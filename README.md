@@ -2,6 +2,8 @@
 
 A living, interactive floor map card for Home Assistant.
 
+![Home Assistant Explorer preview](assets/preview.svg)
+
 > Home Assistant Explorer is currently in early development. The first version provides the foundation for floor plans, rooms, people, devices and animated presence tracking.
 
 ## Features in the first development version
