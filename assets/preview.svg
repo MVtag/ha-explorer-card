@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Home Assistant Explorer preview</title>
+  <desc id="desc">A parchment-style floor map preview for Home Assistant Explorer.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ead9b4"/>
+      <stop offset="1" stop-color="#c7a777"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" fill="#171717"/>
+  <rect x="70" y="55" width="1060" height="565" rx="24" fill="url(#paper)" filter="url(#shadow)"/>
+  <rect x="100" y="85" width="1000" height="505" rx="12" fill="none" stroke="#5c4630" stroke-width="3" opacity="0.7"/>
+  <text x="600" y="145" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#3c2b1e">Home Assistant Explorer</text>
+  <text x="600" y="183" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" letter-spacing="5" fill="#5c4630">LIVING FLOOR MAP</text>
+  <g fill="none" stroke="#6d5439" stroke-width="5">
+    <rect x="180" y="240" width="280" height="210"/>
+    <rect x="460" y="240" width="240" height="140"/>
+    <rect x="700" y="240" width="320" height="210"/>
+    <rect x="460" y="380" width="240" height="150"/>
+  </g>
+  <g font-family="Georgia, serif" font-size="26" fill="#3c2b1e">
+    <text x="320" y="345" text-anchor="middle">Living room</text>
+    <text x="580" y="320" text-anchor="middle">Kitchen</text>
+    <text x="860" y="345" text-anchor="middle">Workshop</text>
+    <text x="580" y="465" text-anchor="middle">Hall</text>
+  </g>
+  <g fill="#3c2b1e" opacity="0.85">
+    <circle cx="300" cy="390" r="10"/>
+    <circle cx="330" cy="410" r="8"/>
+    <circle cx="360" cy="390" r="10"/>
+    <circle cx="795" cy="385" r="10"/>
+    <circle cx="825" cy="405" r="8"/>
+    <circle cx="855" cy="385" r="10"/>
+  </g>
+  <text x="600" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#4b3827">Interactive rooms · live presence · Home Assistant entities</text>
+</svg>
