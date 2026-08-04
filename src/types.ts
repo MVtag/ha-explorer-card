@@ -11,12 +11,6 @@ export interface HassEntity {
   attributes: Record<string, unknown>;
 }
 
-export interface ExplorerCardConfig {
-  type: string;
-  title?: string;
-  background?: string;
-}
-
 declare global {
   interface Window {
     customCards?: Array<{
