@@ -1,8 +1,10 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import type { ExplorerCardConfig, HomeAssistant } from "./types";
+import "./components/explorer-canvas";
+import type { ExplorerCardConfig } from "./models/config";
+import type { HomeAssistant } from "./types";
 
-const CARD_VERSION = "0.1.0";
+const CARD_VERSION = "0.2.0-dev";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -17,140 +19,72 @@ export class HaExplorerCard extends LitElement {
     return {
       type: "custom:ha-explorer-card",
       title: "Home Assistant Explorer",
+      min_zoom: 1,
+      max_zoom: 6,
+      initial_zoom: 1,
     };
   }
 
   public setConfig(config: ExplorerCardConfig): void {
-    if (!config) {
-      throw new Error("Configuration is required");
-    }
-
+    if (!config) throw new Error("Configuration is required");
     this.config = {
       title: "Home Assistant Explorer",
+      min_zoom: 1,
+      max_zoom: 6,
+      initial_zoom: 1,
       ...config,
     };
   }
 
   public getCardSize(): number {
-    return 5;
+    return 6;
   }
 
   protected render() {
-    if (!this.config) {
-      return nothing;
-    }
-
-    const backgroundStyle = this.config.background
-      ? `background-image: linear-gradient(rgba(30, 23, 14, 0.18), rgba(30, 23, 14, 0.18)), url('${this.config.background}')`
-      : "";
+    if (!this.config) return nothing;
+    const image = this.config.image ?? this.config.background ?? "";
 
     return html`
       <ha-card>
-        <div class="map" style=${backgroundStyle}>
-          <header>
-            <span class="eyebrow">Living floor map</span>
+        <header>
+          <div>
+            <span>Explorer map</span>
             <h1>${this.config.title}</h1>
-          </header>
-
-          <div class="placeholder">
-            <div class="compass">✦</div>
-            <strong>Explorer-kortet er installeret</strong>
-            <span>Næste trin bliver plantegning, rum og levende placeringer.</span>
           </div>
+          <small>SVG Engine · v${CARD_VERSION}</small>
+        </header>
 
-          <footer>Home Assistant Explorer · v${CARD_VERSION}</footer>
-        </div>
+        <explorer-canvas
+          .image=${image}
+          .minZoom=${this.config.min_zoom ?? 1}
+          .maxZoom=${this.config.max_zoom ?? 6}
+          .initialZoom=${this.config.initial_zoom ?? 1}
+        ></explorer-canvas>
       </ha-card>
     `;
   }
 
   static styles = css`
-    :host {
-      display: block;
-    }
-
-    ha-card {
-      overflow: hidden;
-      border-radius: var(--ha-card-border-radius, 12px);
-    }
-
-    .map {
-      min-height: 360px;
-      box-sizing: border-box;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      color: #3c2b1e;
-      background-color: #d8c39b;
-      background-size: cover;
-      background-position: center;
-      font-family: Georgia, "Times New Roman", serif;
-      position: relative;
-      isolation: isolate;
-    }
-
-    .map::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(60, 43, 30, 0.45);
-      pointer-events: none;
-      z-index: -1;
-    }
-
+    :host { display: block; }
+    ha-card { overflow: hidden; }
     header {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      color: var(--primary-text-color);
+      background: var(--ha-card-background, var(--card-background-color));
     }
-
-    .eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
+    header span {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.72;
+      color: var(--secondary-text-color);
     }
-
-    h1 {
-      margin: 6px 0 0;
-      font-size: clamp(1.65rem, 4vw, 2.4rem);
-      font-weight: 500;
-    }
-
-    .placeholder {
-      flex: 1;
-      display: grid;
-      place-content: center;
-      justify-items: center;
-      gap: 10px;
-      text-align: center;
-      padding: 32px 12px;
-    }
-
-    .placeholder strong {
-      font-size: 1.15rem;
-    }
-
-    .placeholder span {
-      max-width: 420px;
-      line-height: 1.5;
-      opacity: 0.8;
-    }
-
-    .compass {
-      width: 58px;
-      height: 58px;
-      border: 1px solid currentColor;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 1.8rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      opacity: 0.65;
-    }
+    h1 { margin: 3px 0 0; font-size: 1.25rem; }
+    small { color: var(--secondary-text-color); white-space: nowrap; }
   `;
 }
 
@@ -163,18 +97,25 @@ export class HaExplorerCardEditor extends LitElement {
     this.config = config;
   }
 
-  private updateValue(key: keyof ExplorerCardConfig, value: string): void {
-    if (!this.config) return;
+  private updateText(key: keyof ExplorerCardConfig, value: string): void {
+    this.updateConfig({ [key]: value });
+  }
 
-    const config = { ...this.config, [key]: value };
+  private updateNumber(key: keyof ExplorerCardConfig, value: string): void {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return;
+    this.updateConfig({ [key]: parsed });
+  }
+
+  private updateConfig(change: Partial<ExplorerCardConfig>): void {
+    if (!this.config) return;
+    const config = { ...this.config, ...change };
     this.config = config;
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    this.dispatchEvent(new CustomEvent("config-changed", {
+      detail: { config },
+      bubbles: true,
+      composed: true,
+    }));
   }
 
   protected render() {
@@ -182,41 +123,33 @@ export class HaExplorerCardEditor extends LitElement {
 
     return html`
       <div class="editor">
-        <label>
-          Titel
-          <input
-            .value=${this.config.title ?? ""}
-            @input=${(event: InputEvent) =>
-              this.updateValue("title", (event.target as HTMLInputElement).value)}
-          />
+        <label>Titel
+          <input .value=${this.config.title ?? ""}
+            @input=${(e: InputEvent) => this.updateText("title", (e.target as HTMLInputElement).value)} />
         </label>
-
-        <label>
-          Baggrundsbillede (valgfrit)
-          <input
-            .value=${this.config.background ?? ""}
-            placeholder="/local/explorer/floorplan.png"
-            @input=${(event: InputEvent) =>
-              this.updateValue("background", (event.target as HTMLInputElement).value)}
-          />
+        <label>Plantegning
+          <input .value=${this.config.image ?? this.config.background ?? ""}
+            placeholder="/local/explorer/floorplan.svg"
+            @input=${(e: InputEvent) => this.updateText("image", (e.target as HTMLInputElement).value)} />
         </label>
+        <div class="numbers">
+          <label>Minimum zoom
+            <input type="number" min="0.5" step="0.1" .value=${String(this.config.min_zoom ?? 1)}
+              @input=${(e: InputEvent) => this.updateNumber("min_zoom", (e.target as HTMLInputElement).value)} />
+          </label>
+          <label>Maksimum zoom
+            <input type="number" min="1" step="0.5" .value=${String(this.config.max_zoom ?? 6)}
+              @input=${(e: InputEvent) => this.updateNumber("max_zoom", (e.target as HTMLInputElement).value)} />
+          </label>
+        </div>
       </div>
     `;
   }
 
   static styles = css`
-    .editor {
-      display: grid;
-      gap: 16px;
-      padding: 8px 0;
-    }
-
-    label {
-      display: grid;
-      gap: 6px;
-      font-weight: 500;
-    }
-
+    .editor { display: grid; gap: 16px; padding: 8px 0; }
+    .numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    label { display: grid; gap: 6px; font-weight: 500; }
     input {
       box-sizing: border-box;
       width: 100%;
@@ -234,12 +167,10 @@ window.customCards = window.customCards || [];
 window.customCards.push({
   type: "ha-explorer-card",
   name: "Home Assistant Explorer",
-  description: "A living, interactive floor map for Home Assistant.",
+  description: "An interactive SVG floor map for Home Assistant.",
   preview: true,
 });
 
-console.info(
-  `%c HOME ASSISTANT EXPLORER %c v${CARD_VERSION} `,
-  "color: white; background: #594431; font-weight: 700;",
-  "color: #594431; background: #d8c39b; font-weight: 700;",
-);
+console.info(`%c HOME ASSISTANT EXPLORER %c v${CARD_VERSION} `,
+  "color:white;background:#594431;font-weight:700;",
+  "color:#594431;background:#d8c39b;font-weight:700;");
