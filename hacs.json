@@ -1,0 +1,6 @@
+{
+  "name": "Home Assistant Explorer",
+  "content_in_root": false,
+  "filename": "ha-explorer-card.js",
+  "render_readme": true
+}
