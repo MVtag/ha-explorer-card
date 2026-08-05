@@ -1,5 +1,6 @@
 export type FloorplanFitMode = "contain" | "cover";
 export type NormalizedPoint = [number, number];
+export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
 
 export interface ExplorerRoom {
   id: string;
@@ -12,6 +13,17 @@ export interface ExplorerRoom {
   };
 }
 
+export interface ExplorerPresence {
+  id: string;
+  name?: string;
+  type?: PresenceObjectType;
+  x: number;
+  y: number;
+  color?: string;
+  icon?: string;
+  visible?: boolean;
+}
+
 export interface ExplorerCardConfig {
   type: string;
   title?: string;
@@ -22,6 +34,7 @@ export interface ExplorerCardConfig {
   initial_zoom?: number;
   fit_mode?: FloorplanFitMode;
   rooms?: ExplorerRoom[];
+  presences?: ExplorerPresence[];
 }
 
 export interface ViewportState {
