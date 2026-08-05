@@ -13,6 +13,17 @@ export interface ExplorerRoom {
   };
 }
 
+export interface PresenceEntityBinding {
+  entity: string;
+  x_attribute?: string;
+  y_attribute?: string;
+  name_attribute?: string;
+  icon_attribute?: string;
+  color_attribute?: string;
+  visible_attribute?: string;
+  hidden_states?: string[];
+}
+
 export interface ExplorerPresence {
   id: string;
   name?: string;
@@ -22,6 +33,7 @@ export interface ExplorerPresence {
   color?: string;
   icon?: string;
   visible?: boolean;
+  entity_binding?: PresenceEntityBinding;
 }
 
 export interface ExplorerCardConfig {
