@@ -1,6 +1,10 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import type { ViewportState } from "../models/config";
+import type {
+  FloorplanFitMode,
+  FloorplanMetadata,
+  ViewportState,
+} from "../models/config";
 import {
   VIEWBOX_SIZE,
   clampZoom,
@@ -14,14 +18,62 @@ export class ExplorerCanvas extends LitElement {
   @property({ type: Number, attribute: "min-zoom" }) minZoom = 1;
   @property({ type: Number, attribute: "max-zoom" }) maxZoom = 6;
   @property({ type: Number, attribute: "initial-zoom" }) initialZoom = 1;
+  @property({ attribute: "fit-mode" }) fitMode: FloorplanFitMode = "contain";
 
   @state() private viewport: ViewportState = { zoom: 1, x: 0, y: 0 };
+  @state() private metadata: FloorplanMetadata = {
+    width: 16,
+    height: 9,
+    status: "idle",
+  };
+
   private pointerId?: number;
   private lastPointer?: { x: number; y: number };
+  private imageRequest = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.resetViewport();
+  }
+
+  protected updated(changed: Map<PropertyKey, unknown>): void {
+    if (changed.has("image")) {
+      void this.loadImageMetadata();
+    }
+  }
+
+  private async loadImageMetadata(): Promise<void> {
+    const request = ++this.imageRequest;
+
+    if (!this.image) {
+      this.metadata = { width: 16, height: 9, status: "idle" };
+      this.resetViewport();
+      return;
+    }
+
+    this.metadata = { ...this.metadata, status: "loading" };
+
+    const image = new Image();
+    image.decoding = "async";
+
+    await new Promise<void>((resolve) => {
+      image.onload = () => {
+        if (request !== this.imageRequest) return resolve();
+        this.metadata = {
+          width: Math.max(1, image.naturalWidth || 16),
+          height: Math.max(1, image.naturalHeight || 9),
+          status: "loaded",
+        };
+        this.resetViewport();
+        resolve();
+      };
+      image.onerror = () => {
+        if (request !== this.imageRequest) return resolve();
+        this.metadata = { ...this.metadata, status: "error" };
+        resolve();
+      };
+      image.src = this.image;
+    });
   }
 
   private resetViewport(): void {
@@ -79,9 +131,17 @@ export class ExplorerCanvas extends LitElement {
     this.lastPointer = undefined;
   }
 
+  private get aspectRatio(): string {
+    return `${this.metadata.width} / ${this.metadata.height}`;
+  }
+
   protected render() {
+    const preserveAspectRatio = this.fitMode === "cover"
+      ? "xMidYMid slice"
+      : "xMidYMid meet";
+
     return html`
-      <div class="viewport">
+      <div class="viewport" style=${`--floorplan-ratio:${this.aspectRatio}`}>
         <svg
           viewBox="0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}"
           preserveAspectRatio="xMidYMid meet"
@@ -95,39 +155,62 @@ export class ExplorerCanvas extends LitElement {
         >
           <rect width="1000" height="1000" class="backdrop"></rect>
           <g transform=${viewportTransform(this.viewport)}>
-            ${this.image
+            ${this.image && this.metadata.status !== "error"
               ? html`<image
                   href=${this.image}
                   x="0"
                   y="0"
                   width="1000"
                   height="1000"
-                  preserveAspectRatio="xMidYMid meet"
+                  preserveAspectRatio=${preserveAspectRatio}
                 ></image>`
               : nothing}
           </g>
         </svg>
 
-        ${this.image
-          ? nothing
-          : html`<div class="empty">
-              <strong>Vælg en plantegning</strong>
-              <span>Tilføj en PNG-, JPG- eller SVG-fil i kortets editor.</span>
-            </div>`}
+        ${this.renderStatus()}
 
-        <div class="controls">
-          <button @click=${this.resetViewport} title="Nulstil visning">⌂</button>
+        <div class="controls" aria-label="Kortkontroller">
+          <button @click=${this.resetViewport} title="Tilpas plantegningen til skærmen">⌂</button>
           <span>${Math.round(this.viewport.zoom * 100)}%</span>
         </div>
       </div>
     `;
   }
 
+  private renderStatus() {
+    if (!this.image) {
+      return html`<div class="message">
+        <strong>Vælg en plantegning</strong>
+        <span>Tilføj en PNG-, JPG- eller SVG-fil i kortets editor.</span>
+      </div>`;
+    }
+
+    if (this.metadata.status === "loading") {
+      return html`<div class="message">
+        <span class="spinner" aria-hidden="true"></span>
+        <strong>Indlæser plantegning…</strong>
+      </div>`;
+    }
+
+    if (this.metadata.status === "error") {
+      return html`<div class="message error">
+        <strong>Plantegningen kunne ikke indlæses</strong>
+        <span>Kontrollér filstien og at Home Assistant kan åbne billedet.</span>
+      </div>`;
+    }
+
+    return nothing;
+  }
+
   static styles = css`
     :host { display: block; }
     .viewport {
       position: relative;
-      min-height: 420px;
+      width: 100%;
+      aspect-ratio: var(--floorplan-ratio, 16 / 9);
+      min-height: 280px;
+      max-height: min(72vh, 760px);
       overflow: hidden;
       background: #cdbb94;
       touch-action: none;
@@ -136,14 +219,13 @@ export class ExplorerCanvas extends LitElement {
     svg {
       width: 100%;
       height: 100%;
-      min-height: 420px;
       display: block;
       cursor: grab;
     }
     svg:active { cursor: grabbing; }
     .backdrop { fill: #d8c9a7; }
     image { pointer-events: none; }
-    .empty {
+    .message {
       position: absolute;
       inset: 0;
       display: grid;
@@ -154,8 +236,18 @@ export class ExplorerCanvas extends LitElement {
       text-align: center;
       color: #4c3928;
       pointer-events: none;
+      background: rgba(216, 201, 167, 0.82);
     }
-    .empty span { opacity: 0.75; }
+    .message span { max-width: 440px; opacity: 0.78; }
+    .message.error { color: #7a251f; }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
     .controls {
       position: absolute;
       right: 12px;
@@ -176,6 +268,10 @@ export class ExplorerCanvas extends LitElement {
       cursor: pointer;
       font-size: 18px;
       line-height: 1;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 600px) {
+      .viewport { min-height: 240px; max-height: 68vh; }
     }
   `;
 }
