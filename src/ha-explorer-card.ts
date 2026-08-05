@@ -4,7 +4,7 @@ import "./components/explorer-canvas";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 
-const CARD_VERSION = "0.2.0-dev";
+const CARD_VERSION = "0.3.0-dev";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -22,6 +22,7 @@ export class HaExplorerCard extends LitElement {
       min_zoom: 1,
       max_zoom: 6,
       initial_zoom: 1,
+      fit_mode: "contain",
     };
   }
 
@@ -32,6 +33,7 @@ export class HaExplorerCard extends LitElement {
       min_zoom: 1,
       max_zoom: 6,
       initial_zoom: 1,
+      fit_mode: "contain",
       ...config,
     };
   }
@@ -51,7 +53,7 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>SVG Engine · v${CARD_VERSION}</small>
+          <small>Floorplan Viewer · v${CARD_VERSION}</small>
         </header>
 
         <explorer-canvas
@@ -59,6 +61,7 @@ export class HaExplorerCard extends LitElement {
           .minZoom=${this.config.min_zoom ?? 1}
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
+          .fitMode=${this.config.fit_mode ?? "contain"}
         ></explorer-canvas>
       </ha-card>
     `;
@@ -85,6 +88,10 @@ export class HaExplorerCard extends LitElement {
     }
     h1 { margin: 3px 0 0; font-size: 1.25rem; }
     small { color: var(--secondary-text-color); white-space: nowrap; }
+    @media (max-width: 600px) {
+      header { align-items: flex-start; padding: 14px 16px; }
+      small { font-size: 0.68rem; }
+    }
   `;
 }
 
@@ -132,6 +139,15 @@ export class HaExplorerCardEditor extends LitElement {
             placeholder="/local/explorer/floorplan.svg"
             @input=${(e: InputEvent) => this.updateText("image", (e.target as HTMLInputElement).value)} />
         </label>
+        <label>Tilpasning
+          <select
+            .value=${this.config.fit_mode ?? "contain"}
+            @change=${(e: Event) => this.updateText("fit_mode", (e.target as HTMLSelectElement).value)}
+          >
+            <option value="contain">Vis hele plantegningen</option>
+            <option value="cover">Fyld hele kortet</option>
+          </select>
+        </label>
         <div class="numbers">
           <label>Minimum zoom
             <input type="number" min="0.5" step="0.1" .value=${String(this.config.min_zoom ?? 1)}
@@ -150,7 +166,7 @@ export class HaExplorerCardEditor extends LitElement {
     .editor { display: grid; gap: 16px; padding: 8px 0; }
     .numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     label { display: grid; gap: 6px; font-weight: 500; }
-    input {
+    input, select {
       box-sizing: border-box;
       width: 100%;
       padding: 10px 12px;
