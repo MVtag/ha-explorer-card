@@ -1,7 +1,9 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "./room-layer";
+import "./presence-layer";
 import type {
+  ExplorerPresence,
   ExplorerRoom,
   FloorplanFitMode,
   FloorplanMetadata,
@@ -18,6 +20,7 @@ import {
 export class ExplorerCanvas extends LitElement {
   @property() image = "";
   @property({ attribute: false }) rooms: ExplorerRoom[] = [];
+  @property({ attribute: false }) presences: ExplorerPresence[] = [];
   @property({ type: Number, attribute: "min-zoom" }) minZoom = 1;
   @property({ type: Number, attribute: "max-zoom" }) maxZoom = 6;
   @property({ type: Number, attribute: "initial-zoom" }) initialZoom = 1;
@@ -25,6 +28,7 @@ export class ExplorerCanvas extends LitElement {
 
   @state() private viewport: ViewportState = { zoom: 1, x: 0, y: 0 };
   @state() private selectedRoom?: ExplorerRoom;
+  @state() private selectedPresence?: ExplorerPresence;
   @state() private metadata: FloorplanMetadata = {
     width: 16,
     height: 9,
@@ -124,6 +128,12 @@ export class ExplorerCanvas extends LitElement {
 
   private handleRoomSelected(event: CustomEvent<{ room?: ExplorerRoom }>): void {
     this.selectedRoom = event.detail.room;
+    if (event.detail.room) this.selectedPresence = undefined;
+  }
+
+  private handlePresenceSelected(event: CustomEvent<{ presence?: ExplorerPresence }>): void {
+    this.selectedPresence = event.detail.presence;
+    if (event.detail.presence) this.selectedRoom = undefined;
   }
 
   private get aspectRatio(): string {
@@ -161,10 +171,14 @@ export class ExplorerCanvas extends LitElement {
           @room-selected=${this.handleRoomSelected}
         ></room-layer>
 
+        <presence-layer
+          .presences=${this.presences}
+          .transform=${transform}
+          @presence-selected=${this.handlePresenceSelected}
+        ></presence-layer>
+
         ${this.renderStatus()}
-        ${this.selectedRoom
-          ? html`<div class="room-info"><strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong><span>Valgt rum</span></div>`
-          : nothing}
+        ${this.renderSelection()}
 
         <div class="controls" aria-label="Kortkontroller">
           <button @click=${this.resetViewport} title="Tilpas plantegningen til skærmen">⌂</button>
@@ -172,6 +186,24 @@ export class ExplorerCanvas extends LitElement {
         </div>
       </div>
     `;
+  }
+
+  private renderSelection() {
+    if (this.selectedPresence) {
+      return html`<div class="selection-info">
+        <strong>${this.selectedPresence.name ?? this.selectedPresence.id}</strong>
+        <span>${this.selectedPresence.type ?? "person"}</span>
+      </div>`;
+    }
+
+    if (this.selectedRoom) {
+      return html`<div class="selection-info">
+        <strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong>
+        <span>Valgt rum</span>
+      </div>`;
+    }
+
+    return nothing;
   }
 
   private renderStatus() {
@@ -183,18 +215,18 @@ export class ExplorerCanvas extends LitElement {
 
   static styles = css`
     :host { display: block; }
-    .viewport { position: relative; width: 100%; aspect-ratio: var(--floorplan-ratio, 16 / 9); min-height: 280px; max-height: min(72vh,760px); overflow: hidden; background:#cdbb94; touch-action:none; user-select:none; }
+    .viewport { position:relative; width:100%; aspect-ratio:var(--floorplan-ratio,16 / 9); min-height:280px; max-height:min(72vh,760px); overflow:hidden; background:#cdbb94; touch-action:none; user-select:none; }
     svg.floorplan { width:100%; height:100%; display:block; cursor:grab; }
     svg.floorplan:active { cursor:grabbing; }
     .backdrop { fill:#d8c9a7; }
     image { pointer-events:none; }
-    .message { position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:8px; padding:24px; text-align:center; color:#4c3928; pointer-events:none; background:rgba(216,201,167,.82); z-index:3; }
+    .message { position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:8px; padding:24px; text-align:center; color:#4c3928; pointer-events:none; background:rgba(216,201,167,.82); z-index:5; }
     .message.error { color:#7a251f; }
     .spinner { width:28px; height:28px; border:3px solid currentColor; border-right-color:transparent; border-radius:50%; animation:spin .8s linear infinite; }
-    .controls, .room-info { position:absolute; z-index:4; display:flex; align-items:center; gap:8px; border-radius:999px; background:rgba(45,34,24,.82); color:white; font:500 12px system-ui,sans-serif; }
+    .controls,.selection-info { position:absolute; z-index:6; display:flex; align-items:center; gap:8px; border-radius:999px; background:rgba(45,34,24,.82); color:white; font:500 12px system-ui,sans-serif; }
     .controls { right:12px; bottom:12px; padding:6px 8px; }
-    .room-info { left:12px; bottom:12px; padding:8px 12px; }
-    .room-info span { opacity:.72; }
+    .selection-info { left:12px; bottom:12px; padding:8px 12px; }
+    .selection-info span { opacity:.72; text-transform:capitalize; }
     button { border:0; background:transparent; color:inherit; cursor:pointer; font-size:18px; line-height:1; }
     @keyframes spin { to { transform:rotate(360deg); } }
     @media (max-width:600px) { .viewport { min-height:240px; max-height:68vh; } }
