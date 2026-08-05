@@ -5,9 +5,11 @@ import type { ExplorerRoom } from "../models/config";
 @customElement("room-layer")
 export class RoomLayer extends LitElement {
   @property({ attribute: false }) rooms: ExplorerRoom[] = [];
+  @property() transform = "translate(0 0) scale(1)";
   @state() private selectedRoomId?: string;
 
-  private selectRoom(room: ExplorerRoom): void {
+  private selectRoom(event: Event, room: ExplorerRoom): void {
+    event.stopPropagation();
     this.selectedRoomId = this.selectedRoomId === room.id ? undefined : room.id;
     this.dispatchEvent(new CustomEvent("room-selected", {
       detail: { room: this.selectedRoomId ? room : undefined },
@@ -20,29 +22,33 @@ export class RoomLayer extends LitElement {
     if (!this.rooms.length) return nothing;
 
     return html`
-      <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-label="Rumlag">
-        ${this.rooms.map((room) => {
-          const points = room.points.map(([x, y]) => `${x * 1000},${y * 1000}`).join(" ");
-          const selected = room.id === this.selectedRoomId;
-          const labelX = (room.label?.x ?? room.points.reduce((sum, point) => sum + point[0], 0) / room.points.length) * 1000;
-          const labelY = (room.label?.y ?? room.points.reduce((sum, point) => sum + point[1], 0) / room.points.length) * 1000;
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" aria-label="Rumlag">
+        <g transform=${this.transform}>
+          ${this.rooms.map((room) => {
+            const points = room.points.map(([x, y]) => `${x * 1000},${y * 1000}`).join(" ");
+            const selected = room.id === this.selectedRoomId;
+            const labelX = (room.label?.x ?? room.points.reduce((sum, point) => sum + point[0], 0) / room.points.length) * 1000;
+            const labelY = (room.label?.y ?? room.points.reduce((sum, point) => sum + point[1], 0) / room.points.length) * 1000;
 
-          return html`
-            <g class=${selected ? "room selected" : "room"} @click=${() => this.selectRoom(room)}>
-              <polygon points=${points} style=${`--room-color:${room.color ?? "#03a9f4"}`}></polygon>
-              ${room.name
-                ? html`<text x=${labelX} y=${labelY} text-anchor="middle" dominant-baseline="middle">${room.name}</text>`
-                : nothing}
-            </g>
-          `;
-        })}
+            return html`
+              <g class=${selected ? "room selected" : "room"}
+                @pointerdown=${(event: PointerEvent) => event.stopPropagation()}
+                @click=${(event: MouseEvent) => this.selectRoom(event, room)}>
+                <polygon points=${points} style=${`--room-color:${room.color ?? "#03a9f4"}`}></polygon>
+                ${room.name
+                  ? html`<text x=${labelX} y=${labelY} text-anchor="middle" dominant-baseline="middle">${room.name}</text>`
+                  : nothing}
+              </g>
+            `;
+          })}
+        </g>
       </svg>
     `;
   }
 
   static styles = css`
     :host { position: absolute; inset: 0; display: block; pointer-events: none; }
-    svg { width: 100%; height: 100%; overflow: visible; }
+    svg { width: 100%; height: 100%; overflow: hidden; }
     .room { pointer-events: all; cursor: pointer; }
     polygon {
       fill: color-mix(in srgb, var(--room-color) 18%, transparent);
@@ -51,8 +57,7 @@ export class RoomLayer extends LitElement {
       vector-effect: non-scaling-stroke;
       transition: fill 160ms ease, stroke-width 160ms ease;
     }
-    .room:hover polygon,
-    .room.selected polygon {
+    .room:hover polygon, .room.selected polygon {
       fill: color-mix(in srgb, var(--room-color) 34%, transparent);
       stroke-width: 5;
     }
