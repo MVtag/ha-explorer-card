@@ -4,7 +4,7 @@ import "./components/explorer-canvas";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 
-const CARD_VERSION = "0.4.0-dev";
+const CARD_VERSION = "0.5.0-dev";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -24,6 +24,7 @@ export class HaExplorerCard extends LitElement {
       initial_zoom: 1,
       fit_mode: "contain",
       rooms: [],
+      presences: [],
     };
   }
 
@@ -36,6 +37,7 @@ export class HaExplorerCard extends LitElement {
       initial_zoom: 1,
       fit_mode: "contain",
       rooms: [],
+      presences: [],
       ...config,
     };
   }
@@ -55,12 +57,13 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Room Engine · v${CARD_VERSION}</small>
+          <small>Presence Engine · v${CARD_VERSION}</small>
         </header>
 
         <explorer-canvas
           .image=${image}
           .rooms=${this.config.rooms ?? []}
+          .presences=${this.config.presences ?? []}
           .minZoom=${this.config.min_zoom ?? 1}
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
@@ -107,7 +110,7 @@ export class HaExplorerCardEditor extends LitElement {
         <label>Titel<input .value=${this.config.title ?? ""} @input=${(e:InputEvent)=>this.updateText("title",(e.target as HTMLInputElement).value)} /></label>
         <label>Plantegning<input .value=${this.config.image ?? this.config.background ?? ""} placeholder="/local/explorer/floorplan.svg" @input=${(e:InputEvent)=>this.updateText("image",(e.target as HTMLInputElement).value)} /></label>
         <label>Tilpasning<select .value=${this.config.fit_mode ?? "contain"} @change=${(e:Event)=>this.updateText("fit_mode",(e.target as HTMLSelectElement).value)}><option value="contain">Vis hele plantegningen</option><option value="cover">Fyld hele kortet</option></select></label>
-        <div class="notice">Rum konfigureres foreløbigt i YAML. Den visuelle rumeditor kommer i Explorer Studio.</div>
+        <div class="notice">Rum og tilstedeværelsesobjekter konfigureres foreløbigt i YAML. Den visuelle editor kommer i Explorer Studio.</div>
         <div class="numbers">
           <label>Minimum zoom<input type="number" min="0.5" step="0.1" .value=${String(this.config.min_zoom ?? 1)} @input=${(e:InputEvent)=>this.updateNumber("min_zoom",(e.target as HTMLInputElement).value)} /></label>
           <label>Maksimum zoom<input type="number" min="1" step="0.5" .value=${String(this.config.max_zoom ?? 6)} @input=${(e:InputEvent)=>this.updateNumber("max_zoom",(e.target as HTMLInputElement).value)} /></label>
