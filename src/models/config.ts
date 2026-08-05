@@ -1,4 +1,16 @@
 export type FloorplanFitMode = "contain" | "cover";
+export type NormalizedPoint = [number, number];
+
+export interface ExplorerRoom {
+  id: string;
+  name?: string;
+  points: NormalizedPoint[];
+  color?: string;
+  label?: {
+    x: number;
+    y: number;
+  };
+}
 
 export interface ExplorerCardConfig {
   type: string;
@@ -9,6 +21,7 @@ export interface ExplorerCardConfig {
   max_zoom?: number;
   initial_zoom?: number;
   fit_mode?: FloorplanFitMode;
+  rooms?: ExplorerRoom[];
 }
 
 export interface ViewportState {
