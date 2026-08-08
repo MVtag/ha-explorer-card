@@ -5,7 +5,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.6.2";
+const CARD_VERSION = "0.7.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -50,7 +50,8 @@ export class HaExplorerCard extends LitElement {
   protected render() {
     if (!this.config) return nothing;
     const image = this.config.image ?? this.config.background ?? "";
-    const presences = resolvePresences(this.config.presences ?? [], this.hass);
+    const rooms = this.config.rooms ?? [];
+    const presences = resolvePresences(this.config.presences ?? [], this.hass, rooms);
 
     return html`
       <ha-card>
@@ -59,12 +60,12 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Entity Binding · v${CARD_VERSION}</small>
+          <small>Room Awareness · v${CARD_VERSION}</small>
         </header>
 
         <explorer-canvas
           .image=${image}
-          .rooms=${this.config.rooms ?? []}
+          .rooms=${rooms}
           .presences=${presences}
           .minZoom=${this.config.min_zoom ?? 1}
           .maxZoom=${this.config.max_zoom ?? 6}
@@ -112,7 +113,7 @@ export class HaExplorerCardEditor extends LitElement {
         <label>Titel<input .value=${this.config.title ?? ""} @input=${(e:InputEvent)=>this.updateText("title",(e.target as HTMLInputElement).value)} /></label>
         <label>Plantegning<input .value=${this.config.image ?? this.config.background ?? ""} placeholder="/local/explorer/floorplan.svg" @input=${(e:InputEvent)=>this.updateText("image",(e.target as HTMLInputElement).value)} /></label>
         <label>Tilpasning<select .value=${this.config.fit_mode ?? "contain"} @change=${(e:Event)=>this.updateText("fit_mode",(e.target as HTMLSelectElement).value)}><option value="contain">Vis hele plantegningen</option><option value="cover">Fyld hele kortet</option></select></label>
-        <div class="notice">Rum og presence-objekter konfigureres foreløbigt i YAML. Presence-objekter kan nu bindes til Home Assistant-entiteter.</div>
+        <div class="notice">Rum og presence-objekter konfigureres foreløbigt i YAML. Presence-objekter kan bindes til Home Assistant-entiteter og placeres automatisk ud fra et rum eller Area ID.</div>
         <div class="numbers">
           <label>Minimum zoom<input type="number" min="0.5" step="0.1" .value=${String(this.config.min_zoom ?? 1)} @input=${(e:InputEvent)=>this.updateNumber("min_zoom",(e.target as HTMLInputElement).value)} /></label>
           <label>Maksimum zoom<input type="number" min="1" step="0.5" .value=${String(this.config.max_zoom ?? 6)} @input=${(e:InputEvent)=>this.updateNumber("max_zoom",(e.target as HTMLInputElement).value)} /></label>

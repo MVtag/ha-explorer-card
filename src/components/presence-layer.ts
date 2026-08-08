@@ -35,8 +35,8 @@ export class PresenceLayer extends LitElement {
           ${visible.map((presence) => {
             const type = presence.type ?? "person";
             const selected = presence.id === this.selectedPresenceId;
-            const x = presence.x * 1000;
-            const y = presence.y * 1000;
+            const x = (presence.x ?? 0.5) * 1000;
+            const y = (presence.y ?? 0.5) * 1000;
             const icon = presence.icon ?? DEFAULT_ICONS[type];
 
             return html`
