@@ -1,5 +1,6 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { live } from "lit/directives/live.js";
 import type {
   ExplorerCardConfig,
   ExplorerPresence,
@@ -208,7 +209,7 @@ export class HaExplorerCardEditor extends LitElement {
           <label>
             Home Assistant Area
             <select
-              .value=${room.area_id ?? ""}
+              .value=${live(room.area_id ?? "")}
               @change=${(event: Event) =>
                 this.updateRoom(index, {
                   area_id: (event.target as HTMLSelectElement).value || undefined,
