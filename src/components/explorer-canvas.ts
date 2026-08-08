@@ -1,13 +1,12 @@
-import { LitElement, css, html, nothing } from "lit";
+import { LitElement, css, html, nothing, svg } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import "./room-layer";
-import "./presence-layer";
 import type {
   ExplorerPresence,
   ExplorerRoom,
   FloorplanFitMode,
   FloorplanMetadata,
+  PresenceObjectType,
   ViewportState,
 } from "../models/config";
 import {
@@ -21,6 +20,14 @@ const DEFAULT_METADATA: FloorplanMetadata = {
   width: 16,
   height: 9,
   status: "idle",
+};
+
+const DEFAULT_ICONS: Record<PresenceObjectType, string> = {
+  person: "●",
+  pet: "◆",
+  robot: "■",
+  vehicle: "▰",
+  object: "✦",
 };
 
 const BLOCKED_SVG_ELEMENTS =
@@ -42,8 +49,8 @@ function parseSvgLength(value: string | null): number | undefined {
   return Number.isFinite(number) && number > 0 ? number : undefined;
 }
 
-function readSvgDimensions(svg: SVGSVGElement): { width: number; height: number } {
-  const viewBox = svg
+function readSvgDimensions(svgElement: SVGSVGElement): { width: number; height: number } {
+  const viewBox = svgElement
     .getAttribute("viewBox")
     ?.trim()
     .split(/[\s,]+/)
@@ -59,8 +66,8 @@ function readSvgDimensions(svg: SVGSVGElement): { width: number; height: number 
   }
 
   return {
-    width: parseSvgLength(svg.getAttribute("width")) ?? 16,
-    height: parseSvgLength(svg.getAttribute("height")) ?? 9,
+    width: parseSvgLength(svgElement.getAttribute("width")) ?? 16,
+    height: parseSvgLength(svgElement.getAttribute("height")) ?? 9,
   };
 }
 
@@ -207,24 +214,24 @@ export class ExplorerCanvas extends LitElement {
     if (request !== this.imageRequest) return;
 
     const document = new DOMParser().parseFromString(svgText, "image/svg+xml");
-    const svg = sanitizeSvgDocument(document);
-    const dimensions = readSvgDimensions(svg);
+    const svgElement = sanitizeSvgDocument(document);
+    const dimensions = readSvgDimensions(svgElement);
 
-    if (!svg.hasAttribute("viewBox")) {
-      svg.setAttribute("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`);
+    if (!svgElement.hasAttribute("viewBox")) {
+      svgElement.setAttribute("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`);
     }
 
-    svg.setAttribute("x", "0");
-    svg.setAttribute("y", "0");
-    svg.setAttribute("width", String(VIEWBOX_SIZE));
-    svg.setAttribute("height", String(VIEWBOX_SIZE));
-    svg.setAttribute(
+    svgElement.setAttribute("x", "0");
+    svgElement.setAttribute("y", "0");
+    svgElement.setAttribute("width", String(VIEWBOX_SIZE));
+    svgElement.setAttribute("height", String(VIEWBOX_SIZE));
+    svgElement.setAttribute(
       "preserveAspectRatio",
       this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet",
     );
-    svg.setAttribute("class", "inline-floorplan");
+    svgElement.setAttribute("class", "inline-floorplan");
 
-    const serializedSvg = new XMLSerializer().serializeToString(svg);
+    const serializedSvg = new XMLSerializer().serializeToString(svgElement);
     if (request !== this.imageRequest) return;
 
     this.svgMarkup = serializedSvg;
@@ -266,9 +273,9 @@ export class ExplorerCanvas extends LitElement {
   }
 
   private toViewBoxPoint(event: WheelEvent | PointerEvent): { x: number; y: number } {
-    const svg = this.renderRoot.querySelector("svg.floorplan");
-    if (!svg) return { x: VIEWBOX_SIZE / 2, y: VIEWBOX_SIZE / 2 };
-    const rect = svg.getBoundingClientRect();
+    const svgElement = this.renderRoot.querySelector("svg.floorplan");
+    if (!svgElement) return { x: VIEWBOX_SIZE / 2, y: VIEWBOX_SIZE / 2 };
+    const rect = svgElement.getBoundingClientRect();
     return {
       x: ((event.clientX - rect.left) / rect.width) * VIEWBOX_SIZE,
       y: ((event.clientY - rect.top) / rect.height) * VIEWBOX_SIZE,
@@ -304,14 +311,91 @@ export class ExplorerCanvas extends LitElement {
     this.lastPointer = undefined;
   }
 
-  private handleRoomSelected(event: CustomEvent<{ room?: ExplorerRoom }>): void {
-    this.selectedRoom = event.detail.room;
-    if (event.detail.room) this.selectedPresence = undefined;
+  private selectRoom(event: Event, room: ExplorerRoom): void {
+    event.stopPropagation();
+    this.selectedRoom = this.selectedRoom?.id === room.id ? undefined : room;
+    if (this.selectedRoom) this.selectedPresence = undefined;
   }
 
-  private handlePresenceSelected(event: CustomEvent<{ presence?: ExplorerPresence }>): void {
-    this.selectedPresence = event.detail.presence;
-    if (event.detail.presence) this.selectedRoom = undefined;
+  private selectPresence(event: Event, presence: ExplorerPresence): void {
+    event.stopPropagation();
+    this.selectedPresence = this.selectedPresence?.id === presence.id ? undefined : presence;
+    if (this.selectedPresence) this.selectedRoom = undefined;
+  }
+
+  private renderRooms() {
+    return this.rooms.map((room) => {
+      if (!room.points.length) return nothing;
+
+      const points = room.points.map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`).join(" ");
+      const selected = room.id === this.selectedRoom?.id;
+      const averageX = room.points.reduce((sum, point) => sum + point[0], 0) / room.points.length;
+      const averageY = room.points.reduce((sum, point) => sum + point[1], 0) / room.points.length;
+      const labelX = (room.label?.x ?? averageX) * VIEWBOX_SIZE;
+      const labelY = (room.label?.y ?? averageY) * VIEWBOX_SIZE;
+      const color = room.color ?? "#03a9f4";
+
+      return svg`
+        <g
+          class=${selected ? "room selected" : "room"}
+          @pointerdown=${(event: PointerEvent) => event.stopPropagation()}
+          @click=${(event: MouseEvent) => this.selectRoom(event, room)}
+        >
+          <polygon
+            points=${points}
+            fill=${color}
+            fill-opacity=${selected ? "0.34" : "0.18"}
+            stroke=${color}
+            stroke-opacity="0.9"
+            stroke-width=${selected ? "5" : "3"}
+            vector-effect="non-scaling-stroke"
+          ></polygon>
+          ${room.name
+            ? svg`<text
+                class="room-label"
+                x=${labelX}
+                y=${labelY}
+                text-anchor="middle"
+                dominant-baseline="middle"
+              >${room.name}</text>`
+            : nothing}
+        </g>
+      `;
+    });
+  }
+
+  private renderPresences() {
+    return this.presences
+      .filter((presence) => presence.visible !== false)
+      .map((presence) => {
+        const type = presence.type ?? "person";
+        const selected = presence.id === this.selectedPresence?.id;
+        const x = (presence.x ?? 0.5) * VIEWBOX_SIZE;
+        const y = (presence.y ?? 0.5) * VIEWBOX_SIZE;
+        const icon = presence.icon ?? DEFAULT_ICONS[type];
+        const color = presence.color ?? "#03a9f4";
+
+        return svg`
+          <g
+            class=${selected ? "presence selected" : "presence"}
+            transform=${`translate(${x} ${y})`}
+            @pointerdown=${(event: PointerEvent) => event.stopPropagation()}
+            @click=${(event: MouseEvent) => this.selectPresence(event, presence)}
+          >
+            <circle
+              r=${selected ? "31" : "25"}
+              fill=${color}
+              stroke="white"
+              stroke-width=${selected ? "6" : "4"}
+              vector-effect="non-scaling-stroke"
+            ></circle>
+            <text class="presence-icon" text-anchor="middle" dominant-baseline="central">${icon}</text>
+            ${presence.name
+              ? svg`<text class="presence-label" y="48" text-anchor="middle">${presence.name}</text>`
+              : nothing}
+          </g>
+        `;
+      });
   }
 
   private get aspectRatio(): string {
@@ -324,7 +408,8 @@ export class ExplorerCanvas extends LitElement {
 
     return html`
       <div class="viewport" style=${`--floorplan-ratio:${this.aspectRatio}`}>
-        <svg class="floorplan"
+        <svg
+          class="floorplan"
           viewBox="0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}"
           preserveAspectRatio="xMidYMid meet"
           role="img"
@@ -333,29 +418,35 @@ export class ExplorerCanvas extends LitElement {
           @pointerdown=${this.handlePointerDown}
           @pointermove=${this.handlePointerMove}
           @pointerup=${this.handlePointerUp}
-          @pointercancel=${this.handlePointerUp}>
-          <rect width="1000" height="1000" class="backdrop"></rect>
-          <g transform=${transform}>
-            ${this.svgMarkup && this.metadata.status === "loaded"
-              ? unsafeSVG(this.svgMarkup)
-              : this.imageSource && this.metadata.status === "loaded"
-                ? html`<image href=${this.imageSource} x="0" y="0" width="1000" height="1000"
-                    preserveAspectRatio=${preserveAspectRatio}></image>`
-                : nothing}
+          @pointercancel=${this.handlePointerUp}
+        >
+          <rect width=${VIEWBOX_SIZE} height=${VIEWBOX_SIZE} class="backdrop"></rect>
+
+          <g class="scene" transform=${transform}>
+            <g class="floorplan-source">
+              ${this.svgMarkup && this.metadata.status === "loaded"
+                ? unsafeSVG(this.svgMarkup)
+                : this.imageSource && this.metadata.status === "loaded"
+                  ? svg`<image
+                      href=${this.imageSource}
+                      x="0"
+                      y="0"
+                      width=${VIEWBOX_SIZE}
+                      height=${VIEWBOX_SIZE}
+                      preserveAspectRatio=${preserveAspectRatio}
+                    ></image>`
+                  : nothing}
+            </g>
+
+            <g class="rooms-scene" aria-label="Rumlag">
+              ${this.renderRooms()}
+            </g>
+
+            <g class="presences-scene" aria-label="Tilstedeværelseslag">
+              ${this.renderPresences()}
+            </g>
           </g>
         </svg>
-
-        <room-layer
-          .rooms=${this.rooms}
-          .transform=${transform}
-          @room-selected=${this.handleRoomSelected}
-        ></room-layer>
-
-        <presence-layer
-          .presences=${this.presences}
-          .transform=${transform}
-          @presence-selected=${this.handlePresenceSelected}
-        ></presence-layer>
 
         ${this.renderStatus()}
         ${this.renderSelection()}
@@ -387,29 +478,147 @@ export class ExplorerCanvas extends LitElement {
   }
 
   private renderStatus() {
-    if (!this.image) return html`<div class="message"><strong>Vælg en plantegning</strong><span>Tilføj en PNG-, JPG- eller SVG-fil i kortets editor.</span></div>`;
-    if (this.metadata.status === "loading") return html`<div class="message"><span class="spinner"></span><strong>Indlæser plantegning…</strong></div>`;
-    if (this.metadata.status === "error") return html`<div class="message error"><strong>Plantegningen kunne ikke indlæses</strong><span>${this.loadError || "Kontrollér filstien."}</span></div>`;
+    if (!this.image) {
+      return html`<div class="message">
+        <strong>Vælg en plantegning</strong>
+        <span>Tilføj en PNG-, JPG- eller SVG-fil i kortets editor.</span>
+      </div>`;
+    }
+    if (this.metadata.status === "loading") {
+      return html`<div class="message"><span class="spinner"></span><strong>Indlæser plantegning…</strong></div>`;
+    }
+    if (this.metadata.status === "error") {
+      return html`<div class="message error">
+        <strong>Plantegningen kunne ikke indlæses</strong>
+        <span>${this.loadError || "Kontrollér filstien."}</span>
+      </div>`;
+    }
     return nothing;
   }
 
   static styles = css`
     :host { display: block; }
-    .viewport { position:relative; width:100%; aspect-ratio:var(--floorplan-ratio,16 / 9); min-height:280px; max-height:min(72vh,760px); overflow:hidden; background:#cdbb94; touch-action:none; user-select:none; }
-    svg.floorplan { width:100%; height:100%; display:block; cursor:grab; }
-    svg.floorplan:active { cursor:grabbing; }
-    .backdrop { fill:#d8c9a7; }
-    image,.inline-floorplan { pointer-events:none; }
-    .message { position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:8px; padding:24px; text-align:center; color:#4c3928; pointer-events:none; background:rgba(216,201,167,.82); z-index:5; }
-    .message.error { color:#7a251f; }
-    .message span { max-width:38ch; }
-    .spinner { width:28px; height:28px; border:3px solid currentColor; border-right-color:transparent; border-radius:50%; animation:spin .8s linear infinite; }
-    .controls,.selection-info { position:absolute; z-index:6; display:flex; align-items:center; gap:8px; border-radius:999px; background:rgba(45,34,24,.82); color:white; font:500 12px system-ui,sans-serif; }
-    .controls { right:12px; bottom:12px; padding:6px 8px; }
-    .selection-info { left:12px; bottom:12px; padding:8px 12px; }
-    .selection-info span { opacity:.72; text-transform:capitalize; }
-    button { border:0; background:transparent; color:inherit; cursor:pointer; font-size:18px; line-height:1; }
-    @keyframes spin { to { transform:rotate(360deg); } }
-    @media (max-width:600px) { .viewport { min-height:240px; max-height:68vh; } }
+
+    .viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: var(--floorplan-ratio, 16 / 9);
+      min-height: 280px;
+      max-height: min(72vh, 760px);
+      overflow: hidden;
+      background: #cdbb94;
+      touch-action: none;
+      user-select: none;
+    }
+
+    svg.floorplan {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+
+    svg.floorplan:active { cursor: grabbing; }
+    .backdrop { fill: #d8c9a7; }
+    .floorplan-source { pointer-events: none; }
+
+    .room,
+    .presence {
+      cursor: pointer;
+      pointer-events: all;
+    }
+
+    .room polygon {
+      transition: fill-opacity 160ms ease, stroke-width 160ms ease;
+    }
+
+    .room:hover polygon { fill-opacity: .3; }
+
+    .room-label,
+    .presence-label {
+      fill: var(--primary-text-color, #1f2937);
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.94);
+      pointer-events: none;
+      font-family: system-ui, sans-serif;
+    }
+
+    .room-label {
+      stroke-width: 5px;
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .presence circle {
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,.28));
+      transition: r 160ms ease, stroke-width 160ms ease;
+    }
+
+    .presence:hover circle { r: 31px; stroke-width: 6px; }
+
+    .presence-icon {
+      fill: white;
+      font-family: system-ui, sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .presence-label {
+      stroke-width: 5px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .message {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      gap: 8px;
+      padding: 24px;
+      text-align: center;
+      color: #4c3928;
+      pointer-events: none;
+      background: rgba(216,201,167,.82);
+      z-index: 5;
+    }
+
+    .message.error { color: #7a251f; }
+    .message span { max-width: 38ch; }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    .controls,
+    .selection-info {
+      position: absolute;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(45,34,24,.82);
+      color: white;
+      font: 500 12px system-ui, sans-serif;
+    }
+
+    .controls { right: 12px; bottom: 12px; padding: 6px 8px; }
+    .selection-info { left: 12px; bottom: 12px; padding: 8px 12px; }
+    .selection-info span { opacity: .72; text-transform: capitalize; }
+    button { border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 18px; line-height: 1; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .viewport { min-height: 240px; max-height: 68vh; }
+    }
   `;
 }
