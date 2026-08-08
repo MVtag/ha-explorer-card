@@ -19,11 +19,12 @@ export interface ExplorerRoom {
 }
 
 export interface PresenceEntityBinding {
-  entity: string;
+  entity?: string;
   x_attribute?: string;
   y_attribute?: string;
   name_attribute?: string;
   icon_attribute?: string;
+  avatar_attribute?: string;
   color_attribute?: string;
   visible_attribute?: string;
   hidden_states?: string[];
@@ -40,6 +41,7 @@ export interface ExplorerPresence {
   room_id?: string;
   color?: string;
   icon?: string;
+  avatar?: string;
   visible?: boolean;
   entity_binding?: PresenceEntityBinding;
 }
