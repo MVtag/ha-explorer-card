@@ -13,7 +13,7 @@ const DEFAULT_ICONS: Record<PresenceObjectType, string> = {
 @customElement("presence-layer")
 export class PresenceLayer extends LitElement {
   @property({ attribute: false }) presences: ExplorerPresence[] = [];
-  @property() transform = "";
+  @property() transform = "translate(0 0) scale(1)";
   @state() private selectedPresenceId?: string;
 
   private selectPresence(presence: ExplorerPresence): void {
@@ -30,7 +30,13 @@ export class PresenceLayer extends LitElement {
     if (!visible.length) return nothing;
 
     return html`
-      <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-label="Tilstedeværelseslag">
+      <svg
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="xMidYMid meet"
+        width="100%"
+        height="100%"
+        aria-label="Tilstedeværelseslag"
+      >
         <g transform=${this.transform}>
           ${visible.map((presence) => {
             const type = presence.type ?? "person";
@@ -42,7 +48,9 @@ export class PresenceLayer extends LitElement {
             return html`
               <g
                 class=${selected ? "presence selected" : "presence"}
-                style=${`--presence-color:${presence.color ?? "#03a9f4"};transform:translate(${x}px,${y}px)`}
+                transform=${`translate(${x} ${y})`}
+                style=${`--presence-color:${presence.color ?? "#03a9f4"}`}
+                @pointerdown=${(event: PointerEvent) => event.stopPropagation()}
                 @click=${() => this.selectPresence(presence)}
               >
                 <circle r="25"></circle>
@@ -62,20 +70,26 @@ export class PresenceLayer extends LitElement {
     :host {
       position: absolute;
       inset: 0;
+      z-index: 3;
       display: block;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
     }
 
     svg {
+      position: absolute;
+      inset: 0;
+      display: block;
       width: 100%;
       height: 100%;
       overflow: visible;
+      pointer-events: none;
     }
 
     .presence {
       pointer-events: all;
       cursor: pointer;
-      transition: transform 650ms cubic-bezier(.2,.8,.2,1);
     }
 
     circle {
