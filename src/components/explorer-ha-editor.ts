@@ -27,10 +27,10 @@ class HaExplorerRoomTools extends HaExplorerRoomDrawingEditor {
     }
   }
 
-  protected override render(): TemplateResult {
+  protected override render(): TemplateResult<1> {
     return (
       this as unknown as {
-        renderRoomDrawingEditor: () => TemplateResult;
+        renderRoomDrawingEditor: () => TemplateResult<1>;
       }
     ).renderRoomDrawingEditor();
   }
