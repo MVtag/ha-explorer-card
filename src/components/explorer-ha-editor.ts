@@ -39,17 +39,48 @@ class HaExplorerRoomTools extends HaExplorerRoomDrawingEditor {
 /**
  * Home Assistant-facing Explorer editor.
  *
- * v0.10.3 makes this element the single owner of card configuration. The
- * standard Card / Rooms / People & Objects editor is rendered directly by this
- * host, while the visual room tool is a child that only proposes config
- * changes. Every change is then re-dispatched from this one top-level element,
- * so Home Assistant receives the same save-state event regardless of whether a
- * title, room name, polygon or presence anchor was changed.
+ * v0.10.3 made this element the single owner of card configuration. v0.10.4
+ * also normalizes native form-control change events so Home Assistant receives
+ * the final configuration after the browser control event has completed.
  */
 @customElement("ha-explorer-ha-editor")
 export class HaExplorerHaEditor extends HaExplorerCardEditor {
   private get currentConfig(): ExplorerCardConfig | undefined {
     return (this as unknown as { config?: ExplorerCardConfig }).config;
+  }
+
+  private emitHomeAssistantConfig(config: ExplorerCardConfig): boolean {
+    const homeAssistantEvent = new Event("config-changed", {
+      bubbles: true,
+      composed: true,
+    }) as ConfigChangedEvent;
+
+    homeAssistantEvent.detail = { config };
+    return super.dispatchEvent(homeAssistantEvent);
+  }
+
+  private readonly handleNativeControlChange = (event: Event): void => {
+    // Let the control's own @change handler update Explorer first, but prevent
+    // the raw browser change event from escaping the editor. Home Assistant only
+    // needs the resulting config-changed event.
+    event.stopPropagation();
+
+    // Re-emit after the native change event has fully completed. This avoids a
+    // stale editor/save state for select/change-driven fields such as area_id,
+    // aliases, anchors, presence type and static room fallback.
+    queueMicrotask(() => {
+      const config = this.currentConfig;
+      if (config) this.emitHomeAssistantConfig(config);
+    });
+  };
+
+  protected override firstUpdated(): void {
+    this.renderRoot.addEventListener("change", this.handleNativeControlChange);
+  }
+
+  public override disconnectedCallback(): void {
+    this.renderRoot.removeEventListener("change", this.handleNativeControlChange);
+    super.disconnectedCallback();
   }
 
   private handleDrawingConfigChanged(event: Event): void {
@@ -88,12 +119,6 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
       return super.dispatchEvent(event);
     }
 
-    const homeAssistantEvent = new Event("config-changed", {
-      bubbles: true,
-      composed: true,
-    }) as ConfigChangedEvent;
-
-    homeAssistantEvent.detail = { config };
-    return super.dispatchEvent(homeAssistantEvent);
+    return this.emitHomeAssistantConfig(config);
   }
 }
