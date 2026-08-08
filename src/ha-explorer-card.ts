@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "./components/explorer-canvas";
-import "./components/explorer-room-drawing-editor";
+import "./components/explorer-ha-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.10.1";
+const CARD_VERSION = "0.10.2";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -14,7 +14,7 @@ export class HaExplorerCard extends LitElement {
   @state() private config?: ExplorerCardConfig;
 
   public static getConfigElement(): HTMLElement {
-    return document.createElement("ha-explorer-room-drawing-editor");
+    return document.createElement("ha-explorer-ha-editor");
   }
 
   public static getStubConfig(): ExplorerCardConfig {
