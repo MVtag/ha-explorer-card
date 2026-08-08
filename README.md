@@ -17,6 +17,9 @@ A living, interactive floor map card for Home Assistant.
 - Home Assistant entity binding
 - Room-aware automatic presence placement
 - Circular Home Assistant profile avatars for presence markers
+- Visual room binding and presence setup editor
+- Home Assistant Area Registry integration
+- Backend-independent room tracking
 - HACS-compatible release assets
 
 ## HACS installation
@@ -35,6 +38,18 @@ title: Home Assistant Explorer
 image: /local/explorer/floorplan.svg
 fit_mode: contain
 ```
+
+## Visual setup editor
+
+The card editor is organized into three sections:
+
+- **Kort** — title, floorplan, fit mode and zoom limits
+- **Rum** — bind existing Explorer rooms to Home Assistant Areas, edit aliases and adjust the presence anchor
+- **Personer & objekter** — add/remove presence objects, select the primary Home Assistant entity, choose a room-tracking entity and configure a static fallback room
+
+Explorer does not require a specific presence backend. A `room_entity` may come from Bermuda, ESPresense, a Home Assistant helper or any other integration that exposes the current room as an entity state.
+
+Existing room polygons are preserved while they are edited visually. Drawing new room polygon boundaries directly on the floorplan is planned for the next visual floorplan editor milestone.
 
 ## Room-aware presence placement
 
@@ -66,7 +81,7 @@ presences:
     type: person
     entity_binding:
       entity: person.marc_poulsen
-      room_entity: input_select.explorer_room_test
+      room_entity: sensor.marc_room
 ```
 
 When the primary entity has an `entity_picture`, Explorer renders it as a circular avatar. An explicit `name` on the presence object takes priority over the entity's `friendly_name`.
@@ -148,9 +163,10 @@ dist/ha-explorer-card.js
 3. Presence engine
 4. Home Assistant entity binding
 5. Room-aware automatic placement
-6. Visual room editor
-7. Animated movement and footsteps
-8. Themes and custom overlays
+6. Visual room and presence binding editor
+7. Visual floorplan room drawing
+8. Animated movement and footsteps
+9. Themes and custom overlays
 
 ## License
 
