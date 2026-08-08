@@ -22,7 +22,13 @@ export class RoomLayer extends LitElement {
     if (!this.rooms.length) return nothing;
 
     return html`
-      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" aria-label="Rumlag">
+      <svg
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="xMidYMid meet"
+        width="100%"
+        height="100%"
+        aria-label="Rumlag"
+      >
         <g transform=${this.transform}>
           ${this.rooms.map((room) => {
             const points = room.points.map(([x, y]) => `${x * 1000},${y * 1000}`).join(" ");
@@ -47,9 +53,31 @@ export class RoomLayer extends LitElement {
   }
 
   static styles = css`
-    :host { position: absolute; inset: 0; display: block; pointer-events: none; }
-    svg { width: 100%; height: 100%; overflow: hidden; }
-    .room { pointer-events: all; cursor: pointer; }
+    :host {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    svg {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .room {
+      pointer-events: all;
+      cursor: pointer;
+    }
+
     polygon {
       fill: color-mix(in srgb, var(--room-color) 18%, transparent);
       stroke: color-mix(in srgb, var(--room-color) 80%, white 10%);
@@ -57,10 +85,13 @@ export class RoomLayer extends LitElement {
       vector-effect: non-scaling-stroke;
       transition: fill 160ms ease, stroke-width 160ms ease;
     }
-    .room:hover polygon, .room.selected polygon {
+
+    .room:hover polygon,
+    .room.selected polygon {
       fill: color-mix(in srgb, var(--room-color) 34%, transparent);
       stroke-width: 5;
     }
+
     text {
       fill: var(--primary-text-color, #1f2937);
       paint-order: stroke;
