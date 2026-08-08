@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, type TemplateResult } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { ExplorerCardConfig } from "../models/config";
 import { HaExplorerCardEditor } from "./explorer-config-editor";
@@ -27,8 +27,12 @@ class HaExplorerRoomTools extends HaExplorerRoomDrawingEditor {
     }
   }
 
-  protected override render() {
-    return (this as unknown as { renderRoomDrawingEditor: () => unknown }).renderRoomDrawingEditor();
+  protected override render(): TemplateResult {
+    return (
+      this as unknown as {
+        renderRoomDrawingEditor: () => TemplateResult;
+      }
+    ).renderRoomDrawingEditor();
   }
 }
 
