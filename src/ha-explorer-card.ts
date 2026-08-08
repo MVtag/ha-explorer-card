@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "./components/explorer-canvas";
-import "./components/explorer-config-editor";
+import "./components/explorer-room-drawing-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.9.0";
+const CARD_VERSION = "0.10.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -14,7 +14,7 @@ export class HaExplorerCard extends LitElement {
   @state() private config?: ExplorerCardConfig;
 
   public static getConfigElement(): HTMLElement {
-    return document.createElement("ha-explorer-card-editor");
+    return document.createElement("ha-explorer-room-drawing-editor");
   }
 
   public static getStubConfig(): ExplorerCardConfig {
@@ -61,7 +61,7 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Visual Setup · v${CARD_VERSION}</small>
+          <small>Visual Room Editor · v${CARD_VERSION}</small>
         </header>
 
         <explorer-canvas

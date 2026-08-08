@@ -18,6 +18,8 @@ A living, interactive floor map card for Home Assistant.
 - Room-aware automatic presence placement
 - Circular Home Assistant profile avatars for presence markers
 - Visual room binding and presence setup editor
+- Visual room polygon drawing directly on the floorplan
+- Visual presence-anchor placement
 - Home Assistant Area Registry integration
 - Backend-independent room tracking
 - HACS-compatible release assets
@@ -41,15 +43,28 @@ fit_mode: contain
 
 ## Visual setup editor
 
-The card editor is organized into three sections:
+The card editor contains the normal setup sections plus a visual floorplan editor:
 
 - **Kort** — title, floorplan, fit mode and zoom limits
-- **Rum** — bind existing Explorer rooms to Home Assistant Areas, edit aliases and adjust the presence anchor
+- **Rum** — bind Explorer rooms to Home Assistant Areas, edit aliases and adjust the presence anchor
 - **Personer & objekter** — add/remove presence objects, select the primary Home Assistant entity, choose a room-tracking entity and configure a static fallback room
+- **Visual Room Editor** — draw new room polygons, redraw existing room boundaries and place presence anchors directly on the floorplan
 
 Explorer does not require a specific presence backend. A `room_entity` may come from Bermuda, ESPresense, a Home Assistant helper or any other integration that exposes the current room as an entity state.
 
-Existing room polygons are preserved while they are edited visually. Drawing new room polygon boundaries directly on the floorplan is planned for the next visual floorplan editor milestone.
+### Drawing a room
+
+1. Open the visual editor for the card.
+2. Scroll to **Visual Room Editor**.
+3. Select **Nyt rum**.
+4. Enter a room name and optionally select a Home Assistant Area.
+5. Tap/click around the room boundary on the floorplan.
+6. Use at least three points and choose **Gem rum**.
+7. Select the room and choose **Placér personpunkt** to set where presence markers should normally appear.
+
+The editor automatically stores drawing coordinates as normalized values from `0` to `1`, so the resulting configuration remains compatible with YAML and the existing Explorer room engine.
+
+Existing rooms can be selected directly on the editor preview and redrawn without changing their semantic metadata. The old geometry is preserved until the new polygon is saved.
 
 ## Room-aware presence placement
 
