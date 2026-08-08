@@ -2,15 +2,20 @@ export type FloorplanFitMode = "contain" | "cover";
 export type NormalizedPoint = [number, number];
 export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
 
+export interface NormalizedPosition {
+  x: number;
+  y: number;
+}
+
 export interface ExplorerRoom {
   id: string;
   name?: string;
   points: NormalizedPoint[];
   color?: string;
-  label?: {
-    x: number;
-    y: number;
-  };
+  area_id?: string;
+  aliases?: string[];
+  label?: NormalizedPosition;
+  presence_anchor?: NormalizedPosition;
 }
 
 export interface PresenceEntityBinding {
@@ -22,14 +27,17 @@ export interface PresenceEntityBinding {
   color_attribute?: string;
   visible_attribute?: string;
   hidden_states?: string[];
+  room_entity?: string;
+  room_attribute?: string;
 }
 
 export interface ExplorerPresence {
   id: string;
   name?: string;
   type?: PresenceObjectType;
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
+  room_id?: string;
   color?: string;
   icon?: string;
   visible?: boolean;
