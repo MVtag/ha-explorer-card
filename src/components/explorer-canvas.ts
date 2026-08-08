@@ -91,6 +91,23 @@ function isSafeSvgReference(value: string): boolean {
   );
 }
 
+function safePresenceAvatar(source?: string): string | undefined {
+  const value = source?.trim();
+  if (!value) return undefined;
+
+  if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(value)) return value;
+  if (value.startsWith("/")) return value;
+
+  try {
+    const url = new URL(value, window.location.href);
+    if (["http:", "https:", "blob:"].includes(url.protocol)) return value;
+  } catch {
+    return undefined;
+  }
+
+  return undefined;
+}
+
 function sanitizeSvgDocument(document: Document): SVGSVGElement {
   const parserError = document.querySelector("parsererror");
   const root = document.documentElement;
@@ -367,13 +384,18 @@ export class ExplorerCanvas extends LitElement {
   private renderPresences() {
     return this.presences
       .filter((presence) => presence.visible !== false)
-      .map((presence) => {
+      .map((presence, index) => {
         const type = presence.type ?? "person";
         const selected = presence.id === this.selectedPresence?.id;
         const x = (presence.x ?? 0.5) * VIEWBOX_SIZE;
         const y = (presence.y ?? 0.5) * VIEWBOX_SIZE;
         const icon = presence.icon ?? DEFAULT_ICONS[type];
+        const avatar = safePresenceAvatar(presence.avatar);
         const color = presence.color ?? "#03a9f4";
+        const radius = selected ? 31 : 25;
+        const diameter = radius * 2;
+        const clipId = `presence-avatar-${index}`;
+        const labelY = selected ? 58 : 52;
 
         return svg`
           <g
@@ -382,16 +404,50 @@ export class ExplorerCanvas extends LitElement {
             @pointerdown=${(event: PointerEvent) => event.stopPropagation()}
             @click=${(event: MouseEvent) => this.selectPresence(event, presence)}
           >
-            <circle
-              r=${selected ? "31" : "25"}
-              fill=${color}
-              stroke="white"
-              stroke-width=${selected ? "6" : "4"}
-              vector-effect="non-scaling-stroke"
-            ></circle>
-            <text class="presence-icon" text-anchor="middle" dominant-baseline="central">${icon}</text>
+            ${avatar
+              ? svg`
+                  <defs>
+                    <clipPath id=${clipId}>
+                      <circle r=${radius}></circle>
+                    </clipPath>
+                  </defs>
+                  <circle
+                    class="presence-avatar-background"
+                    r=${radius}
+                    fill=${color}
+                  ></circle>
+                  <image
+                    class="presence-avatar"
+                    href=${avatar}
+                    x=${-radius}
+                    y=${-radius}
+                    width=${diameter}
+                    height=${diameter}
+                    preserveAspectRatio="xMidYMid slice"
+                    clip-path=${`url(#${clipId})`}
+                  ></image>
+                  <circle
+                    class="presence-border"
+                    r=${radius}
+                    fill="none"
+                    stroke="white"
+                    stroke-width=${selected ? "6" : "4"}
+                    vector-effect="non-scaling-stroke"
+                  ></circle>
+                `
+              : svg`
+                  <circle
+                    class="presence-marker"
+                    r=${radius}
+                    fill=${color}
+                    stroke="white"
+                    stroke-width=${selected ? "6" : "4"}
+                    vector-effect="non-scaling-stroke"
+                  ></circle>
+                  <text class="presence-icon" text-anchor="middle" dominant-baseline="central">${icon}</text>
+                `}
             ${presence.name
-              ? svg`<text class="presence-label" y="48" text-anchor="middle">${presence.name}</text>`
+              ? svg`<text class="presence-label" y=${labelY} text-anchor="middle">${presence.name}</text>`
               : nothing}
           </g>
         `;
@@ -549,19 +605,24 @@ export class ExplorerCanvas extends LitElement {
       font-weight: 600;
     }
 
-    .presence circle {
+    .presence-marker,
+    .presence-avatar-background,
+    .presence-avatar,
+    .presence-border {
       filter: drop-shadow(0 3px 5px rgba(0,0,0,.28));
-      transition: r 160ms ease, stroke-width 160ms ease;
     }
 
-    .presence:hover circle { r: 31px; stroke-width: 6px; }
+    .presence-avatar,
+    .presence-border,
+    .presence-icon {
+      pointer-events: none;
+    }
 
     .presence-icon {
       fill: white;
       font-family: system-ui, sans-serif;
       font-size: 25px;
       font-weight: 800;
-      pointer-events: none;
     }
 
     .presence-label {
