@@ -11,11 +11,13 @@ import { HaExplorerCardEditor } from "./explorer-config-editor";
 const VIEWBOX_SIZE = 1000;
 type DrawingMode = "idle" | "draw-new" | "redraw" | "anchor";
 
+type AnchorPoint = { x: number; y: number };
+
 function clampNormalized(value: number): number {
   return Math.min(1, Math.max(0, value));
 }
 
-function roomCenter(points: NormalizedPoint[]): { x: number; y: number } {
+function roomCenter(points: NormalizedPoint[]): AnchorPoint {
   if (!points.length) return { x: 0.5, y: 0.5 };
   return {
     x: points.reduce((sum, point) => sum + point[0], 0) / points.length,
@@ -36,14 +38,17 @@ function slugify(value: string): string {
 @customElement("ha-explorer-room-drawing-editor")
 export class HaExplorerRoomDrawingEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
+
   @state() private roomConfig?: ExplorerCardConfig;
   @state() private drawingMode: DrawingMode = "idle";
   @state() private selectedRoomId = "";
   @state() private pendingPoints: NormalizedPoint[] = [];
+  @state() private pendingAnchor?: AnchorPoint;
   @state() private draftRoomName = "";
   @state() private draftAreaId = "";
   @state() private drawingAreas: AreaRegistryEntry[] = [];
   @state() private drawingAreaError = "";
+
   @query("ha-explorer-card-editor") private baseEditor?: HaExplorerCardEditor;
 
   public setConfig(config: ExplorerCardConfig): void {
@@ -56,6 +61,7 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
       this.selectedRoomId = "";
       this.drawingMode = "idle";
       this.pendingPoints = [];
+      this.pendingAnchor = undefined;
     }
   }
 
@@ -84,7 +90,13 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
   }
 
   private handleBaseConfigChanged(event: CustomEvent<{ config: ExplorerCardConfig }>): void {
-    if (event.detail?.config) this.roomConfig = event.detail.config;
+    if (!event.detail?.config) return;
+
+    // The room drawing editor is the element Home Assistant receives from
+    // getConfigElement(). Re-emit the child's configuration event from this
+    // wrapper so Home Assistant always sees one deterministic change event.
+    event.stopPropagation();
+    this.emitConfig(event.detail.config);
   }
 
   private emitConfig(config: ExplorerCardConfig): void {
@@ -127,8 +139,9 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
     }
 
     if (this.drawingMode === "anchor" && this.selectedRoom) {
-      this.updateSelectedRoom({ presence_anchor: { x: point[0], y: point[1] } });
-      this.drawingMode = "idle";
+      // v0.10.1: preview only. Do not mutate the card configuration until
+      // the user explicitly presses "Gem personpunkt".
+      this.pendingAnchor = { x: point[0], y: point[1] };
     }
   }
 
@@ -151,6 +164,7 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
   private beginNewRoom(): void {
     this.selectedRoomId = "";
     this.pendingPoints = [];
+    this.pendingAnchor = undefined;
     this.draftRoomName = `Rum ${this.rooms.length + 1}`;
     this.draftAreaId = "";
     this.drawingMode = "draw-new";
@@ -159,17 +173,20 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
   private beginRedraw(): void {
     if (!this.selectedRoom) return;
     this.pendingPoints = [];
+    this.pendingAnchor = undefined;
     this.drawingMode = "redraw";
   }
 
   private beginAnchor(): void {
     if (!this.selectedRoom) return;
     this.pendingPoints = [];
+    this.pendingAnchor = undefined;
     this.drawingMode = "anchor";
   }
 
   private cancelDrawing(): void {
     this.pendingPoints = [];
+    this.pendingAnchor = undefined;
     this.drawingMode = "idle";
   }
 
@@ -192,9 +209,11 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
         presence_anchor: center,
         ...(this.draftAreaId ? { area_id: this.draftAreaId } : {}),
       };
+
       const config = { ...this.roomConfig, rooms: [...this.rooms, room] };
       this.selectedRoomId = id;
       this.pendingPoints = [];
+      this.pendingAnchor = undefined;
       this.drawingMode = "idle";
       this.emitConfig(config);
       return;
@@ -210,28 +229,40 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
             }
           : room,
       );
+
       this.pendingPoints = [];
+      this.pendingAnchor = undefined;
       this.drawingMode = "idle";
       this.emitConfig({ ...this.roomConfig, rooms });
     }
   }
 
-  private updateSelectedRoom(patch: Partial<ExplorerRoom>): void {
-    if (!this.roomConfig || !this.selectedRoom) return;
+  private finishAnchor(): void {
+    if (!this.roomConfig || !this.selectedRoom || !this.pendingAnchor) return;
+
+    const anchor = { ...this.pendingAnchor };
     const rooms = this.rooms.map((room) =>
-      room.id === this.selectedRoomId ? { ...room, ...patch } : room,
+      room.id === this.selectedRoomId ? { ...room, presence_anchor: anchor } : room,
     );
+
+    this.pendingAnchor = undefined;
+    this.drawingMode = "idle";
     this.emitConfig({ ...this.roomConfig, rooms });
   }
 
   private renderRoomPolygon(room: ExplorerRoom) {
     if (!room.points.length) return nothing;
+
     const points = room.points
       .map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`)
       .join(" ");
     const selected = room.id === this.selectedRoomId;
     const center = roomCenter(room.points);
-    const anchor = room.presence_anchor ?? center;
+    const storedAnchor = room.presence_anchor ?? center;
+    const anchor =
+      selected && this.drawingMode === "anchor" && this.pendingAnchor
+        ? this.pendingAnchor
+        : storedAnchor;
 
     return svg`
       <g
@@ -256,7 +287,10 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
         >${room.name ?? room.id}</text>
         ${selected
           ? svg`
-              <g class="anchor-marker" transform=${`translate(${anchor.x * VIEWBOX_SIZE} ${anchor.y * VIEWBOX_SIZE})`}>
+              <g
+                class=${this.pendingAnchor ? "anchor-marker pending-anchor" : "anchor-marker"}
+                transform=${`translate(${anchor.x * VIEWBOX_SIZE} ${anchor.y * VIEWBOX_SIZE})`}
+              >
                 <circle r="15"></circle>
                 <line x1="-24" y1="0" x2="24" y2="0"></line>
                 <line x1="0" y1="-24" x2="0" y2="24"></line>
@@ -269,6 +303,7 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
 
   private renderPendingPolygon() {
     if (!this.pendingPoints.length) return nothing;
+
     const points = this.pendingPoints
       .map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`)
       .join(" ");
@@ -302,12 +337,15 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
     if (this.drawingMode === "draw-new") {
       return html`Tryk rundt langs kanten af det nye rum. Brug mindst 3 punkter og afslut med <strong>Gem rum</strong>.`;
     }
+
     if (this.drawingMode === "redraw") {
       return html`Tegn den nye kant for <strong>${this.selectedRoom?.name ?? this.selectedRoomId}</strong>. Den gamle geometri ændres først, når du gemmer.`;
     }
+
     if (this.drawingMode === "anchor") {
-      return html`Tryk på det sted i <strong>${this.selectedRoom?.name ?? this.selectedRoomId}</strong>, hvor personer normalt skal vises.`;
+      return html`Tryk på det sted i <strong>${this.selectedRoom?.name ?? this.selectedRoomId}</strong>, hvor personer normalt skal vises. Kontrollér markøren og tryk derefter <strong>Gem personpunkt</strong>.`;
     }
+
     return html`Vælg et eksisterende rum på kortet for at redigere det, eller tryk <strong>Nyt rum</strong> for at tegne et nyt.`;
   }
 
@@ -349,6 +387,23 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
       `;
     }
 
+    if (this.drawingMode === "anchor" && this.selectedRoom) {
+      const stored = this.selectedRoom.presence_anchor ?? roomCenter(this.selectedRoom.points);
+      const preview = this.pendingAnchor ?? stored;
+      return html`
+        <div class="selected-summary">
+          <div>
+            <strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong>
+            <span>
+              ${this.pendingAnchor ? "Nyt personpunkt" : "Nuværende personpunkt"}
+              ${preview.x.toFixed(2)}, ${preview.y.toFixed(2)}
+            </span>
+          </div>
+          <span class="room-id">${this.pendingAnchor ? "Ikke gemt" : this.selectedRoom.id}</span>
+        </div>
+      `;
+    }
+
     if (this.selectedRoom) {
       const anchor = this.selectedRoom.presence_anchor ?? roomCenter(this.selectedRoom.points);
       return html`
@@ -368,31 +423,63 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
   private renderButtonBar() {
     const drawingPolygon = this.drawingMode === "draw-new" || this.drawingMode === "redraw";
 
-    if (this.drawingMode !== "idle") {
+    if (drawingPolygon) {
       return html`
         <div class="button-bar">
-          ${drawingPolygon
-            ? html`
-                <button class="secondary" ?disabled=${!this.pendingPoints.length} @click=${this.undoPoint}>
-                  Fortryd punkt
-                </button>
-                <button class="primary" ?disabled=${this.pendingPoints.length < 3} @click=${this.finishPolygon}>
-                  ${this.drawingMode === "draw-new" ? "Gem rum" : "Gem ny rumkant"}
-                </button>
-              `
-            : nothing}
-          <button class="secondary" @click=${this.cancelDrawing}>Annuller</button>
+          <button
+            type="button"
+            class="secondary"
+            ?disabled=${!this.pendingPoints.length}
+            @click=${this.undoPoint}
+          >
+            Fortryd punkt
+          </button>
+          <button
+            type="button"
+            class="primary"
+            ?disabled=${this.pendingPoints.length < 3}
+            @click=${this.finishPolygon}
+          >
+            ${this.drawingMode === "draw-new" ? "Gem rum" : "Gem ny rumkant"}
+          </button>
+          <button type="button" class="secondary" @click=${this.cancelDrawing}>Annuller</button>
+        </div>
+      `;
+    }
+
+    if (this.drawingMode === "anchor") {
+      return html`
+        <div class="button-bar">
+          <button
+            type="button"
+            class="primary"
+            ?disabled=${!this.pendingAnchor}
+            @click=${this.finishAnchor}
+          >
+            Gem personpunkt
+          </button>
+          <button type="button" class="secondary" @click=${this.cancelDrawing}>Annuller</button>
         </div>
       `;
     }
 
     return html`
       <div class="button-bar">
-        <button class="primary" @click=${this.beginNewRoom}>+ Nyt rum</button>
-        <button class="secondary" ?disabled=${!this.selectedRoom} @click=${this.beginRedraw}>
+        <button type="button" class="primary" @click=${this.beginNewRoom}>+ Nyt rum</button>
+        <button
+          type="button"
+          class="secondary"
+          ?disabled=${!this.selectedRoom}
+          @click=${this.beginRedraw}
+        >
           Tegn rumkant igen
         </button>
-        <button class="secondary" ?disabled=${!this.selectedRoom} @click=${this.beginAnchor}>
+        <button
+          type="button"
+          class="secondary"
+          ?disabled=${!this.selectedRoom}
+          @click=${this.beginAnchor}
+        >
           Placér personpunkt
         </button>
       </div>
@@ -401,6 +488,7 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
 
   private renderRoomDrawingEditor() {
     if (!this.roomConfig) return nothing;
+
     const image = this.roomConfig.image ?? this.roomConfig.background ?? "";
     const preserveAspectRatio =
       this.roomConfig.fit_mode === "cover" ? "xMidYMid slice" : "xMidYMid meet";
@@ -417,7 +505,9 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
 
         <div class="instruction">${this.renderDrawingInstructions()}</div>
         ${this.renderDrawingTools()}
-        ${this.drawingAreaError ? html`<div class="drawing-warning">${this.drawingAreaError}</div>` : nothing}
+        ${this.drawingAreaError
+          ? html`<div class="drawing-warning">${this.drawingAreaError}</div>`
+          : nothing}
 
         ${image
           ? html`
@@ -448,6 +538,7 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
             `}
 
         ${this.renderButtonBar()}
+
         <div class="drawing-note">
           Koordinater gemmes automatisk som normaliserede værdier fra 0 til 1. Eksisterende YAML-konfiguration er fortsat kompatibel.
         </div>
@@ -626,6 +717,11 @@ export class HaExplorerRoomDrawingEditor extends LitElement {
       stroke: var(--accent-color, var(--primary-color));
       stroke-width: 4px;
       vector-effect: non-scaling-stroke;
+    }
+
+    .pending-anchor circle,
+    .pending-anchor line {
+      stroke-dasharray: 8 6;
     }
 
     .pending-fill {
