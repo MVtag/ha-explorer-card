@@ -1,11 +1,11 @@
-import { css, html, nothing, svg } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { LitElement, css, html, nothing, svg } from "lit";
+import { customElement, property, query, state } from "lit/decorators.js";
 import type {
   ExplorerCardConfig,
   ExplorerRoom,
   NormalizedPoint,
 } from "../models/config";
-import type { AreaRegistryEntry } from "../types";
+import type { AreaRegistryEntry, HomeAssistant } from "../types";
 import { HaExplorerCardEditor } from "./explorer-config-editor";
 
 const VIEWBOX_SIZE = 1000;
@@ -34,7 +34,8 @@ function slugify(value: string): string {
 }
 
 @customElement("ha-explorer-room-drawing-editor")
-export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
+export class HaExplorerRoomDrawingEditor extends LitElement {
+  @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private roomConfig?: ExplorerCardConfig;
   @state() private drawingMode: DrawingMode = "idle";
   @state() private selectedRoomId = "";
@@ -43,9 +44,9 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
   @state() private draftAreaId = "";
   @state() private drawingAreas: AreaRegistryEntry[] = [];
   @state() private drawingAreaError = "";
+  @query("ha-explorer-card-editor") private baseEditor?: HaExplorerCardEditor;
 
-  public override setConfig(config: ExplorerCardConfig): void {
-    super.setConfig(config);
+  public setConfig(config: ExplorerCardConfig): void {
     this.roomConfig = config;
 
     if (
@@ -58,9 +59,11 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
     }
   }
 
-  protected override updated(changed: Map<PropertyKey, unknown>): void {
-    super.updated(changed);
+  protected updated(changed: Map<PropertyKey, unknown>): void {
     if (changed.has("hass")) void this.loadDrawingAreas();
+    if ((changed.has("roomConfig") || changed.has("hass")) && this.roomConfig) {
+      this.baseEditor?.setConfig(this.roomConfig);
+    }
   }
 
   private async loadDrawingAreas(): Promise<void> {
@@ -80,9 +83,13 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
     }
   }
 
+  private handleBaseConfigChanged(event: CustomEvent<{ config: ExplorerCardConfig }>): void {
+    if (event.detail?.config) this.roomConfig = event.detail.config;
+  }
+
   private emitConfig(config: ExplorerCardConfig): void {
     this.roomConfig = config;
-    super.setConfig(config);
+    this.baseEditor?.setConfig(config);
     this.dispatchEvent(
       new CustomEvent("config-changed", {
         detail: { config },
@@ -185,10 +192,7 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
         presence_anchor: center,
         ...(this.draftAreaId ? { area_id: this.draftAreaId } : {}),
       };
-      const config = {
-        ...this.roomConfig,
-        rooms: [...this.rooms, room],
-      };
+      const config = { ...this.roomConfig, rooms: [...this.rooms, room] };
       this.selectedRoomId = id;
       this.pendingPoints = [];
       this.drawingMode = "idle";
@@ -308,8 +312,6 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
   }
 
   private renderDrawingTools() {
-    const drawingPolygon = this.drawingMode === "draw-new" || this.drawingMode === "redraw";
-
     if (this.drawingMode === "draw-new") {
       return html`
         <div class="draft-grid">
@@ -338,7 +340,7 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
       `;
     }
 
-    if (drawingPolygon) {
+    if (this.drawingMode === "redraw") {
       return html`
         <div class="selected-summary">
           <strong>${this.selectedRoom?.name ?? this.selectedRoomId}</strong>
@@ -453,282 +455,271 @@ export class HaExplorerRoomDrawingEditor extends HaExplorerCardEditor {
     `;
   }
 
-  protected override render() {
+  protected render() {
     return html`
-      ${super.render()}
+      <ha-explorer-card-editor
+        .hass=${this.hass}
+        @config-changed=${this.handleBaseConfigChanged}
+      ></ha-explorer-card-editor>
       ${this.renderRoomDrawingEditor()}
     `;
   }
 
-  static override styles = [
-    HaExplorerCardEditor.styles,
-    css`
+  static styles = css`
+    :host {
+      display: block;
+    }
+
+    .drawing-editor {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--divider-color);
+      border-radius: 14px;
+      background: var(--ha-card-background, var(--card-background-color));
+    }
+
+    .drawing-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .drawing-heading h3 {
+      margin: 3px 0 0;
+      font-size: 1.08rem;
+    }
+
+    .eyebrow {
+      display: block;
+      color: var(--secondary-text-color);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .count-badge,
+    .room-id {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--secondary-background-color);
+      color: var(--secondary-text-color);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .instruction,
+    .drawing-note,
+    .drawing-warning {
+      padding: 10px 12px;
+      border-radius: 10px;
+      line-height: 1.45;
+      font-size: 0.9rem;
+    }
+
+    .instruction,
+    .drawing-note {
+      background: var(--secondary-background-color);
+      color: var(--secondary-text-color);
+    }
+
+    .drawing-warning {
+      background: var(--secondary-background-color);
+      color: var(--primary-text-color);
+      border-left: 3px solid var(--warning-color, #ff9800);
+    }
+
+    .draft-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .draft-grid label {
+      display: grid;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .draft-grid input,
+    .draft-grid select {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--divider-color);
+      border-radius: 8px;
+      color: var(--primary-text-color);
+      background: var(--card-background-color);
+      font: inherit;
+    }
+
+    .selected-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--divider-color);
+      border-radius: 10px;
+    }
+
+    .selected-summary span:not(.room-id) {
+      display: block;
+      margin-top: 3px;
+      color: var(--secondary-text-color);
+      font-size: 0.8rem;
+    }
+
+    .map-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--divider-color);
+      border-radius: 12px;
+      background: var(--secondary-background-color);
+      touch-action: manipulation;
+    }
+
+    .drawing-map {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      cursor: default;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .mode-draw-new .drawing-map,
+    .mode-redraw .drawing-map {
+      cursor: crosshair;
+    }
+
+    .mode-anchor .drawing-map {
+      cursor: cell;
+    }
+
+    .map-room {
+      cursor: pointer;
+    }
+
+    .drawing-room-label {
+      fill: var(--primary-text-color);
+      paint-order: stroke;
+      stroke: var(--card-background-color);
+      stroke-width: 8px;
+      stroke-linejoin: round;
+      font-size: 30px;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .anchor-marker circle {
+      fill: var(--card-background-color);
+      stroke: var(--accent-color, var(--primary-color));
+      stroke-width: 5px;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .anchor-marker line {
+      stroke: var(--accent-color, var(--primary-color));
+      stroke-width: 4px;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .pending-fill {
+      fill: var(--accent-color, var(--primary-color));
+      fill-opacity: 0.22;
+      stroke: none;
+      pointer-events: none;
+    }
+
+    .pending-line {
+      stroke: var(--accent-color, var(--primary-color));
+      stroke-width: 5px;
+      stroke-dasharray: 14 10;
+      pointer-events: none;
+    }
+
+    .pending-point {
+      fill: var(--card-background-color);
+      stroke: var(--accent-color, var(--primary-color));
+      stroke-width: 5px;
+      vector-effect: non-scaling-stroke;
+      pointer-events: none;
+    }
+
+    .point-number {
+      fill: var(--primary-text-color);
+      paint-order: stroke;
+      stroke: var(--card-background-color);
+      stroke-width: 7px;
+      font-size: 25px;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .button-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .button-bar button {
+      appearance: none;
+      min-height: 40px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--divider-color);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .button-bar button.primary {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+      color: var(--text-primary-color, #fff);
+    }
+
+    .button-bar button.secondary {
+      background: var(--card-background-color);
+      color: var(--primary-text-color);
+    }
+
+    .button-bar button:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .empty-map {
+      display: grid;
+      min-height: 180px;
+      place-items: center;
+      padding: 24px;
+      border: 1px dashed var(--divider-color);
+      border-radius: 12px;
+      color: var(--secondary-text-color);
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
       .drawing-editor {
-        margin-top: 18px;
-        display: grid;
-        gap: 14px;
-        padding: 16px;
-        border: 1px solid var(--divider-color);
-        border-radius: 14px;
-        background: var(--ha-card-background, var(--card-background-color));
-      }
-
-      .drawing-heading {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 12px;
-      }
-
-      .drawing-heading h3 {
-        margin: 3px 0 0;
-        font-size: 1.08rem;
-      }
-
-      .eyebrow {
-        display: block;
-        color: var(--secondary-text-color);
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .count-badge,
-      .room-id {
-        padding: 5px 9px;
-        border-radius: 999px;
-        background: var(--secondary-background-color);
-        color: var(--secondary-text-color);
-        font-size: 0.75rem;
-        white-space: nowrap;
-      }
-
-      .instruction,
-      .drawing-note,
-      .drawing-warning {
-        padding: 10px 12px;
-        border-radius: 10px;
-        line-height: 1.45;
-        font-size: 0.9rem;
-      }
-
-      .instruction,
-      .drawing-note {
-        background: var(--secondary-background-color);
-        color: var(--secondary-text-color);
-      }
-
-      .drawing-warning {
-        background: color-mix(in srgb, var(--warning-color, #ff9800) 12%, transparent);
-        color: var(--primary-text-color);
+        padding: 12px;
       }
 
       .draft-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .draft-grid label {
-        display: grid;
-        gap: 6px;
-        font-weight: 500;
-      }
-
-      .draft-grid input,
-      .draft-grid select {
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid var(--divider-color);
-        border-radius: 8px;
-        color: var(--primary-text-color);
-        background: var(--card-background-color);
-        font: inherit;
-      }
-
-      .selected-summary {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 10px 12px;
-        border: 1px solid var(--divider-color);
-        border-radius: 10px;
-      }
-
-      .selected-summary > div,
-      .selected-summary strong,
-      .selected-summary span {
-        min-width: 0;
-      }
-
-      .selected-summary strong,
-      .selected-summary > span:not(.room-id) {
-        display: block;
-      }
-
-      .selected-summary span:not(.room-id) {
-        margin-top: 3px;
-        color: var(--secondary-text-color);
-        font-size: 0.8rem;
-      }
-
-      .map-frame {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--divider-color);
-        border-radius: 12px;
-        background:
-          linear-gradient(45deg, var(--secondary-background-color) 25%, transparent 25%),
-          linear-gradient(-45deg, var(--secondary-background-color) 25%, transparent 25%),
-          linear-gradient(45deg, transparent 75%, var(--secondary-background-color) 75%),
-          linear-gradient(-45deg, transparent 75%, var(--secondary-background-color) 75%);
-        background-size: 20px 20px;
-        background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-        touch-action: manipulation;
-      }
-
-      .drawing-map {
-        display: block;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        cursor: default;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-
-      .mode-draw-new .drawing-map,
-      .mode-redraw .drawing-map {
-        cursor: crosshair;
-      }
-
-      .mode-anchor .drawing-map {
-        cursor: cell;
-      }
-
-      .map-room {
-        cursor: pointer;
+        grid-template-columns: 1fr;
       }
 
       .drawing-room-label {
-        fill: var(--primary-text-color);
-        paint-order: stroke;
-        stroke: var(--card-background-color);
-        stroke-width: 8px;
-        stroke-linejoin: round;
-        font-size: 30px;
-        font-weight: 700;
-        pointer-events: none;
-      }
-
-      .anchor-marker circle {
-        fill: var(--card-background-color);
-        stroke: var(--accent-color, var(--primary-color));
-        stroke-width: 5px;
-        vector-effect: non-scaling-stroke;
-      }
-
-      .anchor-marker line {
-        stroke: var(--accent-color, var(--primary-color));
-        stroke-width: 4px;
-        vector-effect: non-scaling-stroke;
-      }
-
-      .pending-fill {
-        fill: var(--accent-color, var(--primary-color));
-        fill-opacity: 0.22;
-        stroke: none;
-        pointer-events: none;
-      }
-
-      .pending-line {
-        stroke: var(--accent-color, var(--primary-color));
-        stroke-width: 5px;
-        stroke-dasharray: 14 10;
-        pointer-events: none;
-      }
-
-      .pending-point {
-        fill: var(--card-background-color);
-        stroke: var(--accent-color, var(--primary-color));
-        stroke-width: 5px;
-        vector-effect: non-scaling-stroke;
-        pointer-events: none;
-      }
-
-      .point-number {
-        fill: var(--primary-text-color);
-        paint-order: stroke;
-        stroke: var(--card-background-color);
-        stroke-width: 7px;
-        font-size: 25px;
-        font-weight: 700;
-        pointer-events: none;
-      }
-
-      .button-bar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        font-size: 34px;
       }
 
       .button-bar button {
-        appearance: none;
-        min-height: 40px;
-        padding: 9px 13px;
-        border-radius: 9px;
-        border: 1px solid var(--divider-color);
-        font: inherit;
-        font-weight: 600;
-        cursor: pointer;
+        flex: 1 1 auto;
       }
-
-      .button-bar button.primary {
-        border-color: var(--primary-color);
-        background: var(--primary-color);
-        color: var(--text-primary-color, #fff);
-      }
-
-      .button-bar button.secondary {
-        background: var(--card-background-color);
-        color: var(--primary-text-color);
-      }
-
-      .button-bar button:disabled {
-        opacity: 0.45;
-        cursor: default;
-      }
-
-      .empty-map {
-        display: grid;
-        min-height: 180px;
-        place-items: center;
-        padding: 24px;
-        border: 1px dashed var(--divider-color);
-        border-radius: 12px;
-        color: var(--secondary-text-color);
-        text-align: center;
-      }
-
-      @media (max-width: 600px) {
-        .drawing-editor {
-          padding: 12px;
-        }
-
-        .draft-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .drawing-room-label {
-          font-size: 34px;
-        }
-
-        .button-bar button {
-          flex: 1 1 auto;
-        }
-      }
-    `,
-  ];
+    }
+  `;
 }
