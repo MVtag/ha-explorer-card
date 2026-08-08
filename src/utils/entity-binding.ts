@@ -5,8 +5,8 @@ import { findRoomByReference, getRoomPresenceAnchor } from "./room-awareness";
 const DEFAULT_HIDDEN_STATES = ["unknown", "unavailable"];
 const UNKNOWN_ROOM_STATES = new Set(["", "unknown", "unavailable", "none", "null"]);
 
-function readAttribute(entity: HassEntity, attribute?: string): unknown {
-  return attribute ? entity.attributes[attribute] : undefined;
+function readAttribute(entity: HassEntity | undefined, attribute?: string): unknown {
+  return entity && attribute ? entity.attributes[attribute] : undefined;
 }
 
 function normalizedNumber(value: unknown, fallback?: number): number | undefined {
@@ -38,7 +38,7 @@ function roomReferenceValue(value: unknown): string | undefined {
 
 function readRoomReference(
   binding: PresenceEntityBinding,
-  entity: HassEntity,
+  entity: HassEntity | undefined,
   hass: HomeAssistant,
 ): string | undefined {
   if (binding.room_entity) {
@@ -50,6 +50,8 @@ function readRoomReference(
         : roomEntity.state,
     );
   }
+
+  if (!entity) return undefined;
 
   return roomReferenceValue(
     readAttribute(entity, binding.room_attribute ?? "explorer_room"),
@@ -89,38 +91,49 @@ export function resolvePresence(
   const binding = presence.entity_binding;
   if (!binding || !hass) return applyRoomPosition(presence, rooms);
 
-  const entity = hass.states[binding.entity];
-  if (!entity) return { ...applyRoomPosition(presence, rooms), visible: false };
+  const entity = binding.entity ? hass.states[binding.entity] : undefined;
+  if (binding.entity && !entity) {
+    return { ...applyRoomPosition(presence, rooms), visible: false };
+  }
 
   const hiddenStates = binding.hidden_states ?? DEFAULT_HIDDEN_STATES;
-  const hiddenByState = hiddenStates.includes(entity.state);
+  const hiddenByState = entity ? hiddenStates.includes(entity.state) : false;
   const visibleAttribute = readAttribute(entity, binding.visible_attribute);
   const visible = hiddenByState
     ? false
     : booleanValue(visibleAttribute, presence.visible ?? true);
 
+  const entityName = stringValue(
+    readAttribute(entity, binding.name_attribute ?? "friendly_name"),
+  );
+  const entityAvatar = stringValue(
+    readAttribute(entity, binding.avatar_attribute ?? "entity_picture"),
+  );
+  const entityIcon = binding.icon_attribute
+    ? stringValue(readAttribute(entity, binding.icon_attribute))
+    : undefined;
+  const entityColor = stringValue(
+    readAttribute(entity, binding.color_attribute ?? "explorer_color"),
+  );
+
   const resolved: ExplorerPresence = {
     ...presence,
-    x: normalizedNumber(
-      readAttribute(entity, binding.x_attribute ?? "explorer_x"),
-      presence.x,
-    ),
-    y: normalizedNumber(
-      readAttribute(entity, binding.y_attribute ?? "explorer_y"),
-      presence.y,
-    ),
-    name: stringValue(
-      readAttribute(entity, binding.name_attribute ?? "friendly_name"),
-      presence.name,
-    ),
-    icon: stringValue(
-      readAttribute(entity, binding.icon_attribute ?? "entity_picture"),
-      presence.icon,
-    ),
-    color: stringValue(
-      readAttribute(entity, binding.color_attribute ?? "explorer_color"),
-      presence.color,
-    ),
+    x: entity
+      ? normalizedNumber(
+          readAttribute(entity, binding.x_attribute ?? "explorer_x"),
+          presence.x,
+        )
+      : normalizedNumber(presence.x),
+    y: entity
+      ? normalizedNumber(
+          readAttribute(entity, binding.y_attribute ?? "explorer_y"),
+          presence.y,
+        )
+      : normalizedNumber(presence.y),
+    name: presence.name ?? entityName,
+    avatar: presence.avatar ?? entityAvatar,
+    icon: presence.icon ?? entityIcon,
+    color: presence.color ?? entityColor,
     visible,
   };
 

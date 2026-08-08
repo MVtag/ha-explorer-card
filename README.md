@@ -16,6 +16,7 @@ A living, interactive floor map card for Home Assistant.
 - Presence objects for people, pets, robots, vehicles and custom objects
 - Home Assistant entity binding
 - Room-aware automatic presence placement
+- Circular Home Assistant profile avatars for presence markers
 - HACS-compatible release assets
 
 ## HACS installation
@@ -64,15 +65,28 @@ presences:
     name: Marc
     type: person
     entity_binding:
-      entity: person.marc
-      room_entity: sensor.marc_room
+      entity: person.marc_poulsen
+      room_entity: input_select.explorer_room_test
+```
+
+When the primary entity has an `entity_picture`, Explorer renders it as a circular avatar. An explicit `name` on the presence object takes priority over the entity's `friendly_name`.
+
+The primary entity is optional when only room tracking is needed:
+
+```yaml
+presences:
+  - id: room-only-test
+    name: Marc
+    type: person
+    entity_binding:
+      room_entity: input_select.explorer_room_test
 ```
 
 If the room sensor exposes the room as an attribute instead of its state, set `room_attribute`:
 
 ```yaml
 entity_binding:
-  entity: person.marc
+  entity: person.marc_poulsen
   room_entity: sensor.marc_presence
   room_attribute: area_id
 ```
@@ -109,7 +123,9 @@ explorer_color: "#03a9f4"
 explorer_room: kitchen
 ```
 
-Custom attribute names can be configured with `x_attribute`, `y_attribute`, `name_attribute`, `icon_attribute`, `color_attribute`, `visible_attribute` and `room_attribute`.
+`entity_picture` is treated as an avatar image rather than text. The avatar attribute can be changed with `avatar_attribute`. Text/icon binding is only read when an explicit `icon_attribute` is configured.
+
+Custom attribute names can be configured with `x_attribute`, `y_attribute`, `name_attribute`, `icon_attribute`, `avatar_attribute`, `color_attribute`, `visible_attribute` and `room_attribute`.
 
 ## Development
 
