@@ -1,5 +1,6 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import "./room-layer";
 import "./presence-layer";
 import type {
@@ -145,37 +146,31 @@ export class ExplorerCanvas extends LitElement {
   @state() private selectedPresence?: ExplorerPresence;
   @state() private metadata: FloorplanMetadata = { ...DEFAULT_METADATA };
   @state() private imageSource = "";
+  @state() private svgMarkup = "";
   @state() private loadError = "";
 
   private pointerId?: number;
   private lastPointer?: { x: number; y: number };
   private imageRequest = 0;
-  private svgObjectUrl?: string;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.resetViewport();
   }
 
-  disconnectedCallback(): void {
-    this.releaseSvgObjectUrl();
-    super.disconnectedCallback();
-  }
-
   protected updated(changed: Map<PropertyKey, unknown>): void {
-    if (changed.has("image")) void this.loadFloorplan();
-  }
-
-  private releaseSvgObjectUrl(): void {
-    if (!this.svgObjectUrl) return;
-    URL.revokeObjectURL(this.svgObjectUrl);
-    this.svgObjectUrl = undefined;
+    if (
+      changed.has("image") ||
+      (changed.has("fitMode") && this.image && isSvgSource(this.image))
+    ) {
+      void this.loadFloorplan();
+    }
   }
 
   private async loadFloorplan(): Promise<void> {
     const request = ++this.imageRequest;
-    this.releaseSvgObjectUrl();
     this.imageSource = "";
+    this.svgMarkup = "";
     this.loadError = "";
 
     if (!this.image) {
@@ -192,6 +187,7 @@ export class ExplorerCanvas extends LitElement {
     } catch (error) {
       if (request !== this.imageRequest) return;
       this.imageSource = "";
+      this.svgMarkup = "";
       this.metadata = { ...this.metadata, status: "error" };
       this.loadError = error instanceof Error ? error.message : "Plantegningen kunne ikke indlæses.";
     }
@@ -213,18 +209,25 @@ export class ExplorerCanvas extends LitElement {
     const document = new DOMParser().parseFromString(svgText, "image/svg+xml");
     const svg = sanitizeSvgDocument(document);
     const dimensions = readSvgDimensions(svg);
-    const serializedSvg = new XMLSerializer().serializeToString(svg);
-    const objectUrl = URL.createObjectURL(
-      new Blob([serializedSvg], { type: "image/svg+xml;charset=utf-8" }),
-    );
 
-    if (request !== this.imageRequest) {
-      URL.revokeObjectURL(objectUrl);
-      return;
+    if (!svg.hasAttribute("viewBox")) {
+      svg.setAttribute("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`);
     }
 
-    this.svgObjectUrl = objectUrl;
-    this.imageSource = objectUrl;
+    svg.setAttribute("x", "0");
+    svg.setAttribute("y", "0");
+    svg.setAttribute("width", String(VIEWBOX_SIZE));
+    svg.setAttribute("height", String(VIEWBOX_SIZE));
+    svg.setAttribute(
+      "preserveAspectRatio",
+      this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet",
+    );
+    svg.setAttribute("class", "inline-floorplan");
+
+    const serializedSvg = new XMLSerializer().serializeToString(svg);
+    if (request !== this.imageRequest) return;
+
+    this.svgMarkup = serializedSvg;
     this.metadata = {
       width: dimensions.width,
       height: dimensions.height,
@@ -333,10 +336,12 @@ export class ExplorerCanvas extends LitElement {
           @pointercancel=${this.handlePointerUp}>
           <rect width="1000" height="1000" class="backdrop"></rect>
           <g transform=${transform}>
-            ${this.imageSource && this.metadata.status === "loaded"
-              ? html`<image href=${this.imageSource} x="0" y="0" width="1000" height="1000"
-                  preserveAspectRatio=${preserveAspectRatio}></image>`
-              : nothing}
+            ${this.svgMarkup && this.metadata.status === "loaded"
+              ? unsafeSVG(this.svgMarkup)
+              : this.imageSource && this.metadata.status === "loaded"
+                ? html`<image href=${this.imageSource} x="0" y="0" width="1000" height="1000"
+                    preserveAspectRatio=${preserveAspectRatio}></image>`
+                : nothing}
           </g>
         </svg>
 
@@ -394,7 +399,7 @@ export class ExplorerCanvas extends LitElement {
     svg.floorplan { width:100%; height:100%; display:block; cursor:grab; }
     svg.floorplan:active { cursor:grabbing; }
     .backdrop { fill:#d8c9a7; }
-    image { pointer-events:none; }
+    image,.inline-floorplan { pointer-events:none; }
     .message { position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:8px; padding:24px; text-align:center; color:#4c3928; pointer-events:none; background:rgba(216,201,167,.82); z-index:5; }
     .message.error { color:#7a251f; }
     .message span { max-width:38ch; }
