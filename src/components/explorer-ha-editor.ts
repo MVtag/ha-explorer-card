@@ -3,28 +3,20 @@ import { customElement, property } from "lit/decorators.js";
 import type { ExplorerCardConfig } from "../models/config";
 import { HaExplorerCardEditor } from "./explorer-config-editor";
 import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
+import "./explorer-route-editor";
 
 type ConfigChangedEvent = Event & {
   detail: { config: ExplorerCardConfig };
 };
 
-/**
- * Drawing-only adapter around the existing room drawing editor.
- *
- * The original room drawing editor also rendered a nested base editor. Keeping
- * that nested editor meant Explorer could end up with two independent config
- * owners. This adapter deliberately renders only the drawing surface while the
- * Home Assistant-facing editor below remains the single source of truth.
- */
+/** Drawing-only adapter around the existing room drawing editor. */
 @customElement("ha-explorer-room-tools")
 class HaExplorerRoomTools extends HaExplorerRoomDrawingEditor {
   @property({ attribute: false }) public config?: ExplorerCardConfig;
 
   protected override updated(changed: Map<PropertyKey, unknown>): void {
     super.updated(changed);
-    if (changed.has("config") && this.config) {
-      this.setConfig(this.config);
-    }
+    if (changed.has("config") && this.config) this.setConfig(this.config);
   }
 
   protected override render(): TemplateResult<1> {
@@ -36,13 +28,6 @@ class HaExplorerRoomTools extends HaExplorerRoomDrawingEditor {
   }
 }
 
-/**
- * Home Assistant-facing Explorer editor.
- *
- * v0.10.3 made this element the single owner of card configuration. v0.10.4
- * also normalizes native form-control change events so Home Assistant receives
- * the final configuration after the browser control event has completed.
- */
 @customElement("ha-explorer-ha-editor")
 export class HaExplorerHaEditor extends HaExplorerCardEditor {
   private get currentConfig(): ExplorerCardConfig | undefined {
@@ -54,20 +39,12 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
       bubbles: true,
       composed: true,
     }) as ConfigChangedEvent;
-
     homeAssistantEvent.detail = { config };
     return super.dispatchEvent(homeAssistantEvent);
   }
 
   private readonly handleNativeControlChange = (event: Event): void => {
-    // Let the control's own @change handler update Explorer first, but prevent
-    // the raw browser change event from escaping the editor. Home Assistant only
-    // needs the resulting config-changed event.
     event.stopPropagation();
-
-    // Re-emit after the native change event has fully completed. This avoids a
-    // stale editor/save state for select/change-driven fields such as area_id,
-    // aliases, anchors, presence type and static room fallback.
     queueMicrotask(() => {
       const config = this.currentConfig;
       if (config) this.emitHomeAssistantConfig(config);
@@ -83,19 +60,14 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
     super.disconnectedCallback();
   }
 
-  private handleDrawingConfigChanged(event: Event): void {
+  private handleToolConfigChanged(event: Event): void {
     const config = (event as CustomEvent<{ config?: ExplorerCardConfig }>).detail?.config;
     if (!config) return;
-
     event.stopPropagation();
     this.setConfig(config);
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config },
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    this.dispatchEvent(new CustomEvent("config-changed", {
+      detail: { config }, bubbles: true, composed: true,
+    }));
   }
 
   protected override render() {
@@ -104,21 +76,19 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
       <ha-explorer-room-tools
         .hass=${this.hass}
         .config=${this.currentConfig}
-        @config-changed=${this.handleDrawingConfigChanged}
+        @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-room-tools>
+      <ha-explorer-route-editor
+        .config=${this.currentConfig}
+        @config-changed=${this.handleToolConfigChanged}
+      ></ha-explorer-route-editor>
     `;
   }
 
   public override dispatchEvent(event: Event): boolean {
-    if (event.type !== "config-changed") {
-      return super.dispatchEvent(event);
-    }
-
+    if (event.type !== "config-changed") return super.dispatchEvent(event);
     const config = (event as CustomEvent<{ config?: ExplorerCardConfig }>).detail?.config;
-    if (!config) {
-      return super.dispatchEvent(event);
-    }
-
+    if (!config) return super.dispatchEvent(event);
     return this.emitHomeAssistantConfig(config);
   }
 }
