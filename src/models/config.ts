@@ -18,6 +18,12 @@ export interface ExplorerRoom {
   presence_anchor?: NormalizedPosition;
 }
 
+export interface ExplorerRoute {
+  from: string;
+  to: string;
+  via?: NormalizedPoint[];
+}
+
 export interface PresenceEntityBinding {
   entity?: string;
   x_attribute?: string;
@@ -56,6 +62,7 @@ export interface ExplorerCardConfig {
   initial_zoom?: number;
   fit_mode?: FloorplanFitMode;
   rooms?: ExplorerRoom[];
+  routes?: ExplorerRoute[];
   presences?: ExplorerPresence[];
 }
 

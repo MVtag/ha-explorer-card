@@ -1,5 +1,6 @@
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { ExplorerCanvas } from "./explorer-canvas";
+import type { ExplorerRoute, NormalizedPoint } from "../models/config";
 import { VIEWBOX_SIZE } from "../utils/viewport";
 
 interface PresencePosition {
@@ -14,7 +15,10 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
 @customElement("explorer-animated-canvas")
 export class ExplorerAnimatedCanvas extends ExplorerCanvas {
+  @property({ attribute: false }) public routes: ExplorerRoute[] = [];
+
   private readonly previousPresencePositions = new Map<string, PresencePosition>();
+  private readonly previousPresenceRooms = new Map<string, string | undefined>();
   private readonly activeAnimations = new Map<string, SVGElement>();
 
   protected updated(changed: Map<PropertyKey, unknown>): void {
@@ -38,6 +42,8 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
         y: (presence.y ?? 0.5) * VIEWBOX_SIZE,
       };
       const previous = this.previousPresencePositions.get(presence.id);
+      const previousRoom = this.previousPresenceRooms.get(presence.id);
+      const currentRoom = presence.room_id;
       currentIds.add(presence.id);
 
       this.activeAnimations.get(presence.id)?.remove();
@@ -48,20 +54,19 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
         previous &&
         (Math.abs(previous.x - current.x) > 0.01 || Math.abs(previous.y - current.y) > 0.01)
       ) {
-        this.createFootsteps(previous, current);
+        const path = this.resolveMovementPath(previous, current, previousRoom, currentRoom);
+        this.createFootsteps(path);
 
         const animation = document.createElementNS(SVG_NAMESPACE, "animateTransform");
         animation.setAttribute("attributeName", "transform");
         animation.setAttribute("attributeType", "XML");
         animation.setAttribute("type", "translate");
-        animation.setAttribute("from", `${previous.x} ${previous.y}`);
-        animation.setAttribute("to", `${current.x} ${current.y}`);
+        animation.setAttribute("values", path.map((point) => `${point.x} ${point.y}`).join(";"));
+        animation.setAttribute("keyTimes", this.buildKeyTimes(path).join(";"));
         animation.setAttribute("dur", `${MOVEMENT_DURATION_MS}ms`);
         animation.setAttribute("begin", "indefinite");
         animation.setAttribute("fill", "freeze");
-        animation.setAttribute("calcMode", "spline");
-        animation.setAttribute("keySplines", "0.22 1 0.36 1");
-        animation.setAttribute("keyTimes", "0;1");
+        animation.setAttribute("calcMode", "linear");
 
         element.appendChild(animation);
         this.activeAnimations.set(presence.id, animation);
@@ -75,11 +80,59 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       }
 
       this.previousPresencePositions.set(presence.id, current);
+      this.previousPresenceRooms.set(presence.id, currentRoom);
     });
 
     for (const id of this.previousPresencePositions.keys()) {
-      if (!currentIds.has(id)) this.previousPresencePositions.delete(id);
+      if (!currentIds.has(id)) {
+        this.previousPresencePositions.delete(id);
+        this.previousPresenceRooms.delete(id);
+      }
     }
+  }
+
+  private resolveMovementPath(
+    from: PresencePosition,
+    to: PresencePosition,
+    fromRoom?: string,
+    toRoom?: string,
+  ): PresencePosition[] {
+    if (!fromRoom || !toRoom || fromRoom === toRoom) return [from, to];
+
+    const direct = this.routes.find((route) => route.from === fromRoom && route.to === toRoom);
+    if (direct) return [from, ...this.toViewboxPoints(direct.via ?? []), to];
+
+    const reverse = this.routes.find((route) => route.from === toRoom && route.to === fromRoom);
+    if (reverse) {
+      return [from, ...this.toViewboxPoints([...(reverse.via ?? [])].reverse()), to];
+    }
+
+    return [from, to];
+  }
+
+  private toViewboxPoints(points: NormalizedPoint[]): PresencePosition[] {
+    return points.map(([x, y]) => ({ x: x * VIEWBOX_SIZE, y: y * VIEWBOX_SIZE }));
+  }
+
+  private buildKeyTimes(path: PresencePosition[]): number[] {
+    if (path.length <= 2) return [0, 1];
+
+    const lengths: number[] = [];
+    let total = 0;
+    for (let index = 1; index < path.length; index += 1) {
+      const length = Math.hypot(path[index].x - path[index - 1].x, path[index].y - path[index - 1].y);
+      lengths.push(length);
+      total += length;
+    }
+    if (total <= 0) return path.map((_, index) => index / (path.length - 1));
+
+    const times = [0];
+    let elapsed = 0;
+    lengths.forEach((length) => {
+      elapsed += length;
+      times.push(elapsed / total);
+    });
+    return times;
   }
 
   private ensureFootstepLayer(): SVGGElement | undefined {
@@ -99,26 +152,47 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
     return layer;
   }
 
-  private createFootsteps(from: PresencePosition, to: PresencePosition): void {
+  private createFootsteps(path: PresencePosition[]): void {
     const layer = this.ensureFootstepLayer();
-    if (!layer) return;
+    if (!layer || path.length < 2) return;
 
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    const distance = Math.hypot(dx, dy);
-    if (distance < FOOTSTEP_SPACING) return;
+    const segments = path.slice(1).map((point, index) => {
+      const start = path[index];
+      return {
+        start,
+        end: point,
+        length: Math.hypot(point.x - start.x, point.y - start.y),
+      };
+    });
+    const totalDistance = segments.reduce((sum, segment) => sum + segment.length, 0);
+    if (totalDistance < FOOTSTEP_SPACING) return;
 
-    const stepCount = Math.min(14, Math.max(3, Math.floor(distance / FOOTSTEP_SPACING)));
-    const angle = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
-    const perpendicularX = distance > 0 ? -dy / distance : 0;
-    const perpendicularY = distance > 0 ? dx / distance : 0;
+    const stepCount = Math.min(20, Math.max(3, Math.floor(totalDistance / FOOTSTEP_SPACING)));
 
     for (let index = 0; index < stepCount; index += 1) {
       const progress = (index + 1) / (stepCount + 1);
+      const targetDistance = totalDistance * progress;
+      let traversed = 0;
+      let segment = segments[segments.length - 1];
+
+      for (const candidate of segments) {
+        if (traversed + candidate.length >= targetDistance) {
+          segment = candidate;
+          break;
+        }
+        traversed += candidate.length;
+      }
+
+      const localProgress = segment.length > 0 ? (targetDistance - traversed) / segment.length : 0;
+      const dx = segment.end.x - segment.start.x;
+      const dy = segment.end.y - segment.start.y;
       const side = index % 2 === 0 ? -1 : 1;
+      const perpendicularX = segment.length > 0 ? -dy / segment.length : 0;
+      const perpendicularY = segment.length > 0 ? dx / segment.length : 0;
       const offset = 9 * side;
-      const x = from.x + dx * progress + perpendicularX * offset;
-      const y = from.y + dy * progress + perpendicularY * offset;
+      const x = segment.start.x + dx * localProgress + perpendicularX * offset;
+      const y = segment.start.y + dy * localProgress + perpendicularY * offset;
+      const angle = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
       const delay = Math.round(progress * MOVEMENT_DURATION_MS);
 
       const footprint = document.createElementNS(SVG_NAMESPACE, "g");
