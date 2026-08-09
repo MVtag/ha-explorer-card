@@ -6,7 +6,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.11.0";
+const CARD_VERSION = "0.12.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -61,7 +61,7 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Animated Movement · v${CARD_VERSION}</small>
+          <small>Footsteps · v${CARD_VERSION}</small>
         </header>
 
         <explorer-animated-canvas
