@@ -143,12 +143,17 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       fade.setAttribute("attributeName", "opacity");
       fade.setAttribute("values", "0;0.72;0.56;0");
       fade.setAttribute("keyTimes", "0;0.08;0.58;1");
-      fade.setAttribute("begin", `${delay}ms`);
+      fade.setAttribute("begin", "indefinite");
       fade.setAttribute("dur", `${FOOTSTEP_LIFETIME_MS}ms`);
       fade.setAttribute("fill", "freeze");
 
       footprint.append(sole, heel, fade);
       layer.appendChild(footprint);
+
+      window.setTimeout(() => {
+        if (!footprint.isConnected) return;
+        (fade as SVGAnimationElement).beginElement();
+      }, delay);
 
       window.setTimeout(() => footprint.remove(), delay + FOOTSTEP_LIFETIME_MS + 120);
     }
