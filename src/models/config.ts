@@ -1,6 +1,7 @@
 export type FloorplanFitMode = "contain" | "cover";
 export type NormalizedPoint = [number, number];
 export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
+export type RouteNodeKind = "door" | "junction" | "waypoint";
 
 export interface NormalizedPosition {
   x: number;
@@ -18,10 +19,25 @@ export interface ExplorerRoom {
   presence_anchor?: NormalizedPosition;
 }
 
+export interface ExplorerRouteNode {
+  id: string;
+  name?: string;
+  point: NormalizedPoint;
+  kind?: RouteNodeKind;
+}
+
+export interface ExplorerRouteStep {
+  node_id?: string;
+  point?: NormalizedPoint;
+}
+
 export interface ExplorerRoute {
   from: string;
   to: string;
+  /** Legacy inline waypoints from v0.13-v0.15. */
   via?: NormalizedPoint[];
+  /** Ordered route steps. A step may reference a shared node or contain a local point. */
+  path?: ExplorerRouteStep[];
 }
 
 export interface PresenceEntityBinding {
@@ -62,6 +78,7 @@ export interface ExplorerCardConfig {
   initial_zoom?: number;
   fit_mode?: FloorplanFitMode;
   rooms?: ExplorerRoom[];
+  route_nodes?: ExplorerRouteNode[];
   routes?: ExplorerRoute[];
   presences?: ExplorerPresence[];
 }
