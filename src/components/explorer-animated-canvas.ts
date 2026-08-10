@@ -1,6 +1,11 @@
 import { customElement, property } from "lit/decorators.js";
 import { ExplorerCanvas } from "./explorer-canvas";
-import type { ExplorerRoute, NormalizedPoint } from "../models/config";
+import type {
+  ExplorerRoute,
+  ExplorerRouteNode,
+  ExplorerRouteStep,
+  NormalizedPoint,
+} from "../models/config";
 import { VIEWBOX_SIZE } from "../utils/viewport";
 
 interface PresencePosition {
@@ -16,6 +21,7 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 @customElement("explorer-animated-canvas")
 export class ExplorerAnimatedCanvas extends ExplorerCanvas {
   @property({ attribute: false }) public routes: ExplorerRoute[] = [];
+  @property({ attribute: false }) public routeNodes: ExplorerRouteNode[] = [];
 
   private readonly previousPresencePositions = new Map<string, PresencePosition>();
   private readonly previousPresenceRooms = new Map<string, string | undefined>();
@@ -100,14 +106,37 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
     if (!fromRoom || !toRoom || fromRoom === toRoom) return [from, to];
 
     const direct = this.routes.find((route) => route.from === fromRoom && route.to === toRoom);
-    if (direct) return [from, ...this.toViewboxPoints(direct.via ?? []), to];
+    if (direct) return [from, ...this.resolveRouteWaypoints(direct, false), to];
 
     const reverse = this.routes.find((route) => route.from === toRoom && route.to === fromRoom);
-    if (reverse) {
-      return [from, ...this.toViewboxPoints([...(reverse.via ?? [])].reverse()), to];
-    }
+    if (reverse) return [from, ...this.resolveRouteWaypoints(reverse, true), to];
 
     return [from, to];
+  }
+
+  private resolveRouteWaypoints(route: ExplorerRoute, reverse: boolean): PresencePosition[] {
+    const steps = this.routeSteps(route);
+    const ordered = reverse ? [...steps].reverse() : steps;
+    const points: NormalizedPoint[] = [];
+
+    ordered.forEach((step) => {
+      const point = this.resolveRouteStep(step);
+      if (point) points.push(point);
+    });
+
+    return this.toViewboxPoints(points);
+  }
+
+  private routeSteps(route: ExplorerRoute): ExplorerRouteStep[] {
+    if (route.path) return route.path;
+    return (route.via ?? []).map((point) => ({ point }));
+  }
+
+  private resolveRouteStep(step: ExplorerRouteStep): NormalizedPoint | undefined {
+    if (step.node_id) {
+      return this.routeNodes.find((node) => node.id === step.node_id)?.point;
+    }
+    return step.point;
   }
 
   private toViewboxPoints(points: NormalizedPoint[]): PresencePosition[] {
