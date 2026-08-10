@@ -2,6 +2,8 @@ import { customElement, property } from "lit/decorators.js";
 import { ExplorerCanvas } from "./explorer-canvas";
 import type {
   ExplorerRoute,
+  ExplorerRouteGraphEdge,
+  ExplorerRouteGraphEndpoint,
   ExplorerRouteNode,
   ExplorerRouteStep,
   NormalizedPoint,
@@ -13,6 +15,11 @@ interface PresencePosition {
   y: number;
 }
 
+interface GraphNeighbor {
+  key: string;
+  weight: number;
+}
+
 const MOVEMENT_DURATION_MS = 900;
 const FOOTSTEP_LIFETIME_MS = 3600;
 const FOOTSTEP_SPACING = 58;
@@ -22,6 +29,7 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 export class ExplorerAnimatedCanvas extends ExplorerCanvas {
   @property({ attribute: false }) public routes: ExplorerRoute[] = [];
   @property({ attribute: false }) public routeNodes: ExplorerRouteNode[] = [];
+  @property({ attribute: false }) public routeGraphEdges: ExplorerRouteGraphEdge[] = [];
 
   private readonly previousPresencePositions = new Map<string, PresencePosition>();
   private readonly previousPresenceRooms = new Map<string, string | undefined>();
@@ -111,6 +119,9 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
     const reverse = this.routes.find((route) => route.from === toRoom && route.to === fromRoom);
     if (reverse) return [from, ...this.resolveRouteWaypoints(reverse, true), to];
 
+    const graphWaypoints = this.resolveGraphWaypoints(fromRoom, toRoom);
+    if (graphWaypoints) return [from, ...graphWaypoints, to];
+
     return [from, to];
   }
 
@@ -137,6 +148,112 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       return this.routeNodes.find((node) => node.id === step.node_id)?.point;
     }
     return step.point;
+  }
+
+  private roomAnchor(roomId: string): NormalizedPoint | undefined {
+    const room = this.rooms.find((entry) => entry.id === roomId);
+    if (!room) return undefined;
+    if (room.presence_anchor) return [room.presence_anchor.x, room.presence_anchor.y];
+    if (!room.points.length) return undefined;
+    return [
+      room.points.reduce((sum, point) => sum + point[0], 0) / room.points.length,
+      room.points.reduce((sum, point) => sum + point[1], 0) / room.points.length,
+    ];
+  }
+
+  private graphEndpointKey(endpoint: ExplorerRouteGraphEndpoint): string {
+    return `${endpoint.kind}:${endpoint.id}`;
+  }
+
+  private graphEndpointPoint(endpoint: ExplorerRouteGraphEndpoint): NormalizedPoint | undefined {
+    if (endpoint.kind === "room") return this.roomAnchor(endpoint.id);
+    return this.routeNodes.find((node) => node.id === endpoint.id)?.point;
+  }
+
+  private resolveGraphWaypoints(fromRoom: string, toRoom: string): PresencePosition[] | undefined {
+    if (!this.routeGraphEdges.length) return undefined;
+
+    const startKey = `room:${fromRoom}`;
+    const targetKey = `room:${toRoom}`;
+    const positions = new Map<string, NormalizedPoint>();
+    const adjacency = new Map<string, GraphNeighbor[]>();
+
+    const rememberEndpoint = (endpoint: ExplorerRouteGraphEndpoint): NormalizedPoint | undefined => {
+      const key = this.graphEndpointKey(endpoint);
+      const existing = positions.get(key);
+      if (existing) return existing;
+      const point = this.graphEndpointPoint(endpoint);
+      if (point) positions.set(key, point);
+      return point;
+    };
+
+    const addNeighbor = (fromKey: string, toKey: string, weight: number): void => {
+      const list = adjacency.get(fromKey) ?? [];
+      list.push({ key: toKey, weight });
+      adjacency.set(fromKey, list);
+    };
+
+    this.routeGraphEdges.forEach((edge) => {
+      const fromPoint = rememberEndpoint(edge.from);
+      const toPoint = rememberEndpoint(edge.to);
+      if (!fromPoint || !toPoint) return;
+      const fromKey = this.graphEndpointKey(edge.from);
+      const toKey = this.graphEndpointKey(edge.to);
+      const weight = Math.hypot(toPoint[0] - fromPoint[0], toPoint[1] - fromPoint[1]);
+      addNeighbor(fromKey, toKey, weight);
+      addNeighbor(toKey, fromKey, weight);
+    });
+
+    if (!adjacency.has(startKey) || !adjacency.has(targetKey)) return undefined;
+
+    const distances = new Map<string, number>();
+    const previous = new Map<string, string>();
+    const unvisited = new Set<string>(adjacency.keys());
+    adjacency.forEach((neighbors) => neighbors.forEach((neighbor) => unvisited.add(neighbor.key)));
+    unvisited.forEach((key) => distances.set(key, Number.POSITIVE_INFINITY));
+    distances.set(startKey, 0);
+
+    while (unvisited.size) {
+      let current: string | undefined;
+      let currentDistance = Number.POSITIVE_INFINITY;
+      for (const key of unvisited) {
+        const distance = distances.get(key) ?? Number.POSITIVE_INFINITY;
+        if (distance < currentDistance) {
+          current = key;
+          currentDistance = distance;
+        }
+      }
+
+      if (!current || !Number.isFinite(currentDistance)) break;
+      unvisited.delete(current);
+      if (current === targetKey) break;
+
+      for (const neighbor of adjacency.get(current) ?? []) {
+        if (!unvisited.has(neighbor.key)) continue;
+        const candidate = currentDistance + neighbor.weight;
+        if (candidate < (distances.get(neighbor.key) ?? Number.POSITIVE_INFINITY)) {
+          distances.set(neighbor.key, candidate);
+          previous.set(neighbor.key, current);
+        }
+      }
+    }
+
+    if (!Number.isFinite(distances.get(targetKey) ?? Number.POSITIVE_INFINITY)) return undefined;
+
+    const pathKeys = [targetKey];
+    let cursor = targetKey;
+    while (cursor !== startKey) {
+      const parent = previous.get(cursor);
+      if (!parent) return undefined;
+      pathKeys.push(parent);
+      cursor = parent;
+    }
+    pathKeys.reverse();
+
+    const middle = pathKeys.slice(1, -1)
+      .map((key) => positions.get(key))
+      .filter((point): point is NormalizedPoint => Boolean(point));
+    return this.toViewboxPoints(middle);
   }
 
   private toViewboxPoints(points: NormalizedPoint[]): PresencePosition[] {
