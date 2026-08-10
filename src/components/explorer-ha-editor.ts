@@ -5,6 +5,7 @@ import { HaExplorerCardEditor } from "./explorer-config-editor";
 import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
 import "./explorer-route-editor";
 import "./explorer-route-graph-editor";
+import "./explorer-route-diagnostics";
 
 type ConfigChangedEvent = Event & {
   detail: { config: ExplorerCardConfig };
@@ -87,6 +88,9 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
         .config=${this.currentConfig}
         @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-route-graph-editor>
+      <ha-explorer-route-diagnostics
+        .config=${this.currentConfig}
+      ></ha-explorer-route-diagnostics>
     `;
   }
 
