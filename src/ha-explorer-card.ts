@@ -6,7 +6,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.16.0";
+const CARD_VERSION = "0.17.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -27,6 +27,7 @@ export class HaExplorerCard extends LitElement {
       fit_mode: "contain",
       rooms: [],
       route_nodes: [],
+      route_graph_edges: [],
       routes: [],
       presences: [],
     };
@@ -42,6 +43,7 @@ export class HaExplorerCard extends LitElement {
       fit_mode: "contain",
       rooms: [],
       route_nodes: [],
+      route_graph_edges: [],
       routes: [],
       presences: [],
       ...config,
@@ -65,13 +67,14 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Shared Route Nodes · v${CARD_VERSION}</small>
+          <small>Automatic Route Graph · v${CARD_VERSION}</small>
         </header>
 
         <explorer-animated-canvas
           .image=${image}
           .rooms=${rooms}
           .routeNodes=${this.config.route_nodes ?? []}
+          .routeGraphEdges=${this.config.route_graph_edges ?? []}
           .routes=${this.config.routes ?? []}
           .presences=${presences}
           .minZoom=${this.config.min_zoom ?? 1}
