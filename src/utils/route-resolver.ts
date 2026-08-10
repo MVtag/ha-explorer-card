@@ -350,7 +350,9 @@ export function analyzeRouteGraph(config: ExplorerCardConfig): RouteGraphDiagnos
   const degree = new Map<string, number>();
   const adjacency = new Map<string, Set<string>>();
 
-  const bumpDegree = (key: string): void => degree.set(key, (degree.get(key) ?? 0) + 1);
+  const bumpDegree = (key: string): void => {
+    degree.set(key, (degree.get(key) ?? 0) + 1);
+  };
   const connect = (from: string, to: string): void => {
     const fromSet = adjacency.get(from) ?? new Set<string>();
     fromSet.add(to);
