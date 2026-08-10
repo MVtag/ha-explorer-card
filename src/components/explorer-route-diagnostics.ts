@@ -37,7 +37,7 @@ export class HaExplorerRouteDiagnostics extends LitElement {
     return this.rooms.find((room) => room.id === roomId)?.name ?? roomId;
   }
 
-  private nodeName(nodeId: string): string {
+  private routeNodeName(nodeId: string): string {
     return this.routeNodes.find((node) => node.id === nodeId)?.name ?? nodeId;
   }
 
@@ -187,7 +187,7 @@ export class HaExplorerRouteDiagnostics extends LitElement {
         <div class="issue"><strong>Frakoblede rum</strong><span>${diagnostics.disconnectedRoomIds.map((id) => this.roomName(id)).join(", ")}</span></div>
       ` : nothing}
       ${diagnostics.disconnectedNodeIds.length ? html`
-        <div class="issue"><strong>Frakoblede punkter</strong><span>${diagnostics.disconnectedNodeIds.map((id) => this.nodeName(id)).join(", ")}</span></div>
+        <div class="issue"><strong>Frakoblede punkter</strong><span>${diagnostics.disconnectedNodeIds.map((id) => this.routeNodeName(id)).join(", ")}</span></div>
       ` : nothing}
       ${diagnostics.invalidEdges ? html`
         <div class="issue"><strong>Ugyldige forbindelser</strong><span>${diagnostics.invalidEdges} forbindelse${diagnostics.invalidEdges === 1 ? "" : "r"} peger på et manglende punkt, manglende rum eller sig selv.</span></div>
