@@ -55,7 +55,7 @@ export class HaExplorerRouteEditor extends LitElement {
     return room?.name ?? roomId;
   }
 
-  private nodeName(node: ExplorerRouteNode): string {
+  private routeNodeLabel(node: ExplorerRouteNode): string {
     return node.name?.trim() || node.id;
   }
 
@@ -227,7 +227,7 @@ export class HaExplorerRouteEditor extends LitElement {
           @click=${(event: MouseEvent) => this.useSharedNode(event, node)}
         >
           <circle r="15"></circle>
-          <text y="-24" text-anchor="middle">${this.nodeName(node)}</text>
+          <text y="-24" text-anchor="middle">${this.routeNodeLabel(node)}</text>
           ${usage > 0 ? svg`<text class="usage" y="7" text-anchor="middle">${usage}</text>` : nothing}
         </g>
       `;
@@ -342,7 +342,7 @@ export class HaExplorerRouteEditor extends LitElement {
               return html`
                 <div class="node-item">
                   <span class=${`node-dot ${node.kind ?? "waypoint"}`}></span>
-                  <span class="node-copy"><strong>${this.nodeName(node)}</strong><small>${node.kind ?? "waypoint"} · bruges ${usage} ${usage === 1 ? "gang" : "gange"}</small></span>
+                  <span class="node-copy"><strong>${this.routeNodeLabel(node)}</strong><small>${node.kind ?? "waypoint"} · bruges ${usage} ${usage === 1 ? "gang" : "gange"}</small></span>
                   <button class="mini danger" ?disabled=${usage > 0} title=${usage > 0 ? "Punktet bruges af en rute" : "Slet punkt"} @click=${() => this.deleteNode(node)}>Slet</button>
                 </div>
               `;
