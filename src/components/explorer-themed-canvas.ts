@@ -266,127 +266,126 @@ export class ExplorerThemedCanvas extends ExplorerLivingCanvas {
     }
   }
 
-  static override styles = [
-    ExplorerLivingCanvas.styles,
-    css`
-      :host([map-theme="enchanted_antique"]) {
-        --primary-color: #68472f;
-        --primary-text-color: #4c321f;
-        --secondary-text-color: #6f5239;
-        --success-color: #6f6d3c;
-        --error-color: #8b4639;
-        --warning-color: #9a6731;
-        --accent-color: #74513b;
-        --card-background-color: #d9c294;
-        --explorer-room-light-color: #e3a33d;
-        --explorer-room-motion-color: #75573a;
-        --explorer-room-media-color: #71503e;
-        --explorer-room-opening-color: #936031;
-      }
+  static override styles = css`
+    ${ExplorerLivingCanvas.styles}
 
-      :host([map-theme="enchanted_antique"]) .viewport {
-        background:
-          radial-gradient(circle at 22% 18%, rgba(255, 240, 195, .42), transparent 28%),
-          radial-gradient(circle at 78% 76%, rgba(91, 55, 29, .16), transparent 42%),
-          #c4a26e;
-        box-shadow:
-          inset 0 0 34px rgba(64, 40, 25, .22),
-          inset 0 0 110px rgba(82, 50, 26, .12);
-      }
+    :host([map-theme="enchanted_antique"]) {
+      --primary-color: #68472f;
+      --primary-text-color: #4c321f;
+      --secondary-text-color: #6f5239;
+      --success-color: #6f6d3c;
+      --error-color: #8b4639;
+      --warning-color: #9a6731;
+      --accent-color: #74513b;
+      --card-background-color: #d9c294;
+      --explorer-room-light-color: #e3a33d;
+      --explorer-room-motion-color: #75573a;
+      --explorer-room-media-color: #71503e;
+      --explorer-room-opening-color: #936031;
+    }
 
-      :host([map-theme="enchanted_antique"]) .viewport::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 3;
-        box-shadow: inset 0 0 44px rgba(60, 38, 24, .21);
-      }
+    :host([map-theme="enchanted_antique"]) .viewport {
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255, 240, 195, .42), transparent 28%),
+        radial-gradient(circle at 78% 76%, rgba(91, 55, 29, .16), transparent 42%),
+        #c4a26e;
+      box-shadow:
+        inset 0 0 34px rgba(64, 40, 25, .22),
+        inset 0 0 110px rgba(82, 50, 26, .12);
+    }
 
-      :host([map-theme="enchanted_antique"]) .backdrop {
-        fill: #caa970;
-      }
+    :host([map-theme="enchanted_antique"]) .viewport::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      box-shadow: inset 0 0 44px rgba(60, 38, 24, .21);
+    }
 
+    :host([map-theme="enchanted_antique"]) .backdrop {
+      fill: #caa970;
+    }
+
+    :host([map-theme="enchanted_antique"]) .floorplan-source {
+      filter: sepia(.92) saturate(.58) contrast(1.10) brightness(.93);
+      opacity: .88;
+      mix-blend-mode: multiply;
+    }
+
+    :host([map-theme="enchanted_antique"]) .room polygon {
+      fill: #795132 !important;
+      fill-opacity: .075 !important;
+      stroke: #543722 !important;
+      stroke-opacity: .83 !important;
+      stroke-width: 2.6px !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 1px .45px rgba(69, 42, 24, .28));
+    }
+
+    :host([map-theme="enchanted_antique"]) .room:hover polygon {
+      fill-opacity: .14 !important;
+    }
+
+    :host([map-theme="enchanted_antique"]) .room.selected polygon {
+      fill-opacity: .19 !important;
+      stroke-width: 4px !important;
+    }
+
+    :host([map-theme="enchanted_antique"]) .room-label,
+    :host([map-theme="enchanted_antique"]) .presence-label,
+    :host([map-theme="enchanted_antique"]) .route-status-scene text {
+      fill: #4e321e !important;
+      stroke: rgba(222, 199, 151, .82) !important;
+      stroke-width: 3.5px !important;
+      font-family: Georgia, Cambria, "Times New Roman", serif !important;
+      letter-spacing: .045em;
+    }
+
+    :host([map-theme="enchanted_antique"]) .room-label {
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    :host([map-theme="enchanted_antique"]) .presence-label {
+      font-weight: 700;
+      font-variant: small-caps;
+    }
+
+    :host([map-theme="enchanted_antique"]) .presence-border {
+      stroke: #ead8aa !important;
+      filter: drop-shadow(0 2px 3px rgba(54, 34, 21, .35));
+    }
+
+    :host([map-theme="enchanted_antique"]) .presence-avatar-background,
+    :host([map-theme="enchanted_antique"]) .presence-marker {
+      fill: #76543a !important;
+    }
+
+    :host([map-theme="enchanted_antique"]) .footsteps-scene ellipse {
+      fill: #4b301d !important;
+      filter: drop-shadow(0 0 1.3px rgba(66, 38, 20, .38));
+    }
+
+    :host([map-theme="enchanted_antique"]) .route-status-scene line {
+      filter: drop-shadow(0 .6px .6px rgba(65, 39, 23, .28));
+    }
+
+    :host([map-theme="enchanted_antique"]) .room-reactions-scene polygon {
+      mix-blend-mode: multiply;
+    }
+
+    :host([map-theme="enchanted_antique"]) .antique-paper-scene,
+    :host([map-theme="enchanted_antique"]) .antique-compass {
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host([map-theme="enchanted_antique"]) .room polygon,
       :host([map-theme="enchanted_antique"]) .floorplan-source {
-        filter: sepia(.92) saturate(.58) contrast(1.10) brightness(.93);
-        opacity: .88;
-        mix-blend-mode: multiply;
+        transition: none !important;
       }
-
-      :host([map-theme="enchanted_antique"]) .room polygon {
-        fill: #795132 !important;
-        fill-opacity: .075 !important;
-        stroke: #543722 !important;
-        stroke-opacity: .83 !important;
-        stroke-width: 2.6px !important;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        filter: drop-shadow(0 1px .45px rgba(69, 42, 24, .28));
-      }
-
-      :host([map-theme="enchanted_antique"]) .room:hover polygon {
-        fill-opacity: .14 !important;
-      }
-
-      :host([map-theme="enchanted_antique"]) .room.selected polygon {
-        fill-opacity: .19 !important;
-        stroke-width: 4px !important;
-      }
-
-      :host([map-theme="enchanted_antique"]) .room-label,
-      :host([map-theme="enchanted_antique"]) .presence-label,
-      :host([map-theme="enchanted_antique"]) .route-status-scene text {
-        fill: #4e321e !important;
-        stroke: rgba(222, 199, 151, .82) !important;
-        stroke-width: 3.5px !important;
-        font-family: Georgia, Cambria, "Times New Roman", serif !important;
-        letter-spacing: .045em;
-      }
-
-      :host([map-theme="enchanted_antique"]) .room-label {
-        font-style: italic;
-        font-weight: 700;
-      }
-
-      :host([map-theme="enchanted_antique"]) .presence-label {
-        font-weight: 700;
-        font-variant: small-caps;
-      }
-
-      :host([map-theme="enchanted_antique"]) .presence-border {
-        stroke: #ead8aa !important;
-        filter: drop-shadow(0 2px 3px rgba(54, 34, 21, .35));
-      }
-
-      :host([map-theme="enchanted_antique"]) .presence-avatar-background,
-      :host([map-theme="enchanted_antique"]) .presence-marker {
-        fill: #76543a !important;
-      }
-
-      :host([map-theme="enchanted_antique"]) .footsteps-scene ellipse {
-        fill: #4b301d !important;
-        filter: drop-shadow(0 0 1.3px rgba(66, 38, 20, .38));
-      }
-
-      :host([map-theme="enchanted_antique"]) .route-status-scene line {
-        filter: drop-shadow(0 .6px .6px rgba(65, 39, 23, .28));
-      }
-
-      :host([map-theme="enchanted_antique"]) .room-reactions-scene polygon {
-        mix-blend-mode: multiply;
-      }
-
-      :host([map-theme="enchanted_antique"]) .antique-paper-scene,
-      :host([map-theme="enchanted_antique"]) .antique-compass {
-        pointer-events: none;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        :host([map-theme="enchanted_antique"]) .room polygon,
-        :host([map-theme="enchanted_antique"]) .floorplan-source {
-          transition: none !important;
-        }
-      }
-    `,
-  ];
+    }
+  `;
 }
