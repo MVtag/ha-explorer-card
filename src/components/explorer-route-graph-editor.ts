@@ -8,7 +8,11 @@ import type {
   RouteGraphEndpointKind,
 } from "../models/config";
 import type { HomeAssistant } from "../types";
-import { evaluateRouteGraphEdges, type RouteGraphEdgeStatus } from "../utils/route-resolver";
+import {
+  evaluateRouteGraphEdges,
+  evaluateRouteNodeState,
+  type RouteGraphEdgeStatus,
+} from "../utils/route-resolver";
 
 const VIEWBOX_SIZE = 1000;
 
@@ -262,18 +266,13 @@ export class HaExplorerRouteGraphEditor extends LitElement {
       .filter((endpoint) => endpoint.point)
       .map((endpoint) => {
         const [x, y] = endpoint.point as NormalizedPoint;
-        const node = endpoint.kind === "node" ? this.routeNodes.find((entry) => entry.id === endpoint.id) : undefined;
-        const blocked = Boolean(node?.state_binding) && !evaluateRouteGraphEdges(
-          {
-            type: "custom:ha-explorer-card",
-            route_nodes: this.routeNodes,
-            route_graph_edges: this.graphEdges.filter((edge) =>
-              (edge.from.kind === "node" && edge.from.id === endpoint.id) ||
-              (edge.to.kind === "node" && edge.to.id === endpoint.id),
-            ),
-          },
-          (entityId) => this.entityState(entityId),
-        ).some((status) => status.active);
+        const node = endpoint.kind === "node"
+          ? this.routeNodes.find((entry) => entry.id === endpoint.id)
+          : undefined;
+        const nodeStatus = node
+          ? evaluateRouteNodeState(node, (entityId) => this.entityState(entityId))
+          : undefined;
+        const blocked = Boolean(nodeStatus?.conditional && !nodeStatus.active);
         return svg`
           <g transform=${`translate(${x * VIEWBOX_SIZE} ${y * VIEWBOX_SIZE})`}>
             <circle class=${endpoint.kind === "room" ? "graph-room" : blocked ? "graph-node blocked" : "graph-node"} r=${endpoint.kind === "room" ? "11" : "13"}></circle>
