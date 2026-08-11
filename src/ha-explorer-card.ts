@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./components/explorer-living-canvas";
+import "./components/explorer-themed-canvas";
 import "./components/explorer-ha-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.21.0";
+const CARD_VERSION = "0.22.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -25,6 +25,7 @@ export class HaExplorerCard extends LitElement {
       max_zoom: 6,
       initial_zoom: 1,
       fit_mode: "contain",
+      appearance: { theme: "classic" },
       rooms: [],
       route_nodes: [],
       route_graph_edges: [],
@@ -47,6 +48,10 @@ export class HaExplorerCard extends LitElement {
       routes: [],
       presences: [],
       ...config,
+      appearance: {
+        theme: "classic",
+        ...(config.appearance ?? {}),
+      },
     };
   }
 
@@ -59,18 +64,21 @@ export class HaExplorerCard extends LitElement {
     const image = this.config.image ?? this.config.background ?? "";
     const rooms = this.config.rooms ?? [];
     const presences = resolvePresences(this.config.presences ?? [], this.hass, rooms);
+    const theme = this.config.appearance?.theme ?? "classic";
+    const enchanted = theme === "enchanted_antique";
 
     return html`
-      <ha-card>
+      <ha-card class=${enchanted ? "enchanted" : "classic"}>
         <header>
           <div>
-            <span>Explorer map</span>
+            <span>${enchanted ? "Enchanted Explorer" : "Explorer map"}</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Living Rooms / Entity Reactions · v${CARD_VERSION}</small>
+          <small>Appearance Themes · v${CARD_VERSION}</small>
         </header>
 
-        <explorer-living-canvas
+        <explorer-themed-canvas
+          .theme=${theme}
           .hass=${this.hass}
           .image=${image}
           .rooms=${rooms}
@@ -82,7 +90,7 @@ export class HaExplorerCard extends LitElement {
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
           .fitMode=${this.config.fit_mode ?? "contain"}
-        ></explorer-living-canvas>
+        ></explorer-themed-canvas>
       </ha-card>
     `;
   }
@@ -94,6 +102,27 @@ export class HaExplorerCard extends LitElement {
     header span { display:block; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--secondary-text-color); }
     h1 { margin:3px 0 0; font-size:1.25rem; }
     small { color:var(--secondary-text-color); white-space:nowrap; }
+
+    ha-card.enchanted {
+      background:#d3b985;
+      border-color:rgba(80,50,28,.25);
+      box-shadow:0 4px 16px rgba(61,39,24,.16);
+    }
+    ha-card.enchanted header {
+      color:#4b311f;
+      background:
+        radial-gradient(circle at 18% 20%,rgba(255,240,193,.46),transparent 32%),
+        linear-gradient(90deg,#d8c294,#c8a970);
+      border-bottom:1px solid rgba(78,50,30,.18);
+    }
+    ha-card.enchanted header span,
+    ha-card.enchanted header small { color:#6b4a33; }
+    ha-card.enchanted h1 {
+      font-family:Georgia,Cambria,"Times New Roman",serif;
+      font-style:italic;
+      letter-spacing:.025em;
+    }
+
     @media (max-width:600px) { header { align-items:flex-start; padding:14px 16px; } small { font-size:.68rem; } }
   `;
 }
