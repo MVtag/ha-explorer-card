@@ -9,6 +9,7 @@ import type {
 import type { HomeAssistant } from "../types";
 import {
   evaluateRouteGraphEdges,
+  evaluateRouteNodeState,
   resolveRoute,
   type RouteGraphEdgeStatus,
 } from "../utils/route-resolver";
@@ -166,15 +167,26 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
     const endpoints = `${this.endpointLabel(status.edge.from)} ↔ ${this.endpointLabel(status.edge.to)}`;
     if (!status.conditional) return `${endpoints} · altid aktiv`;
     const state = status.currentState ?? "ukendt";
-    return `${endpoints} · ${status.active ? "aktiv" : "blokeret"} · ${status.entity ?? "manglende entity"}: ${state}`;
+    const source = status.conditionSource === "node"
+      ? `dørpunkt ${this.routeNodes.find((node) => node.id === status.nodeId)?.name ?? status.nodeId ?? "ukendt"}`
+      : "route-condition";
+    return `${endpoints} · ${status.active ? "aktiv" : "blokeret"} · ${source} · ${status.entity ?? "manglende entity"}: ${state}`;
   }
 
-  private doorVisualStatus(nodeId: string, statuses: RouteGraphEdgeStatus[]): DoorVisualStatus {
+  private doorVisualStatus(node: ExplorerRouteNode, statuses: RouteGraphEdgeStatus[]): DoorVisualStatus {
+    if (node.state_binding) {
+      const state = evaluateRouteNodeState(
+        node,
+        (entityId) => this.hass?.states[entityId]?.state,
+      );
+      return state.active ? "active" : "blocked";
+    }
+
     const incident = statuses.filter((status) => {
       const { from, to } = status.edge;
       return (
-        (from.kind === "node" && from.id === nodeId) ||
-        (to.kind === "node" && to.id === nodeId)
+        (from.kind === "node" && from.id === node.id) ||
+        (to.kind === "node" && to.id === node.id)
       );
     });
     const conditional = incident.filter((status) => status.conditional);
@@ -278,7 +290,7 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
     });
 
     doorNodes.forEach((node) => {
-      const status = this.doorVisualStatus(node.id, statuses);
+      const status = this.doorVisualStatus(node, statuses);
       const color = this.doorStatusColor(status);
       const x = node.point[0] * VIEWBOX_SIZE;
       const y = node.point[1] * VIEWBOX_SIZE;
@@ -355,11 +367,17 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       const statusLabel = status === "always"
         ? "altid aktiv"
         : status === "active"
-          ? "aktiv"
+          ? "åben"
           : status === "blocked"
-            ? "blokeret"
+            ? "lukket / blokeret"
             : "blandet status";
-      this.appendSvgTitle(group, `${node.name ?? node.id} · ${statusLabel}`);
+      const nodeState = node.state_binding
+        ? evaluateRouteNodeState(node, (entityId) => this.hass?.states[entityId]?.state)
+        : undefined;
+      const liveState = nodeState?.entity
+        ? ` · ${nodeState.entity}: ${nodeState.currentState ?? "ukendt"} · åben: ${nodeState.allowedStates.join(", ")}`
+        : "";
+      this.appendSvgTitle(group, `${node.name ?? node.id} · ${statusLabel}${liveState}`);
       layer.appendChild(group);
     });
 
