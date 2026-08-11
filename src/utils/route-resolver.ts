@@ -9,6 +9,8 @@ import type {
 
 export type RouteResolutionSource = "manual" | "graph" | "fallback";
 export type RouteResolutionHopKind = "room" | "node" | "point";
+export type RouteEntityStateResolver = (entityId: string) => string | undefined;
+export type RouteEdgeBlockReason = "missing_entity" | "entity_unavailable" | "state_blocked";
 
 export interface RouteResolutionHop {
   kind: RouteResolutionHopKind;
@@ -18,12 +20,24 @@ export interface RouteResolutionHop {
   point: NormalizedPoint;
 }
 
+export interface RouteGraphEdgeStatus {
+  index: number;
+  edge: ExplorerRouteGraphEdge;
+  conditional: boolean;
+  active: boolean;
+  entity?: string;
+  currentState?: string;
+  allowedStates: string[];
+  reason?: RouteEdgeBlockReason;
+}
+
 export interface RouteResolution {
   source: RouteResolutionSource;
   hops: RouteResolutionHop[];
   distance: number;
   manualRoute?: ExplorerRoute;
   reversedManualRoute?: boolean;
+  blockedEdges: RouteGraphEdgeStatus[];
 }
 
 export interface RouteGraphDiagnostics {
@@ -38,6 +52,9 @@ export interface RouteGraphDiagnostics {
     to: string;
     nodeId: string;
   }>;
+  conditionalEdges: number;
+  blockedEdges: RouteGraphEdgeStatus[];
+  unresolvedConditionEntities: string[];
 }
 
 interface GraphNeighbor {
@@ -106,6 +123,76 @@ function endpointHop(
   };
 }
 
+function normalizedAllowedStates(edge: ExplorerRouteGraphEdge): string[] {
+  const values = (edge.condition?.allowed_states ?? [])
+    .map((state) => state.trim())
+    .filter(Boolean);
+  return values.length ? [...new Set(values)] : ["on"];
+}
+
+export function evaluateRouteGraphEdge(
+  edge: ExplorerRouteGraphEdge,
+  index: number,
+  stateResolver?: RouteEntityStateResolver,
+): RouteGraphEdgeStatus {
+  if (!edge.condition) {
+    return {
+      index,
+      edge,
+      conditional: false,
+      active: true,
+      allowedStates: [],
+    };
+  }
+
+  const entity = edge.condition.entity?.trim();
+  const allowedStates = normalizedAllowedStates(edge);
+  if (!entity) {
+    return {
+      index,
+      edge,
+      conditional: true,
+      active: false,
+      allowedStates,
+      reason: "missing_entity",
+    };
+  }
+
+  const currentState = stateResolver?.(entity);
+  if (currentState === undefined) {
+    return {
+      index,
+      edge,
+      conditional: true,
+      active: false,
+      entity,
+      allowedStates,
+      reason: "entity_unavailable",
+    };
+  }
+
+  const active = allowedStates.includes(currentState);
+  return {
+    index,
+    edge,
+    conditional: true,
+    active,
+    entity,
+    currentState,
+    allowedStates,
+    ...(active ? {} : { reason: "state_blocked" as const }),
+  };
+}
+
+export function evaluateRouteGraphEdges(
+  config: ExplorerCardConfig,
+  stateResolver?: RouteEntityStateResolver,
+): RouteGraphEdgeStatus[] {
+  return (config.route_graph_edges ?? []).map((edge, index) =>
+    evaluateRouteGraphEdge(edge, index, stateResolver),
+  );
+}
+
 function routeSteps(route: ExplorerRoute): ExplorerRouteStep[] {
   if (route.path) return route.path;
   return (route.via ?? []).map((point) => ({ point }));
@@ -153,6 +240,7 @@ function manualResolution(
   fromRoomId: string,
   toRoomId: string,
   reverse: boolean,
+  blockedEdges: RouteGraphEdgeStatus[],
 ): RouteResolution | undefined {
   const start = roomAnchor(config, fromRoomId);
   const end = roomAnchor(config, toRoomId);
@@ -188,10 +276,14 @@ function manualResolution(
     distance: routeDistance(hops),
     manualRoute: route,
     reversedManualRoute: reverse,
+    blockedEdges,
   };
 }
 
-function buildGraph(config: ExplorerCardConfig): GraphBuildResult {
+function buildGraph(
+  config: ExplorerCardConfig,
+  edgeStatuses: RouteGraphEdgeStatus[],
+): GraphBuildResult {
   const adjacency = new Map<string, GraphNeighbor[]>();
   const positions = new Map<string, NormalizedPoint>();
   const endpoints = new Map<string, ExplorerRouteGraphEndpoint>();
@@ -212,12 +304,15 @@ function buildGraph(config: ExplorerCardConfig): GraphBuildResult {
     adjacency.set(fromKey, list);
   };
 
-  (config.route_graph_edges ?? []).forEach((edge) => {
+  edgeStatuses.forEach((status) => {
+    if (!status.active) return;
+    const edge = status.edge;
     const fromPoint = rememberEndpoint(edge.from);
     const toPoint = rememberEndpoint(edge.to);
     if (!fromPoint || !toPoint) return;
     const fromKey = endpointKey(edge.from);
     const toKey = endpointKey(edge.to);
+    if (fromKey === toKey) return;
     const weight = Math.hypot(toPoint[0] - fromPoint[0], toPoint[1] - fromPoint[1]);
     addNeighbor(fromKey, toKey, weight);
     addNeighbor(toKey, fromKey, weight);
@@ -230,12 +325,14 @@ function graphResolution(
   config: ExplorerCardConfig,
   fromRoomId: string,
   toRoomId: string,
+  edgeStatuses: RouteGraphEdgeStatus[],
+  blockedEdges: RouteGraphEdgeStatus[],
 ): RouteResolution | undefined {
   if (!(config.route_graph_edges ?? []).length) return undefined;
 
   const startKey = `room:${fromRoomId}`;
   const targetKey = `room:${toRoomId}`;
-  const { adjacency, endpoints } = buildGraph(config);
+  const { adjacency, endpoints } = buildGraph(config, edgeStatuses);
   if (!adjacency.has(startKey) || !adjacency.has(targetKey)) return undefined;
 
   const distances = new Map<string, number>();
@@ -292,6 +389,7 @@ function graphResolution(
     source: "graph",
     hops,
     distance: routeDistance(hops),
+    blockedEdges,
   };
 }
 
@@ -299,20 +397,24 @@ export function resolveRoute(
   config: ExplorerCardConfig,
   fromRoomId: string,
   toRoomId: string,
+  stateResolver?: RouteEntityStateResolver,
 ): RouteResolution | undefined {
   if (!fromRoomId || !toRoomId || fromRoomId === toRoomId) return undefined;
+
+  const edgeStatuses = evaluateRouteGraphEdges(config, stateResolver);
+  const blockedEdges = edgeStatuses.filter((status) => !status.active);
 
   const direct = (config.routes ?? []).find(
     (route) => route.from === fromRoomId && route.to === toRoomId,
   );
-  if (direct) return manualResolution(config, direct, fromRoomId, toRoomId, false);
+  if (direct) return manualResolution(config, direct, fromRoomId, toRoomId, false, blockedEdges);
 
   const reverse = (config.routes ?? []).find(
     (route) => route.from === toRoomId && route.to === fromRoomId,
   );
-  if (reverse) return manualResolution(config, reverse, fromRoomId, toRoomId, true);
+  if (reverse) return manualResolution(config, reverse, fromRoomId, toRoomId, true, blockedEdges);
 
-  const graph = graphResolution(config, fromRoomId, toRoomId);
+  const graph = graphResolution(config, fromRoomId, toRoomId, edgeStatuses, blockedEdges);
   if (graph) return graph;
 
   const start = roomAnchor(config, fromRoomId);
@@ -334,14 +436,22 @@ export function resolveRoute(
       point: end,
     },
   ];
-  return { source: "fallback", hops, distance: routeDistance(hops) };
+  return {
+    source: "fallback",
+    hops,
+    distance: routeDistance(hops),
+    blockedEdges,
+  };
 }
 
 function canonicalEdgeKey(edge: ExplorerRouteGraphEdge): string {
   return [endpointKey(edge.from), endpointKey(edge.to)].sort().join("|");
 }
 
-export function analyzeRouteGraph(config: ExplorerCardConfig): RouteGraphDiagnostics {
+export function analyzeRouteGraph(
+  config: ExplorerCardConfig,
+  stateResolver?: RouteEntityStateResolver,
+): RouteGraphDiagnostics {
   const graphEdges = config.route_graph_edges ?? [];
   let invalidEdges = 0;
   let duplicateEdges = 0;
@@ -421,6 +531,14 @@ export function analyzeRouteGraph(config: ExplorerCardConfig): RouteGraphDiagnos
     });
   });
 
+  const edgeStatuses = evaluateRouteGraphEdges(config, stateResolver);
+  const blockedEdges = edgeStatuses.filter((status) => !status.active);
+  const unresolvedConditionEntities = [...new Set(
+    blockedEdges
+      .filter((status) => status.reason === "missing_entity" || status.reason === "entity_unavailable")
+      .map((status) => status.entity ?? "(mangler entity)"),
+  )];
+
   return {
     invalidEdges,
     duplicateEdges,
@@ -429,5 +547,8 @@ export function analyzeRouteGraph(config: ExplorerCardConfig): RouteGraphDiagnos
     disconnectedRoomIds,
     disconnectedNodeIds,
     brokenRouteNodeReferences,
+    conditionalEdges: edgeStatuses.filter((status) => status.conditional).length,
+    blockedEdges,
+    unresolvedConditionEntities,
   };
 }
