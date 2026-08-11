@@ -51,7 +51,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     return zone.color?.trim() || ZONE_COLORS[zone.kind ?? "info"];
   }
 
-  private appendTitle(parent: SVGElement, status: ExplorerZoneStatus): void {
+  private appendZoneTitle(parent: SVGElement, status: ExplorerZoneStatus): void {
     const title = document.createElementNS(SVG_NAMESPACE, "title");
     const zone = status.zone;
     const binding = status.entity
@@ -137,7 +137,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
       group.appendChild(label);
     }
 
-    this.appendTitle(group, status);
+    this.appendZoneTitle(group, status);
     layer.appendChild(group);
   }
 
