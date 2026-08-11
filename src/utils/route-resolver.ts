@@ -3,6 +3,7 @@ import type {
   ExplorerRoute,
   ExplorerRouteGraphEdge,
   ExplorerRouteGraphEndpoint,
+  ExplorerRouteNode,
   ExplorerRouteStep,
   NormalizedPoint,
 } from "../models/config";
@@ -11,6 +12,7 @@ export type RouteResolutionSource = "manual" | "graph" | "fallback";
 export type RouteResolutionHopKind = "room" | "node" | "point";
 export type RouteEntityStateResolver = (entityId: string) => string | undefined;
 export type RouteEdgeBlockReason = "missing_entity" | "entity_unavailable" | "state_blocked";
+export type RouteConditionSource = "edge" | "node";
 
 export interface RouteResolutionHop {
   kind: RouteResolutionHopKind;
@@ -18,6 +20,16 @@ export interface RouteResolutionHop {
   key: string;
   label: string;
   point: NormalizedPoint;
+}
+
+export interface RouteNodeStateStatus {
+  nodeId: string;
+  conditional: boolean;
+  active: boolean;
+  entity?: string;
+  currentState?: string;
+  allowedStates: string[];
+  reason?: RouteEdgeBlockReason;
 }
 
 export interface RouteGraphEdgeStatus {
@@ -29,6 +41,9 @@ export interface RouteGraphEdgeStatus {
   currentState?: string;
   allowedStates: string[];
   reason?: RouteEdgeBlockReason;
+  conditionSource?: RouteConditionSource;
+  nodeId?: string;
+  nodeStatuses?: RouteNodeStateStatus[];
 }
 
 export interface RouteResolution {
@@ -54,6 +69,8 @@ export interface RouteGraphDiagnostics {
   }>;
   conditionalEdges: number;
   blockedEdges: RouteGraphEdgeStatus[];
+  conditionalNodes: number;
+  blockedNodes: RouteNodeStateStatus[];
   unresolvedConditionEntities: string[];
 }
 
@@ -123,11 +140,62 @@ function endpointHop(
   };
 }
 
-function normalizedAllowedStates(edge: ExplorerRouteGraphEdge): string[] {
-  const values = (edge.condition?.allowed_states ?? [])
-    .map((state) => state.trim())
-    .filter(Boolean);
+function normalizeStates(states?: string[]): string[] {
+  const values = (states ?? []).map((state) => state.trim()).filter(Boolean);
   return values.length ? [...new Set(values)] : ["on"];
+}
+
+function normalizedAllowedStates(edge: ExplorerRouteGraphEdge): string[] {
+  return normalizeStates(edge.condition?.allowed_states);
+}
+
+export function evaluateRouteNodeState(
+  node: ExplorerRouteNode,
+  stateResolver?: RouteEntityStateResolver,
+): RouteNodeStateStatus {
+  if (!node.state_binding) {
+    return {
+      nodeId: node.id,
+      conditional: false,
+      active: true,
+      allowedStates: [],
+    };
+  }
+
+  const entity = node.state_binding.entity?.trim();
+  const allowedStates = normalizeStates(node.state_binding.open_states);
+  if (!entity) {
+    return {
+      nodeId: node.id,
+      conditional: true,
+      active: false,
+      allowedStates,
+      reason: "missing_entity",
+    };
+  }
+
+  const currentState = stateResolver?.(entity);
+  if (currentState === undefined) {
+    return {
+      nodeId: node.id,
+      conditional: true,
+      active: false,
+      entity,
+      allowedStates,
+      reason: "entity_unavailable",
+    };
+  }
+
+  const active = allowedStates.includes(currentState);
+  return {
+    nodeId: node.id,
+    conditional: true,
+    active,
+    entity,
+    currentState,
+    allowedStates,
+    ...(active ? {} : { reason: "state_blocked" as const }),
+  };
 }
 
 export function evaluateRouteGraphEdge(
@@ -155,6 +223,7 @@ export function evaluateRouteGraphEdge(
       active: false,
       allowedStates,
       reason: "missing_entity",
+      conditionSource: "edge",
     };
   }
 
@@ -168,6 +237,7 @@ export function evaluateRouteGraphEdge(
       entity,
       allowedStates,
       reason: "entity_unavailable",
+      conditionSource: "edge",
     };
   }
 
@@ -180,6 +250,7 @@ export function evaluateRouteGraphEdge(
     entity,
     currentState,
     allowedStates,
+    conditionSource: "edge",
     ...(active ? {} : { reason: "state_blocked" as const }),
   };
 }
@@ -188,9 +259,45 @@ export function evaluateRouteGraphEdges(
   config: ExplorerCardConfig,
   stateResolver?: RouteEntityStateResolver,
 ): RouteGraphEdgeStatus[] {
-  return (config.route_graph_edges ?? []).map((edge, index) =>
-    evaluateRouteGraphEdge(edge, index, stateResolver),
-  );
+  const nodes = new Map((config.route_nodes ?? []).map((node) => [node.id, node]));
+
+  return (config.route_graph_edges ?? []).map((edge, index) => {
+    const edgeStatus = evaluateRouteGraphEdge(edge, index, stateResolver);
+    const endpointNodes = [edge.from, edge.to]
+      .filter((endpoint) => endpoint.kind === "node")
+      .map((endpoint) => nodes.get(endpoint.id))
+      .filter((node): node is ExplorerRouteNode => Boolean(node));
+    const nodeStatuses = endpointNodes
+      .map((node) => evaluateRouteNodeState(node, stateResolver))
+      .filter((status) => status.conditional);
+
+    const blockedNode = nodeStatuses.find((status) => !status.active);
+    const representativeNode = blockedNode ?? (!edgeStatus.conditional ? nodeStatuses[0] : undefined);
+    const active = edgeStatus.active && nodeStatuses.every((status) => status.active);
+    const conditional = edgeStatus.conditional || nodeStatuses.length > 0;
+
+    if (representativeNode) {
+      return {
+        ...edgeStatus,
+        conditional,
+        active,
+        entity: representativeNode.entity,
+        currentState: representativeNode.currentState,
+        allowedStates: representativeNode.allowedStates,
+        reason: active ? undefined : representativeNode.reason,
+        conditionSource: "node" as const,
+        nodeId: representativeNode.nodeId,
+        nodeStatuses,
+      };
+    }
+
+    return {
+      ...edgeStatus,
+      conditional,
+      active,
+      nodeStatuses,
+    };
+  });
 }
 
 function routeSteps(route: ExplorerRoute): ExplorerRouteStep[] {
@@ -533,11 +640,25 @@ export function analyzeRouteGraph(
 
   const edgeStatuses = evaluateRouteGraphEdges(config, stateResolver);
   const blockedEdges = edgeStatuses.filter((status) => !status.active);
-  const unresolvedConditionEntities = [...new Set(
-    blockedEdges
-      .filter((status) => status.reason === "missing_entity" || status.reason === "entity_unavailable")
-      .map((status) => status.entity ?? "(mangler entity)"),
-  )];
+  const nodeStatuses = (config.route_nodes ?? [])
+    .map((node) => evaluateRouteNodeState(node, stateResolver))
+    .filter((status) => status.conditional);
+  const blockedNodes = nodeStatuses.filter((status) => !status.active);
+
+  const unresolved = new Set<string>();
+  edgeStatuses.forEach((status) => {
+    if (
+      status.conditionSource === "edge" &&
+      (status.reason === "missing_entity" || status.reason === "entity_unavailable")
+    ) {
+      unresolved.add(status.entity ?? "(mangler entity)");
+    }
+  });
+  nodeStatuses.forEach((status) => {
+    if (status.reason === "missing_entity" || status.reason === "entity_unavailable") {
+      unresolved.add(status.entity ?? "(mangler entity)");
+    }
+  });
 
   return {
     invalidEdges,
@@ -549,6 +670,8 @@ export function analyzeRouteGraph(
     brokenRouteNodeReferences,
     conditionalEdges: edgeStatuses.filter((status) => status.conditional).length,
     blockedEdges,
-    unresolvedConditionEntities,
+    conditionalNodes: nodeStatuses.length,
+    blockedNodes,
+    unresolvedConditionEntities: [...unresolved],
   };
 }
