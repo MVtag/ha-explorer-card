@@ -5,6 +5,7 @@ import type {
   ExplorerRouteGraphEdge,
   ExplorerRouteNode,
 } from "../models/config";
+import type { HomeAssistant } from "../types";
 import { resolveRoute } from "../utils/route-resolver";
 import { VIEWBOX_SIZE } from "../utils/viewport";
 
@@ -20,6 +21,7 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
 @customElement("explorer-animated-canvas")
 export class ExplorerAnimatedCanvas extends ExplorerCanvas {
+  @property({ attribute: false }) public hass?: HomeAssistant;
   @property({ attribute: false }) public routes: ExplorerRoute[] = [];
   @property({ attribute: false }) public routeNodes: ExplorerRouteNode[] = [];
   @property({ attribute: false }) public routeGraphEdges: ExplorerRouteGraphEdge[] = [];
@@ -112,7 +114,7 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       route_nodes: this.routeNodes,
       route_graph_edges: this.routeGraphEdges,
       routes: this.routes,
-    }, fromRoom, toRoom);
+    }, fromRoom, toRoom, (entityId) => this.hass?.states[entityId]?.state);
 
     if (!resolution) return [from, to];
     const middle = resolution.hops.slice(1, -1).map((hop) => ({
