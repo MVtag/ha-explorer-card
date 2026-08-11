@@ -34,7 +34,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     }
   }
 
-  private polygonPoints(points: NormalizedPoint[]): string {
+  private zonePolygonPoints(points: NormalizedPoint[]): string {
     return points.map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`).join(" ");
   }
 
@@ -72,7 +72,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     group.setAttribute("pointer-events", "none");
 
     const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
-    polygon.setAttribute("points", this.polygonPoints(zone.points));
+    polygon.setAttribute("points", this.zonePolygonPoints(zone.points));
     polygon.setAttribute("fill", color);
     polygon.setAttribute("fill-opacity", kind === "danger" || kind === "restricted" ? ".18" : ".13");
     polygon.setAttribute("stroke", color);
