@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import type { ExplorerCardConfig } from "../models/config";
 import { HaExplorerCardEditor } from "./explorer-config-editor";
 import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
+import "./explorer-theme-editor";
 import "./explorer-room-reactions-editor";
 import "./explorer-route-editor";
 import "./explorer-route-graph-editor";
@@ -76,6 +77,10 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
   protected override render() {
     return html`
       ${super.render()}
+      <ha-explorer-theme-editor
+        .config=${this.currentConfig}
+        @config-changed=${this.handleToolConfigChanged}
+      ></ha-explorer-theme-editor>
       <ha-explorer-room-tools
         .hass=${this.hass}
         .config=${this.currentConfig}
