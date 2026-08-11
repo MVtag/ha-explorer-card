@@ -81,6 +81,7 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
         @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-room-tools>
       <ha-explorer-route-editor
+        .hass=${this.hass}
         .config=${this.currentConfig}
         @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-route-editor>
