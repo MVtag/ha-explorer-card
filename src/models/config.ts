@@ -3,10 +3,20 @@ export type NormalizedPoint = [number, number];
 export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
+export type RoomReactionKind = "light" | "motion" | "media" | "opening";
 
 export interface NormalizedPosition {
   x: number;
   y: number;
+}
+
+export interface ExplorerRoomReaction {
+  /** Visual reaction rendered when the bound entity is in one of its active states. */
+  kind: RoomReactionKind;
+  /** Home Assistant entity driving this reaction. */
+  entity: string;
+  /** States that activate the reaction. Defaults depend on the reaction kind. */
+  active_states?: string[];
 }
 
 export interface ExplorerRoom {
@@ -18,6 +28,8 @@ export interface ExplorerRoom {
   aliases?: string[];
   label?: NormalizedPosition;
   presence_anchor?: NormalizedPosition;
+  /** Optional Home Assistant entities that make this room visually react at runtime. */
+  reactions?: ExplorerRoomReaction[];
 }
 
 export interface ExplorerRouteNodeStateBinding {
