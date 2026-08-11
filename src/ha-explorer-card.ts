@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./components/explorer-themed-canvas";
+import "./components/explorer-zones-canvas";
 import "./components/explorer-ha-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.22.0";
+const CARD_VERSION = "0.23.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -27,6 +27,7 @@ export class HaExplorerCard extends LitElement {
       fit_mode: "contain",
       appearance: { theme: "classic" },
       rooms: [],
+      zones: [],
       route_nodes: [],
       route_graph_edges: [],
       routes: [],
@@ -43,6 +44,7 @@ export class HaExplorerCard extends LitElement {
       initial_zoom: 1,
       fit_mode: "contain",
       rooms: [],
+      zones: [],
       route_nodes: [],
       route_graph_edges: [],
       routes: [],
@@ -74,14 +76,15 @@ export class HaExplorerCard extends LitElement {
             <span>${enchanted ? "Enchanted Explorer" : "Explorer map"}</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Appearance Themes · v${CARD_VERSION}</small>
+          <small>Zones / Dynamic Areas · v${CARD_VERSION}</small>
         </header>
 
-        <explorer-themed-canvas
+        <explorer-zones-canvas
           .theme=${theme}
           .hass=${this.hass}
           .image=${image}
           .rooms=${rooms}
+          .zones=${this.config.zones ?? []}
           .routeNodes=${this.config.route_nodes ?? []}
           .routeGraphEdges=${this.config.route_graph_edges ?? []}
           .routes=${this.config.routes ?? []}
@@ -90,7 +93,7 @@ export class HaExplorerCard extends LitElement {
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
           .fitMode=${this.config.fit_mode ?? "contain"}
-        ></explorer-themed-canvas>
+        ></explorer-zones-canvas>
       </ha-card>
     `;
   }

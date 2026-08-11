@@ -5,6 +5,7 @@ export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
 export type RoomReactionKind = "light" | "motion" | "media" | "opening";
 export type ExplorerTheme = "classic" | "enchanted_antique";
+export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "restricted";
 
 export interface NormalizedPosition {
   x: number;
@@ -14,6 +15,26 @@ export interface NormalizedPosition {
 export interface ExplorerAppearanceConfig {
   /** Visual presentation only. Routing, presence and entity semantics are unchanged. */
   theme?: ExplorerTheme;
+}
+
+export interface ExplorerZoneStateBinding {
+  /** Home Assistant entity that controls whether this zone is active/visible. */
+  entity: string;
+  /** States that activate the zone. Defaults to ["on"] when omitted or empty. */
+  active_states?: string[];
+}
+
+export interface ExplorerZone {
+  id: string;
+  name?: string;
+  points: NormalizedPoint[];
+  kind?: ExplorerZoneKind;
+  color?: string;
+  label?: NormalizedPosition;
+  /** Set false to hide the zone while keeping its configuration. Defaults to true. */
+  visible?: boolean;
+  /** Optional Home Assistant state binding. Without one, a visible zone is always active. */
+  state_binding?: ExplorerZoneStateBinding;
 }
 
 export interface ExplorerRoomReaction {
@@ -126,6 +147,7 @@ export interface ExplorerCardConfig {
   fit_mode?: FloorplanFitMode;
   appearance?: ExplorerAppearanceConfig;
   rooms?: ExplorerRoom[];
+  zones?: ExplorerZone[];
   route_nodes?: ExplorerRouteNode[];
   route_graph_edges?: ExplorerRouteGraphEdge[];
   routes?: ExplorerRoute[];
