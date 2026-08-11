@@ -85,10 +85,12 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
         @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-route-editor>
       <ha-explorer-route-graph-editor
+        .hass=${this.hass}
         .config=${this.currentConfig}
         @config-changed=${this.handleToolConfigChanged}
       ></ha-explorer-route-graph-editor>
       <ha-explorer-route-diagnostics
+        .hass=${this.hass}
         .config=${this.currentConfig}
       ></ha-explorer-route-diagnostics>
     `;
