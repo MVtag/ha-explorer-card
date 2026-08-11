@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./components/explorer-animated-canvas";
+import "./components/explorer-living-canvas";
 import "./components/explorer-ha-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.20.1";
+const CARD_VERSION = "0.21.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -67,10 +67,10 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Door Entity Binding · v${CARD_VERSION}</small>
+          <small>Living Rooms / Entity Reactions · v${CARD_VERSION}</small>
         </header>
 
-        <explorer-animated-canvas
+        <explorer-living-canvas
           .hass=${this.hass}
           .image=${image}
           .rooms=${rooms}
@@ -82,7 +82,7 @@ export class HaExplorerCard extends LitElement {
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
           .fitMode=${this.config.fit_mode ?? "contain"}
-        ></explorer-animated-canvas>
+        ></explorer-living-canvas>
       </ha-card>
     `;
   }
