@@ -20,11 +20,20 @@ export interface ExplorerRoom {
   presence_anchor?: NormalizedPosition;
 }
 
+export interface ExplorerRouteNodeStateBinding {
+  /** Home Assistant entity that describes whether the physical node is passable. */
+  entity: string;
+  /** States that mean the door/node is open and passable. Defaults to ["on"]. */
+  open_states?: string[];
+}
+
 export interface ExplorerRouteNode {
   id: string;
   name?: string;
   point: NormalizedPoint;
   kind?: RouteNodeKind;
+  /** Optional live state binding. Primarily used by door nodes. */
+  state_binding?: ExplorerRouteNodeStateBinding;
 }
 
 export interface ExplorerRouteStep {
