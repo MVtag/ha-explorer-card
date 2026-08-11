@@ -6,7 +6,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.18.0";
+const CARD_VERSION = "0.19.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -67,10 +67,11 @@ export class HaExplorerCard extends LitElement {
             <span>Explorer map</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Route Preview & Diagnostics · v${CARD_VERSION}</small>
+          <small>Smart / Conditional Routes · v${CARD_VERSION}</small>
         </header>
 
         <explorer-animated-canvas
+          .hass=${this.hass}
           .image=${image}
           .rooms=${rooms}
           .routeNodes=${this.config.route_nodes ?? []}

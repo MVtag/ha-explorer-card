@@ -7,6 +7,8 @@ import type {
   NormalizedPoint,
   RouteGraphEndpointKind,
 } from "../models/config";
+import type { HomeAssistant } from "../types";
+import { evaluateRouteGraphEdge } from "../utils/route-resolver";
 
 const VIEWBOX_SIZE = 1000;
 
@@ -21,9 +23,15 @@ interface GraphEndpointOption {
 @customElement("ha-explorer-route-graph-editor")
 export class HaExplorerRouteGraphEditor extends LitElement {
   @property({ attribute: false }) public config?: ExplorerCardConfig;
+  @property({ attribute: false }) public hass?: HomeAssistant;
 
   @state() private fromKey = "";
   @state() private toKey = "";
+  @state() private conditionEntity = "";
+  @state() private conditionStates = "on";
+  @state() private editingConditionIndex?: number;
+  @state() private editingEntity = "";
+  @state() private editingStates = "on";
 
   private get rooms() {
     return this.config?.rooms ?? [];
@@ -99,6 +107,19 @@ export class HaExplorerRouteGraphEditor extends LitElement {
     return [this.endpointKey(edge.from), this.endpointKey(edge.to)].sort().join("|");
   }
 
+  private parseAllowedStates(value: string): string[] {
+    const states = value.split(",").map((entry) => entry.trim()).filter(Boolean);
+    return states.length ? [...new Set(states)] : ["on"];
+  }
+
+  private entityState(entityId: string): string | undefined {
+    return this.hass?.states[entityId]?.state;
+  }
+
+  private edgeStatus(edge: ExplorerRouteGraphEdge, index: number) {
+    return evaluateRouteGraphEdge(edge, index, (entityId) => this.entityState(entityId));
+  }
+
   private canAdd(): boolean {
     if (!this.fromKey || !this.toKey || this.fromKey === this.toKey) return false;
     const from = this.parseEndpoint(this.fromKey);
@@ -114,33 +135,105 @@ export class HaExplorerRouteGraphEditor extends LitElement {
     const from = this.parseEndpoint(this.fromKey);
     const to = this.parseEndpoint(this.toKey);
     if (!from || !to) return;
+
+    const entity = this.conditionEntity.trim();
+    const edge: ExplorerRouteGraphEdge = {
+      from,
+      to,
+      ...(entity ? {
+        condition: {
+          entity,
+          allowed_states: this.parseAllowedStates(this.conditionStates),
+        },
+      } : {}),
+    };
+
     this.emitConfig({
       ...this.config,
-      route_graph_edges: [...this.graphEdges, { from, to }],
+      route_graph_edges: [...this.graphEdges, edge],
     });
     this.fromKey = "";
     this.toKey = "";
+    this.conditionEntity = "";
+    this.conditionStates = "on";
   }
 
   private deleteEdge(index: number): void {
     if (!this.config) return;
+    if (this.editingConditionIndex === index) this.editingConditionIndex = undefined;
     this.emitConfig({
       ...this.config,
       route_graph_edges: this.graphEdges.filter((_, edgeIndex) => edgeIndex !== index),
     });
   }
 
+  private beginEditCondition(index: number): void {
+    const condition = this.graphEdges[index]?.condition;
+    this.editingConditionIndex = index;
+    this.editingEntity = condition?.entity ?? "";
+    this.editingStates = (condition?.allowed_states?.length ? condition.allowed_states : ["on"]).join(", ");
+  }
+
+  private cancelEditCondition(): void {
+    this.editingConditionIndex = undefined;
+    this.editingEntity = "";
+    this.editingStates = "on";
+  }
+
+  private saveCondition(index: number): void {
+    if (!this.config) return;
+    const entity = this.editingEntity.trim();
+    const edges = this.graphEdges.map((edge, edgeIndex) => {
+      if (edgeIndex !== index) return edge;
+      return {
+        ...edge,
+        ...(entity ? {
+          condition: {
+            entity,
+            allowed_states: this.parseAllowedStates(this.editingStates),
+          },
+        } : { condition: undefined }),
+      };
+    });
+    this.cancelEditCondition();
+    this.emitConfig({ ...this.config, route_graph_edges: edges });
+  }
+
+  private removeCondition(index: number): void {
+    if (!this.config) return;
+    const edges = this.graphEdges.map((edge, edgeIndex) => {
+      if (edgeIndex !== index) return edge;
+      const { condition: _condition, ...withoutCondition } = edge;
+      return withoutCondition;
+    });
+    this.cancelEditCondition();
+    this.emitConfig({ ...this.config, route_graph_edges: edges });
+  }
+
+  private statusLabel(edge: ExplorerRouteGraphEdge, index: number): string {
+    const status = this.edgeStatus(edge, index);
+    if (!status.conditional) return "Altid åben";
+    if (status.active) return `Åben · ${status.currentState}`;
+    if (status.reason === "entity_unavailable") return "Blokeret · entity mangler";
+    if (status.reason === "missing_entity") return "Blokeret · ingen entity";
+    return `Blokeret · ${status.currentState ?? "ukendt"}`;
+  }
+
   private renderGraphOverlay() {
-    const edges = this.graphEdges.map((edge) => {
+    const edges = this.graphEdges.map((edge, index) => {
       const from = this.endpointPoint(edge.from);
       const to = this.endpointPoint(edge.to);
       if (!from || !to) return nothing;
+      const status = this.edgeStatus(edge, index);
+      const classes = ["graph-edge", status.conditional ? "conditional" : "", status.active ? "" : "blocked"]
+        .filter(Boolean)
+        .join(" ");
       return svg`<line
         x1=${from[0] * VIEWBOX_SIZE}
         y1=${from[1] * VIEWBOX_SIZE}
         x2=${to[0] * VIEWBOX_SIZE}
         y2=${to[1] * VIEWBOX_SIZE}
-        class="graph-edge"
+        class=${classes}
         vector-effect="non-scaling-stroke"
       ></line>`;
     });
@@ -163,16 +256,17 @@ export class HaExplorerRouteGraphEditor extends LitElement {
     if (!this.config) return nothing;
     const image = this.config.image ?? this.config.background ?? "";
     const options = this.endpointOptions();
+    const conditionalCount = this.graphEdges.filter((edge) => Boolean(edge.condition)).length;
 
     return html`
       <section class="graph-editor">
         <div class="heading">
-          <div><span>Automatic Route Graph</span><h3>Forbind rum, døre og gangpunkter</h3></div>
-          <b>${this.graphEdges.length} forbindelser</b>
+          <div><span>Smart / Conditional Routes</span><h3>Forbind rum, døre og gangpunkter</h3></div>
+          <b>${this.graphEdges.length} forbindelser · ${conditionalCount} smarte</b>
         </div>
 
         <div class="instruction">
-          Opret kun de fysiske forbindelser der faktisk kan gås. Explorer finder derefter automatisk den korteste vej gennem grafen. En manuelt tegnet rute mellem to rum har stadig førsteprioritet.
+          En forbindelse kan være permanent eller styres af en Home Assistant entity. Hvis en betinget forbindelse er blokeret, finder Explorer automatisk en anden graph-vej. Manuelle ruter har stadig førsteprioritet.
         </div>
 
         <div class="selectors">
@@ -190,17 +284,61 @@ export class HaExplorerRouteGraphEditor extends LitElement {
           </label>
         </div>
 
+        <div class="condition-draft">
+          <div class="condition-title"><strong>Smart betingelse · valgfri</strong><span>Lad entity være tom for en permanent forbindelse.</span></div>
+          <div class="condition-fields">
+            <label>Home Assistant entity
+              <input
+                placeholder="binary_sensor.hoveddor"
+                .value=${this.conditionEntity}
+                @input=${(event: InputEvent) => this.conditionEntity = (event.target as HTMLInputElement).value}
+              >
+            </label>
+            <label>Tilladte states
+              <input
+                placeholder="on"
+                .value=${this.conditionStates}
+                @input=${(event: InputEvent) => this.conditionStates = (event.target as HTMLInputElement).value}
+              >
+              <small>Flere states adskilles med komma, fx <code>on, open</code>.</small>
+            </label>
+          </div>
+        </div>
+
         <button class="primary add" ?disabled=${!this.canAdd()} @click=${this.addEdge}>+ Tilføj forbindelse</button>
 
         ${this.graphEdges.length ? html`
           <div class="edge-list">
-            ${this.graphEdges.map((edge, index) => html`
-              <div class="edge-item">
-                <span class="edge-index">${index + 1}</span>
-                <span class="edge-copy"><strong>${this.endpointLabel(edge.from)}</strong><small>↔ ${this.endpointLabel(edge.to)}</small></span>
-                <button class="danger mini" @click=${() => this.deleteEdge(index)}>Slet</button>
-              </div>
-            `)}
+            ${this.graphEdges.map((edge, index) => {
+              const status = this.edgeStatus(edge, index);
+              const editing = this.editingConditionIndex === index;
+              return html`
+                <div class=${status.active ? "edge-item" : "edge-item blocked"}>
+                  <span class="edge-index">${index + 1}</span>
+                  <span class="edge-copy">
+                    <strong>${this.endpointLabel(edge.from)}</strong>
+                    <small>↔ ${this.endpointLabel(edge.to)}</small>
+                    <em class=${status.active ? "status open" : "status blocked"}>${this.statusLabel(edge, index)}</em>
+                    ${edge.condition ? html`<small>${edge.condition.entity} · tilladt: ${(edge.condition.allowed_states?.length ? edge.condition.allowed_states : ["on"]).join(", ")}</small>` : nothing}
+                  </span>
+                  <div class="edge-actions">
+                    <button class="secondary mini" @click=${() => this.beginEditCondition(index)}>Betingelse</button>
+                    <button class="danger mini" @click=${() => this.deleteEdge(index)}>Slet</button>
+                  </div>
+                </div>
+                ${editing ? html`
+                  <div class="condition-edit">
+                    <label>Entity<input .value=${this.editingEntity} @input=${(event: InputEvent) => this.editingEntity = (event.target as HTMLInputElement).value}></label>
+                    <label>Tilladte states<input .value=${this.editingStates} @input=${(event: InputEvent) => this.editingStates = (event.target as HTMLInputElement).value}></label>
+                    <div class="condition-actions">
+                      <button class="primary mini" @click=${() => this.saveCondition(index)}>Gem betingelse</button>
+                      ${edge.condition ? html`<button class="secondary mini" @click=${() => this.removeCondition(index)}>Gør permanent</button>` : nothing}
+                      <button class="secondary mini" @click=${this.cancelEditCondition}>Annuller</button>
+                    </div>
+                  </div>
+                ` : nothing}
+              `;
+            })}
           </div>
         ` : html`<div class="empty">Ingen graph-forbindelser endnu. Start typisk med at forbinde et rum til dets dørpunkt.</div>`}
 
@@ -211,12 +349,13 @@ export class HaExplorerRouteGraphEditor extends LitElement {
               ${this.renderGraphOverlay()}
             </svg>
           </div>
+          <div class="legend"><span><i class="line open"></i>Aktiv</span><span><i class="line conditional"></i>Betinget</span><span><i class="line blocked"></i>Blokeret</span></div>
         ` : nothing}
       </section>
     `;
   }
 
   static styles = css`
-    :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.7;stroke-dasharray:9 7}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}@media(max-width:600px){.selectors{grid-template-columns:1fr}}
+    :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
 }

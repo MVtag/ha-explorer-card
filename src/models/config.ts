@@ -46,9 +46,18 @@ export interface ExplorerRouteGraphEndpoint {
   id: string;
 }
 
+export interface ExplorerRouteCondition {
+  /** Home Assistant entity whose current state controls whether the edge is usable. */
+  entity: string;
+  /** States that make the edge available. Defaults to ["on"] when omitted or empty. */
+  allowed_states?: string[];
+}
+
 export interface ExplorerRouteGraphEdge {
   from: ExplorerRouteGraphEndpoint;
   to: ExplorerRouteGraphEndpoint;
+  /** Optional live Home Assistant condition. Unconditional edges remain always available. */
+  condition?: ExplorerRouteCondition;
 }
 
 export interface PresenceEntityBinding {
