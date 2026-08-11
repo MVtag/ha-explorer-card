@@ -8,7 +8,7 @@ import type {
 import type { HomeAssistant } from "../types";
 import {
   analyzeRouteGraph,
-  evaluateRouteGraphEdge,
+  evaluateRouteGraphEdges,
   resolveRoute,
   roomAnchor,
   type RouteGraphEdgeStatus,
@@ -61,12 +61,22 @@ export class HaExplorerRouteDiagnostics extends LitElement {
     return this.hass?.states[entityId]?.state;
   }
 
-  private edgeStatus(index: number): RouteGraphEdgeStatus {
-    return evaluateRouteGraphEdge(
-      this.graphEdges[index],
-      index,
+  private edgeStatuses(): RouteGraphEdgeStatus[] {
+    if (!this.config) return [];
+    return evaluateRouteGraphEdges(
+      this.config,
       (entityId) => this.entityState(entityId),
     );
+  }
+
+  private edgeStatus(index: number): RouteGraphEdgeStatus {
+    return this.edgeStatuses()[index] ?? {
+      index,
+      edge: this.graphEdges[index],
+      conditional: false,
+      active: true,
+      allowedStates: [],
+    };
   }
 
   private selectedResolution(): RouteResolution | undefined {
@@ -96,11 +106,11 @@ export class HaExplorerRouteDiagnostics extends LitElement {
     }
     if (resolution.source === "graph") {
       return blocked
-        ? `${blocked} betinget forbindelse${blocked === 1 ? " er" : "r er"} blokeret. Explorer har automatisk fundet den korteste aktive alternative graph-vej.`
+        ? `${blocked} live-styret forbindelse${blocked === 1 ? " er" : "r er"} blokeret. Explorer har automatisk fundet den korteste aktive alternative graph-vej.`
         : "Der er ingen manuel override, så Explorer bruger den korteste forbundne graph-vej.";
     }
     return blocked
-      ? `${blocked} betinget forbindelse${blocked === 1 ? " er" : "r er"} blokeret, og der findes ingen aktiv graph-vej mellem rummene. Explorer bruger derfor straight-line fallback.`
+      ? `${blocked} live-styret forbindelse${blocked === 1 ? " er" : "r er"} blokeret, og der findes ingen aktiv graph-vej mellem rummene. Explorer bruger derfor straight-line fallback.`
       : "Der blev ikke fundet en manuel rute eller en sammenhængende graph-vej mellem rummene.";
   }
 
@@ -112,17 +122,21 @@ export class HaExplorerRouteDiagnostics extends LitElement {
   }
 
   private blockedReason(status: RouteGraphEdgeStatus): string {
-    if (status.reason === "missing_entity") return "Betingelsen mangler en entity";
-    if (status.reason === "entity_unavailable") return "Entity findes ikke i Home Assistant";
-    return `Aktuel state ${status.currentState ?? "ukendt"} er ikke tilladt`;
+    const source = status.conditionSource === "node"
+      ? `Dørpunkt ${this.routeNodeName(status.nodeId ?? "")}`
+      : "Route-condition";
+    if (status.reason === "missing_entity") return `${source} mangler en entity`;
+    if (status.reason === "entity_unavailable") return `${source}: entity findes ikke i Home Assistant`;
+    return `${source}: aktuel state ${status.currentState ?? "ukendt"} er ikke tilladt`;
   }
 
   private renderGraphOverlay() {
+    const statuses = this.edgeStatuses();
     return this.graphEdges.map((edge, index) => {
       const from = this.endpointPoint(edge.from);
       const to = this.endpointPoint(edge.to);
       if (!from || !to) return nothing;
-      const status = this.edgeStatus(index);
+      const status = statuses[index] ?? this.edgeStatus(index);
       const classes = [
         "graph-context",
         status.conditional ? "conditional" : "",
@@ -197,7 +211,7 @@ export class HaExplorerRouteDiagnostics extends LitElement {
 
   private renderBlockedEdges(blockedEdges: RouteGraphEdgeStatus[]) {
     if (!blockedEdges.length) {
-      return html`<div class="live-summary ok"><strong>Alle betingede forbindelser er aktive</strong><span>Ingen smart routes er blokeret af Home Assistant state lige nu.</span></div>`;
+      return html`<div class="live-summary ok"><strong>Alle live-styrede forbindelser er aktive</strong><span>Ingen dørpunkter eller route-conditions blokerer graph'et lige nu.</span></div>`;
     }
 
     return html`
@@ -209,8 +223,8 @@ export class HaExplorerRouteDiagnostics extends LitElement {
         ${blockedEdges.map((status) => html`
           <div class="blocked-item">
             <strong>${this.endpointLabel(status.edge.from)} ↔ ${this.endpointLabel(status.edge.to)}</strong>
-            <span>${status.entity ?? "Ingen entity"}</span>
-            <small>${this.blockedReason(status)} · tilladt: ${status.allowedStates.join(", ")}</small>
+            <span>${status.conditionSource === "node" ? `Arvet fra dørpunkt · ${status.entity ?? "Ingen entity"}` : status.entity ?? "Ingen entity"}</span>
+            <small>${this.blockedReason(status)} · åben/tilladt: ${status.allowedStates.join(", ")}</small>
           </div>
         `)}
       </div>
@@ -252,8 +266,10 @@ export class HaExplorerRouteDiagnostics extends LitElement {
 
       <div class="metric-grid">
         <div><strong>${this.graphEdges.length}</strong><span>forbindelser</span></div>
-        <div><strong>${diagnostics.conditionalEdges}</strong><span>betingede</span></div>
-        <div><strong>${diagnostics.blockedEdges.length}</strong><span>blokeret nu</span></div>
+        <div><strong>${diagnostics.conditionalEdges}</strong><span>live styrede</span></div>
+        <div><strong>${diagnostics.conditionalNodes}</strong><span>dør/punkt-bindinger</span></div>
+        <div><strong>${diagnostics.blockedNodes.length}</strong><span>blokerede punkter</span></div>
+        <div><strong>${diagnostics.blockedEdges.length}</strong><span>blokerede forbindelser</span></div>
         <div><strong>${diagnostics.components}</strong><span>graph-dele</span></div>
         <div><strong>${diagnostics.disconnectedRoomIds.length}</strong><span>frakoblede rum</span></div>
         <div><strong>${diagnostics.disconnectedNodeIds.length}</strong><span>frakoblede punkter</span></div>
@@ -275,7 +291,7 @@ export class HaExplorerRouteDiagnostics extends LitElement {
         <div class="issue"><strong>Duplikerede forbindelser</strong><span>${diagnostics.duplicateEdges} ekstra forbindelse${diagnostics.duplicateEdges === 1 ? "" : "r"} forbinder de samme endpoints.</span></div>
       ` : nothing}
       ${diagnostics.unresolvedConditionEntities.length ? html`
-        <div class="issue"><strong>Betingelser med manglende entity</strong><span>${diagnostics.unresolvedConditionEntities.join(", ")}</span></div>
+        <div class="issue"><strong>Live bindinger med manglende entity</strong><span>${diagnostics.unresolvedConditionEntities.join(", ")}</span></div>
       ` : nothing}
       ${diagnostics.brokenRouteNodeReferences.length ? html`
         <div class="issue"><strong>Manuelle ruter med manglende shared node</strong><span>${diagnostics.brokenRouteNodeReferences.map((entry) => `${this.roomName(entry.from)} ↔ ${this.roomName(entry.to)}: ${entry.nodeId}`).join(" · ")}</span></div>
@@ -292,11 +308,11 @@ export class HaExplorerRouteDiagnostics extends LitElement {
       <section class="diagnostics">
         <div class="heading">
           <div><span>Route Preview & Diagnostics</span><h3>Se præcis hvilken vej Explorer vælger</h3></div>
-          <b>Live conditions · v0.19</b>
+          <b>Door bindings · v0.20.1</b>
         </div>
 
         <div class="instruction">
-          Vælg to rum for at simulere routing uden at flytte en person. Preview bruger samme Home Assistant states og samme prioritet som runtime: manuel rute → aktive graph-forbindelser → straight-line fallback.
+          Vælg to rum for at simulere routing uden at flytte en person. Preview bruger samme Home Assistant states som runtime. Dørpunkt-bindinger og ekstra route-conditions evalueres af den samme resolver før graph-routing.
         </div>
 
         <div class="selectors">
@@ -340,16 +356,16 @@ export class HaExplorerRouteDiagnostics extends LitElement {
               ${this.renderPreviewOverlay(resolution)}
             </svg>
           </div>
-          <div class="legend"><span><i class="line active"></i>Aktiv graph</span><span><i class="line conditional"></i>Betinget</span><span><i class="line blocked"></i>Blokeret</span></div>
+          <div class="legend"><span><i class="line active"></i>Aktiv graph</span><span><i class="line conditional"></i>Live styret</span><span><i class="line blocked"></i>Blokeret</span></div>
         ` : nothing}
 
-        <div class="diagnostic-heading"><strong>Netværksdiagnostik</strong><span>Gennemgår live conditions, graph, rum, shared nodes og manuelle node-referencer.</span></div>
+        <div class="diagnostic-heading"><strong>Netværksdiagnostik</strong><span>Gennemgår dørbindinger, route-conditions, graph, rum, shared nodes og manuelle node-referencer.</span></div>
         ${this.renderDiagnostics()}
       </section>
     `;
   }
 
   static styles = css`
-    :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,1fr)}.route-result-top{align-items:flex-start;flex-direction:column}}
+    :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 }
