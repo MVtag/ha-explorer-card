@@ -1,6 +1,6 @@
 {
   "name": "ha-explorer-card",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "description": "A living, interactive floor map card for Home Assistant",
   "type": "module",
   "main": "dist/ha-explorer-card.js",
