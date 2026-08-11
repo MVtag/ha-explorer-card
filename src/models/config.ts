@@ -4,10 +4,16 @@ export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "objec
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
 export type RoomReactionKind = "light" | "motion" | "media" | "opening";
+export type ExplorerTheme = "classic" | "enchanted_antique";
 
 export interface NormalizedPosition {
   x: number;
   y: number;
+}
+
+export interface ExplorerAppearanceConfig {
+  /** Visual presentation only. Routing, presence and entity semantics are unchanged. */
+  theme?: ExplorerTheme;
 }
 
 export interface ExplorerRoomReaction {
@@ -118,6 +124,7 @@ export interface ExplorerCardConfig {
   max_zoom?: number;
   initial_zoom?: number;
   fit_mode?: FloorplanFitMode;
+  appearance?: ExplorerAppearanceConfig;
   rooms?: ExplorerRoom[];
   route_nodes?: ExplorerRouteNode[];
   route_graph_edges?: ExplorerRouteGraphEdge[];
