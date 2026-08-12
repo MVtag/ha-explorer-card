@@ -150,6 +150,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
 
   private handleKindChange(kind: RoomReactionKind): void {
     this.draftKind = kind;
+    this.draftEntity = "";
     this.draftStates = kind === "temperature"
       ? ""
       : defaultRoomReactionStates(kind).join(", ");
@@ -185,7 +186,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
     return `Inaktiv · ${status.currentState ?? "ukendt"}`;
   }
 
-  private entityOptions(): string[] {
+  private entityOptions(): Array<{ id: string; label: string }> {
     if (!this.hass) return [];
     const entries = Object.entries(this.hass.states);
     const preferred = entries.filter(([entityId, entity]) => {
@@ -199,15 +200,16 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
         (typeof unit === "string" && (unit.includes("°C") || unit.includes("°F")))
       );
     });
-    return preferred.map(([entityId]) => entityId).sort((a, b) => a.localeCompare(b));
-  }
 
-  private entityPlaceholder(): string {
-    if (this.draftKind === "light") return "light.kokken";
-    if (this.draftKind === "motion") return "binary_sensor.kokken_motion";
-    if (this.draftKind === "media") return "media_player.tv";
-    if (this.draftKind === "opening") return "binary_sensor.vindue";
-    return "sensor.stue_temperatur";
+    return preferred
+      .map(([id, entity]) => {
+        const friendly = entity.attributes.friendly_name;
+        return {
+          id,
+          label: typeof friendly === "string" && friendly.trim() ? friendly.trim() : id,
+        };
+      })
+      .sort((a, b) => a.label.localeCompare(b.label, "da") || a.id.localeCompare(b.id));
   }
 
   private previewPoints(room: ExplorerRoom): string {
@@ -293,12 +295,14 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
     if (!this.config) return nothing;
     const room = this.selectedRoom;
     const reactions = room?.reactions ?? [];
+    const entityOptions = this.entityOptions();
+    const draftEntityKnown = entityOptions.some((option) => option.id === this.draftEntity);
 
     return html`
       <section class="reaction-editor">
         <div class="heading">
           <div>
-            <span>Living Entity Points · v0.25.2</span>
+            <span>Living Entity Points · v0.25.3</span>
             <h3>Placér Home Assistant-entities dér hvor de fysisk er</h3>
           </div>
           <b>${this.rooms.reduce((sum, entry) => sum + (entry.reactions?.length ?? 0), 0)} punkter</b>
@@ -339,15 +343,21 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
                 </select>
               </label>
               <label>Home Assistant entity
-                <input
-                  list="explorer-room-reaction-entities"
-                  placeholder=${this.entityPlaceholder()}
+                <select
                   .value=${this.draftEntity}
-                  @input=${(event: InputEvent) => this.draftEntity = (event.target as HTMLInputElement).value}
+                  @change=${(event: Event) => this.draftEntity = (event.target as HTMLSelectElement).value}
                 >
-                <datalist id="explorer-room-reaction-entities">
-                  ${this.entityOptions().map((entityId) => html`<option value=${entityId}></option>`)}
-                </datalist>
+                  <option value="">Vælg entity…</option>
+                  ${this.draftEntity && !draftEntityKnown
+                    ? html`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>`
+                    : nothing}
+                  ${entityOptions.map((option) => html`
+                    <option value=${option.id}>
+                      ${option.label === option.id ? option.id : `${option.label} · ${option.id}`}
+                    </option>
+                  `)}
+                </select>
+                <small>${entityOptions.length} relevante entities fundet i Home Assistant.</small>
               </label>
               ${this.draftKind === "temperature"
                 ? html`<div class="temperature-note">
