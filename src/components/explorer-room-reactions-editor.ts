@@ -4,20 +4,36 @@ import type {
   ExplorerCardConfig,
   ExplorerRoom,
   ExplorerRoomReaction,
+  NormalizedPosition,
   RoomReactionKind,
 } from "../models/config";
 import type { HomeAssistant } from "../types";
 import {
   defaultRoomReactionStates,
   evaluateRoomReaction,
+  roomReactionPosition,
 } from "../utils/room-reactions";
+import { VIEWBOX_SIZE } from "../utils/viewport";
 
 const KIND_LABELS: Record<RoomReactionKind, string> = {
-  light: "Lys / glød",
-  motion: "Bevægelse / puls",
-  media: "Media / TV",
-  opening: "Åbning / vindue",
+  light: "Lampe / lys",
+  motion: "Bevægelsessensor",
+  media: "TV / media",
+  opening: "Dør / vindue",
+  temperature: "Temperatur",
 };
+
+const KIND_GLYPHS: Record<RoomReactionKind, string> = {
+  light: "✦",
+  motion: "◉",
+  media: "▶",
+  opening: "↗",
+  temperature: "°",
+};
+
+function clamp01(value: number): number {
+  return Math.min(1, Math.max(0, value));
+}
 
 @customElement("ha-explorer-room-reactions-editor")
 export class HaExplorerRoomReactionsEditor extends LitElement {
@@ -28,6 +44,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
   @state() private draftKind: RoomReactionKind = "light";
   @state() private draftEntity = "";
   @state() private draftStates = "on";
+  @state() private draftPosition?: NormalizedPosition;
   @state() private editingIndex?: number;
 
   private get rooms(): ExplorerRoom[] {
@@ -85,10 +102,12 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
 
   private saveReaction(): void {
     if (!this.selectedRoom || !this.draftEntity.trim() || this.isDuplicate()) return;
+    const states = this.parseStates(this.draftStates);
     const reaction: ExplorerRoomReaction = {
       kind: this.draftKind,
       entity: this.draftEntity.trim(),
-      active_states: this.parseStates(this.draftStates),
+      ...(this.draftKind === "temperature" || !states.length ? {} : { active_states: states }),
+      ...(this.draftPosition ? { position: { ...this.draftPosition } } : {}),
     };
     const existing = [...(this.selectedRoom.reactions ?? [])];
     if (this.editingIndex === undefined) existing.push(reaction);
@@ -98,16 +117,20 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
   }
 
   private beginEdit(index: number): void {
-    const reaction = this.selectedRoom?.reactions?.[index];
-    if (!reaction) return;
+    const room = this.selectedRoom;
+    const reaction = room?.reactions?.[index];
+    if (!room || !reaction) return;
     this.editingIndex = index;
     this.draftKind = reaction.kind;
     this.draftEntity = reaction.entity;
-    this.draftStates = (
-      reaction.active_states?.length
-        ? reaction.active_states
-        : defaultRoomReactionStates(reaction.kind)
-    ).join(", ");
+    this.draftStates = reaction.kind === "temperature"
+      ? ""
+      : (
+          reaction.active_states?.length
+            ? reaction.active_states
+            : defaultRoomReactionStates(reaction.kind)
+        ).join(", ");
+    this.draftPosition = roomReactionPosition(room, reaction);
   }
 
   private cancelEdit(): void {
@@ -115,6 +138,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
     this.draftKind = "light";
     this.draftEntity = "";
     this.draftStates = defaultRoomReactionStates("light").join(", ");
+    this.draftPosition = undefined;
   }
 
   private deleteReaction(index: number): void {
@@ -126,7 +150,9 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
 
   private handleKindChange(kind: RoomReactionKind): void {
     this.draftKind = kind;
-    this.draftStates = defaultRoomReactionStates(kind).join(", ");
+    this.draftStates = kind === "temperature"
+      ? ""
+      : defaultRoomReactionStates(kind).join(", ");
   }
 
   private reactionStatus(reaction: ExplorerRoomReaction, index: number) {
@@ -137,22 +163,129 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
     );
   }
 
+  private formatTemperature(value: number, unit?: string): string {
+    const formatted = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(value);
+    return unit ? `${formatted} ${unit}` : `${formatted}°`;
+  }
+
   private statusLabel(reaction: ExplorerRoomReaction, index: number): string {
     const status = this.reactionStatus(reaction, index);
     if (status.active) {
       if (reaction.kind === "light") {
         return `Aktiv · ${status.currentState} · ${Math.round(status.intensity * 100)} %`;
       }
+      if (reaction.kind === "temperature" && status.numericValue !== undefined) {
+        return `Aktuel · ${this.formatTemperature(status.numericValue, status.unit)}`;
+      }
       return `Aktiv · ${status.currentState}`;
     }
-    if (status.reason === "entity_unavailable") return "Entity mangler";
+    if (status.reason === "entity_unavailable") return "Entity utilgængelig";
     if (status.reason === "missing_entity") return "Ingen entity";
+    if (reaction.kind === "temperature") return `Ingen numerisk temperatur · ${status.currentState ?? "ukendt"}`;
     return `Inaktiv · ${status.currentState ?? "ukendt"}`;
   }
 
   private entityOptions(): string[] {
     if (!this.hass) return [];
-    return Object.keys(this.hass.states).sort((a, b) => a.localeCompare(b));
+    const entries = Object.entries(this.hass.states);
+    const preferred = entries.filter(([entityId, entity]) => {
+      if (this.draftKind === "light") return entityId.startsWith("light.");
+      if (this.draftKind === "media") return entityId.startsWith("media_player.");
+      if (this.draftKind === "motion" || this.draftKind === "opening") return entityId.startsWith("binary_sensor.");
+      const deviceClass = entity.attributes.device_class;
+      const unit = entity.attributes.unit_of_measurement;
+      return entityId.startsWith("sensor.") && (
+        deviceClass === "temperature" ||
+        (typeof unit === "string" && (unit.includes("°C") || unit.includes("°F")))
+      );
+    });
+    return preferred.map(([entityId]) => entityId).sort((a, b) => a.localeCompare(b));
+  }
+
+  private entityPlaceholder(): string {
+    if (this.draftKind === "light") return "light.kokken";
+    if (this.draftKind === "motion") return "binary_sensor.kokken_motion";
+    if (this.draftKind === "media") return "media_player.tv";
+    if (this.draftKind === "opening") return "binary_sensor.vindue";
+    return "sensor.stue_temperatur";
+  }
+
+  private previewPoints(room: ExplorerRoom): string {
+    return room.points.map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`).join(" ");
+  }
+
+  private handlePreviewClick(event: MouseEvent): void {
+    const svg = event.currentTarget as SVGSVGElement;
+    const bounds = svg.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    this.draftPosition = {
+      x: clamp01((event.clientX - bounds.left) / bounds.width),
+      y: clamp01((event.clientY - bounds.top) / bounds.height),
+    };
+  }
+
+  private useRoomAnchor(): void {
+    const room = this.selectedRoom;
+    if (!room) return;
+    this.draftPosition = roomReactionPosition(room);
+  }
+
+  private draftPoint(room: ExplorerRoom): NormalizedPosition {
+    return this.draftPosition ?? roomReactionPosition(room);
+  }
+
+  private renderPlacementPreview(room: ExplorerRoom) {
+    const image = this.config?.image ?? this.config?.background ?? "";
+    const draft = this.draftPoint(room);
+    const reactions = room.reactions ?? [];
+
+    return html`
+      <div class="placement-block">
+        <div class="placement-heading">
+          <div>
+            <strong>Fysisk placering på kortet</strong>
+            <small>Klik dér hvor entity'en fysisk sidder. Punktet følger plantegningen ved zoom og pan.</small>
+          </div>
+          <button class="secondary mini" type="button" @click=${this.useRoomAnchor}>Brug rum-anchor</button>
+        </div>
+        <svg
+          class="placement-preview"
+          viewBox=${`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
+          preserveAspectRatio="none"
+          @click=${this.handlePreviewClick}
+        >
+          <rect x="0" y="0" width=${VIEWBOX_SIZE} height=${VIEWBOX_SIZE} class="preview-background"></rect>
+          ${image
+            ? html`<image href=${image} x="0" y="0" width=${VIEWBOX_SIZE} height=${VIEWBOX_SIZE} preserveAspectRatio="none"></image>`
+            : nothing}
+          ${room.points.length >= 3
+            ? html`<polygon class="selected-room" points=${this.previewPoints(room)}></polygon>`
+            : nothing}
+          ${reactions.map((reaction, index) => {
+            const point = roomReactionPosition(room, reaction);
+            const status = this.reactionStatus(reaction, index);
+            return html`
+              <g
+                class=${`existing-point ${reaction.kind} ${status.active ? "active" : "inactive"}`}
+                transform=${`translate(${point.x * VIEWBOX_SIZE} ${point.y * VIEWBOX_SIZE})`}
+              >
+                <circle r="13"></circle>
+                <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[reaction.kind]}</text>
+              </g>
+            `;
+          })}
+          <g class=${`draft-point ${this.draftKind}`} transform=${`translate(${draft.x * VIEWBOX_SIZE} ${draft.y * VIEWBOX_SIZE})`}>
+            <circle class="draft-halo" r="24"></circle>
+            <circle class="draft-core" r="13"></circle>
+            <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[this.draftKind]}</text>
+          </g>
+        </svg>
+        <small class="coordinates">
+          Placering: ${(draft.x * 100).toFixed(1)} % / ${(draft.y * 100).toFixed(1)} %
+          ${this.draftPosition ? "· valgt på plantegningen" : "· bruger rum-anchor indtil du klikker"}
+        </small>
+      </div>
+    `;
   }
 
   protected render() {
@@ -164,14 +297,16 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
       <section class="reaction-editor">
         <div class="heading">
           <div>
-            <span>Living Rooms / Entity Reactions</span>
-            <h3>Få rummene til at reagere på Home Assistant</h3>
+            <span>Living Entity Points · v0.25.1</span>
+            <h3>Placér Home Assistant-entities dér hvor de fysisk er</h3>
           </div>
-          <b>${this.rooms.reduce((sum, entry) => sum + (entry.reactions?.length ?? 0), 0)} bindinger</b>
+          <b>${this.rooms.reduce((sum, entry) => sum + (entry.reactions?.length ?? 0), 0)} punkter</b>
         </div>
 
         <div class="instruction">
-          Tilføj flere entities til samme rum. Lys giver varm glød og bruger automatisk <code>brightness</code>, hvis entity'en har attributten. Flere tændte lys gør gløden stærkere. Bevægelse pulserer, media/TV får en live markør, og åbninger fremhæver rummets kant.
+          Hele rummet bliver ikke længere farvet af en enkelt entity. Hver lampe, bevægelsessensor,
+          TV/media player, dør/vindue og temperatursensor får sit eget punkt på plantegningen.
+          Lamper bruger stadig <code>brightness</code>, og temperatur vises med den aktuelle værdi.
         </div>
 
         ${this.rooms.length ? html`
@@ -189,7 +324,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
 
           <div class="draft">
             <div class="draft-title">
-              <strong>${this.editingIndex === undefined ? "Ny reaktion" : "Redigér reaktion"}</strong>
+              <strong>${this.editingIndex === undefined ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong>
               <span>${room?.name ?? room?.id}</span>
             </div>
             <div class="fields">
@@ -205,7 +340,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
               <label>Home Assistant entity
                 <input
                   list="explorer-room-reaction-entities"
-                  placeholder=${this.draftKind === "light" ? "light.kokken" : this.draftKind === "motion" ? "binary_sensor.kokken_motion" : this.draftKind === "media" ? "media_player.tv" : "binary_sensor.vindue"}
+                  placeholder=${this.entityPlaceholder()}
                   .value=${this.draftEntity}
                   @input=${(event: InputEvent) => this.draftEntity = (event.target as HTMLInputElement).value}
                 >
@@ -213,20 +348,28 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
                   ${this.entityOptions().map((entityId) => html`<option value=${entityId}></option>`)}
                 </datalist>
               </label>
-              <label>Aktiv state(s)
-                <input
-                  .value=${this.draftStates}
-                  @input=${(event: InputEvent) => this.draftStates = (event.target as HTMLInputElement).value}
-                >
-                <small>Flere states adskilles med komma.</small>
-              </label>
+              ${this.draftKind === "temperature"
+                ? html`<div class="temperature-note">
+                    <strong>Temperatur</strong>
+                    <small>Vises automatisk, når sensoren har en numerisk state. Enheden hentes fra Home Assistant.</small>
+                  </div>`
+                : html`<label>Aktiv state(s)
+                    <input
+                      .value=${this.draftStates}
+                      @input=${(event: InputEvent) => this.draftStates = (event.target as HTMLInputElement).value}
+                    >
+                    <small>Flere states adskilles med komma.</small>
+                  </label>`}
             </div>
+
+            ${room ? this.renderPlacementPreview(room) : nothing}
+
             ${this.isDuplicate() && this.draftEntity.trim() ? html`
-              <div class="duplicate">Denne entity er allerede tilføjet med samme reaktionstype i rummet.</div>
+              <div class="duplicate">Denne entity er allerede tilføjet med samme type i rummet.</div>
             ` : nothing}
             <div class="actions">
               <button class="primary" ?disabled=${!this.draftEntity.trim() || this.isDuplicate()} @click=${this.saveReaction}>
-                ${this.editingIndex === undefined ? "+ Tilføj reaktion" : "Gem ændring"}
+                ${this.editingIndex === undefined ? "+ Tilføj punkt" : "Gem ændring"}
               </button>
               ${this.editingIndex !== undefined ? html`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : nothing}
             </div>
@@ -236,14 +379,18 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
             <div class="reaction-list">
               ${reactions.map((reaction, index) => {
                 const status = this.reactionStatus(reaction, index);
+                const point = room ? roomReactionPosition(room, reaction) : { x: 0.5, y: 0.5 };
                 return html`
                   <div class=${status.active ? "reaction-item active" : "reaction-item"}>
-                    <span class=${`kind ${reaction.kind}`}>${reaction.kind === "light" ? "☀" : reaction.kind === "motion" ? "◉" : reaction.kind === "media" ? "▶" : "↗"}</span>
+                    <span class=${`kind ${reaction.kind}`}>${KIND_GLYPHS[reaction.kind]}</span>
                     <span class="copy">
                       <strong>${KIND_LABELS[reaction.kind]}</strong>
                       <small>${reaction.entity}</small>
                       <em class=${status.active ? "status active" : "status"}>${this.statusLabel(reaction, index)}</em>
-                      <small>Aktiv: ${status.activeStates.join(", ")}</small>
+                      <small>Placering: ${(point.x * 100).toFixed(1)} % / ${(point.y * 100).toFixed(1)} %</small>
+                      ${reaction.kind !== "temperature"
+                        ? html`<small>Aktiv: ${status.activeStates.join(", ")}</small>`
+                        : nothing}
                     </span>
                     <div class="item-actions">
                       <button class="secondary mini" @click=${() => this.beginEdit(index)}>Redigér</button>
@@ -253,13 +400,13 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
                 `;
               })}
             </div>
-          ` : html`<div class="empty">Der er endnu ingen levende reaktioner i dette rum.</div>`}
+          ` : html`<div class="empty">Der er endnu ingen entity-punkter i dette rum.</div>`}
         ` : html`<div class="empty">Tegn mindst ét rum først.</div>`}
       </section>
     `;
   }
 
   static styles = css`
-    :host{display:block}.reaction-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty,.duplicate{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.88rem;line-height:1.45}.duplicate{border-left:4px solid var(--warning-color,#ff9800)}.room-select,.fields label{display:grid;gap:6px;font-size:.85rem}.room-select select,.fields select,.fields input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.draft{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color)}.draft-title{display:flex;justify-content:space-between;gap:10px}.draft-title span,.fields small{color:var(--secondary-text-color);font-size:.8rem}.fields{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:10px}.actions,.item-actions{display:flex;gap:7px;flex-wrap:wrap}.reaction-list{display:grid;gap:7px}.reaction-item{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid transparent;border-radius:10px;background:var(--secondary-background-color)}.reaction-item.active{border-color:color-mix(in srgb,var(--primary-color,#03a9f4) 45%,transparent)}.kind{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:900;background:var(--card-background-color);color:var(--secondary-text-color);flex:none}.kind.light{color:var(--warning-color,#ffb74d)}.kind.motion{color:var(--primary-color,#03a9f4)}.kind.media{color:var(--accent-color,#7e57c2)}.kind.opening{color:var(--warning-color,#ff9800)}.copy{display:grid;gap:2px;min-width:0;flex:1}.copy small{color:var(--secondary-text-color);overflow-wrap:anywhere}.status{font-style:normal;font-size:.75rem;font-weight:800;color:var(--secondary-text-color)}.status.active{color:var(--success-color,#43a047)}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--card-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}@media(max-width:720px){.fields{grid-template-columns:1fr}.reaction-item{align-items:flex-start}.item-actions{flex-direction:column}.draft-title{flex-direction:column}}
+    :host{display:block}.reaction-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty,.duplicate{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.88rem;line-height:1.45}.duplicate{border-left:4px solid var(--warning-color,#ff9800)}.room-select,.fields label{display:grid;gap:6px;font-size:.85rem}.room-select select,.fields select,.fields input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.draft{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color)}.draft-title{display:flex;justify-content:space-between;gap:10px}.draft-title span,.fields small,.temperature-note small{color:var(--secondary-text-color);font-size:.8rem}.fields{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:10px}.temperature-note{display:grid;align-content:start;gap:6px;padding:8px 10px;border:1px dashed var(--divider-color);border-radius:8px;background:var(--card-background-color);font-size:.85rem}.actions,.item-actions{display:flex;gap:7px;flex-wrap:wrap}.reaction-list{display:grid;gap:7px}.reaction-item{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid transparent;border-radius:10px;background:var(--secondary-background-color)}.reaction-item.active{border-color:color-mix(in srgb,var(--primary-color,#03a9f4) 45%,transparent)}.kind{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:900;background:var(--card-background-color);color:var(--secondary-text-color);flex:none}.kind.light{color:var(--warning-color,#ffb74d)}.kind.motion{color:var(--primary-color,#03a9f4)}.kind.media{color:var(--accent-color,#7e57c2)}.kind.opening{color:var(--warning-color,#ff9800)}.kind.temperature{color:#4f9b78}.copy{display:grid;gap:2px;min-width:0;flex:1}.copy small{color:var(--secondary-text-color);overflow-wrap:anywhere}.status{font-style:normal;font-size:.75rem;font-weight:800;color:var(--secondary-text-color)}.status.active{color:var(--success-color,#43a047)}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--card-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.placement-block{display:grid;gap:8px}.placement-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.placement-heading>div{display:grid;gap:3px}.placement-heading small,.coordinates{color:var(--secondary-text-color);font-size:.78rem}.placement-preview{display:block;width:100%;aspect-ratio:1.55/1;max-height:440px;border:1px solid var(--divider-color);border-radius:10px;overflow:hidden;cursor:crosshair;background:var(--card-background-color);touch-action:manipulation}.preview-background{fill:var(--card-background-color,#fff)}.placement-preview image{opacity:.92}.selected-room{fill:var(--primary-color,#03a9f4);fill-opacity:.07;stroke:var(--primary-color,#03a9f4);stroke-opacity:.55;stroke-width:4;vector-effect:non-scaling-stroke}.existing-point circle{fill:var(--card-background-color,#fff);stroke:var(--secondary-text-color,#777);stroke-width:3;vector-effect:non-scaling-stroke}.existing-point.active circle{stroke:var(--success-color,#43a047)}.existing-point text{font-size:16px;font-weight:900;fill:var(--secondary-text-color,#777);pointer-events:none}.existing-point.active text{fill:var(--primary-text-color,#222)}.draft-halo{fill:var(--primary-color,#03a9f4);fill-opacity:.12;stroke:var(--primary-color,#03a9f4);stroke-width:2;stroke-opacity:.45;vector-effect:non-scaling-stroke}.draft-core{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.draft-point text{font-size:17px;font-weight:900;fill:var(--primary-color,#03a9f4);pointer-events:none}@media(max-width:720px){.fields{grid-template-columns:1fr}.reaction-item{align-items:flex-start}.item-actions{flex-direction:column}.draft-title,.placement-heading{flex-direction:column}.placement-preview{aspect-ratio:1.25/1}}
   `;
 }
