@@ -110,14 +110,19 @@ export function analyzeExplorerSetup(
   const reactions = rooms.flatMap((room) => room.reactions ?? []);
   const references = collectEntityReferences(config);
 
-  const entityIssues: ExplorerEntityIssue[] = hass
-    ? references.flatMap((reference) => {
-        const entity = hass.states[reference.entity];
-        if (!entity) return [{ ...reference, unavailable: false }];
-        const unavailable = entity.state === "unavailable" || entity.state === "unknown";
-        return unavailable ? [{ ...reference, unavailable: true }] : [];
-      })
-    : [];
+  const entityIssues: ExplorerEntityIssue[] = [];
+  if (hass) {
+    for (const reference of references) {
+      const entity = hass.states[reference.entity];
+      if (!entity) {
+        entityIssues.push({ ...reference, unavailable: false });
+        continue;
+      }
+      if (entity.state === "unavailable" || entity.state === "unknown") {
+        entityIssues.push({ ...reference, unavailable: true });
+      }
+    }
+  }
 
   const missingEntities = entityIssues.filter((issue) => !issue.unavailable);
   const unreadyPresences = presences.filter((presence) => !presenceHasPositionSource(presence));
