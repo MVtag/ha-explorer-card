@@ -1,12 +1,12 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./components/explorer-zones-canvas";
+import "./components/explorer-presence-polish-canvas";
 import "./components/explorer-ha-editor";
 import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.23.0";
+const CARD_VERSION = "0.24.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -76,10 +76,10 @@ export class HaExplorerCard extends LitElement {
             <span>${enchanted ? "Enchanted Explorer" : "Explorer map"}</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Zones / Dynamic Areas · v${CARD_VERSION}</small>
+          <small>Multi-person & Object Polish · v${CARD_VERSION}</small>
         </header>
 
-        <explorer-zones-canvas
+        <explorer-presence-polish-canvas
           .theme=${theme}
           .hass=${this.hass}
           .image=${image}
@@ -93,7 +93,7 @@ export class HaExplorerCard extends LitElement {
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
           .fitMode=${this.config.fit_mode ?? "contain"}
-        ></explorer-zones-canvas>
+        ></explorer-presence-polish-canvas>
       </ha-card>
     `;
   }

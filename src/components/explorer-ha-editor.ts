@@ -4,6 +4,7 @@ import type { ExplorerCardConfig } from "../models/config";
 import { HaExplorerCardEditor } from "./explorer-config-editor";
 import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
 import "./explorer-theme-editor";
+import "./explorer-presence-polish-editor";
 import "./explorer-zones-editor";
 import "./explorer-room-reactions-editor";
 import "./explorer-route-editor";
@@ -78,6 +79,10 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
   protected override render() {
     return html`
       ${super.render()}
+      <ha-explorer-presence-polish-editor
+        .config=${this.currentConfig}
+        @config-changed=${this.handleToolConfigChanged}
+      ></ha-explorer-presence-polish-editor>
       <ha-explorer-theme-editor
         .config=${this.currentConfig}
         @config-changed=${this.handleToolConfigChanged}
