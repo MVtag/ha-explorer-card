@@ -3,7 +3,7 @@ export type NormalizedPoint = [number, number];
 export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
-export type RoomReactionKind = "light" | "motion" | "media" | "opening";
+export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "temperature";
 export type ExplorerTheme = "classic" | "enchanted_antique";
 export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "restricted";
 
@@ -42,7 +42,7 @@ export interface ExplorerRoomReaction {
   kind: RoomReactionKind;
   /** Home Assistant entity driving this reaction. */
   entity: string;
-  /** States that activate the reaction. Defaults depend on the reaction kind. */
+  /** States that activate the reaction. Defaults depend on the reaction kind. Ignored for temperature. */
   active_states?: string[];
   /** Physical entity position on the floorplan. Falls back to the room anchor when omitted. */
   position?: NormalizedPosition;
