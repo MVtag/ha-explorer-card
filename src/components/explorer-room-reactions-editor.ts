@@ -215,8 +215,8 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
   }
 
   private handlePreviewClick(event: MouseEvent): void {
-    const svg = event.currentTarget as SVGSVGElement;
-    const bounds = svg.getBoundingClientRect();
+    const element = event.currentTarget as HTMLElement;
+    const bounds = element.getBoundingClientRect();
     if (!bounds.width || !bounds.height) return;
     this.draftPosition = {
       x: clamp01((event.clientX - bounds.left) / bounds.width),
@@ -248,38 +248,39 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
           </div>
           <button class="secondary mini" type="button" @click=${this.useRoomAnchor}>Brug rum-anchor</button>
         </div>
-        <svg
-          class="placement-preview"
-          viewBox=${`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
-          preserveAspectRatio="none"
-          @click=${this.handlePreviewClick}
-        >
-          <rect x="0" y="0" width=${VIEWBOX_SIZE} height=${VIEWBOX_SIZE} class="preview-background"></rect>
+        <div class="placement-preview" @click=${this.handlePreviewClick}>
           ${image
-            ? html`<image href=${image} x="0" y="0" width=${VIEWBOX_SIZE} height=${VIEWBOX_SIZE} preserveAspectRatio="none"></image>`
+            ? html`<img class="preview-floorplan" src=${image} alt="Plantegning til placering af entity-punkt">`
             : nothing}
-          ${room.points.length >= 3
-            ? html`<polygon class="selected-room" points=${this.previewPoints(room)}></polygon>`
-            : nothing}
-          ${reactions.map((reaction, index) => {
-            const point = roomReactionPosition(room, reaction);
-            const status = this.reactionStatus(reaction, index);
-            return html`
-              <g
-                class=${`existing-point ${reaction.kind} ${status.active ? "active" : "inactive"}`}
-                transform=${`translate(${point.x * VIEWBOX_SIZE} ${point.y * VIEWBOX_SIZE})`}
-              >
-                <circle r="13"></circle>
-                <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[reaction.kind]}</text>
-              </g>
-            `;
-          })}
-          <g class=${`draft-point ${this.draftKind}`} transform=${`translate(${draft.x * VIEWBOX_SIZE} ${draft.y * VIEWBOX_SIZE})`}>
-            <circle class="draft-halo" r="24"></circle>
-            <circle class="draft-core" r="13"></circle>
-            <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[this.draftKind]}</text>
-          </g>
-        </svg>
+          <svg
+            class="placement-overlay"
+            viewBox=${`0 0 ${VIEWBOX_SIZE} ${VIEWBOX_SIZE}`}
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            ${room.points.length >= 3
+              ? html`<polygon class="selected-room" points=${this.previewPoints(room)}></polygon>`
+              : nothing}
+            ${reactions.map((reaction, index) => {
+              const point = roomReactionPosition(room, reaction);
+              const status = this.reactionStatus(reaction, index);
+              return html`
+                <g
+                  class=${`existing-point ${reaction.kind} ${status.active ? "active" : "inactive"}`}
+                  transform=${`translate(${point.x * VIEWBOX_SIZE} ${point.y * VIEWBOX_SIZE})`}
+                >
+                  <circle r="13"></circle>
+                  <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[reaction.kind]}</text>
+                </g>
+              `;
+            })}
+            <g class=${`draft-point ${this.draftKind}`} transform=${`translate(${draft.x * VIEWBOX_SIZE} ${draft.y * VIEWBOX_SIZE})`}>
+              <circle class="draft-halo" r="24"></circle>
+              <circle class="draft-core" r="13"></circle>
+              <text text-anchor="middle" dominant-baseline="central">${KIND_GLYPHS[this.draftKind]}</text>
+            </g>
+          </svg>
+        </div>
         <small class="coordinates">
           Placering: ${(draft.x * 100).toFixed(1)} % / ${(draft.y * 100).toFixed(1)} %
           ${this.draftPosition ? "· valgt på plantegningen" : "· bruger rum-anchor indtil du klikker"}
@@ -297,7 +298,7 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
       <section class="reaction-editor">
         <div class="heading">
           <div>
-            <span>Living Entity Points · v0.25.1</span>
+            <span>Living Entity Points · v0.25.2</span>
             <h3>Placér Home Assistant-entities dér hvor de fysisk er</h3>
           </div>
           <b>${this.rooms.reduce((sum, entry) => sum + (entry.reactions?.length ?? 0), 0)} punkter</b>
@@ -407,6 +408,6 @@ export class HaExplorerRoomReactionsEditor extends LitElement {
   }
 
   static styles = css`
-    :host{display:block}.reaction-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty,.duplicate{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.88rem;line-height:1.45}.duplicate{border-left:4px solid var(--warning-color,#ff9800)}.room-select,.fields label{display:grid;gap:6px;font-size:.85rem}.room-select select,.fields select,.fields input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.draft{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color)}.draft-title{display:flex;justify-content:space-between;gap:10px}.draft-title span,.fields small,.temperature-note small{color:var(--secondary-text-color);font-size:.8rem}.fields{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:10px}.temperature-note{display:grid;align-content:start;gap:6px;padding:8px 10px;border:1px dashed var(--divider-color);border-radius:8px;background:var(--card-background-color);font-size:.85rem}.actions,.item-actions{display:flex;gap:7px;flex-wrap:wrap}.reaction-list{display:grid;gap:7px}.reaction-item{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid transparent;border-radius:10px;background:var(--secondary-background-color)}.reaction-item.active{border-color:color-mix(in srgb,var(--primary-color,#03a9f4) 45%,transparent)}.kind{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:900;background:var(--card-background-color);color:var(--secondary-text-color);flex:none}.kind.light{color:var(--warning-color,#ffb74d)}.kind.motion{color:var(--primary-color,#03a9f4)}.kind.media{color:var(--accent-color,#7e57c2)}.kind.opening{color:var(--warning-color,#ff9800)}.kind.temperature{color:#4f9b78}.copy{display:grid;gap:2px;min-width:0;flex:1}.copy small{color:var(--secondary-text-color);overflow-wrap:anywhere}.status{font-style:normal;font-size:.75rem;font-weight:800;color:var(--secondary-text-color)}.status.active{color:var(--success-color,#43a047)}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--card-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.placement-block{display:grid;gap:8px}.placement-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.placement-heading>div{display:grid;gap:3px}.placement-heading small,.coordinates{color:var(--secondary-text-color);font-size:.78rem}.placement-preview{display:block;width:100%;aspect-ratio:1.55/1;max-height:440px;border:1px solid var(--divider-color);border-radius:10px;overflow:hidden;cursor:crosshair;background:var(--card-background-color);touch-action:manipulation}.preview-background{fill:var(--card-background-color,#fff)}.placement-preview image{opacity:.92}.selected-room{fill:var(--primary-color,#03a9f4);fill-opacity:.07;stroke:var(--primary-color,#03a9f4);stroke-opacity:.55;stroke-width:4;vector-effect:non-scaling-stroke}.existing-point circle{fill:var(--card-background-color,#fff);stroke:var(--secondary-text-color,#777);stroke-width:3;vector-effect:non-scaling-stroke}.existing-point.active circle{stroke:var(--success-color,#43a047)}.existing-point text{font-size:16px;font-weight:900;fill:var(--secondary-text-color,#777);pointer-events:none}.existing-point.active text{fill:var(--primary-text-color,#222)}.draft-halo{fill:var(--primary-color,#03a9f4);fill-opacity:.12;stroke:var(--primary-color,#03a9f4);stroke-width:2;stroke-opacity:.45;vector-effect:non-scaling-stroke}.draft-core{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.draft-point text{font-size:17px;font-weight:900;fill:var(--primary-color,#03a9f4);pointer-events:none}@media(max-width:720px){.fields{grid-template-columns:1fr}.reaction-item{align-items:flex-start}.item-actions{flex-direction:column}.draft-title,.placement-heading{flex-direction:column}.placement-preview{aspect-ratio:1.25/1}}
+    :host{display:block}.reaction-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty,.duplicate{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.88rem;line-height:1.45}.duplicate{border-left:4px solid var(--warning-color,#ff9800)}.room-select,.fields label{display:grid;gap:6px;font-size:.85rem}.room-select select,.fields select,.fields input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.draft{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color)}.draft-title{display:flex;justify-content:space-between;gap:10px}.draft-title span,.fields small,.temperature-note small{color:var(--secondary-text-color);font-size:.8rem}.fields{display:grid;grid-template-columns:.8fr 1.4fr 1fr;gap:10px}.temperature-note{display:grid;align-content:start;gap:6px;padding:8px 10px;border:1px dashed var(--divider-color);border-radius:8px;background:var(--card-background-color);font-size:.85rem}.actions,.item-actions{display:flex;gap:7px;flex-wrap:wrap}.reaction-list{display:grid;gap:7px}.reaction-item{display:flex;align-items:center;gap:10px;padding:9px;border:1px solid transparent;border-radius:10px;background:var(--secondary-background-color)}.reaction-item.active{border-color:color-mix(in srgb,var(--primary-color,#03a9f4) 45%,transparent)}.kind{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:1rem;font-weight:900;background:var(--card-background-color);color:var(--secondary-text-color);flex:none}.kind.light{color:var(--warning-color,#ffb74d)}.kind.motion{color:var(--primary-color,#03a9f4)}.kind.media{color:var(--accent-color,#7e57c2)}.kind.opening{color:var(--warning-color,#ff9800)}.kind.temperature{color:#4f9b78}.copy{display:grid;gap:2px;min-width:0;flex:1}.copy small{color:var(--secondary-text-color);overflow-wrap:anywhere}.status{font-style:normal;font-size:.75rem;font-weight:800;color:var(--secondary-text-color)}.status.active{color:var(--success-color,#43a047)}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--card-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.placement-block{display:grid;gap:8px}.placement-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.placement-heading>div{display:grid;gap:3px}.placement-heading small,.coordinates{color:var(--secondary-text-color);font-size:.78rem}.placement-preview{position:relative;display:block;width:100%;aspect-ratio:1.55/1;max-height:440px;border:1px solid var(--divider-color);border-radius:10px;overflow:hidden;cursor:crosshair;background:var(--card-background-color);touch-action:manipulation}.preview-floorplan,.placement-overlay{position:absolute;inset:0;width:100%;height:100%}.preview-floorplan{display:block;object-fit:fill;opacity:.92;pointer-events:none;user-select:none;-webkit-user-drag:none}.placement-overlay{display:block;pointer-events:none}.selected-room{fill:var(--primary-color,#03a9f4);fill-opacity:.07;stroke:var(--primary-color,#03a9f4);stroke-opacity:.55;stroke-width:4;vector-effect:non-scaling-stroke}.existing-point circle{fill:var(--card-background-color,#fff);stroke:var(--secondary-text-color,#777);stroke-width:3;vector-effect:non-scaling-stroke}.existing-point.active circle{stroke:var(--success-color,#43a047)}.existing-point text{font-size:16px;font-weight:900;fill:var(--secondary-text-color,#777);pointer-events:none}.existing-point.active text{fill:var(--primary-text-color,#222)}.draft-halo{fill:var(--primary-color,#03a9f4);fill-opacity:.12;stroke:var(--primary-color,#03a9f4);stroke-width:2;stroke-opacity:.45;vector-effect:non-scaling-stroke}.draft-core{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.draft-point text{font-size:17px;font-weight:900;fill:var(--primary-color,#03a9f4);pointer-events:none}@media(max-width:720px){.fields{grid-template-columns:1fr}.reaction-item{align-items:flex-start}.item-actions{flex-direction:column}.draft-title,.placement-heading{flex-direction:column}.placement-preview{aspect-ratio:1.25/1}}
   `;
 }
