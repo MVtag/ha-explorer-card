@@ -44,6 +44,8 @@ export interface ExplorerRoomReaction {
   entity: string;
   /** States that activate the reaction. Defaults depend on the reaction kind. */
   active_states?: string[];
+  /** Physical entity position on the floorplan. Falls back to the room anchor when omitted. */
+  position?: NormalizedPosition;
 }
 
 export interface ExplorerRoom {
