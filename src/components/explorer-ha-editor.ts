@@ -67,19 +67,29 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
     });
   };
 
+  private readonly handleItemCardClick = (event: Event): void => {
+    const target = event.target as HTMLElement | null;
+    if (!target || target.closest("button, input, select, textarea, a")) return;
+    const heading = target.closest<HTMLElement>(".item-heading");
+    const card = heading?.closest<HTMLElement>(".item-card");
+    if (!heading || !card) return;
+    card.classList.toggle("item-open");
+  };
+
   protected override firstUpdated(): void {
     this.renderRoot.addEventListener("change", this.handleNativeControlChange);
+    this.renderRoot.addEventListener("click", this.handleItemCardClick);
 
+    // v0.25.3: every editor section starts collapsed. Setup-overview shortcuts
+    // can still open the requested section automatically.
     queueMicrotask(() => {
-      const baseSections = this.baseSections;
-      baseSections[0] && (baseSections[0].open = true);
-      baseSections[1] && (baseSections[1].open = false);
-      baseSections[2] && (baseSections[2].open = false);
+      this.baseSections.forEach((section) => (section.open = false));
     });
   }
 
   public override disconnectedCallback(): void {
     this.renderRoot.removeEventListener("change", this.handleNativeControlChange);
+    this.renderRoot.removeEventListener("click", this.handleItemCardClick);
     super.disconnectedCallback();
   }
 
@@ -149,11 +159,19 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
     const config = this.currentConfig;
 
     return html`
-      <ha-explorer-setup-overview
-        .hass=${this.hass}
-        .config=${config}
-        @explorer-editor-navigate=${this.handleEditorNavigate}
-      ></ha-explorer-setup-overview>
+      <details class="setup-section">
+        <summary>
+          <span>Opsætningsoversigt</span>
+          <span class="advanced-hint">Status & genveje</span>
+        </summary>
+        <div class="setup-content">
+          <ha-explorer-setup-overview
+            .hass=${this.hass}
+            .config=${config}
+            @explorer-editor-navigate=${this.handleEditorNavigate}
+          ></ha-explorer-setup-overview>
+        </div>
+      </details>
 
       ${super.render()}
 
@@ -264,6 +282,50 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
   static override styles = css`
     ${HaExplorerCardEditor.styles}
 
+    .setup-section,
+    .advanced-section {
+      scroll-margin-top:16px;
+      border:1px solid var(--divider-color);
+      border-radius:12px;
+      overflow:hidden;
+      background:var(--card-background-color);
+      transition:border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .setup-section { margin-bottom:12px; }
+    .setup-section > summary,
+    .advanced-section > summary {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .setup-section > summary::-webkit-details-marker,
+    .advanced-section > summary::-webkit-details-marker { display:none; }
+    .setup-section > summary::after,
+    .advanced-section > summary::after {
+      content:"⌄";
+      margin-left:4px;
+      color:var(--secondary-text-color);
+      transition:transform 160ms ease;
+    }
+    .setup-section[open] > summary::after,
+    .advanced-section[open] > summary::after { transform:rotate(180deg); }
+    .setup-content { padding:0 10px 10px; }
+    .setup-content > * { margin-top:0; }
+
+    .item-card:not(.item-open) > :not(.item-heading) { display:none !important; }
+    .item-heading { cursor:pointer; user-select:none; }
+    .item-heading::after {
+      content:"⌄";
+      flex:none;
+      color:var(--secondary-text-color);
+      transition:transform 160ms ease;
+    }
+    .item-card.item-open .item-heading::after { transform:rotate(180deg); }
+
     .advanced-heading {
       display:flex;
       align-items:flex-end;
@@ -277,31 +339,6 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
     .advanced-heading strong { color:var(--primary-text-color); font-size:.92rem; }
     .advanced-heading small { font-size:.75rem; }
     .advanced-tools { display:grid; gap:9px; padding-bottom:8px; }
-    .advanced-section {
-      scroll-margin-top:16px;
-      border:1px solid var(--divider-color);
-      border-radius:12px;
-      overflow:hidden;
-      background:var(--card-background-color);
-      transition:border-color 180ms ease, box-shadow 180ms ease;
-    }
-    .advanced-section > summary {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      cursor:pointer;
-      font-weight:700;
-    }
-    .advanced-section > summary::-webkit-details-marker { display:none; }
-    .advanced-section > summary::after {
-      content:"⌄";
-      margin-left:4px;
-      color:var(--secondary-text-color);
-      transition:transform 160ms ease;
-    }
-    .advanced-section[open] > summary::after { transform:rotate(180deg); }
     .advanced-hint { margin-left:auto; color:var(--secondary-text-color); font-size:.75rem; font-weight:500; text-align:right; }
     .advanced-content { padding:0 10px 10px; }
     .advanced-content > * { margin-top:0; }
@@ -312,6 +349,7 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
 
     @media (max-width:600px) {
       .advanced-heading { align-items:flex-start; flex-direction:column; }
+      .setup-section > summary,
       .advanced-section > summary { align-items:flex-start; }
       .advanced-hint { max-width:48%; }
     }
