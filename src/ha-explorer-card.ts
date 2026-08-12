@@ -6,7 +6,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.25.0";
+const CARD_VERSION = "0.25.1";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -76,7 +76,7 @@ export class HaExplorerCard extends LitElement {
             <span>${enchanted ? "Enchanted Explorer" : "Explorer map"}</span>
             <h1>${this.config.title}</h1>
           </div>
-          <small>Editor & UX Polish · v${CARD_VERSION}</small>
+          <small>Living Entity Points · v${CARD_VERSION}</small>
         </header>
 
         <explorer-presence-polish-canvas

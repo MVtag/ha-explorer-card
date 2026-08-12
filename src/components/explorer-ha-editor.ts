@@ -70,7 +70,6 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
   protected override firstUpdated(): void {
     this.renderRoot.addEventListener("change", this.handleNativeControlChange);
 
-    // v0.25 keeps the essential map section visible, while reducing the initial editor wall.
     queueMicrotask(() => {
       const baseSections = this.baseSections;
       baseSections[0] && (baseSections[0].open = true);
@@ -211,8 +210,8 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
 
         ${this.renderAdvancedSection(
           "room-reactions",
-          "Living Rooms",
-          "Lys, motion, media og åbninger",
+          "Living Entity Points",
+          "Lamper, TV, sensorer, åbninger og temperatur",
           html`<ha-explorer-room-reactions-editor
             .hass=${this.hass}
             .config=${config}
