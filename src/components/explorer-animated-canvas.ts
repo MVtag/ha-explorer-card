@@ -6,7 +6,6 @@ import type {
   ExplorerRouteGraphEndpoint,
   ExplorerRouteNode,
 } from "../models/config";
-import type { HomeAssistant } from "../types";
 import {
   evaluateRouteGraphEdges,
   evaluateRouteNodeState,
@@ -29,7 +28,6 @@ const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 
 @customElement("explorer-animated-canvas")
 export class ExplorerAnimatedCanvas extends ExplorerCanvas {
-  @property({ attribute: false }) public hass?: HomeAssistant;
   @property({ attribute: false }) public routes: ExplorerRoute[] = [];
   @property({ attribute: false }) public routeNodes: ExplorerRouteNode[] = [];
   @property({ attribute: false }) public routeGraphEdges: ExplorerRouteGraphEdge[] = [];
