@@ -4,6 +4,12 @@ export interface HomeAssistant {
     darkMode: boolean;
   };
   callWS?<T>(message: Record<string, unknown>): Promise<T>;
+  callService?(
+    domain: string,
+    service: string,
+    serviceData?: Record<string, unknown>,
+    target?: { entity_id?: string | string[] },
+  ): Promise<void>;
 }
 
 export interface HassEntity {
