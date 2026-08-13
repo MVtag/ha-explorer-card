@@ -6,11 +6,12 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.25.5";
+const CARD_VERSION = "0.25.6";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
+  @property({ type: Boolean, attribute: false }) public preview = false;
   @state() private config?: ExplorerCardConfig;
 
   public static getConfigElement(): HTMLElement {
@@ -77,7 +78,7 @@ export class HaExplorerCard extends LitElement {
     const enchanted = theme === "enchanted_antique";
 
     return html`
-      <ha-card class=${enchanted ? "enchanted" : "classic"}>
+      <ha-card class=${`${enchanted ? "enchanted" : "classic"}${this.preview ? " preview" : ""}`}>
         <header>
           <div>
             <span>${enchanted ? "Enchanted Explorer" : "Explorer map"}</span>
@@ -106,8 +107,9 @@ export class HaExplorerCard extends LitElement {
   }
 
   static styles = css`
-    :host { display:block; width:100%; min-width:0; position:relative; isolation:isolate; }
-    ha-card { width:100%; overflow:hidden; position:relative; z-index:0; }
+    :host { display:block; width:100%; min-width:0; }
+    ha-card { width:100%; overflow:hidden; }
+    ha-card.preview explorer-presence-polish-canvas { --explorer-viewport-max-height:min(52vh,520px); }
     header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; color:var(--primary-text-color); background:var(--ha-card-background,var(--card-background-color)); }
     header span { display:block; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--secondary-text-color); }
     h1 { margin:3px 0 0; font-size:1.25rem; }
