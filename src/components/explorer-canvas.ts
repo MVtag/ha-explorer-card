@@ -560,7 +560,7 @@ export class ExplorerCanvas extends LitElement {
       width: 100%;
       aspect-ratio: var(--floorplan-ratio, 16 / 9);
       min-height: 280px;
-      max-height: min(72vh, 760px);
+      max-height: var(--explorer-viewport-max-height, min(72vh, 760px));
       overflow: hidden;
       background: #cdbb94;
       touch-action: none;
@@ -679,7 +679,7 @@ export class ExplorerCanvas extends LitElement {
     @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 600px) {
-      .viewport { min-height: 240px; max-height: 68vh; }
+      .viewport { min-height: 240px; max-height: var(--explorer-viewport-max-height, 68vh); }
     }
   `;
 }
