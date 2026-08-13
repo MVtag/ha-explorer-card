@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing, svg } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
+import "./explorer-room-panel";
 import type {
   ExplorerPresence,
   ExplorerRoom,
@@ -9,6 +10,7 @@ import type {
   PresenceObjectType,
   ViewportState,
 } from "../models/config";
+import type { HomeAssistant } from "../types";
 import {
   VIEWBOX_SIZE,
   clampZoom,
@@ -157,6 +159,7 @@ function sanitizeSvgDocument(document: Document): SVGSVGElement {
 
 @customElement("explorer-canvas")
 export class ExplorerCanvas extends LitElement {
+  @property({ attribute: false }) public hass?: HomeAssistant;
   @property() image = "";
   @property({ attribute: false }) rooms: ExplorerRoom[] = [];
   @property({ attribute: false }) presences: ExplorerPresence[] = [];
@@ -183,6 +186,10 @@ export class ExplorerCanvas extends LitElement {
   }
 
   protected updated(changed: Map<PropertyKey, unknown>): void {
+    if (changed.has("rooms") && this.selectedRoom) {
+      this.selectedRoom = this.rooms.find((room) => room.id === this.selectedRoom?.id);
+    }
+
     if (
       changed.has("image") ||
       (changed.has("fitMode") && this.image && isSvgSource(this.image))
@@ -524,13 +531,19 @@ export class ExplorerCanvas extends LitElement {
     }
 
     if (this.selectedRoom) {
-      return html`<div class="selection-info">
-        <strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong>
-        <span>Valgt rum</span>
-      </div>`;
+      return html`<explorer-room-panel
+        .room=${this.selectedRoom}
+        .presences=${this.presences}
+        .hass=${this.hass}
+        @explorer-room-close=${this.clearRoomSelection}
+      ></explorer-room-panel>`;
     }
 
     return nothing;
+  }
+
+  private clearRoomSelection(): void {
+    this.selectedRoom = undefined;
   }
 
   private renderStatus() {
