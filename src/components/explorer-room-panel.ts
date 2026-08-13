@@ -7,7 +7,7 @@ import { evaluateRoomReactions, type RoomReactionStatus } from "../utils/room-re
 function safeAvatar(source?: string): string | undefined {
   const value = source?.trim();
   if (!value) return undefined;
-  if (/^data:image\\/(?:png|jpe?g|gif|webp);base64,/i.test(value) || value.startsWith("/")) {
+  if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(value) || value.startsWith("/")) {
     return value;
   }
   try {
