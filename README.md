@@ -13,6 +13,7 @@ A living, interactive floor map card for Home Assistant.
 - Native inline SVG rendering
 - Zoom and pan controls
 - Interactive room polygons
+- Room detail panel with live entity states and light controls
 - Presence objects for people, pets, robots, vehicles and custom objects
 - Home Assistant entity binding
 - Room-aware automatic presence placement
@@ -23,6 +24,17 @@ A living, interactive floor map card for Home Assistant.
 - Home Assistant Area Registry integration
 - Backend-independent room tracking
 - HACS-compatible release assets
+
+## Interactive rooms
+
+Click or tap a configured room on the live floorplan to open its room panel. The panel reuses the room's existing Living Entity Point bindings and shows:
+
+- People and tracked objects currently placed in the room
+- Live light, motion, media, opening and temperature states
+- Direct **On / Off** controls for bound light entities
+- Native Home Assistant more-info dialogs for every bound entity
+
+No additional room-panel configuration is required. Rooms without entity reactions still open and explain that bindings can be added in the visual editor.
 
 ## HACS installation
 
@@ -182,6 +194,7 @@ dist/ha-explorer-card.js
 7. Visual floorplan room drawing
 8. Animated movement and footsteps
 9. Themes and custom overlays
+10. Interactive room details and controls
 
 ## License
 
