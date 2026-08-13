@@ -6,7 +6,7 @@ import type { ExplorerCardConfig } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.25.3";
+const CARD_VERSION = "0.25.4";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -61,6 +61,13 @@ export class HaExplorerCard extends LitElement {
     return 6;
   }
 
+  public getGridOptions() {
+    return {
+      columns: "full" as const,
+      min_columns: 6,
+    };
+  }
+
   protected render() {
     if (!this.config) return nothing;
     const image = this.config.image ?? this.config.background ?? "";
@@ -99,8 +106,8 @@ export class HaExplorerCard extends LitElement {
   }
 
   static styles = css`
-    :host { display:block; }
-    ha-card { overflow:hidden; }
+    :host { display:block; width:100%; }
+    ha-card { width:100%; overflow:hidden; }
     header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; color:var(--primary-text-color); background:var(--ha-card-background,var(--card-background-color)); }
     header span { display:block; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--secondary-text-color); }
     h1 { margin:3px 0 0; font-size:1.25rem; }
