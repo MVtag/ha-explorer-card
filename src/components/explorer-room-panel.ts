@@ -4,6 +4,20 @@ import type { ExplorerPresence, ExplorerRoom, RoomReactionKind } from "../models
 import type { HomeAssistant } from "../types";
 import { evaluateRoomReactions, type RoomReactionStatus } from "../utils/room-reactions";
 
+function safeAvatar(source?: string): string | undefined {
+  const value = source?.trim();
+  if (!value) return undefined;
+  if (/^data:image\\/(?:png|jpe?g|gif|webp);base64,/i.test(value) || value.startsWith("/")) {
+    return value;
+  }
+  try {
+    const url = new URL(value, window.location.href);
+    return ["http:", "https:", "blob:"].includes(url.protocol) ? value : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 const REACTION_ICONS: Record<RoomReactionKind, string> = {
   light: "💡",
   motion: "◉",
@@ -89,12 +103,13 @@ export class ExplorerRoomPanel extends LitElement {
 
   private async toggleLight(event: Event, entityId: string): Promise<void> {
     event.stopPropagation();
-    if (!this.hass?.callService || this.pendingLights.has(entityId)) return;
+    const hass = this.hass;
+    if (!hass?.callService || this.pendingLights.has(entityId)) return;
 
     this.actionError = "";
     this.pendingLights = new Set([...this.pendingLights, entityId]);
     try {
-      await this.hass.callService("light", "toggle", {}, { entity_id: entityId });
+      await hass.callService("light", "toggle", {}, { entity_id: entityId });
     } catch (_error) {
       this.actionError = `Kunne ikke styre ${this.entityName(entityId)}.`;
     } finally {
@@ -126,14 +141,15 @@ export class ExplorerRoomPanel extends LitElement {
 
         ${occupants.length
           ? html`<div class="occupants" aria-label="Personer og objekter i rummet">
-              ${occupants.map(
-                (presence) => html`<span class="occupant">
-                  ${presence.avatar
-                    ? html`<img src=${presence.avatar} alt="" />`
+              ${occupants.map((presence) => {
+                const avatar = safeAvatar(presence.avatar);
+                return html`<span class="occupant">
+                  ${avatar
+                    ? html`<img src=${avatar} alt="" />`
                     : html`<span class="occupant-dot"></span>`}
                   ${presence.name ?? presence.id}
-                </span>`,
-              )}
+                </span>`;
+              })}
             </div>`
           : nothing}
 
