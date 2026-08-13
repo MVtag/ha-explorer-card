@@ -576,7 +576,6 @@ export class ExplorerCanvas extends LitElement {
       max-height: var(--explorer-viewport-max-height, min(72vh, 760px));
       overflow: hidden;
       background: #cdbb94;
-      touch-action: none;
       user-select: none;
     }
 
@@ -585,6 +584,7 @@ export class ExplorerCanvas extends LitElement {
       height: 100%;
       display: block;
       cursor: grab;
+      touch-action: none;
     }
 
     svg.floorplan:active { cursor: grabbing; }
