@@ -4,6 +4,7 @@ export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "objec
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
 export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "temperature";
+export type ExplorerRoomQuickActionKind = "scene" | "script";
 export type ExplorerTheme = "classic" | "enchanted_antique";
 export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "restricted";
 
@@ -48,6 +49,19 @@ export interface ExplorerRoomReaction {
   position?: NormalizedPosition;
 }
 
+export interface ExplorerRoomQuickAction {
+  /** Stable action identifier within the room. */
+  id: string;
+  /** Label shown in the room panel. */
+  name: string;
+  /** Safe, supported Home Assistant action domain. */
+  kind: ExplorerRoomQuickActionKind;
+  /** scene.* or script.* entity activated by this action. */
+  entity: string;
+  /** Optional short glyph or emoji shown on the action button. */
+  icon?: string;
+}
+
 export interface ExplorerRoom {
   id: string;
   name?: string;
@@ -59,6 +73,8 @@ export interface ExplorerRoom {
   presence_anchor?: NormalizedPosition;
   /** Optional Home Assistant entities that make this room visually react at runtime. */
   reactions?: ExplorerRoomReaction[];
+  /** Optional scene and script shortcuts shown in the interactive room panel. */
+  quick_actions?: ExplorerRoomQuickAction[];
 }
 
 export interface ExplorerRouteNodeStateBinding {

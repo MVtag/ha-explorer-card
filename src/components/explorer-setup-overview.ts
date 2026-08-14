@@ -58,7 +58,7 @@ export class HaExplorerSetupOverview extends LitElement {
       <section class="overview">
         <div class="hero">
           <div>
-            <span class="eyebrow">Editor & UX Polish · v0.25.0</span>
+            <span class="eyebrow">Room Actions · v0.27.0</span>
             <h3>Opsætningsoversigt</h3>
             <p>
               ${healthy
@@ -68,7 +68,7 @@ export class HaExplorerSetupOverview extends LitElement {
           </div>
           <div class="health ${healthy ? "healthy" : "attention"}">
             <strong>${healthy ? "Klar" : `${summary.attentionCount} tjek`}</strong>
-            <small>${summary.configuredFeatureCount}/7 områder aktive</small>
+            <small>${summary.configuredFeatureCount}/8 områder aktive</small>
           </div>
         </div>
 
@@ -78,6 +78,7 @@ export class HaExplorerSetupOverview extends LitElement {
           <span><strong>${summary.routeCount}</strong> routes</span>
           <span><strong>${summary.nodeCount}</strong> nodes</span>
           <span><strong>${summary.reactionCount}</strong> reaktioner</span>
+          <span><strong>${summary.actionCount}</strong> handlinger</span>
           <span><strong>${summary.zoneCount}</strong> zoner</span>
         </div>
 

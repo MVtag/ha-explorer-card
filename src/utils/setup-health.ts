@@ -10,6 +10,7 @@ export type ExplorerEditorSection =
   | "room-tools"
   | "zones"
   | "room-reactions"
+  | "room-actions"
   | "routes"
   | "route-graph"
   | "diagnostics";
@@ -38,6 +39,7 @@ export interface ExplorerSetupSummary {
   presenceCount: number;
   zoneCount: number;
   reactionCount: number;
+  actionCount: number;
   routeCount: number;
   nodeCount: number;
 }
@@ -77,6 +79,10 @@ function collectEntityReferences(config: ExplorerCardConfig): EntityReference[] 
       const entity = cleanEntity(reaction.entity);
       if (entity) references.push({ entity, source: `${room.name ?? room.id} · ${reaction.kind}`, target: "room-reactions" });
     }
+    for (const action of room.quick_actions ?? []) {
+      const entity = cleanEntity(action.entity);
+      if (entity) references.push({ entity, source: `${room.name ?? room.id} · ${action.name}`, target: "room-actions" });
+    }
   }
 
   for (const zone of config.zones ?? []) {
@@ -108,6 +114,7 @@ export function analyzeExplorerSetup(
   const routeEdges = config.route_graph_edges ?? [];
   const manualRoutes = config.routes ?? [];
   const reactions = rooms.flatMap((room) => room.reactions ?? []);
+  const actions = rooms.flatMap((room) => room.quick_actions ?? []);
   const references = collectEntityReferences(config);
 
   const entityIssues: ExplorerEntityIssue[] = [];
@@ -193,6 +200,15 @@ export function analyzeExplorerSetup(
       target: "room-reactions",
     },
     {
+      id: "quick-actions",
+      label: "Rumhandlinger",
+      detail: actions.length
+        ? `${actions.length} scene- eller scripthandling${actions.length === 1 ? "" : "er"} konfigureret.`
+        : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.",
+      state: actions.length ? "ready" : "optional",
+      target: "room-actions",
+    },
+    {
       id: "zones",
       label: "Dynamic Areas",
       detail: zones.length
@@ -212,6 +228,7 @@ export function analyzeExplorerSetup(
     presenceCount: presences.length,
     zoneCount: zones.length,
     reactionCount: reactions.length,
+    actionCount: actions.length,
     routeCount: routeEdges.length + manualRoutes.length,
     nodeCount: routeNodes.length,
   };

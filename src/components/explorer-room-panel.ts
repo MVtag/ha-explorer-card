@@ -1,6 +1,11 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import type { ExplorerPresence, ExplorerRoom, RoomReactionKind } from "../models/config";
+import type {
+  ExplorerPresence,
+  ExplorerRoom,
+  ExplorerRoomQuickAction,
+  RoomReactionKind,
+} from "../models/config";
 import type { HomeAssistant } from "../types";
 import { evaluateRoomReactions, type RoomReactionStatus } from "../utils/room-reactions";
 
@@ -41,6 +46,7 @@ export class ExplorerRoomPanel extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
   @state() private pendingLights = new Set<string>();
+  @state() private pendingRoomAction = "";
   @state() private actionError = "";
 
   private get statuses(): RoomReactionStatus[] {
@@ -101,6 +107,48 @@ export class ExplorerRoomPanel extends LitElement {
     );
   }
 
+  private get roomLightIds(): string[] {
+    return [...new Set(
+      (this.room?.reactions ?? [])
+        .filter((reaction) => reaction.kind === "light")
+        .map((reaction) => reaction.entity),
+    )];
+  }
+
+  private async runRoomService(
+    pendingId: string,
+    domain: "light" | "scene" | "script",
+    service: "turn_on" | "turn_off",
+    entityIds: string | string[],
+    errorLabel: string,
+  ): Promise<void> {
+    const hass = this.hass;
+    if (!hass?.callService || this.pendingRoomAction) return;
+    this.actionError = "";
+    this.pendingRoomAction = pendingId;
+    try {
+      await hass.callService(domain, service, {}, { entity_id: entityIds });
+    } catch (_error) {
+      this.actionError = `Kunne ikke starte ${errorLabel}.`;
+    } finally {
+      this.pendingRoomAction = "";
+    }
+  }
+
+  private runQuickAction(action: ExplorerRoomQuickAction): void {
+    if (!action.entity.startsWith(`${action.kind}.`)) {
+      this.actionError = `Ugyldig entity for ${action.name}.`;
+      return;
+    }
+    void this.runRoomService(
+      `quick:${action.id}`,
+      action.kind,
+      "turn_on",
+      action.entity,
+      action.name,
+    );
+  }
+
   private async toggleLight(event: Event, entityId: string): Promise<void> {
     event.stopPropagation();
     const hass = this.hass;
@@ -123,6 +171,8 @@ export class ExplorerRoomPanel extends LitElement {
     if (!this.room) return nothing;
     const statuses = this.statuses;
     const occupants = this.occupants;
+    const roomLightIds = this.roomLightIds;
+    const quickActions = this.room.quick_actions ?? [];
 
     return html`
       <section class="panel" role="dialog" aria-label=${`Rumdetaljer for ${this.room.name ?? this.room.id}`}>
@@ -150,6 +200,35 @@ export class ExplorerRoomPanel extends LitElement {
                   ${presence.name ?? presence.id}
                 </span>`;
               })}
+            </div>`
+          : nothing}
+
+        ${roomLightIds.length || quickActions.length
+          ? html`<div class="quick-actions" aria-label="Hurtighandlinger">
+              <h3>Hurtighandlinger</h3>
+              <div class="quick-grid">
+                ${roomLightIds.length
+                  ? html`
+                      <button
+                        @click=${() => void this.runRoomService("lights:on", "light", "turn_on", roomLightIds, "alle lys")}
+                        ?disabled=${Boolean(this.pendingRoomAction) || !this.hass?.callService}
+                      ><span>💡</span>${this.pendingRoomAction === "lights:on" ? "Vent…" : "Tænd alt"}</button>
+                      <button
+                        @click=${() => void this.runRoomService("lights:off", "light", "turn_off", roomLightIds, "alle lys")}
+                        ?disabled=${Boolean(this.pendingRoomAction) || !this.hass?.callService}
+                      ><span>◌</span>${this.pendingRoomAction === "lights:off" ? "Vent…" : "Sluk alt"}</button>
+                    `
+                  : nothing}
+                ${quickActions.map((action) => html`
+                  <button
+                    @click=${() => this.runQuickAction(action)}
+                    ?disabled=${Boolean(this.pendingRoomAction) || !this.hass?.callService}
+                  >
+                    <span>${action.icon ?? (action.kind === "scene" ? "✦" : "▶")}</span>
+                    ${this.pendingRoomAction === `quick:${action.id}` ? "Vent…" : action.name}
+                  </button>
+                `)}
+              </div>
             </div>`
           : nothing}
 
@@ -273,6 +352,34 @@ export class ExplorerRoomPanel extends LitElement {
       background: var(--primary-color, #03a9f4);
     }
 
+    .quick-actions { display:grid; gap:7px; margin:2px 0 12px; }
+    .quick-actions h3 { margin:0; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; opacity:.68; }
+    .quick-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .quick-grid button {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      padding:9px 10px;
+      border:1px solid var(--explorer-room-panel-border,rgba(255,255,255,.18));
+      border-radius:11px;
+      color:inherit;
+      background:var(--explorer-room-panel-control,rgba(255,255,255,.10));
+      cursor:pointer;
+      font-size:.74rem;
+      font-weight:700;
+      text-align:left;
+    }
+    .quick-grid button span {
+      display:grid;
+      place-items:center;
+      width:24px;
+      height:24px;
+      flex:0 0 auto;
+      border-radius:8px;
+      background:var(--explorer-room-panel-row,rgba(255,255,255,.08));
+    }
+    .quick-grid button:disabled { opacity:.5; cursor:wait; }
     .entities { display: grid; gap: 7px; }
     .entity {
       justify-content: space-between;
