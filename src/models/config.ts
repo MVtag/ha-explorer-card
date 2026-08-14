@@ -13,7 +13,7 @@ export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
 export interface ExplorerCalibrationPoint { sensor_x:number; sensor_y:number; room_x:number; room_y:number; }
-export interface ExplorerRoomPositionCalibration { a:ExplorerCalibrationPoint; b:ExplorerCalibrationPoint; }
+export interface ExplorerRoomPositionCalibration { a:ExplorerCalibrationPoint; b:ExplorerCalibrationPoint; c?:ExplorerCalibrationPoint; }
 export interface ExplorerRoomMeters { width:number; height:number; flip_x?:boolean; flip_y?:boolean; position_calibration?:ExplorerRoomPositionCalibration; }
 export interface ExplorerZoneStateBinding { entity:string; active_states?:string[]; }
 export interface ExplorerZone { id:string; name?:string; points:NormalizedPoint[]; kind?:ExplorerZoneKind; color?:string; label?:NormalizedPosition; visible?:boolean; state_binding?:ExplorerZoneStateBinding; }
