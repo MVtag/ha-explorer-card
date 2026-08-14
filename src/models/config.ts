@@ -29,7 +29,10 @@ export interface ExplorerRouteCondition { entity:string; allowed_states?:string[
 export interface ExplorerRouteGraphEdge { from:ExplorerRouteGraphEndpoint; to:ExplorerRouteGraphEndpoint; condition?:ExplorerRouteCondition; }
 
 export interface PresenceEntityBinding {
+  /** Identity/profile entity, e.g. person.marc. */
   entity?: string;
+  /** Optional separate entity that supplies live x/y coordinates, e.g. an mmWave target sensor. */
+  position_entity?: string;
   x_attribute?: string;
   y_attribute?: string;
   /** normalized = 0..1; meters = whole floorplan metres; room_meters = metres inside presence.room_id. */
