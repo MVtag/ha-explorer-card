@@ -7,6 +7,7 @@ import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
 import "./explorer-setup-overview";
 import "./explorer-theme-editor";
 import "./explorer-presence-polish-editor";
+import "./explorer-identity-editor";
 import "./explorer-zones-editor";
 import "./explorer-room-reactions-editor";
 import "./explorer-room-actions-editor";
@@ -81,8 +82,6 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
     this.renderRoot.addEventListener("change", this.handleNativeControlChange);
     this.renderRoot.addEventListener("click", this.handleItemCardClick);
 
-    // v0.25.3: every editor section starts collapsed. Setup-overview shortcuts
-    // can still open the requested section automatically.
     queueMicrotask(() => {
       this.baseSections.forEach((section) => (section.open = false));
     });
@@ -204,6 +203,17 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
             .config=${config}
             @config-changed=${this.handleToolConfigChanged}
           ></ha-explorer-room-tools>`,
+        )}
+
+        ${this.renderAdvancedSection(
+          "presences",
+          "Multi-Person & Identity",
+          "Navne, profiler og separate mmWave-targets",
+          html`<ha-explorer-identity-editor
+            .hass=${this.hass}
+            .config=${config}
+            @config-changed=${this.handleToolConfigChanged}
+          ></ha-explorer-identity-editor>`,
         )}
 
         ${this.renderAdvancedSection(
