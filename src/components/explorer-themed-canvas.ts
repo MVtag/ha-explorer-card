@@ -282,6 +282,11 @@ export class ExplorerThemedCanvas extends ExplorerLivingCanvas {
       --explorer-room-motion-color: #75573a;
       --explorer-room-media-color: #71503e;
       --explorer-room-opening-color: #936031;
+      --explorer-room-panel-background: rgba(218, 192, 143, .96);
+      --explorer-room-panel-text: #4b311f;
+      --explorer-room-panel-border: rgba(82, 50, 30, .34);
+      --explorer-room-panel-control: rgba(91, 57, 34, .12);
+      --explorer-room-panel-row: rgba(255, 239, 199, .22);
     }
 
     :host([map-theme="enchanted_antique"]) .viewport {
