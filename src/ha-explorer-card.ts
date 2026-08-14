@@ -6,7 +6,7 @@ import type { ExplorerCardConfig, ExplorerRoom } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.31.0";
+const CARD_VERSION = "0.31.1";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
