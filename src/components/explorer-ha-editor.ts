@@ -9,6 +9,7 @@ import "./explorer-theme-editor";
 import "./explorer-presence-polish-editor";
 import "./explorer-zones-editor";
 import "./explorer-room-reactions-editor";
+import "./explorer-room-actions-editor";
 import "./explorer-route-editor";
 import "./explorer-route-graph-editor";
 import "./explorer-route-diagnostics";
@@ -235,6 +236,17 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
             .config=${config}
             @config-changed=${this.handleToolConfigChanged}
           ></ha-explorer-room-reactions-editor>`,
+        )}
+
+        ${this.renderAdvancedSection(
+          "room-actions",
+          "Rumscener og hurtighandlinger",
+          "Tænd/sluk alt, scenes og scripts",
+          html`<ha-explorer-room-actions-editor
+            .hass=${this.hass}
+            .config=${config}
+            @config-changed=${this.handleToolConfigChanged}
+          ></ha-explorer-room-actions-editor>`,
         )}
 
         ${this.renderAdvancedSection(
