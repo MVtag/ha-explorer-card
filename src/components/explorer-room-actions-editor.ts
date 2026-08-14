@@ -125,7 +125,7 @@ export class HaExplorerRoomActionsEditor extends LitElement {
     this.icon = action.icon ?? "";
   }
 
-  private remove(id: string): void {
+  private removeAction(id: string): void {
     this.updateRoom((this.selectedRoom?.quick_actions ?? []).filter((action) => action.id !== id));
     if (this.editingId === id) this.resetDraft();
   }
@@ -205,7 +205,7 @@ export class HaExplorerRoomActionsEditor extends LitElement {
               <span class="glyph">${action.icon ?? (action.kind === "scene" ? "✦" : "▶")}</span>
               <span><strong>${action.name}</strong><small>${action.entity}</small></span>
               <button @click=${() => this.edit(action)}>Redigér</button>
-              <button class="danger" @click=${() => this.remove(action.id)}>Slet</button>
+              <button class="danger" @click=${() => this.removeAction(action.id)}>Slet</button>
             </article>
           `)}
           ${!(room?.quick_actions?.length)
