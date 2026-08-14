@@ -12,7 +12,7 @@ export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "res
 export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
-export interface ExplorerRoomMeters { width:number; height:number; }
+export interface ExplorerRoomMeters { width:number; height:number; flip_x?:boolean; flip_y?:boolean; }
 export interface ExplorerZoneStateBinding { entity:string; active_states?:string[]; }
 export interface ExplorerZone { id:string; name?:string; points:NormalizedPoint[]; kind?:ExplorerZoneKind; color?:string; label?:NormalizedPosition; visible?:boolean; state_binding?:ExplorerZoneStateBinding; }
 export interface ExplorerRoomReaction { kind:RoomReactionKind; entity:string; active_states?:string[]; position?:NormalizedPosition; }
