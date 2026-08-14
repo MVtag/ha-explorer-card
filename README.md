@@ -13,7 +13,7 @@ A living, interactive floor map card for Home Assistant.
 - Native inline SVG rendering
 - Zoom and pan controls
 - Interactive room polygons
-- Room detail panel with live entity states and light controls
+- Room detail panel with live entity states, aggregate light controls and scene/script shortcuts
 - Presence objects for people, pets, robots, vehicles and custom objects
 - Home Assistant entity binding
 - Room-aware automatic presence placement
@@ -24,6 +24,18 @@ A living, interactive floor map card for Home Assistant.
 - Home Assistant Area Registry integration
 - Backend-independent room tracking
 - HACS-compatible release assets
+
+## Room scenes and quick actions
+
+Version 0.27 adds room-level actions without requiring manual YAML:
+
+- **Tænd alt** and **Sluk alt** appear automatically for every room with bound light reactions
+- Add Home Assistant `scene.*` and `script.*` entities from the visual editor
+- Give each shortcut a custom Danish label and a short glyph or emoji
+- Actions are restricted to the safe `scene.turn_on`, `script.turn_on`, `light.turn_on` and `light.turn_off` services
+- Pending and error states are shown directly in the room panel
+
+Open **Rumscener og hurtighandlinger** under the advanced editor tools, select a room, then choose a scene or script from Home Assistant.
 
 ## Interactive rooms
 
