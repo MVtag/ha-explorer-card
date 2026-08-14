@@ -1,7 +1,7 @@
 export type FloorplanFitMode = "contain" | "cover";
 export type NormalizedPoint = [number, number];
 export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "object";
-export type PresenceCoordinateSpace = "normalized" | "meters";
+export type PresenceCoordinateSpace = "normalized" | "meters" | "room_meters";
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
 export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "temperature";
@@ -12,11 +12,12 @@ export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "res
 export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
+export interface ExplorerRoomMeters { width:number; height:number; }
 export interface ExplorerZoneStateBinding { entity:string; active_states?:string[]; }
 export interface ExplorerZone { id:string; name?:string; points:NormalizedPoint[]; kind?:ExplorerZoneKind; color?:string; label?:NormalizedPosition; visible?:boolean; state_binding?:ExplorerZoneStateBinding; }
 export interface ExplorerRoomReaction { kind:RoomReactionKind; entity:string; active_states?:string[]; position?:NormalizedPosition; }
 export interface ExplorerRoomQuickAction { id:string; name:string; kind:ExplorerRoomQuickActionKind; entity:string; icon?:string; }
-export interface ExplorerRoom { id:string; name?:string; points:NormalizedPoint[]; color?:string; area_id?:string; aliases?:string[]; label?:NormalizedPosition; presence_anchor?:NormalizedPosition; reactions?:ExplorerRoomReaction[]; quick_actions?:ExplorerRoomQuickAction[]; }
+export interface ExplorerRoom { id:string; name?:string; points:NormalizedPoint[]; color?:string; area_id?:string; aliases?:string[]; label?:NormalizedPosition; presence_anchor?:NormalizedPosition; physical_meters?:ExplorerRoomMeters; reactions?:ExplorerRoomReaction[]; quick_actions?:ExplorerRoomQuickAction[]; }
 export interface ExplorerRouteNodeStateBinding { entity:string; open_states?:string[]; }
 export interface ExplorerRouteNode { id:string; name?:string; point:NormalizedPoint; kind?:RouteNodeKind; state_binding?:ExplorerRouteNodeStateBinding; }
 export interface ExplorerRouteStep { node_id?:string; point?:NormalizedPoint; }
@@ -29,7 +30,7 @@ export interface PresenceEntityBinding {
   entity?: string;
   x_attribute?: string;
   y_attribute?: string;
-  /** normalized = 0..1 attributes; meters = Explorer map coordinates in metres. */
+  /** normalized = 0..1; meters = whole floorplan metres; room_meters = metres inside presence.room_id. */
   coordinate_space?: PresenceCoordinateSpace;
   name_attribute?: string;
   icon_attribute?: string;
@@ -48,8 +49,7 @@ export interface ExplorerCardConfig {
   title?:string;
   image?:string;
   background?:string;
-  /** Physical dimensions used to convert map_x/map_y metres to 0..1 canvas coordinates. */
-  floorplan_meters?: ExplorerFloorplanMeters;
+  floorplan_meters?:ExplorerFloorplanMeters;
   min_zoom?:number;
   max_zoom?:number;
   initial_zoom?:number;
