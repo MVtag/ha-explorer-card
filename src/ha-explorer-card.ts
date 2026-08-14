@@ -2,11 +2,11 @@ import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "./components/explorer-presence-polish-canvas";
 import "./components/explorer-ha-editor";
-import type { ExplorerCardConfig } from "./models/config";
+import type { ExplorerCardConfig, ExplorerRoom } from "./models/config";
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 
-const CARD_VERSION = "0.28.0";
+const CARD_VERSION = "0.29.0";
 
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -15,14 +15,20 @@ export class HaExplorerCard extends LitElement {
   @state() private config?: ExplorerCardConfig;
 
   public static getConfigElement(): HTMLElement { return document.createElement("ha-explorer-ha-editor"); }
-  public static getStubConfig(): ExplorerCardConfig { return {type:"custom:ha-explorer-card",title:"Home Assistant Explorer",min_zoom:1,max_zoom:6,initial_zoom:1,fit_mode:"contain",appearance:{theme:"classic"},rooms:[],zones:[],route_nodes:[],route_graph_edges:[],routes:[],presences:[]}; }
+  public static getStubConfig(): ExplorerCardConfig { return {type:"custom:ha-explorer-card",title:"Home Assistant Explorer",floorplan_meters:{width:4.3,height:5.4},min_zoom:1,max_zoom:6,initial_zoom:1,fit_mode:"contain",appearance:{theme:"classic"},rooms:[{id:"stue",name:"Stue",points:[[0,0],[1,0],[1,1],[0,1]],label:{x:.5,y:.5}}],zones:[],route_nodes:[],route_graph_edges:[],routes:[],presences:[]}; }
   public setConfig(config:ExplorerCardConfig):void { if(!config)throw new Error("Configuration is required");this.config={title:"Home Assistant Explorer",min_zoom:1,max_zoom:6,initial_zoom:1,fit_mode:"contain",rooms:[],zones:[],route_nodes:[],route_graph_edges:[],routes:[],presences:[],...config,appearance:{theme:"classic",...(config.appearance??{})}}; }
   public getCardSize():number{return 6;}
   public getGridOptions(){return {columns:12,min_columns:6};}
 
+  private defaultRoom(): ExplorerRoom[] {
+    if ((this.config?.rooms?.length ?? 0) > 0) return this.config?.rooms ?? [];
+    if (!this.config?.floorplan_meters) return [];
+    return [{id:"room",name:this.config.title??"Rum",points:[[0,0],[1,0],[1,1],[0,1]],label:{x:.5,y:.5}}];
+  }
+
   protected render(){
     if(!this.config)return nothing;
-    const image=this.config.image??this.config.background??"";const rooms=this.config.rooms??[];
+    const image=this.config.image??this.config.background??"";const rooms=this.defaultRoom();
     const presences=resolvePresences(this.config.presences??[],this.hass,rooms,this.config.floorplan_meters);
     const theme=this.config.appearance?.theme??"classic";const enchanted=theme==="enchanted_antique";
     return html`<ha-card class=${`${enchanted?"enchanted":"classic"}${this.preview?" preview":""}`}><header><div><span>${enchanted?"Enchanted Explorer":"Explorer map"}</span><h1>${this.config.title}</h1></div><small>Living Entity Points · v${CARD_VERSION}</small></header><explorer-presence-polish-canvas .theme=${theme} .hass=${this.hass} .image=${image} .rooms=${rooms} .zones=${this.config.zones??[]} .routeNodes=${this.config.route_nodes??[]} .routeGraphEdges=${this.config.route_graph_edges??[]} .routes=${this.config.routes??[]} .presences=${presences} .minZoom=${this.config.min_zoom??1} .maxZoom=${this.config.max_zoom??6} .initialZoom=${this.config.initial_zoom??1} .fitMode=${this.config.fit_mode??"contain"}></explorer-presence-polish-canvas></ha-card>`;
