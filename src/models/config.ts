@@ -15,7 +15,8 @@ export type ExplorerOpeningSwing = "left" | "right";
 
 export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerDayNightConfig { enabled?:boolean; mode?:ExplorerDayNightMode; sun_entity?:string; night_states?:string[]; intensity?:number; }
-export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; day_night?:ExplorerDayNightConfig; }
+export interface ExplorerCompassConfig { visible?:boolean; rotation?:number; size?:number; }
+export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; day_night?:ExplorerDayNightConfig; compass?:ExplorerCompassConfig; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
 export interface ExplorerCalibrationPoint { sensor_x:number; sensor_y:number; room_x:number; room_y:number; }
 export interface ExplorerRoomPositionCalibration { a:ExplorerCalibrationPoint; b:ExplorerCalibrationPoint; c?:ExplorerCalibrationPoint; }
