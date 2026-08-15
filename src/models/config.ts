@@ -8,6 +8,9 @@ export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "tempe
 export type ExplorerRoomQuickActionKind = "scene" | "script";
 export type ExplorerTheme = "classic" | "enchanted_antique";
 export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "restricted";
+export type ExplorerOpeningKind = "door" | "window";
+export type ExplorerOpeningHinge = "start" | "end";
+export type ExplorerOpeningSwing = "left" | "right";
 
 export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerAppearanceConfig { theme?: ExplorerTheme; }
@@ -27,6 +30,27 @@ export interface ExplorerRoute { from:string; to:string; via?:NormalizedPoint[];
 export interface ExplorerRouteGraphEndpoint { kind:RouteGraphEndpointKind; id:string; }
 export interface ExplorerRouteCondition { entity:string; allowed_states?:string[]; }
 export interface ExplorerRouteGraphEdge { from:ExplorerRouteGraphEndpoint; to:ExplorerRouteGraphEndpoint; condition?:ExplorerRouteCondition; }
+
+export interface ExplorerOpeningStateBinding {
+  entity:string;
+  open_states?:string[];
+}
+export interface ExplorerOpening {
+  id:string;
+  name?:string;
+  kind:ExplorerOpeningKind;
+  /** Opening centre in normalized map coordinates. */
+  point:NormalizedPoint;
+  /** Closed opening direction in degrees, 0 = horizontal to the right. */
+  angle?:number;
+  /** Visual length in normalized map width. */
+  length?:number;
+  hinge?:ExplorerOpeningHinge;
+  swing?:ExplorerOpeningSwing;
+  open_angle?:number;
+  visible?:boolean;
+  state_binding?:ExplorerOpeningStateBinding;
+}
 
 export interface PresenceEntityBinding {
   /** Identity/profile entity, e.g. person.marc. */
@@ -65,6 +89,7 @@ export interface ExplorerCardConfig {
   route_nodes?:ExplorerRouteNode[];
   route_graph_edges?:ExplorerRouteGraphEdge[];
   routes?:ExplorerRoute[];
+  openings?:ExplorerOpening[];
   presences?:ExplorerPresence[];
 }
 
