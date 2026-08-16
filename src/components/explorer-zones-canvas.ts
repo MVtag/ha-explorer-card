@@ -61,6 +61,28 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     parent.appendChild(title);
   }
 
+  private appendZoneAccent(group: SVGGElement, zone: ExplorerZone, kind: ExplorerZoneKind, color: string): void {
+    if (kind !== "cleaning" && kind !== "restricted") return;
+    const accent = document.createElementNS(SVG_NAMESPACE, "polygon");
+    accent.setAttribute("points", this.zonePolygonPoints(zone.points));
+    accent.setAttribute("class", `zone-accent zone-accent-${kind}`);
+    accent.setAttribute("fill", "none");
+    accent.setAttribute("stroke", color);
+    accent.setAttribute("vector-effect", "non-scaling-stroke");
+    accent.setAttribute("stroke-linejoin", "round");
+    accent.setAttribute("pointer-events", "none");
+    if (kind === "cleaning") {
+      accent.setAttribute("stroke-width", "8");
+      accent.setAttribute("stroke-opacity", ".30");
+      accent.setAttribute("stroke-dasharray", "3 15");
+    } else {
+      accent.setAttribute("stroke-width", "9");
+      accent.setAttribute("stroke-opacity", ".20");
+      accent.setAttribute("stroke-dasharray", "2 11");
+    }
+    group.appendChild(accent);
+  }
+
   private renderZone(layer: SVGGElement, status: ExplorerZoneStatus, reduceMotion: boolean): void {
     const zone = status.zone;
     if (!status.active || zone.points.length < 3) return;
@@ -68,10 +90,11 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     const kind = zone.kind ?? "info";
     const color = this.zoneColor(zone);
     const group = document.createElementNS(SVG_NAMESPACE, "g");
-    group.setAttribute("class", `dynamic-zone zone-${kind} zone-${zone.id}`);
+    group.setAttribute("class", `dynamic-zone zone-${kind} zone-${zone.id}${reduceMotion ? " reduced-motion" : ""}`);
     group.setAttribute("pointer-events", "none");
 
     const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
+    polygon.setAttribute("class", "zone-shape");
     polygon.setAttribute("points", this.zonePolygonPoints(zone.points));
     polygon.setAttribute("fill", color);
     polygon.setAttribute("fill-opacity", kind === "danger" || kind === "restricted" ? ".18" : ".13");
@@ -84,15 +107,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     if (kind === "restricted") polygon.setAttribute("stroke-dasharray", "7 7");
     if (kind === "cleaning") polygon.setAttribute("stroke-dasharray", "4 8");
     group.appendChild(polygon);
-
-    if (kind === "danger" && !reduceMotion) {
-      const pulse = document.createElementNS(SVG_NAMESPACE, "animate");
-      pulse.setAttribute("attributeName", "fill-opacity");
-      pulse.setAttribute("values", ".12;.25;.12");
-      pulse.setAttribute("dur", "2.2s");
-      pulse.setAttribute("repeatCount", "indefinite");
-      polygon.appendChild(pulse);
-    }
+    this.appendZoneAccent(group, zone, kind, color);
 
     const center = this.zoneCenter(zone);
     const marker = document.createElementNS(SVG_NAMESPACE, "g");
@@ -100,6 +115,7 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
     marker.setAttribute("class", "zone-marker");
 
     const markerBg = document.createElementNS(SVG_NAMESPACE, "circle");
+    markerBg.setAttribute("class", "zone-marker-bg");
     markerBg.setAttribute("r", "17");
     markerBg.setAttribute("fill", "var(--card-background-color, #ffffff)");
     markerBg.setAttribute("fill-opacity", ".90");
@@ -178,6 +194,51 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
       --explorer-zone-restricted: #8b5a9e;
     }
 
+    .zone-warning:not(.reduced-motion) .zone-shape {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: zoneWarningPulse 2.8s ease-in-out infinite;
+    }
+
+    .zone-danger:not(.reduced-motion) .zone-shape,
+    .zone-danger:not(.reduced-motion) .zone-marker-bg {
+      animation: zoneDangerPulse 1.85s ease-in-out infinite;
+    }
+
+    .zone-cleaning:not(.reduced-motion) .zone-shape,
+    .zone-cleaning:not(.reduced-motion) .zone-accent-cleaning {
+      animation: zoneCleaningSweep 2.2s linear infinite;
+    }
+
+    .zone-restricted .zone-shape {
+      filter: drop-shadow(0 0 2px color-mix(in srgb, currentColor 30%, transparent));
+    }
+
+    .zone-restricted:not(.reduced-motion) .zone-accent-restricted {
+      animation: zoneRestrictedRunes 4.6s linear infinite;
+    }
+
+    @keyframes zoneWarningPulse {
+      0%, 100% { fill-opacity: .10; stroke-opacity: .62; }
+      50% { fill-opacity: .18; stroke-opacity: .98; }
+    }
+
+    @keyframes zoneDangerPulse {
+      0%, 100% { fill-opacity: .13; stroke-opacity: .66; }
+      45% { fill-opacity: .28; stroke-opacity: 1; }
+      58% { fill-opacity: .18; stroke-opacity: .86; }
+    }
+
+    @keyframes zoneCleaningSweep {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -48; }
+    }
+
+    @keyframes zoneRestrictedRunes {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: 52; }
+    }
+
     :host([map-theme="enchanted_antique"]) {
       --explorer-zone-info: #65704b;
       --explorer-zone-warning: #9b6a31;
@@ -188,13 +249,30 @@ export class ExplorerZonesCanvas extends ExplorerThemedCanvas {
 
     :host([map-theme="enchanted_antique"]) .zones-scene polygon {
       mix-blend-mode: multiply;
-      filter: drop-shadow(0 .7px .7px rgba(67, 40, 22, .24));
+      filter: sepia(.18) drop-shadow(0 .7px .7px rgba(67, 40, 22, .24));
+    }
+
+    :host([map-theme="enchanted_antique"]) .zone-danger .zone-shape {
+      filter: sepia(.22) drop-shadow(0 0 3px rgba(100, 40, 27, .30));
+    }
+
+    :host([map-theme="enchanted_antique"]) .zone-cleaning .zone-accent,
+    :host([map-theme="enchanted_antique"]) .zone-restricted .zone-accent {
+      opacity: .78;
     }
 
     :host([map-theme="enchanted_antique"]) .zone-label,
     :host([map-theme="enchanted_antique"]) .zone-marker text {
       font-family: Georgia, Cambria, "Times New Roman", serif !important;
       letter-spacing: .035em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .zones-scene .zone-shape,
+      .zones-scene .zone-accent,
+      .zones-scene .zone-marker-bg {
+        animation: none !important;
+      }
     }
   `;
 }
