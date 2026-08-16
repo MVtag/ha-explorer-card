@@ -4,7 +4,7 @@ export type PresenceObjectType = "person" | "pet" | "robot" | "vehicle" | "objec
 export type PresenceCoordinateSpace = "normalized" | "meters" | "room_meters";
 export type RouteNodeKind = "door" | "junction" | "waypoint";
 export type RouteGraphEndpointKind = "room" | "node";
-export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "temperature";
+export type RoomReactionKind = "light" | "motion" | "media" | "opening" | "temperature" | "fireplace";
 export type ExplorerRoomQuickActionKind = "scene" | "script";
 export type ExplorerTheme = "classic" | "enchanted_antique";
 export type ExplorerDayNightMode = "auto" | "day" | "night";
@@ -26,7 +26,7 @@ export interface ExplorerRoomPositionCalibration { a:ExplorerCalibrationPoint; b
 export interface ExplorerRoomMeters { width:number; height:number; flip_x?:boolean; flip_y?:boolean; position_calibration?:ExplorerRoomPositionCalibration; }
 export interface ExplorerZoneStateBinding { entity:string; active_states?:string[]; }
 export interface ExplorerZone { id:string; name?:string; points:NormalizedPoint[]; kind?:ExplorerZoneKind; color?:string; label?:NormalizedPosition; visible?:boolean; state_binding?:ExplorerZoneStateBinding; }
-export interface ExplorerRoomReaction { kind:RoomReactionKind; entity:string; active_states?:string[]; position?:NormalizedPosition; }
+export interface ExplorerRoomReaction { kind:RoomReactionKind; entity:string; active_states?:string[]; position?:NormalizedPosition; intensity?:number; radius?:number; }
 export interface ExplorerRoomQuickAction { id:string; name:string; kind:ExplorerRoomQuickActionKind; entity:string; icon?:string; }
 export interface ExplorerRoom { id:string; name?:string; points:NormalizedPoint[]; color?:string; area_id?:string; aliases?:string[]; label?:NormalizedPosition; presence_anchor?:NormalizedPosition; physical_meters?:ExplorerRoomMeters; reactions?:ExplorerRoomReaction[]; quick_actions?:ExplorerRoomQuickAction[]; }
 export interface ExplorerRouteNodeStateBinding { entity:string; open_states?:string[]; }
