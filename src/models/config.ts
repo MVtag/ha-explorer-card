@@ -16,7 +16,8 @@ export interface NormalizedPosition { x:number; y:number; }
 export interface ExplorerDayNightConfig { enabled?:boolean; mode?:ExplorerDayNightMode; sun_entity?:string; night_states?:string[]; intensity?:number; }
 export interface ExplorerCompassConfig { visible?:boolean; rotation?:number; size?:number; }
 export interface ExplorerAlarmConfig { enabled?:boolean; entity?:string; armed_states?:string[]; triggered_states?:string[]; intensity?:number; }
-export interface ExplorerAppearanceConfig { theme?:ExplorerTheme; day_night?:ExplorerDayNightConfig; compass?:ExplorerCompassConfig; alarm?:ExplorerAlarmConfig; hide_source_text?:boolean; }
+export interface ExplorerOccupancyConfig { enabled?:boolean; home_states?:string[]; intensity?:number; }
+export interface ExplorerAppearanceConfig { theme?:ExplorerTheme; day_night?:ExplorerDayNightConfig; compass?:ExplorerCompassConfig; alarm?:ExplorerAlarmConfig; occupancy?:ExplorerOccupancyConfig; hide_source_text?:boolean; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
 export interface ExplorerCalibrationPoint { sensor_x:number; sensor_y:number; room_x:number; room_y:number; }
 export interface ExplorerRoomPositionCalibration { a:ExplorerCalibrationPoint; b:ExplorerCalibrationPoint; c?:ExplorerCalibrationPoint; }
