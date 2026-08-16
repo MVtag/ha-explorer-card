@@ -89,10 +89,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private appendClouds(layer: SVGGElement): void {
     const clouds: Array<[number, number, number, number, number]> = [
-      [55, 80, 190, 90, .72], [250, 42, 165, 76, .58], [760, 72, 205, 92, .68],
-      [905, 295, 175, 86, .66], [70, 520, 180, 92, .64], [890, 690, 210, 100, .62],
-      [215, 900, 215, 96, .60], [690, 930, 190, 82, .56],
-      [455, 120, 155, 66, .46], [530, 885, 180, 78, .48],
+      [60, 78, 195, 92, .32], [250, 48, 170, 78, .24], [760, 76, 210, 94, .30],
+      [905, 300, 180, 88, .28], [70, 520, 185, 94, .27], [890, 690, 215, 102, .26],
+      [215, 900, 220, 98, .25], [690, 930, 195, 84, .24],
+      [455, 120, 160, 68, .20], [530, 885, 185, 80, .21],
     ];
     for (const [cx, cy, rx, ry, opacity] of clouds) {
       const ellipse = this.svg("ellipse");
@@ -176,20 +176,20 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   static override styles = css`
     ${ExplorerOpeningsCanvas.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
-    .weather-outside-rooms-scene .weather-cloud { fill: #493a2d; filter: blur(9px); mix-blend-mode: multiply; animation: explorerCloudDrift 20s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
-    .weather-outside-rooms-scene .weather-cloud:nth-child(2n) { animation-duration: 27s; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-cloud { fill: #7f715f; filter: blur(24px); mix-blend-mode: soft-light; animation: explorerCloudDrift 24s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+    .weather-outside-rooms-scene .weather-cloud:nth-child(2n) { fill: #a09480; animation-duration: 31s; animation-direction: alternate-reverse; }
     .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
     .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
     .weather-outside-rooms-scene .weather-rain-streak { stroke: #3d4d55; stroke-width: 3.8; stroke-linecap: round; opacity: .82; animation: explorerRainFall 1.05s linear infinite; }
     .weather-outside-rooms-scene .weather-snow-flake { fill: #fff7df; stroke: #a89b82; stroke-width: 1; opacity: .96; animation: explorerSnowFall 7s linear infinite; }
     .weather-outside-rooms-scene .weather-storm-flash { fill: #fff0bd; opacity: 0; mix-blend-mode: screen; animation: explorerStormFlash 6.5s steps(1,end) infinite; }
-    .weather-outside-rooms-scene.is-night .weather-cloud { fill: #353231; opacity: .88; }
+    .weather-outside-rooms-scene.is-night .weather-cloud { fill: #67635d; opacity: .48; mix-blend-mode: soft-light; }
     .weather-outside-rooms-scene.is-night .weather-rain-streak { stroke: #879398; opacity: .78; }
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: multiply; filter: sepia(.22) saturate(.82); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.12) saturate(.7); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-snow-flake { fill: #f1e5c5; }
-    @keyframes explorerCloudDrift { from { transform: translate(-18px,-5px) scale(1); } to { transform: translate(28px,9px) scale(1.08); } }
+    @keyframes explorerCloudDrift { from { transform: translate(-22px,-7px) scale(1.02); } to { transform: translate(34px,11px) scale(1.12); } }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
     @keyframes explorerRainFall { from { transform: translate(18px,-55px); } to { transform: translate(-18px,70px); } }
     @keyframes explorerSnowFall { from { transform: translate(0,-30px); } to { transform: translate(22px,55px); } }
