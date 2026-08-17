@@ -173,7 +173,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
     return "hot";
   }
 
-  private temperatureColor(celsius: number): string {
+  private atmosphereTemperatureColor(celsius: number): string {
     const band = this.temperatureBand(celsius);
     if (band === "cold") return "var(--explorer-room-temperature-cold, #4f87c5)";
     if (band === "neutral") return "var(--explorer-room-temperature-neutral, #4f9b78)";
@@ -216,7 +216,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
 
     temperatures.forEach(({ room, celsius }) => {
       const opacity = this.temperatureOpacity(celsius);
-      const color = this.temperatureColor(celsius);
+      const color = this.atmosphereTemperatureColor(celsius);
       const band = this.temperatureBand(celsius);
       const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
       polygon.setAttribute("points", this.polygonPoints(room));
