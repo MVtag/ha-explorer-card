@@ -14,7 +14,7 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.40.8";
+const CARD_VERSION = "0.40.9";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -306,6 +306,34 @@ export class HaExplorerCard extends LitElement {
   private renderCelestialCloud() {
     return html`<div class="celestial-cloud" aria-hidden="true"></div>`;
   }
+  private renderCastleSurround() {
+    const castle = (side: "left" | "right") => html`<svg
+      class=${`enchanted-castle-side enchanted-castle-${side}`}
+      viewBox="0 0 500 900"
+      preserveAspectRatio="xMidYMax meet"
+      aria-hidden="true"
+    >
+      <circle class="castle-moon-glow" cx="118" cy="238" r="82"></circle>
+      <circle class="castle-moon" cx="118" cy="238" r="58"></circle>
+      <path class="castle-far-hills" d="M0 900V685 Q74 616 142 662 T276 642 T410 680 T500 620 V900Z"></path>
+      <path class="castle-near-hills" d="M0 900V770 Q72 701 142 736 T274 704 T408 748 T500 694 V900Z"></path>
+      <path class="castle-silhouette" d="M24 900V721H55V565H42L70 516L98 565H84V721H116V493H98L137 423L176 493H158V675H196V578H183L214 526L246 578H233V712H277V447H256L304 360L352 447H331V632H370V540H355L392 478L429 540H414V704H455V900Z"></path>
+      <path class="castle-spires" d="M63 516L70 458L77 516ZM128 423L137 326L146 423ZM206 526L214 456L222 526ZM294 360L304 244L314 360ZM383 478L392 391L401 478Z"></path>
+      <path class="castle-bridge" d="M84 743 Q126 696 171 743 T258 743 T348 743 T455 743" fill="none"></path>
+      <g class="castle-windows">
+        <path class="castle-window castle-window-0" d="M62 601v31h16v-31q-8-16-16 0Z"></path>
+        <path class="castle-window castle-window-1" d="M128 531v36h18v-36q-9-18-18 0Z"></path>
+        <path class="castle-window castle-window-2" d="M205 612v27h17v-27q-8-14-17 0Z"></path>
+        <path class="castle-window castle-window-0" d="M294 486v43h20v-43q-10-21-20 0Z"></path>
+        <path class="castle-window castle-window-1" d="M383 572v31h18v-31q-9-16-18 0Z"></path>
+        <path class="castle-window castle-window-2" d="M292 584v26h15v-26q-7-13-15 0Z"></path>
+      </g>
+      <path class="castle-mist" d="M-30 736 C80 698 153 758 250 724 S430 702 540 748"></path>
+    </svg>`;
+    return html`<div class="enchanted-castle-surround" aria-hidden="true">
+      ${castle("left")}${castle("right")}
+    </div>`;
+  }
   protected render() {
     if (!this.config) return nothing;
     const image = this.config.image ?? this.config.background ?? "",
@@ -365,7 +393,7 @@ export class HaExplorerCard extends LitElement {
         !night &&
         ["sunny", "clear", "partlycloudy"].includes(weatherState),
       partly = weatherState === "partlycloudy";
-    return html`<ha-card
+    return html`${this.renderCastleSurround()}<ha-card
       class=${`${enchanted ? "enchanted" : "classic"}${night ? " moonlight" : ""}${sunlit ? " sunlight" : ""}${partly ? " partly-cloudy" : ""}${hasClouds ? " has-clouds" : ""}${occupancyEnabled ? (someoneHome ? " occupied" : " empty-house") : ""}${weatherEnabled && weatherEffect !== "clear" ? ` weather-${weatherEffect}` : ""}${weatherEnabled ? ` state-${weatherState}` : ""}${alarmState === "armed" ? " alarm-armed" : ""}${alarmState === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${intensity};--alarm-intensity:${alarmIntensity};--occupancy-intensity:${occupancyIntensity};--weather-intensity:${weatherIntensity}`}
       ><header>
@@ -461,6 +489,9 @@ export class HaExplorerCard extends LitElement {
         background 0.6s,
         color 0.6s;
     }
+    .enchanted-castle-surround {
+      display: none;
+    }
     @media (min-width: 900px) and (min-height: 600px) {
       :host {
         position: relative;
@@ -512,6 +543,80 @@ export class HaExplorerCard extends LitElement {
         background:
           radial-gradient(ellipse at center, transparent 36%, rgba(11, 8, 6, 0.28) 76%, rgba(8, 6, 5, 0.58) 100%),
           linear-gradient(90deg, rgba(231, 196, 127, 0.05), transparent 18% 82%, rgba(231, 196, 127, 0.05));
+      }
+      .enchanted-castle-surround {
+        display: block;
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .enchanted-castle-side {
+        position: absolute;
+        bottom: 0;
+        width: 34%;
+        max-width: 540px;
+        height: 100%;
+        overflow: visible;
+        opacity: 0.88;
+        filter: drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.13));
+      }
+      .enchanted-castle-left {
+        left: 0;
+      }
+      .enchanted-castle-right {
+        right: 0;
+        transform: scaleX(-1);
+      }
+      .castle-moon-glow {
+        fill: rgba(226, 190, 116, 0.09);
+        filter: blur(24px);
+      }
+      .castle-moon {
+        fill: rgba(205, 168, 102, 0.08);
+        stroke: rgba(225, 192, 124, 0.16);
+        stroke-width: 2;
+      }
+      .castle-far-hills {
+        fill: rgba(15, 12, 11, 0.48);
+      }
+      .castle-near-hills {
+        fill: rgba(7, 6, 6, 0.76);
+      }
+      .castle-silhouette,
+      .castle-spires {
+        fill: rgba(5, 5, 6, 0.88);
+        stroke: rgba(205, 162, 91, 0.23);
+        stroke-width: 1.5;
+        stroke-linejoin: round;
+      }
+      .castle-bridge {
+        stroke: rgba(7, 6, 6, 0.92);
+        stroke-width: 22;
+        stroke-linecap: round;
+        filter: drop-shadow(0 -1px 0 rgba(208, 165, 94, 0.16));
+      }
+      .castle-window {
+        fill: rgba(244, 190, 91, 0.82);
+        filter: drop-shadow(0 0 4px rgba(239, 164, 55, 0.82));
+        animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
+      }
+      .castle-window-1 {
+        animation-delay: -2.2s;
+        animation-duration: 7.1s;
+      }
+      .castle-window-2 {
+        animation-delay: -4.1s;
+        animation-duration: 4.9s;
+      }
+      .castle-mist {
+        fill: none;
+        stroke: rgba(221, 191, 135, 0.13);
+        stroke-width: 30;
+        stroke-linecap: round;
+        filter: blur(13px);
+        animation: explorerCastleMist 14s ease-in-out infinite alternate;
       }
       ha-card:not(.preview) {
         position: relative;
@@ -1630,8 +1735,19 @@ export class HaExplorerCard extends LitElement {
       48% { opacity: 0.88; }
       100% { opacity: 0.56; transform: scale(1.005); }
     }
+    @keyframes explorerCastleWindow {
+      0% { opacity: 0.28; }
+      46% { opacity: 0.92; }
+      100% { opacity: 0.52; }
+    }
+    @keyframes explorerCastleMist {
+      from { transform: translateX(-28px); opacity: 0.45; }
+      to { transform: translateX(34px); opacity: 0.9; }
+    }
     @media (prefers-reduced-motion: reduce) {
       :host::before,
+      .castle-window,
+      .castle-mist,
       .cloud,
       .celestial-cloud,
       .partly-cloudy .sun-disc,
