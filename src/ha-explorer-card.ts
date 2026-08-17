@@ -6,7 +6,7 @@ import type { ExplorerCardConfig, ExplorerPresence, ExplorerRoom, ExplorerWeathe
 import type { HomeAssistant } from "./types";
 import { resolvePresences } from "./utils/entity-binding";
 import { matchPresenceIdentities, resetIdentityTracks } from "./utils/identity-matcher";
-const CARD_VERSION="0.40.0-beta.22";
+const CARD_VERSION="0.40.0-beta.23";
 type AlarmAtmosphereState="normal"|"armed"|"triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement{
