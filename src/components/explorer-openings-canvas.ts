@@ -1,6 +1,6 @@
 import { css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { ExplorerPresencePolishCanvas } from "./explorer-presence-polish-canvas";
+import { ExplorerRoomMagicCanvas } from "./explorer-room-magic-canvas";
 import type { ExplorerOpening } from "../models/config";
 import { VIEWBOX_SIZE } from "../utils/viewport";
 
@@ -9,7 +9,7 @@ const DEFAULT_OPEN_STATES=["on","open","opened","true"];
 const rad=(degrees:number)=>degrees*Math.PI/180;
 
 @customElement("explorer-openings-canvas")
-export class ExplorerOpeningsCanvas extends ExplorerPresencePolishCanvas{
+export class ExplorerOpeningsCanvas extends ExplorerRoomMagicCanvas{
   @property({attribute:false}) public openings:ExplorerOpening[]=[];
 
   protected override updated(changed:Map<PropertyKey,unknown>):void{
@@ -84,7 +84,7 @@ export class ExplorerOpeningsCanvas extends ExplorerPresencePolishCanvas{
     const title=document.createElementNS(SVG_NS,"title");title.textContent=`${opening.name??opening.id} · vindue ${open?"åbent":"lukket"}${opening.state_binding?` · ${opening.state_binding.entity}`:" · ingen entity"}`;g.appendChild(title);layer.appendChild(g);
   }
 
-  static override styles=css`${ExplorerPresencePolishCanvas.styles}
+  static override styles=css`${ExplorerRoomMagicCanvas.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease}
