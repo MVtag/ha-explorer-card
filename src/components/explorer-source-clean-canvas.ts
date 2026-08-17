@@ -180,6 +180,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
     for (const [x, y, scale, index, opacity] of clouds) {
       const form = index % 4;
+      const depth = index % 3;
       const positionGroup = this.svg("g");
       this.attrs(positionGroup, {
         class: "weather-cloud-position",
@@ -189,7 +190,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
       const driftGroup = this.svg("g");
       this.attrs(driftGroup, {
-        class: `weather-cloud weather-cloud-${index % 3} weather-cloud-depth-${index % 2} weather-cloud-form-${form}`,
+        class: `weather-cloud weather-cloud-${index % 3} weather-cloud-depth-${depth} weather-cloud-form-${form}`,
       });
 
       const mistBack = this.svg("g");
@@ -397,8 +398,11 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       transform-origin: center;
       will-change: transform, opacity;
     }
-    .weather-outside-rooms-scene .weather-cloud-1 { animation-name: explorerCloudDriftB; animation-duration: 48s; animation-direction: alternate-reverse; }
-    .weather-outside-rooms-scene .weather-cloud-2 { animation-name: explorerCloudDriftC; animation-duration: 56s; }
+    .weather-outside-rooms-scene .weather-cloud-1 { animation-name: explorerCloudDriftB; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-cloud-2 { animation-name: explorerCloudDriftC; }
+    .weather-outside-rooms-scene .weather-cloud-depth-0 { animation-duration: 34s; }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 { animation-duration: 54s; opacity: .72; }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 { animation-duration: 82s; opacity: .56; }
     .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(239, 236, 228, .19); filter: blur(22px); }
     .weather-outside-rooms-scene .weather-cloud-mist-front { fill: rgba(246, 242, 233, .18); filter: blur(17px); }
     .weather-outside-rooms-scene .weather-cloud-shadow { fill: rgba(70, 65, 58, .10); filter: blur(20px); }
@@ -407,7 +411,13 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(207, 204, 196, .16); }
     .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 252, 244, .19); }
     .weather-outside-rooms-scene .weather-cloud-strand { fill: rgba(226, 222, 213, .14); filter: blur(13px); }
-    .weather-outside-rooms-scene .weather-cloud-fine-strand { fill: rgba(238, 235, 228, .11); filter: blur(9px); }
+    .weather-outside-rooms-scene .weather-cloud-fine-strand {
+      fill: rgba(238, 235, 228, .11);
+      filter: blur(9px);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerCloudWispParallax 22s ease-in-out infinite alternate;
+    }
     .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 253, 246, .20); filter: blur(8px); }
     .weather-outside-rooms-scene .weather-cloud-form-1 .weather-cloud-base { opacity: .78; }
     .weather-outside-rooms-scene .weather-cloud-form-1 .weather-cloud-puff { opacity: .70; }
@@ -415,11 +425,16 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene .weather-cloud-form-2 .weather-cloud-mist { opacity: .88; }
     .weather-outside-rooms-scene .weather-cloud-form-3 .weather-cloud-shadow { opacity: .62; }
     .weather-outside-rooms-scene .weather-cloud-form-3 .weather-cloud-highlight { opacity: .64; }
-    .weather-outside-rooms-scene .weather-cloud-depth-1 { opacity: .68; }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-mist { fill: rgba(218, 219, 216, .17); }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-base { fill: rgba(196, 198, 195, .30); }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-puff { fill: rgba(222, 223, 219, .42); }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-shadow { fill: rgba(58, 58, 55, .09); }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 .weather-cloud-mist { fill: rgba(210, 212, 210, .14); }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 .weather-cloud-base { fill: rgba(190, 193, 191, .24); }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 .weather-cloud-puff { fill: rgba(218, 220, 217, .34); }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 .weather-cloud-shadow { fill: rgba(55, 56, 54, .06); }
+    .weather-outside-rooms-scene .weather-cloud-depth-2 .weather-cloud-fine-strand { animation-duration: 32s; opacity: .70; }
+    .weather-outside-rooms-scene .weather-cloud-depth-0 .weather-cloud-fine-strand { animation-duration: 16s; }
     .weather-outside-rooms-scene.is-night .weather-cloud-mist { fill: rgba(148, 161, 172, .15); }
     .weather-outside-rooms-scene.is-night .weather-cloud-mist-front { fill: rgba(169, 180, 188, .13); }
     .weather-outside-rooms-scene.is-night .weather-cloud-shadow { fill: rgba(18, 24, 31, .18); }
@@ -465,6 +480,11 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       47% { transform: translate(14px,-5px) scale(1.018); opacity: 1; }
       100% { transform: translate(96px,13px) scale(1.008); opacity: .88; }
     }
+    @keyframes explorerCloudWispParallax {
+      0% { transform: translateX(-10px) scaleX(.98); opacity: .72; }
+      52% { transform: translateX(5px) scaleX(1.02); opacity: 1; }
+      100% { transform: translateX(18px) scaleX(1.04); opacity: .78; }
+    }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
     @keyframes explorerRainFall { from { transform: translate(18px,-55px); } to { transform: translate(-18px,70px); } }
     @keyframes explorerSnowFall { from { transform: translate(0,-30px); } to { transform: translate(22px,55px); } }
@@ -472,6 +492,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     @keyframes explorerStormFlashNight { 0%,6%,8%,46%,48%,100% { opacity: 0; } 7%,47% { opacity: .28; } }
     @media(prefers-reduced-motion:reduce) {
       .weather-outside-rooms-scene .weather-cloud,
+      .weather-outside-rooms-scene .weather-cloud-fine-strand,
       .weather-outside-rooms-scene .weather-fog-band,
       .weather-outside-rooms-scene .weather-rain-streak,
       .weather-outside-rooms-scene .weather-snow-flake,
