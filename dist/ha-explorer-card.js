@@ -7588,7 +7588,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
-const br = "0.40.0-beta.34";
+const br = "0.40.1-beta.1";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
