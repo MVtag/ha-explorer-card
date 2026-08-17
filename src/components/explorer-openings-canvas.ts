@@ -40,7 +40,7 @@ export class ExplorerOpeningsCanvas extends ExplorerRoomMagicCanvas{
 
   private openingOpenSince(opening:ExplorerOpening,open:boolean):number|undefined{
     if(!open||!opening.state_binding){this.openingFirstSeenOpenAt.delete(opening.id);return undefined;}
-    const entity=this.hass?.states[opening.state_binding.entity] as (typeof this.hass.states[string]&{last_changed?:string})|undefined;
+    const entity=this.hass?.states[opening.state_binding.entity] as ({last_changed?:string}|undefined);
     const parsed=entity?.last_changed?Date.parse(entity.last_changed):NaN;
     if(Number.isFinite(parsed)){
       this.openingFirstSeenOpenAt.set(opening.id,parsed);
