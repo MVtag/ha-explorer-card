@@ -7801,7 +7801,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
-const br = "0.40.7";
+const br = "0.40.8";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8146,9 +8146,67 @@ Fe.styles = I`
         color 0.6s;
     }
     @media (min-width: 900px) and (min-height: 600px) {
+      :host {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 18px;
+        background:
+          radial-gradient(
+            ellipse at 50% 46%,
+            rgba(194, 144, 74, 0.34) 0%,
+            rgba(82, 60, 40, 0.22) 34%,
+            transparent 60%
+          ),
+          repeating-linear-gradient(
+            112deg,
+            transparent 0 55px,
+            rgba(222, 187, 119, 0.055) 56px 57px,
+            transparent 58px 112px
+          ),
+          linear-gradient(90deg, #211b18 0%, #3f3328 28%, #493927 50%, #3f3328 72%, #211b18 100%);
+        box-shadow:
+          inset 0 0 78px rgba(7, 5, 4, 0.72),
+          inset 0 0 2px rgba(238, 205, 142, 0.28);
+      }
+      :host::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 8% 17%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 17% 42%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 11% 73%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 25% 88%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px),
+          radial-gradient(circle at 92% 20%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 83% 47%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 90% 76%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 76% 91%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px);
+        filter: drop-shadow(0 0 6px rgba(231, 190, 107, 0.62));
+        animation: explorerSurroundTwinkle 7.5s ease-in-out infinite alternate;
+      }
+      :host::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse at center, transparent 36%, rgba(11, 8, 6, 0.28) 76%, rgba(8, 6, 5, 0.58) 100%),
+          linear-gradient(90deg, rgba(231, 196, 127, 0.05), transparent 18% 82%, rgba(231, 196, 127, 0.05));
+      }
       ha-card:not(.preview) {
+        position: relative;
+        z-index: 1;
         max-width: min(1100px, calc(100dvh - 148px));
         margin-inline: auto;
+        border: 1px solid rgba(211, 173, 105, 0.42);
+        box-shadow:
+          0 0 0 1px rgba(61, 41, 25, 0.72),
+          0 0 34px rgba(229, 183, 99, 0.20),
+          0 18px 48px rgba(5, 4, 3, 0.58);
       }
     }
     ha-card.preview explorer-source-clean-canvas {
@@ -9251,7 +9309,13 @@ Fe.styles = I`
         ),
         linear-gradient(90deg, #5a5145, #403d3a);
     }
+    @keyframes explorerSurroundTwinkle {
+      0% { opacity: 0.42; transform: scale(0.995); }
+      48% { opacity: 0.88; }
+      100% { opacity: 0.56; transform: scale(1.005); }
+    }
     @media (prefers-reduced-motion: reduce) {
+      :host::before,
       .cloud,
       .celestial-cloud,
       .partly-cloudy .sun-disc,
