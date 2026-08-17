@@ -182,10 +182,10 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
   }
 
   private temperatureOpacity(celsius: number): number {
-    if (celsius < 18) return Math.min(0.09, 0.035 + (18 - celsius) * 0.009);
-    if (celsius <= 22) return 0.018 + Math.abs(celsius - 20) * 0.004;
-    if (celsius <= 25) return 0.03 + ((celsius - 22) / 3) * 0.045;
-    return Math.min(0.12, 0.075 + (celsius - 25) * 0.009);
+    if (celsius < 18) return Math.min(0.115, 0.045 + (18 - celsius) * 0.0115);
+    if (celsius <= 22) return 0.023 + Math.abs(celsius - 20) * 0.005;
+    if (celsius <= 25) return 0.038 + ((celsius - 22) / 3) * 0.058;
+    return Math.min(0.15, 0.096 + (celsius - 25) * 0.0115);
   }
 
   private roomTemperatures(): RoomTemperatureAtmosphere[] {
@@ -225,7 +225,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
       polygon.setAttribute("fill", color);
       polygon.setAttribute("fill-opacity", String(opacity));
       polygon.setAttribute("stroke", color);
-      polygon.setAttribute("stroke-opacity", String(Math.min(0.15, 0.035 + opacity * 0.85)));
+      polygon.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + opacity * 0.9)));
       polygon.setAttribute("stroke-width", "2");
       polygon.setAttribute("stroke-linejoin", "round");
       polygon.setAttribute("vector-effect", "non-scaling-stroke");
