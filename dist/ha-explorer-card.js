@@ -3524,8 +3524,8 @@ let ke = class extends Be {
       }), g.appendChild(k), u.appendChild(g), e.appendChild(u);
     }
   }
-  appendFog(e) {
-    [
+  appendFog(e, t = "fog") {
+    const i = [
       [55, 14, 0],
       [145, -19, 1],
       [245, 23, 2],
@@ -3536,12 +3536,13 @@ let ke = class extends Be {
       [785, -21, 7],
       [895, 19, 8],
       [985, -15, 9]
-    ].forEach(([i, r, n]) => {
-      const o = this.svg("path");
-      this.attrs(o, {
-        d: `M -120 ${i} C 180 ${i + r}, 390 ${i - r}, 620 ${i} S 980 ${i + r}, 1120 ${i}`,
-        class: `weather-fog-band weather-fog-band-${n}`
-      }), e.appendChild(o);
+    ];
+    (t === "cloudy" ? i.filter((n, o) => o % 2 === 0) : t === "partlycloudy" ? i.filter((n, o) => [2, 5, 8].includes(o)) : i).forEach(([n, o, s]) => {
+      const a = this.svg("path");
+      this.attrs(a, {
+        d: `M -120 ${n} C 180 ${n + o}, 390 ${n - o}, 620 ${n} S 980 ${n + o}, 1120 ${n}`,
+        class: `weather-fog-band weather-fog-band-${s}${t === "fog" ? "" : ` is-cloud-mist is-${t}-mist`}`
+      }), e.appendChild(a);
     });
   }
   appendRain(e, t = !1) {
@@ -3584,7 +3585,7 @@ let ke = class extends Be {
     const i = this.svg("defs");
     i.setAttribute("data-weather-mask", this.weatherMaskId), i.appendChild(this.createWeatherMask()), i.appendChild(this.createCloudFilter()), e.insertBefore(i, e.firstChild);
     const r = this.svg("g"), n = this.weatherState.replace(/[^a-z0-9_-]/g, "");
-    if (r.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${n}${this.weatherNight ? " is-night" : ""}`), r.setAttribute("mask", `url(#${this.weatherMaskId})`), r.setAttribute("pointer-events", "none"), r.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0.25, this.weatherIntensity || 0.6)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && this.appendClouds(r), this.weatherEffect === "fog" && this.appendFog(r), this.weatherEffect === "rain" && this.appendRain(r, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(r, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && this.appendSnow(r), this.weatherState === "snowy-rainy" && this.appendRain(r), this.weatherState === "hail" && this.appendHail(r), this.weatherEffect === "wind" && this.appendWind(r), this.weatherEffect === "exceptional" && (this.appendClouds(r), this.appendWind(r)), this.weatherEffect === "storm") {
+    if (r.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${n}${this.weatherNight ? " is-night" : ""}`), r.setAttribute("mask", `url(#${this.weatherMaskId})`), r.setAttribute("pointer-events", "none"), r.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0.25, this.weatherIntensity || 0.6)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && this.appendClouds(r), this.weatherEffect === "fog" && this.appendFog(r), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(r, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(r, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(r, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(r, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && this.appendSnow(r), this.weatherState === "snowy-rainy" && this.appendRain(r), this.weatherState === "hail" && this.appendHail(r), this.weatherEffect === "wind" && this.appendWind(r), this.weatherEffect === "exceptional" && (this.appendClouds(r), this.appendWind(r)), this.weatherEffect === "storm") {
       const s = this.svg("rect");
       this.attrs(s, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), r.appendChild(s);
     }
@@ -3663,6 +3664,20 @@ ke.styles = I`
     .weather-outside-rooms-scene .weather-fog-band-7 { stroke-width: 40; opacity: .34; animation-duration: 19s; }
     .weather-outside-rooms-scene .weather-fog-band-4,
     .weather-outside-rooms-scene .weather-fog-band-9 { stroke-width: 30; opacity: .52; animation-duration: 14s; }
+    .weather-outside-rooms-scene .weather-fog-band.is-cloudy-mist {
+      stroke: #d9d3c6;
+      stroke-width: 25;
+      opacity: .28;
+      filter: blur(15px);
+      animation-duration: 24s;
+    }
+    .weather-outside-rooms-scene .weather-fog-band.is-partlycloudy-mist {
+      stroke: #e2dac9;
+      stroke-width: 20;
+      opacity: .18;
+      filter: blur(17px);
+      animation-duration: 28s;
+    }
     .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
     .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
     .weather-outside-rooms-scene .weather-snow-flake { fill: #fff7df; stroke: #a89b82; stroke-width: 1; opacity: .96; animation: explorerSnowFall 7s linear infinite; }
@@ -7665,7 +7680,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[o]) && (n = (r ? s(t, i, n) : s(n)) || n);
   return r && n && As(t, i, n), n;
 };
-const br = "0.40.4";
+const br = "0.40.5";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;

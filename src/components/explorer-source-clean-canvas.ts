@@ -335,7 +335,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     }
   }
 
-  private appendFog(layer: SVGGElement): void {
+  private appendFog(layer: SVGGElement, mode: "fog" | "cloudy" | "partlycloudy" = "fog"): void {
     const fogBanks: Array<[number, number, number]> = [
       [55, 14, 0],
       [145, -19, 1],
@@ -349,11 +349,17 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       [985, -15, 9],
     ];
 
-    fogBanks.forEach(([y, wobble, variant]) => {
+    const visibleBanks = mode === "cloudy"
+      ? fogBanks.filter((_, index) => index % 2 === 0)
+      : mode === "partlycloudy"
+        ? fogBanks.filter((_, index) => [2, 5, 8].includes(index))
+        : fogBanks;
+
+    visibleBanks.forEach(([y, wobble, variant]) => {
       const path = this.svg("path");
       this.attrs(path, {
         d: `M -120 ${y} C 180 ${y + wobble}, 390 ${y - wobble}, 620 ${y} S 980 ${y + wobble}, 1120 ${y}`,
-        class: `weather-fog-band weather-fog-band-${variant}`,
+        class: `weather-fog-band weather-fog-band-${variant}${mode === "fog" ? "" : ` is-cloud-mist is-${mode}-mist`}`,
       });
       layer.appendChild(path);
     });
@@ -444,6 +450,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
     if (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") this.appendClouds(layer);
     if (this.weatherEffect === "fog") this.appendFog(layer);
+    if (this.weatherEffect === "cloudy" && this.weatherState === "cloudy") this.appendFog(layer, "cloudy");
+    if (this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy") this.appendFog(layer, "partlycloudy");
     if (this.weatherEffect === "rain") this.appendRain(layer, this.weatherState === "pouring");
     if (this.weatherEffect === "storm" && this.weatherState !== "lightning") this.appendRain(layer, this.weatherState === "lightning-rainy");
     if (this.weatherEffect === "snow" && this.weatherState !== "hail") this.appendSnow(layer);
@@ -536,6 +544,20 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene .weather-fog-band-7 { stroke-width: 40; opacity: .34; animation-duration: 19s; }
     .weather-outside-rooms-scene .weather-fog-band-4,
     .weather-outside-rooms-scene .weather-fog-band-9 { stroke-width: 30; opacity: .52; animation-duration: 14s; }
+    .weather-outside-rooms-scene .weather-fog-band.is-cloudy-mist {
+      stroke: #d9d3c6;
+      stroke-width: 25;
+      opacity: .28;
+      filter: blur(15px);
+      animation-duration: 24s;
+    }
+    .weather-outside-rooms-scene .weather-fog-band.is-partlycloudy-mist {
+      stroke: #e2dac9;
+      stroke-width: 20;
+      opacity: .18;
+      filter: blur(17px);
+      animation-duration: 28s;
+    }
     .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
     .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
     .weather-outside-rooms-scene .weather-snow-flake { fill: #fff7df; stroke: #a89b82; stroke-width: 1; opacity: .96; animation: explorerSnowFall 7s linear infinite; }
