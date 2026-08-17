@@ -14,7 +14,7 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.40.6";
+const CARD_VERSION = "0.40.7";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -460,6 +460,12 @@ export class HaExplorerCard extends LitElement {
       transition:
         background 0.6s,
         color 0.6s;
+    }
+    @media (min-width: 900px) and (min-height: 600px) {
+      ha-card:not(.preview) {
+        max-width: min(1100px, calc(100dvh - 148px));
+        margin-inline: auto;
+      }
     }
     ha-card.preview explorer-source-clean-canvas {
       --explorer-viewport-max-height: min(52vh, 520px);

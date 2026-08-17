@@ -7801,7 +7801,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
-const br = "0.40.6";
+const br = "0.40.7";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8144,6 +8144,12 @@ Fe.styles = I`
       transition:
         background 0.6s,
         color 0.6s;
+    }
+    @media (min-width: 900px) and (min-height: 600px) {
+      ha-card:not(.preview) {
+        max-width: min(1100px, calc(100dvh - 148px));
+        margin-inline: auto;
+      }
     }
     ha-card.preview explorer-source-clean-canvas {
       --explorer-viewport-max-height: min(52vh, 520px);
