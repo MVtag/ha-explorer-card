@@ -14,7 +14,7 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.40.2";
+const CARD_VERSION = "0.40.3";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -412,10 +412,7 @@ export class HaExplorerCard extends LitElement {
         <small>Enchanted Atmosphere · v${CARD_VERSION}</small>
       </header>
       <div class="map-stage">
-        <div class="weather-overlay"></div>
-        <div class="weather-particles"></div>
         <div class="weather-flash"></div>
-        ${hasClouds ? this.renderClouds() : nothing}
         <div class="sun-overlay"></div>
         <div class="sun-disc"></div>
         <explorer-source-clean-canvas
