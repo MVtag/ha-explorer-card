@@ -68,7 +68,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     });
 
     const outside = this.svg("rect");
-    this.attrs(outside, { x: "0", y: "0", width: String(VIEWBOX_SIZE), height: String(VIEWBOX_SIZE), fill: "black" });
+    this.attrs(outside, { x: "0", y: "0", width: String(VIEWBOX_SIZE), height: String(VIEWBOX_SIZE), fill: "white" });
     mask.appendChild(outside);
 
     for (const room of this.rooms) {
@@ -76,8 +76,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       const polygon = this.svg("polygon");
       this.attrs(polygon, {
         points: room.points.map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`).join(" "),
-        fill: "white",
-        stroke: "white",
+        fill: "black",
+        stroke: "black",
         "stroke-width": "16",
         "stroke-linejoin": "round",
       });
@@ -89,13 +89,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private appendClouds(layer: SVGGElement): void {
     const clouds: Array<[number, number, number, number, number]> = [
-      [470, 250, 1.55, 0, .96],
-      [610, 360, 1.34, 1, .90],
-      [520, 520, 1.18, 2, .82],
-      [300, 390, 1.06, 3, .78],
-      [760, 250, 1.12, 4, .78],
-      [350, 680, 1.18, 5, .74],
-      [720, 720, 1.16, 6, .74],
+      [115, 95, 1.15, 0, .88],
+      [380, 72, .95, 1, .76],
+      [820, 105, 1.22, 2, .86],
+      [930, 320, 1.0, 3, .78],
+      [95, 560, 1.1, 4, .82],
+      [910, 705, 1.12, 5, .80],
+      [190, 900, 1.28, 6, .86],
+      [720, 930, 1.18, 7, .82],
     ];
 
     const puffs: Array<[number, number, number, number, number]> = [
