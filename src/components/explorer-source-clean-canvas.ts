@@ -89,33 +89,37 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private appendClouds(layer: SVGGElement): void {
     const clouds: Array<[number, number, number, number, number]> = [
-      [115, 95, 1.15, 0, .88],
-      [380, 72, .95, 1, .76],
-      [820, 105, 1.22, 2, .86],
-      [930, 320, 1.0, 3, .78],
-      [95, 560, 1.1, 4, .82],
-      [910, 705, 1.12, 5, .80],
-      [190, 900, 1.28, 6, .86],
-      [720, 930, 1.18, 7, .82],
+      [470, 250, 1.55, 0, .96],
+      [610, 360, 1.34, 1, .90],
+      [520, 520, 1.18, 2, .82],
+      [300, 390, 1.06, 3, .78],
+      [760, 250, 1.12, 4, .78],
+      [350, 680, 1.18, 5, .74],
+      [720, 720, 1.16, 6, .74],
     ];
 
     const puffs: Array<[number, number, number, number, number]> = [
-      [-82, 4, 92, 56, .48],
-      [-48, -30, 86, 62, .58],
-      [0, -44, 104, 70, .68],
-      [58, -28, 92, 64, .60],
-      [92, 8, 80, 54, .46],
-      [40, 22, 118, 66, .52],
-      [-28, 26, 122, 68, .54],
-      [2, 4, 150, 82, .34],
+      [-82, 4, 92, 56, .52],
+      [-48, -30, 86, 62, .62],
+      [0, -44, 104, 70, .74],
+      [58, -28, 92, 64, .66],
+      [92, 8, 80, 54, .50],
+      [40, 22, 118, 66, .58],
+      [-28, 26, 122, 68, .60],
+      [2, 4, 150, 82, .40],
     ];
 
     for (const [x, y, scale, index, opacity] of clouds) {
+      const positionGroup = this.svg("g");
+      this.attrs(positionGroup, {
+        class: "weather-cloud-position",
+        transform: `translate(${x} ${y}) scale(${scale})`,
+        opacity: String(opacity),
+      });
+
       const group = this.svg("g");
       this.attrs(group, {
         class: `weather-cloud weather-cloud-${index % 3}`,
-        transform: `translate(${x} ${y}) scale(${scale})`,
-        opacity: String(opacity),
       });
 
       for (const [cx, cy, rx, ry, puffOpacity] of puffs) {
@@ -132,9 +136,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       }
 
       const haze = this.svg("ellipse");
-      this.attrs(haze, { cx: "2", cy: "12", rx: "178", ry: "96", opacity: ".22", class: "weather-cloud-haze" });
+      this.attrs(haze, { cx: "2", cy: "12", rx: "178", ry: "96", opacity: ".30", class: "weather-cloud-haze" });
       group.appendChild(haze);
-      layer.appendChild(group);
+      positionGroup.appendChild(group);
+      layer.appendChild(positionGroup);
     }
   }
 
@@ -213,13 +218,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   static override styles = css`
     ${ExplorerOpeningsCanvas.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
+    .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.25)); }
     .weather-outside-rooms-scene .weather-cloud { animation: explorerCloudDrift 28s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
     .weather-outside-rooms-scene .weather-cloud-1 { animation-duration: 34s; animation-direction: alternate-reverse; }
     .weather-outside-rooms-scene .weather-cloud-2 { animation-duration: 40s; }
-    .weather-outside-rooms-scene .weather-cloud-puff { fill: #eee3c7; mix-blend-mode: screen; filter: blur(12px); }
-    .weather-outside-rooms-scene .weather-cloud-haze { fill: #d8c9a8; mix-blend-mode: screen; filter: blur(28px); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-puff { fill: #c8c2b5; opacity: .52; mix-blend-mode: soft-light; }
-    .weather-outside-rooms-scene.is-night .weather-cloud-haze { fill: #8f8c86; opacity: .30; mix-blend-mode: soft-light; }
+    .weather-outside-rooms-scene .weather-cloud-puff { fill: #d9c7a1; filter: blur(9px); }
+    .weather-outside-rooms-scene .weather-cloud-haze { fill: #a99470; filter: blur(20px); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-puff { fill: #bcb5a8; opacity: .58; }
+    .weather-outside-rooms-scene.is-night .weather-cloud-haze { fill: #77746e; opacity: .38; }
     .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
     .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
     .weather-outside-rooms-scene .weather-rain-streak { stroke: #3d4d55; stroke-width: 3.8; stroke-linecap: round; opacity: .82; animation: explorerRainFall 1.05s linear infinite; }
@@ -229,8 +235,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.08) saturate(.72); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-puff { fill: #f3e7c9; }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-haze { fill: #dfcfaa; }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-puff { fill: #d7c39a; }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-haze { fill: #9e8863; }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-snow-flake { fill: #f1e5c5; }
     @keyframes explorerCloudDrift { from { transform: translate(-14px,-4px) scale(1); } to { transform: translate(22px,7px) scale(1.06); } }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
