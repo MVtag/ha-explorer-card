@@ -7588,7 +7588,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
-const br = "0.40.0-beta.33";
+const br = "0.40.0-beta.34";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -7623,8 +7623,10 @@ let Fe = class extends L {
   weatherState() {
     const e = this.config?.appearance?.weather;
     if (!e?.enabled) return "clear";
-    const t = e.entity?.trim();
-    return t && this.hass?.states[t]?.state?.trim().toLowerCase() || "clear";
+    const t = e.preview_state?.trim().toLowerCase();
+    if (this.preview && t && t !== "live") return t;
+    const i = e.entity?.trim();
+    return i && this.hass?.states[i]?.state?.trim().toLowerCase() || "clear";
   }
   weatherEffect(e = this.weatherState()) {
     const t = this.config?.appearance?.weather;
