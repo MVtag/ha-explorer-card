@@ -92,23 +92,23 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     const filter = this.svg("filter");
     this.attrs(filter, {
       id: this.cloudFilterId,
-      x: "-40%",
-      y: "-50%",
-      width: "180%",
-      height: "210%",
+      x: "-55%",
+      y: "-65%",
+      width: "210%",
+      height: "240%",
       colorInterpolationFilters: "sRGB",
     });
 
     const blur = this.svg("feGaussianBlur");
-    this.attrs(blur, { in: "SourceGraphic", stdDeviation: "2.7", result: "soft" });
+    this.attrs(blur, { in: "SourceGraphic", stdDeviation: "3.4", result: "soft" });
     filter.appendChild(blur);
 
     const turbulence = this.svg("feTurbulence");
     this.attrs(turbulence, {
       type: "fractalNoise",
-      baseFrequency: "0.016 0.028",
+      baseFrequency: "0.012 0.021",
       numOctaves: "4",
-      seed: "37",
+      seed: "53",
       result: "noise",
     });
     filter.appendChild(turbulence);
@@ -117,7 +117,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     this.attrs(displacement, {
       in: "soft",
       in2: "noise",
-      scale: "18",
+      scale: "24",
       xChannelSelector: "R",
       yChannelSelector: "G",
       result: "warped",
@@ -125,7 +125,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     filter.appendChild(displacement);
 
     const finish = this.svg("feGaussianBlur");
-    this.attrs(finish, { in: "warped", stdDeviation: "1.2" });
+    this.attrs(finish, { in: "warped", stdDeviation: "2.1" });
     filter.appendChild(finish);
 
     return filter;
@@ -133,29 +133,36 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private appendClouds(layer: SVGGElement): void {
     const clouds: Array<[number, number, number, number, number]> = [
-      [52, 92, 1.08, 0, .92],
-      [360, 36, .86, 1, .70],
-      [895, 112, 1.10, 2, .88],
-      [1012, 382, .96, 3, .80],
-      [22, 600, 1.04, 4, .88],
-      [1005, 735, 1.06, 5, .84],
-      [148, 968, 1.18, 6, .92],
-      [778, 995, 1.12, 7, .88],
+      [52, 92, 1.08, 0, .84],
+      [360, 36, .86, 1, .64],
+      [895, 112, 1.10, 2, .82],
+      [1012, 382, .96, 3, .74],
+      [22, 600, 1.04, 4, .82],
+      [1005, 735, 1.06, 5, .78],
+      [148, 968, 1.18, 6, .84],
+      [778, 995, 1.12, 7, .80],
     ];
 
     const puffs: Array<[number, number, number, number, number]> = [
-      [-120, 22, 58, 34, .50],
-      [-92, -12, 68, 42, .62],
-      [-60, -46, 74, 48, .76],
-      [-16, -70, 82, 54, .90],
-      [34, -64, 78, 52, .86],
-      [78, -40, 70, 46, .72],
-      [112, -8, 60, 38, .58],
-      [128, 22, 52, 32, .42],
-      [82, 26, 82, 34, .58],
-      [24, 36, 108, 40, .62],
-      [-42, 34, 98, 38, .58],
-      [-92, 30, 72, 34, .48],
+      [-120, 22, 54, 31, .42],
+      [-92, -12, 64, 39, .54],
+      [-60, -46, 70, 45, .66],
+      [-16, -70, 78, 50, .78],
+      [34, -64, 74, 49, .74],
+      [78, -40, 66, 43, .62],
+      [112, -8, 56, 35, .50],
+      [128, 22, 48, 29, .36],
+      [82, 26, 76, 31, .48],
+      [24, 36, 100, 37, .52],
+      [-42, 34, 92, 35, .48],
+      [-92, 30, 68, 31, .40],
+    ];
+
+    const shapeTransforms = [
+      "scale(1 .92) skewX(-3)",
+      "scale(.96 1.04) skewX(4)",
+      "scale(1.06 .88) skewX(-5)",
+      "scale(.98 .95) skewX(3)",
     ];
 
     for (const [x, y, scale, index, opacity] of clouds) {
@@ -171,6 +178,22 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         class: `weather-cloud weather-cloud-${index % 3} weather-cloud-depth-${index % 2}`,
       });
 
+      const mist = this.svg("g");
+      this.attrs(mist, {
+        class: "weather-cloud-mist",
+        transform: index % 2 === 0 ? "translate(-12 12) scale(1.08 .82)" : "translate(14 7) scale(.96 .9)",
+      });
+      const mistOne = this.svg("ellipse");
+      this.attrs(mistOne, { cx: "-28", cy: "32", rx: "158", ry: "42" });
+      mist.appendChild(mistOne);
+      const mistTwo = this.svg("ellipse");
+      this.attrs(mistTwo, { cx: "72", cy: "8", rx: "112", ry: "34", opacity: ".62" });
+      mist.appendChild(mistTwo);
+      const mistThree = this.svg("ellipse");
+      this.attrs(mistThree, { cx: "-98", cy: "-2", rx: "88", ry: "28", opacity: ".50" });
+      mist.appendChild(mistThree);
+      driftGroup.appendChild(mist);
+
       const shadow = this.svg("path");
       this.attrs(shadow, {
         d: "M-160 38 C-128 2 -94 -8 -62 4 C-36 18 -8 19 18 7 C52 -9 91 -2 118 18 C144 37 142 62 117 76 C80 96 28 95 -14 91 C-61 88 -111 91 -145 72 C-164 61 -171 49 -160 38 Z",
@@ -182,6 +205,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       this.attrs(body, {
         class: "weather-cloud-body",
         filter: `url(#${this.cloudFilterId})`,
+        transform: shapeTransforms[index % shapeTransforms.length],
       });
 
       const base = this.svg("path");
@@ -206,17 +230,24 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
       const wispOne = this.svg("path");
       this.attrs(wispOne, {
-        d: "M-148 42 C-116 62 -78 59 -48 50 C-16 41 10 52 36 58 C69 66 104 59 139 43 C109 76 65 90 17 84 C-27 79 -63 76 -98 81 C-122 78 -143 66 -148 42 Z",
+        d: "M-164 45 C-126 67 -83 64 -49 53 C-14 42 15 55 43 61 C78 68 115 59 151 39 C118 79 72 95 19 88 C-29 82 -68 80 -106 86 C-135 82 -159 67 -164 45 Z",
         class: "weather-cloud-wisp",
       });
       body.appendChild(wispOne);
 
       const wispTwo = this.svg("path");
       this.attrs(wispTwo, {
-        d: "M-104 -10 C-73 -37 -38 -41 -12 -29 C16 -15 43 -17 72 -37 C57 -6 30 10 4 9 C-31 9 -58 2 -82 10 C-94 8 -103 1 -104 -10 Z",
+        d: "M-111 -8 C-78 -40 -41 -45 -13 -31 C17 -16 47 -19 78 -41 C61 -7 33 13 4 12 C-33 12 -62 4 -88 13 C-101 11 -110 3 -111 -8 Z",
         class: "weather-cloud-detail",
       });
       body.appendChild(wispTwo);
+
+      const lowerMist = this.svg("path");
+      this.attrs(lowerMist, {
+        d: "M-179 68 C-128 91 -72 83 -26 79 C25 75 65 89 112 76 C91 104 42 116 -12 109 C-70 102 -121 113 -164 92 C-179 84 -187 76 -179 68 Z",
+        class: "weather-cloud-lower-mist",
+      });
+      body.appendChild(lowerMist);
       driftGroup.appendChild(body);
 
       const highlight = this.svg("path");
@@ -307,31 +338,36 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   static override styles = css`
     ${ExplorerOpeningsCanvas.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
-    .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.12)); }
+    .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.05)); }
     .weather-outside-rooms-scene .weather-cloud {
-      animation: explorerCloudDriftA 34s ease-in-out infinite alternate;
+      animation: explorerCloudDriftA 36s ease-in-out infinite alternate;
       transform-box: fill-box;
       transform-origin: center;
       will-change: transform, opacity;
     }
-    .weather-outside-rooms-scene .weather-cloud-1 { animation-name: explorerCloudDriftB; animation-duration: 42s; animation-direction: alternate-reverse; }
-    .weather-outside-rooms-scene .weather-cloud-2 { animation-name: explorerCloudDriftC; animation-duration: 50s; }
-    .weather-outside-rooms-scene .weather-cloud-shadow { fill: rgba(60, 43, 28, .34); filter: blur(13px); }
-    .weather-outside-rooms-scene .weather-cloud-base { fill: rgba(184, 164, 125, .78); }
-    .weather-outside-rooms-scene .weather-cloud-puff { fill: rgba(229, 213, 177, .86); }
-    .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(119, 91, 57, .34); }
-    .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 238, 201, .18); }
-    .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 244, 213, .34); filter: blur(7px); }
-    .weather-outside-rooms-scene .weather-cloud-depth-1 { opacity: .82; }
-    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-base { fill: rgba(151, 136, 110, .78); }
-    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-puff { fill: rgba(205, 191, 163, .82); }
-    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-shadow { fill: rgba(52, 39, 29, .40); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-shadow { fill: rgba(28, 31, 36, .42); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-base { fill: rgba(126, 126, 123, .66); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-puff { fill: rgba(173, 170, 162, .62); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-wisp { fill: rgba(74, 76, 79, .40); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-detail { fill: rgba(213, 209, 196, .12); }
-    .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(220, 216, 200, .18); }
+    .weather-outside-rooms-scene .weather-cloud-1 { animation-name: explorerCloudDriftB; animation-duration: 45s; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-cloud-2 { animation-name: explorerCloudDriftC; animation-duration: 54s; }
+    .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(236, 233, 224, .28); filter: blur(20px); }
+    .weather-outside-rooms-scene .weather-cloud-shadow { fill: rgba(67, 60, 51, .15); filter: blur(18px); }
+    .weather-outside-rooms-scene .weather-cloud-base { fill: rgba(220, 216, 205, .48); }
+    .weather-outside-rooms-scene .weather-cloud-puff { fill: rgba(241, 237, 226, .62); }
+    .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(203, 198, 187, .24); }
+    .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 252, 243, .24); }
+    .weather-outside-rooms-scene .weather-cloud-lower-mist { fill: rgba(223, 220, 211, .22); filter: blur(12px); }
+    .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 252, 240, .28); filter: blur(9px); }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 { opacity: .72; }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-mist { fill: rgba(220, 220, 216, .22); }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-base { fill: rgba(199, 198, 192, .42); }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-puff { fill: rgba(225, 223, 216, .52); }
+    .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-shadow { fill: rgba(62, 59, 54, .14); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-mist { fill: rgba(154, 166, 176, .18); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-shadow { fill: rgba(21, 27, 34, .22); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-base { fill: rgba(131, 141, 149, .40); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-puff { fill: rgba(184, 191, 195, .46); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-wisp { fill: rgba(105, 117, 127, .20); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-detail { fill: rgba(224, 228, 226, .14); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-lower-mist { fill: rgba(119, 131, 141, .16); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(220, 226, 225, .16); }
     .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
     .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
     .weather-outside-rooms-scene .weather-rain-streak { stroke: #3d4d55; stroke-width: 3.8; stroke-linecap: round; opacity: .82; animation: explorerRainFall 1.05s linear infinite; }
@@ -340,28 +376,30 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-rain-streak { stroke: #879398; opacity: .78; }
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: multiply; filter: sepia(.18) saturate(.82) contrast(1.07); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-shadow { fill: rgba(61, 39, 22, .42); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-base { fill: rgba(173, 145, 103, .82); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-puff { fill: rgba(222, 195, 150, .88); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(106, 72, 40, .40); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 224, 171, .18); }
-    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 230, 180, .30); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.07) saturate(.72) contrast(.98); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(239, 228, 207, .26); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-shadow { fill: rgba(79, 66, 50, .16); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-base { fill: rgba(224, 212, 191, .50); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-puff { fill: rgba(242, 232, 214, .64); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(200, 184, 158, .22); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 245, 225, .22); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-lower-mist { fill: rgba(225, 214, 195, .20); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 246, 227, .28); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-snow-flake { fill: #f1e5c5; }
     @keyframes explorerCloudDriftA {
-      0% { transform: translate(-44px,-8px) scale(.985); opacity: .91; }
-      48% { transform: translate(14px,4px) scale(1.012); opacity: 1; }
-      100% { transform: translate(96px,10px) scale(1.035); opacity: .94; }
+      0% { transform: translate(-50px,-9px) scale(.985); opacity: .88; }
+      48% { transform: translate(12px,4px) scale(1.012); opacity: 1; }
+      100% { transform: translate(104px,11px) scale(1.035); opacity: .90; }
     }
     @keyframes explorerCloudDriftB {
-      0% { transform: translate(62px,-5px) scale(1.02); opacity: .92; }
-      50% { transform: translate(4px,7px) scale(.995); opacity: 1; }
-      100% { transform: translate(-86px,13px) scale(1.028); opacity: .95; }
+      0% { transform: translate(68px,-6px) scale(1.02); opacity: .88; }
+      50% { transform: translate(3px,7px) scale(.995); opacity: 1; }
+      100% { transform: translate(-94px,14px) scale(1.028); opacity: .91; }
     }
     @keyframes explorerCloudDriftC {
-      0% { transform: translate(-34px,10px) scale(.99); opacity: .92; }
-      47% { transform: translate(18px,-5px) scale(1.02); opacity: 1; }
-      100% { transform: translate(82px,13px) scale(1.01); opacity: .94; }
+      0% { transform: translate(-40px,11px) scale(.99); opacity: .88; }
+      47% { transform: translate(16px,-5px) scale(1.02); opacity: 1; }
+      100% { transform: translate(90px,14px) scale(1.01); opacity: .90; }
     }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
     @keyframes explorerRainFall { from { transform: translate(18px,-55px); } to { transform: translate(-18px,70px); } }
