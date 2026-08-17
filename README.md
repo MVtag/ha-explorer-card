@@ -197,16 +197,12 @@ dist/ha-explorer-card.js
 
 ## Roadmap
 
-1. SVG floor-plan rendering and zoom
-2. Interactive room engine
-3. Presence engine
-4. Home Assistant entity binding
-5. Room-aware automatic placement
-6. Visual room and presence binding editor
-7. Visual floorplan room drawing
-8. Animated movement and footsteps
-9. Themes and custom overlays
-10. Interactive room details and controls
+Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
+
+1. **Weather simulator** — preview `sunny`, `partlycloudy`, `cloudy`, `rain`, `storm`, `fog` and `snow` without changing the real Home Assistant weather entity.
+2. **Movement History 2.0** — safely restore the optional 1–5 minute movement history without risking the main floorplan rendering path.
+3. **Pet & Robot Trails 2.0** — improve pet trails with more distinct paw prints and give robot vacuums a clearer continuous movement route.
+4. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
 
 ## License
 
