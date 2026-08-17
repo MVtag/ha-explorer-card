@@ -3525,12 +3525,23 @@ let ke = class extends Be {
     }
   }
   appendFog(e) {
-    [105, 245, 405, 610, 805, 930].forEach((t, i) => {
-      const r = this.svg("path"), n = i % 2 === 0 ? 18 : -22;
-      this.attrs(r, {
-        d: `M -120 ${t} C 180 ${t + n}, 390 ${t - n}, 620 ${t} S 980 ${t + n}, 1120 ${t}`,
-        class: "weather-fog-band"
-      }), e.appendChild(r);
+    [
+      [55, 14, 0],
+      [145, -19, 1],
+      [245, 23, 2],
+      [345, -16, 3],
+      [455, 20, 4],
+      [565, -24, 5],
+      [675, 17, 6],
+      [785, -21, 7],
+      [895, 19, 8],
+      [985, -15, 9]
+    ].forEach(([i, r, n]) => {
+      const o = this.svg("path");
+      this.attrs(o, {
+        d: `M -120 ${i} C 180 ${i + r}, 390 ${i - r}, 620 ${i} S 980 ${i + r}, 1120 ${i}`,
+        class: `weather-fog-band weather-fog-band-${n}`
+      }), e.appendChild(o);
     });
   }
   appendRain(e, t = !1) {
@@ -3642,8 +3653,16 @@ ke.styles = I`
     .weather-outside-rooms-scene.is-night .weather-cloud-strand { fill: rgba(125, 138, 148, .12); }
     .weather-outside-rooms-scene.is-night .weather-cloud-fine-strand { fill: rgba(164, 174, 181, .09); }
     .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(218, 225, 225, .13); }
-    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
-    .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 34; stroke-linecap: round; opacity: .56; filter: blur(11px); animation: explorerFogDrift 16s ease-in-out infinite alternate; }
+    .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #a9a193; opacity: .30; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-fog-band-1,
+    .weather-outside-rooms-scene .weather-fog-band-6 { stroke-width: 48; opacity: .42; animation-duration: 21s; }
+    .weather-outside-rooms-scene .weather-fog-band-2,
+    .weather-outside-rooms-scene .weather-fog-band-8 { stroke-width: 26; opacity: .48; animation-duration: 12s; }
+    .weather-outside-rooms-scene .weather-fog-band-3,
+    .weather-outside-rooms-scene .weather-fog-band-7 { stroke-width: 40; opacity: .34; animation-duration: 19s; }
+    .weather-outside-rooms-scene .weather-fog-band-4,
+    .weather-outside-rooms-scene .weather-fog-band-9 { stroke-width: 30; opacity: .52; animation-duration: 14s; }
     .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
     .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
     .weather-outside-rooms-scene .weather-snow-flake { fill: #fff7df; stroke: #a89b82; stroke-width: 1; opacity: .96; animation: explorerSnowFall 7s linear infinite; }
@@ -7646,7 +7665,7 @@ var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t
     (s = e[o]) && (n = (r ? s(t, i, n) : s(n)) || n);
   return r && n && As(t, i, n), n;
 };
-const br = "0.40.3";
+const br = "0.40.4";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
