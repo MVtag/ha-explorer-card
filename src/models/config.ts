@@ -8,7 +8,15 @@ export type RoomReactionKind = string;
 export type ExplorerRoomQuickActionKind = "scene" | "script";
 export type ExplorerTheme = "classic" | "enchanted_antique";
 export type ExplorerDayNightMode = "auto" | "day" | "night";
-export type ExplorerWeatherEffect = "clear" | "cloudy" | "fog" | "rain" | "storm" | "snow";
+export type ExplorerWeatherEffect =
+  | "clear"
+  | "cloudy"
+  | "fog"
+  | "rain"
+  | "storm"
+  | "snow"
+  | "wind"
+  | "exceptional";
 export type ExplorerWeatherPreviewState =
   | "live"
   | "sunny"
@@ -21,7 +29,11 @@ export type ExplorerWeatherPreviewState =
   | "fog"
   | "snowy"
   | "snowy-rainy"
-  | "hail";
+  | "hail"
+  | "windy"
+  | "windy-variant"
+  | "clear-night"
+  | "exceptional";
 export type ExplorerZoneKind = "info" | "warning" | "danger" | "cleaning" | "restricted";
 export type ExplorerOpeningKind = "door" | "window";
 export type ExplorerOpeningHinge = "start" | "end";
@@ -31,7 +43,7 @@ export interface ExplorerDayNightConfig { enabled?:boolean; mode?:ExplorerDayNig
 export interface ExplorerCompassConfig { visible?:boolean; rotation?:number; size?:number; }
 export interface ExplorerAlarmConfig { enabled?:boolean; entity?:string; armed_states?:string[]; triggered_states?:string[]; intensity?:number; }
 export interface ExplorerOccupancyConfig { enabled?:boolean; home_states?:string[]; intensity?:number; }
-export interface ExplorerWeatherConfig { enabled?:boolean; entity?:string; intensity?:number; preview_state?:ExplorerWeatherPreviewState; rain_states?:string[]; storm_states?:string[]; snow_states?:string[]; fog_states?:string[]; cloudy_states?:string[]; }
+export interface ExplorerWeatherConfig { enabled?:boolean; entity?:string; intensity?:number; preview_state?:ExplorerWeatherPreviewState; rain_states?:string[]; storm_states?:string[]; snow_states?:string[]; fog_states?:string[]; cloudy_states?:string[]; wind_states?:string[]; exceptional_states?:string[]; }
 export interface ExplorerAppearanceConfig { theme?:ExplorerTheme; day_night?:ExplorerDayNightConfig; compass?:ExplorerCompassConfig; alarm?:ExplorerAlarmConfig; occupancy?:ExplorerOccupancyConfig; weather?:ExplorerWeatherConfig; hide_source_text?:boolean; }
 export interface ExplorerFloorplanMeters { width:number; height:number; }
 export interface ExplorerCalibrationPoint { sensor_x:number; sensor_y:number; room_x:number; room_y:number; }

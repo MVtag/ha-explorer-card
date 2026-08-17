@@ -34,6 +34,10 @@ const WEATHER_PREVIEW_STATES: Array<[ExplorerWeatherPreviewState, string]> = [
   ["snowy", "❄️ Sne"],
   ["snowy-rainy", "🌨️ Slud / sne og regn"],
   ["hail", "🧊 Hagl"],
+  ["windy", "💨 Blæst"],
+  ["windy-variant", "🌬️ Blæst med skyer"],
+  ["clear-night", "🌙 Klar nat"],
+  ["exceptional", "⚠️ Ekstremt / usædvanligt vejr"],
 ];
 
 @customElement("ha-explorer-theme-editor")
@@ -107,6 +111,8 @@ export class HaExplorerThemeEditor extends LitElement {
         "cloudy",
         "partlycloudy",
       ],
+      wind_states: this.config?.appearance?.weather?.wind_states ?? ["windy", "windy-variant"],
+      exceptional_states: this.config?.appearance?.weather?.exceptional_states ?? ["exceptional"],
     };
   }
 
@@ -439,6 +445,10 @@ export class HaExplorerThemeEditor extends LitElement {
                       ❄️ ${weather.snow_states.join(", ")} · 🌫️
                       ${weather.fog_states.join(", ")} · ☁️
                       ${weather.cloudy_states.join(", ")}
+                    </small>
+                    <small>
+                      💨 ${weather.wind_states.join(", ")} · ⚠️
+                      ${weather.exceptional_states.join(", ")} · 🌙 clear-night
                     </small>
                   </div>
                 </div>
