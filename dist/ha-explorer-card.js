@@ -17,14 +17,14 @@ let Xi = class {
     return this.cssText;
   }
 };
-const Ar = (e) => new Xi(typeof e == "string" ? e : e + "", void 0, Xt), I = (e, ...t) => {
+const _r = (e) => new Xi(typeof e == "string" ? e : e + "", void 0, Xt), I = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + s + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(o) + e[n + 1], e[0]);
   return new Xi(i, e, Xt);
-}, _r = (e, t) => {
+}, Ar = (e, t) => {
   if (Yt) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
   else for (const i of t) {
     const r = document.createElement("style"), o = gt.litNonce;
@@ -33,9 +33,9 @@ const Ar = (e) => new Xi(typeof e == "string" ? e : e + "", void 0, Xt), I = (e,
 }, ui = Yt ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
   for (const r of t.cssRules) i += r.cssText;
-  return Ar(i);
+  return _r(i);
 })(e) : e;
-const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnPropertyNames: Nr, getOwnPropertySymbols: Pr, getPrototypeOf: Rr } = Object, At = globalThis, gi = At.trustedTypes, Mr = gi ? gi.emptyScript : "", zr = At.reactiveElementPolyfillSupport, Ge = (e, t) => e, ft = { toAttribute(e, t) {
+const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnPropertyNames: Nr, getOwnPropertySymbols: Pr, getPrototypeOf: Rr } = Object, _t = globalThis, gi = _t.trustedTypes, Mr = gi ? gi.emptyScript : "", zr = _t.reactiveElementPolyfillSupport, Ge = (e, t) => e, ft = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? Mr : null;
@@ -64,7 +64,7 @@ const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnProperty
   }
   return i;
 } }, Qt = (e, t) => !Sr(e, t), mi = { attribute: !0, type: String, converter: ft, reflect: !1, useDefault: !1, hasChanged: Qt };
-Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), At.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), _t.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let Oe = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
@@ -146,7 +146,7 @@ let Oe = class extends HTMLElement {
   }
   createRenderRoot() {
     const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return _r(t, this.constructor.elementStyles), t;
+    return Ar(t, this.constructor.elementStyles), t;
   }
   connectedCallback() {
     this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t) => t.hostConnected?.());
@@ -246,10 +246,10 @@ let Oe = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Oe.elementStyles = [], Oe.shadowRootOptions = { mode: "open" }, Oe[Ge("elementProperties")] = /* @__PURE__ */ new Map(), Oe[Ge("finalized")] = /* @__PURE__ */ new Map(), zr?.({ ReactiveElement: Oe }), (At.reactiveElementVersions ??= []).push("2.1.2");
+Oe.elementStyles = [], Oe.shadowRootOptions = { mode: "open" }, Oe[Ge("elementProperties")] = /* @__PURE__ */ new Map(), Oe[Ge("finalized")] = /* @__PURE__ */ new Map(), zr?.({ ReactiveElement: Oe }), (_t.reactiveElementVersions ??= []).push("2.1.2");
 const Jt = globalThis, fi = (e) => e, bt = Jt.trustedTypes, bi = bt ? bt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, Qi = "$lit$", we = `lit$${Math.random().toFixed(9).slice(2)}$`, Ji = "?" + we, Or = `<${Ji}>`, Se = document, We = () => Se.createComment(""), Ye = (e) => e === null || typeof e != "object" && typeof e != "function", ei = Array.isArray, Ir = (e) => ei(e) || typeof e?.[Symbol.iterator] == "function", Et = `[ 	
 \f\r]`, Ke = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, yi = /-->/g, vi = />/g, ke = RegExp(`>|${Et}(?:([^\\s"'>=/]+)(${Et}*=${Et}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), xi = /'/g, wi = /"/g, er = /^(?:script|style|textarea|title)$/i, tr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = tr(1), E = tr(2), re = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), $i = /* @__PURE__ */ new WeakMap(), _e = Se.createTreeWalker(Se, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), xi = /'/g, wi = /"/g, er = /^(?:script|style|textarea|title)$/i, tr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = tr(1), E = tr(2), re = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), $i = /* @__PURE__ */ new WeakMap(), Ae = Se.createTreeWalker(Se, 129);
 function ir(e, t) {
   if (!ei(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return bi !== void 0 ? bi.createHTML(t) : t;
@@ -272,21 +272,21 @@ class Xe {
     this.parts = [];
     let n = 0, s = 0;
     const a = t.length - 1, l = this.parts, [d, c] = Tr(t, i);
-    if (this.el = Xe.createElement(d, r), _e.currentNode = this.el.content, i === 2 || i === 3) {
+    if (this.el = Xe.createElement(d, r), Ae.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
     }
-    for (; (o = _e.nextNode()) !== null && l.length < a; ) {
+    for (; (o = Ae.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
         if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(Qi)) {
           const u = c[s++], g = o.getAttribute(p).split(we), y = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: y[2], strings: g, ctor: y[1] === "." ? jr : y[1] === "?" ? Lr : y[1] === "@" ? qr : _t }), o.removeAttribute(p);
+          l.push({ type: 1, index: n, name: y[2], strings: g, ctor: y[1] === "." ? Dr : y[1] === "?" ? Lr : y[1] === "@" ? qr : At }), o.removeAttribute(p);
         } else p.startsWith(we) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (er.test(o.tagName)) {
           const p = o.textContent.split(we), u = p.length - 1;
           if (u > 0) {
             o.textContent = bt ? bt.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(p[g], We()), _e.nextNode(), l.push({ type: 2, index: ++n });
+            for (let g = 0; g < u; g++) o.append(p[g], We()), Ae.nextNode(), l.push({ type: 2, index: ++n });
             o.append(p[u], We());
           }
         }
@@ -303,13 +303,13 @@ class Xe {
     return r.innerHTML = t, r;
   }
 }
-function De(e, t, i = e, r) {
+function je(e, t, i = e, r) {
   if (t === re) return t;
   let o = r !== void 0 ? i._$Co?.[r] : i._$Cl;
   const n = Ye(t) ? void 0 : t._$litDirective$;
-  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = De(e, o._$AS(e, t.values), o, r)), t;
+  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = je(e, o._$AS(e, t.values), o, r)), t;
 }
-class Dr {
+class jr {
   constructor(t, i) {
     this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
@@ -321,16 +321,16 @@ class Dr {
   }
   u(t) {
     const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Se).importNode(i, !0);
-    _e.currentNode = o;
-    let n = _e.nextNode(), s = 0, a = 0, l = r[0];
+    Ae.currentNode = o;
+    let n = Ae.nextNode(), s = 0, a = 0, l = r[0];
     for (; l !== void 0; ) {
       if (s === l.index) {
         let d;
         l.type === 2 ? d = new ot(n, n.nextSibling, this, t) : l.type === 1 ? d = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (d = new Br(n, this, t)), this._$AV.push(d), l = r[++a];
       }
-      s !== l?.index && (n = _e.nextNode(), s++);
+      s !== l?.index && (n = Ae.nextNode(), s++);
     }
-    return _e.currentNode = Se, o;
+    return Ae.currentNode = Se, o;
   }
   p(t) {
     let i = 0;
@@ -356,7 +356,7 @@ class ot {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = De(this, t, i), Ye(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== re && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Ir(t) ? this.k(t) : this._(t);
+    t = je(this, t, i), Ye(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== re && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Ir(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -371,7 +371,7 @@ class ot {
     const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = Xe.createElement(ir(r.h, r.h[0]), this.options)), r);
     if (this._$AH?._$AD === o) this._$AH.p(i);
     else {
-      const n = new Dr(o, this), s = n.u(this.options);
+      const n = new jr(o, this), s = n.u(this.options);
       n.p(i), this.T(s), this._$AH = n;
     }
   }
@@ -396,7 +396,7 @@ class ot {
     this._$AM === void 0 && (this._$Cv = t, this._$AP?.(t));
   }
 }
-class _t {
+class At {
   get tagName() {
     return this.element.tagName;
   }
@@ -409,11 +409,11 @@ class _t {
   _$AI(t, i = this, r, o) {
     const n = this.strings;
     let s = !1;
-    if (n === void 0) t = De(this, t, i, 0), s = !Ye(t) || t !== this._$AH && t !== re, s && (this._$AH = t);
+    if (n === void 0) t = je(this, t, i, 0), s = !Ye(t) || t !== this._$AH && t !== re, s && (this._$AH = t);
     else {
       const a = t;
       let l, d;
-      for (t = n[0], l = 0; l < n.length - 1; l++) d = De(this, a[r + l], i, l), d === re && (d = this._$AH[l]), s ||= !Ye(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
+      for (t = n[0], l = 0; l < n.length - 1; l++) d = je(this, a[r + l], i, l), d === re && (d = this._$AH[l]), s ||= !Ye(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
     }
     s && !o && this.j(t);
   }
@@ -421,7 +421,7 @@ class _t {
     t === f ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
   }
 }
-class jr extends _t {
+class Dr extends At {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -429,7 +429,7 @@ class jr extends _t {
     this.element[this.name] = t === f ? void 0 : t;
   }
 }
-class Lr extends _t {
+class Lr extends At {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -437,12 +437,12 @@ class Lr extends _t {
     this.element.toggleAttribute(this.name, !!t && t !== f);
   }
 }
-class qr extends _t {
+class qr extends At {
   constructor(t, i, r, o, n) {
     super(t, i, r, o, n), this.type = 5;
   }
   _$AI(t, i = this) {
-    if ((t = De(this, t, i, 0) ?? f) === re) return;
+    if ((t = je(this, t, i, 0) ?? f) === re) return;
     const r = this._$AH, o = t === f && r !== f || t.capture !== r.capture || t.once !== r.once || t.passive !== r.passive, n = t !== f && (r === f || o);
     o && this.element.removeEventListener(this.name, this, r), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
@@ -458,7 +458,7 @@ class Br {
     return this._$AM._$AU;
   }
   _$AI(t) {
-    De(this, t);
+    je(this, t);
   }
 }
 const Fr = Jt.litHtmlPolyfillSupport;
@@ -525,14 +525,14 @@ const Kr = { attribute: !0, type: String, converter: ft, reflect: !1, hasChanged
   }
   throw Error("Unsupported decorator location: " + r);
 };
-function _(e) {
+function A(e) {
   return (t, i) => typeof i == "object" ? Gr(e, t, i) : ((r, o, n) => {
     const s = o.hasOwnProperty(n);
     return o.constructor.createProperty(n, r), s ? Object.getOwnPropertyDescriptor(o, n) : void 0;
   })(e, t, i);
 }
 function b(e) {
-  return _({ ...e, state: !0, attribute: !1 });
+  return A({ ...e, state: !0, attribute: !1 });
 }
 const Zr = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
 function Ur(e, t) {
@@ -543,7 +543,7 @@ function Ur(e, t) {
     } });
   };
 }
-const Ae = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, rr = (e) => (...t) => ({ _$litDirective$: e, values: t });
+const _e = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, rr = (e) => (...t) => ({ _$litDirective$: e, values: t });
 class or {
   constructor(t) {
   }
@@ -562,7 +562,7 @@ class or {
 }
 class Kt extends or {
   constructor(t) {
-    if (super(t), this.it = f, t.type !== Ae.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
+    if (super(t), this.it = f, t.type !== _e.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
   }
   render(t) {
     if (t === f || t == null) return this._t = void 0, this.it = t;
@@ -618,7 +618,7 @@ function ki(e) {
   const t = e.intensity;
   return typeof t != "number" || !Number.isFinite(t) ? 1 : nr(t);
 }
-function Ai(e) {
+function _i(e) {
   const t = e?.unit_of_measurement;
   return typeof t == "string" && t.trim() ? t.trim() : void 0;
 }
@@ -631,7 +631,7 @@ function sr(e, t, i) {
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
     const d = Number(n.state);
-    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: Ai(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Ai(n.attributes), reason: "state_inactive" };
+    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: _i(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: _i(n.attributes), reason: "state_inactive" };
   }
   const s = n.state.trim().toLowerCase(), a = o.map((d) => d.toLowerCase()).includes(s);
   let l = 0;
@@ -1042,13 +1042,13 @@ ge.styles = I`
     }
   `;
 Ne([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ge.prototype, "room", 2);
 Ne([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ge.prototype, "presences", 2);
 Ne([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ge.prototype, "hass", 2);
 Ne([
   b()
@@ -1063,7 +1063,7 @@ ge = Ne([
   z("explorer-room-panel")
 ], ge);
 const v = 1e3;
-function _i(e, t, i) {
+function Ai(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
 function no(e) {
@@ -1193,7 +1193,7 @@ let B = class extends L {
     });
   }
   resetViewport() {
-    this.viewport = { zoom: _i(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
+    this.viewport = { zoom: Ai(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
   }
   toViewBoxPoint(e) {
     const t = this.renderRoot.querySelector("svg.floorplan");
@@ -1203,7 +1203,7 @@ let B = class extends L {
   }
   handleWheel(e) {
     e.preventDefault();
-    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = _i(this.viewport.zoom * i, this.minZoom, this.maxZoom);
+    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = Ai(this.viewport.zoom * i, this.minZoom, this.maxZoom);
     this.viewport = so(this.viewport, r, t.x, t.y);
   }
   handlePointerDown(e) {
@@ -1245,28 +1245,28 @@ let B = class extends L {
 };
 B.styles = I`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font-size:.8rem;font-weight:700;pointer-events:none}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
 K([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], B.prototype, "hass", 2);
 K([
-  _()
+  A()
 ], B.prototype, "image", 2);
 K([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], B.prototype, "rooms", 2);
 K([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], B.prototype, "presences", 2);
 K([
-  _({ type: Number, attribute: "min-zoom" })
+  A({ type: Number, attribute: "min-zoom" })
 ], B.prototype, "minZoom", 2);
 K([
-  _({ type: Number, attribute: "max-zoom" })
+  A({ type: Number, attribute: "max-zoom" })
 ], B.prototype, "maxZoom", 2);
 K([
-  _({ type: Number, attribute: "initial-zoom" })
+  A({ type: Number, attribute: "initial-zoom" })
 ], B.prototype, "initialZoom", 2);
 K([
-  _({ attribute: "fit-mode" })
+  A({ attribute: "fit-mode" })
 ], B.prototype, "fitMode", 2);
 K([
   b()
@@ -1339,7 +1339,7 @@ function ar(e) {
 function yo(e) {
   return ar(e.condition?.allowed_states);
 }
-function je(e, t) {
+function De(e, t) {
   if (!e.state_binding)
     return {
       nodeId: e.id,
@@ -1425,7 +1425,7 @@ function vo(e, t, i) {
 function nt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = vo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => je(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    const n = vo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => De(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
     return d ? {
       ...n,
       conditional: p,
@@ -1535,14 +1535,14 @@ function $o(e, t, i, r, o) {
   for (a.forEach((m) => m.forEach((x) => p.add(x.key))), p.forEach((m) => d.set(m, Number.POSITIVE_INFINITY)), d.set(n, 0); p.size; ) {
     let m, x = Number.POSITIVE_INFINITY;
     for (const $ of p) {
-      const A = d.get($) ?? Number.POSITIVE_INFINITY;
-      A < x && (m = $, x = A);
+      const _ = d.get($) ?? Number.POSITIVE_INFINITY;
+      _ < x && (m = $, x = _);
     }
     if (!m || !Number.isFinite(x) || (p.delete(m), m === s)) break;
     for (const $ of a.get(m) ?? []) {
       if (!p.has($.key)) continue;
-      const A = x + $.weight;
-      A < (d.get($.key) ?? Number.POSITIVE_INFINITY) && (d.set($.key, A), c.set($.key, m));
+      const _ = x + $.weight;
+      _ < (d.get($.key) ?? Number.POSITIVE_INFINITY) && (d.set($.key, _), c.set($.key, m));
     }
   }
   if (!Number.isFinite(d.get(s) ?? Number.POSITIVE_INFINITY)) return;
@@ -1644,7 +1644,7 @@ function Ri(e, t) {
       C.node_id && !x.has(C.node_id) && m.push({ from: k.from, to: k.to, nodeId: C.node_id });
     });
   });
-  const $ = nt(e, t), A = $.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => je(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), N = /* @__PURE__ */ new Set();
+  const $ = nt(e, t), _ = $.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => De(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), N = /* @__PURE__ */ new Set();
   return $.forEach((k) => {
     k.conditionSource === "edge" && (k.reason === "missing_entity" || k.reason === "entity_unavailable") && N.add(k.entity ?? "(mangler entity)");
   }), w.forEach((k) => {
@@ -1658,18 +1658,18 @@ function Ri(e, t) {
     disconnectedNodeIds: u,
     brokenRouteNodeReferences: m,
     conditionalEdges: $.filter((k) => k.conditional).length,
-    blockedEdges: A,
+    blockedEdges: _,
     conditionalNodes: w.length,
     blockedNodes: S,
     unresolvedConditionEntities: [...N]
   };
 }
-var Ao = Object.defineProperty, _o = Object.getOwnPropertyDescriptor, St = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? _o(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var _o = Object.defineProperty, Ao = Object.getOwnPropertyDescriptor, St = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ao(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Ao(t, i, o), o;
+  return r && o && _o(t, i, o), o;
 };
-const Nt = 900, Mi = 3600, zi = 58, j = "http://www.w3.org/2000/svg";
+const Nt = 900, Mi = 3600, zi = 58, D = "http://www.w3.org/2000/svg";
 let Le = class extends B {
   constructor() {
     super(...arguments), this.routes = [], this.routeNodes = [], this.routeGraphEdges = [], this.previousPresencePositions = /* @__PURE__ */ new Map(), this.previousPresenceRooms = /* @__PURE__ */ new Map(), this.activeAnimations = /* @__PURE__ */ new Map();
@@ -1689,7 +1689,7 @@ let Le = class extends B {
       if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && d && (Math.abs(d.x - l.x) > 0.01 || Math.abs(d.y - l.y) > 0.01)) {
         const u = this.resolveMovementPath(d, l, c, p);
         this.createFootsteps(u);
-        const g = document.createElementNS(j, "animateTransform");
+        const g = document.createElementNS(D, "animateTransform");
         g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((y) => `${y.x} ${y.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Nt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
           this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
         }, Nt + 80);
@@ -1741,7 +1741,7 @@ let Le = class extends B {
   }
   doorVisualStatus(e, t) {
     if (e.state_binding)
-      return je(
+      return De(
         e,
         (a) => this.hass?.states[a]?.state
       ).active ? "active" : "blocked";
@@ -1757,7 +1757,7 @@ let Le = class extends B {
     return e === "active" ? "var(--success-color, #43a047)" : e === "blocked" ? "var(--error-color, #db4437)" : e === "mixed" ? "var(--warning-color, #ff9800)" : "var(--secondary-text-color, #667085)";
   }
   appendSvgTitle(e, t) {
-    const i = document.createElementNS(j, "title");
+    const i = document.createElementNS(D, "title");
     i.textContent = t, e.appendChild(i);
   }
   syncRouteStatusOverlay() {
@@ -1769,41 +1769,41 @@ let Le = class extends B {
     const i = nt(
       this.routeConfig(),
       (s) => this.hass?.states[s]?.state
-    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(j, "g");
+    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(D, "g");
     o.setAttribute("class", "route-status-scene"), o.setAttribute("aria-label", "Live rutestatus og døre"), o.setAttribute("pointer-events", "none"), i.forEach((s) => {
       const a = this.endpointPoint(s.edge.from), l = this.endpointPoint(s.edge.to);
       if (!a || !l) return;
-      const d = this.edgeStatusColor(s), c = document.createElementNS(j, "line");
+      const d = this.edgeStatusColor(s), c = document.createElementNS(D, "line");
       if (c.setAttribute("x1", String(a.x)), c.setAttribute("y1", String(a.y)), c.setAttribute("x2", String(l.x)), c.setAttribute("y2", String(l.y)), c.setAttribute("stroke", d), c.setAttribute("stroke-linecap", "round"), c.setAttribute("vector-effect", "non-scaling-stroke"), c.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), c.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || c.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && c.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(c, this.statusDescription(s)), o.appendChild(c), !s.conditional) return;
-      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(j, "g");
+      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(D, "g");
       g.setAttribute("transform", `translate(${p} ${u})`);
-      const y = document.createElementNS(j, "circle");
+      const y = document.createElementNS(D, "circle");
       y.setAttribute("r", "12"), y.setAttribute("fill", "var(--card-background-color, #ffffff)"), y.setAttribute("fill-opacity", ".9"), y.setAttribute("stroke", d), y.setAttribute("stroke-width", "3"), y.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(y);
-      const m = document.createElementNS(j, "text");
+      const m = document.createElementNS(D, "text");
       if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", d), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
-        const x = document.createElementNS(j, "animate");
+        const x = document.createElementNS(D, "animate");
         x.setAttribute("attributeName", "opacity"), x.setAttribute("values", "1;.45;1"), x.setAttribute("dur", "1.8s"), x.setAttribute("repeatCount", "indefinite"), g.appendChild(x);
       }
       this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
     }), t.forEach((s) => {
-      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), d = s.point[0] * v, c = s.point[1] * v, p = document.createElementNS(j, "g");
+      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), d = s.point[0] * v, c = s.point[1] * v, p = document.createElementNS(D, "g");
       p.setAttribute("transform", `translate(${d} ${c})`);
-      const u = document.createElementNS(j, "circle");
+      const u = document.createElementNS(D, "circle");
       u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
-      const g = document.createElementNS(j, "rect");
+      const g = document.createElementNS(D, "rect");
       g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
-      const y = document.createElementNS(j, "circle");
+      const y = document.createElementNS(D, "circle");
       if (y.setAttribute("cx", "2"), y.setAttribute("cy", "0"), y.setAttribute("r", "2"), y.setAttribute("fill", l), p.appendChild(y), a === "blocked") {
-        const w = document.createElementNS(j, "line");
+        const w = document.createElementNS(D, "line");
         w.setAttribute("x1", "-12"), w.setAttribute("y1", "-15"), w.setAttribute("x2", "12"), w.setAttribute("y2", "15"), w.setAttribute("stroke", l), w.setAttribute("stroke-width", "4"), w.setAttribute("stroke-linecap", "round"), w.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(w);
       }
-      const m = document.createElementNS(j, "circle");
+      const m = document.createElementNS(D, "circle");
       if (m.setAttribute("cx", "16"), m.setAttribute("cy", "-16"), m.setAttribute("r", "6"), m.setAttribute("fill", l), m.setAttribute("stroke", "var(--card-background-color, #ffffff)"), m.setAttribute("stroke-width", "2"), m.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(m), s.name) {
-        const w = document.createElementNS(j, "text");
+        const w = document.createElementNS(D, "text");
         w.setAttribute("y", "39"), w.setAttribute("text-anchor", "middle"), w.setAttribute("fill", "var(--primary-text-color, #1f2937)"), w.setAttribute("font-size", "20"), w.setAttribute("font-weight", "700"), w.setAttribute("font-family", "system-ui, sans-serif"), w.setAttribute("paint-order", "stroke"), w.setAttribute("stroke", "var(--card-background-color, #ffffff)"), w.setAttribute("stroke-width", "5"), w.setAttribute("stroke-linejoin", "round"), w.textContent = s.name, p.appendChild(w);
       }
-      const x = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", $ = s.state_binding ? je(s, (w) => this.hass?.states[w]?.state) : void 0, A = $?.entity ? ` · ${$.entity}: ${$.currentState ?? "ukendt"} · åben: ${$.allowedStates.join(", ")}` : "";
-      this.appendSvgTitle(p, `${s.name ?? s.id} · ${x}${A}`), o.appendChild(p);
+      const x = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", $ = s.state_binding ? De(s, (w) => this.hass?.states[w]?.state) : void 0, _ = $?.entity ? ` · ${$.entity}: ${$.currentState ?? "ukendt"} · åben: ${$.allowedStates.join(", ")}` : "";
+      this.appendSvgTitle(p, `${s.name ?? s.id} · ${x}${_}`), o.appendChild(p);
     });
     const n = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(o, n ?? null);
@@ -1843,7 +1843,7 @@ let Le = class extends B {
     if (!e) return;
     let t = e.querySelector(":scope > g.footsteps-scene");
     if (t) return t;
-    t = document.createElementNS(j, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
+    t = document.createElementNS(D, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
     const i = e.querySelector(":scope > g.presences-scene");
     return e.insertBefore(t, i ?? null), t;
   }
@@ -1870,13 +1870,13 @@ let Le = class extends B {
         }
         l += O.length;
       }
-      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, y = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, x = 9 * g, $ = d.start.x + p * c + y * x, A = d.start.y + u * c + m * x, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Nt), N = document.createElementNS(j, "g");
-      N.setAttribute("transform", `translate(${$} ${A}) rotate(${w + g * 8})`), N.setAttribute("opacity", "0");
-      const k = document.createElementNS(j, "ellipse");
+      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, y = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, x = 9 * g, $ = d.start.x + p * c + y * x, _ = d.start.y + u * c + m * x, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Nt), N = document.createElementNS(D, "g");
+      N.setAttribute("transform", `translate(${$} ${_}) rotate(${w + g * 8})`), N.setAttribute("opacity", "0");
+      const k = document.createElementNS(D, "ellipse");
       k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
-      const C = document.createElementNS(j, "ellipse");
+      const C = document.createElementNS(D, "ellipse");
       C.setAttribute("cx", "0"), C.setAttribute("cy", "9"), C.setAttribute("rx", "4.5"), C.setAttribute("ry", "5.5"), C.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
-      const M = document.createElementNS(j, "animate");
+      const M = document.createElementNS(D, "animate");
       M.setAttribute("attributeName", "opacity"), M.setAttribute("values", "0;0.72;0.56;0"), M.setAttribute("keyTimes", "0;0.08;0.58;1"), M.setAttribute("begin", "indefinite"), M.setAttribute("dur", `${Mi}ms`), M.setAttribute("fill", "freeze"), N.append(k, C, M), t.appendChild(N), window.setTimeout(() => {
         N.isConnected && M.beginElement();
       }, S), window.setTimeout(() => N.remove(), S + Mi + 120);
@@ -1884,13 +1884,13 @@ let Le = class extends B {
   }
 };
 St([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Le.prototype, "routes", 2);
 St([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Le.prototype, "routeNodes", 2);
 St([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Le.prototype, "routeGraphEdges", 2);
 Le = St([
   z("explorer-animated-canvas")
@@ -2169,13 +2169,13 @@ let Je = class extends xt {
       [22, -6, 1.5],
       [-26, -22, 1.4],
       [5, -38, 1.25]
-    ].forEach(([m, x, $], A) => {
+    ].forEach(([m, x, $], _) => {
       const w = document.createElementNS(R, "circle");
-      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(x)), w.setAttribute("r", String($)), w.setAttribute("fill", A % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), d.appendChild(w), !r) {
+      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(x)), w.setAttribute("r", String($)), w.setAttribute("fill", _ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), d.appendChild(w), !r) {
         const S = document.createElementNS(R, "animate");
-        S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${x};${x - 22 - A * 2};${x - 38 - A * 3}`), S.setAttribute("dur", `${2.4 + A % 3 * 0.42}s`), S.setAttribute("begin", `${(A * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
+        S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${x};${x - 22 - _ * 2};${x - 38 - _ * 3}`), S.setAttribute("dur", `${2.4 + _ % 3 * 0.42}s`), S.setAttribute("begin", `${(_ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
         const N = document.createElementNS(R, "animate");
-        N.setAttribute("attributeName", "opacity"), N.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), N.setAttribute("keyTimes", "0;0.18;0.68;1"), N.setAttribute("dur", `${2.4 + A % 3 * 0.42}s`), N.setAttribute("begin", `${(A * 0.37 + o * 0.11).toFixed(2)}s`), N.setAttribute("repeatCount", "indefinite"), w.appendChild(N);
+        N.setAttribute("attributeName", "opacity"), N.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), N.setAttribute("keyTimes", "0;0.18;0.68;1"), N.setAttribute("dur", `${2.4 + _ % 3 * 0.42}s`), N.setAttribute("begin", `${(_ * 0.37 + o * 0.11).toFixed(2)}s`), N.setAttribute("repeatCount", "indefinite"), w.appendChild(N);
       }
     });
     const y = document.createElementNS(R, "title");
@@ -2242,8 +2242,8 @@ let Je = class extends xt {
       [82, -17, 50, 30],
       [14, 23, 92, 27]
     ].forEach(([g, y, m, x], $) => {
-      const A = document.createElementNS(R, "ellipse");
-      A.setAttribute("class", "overcast-cloud-puff"), A.setAttribute("cx", String(g)), A.setAttribute("cy", String(y)), A.setAttribute("rx", String(m)), A.setAttribute("ry", String(x)), A.setAttribute("opacity", String(0.34 + $ % 3 * 0.08)), d.appendChild(A);
+      const _ = document.createElementNS(R, "ellipse");
+      _.setAttribute("class", "overcast-cloud-puff"), _.setAttribute("cx", String(g)), _.setAttribute("cy", String(y)), _.setAttribute("rx", String(m)), _.setAttribute("ry", String(x)), _.setAttribute("opacity", String(0.34 + $ % 3 * 0.08)), d.appendChild(_);
     }), a.appendChild(d);
     const u = document.createElementNS(R, "path");
     u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
@@ -2501,16 +2501,16 @@ let me = class extends Je {
 };
 me.styles = I`${Je.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
 st([
-  _({ attribute: "map-theme", reflect: !0 })
+  A({ attribute: "map-theme", reflect: !0 })
 ], me.prototype, "theme", 2);
 st([
-  _({ type: Number, attribute: "compass-rotation" })
+  A({ type: Number, attribute: "compass-rotation" })
 ], me.prototype, "compassRotation", 2);
 st([
-  _({ type: Number, attribute: "compass-size" })
+  A({ type: Number, attribute: "compass-size" })
 ], me.prototype, "compassSize", 2);
 st([
-  _({ type: Boolean, attribute: "compass-visible" })
+  A({ type: Boolean, attribute: "compass-visible" })
 ], me.prototype, "compassVisible", 2);
 me = st([
   z("explorer-themed-canvas")
@@ -2577,10 +2577,10 @@ function dr(e, t) {
 function To(e, t) {
   return e.map((i) => dr(i, t));
 }
-var Do = Object.defineProperty, jo = Object.getOwnPropertyDescriptor, cr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? jo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var jo = Object.defineProperty, Do = Object.getOwnPropertyDescriptor, cr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Do(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Do(t, i, o), o;
+  return r && o && jo(t, i, o), o;
 };
 const ce = "http://www.w3.org/2000/svg", Lo = {
   info: "var(--explorer-zone-info, #2d8f74)",
@@ -2747,7 +2747,7 @@ qe.styles = I`
     }
   `;
 cr([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], qe.prototype, "zones", 2);
 qe = cr([
   z("explorer-zones-canvas")
@@ -2966,7 +2966,7 @@ let et = class extends qe {
         }
         y += de.length;
       }
-      const x = m.length > 0 ? (g - y) / m.length : 0, $ = m.end.x - m.start.x, A = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Uo[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? Wo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -A / m.length : 0, C = m.length > 0 ? $ / m.length : 0, M = m.start.x + $ * x + k * S * w, O = m.start.y + A * x + C * S * w, Q = Math.atan2(A, $) * 180 / Math.PI + 90, J = Math.round(u * Ko), P = this.polishCreateSvg("g");
+      const x = m.length > 0 ? (g - y) / m.length : 0, $ = m.end.x - m.start.x, _ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Uo[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? Wo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -_ / m.length : 0, C = m.length > 0 ? $ / m.length : 0, M = m.start.x + $ * x + k * S * w, O = m.start.y + _ * x + C * S * w, Q = Math.atan2(_, $) * 180 / Math.PI + 90, J = Math.round(u * Ko), P = this.polishCreateSvg("g");
       P.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), P.setAttribute("data-presence-id", t.id), r === "person" && P.setAttribute("data-trail-style", String(o + 1)), P.setAttribute("transform", `translate(${M} ${O}) rotate(${Q + (S ? w * N : 0)})`), P.setAttribute("opacity", "0"), this.polishAppendTrailShape(P, r, n, o);
       const be = this.polishCreateSvg("animate");
       this.polishSetAttributes(be, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), P.appendChild(be), i.appendChild(P), window.setTimeout(() => {
@@ -3148,7 +3148,7 @@ var Jo = Object.defineProperty, en = Object.getOwnPropertyDescriptor, pr = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Jo(t, i, o), o;
 };
-const Z = "http://www.w3.org/2000/svg", tn = ["on", "open", "opened", "true"], zt = 600 * 1e3, Ot = 1800 * 1e3, It = 3600 * 1e3, Di = 60 * 1e3, ct = (e) => e * Math.PI / 180;
+const Z = "http://www.w3.org/2000/svg", tn = ["on", "open", "opened", "true"], zt = 600 * 1e3, Ot = 1800 * 1e3, It = 3600 * 1e3, ji = 60 * 1e3, ct = (e) => e * Math.PI / 180;
 let Be = class extends tt {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
@@ -3190,8 +3190,8 @@ let Be = class extends tt {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < zt ? zt : n < Ot ? Ot : n < It ? It : void 0, a = s === void 0 ? Di : Math.max(1e3, s - n + 50);
-      t = Math.min(t, Di, a);
+      const n = Math.max(0, e - o), s = n < zt ? zt : n < Ot ? Ot : n < It ? It : void 0, a = s === void 0 ? ji : Math.max(1e3, s - n + 50);
+      t = Math.min(t, ji, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
       this.openingAgeTimer = void 0, this.syncOpenings();
@@ -3230,10 +3230,10 @@ let Be = class extends tt {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * v), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * v, p = t.point[1] * v, u = n / 2, g = ct(s), y = Math.cos(g), m = Math.sin(g), x = -m, $ = y, A = { x: c - y * u, y: p - m * u }, w = { x: c + y * u, y: p + m * u }, S = l === "start" ? A : w, N = l === "start" ? w : A, k = s + (l === "start" ? 0 : 180), C = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? C * a : 0), O = ct(M), Q = { x: S.x + Math.cos(O) * n, y: S.y + Math.sin(O) * n }, J = o ? ` open-age-${o.level}` : "", P = document.createElementNS(Z, "g");
-    P.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${J}`), P.setAttribute("data-opening-id", t.id), o && P.setAttribute("data-open-minutes", String(o.minutes)), this.line(P, A.x, A.y, w.x, w.y, "opening-gap");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * v), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * v, p = t.point[1] * v, u = n / 2, g = ct(s), y = Math.cos(g), m = Math.sin(g), x = -m, $ = y, _ = { x: c - y * u, y: p - m * u }, w = { x: c + y * u, y: p + m * u }, S = l === "start" ? _ : w, N = l === "start" ? w : _, k = s + (l === "start" ? 0 : 180), C = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? C * a : 0), O = ct(M), Q = { x: S.x + Math.cos(O) * n, y: S.y + Math.sin(O) * n }, J = o ? ` open-age-${o.level}` : "", P = document.createElementNS(Z, "g");
+    P.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${J}`), P.setAttribute("data-opening-id", t.id), o && P.setAttribute("data-open-minutes", String(o.minutes)), this.line(P, _.x, _.y, w.x, w.y, "opening-gap");
     const be = Math.max(7, Math.min(12, n * 0.12));
-    for (const ye of [A, w]) this.line(P, ye.x - x * be / 2, ye.y - $ * be / 2, ye.x + x * be / 2, ye.y + $ * be / 2, "door-jamb");
+    for (const ye of [_, w]) this.line(P, ye.x - x * be / 2, ye.y - $ * be / 2, ye.x + x * be / 2, ye.y + $ * be / 2, "door-jamb");
     r && this.line(P, S.x, S.y, N.x, N.y, "door-closed-guide"), this.line(P, S.x, S.y, Q.x, Q.y, "door-leaf");
     const de = document.createElementNS(Z, "circle");
     if (de.setAttribute("cx", String(S.x)), de.setAttribute("cy", String(S.y)), de.setAttribute("r", "4.2"), de.setAttribute("class", "opening-hinge"), P.appendChild(de), r) {
@@ -3246,8 +3246,8 @@ let Be = class extends tt {
     di.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, P.appendChild(di), e.appendChild(P);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * v), s = t.angle ?? 0, a = t.point[0] * v, l = t.point[1] * v, d = ct(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, y = n / 2, m = 5.5, x = { x: a - c * y, y: l - p * y }, $ = { x: a + c * y, y: l + p * y }, A = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Z, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${A}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, x.x, x.y, $.x, $.y, "window-gap"), this.line(w, x.x + u * m, x.y + g * m, $.x + u * m, $.y + g * m, "window-pane"), this.line(w, x.x - u * m, x.y - g * m, $.x - u * m, $.y - g * m, "window-pane"), this.line(w, x.x + u * m, x.y + g * m, x.x - u * m, x.y - g * m, "window-frame-end"), this.line(w, $.x + u * m, $.y + g * m, $.x - u * m, $.y - g * m, "window-frame-end"), r && (this.line(w, x.x + u * m, x.y + g * m, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, $.x + u * m, $.y + g * m, "window-open-sash"));
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * v), s = t.angle ?? 0, a = t.point[0] * v, l = t.point[1] * v, d = ct(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, y = n / 2, m = 5.5, x = { x: a - c * y, y: l - p * y }, $ = { x: a + c * y, y: l + p * y }, _ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Z, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${_}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, x.x, x.y, $.x, $.y, "window-gap"), this.line(w, x.x + u * m, x.y + g * m, $.x + u * m, $.y + g * m, "window-pane"), this.line(w, x.x - u * m, x.y - g * m, $.x - u * m, $.y - g * m, "window-pane"), this.line(w, x.x + u * m, x.y + g * m, x.x - u * m, x.y - g * m, "window-frame-end"), this.line(w, $.x + u * m, $.y + g * m, $.x - u * m, $.y - g * m, "window-frame-end"), r && (this.line(w, x.x + u * m, x.y + g * m, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, $.x + u * m, $.y + g * m, "window-open-sash"));
     const S = a + u * 17, N = l + g * 17, k = document.createElementNS(Z, "circle");
     k.setAttribute("cx", String(S)), k.setAttribute("cy", String(N)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, N, o);
     const C = document.createElementNS(Z, "title");
@@ -3278,7 +3278,7 @@ Be.styles = I`${tt.styles}
     @media(prefers-reduced-motion:reduce){.dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{transition:none}.dynamic-opening.open-age-alert .opening-age-ring{animation:none}}
   `;
 pr([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Be.prototype, "openings", 2);
 Be = pr([
   z("explorer-openings-canvas")
@@ -3468,11 +3468,11 @@ let Ce = class extends Be {
           class: "weather-cloud-puff"
         }), x.appendChild(P);
       }
-      const A = this.svg("path");
-      this.attrs(A, {
+      const _ = this.svg("path");
+      this.attrs(_, {
         d: "M-104 -12 C-76 -34 -47 -40 -20 -30 C8 -19 33 -21 62 -39 C46 -13 22 1 -3 2 C-32 4 -57 -3 -79 3 C-92 4 -101 -2 -104 -12 Z",
         class: "weather-cloud-detail"
-      }), x.appendChild(A);
+      }), x.appendChild(_);
       const w = this.svg("path");
       this.attrs(w, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
@@ -3663,16 +3663,16 @@ Ce.styles = I`
     }
   `;
 at([
-  _({ type: Boolean, attribute: "hide-source-text" })
+  A({ type: Boolean, attribute: "hide-source-text" })
 ], Ce.prototype, "hideSourceText", 2);
 at([
-  _({ attribute: "weather-effect" })
+  A({ attribute: "weather-effect" })
 ], Ce.prototype, "weatherEffect", 2);
 at([
-  _({ type: Number, attribute: "weather-intensity" })
+  A({ type: Number, attribute: "weather-intensity" })
 ], Ce.prototype, "weatherIntensity", 2);
 at([
-  _({ type: Boolean, attribute: "weather-night" })
+  A({ type: Boolean, attribute: "weather-night" })
 ], Ce.prototype, "weatherNight", 2);
 Ce = at([
   z("explorer-source-clean-canvas")
@@ -3680,7 +3680,7 @@ Ce = at([
 const sn = (e) => e.strings === void 0, an = {}, ln = (e, t = an) => e._$AH = t;
 const dn = rr(class extends or {
   constructor(e) {
-    if (super(e), e.type !== Ae.PROPERTY && e.type !== Ae.ATTRIBUTE && e.type !== Ae.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
+    if (super(e), e.type !== _e.PROPERTY && e.type !== _e.ATTRIBUTE && e.type !== _e.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
     if (!sn(e)) throw Error("`live` bindings can only contain a single expression");
   }
   render(e) {
@@ -3689,11 +3689,11 @@ const dn = rr(class extends or {
   update(e, [t]) {
     if (t === re || t === f) return t;
     const i = e.element, r = e.name;
-    if (e.type === Ae.PROPERTY) {
+    if (e.type === _e.PROPERTY) {
       if (t === i[r]) return re;
-    } else if (e.type === Ae.BOOLEAN_ATTRIBUTE) {
+    } else if (e.type === _e.BOOLEAN_ATTRIBUTE) {
       if (!!t === i.hasAttribute(r)) return re;
-    } else if (e.type === Ae.ATTRIBUTE && i.getAttribute(r) === t + "") return re;
+    } else if (e.type === _e.ATTRIBUTE && i.getAttribute(r) === t + "") return re;
     return ln(e), t;
   }
 });
@@ -4125,7 +4125,7 @@ ae.styles = I`
     }
   `;
 Ve([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ae.prototype, "hass", 2);
 Ve([
   b()
@@ -4148,7 +4148,7 @@ var bn = Object.defineProperty, yn = Object.getOwnPropertyDescriptor, q = (e, t,
   return r && o && bn(t, i, o), o;
 };
 const ee = 1e3, pt = (e) => Math.min(1, Math.max(0, e));
-function ji(e) {
+function Di(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
 function vn(e) {
@@ -4162,7 +4162,7 @@ function Li(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
-let D = class extends L {
+let j = class extends L {
   constructor() {
     super(...arguments), this.drawingMode = "idle", this.selectedRoomId = "", this.pendingPoints = [], this.draftRoomName = "", this.draftAreaId = "", this.draftWidth = "", this.draftHeight = "", this.draftFlipX = !1, this.draftFlipY = !1, this.calibrationMessage = "", this.drawingAreas = [], this.drawingAreaError = "";
   }
@@ -4267,7 +4267,7 @@ let D = class extends L {
   finishPolygon() {
     if (!(this.pendingPoints.length < 3 || !this.roomConfig)) {
       if (this.drawingMode === "draw-new") {
-        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = ji(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
+        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Di(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
         this.selectedRoomId = t, this.emitConfig({ ...this.roomConfig, rooms: [...this.rooms, o] });
       } else this.selectedRoom && this.emitConfig({ ...this.roomConfig, rooms: this.rooms.map((e) => e.id === this.selectedRoomId ? { ...e, points: this.pendingPoints } : e) });
       this.pendingPoints = [], this.drawingMode = "idle";
@@ -4302,7 +4302,7 @@ let D = class extends L {
   }
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
-    const t = e.points.map(([n, s]) => `${n * ee},${s * ee}`).join(" "), i = e.id === this.selectedRoomId, r = ji(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
+    const t = e.points.map(([n, s]) => `${n * ee},${s * ee}`).join(" "), i = e.id === this.selectedRoomId, r = Di(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
     return E`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * ee} y=${r.y * ee} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? E`<circle cx=${o.x * ee} cy=${o.y * ee} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
@@ -4327,67 +4327,67 @@ let D = class extends L {
     return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-D.styles = I`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+j.styles = I`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 q([
-  _({ attribute: !1 })
-], D.prototype, "hass", 2);
-q([
-  b()
-], D.prototype, "roomConfig", 2);
+  A({ attribute: !1 })
+], j.prototype, "hass", 2);
 q([
   b()
-], D.prototype, "drawingMode", 2);
+], j.prototype, "roomConfig", 2);
 q([
   b()
-], D.prototype, "selectedRoomId", 2);
+], j.prototype, "drawingMode", 2);
 q([
   b()
-], D.prototype, "pendingPoints", 2);
+], j.prototype, "selectedRoomId", 2);
 q([
   b()
-], D.prototype, "pendingAnchor", 2);
+], j.prototype, "pendingPoints", 2);
 q([
   b()
-], D.prototype, "draftRoomName", 2);
+], j.prototype, "pendingAnchor", 2);
 q([
   b()
-], D.prototype, "draftAreaId", 2);
+], j.prototype, "draftRoomName", 2);
 q([
   b()
-], D.prototype, "draftWidth", 2);
+], j.prototype, "draftAreaId", 2);
 q([
   b()
-], D.prototype, "draftHeight", 2);
+], j.prototype, "draftWidth", 2);
 q([
   b()
-], D.prototype, "draftFlipX", 2);
+], j.prototype, "draftHeight", 2);
 q([
   b()
-], D.prototype, "draftFlipY", 2);
+], j.prototype, "draftFlipX", 2);
 q([
   b()
-], D.prototype, "calA", 2);
+], j.prototype, "draftFlipY", 2);
 q([
   b()
-], D.prototype, "calB", 2);
+], j.prototype, "calA", 2);
 q([
   b()
-], D.prototype, "calC", 2);
+], j.prototype, "calB", 2);
 q([
   b()
-], D.prototype, "calibrationMessage", 2);
+], j.prototype, "calC", 2);
 q([
   b()
-], D.prototype, "drawingAreas", 2);
+], j.prototype, "calibrationMessage", 2);
 q([
   b()
-], D.prototype, "drawingAreaError", 2);
+], j.prototype, "drawingAreas", 2);
+q([
+  b()
+], j.prototype, "drawingAreaError", 2);
 q([
   Ur("ha-explorer-card-editor")
-], D.prototype, "baseEditor", 2);
-D = q([
+], j.prototype, "baseEditor", 2);
+j = q([
   z("ha-explorer-room-drawing-editor")
-], D);
+], j);
 function pe(e) {
   return e?.trim() || void 0;
 }
@@ -4430,23 +4430,23 @@ function $n(e) {
   return t;
 }
 function kn(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], d = i.flatMap((A) => A.reactions ?? []), c = i.flatMap((A) => A.quick_actions ?? []), p = $n(e), u = [];
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], d = i.flatMap((_) => _.reactions ?? []), c = i.flatMap((_) => _.quick_actions ?? []), p = $n(e), u = [];
   if (t)
-    for (const A of p) {
-      const w = t.states[A.entity];
+    for (const _ of p) {
+      const w = t.states[_.entity];
       if (!w) {
-        u.push({ ...A, unavailable: !1 });
+        u.push({ ..._, unavailable: !1 });
         continue;
       }
-      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...A, unavailable: !0 });
+      (w.state === "unavailable" || w.state === "unknown") && u.push({ ..._, unavailable: !0 });
     }
-  const g = u.filter((A) => !A.unavailable), y = r.filter((A) => !wn(A)), m = i.filter((A) => A.points.length < 3), x = (e.image ?? e.background ?? "").trim(), $ = [{ id: "floorplan", label: "Plantegning", detail: x ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: x ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? y.length ? `${r.length} tilføjet · ${y.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? y.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: d.length ? `${d.length} rumreaktion${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: d.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: c.length ? `${c.length} scene- eller scripthandling${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: c.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: $, entityIssues: u, attentionCount: $.filter((A) => A.state === "attention").length, configuredFeatureCount: $.filter((A) => A.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: d.length, actionCount: c.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const g = u.filter((_) => !_.unavailable), y = r.filter((_) => !wn(_)), m = i.filter((_) => _.points.length < 3), x = (e.image ?? e.background ?? "").trim(), $ = [{ id: "floorplan", label: "Plantegning", detail: x ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: x ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? y.length ? `${r.length} tilføjet · ${y.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? y.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: d.length ? `${d.length} rumreaktion${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: d.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: c.length ? `${c.length} scene- eller scripthandling${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: c.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: $, entityIssues: u, attentionCount: $.filter((_) => _.state === "attention").length, configuredFeatureCount: $.filter((_) => _.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: d.length, actionCount: c.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
-var An = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, oi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? _n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var _n = Object.defineProperty, An = Object.getOwnPropertyDescriptor, oi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? An(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && An(t, i, o), o;
+  return r && o && _n(t, i, o), o;
 };
 const Sn = {
   ready: "Klar",
@@ -4615,10 +4615,10 @@ it.styles = I`
     }
   `;
 oi([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], it.prototype, "config", 2);
 oi([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], it.prototype, "hass", 2);
 it = oi([
   z("ha-explorer-setup-overview")
@@ -4628,28 +4628,100 @@ var Cn = Object.defineProperty, En = Object.getOwnPropertyDescriptor, hr = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Cn(t, i, o), o;
 };
-const Dt = [["classic", "Classic", "Den neutrale Home Assistant Explorer-stil."], ["enchanted_antique", "Enchanted Antique Map", "Original magisk kortstil med pergament, sepia-blæk og levende kortdetaljer."]];
+const jt = [
+  ["classic", "Classic", "Den neutrale Home Assistant Explorer-stil."],
+  [
+    "enchanted_antique",
+    "Enchanted Antique Map",
+    "Original magisk kortstil med pergament, sepia-blæk og levende kortdetaljer."
+  ]
+], Nn = [
+  ["live", "Følg rigtigt vejr"],
+  ["sunny", "☀️ Solrigt"],
+  ["partlycloudy", "🌤️ Delvist overskyet"],
+  ["cloudy", "☁️ Overskyet"],
+  ["rainy", "🌧️ Regn"],
+  ["pouring", "🌧️ Kraftig regn"],
+  ["lightning", "⚡ Torden / lyn"],
+  ["lightning-rainy", "⛈️ Torden med regn"],
+  ["fog", "🌫️ Tåge"],
+  ["snowy", "❄️ Sne"],
+  ["snowy-rainy", "🌨️ Slud / sne og regn"],
+  ["hail", "🧊 Hagl"]
+];
 let wt = class extends L {
   get theme() {
     return this.config?.appearance?.theme ?? "classic";
   }
   get dayNight() {
-    return { enabled: this.config?.appearance?.day_night?.enabled ?? !1, mode: this.config?.appearance?.day_night?.mode ?? "auto", sun_entity: this.config?.appearance?.day_night?.sun_entity ?? "sun.sun", night_states: this.config?.appearance?.day_night?.night_states ?? ["below_horizon"], intensity: this.config?.appearance?.day_night?.intensity ?? 0.72 };
+    return {
+      enabled: this.config?.appearance?.day_night?.enabled ?? !1,
+      mode: this.config?.appearance?.day_night?.mode ?? "auto",
+      sun_entity: this.config?.appearance?.day_night?.sun_entity ?? "sun.sun",
+      night_states: this.config?.appearance?.day_night?.night_states ?? ["below_horizon"],
+      intensity: this.config?.appearance?.day_night?.intensity ?? 0.72
+    };
   }
   get compass() {
-    return { visible: this.config?.appearance?.compass?.visible ?? !0, rotation: this.config?.appearance?.compass?.rotation ?? -7, size: this.config?.appearance?.compass?.size ?? 1 };
+    return {
+      visible: this.config?.appearance?.compass?.visible ?? !0,
+      rotation: this.config?.appearance?.compass?.rotation ?? -7,
+      size: this.config?.appearance?.compass?.size ?? 1
+    };
   }
   get alarm() {
-    return { enabled: this.config?.appearance?.alarm?.enabled ?? !1, entity: this.config?.appearance?.alarm?.entity ?? "", armed_states: this.config?.appearance?.alarm?.armed_states ?? ["armed_away", "armed_home", "armed_night", "armed_vacation", "armed_custom_bypass"], triggered_states: this.config?.appearance?.alarm?.triggered_states ?? ["triggered"], intensity: this.config?.appearance?.alarm?.intensity ?? 0.75 };
+    return {
+      enabled: this.config?.appearance?.alarm?.enabled ?? !1,
+      entity: this.config?.appearance?.alarm?.entity ?? "",
+      armed_states: this.config?.appearance?.alarm?.armed_states ?? [
+        "armed_away",
+        "armed_home",
+        "armed_night",
+        "armed_vacation",
+        "armed_custom_bypass"
+      ],
+      triggered_states: this.config?.appearance?.alarm?.triggered_states ?? ["triggered"],
+      intensity: this.config?.appearance?.alarm?.intensity ?? 0.75
+    };
   }
   get occupancy() {
-    return { enabled: this.config?.appearance?.occupancy?.enabled ?? !1, home_states: this.config?.appearance?.occupancy?.home_states ?? ["home"], intensity: this.config?.appearance?.occupancy?.intensity ?? 0.65 };
+    return {
+      enabled: this.config?.appearance?.occupancy?.enabled ?? !1,
+      home_states: this.config?.appearance?.occupancy?.home_states ?? ["home"],
+      intensity: this.config?.appearance?.occupancy?.intensity ?? 0.65
+    };
   }
   get weather() {
-    return { enabled: this.config?.appearance?.weather?.enabled ?? !1, entity: this.config?.appearance?.weather?.entity ?? "weather.home", intensity: this.config?.appearance?.weather?.intensity ?? 0.6, rain_states: this.config?.appearance?.weather?.rain_states ?? ["rainy", "pouring"], storm_states: this.config?.appearance?.weather?.storm_states ?? ["lightning", "lightning-rainy"], snow_states: this.config?.appearance?.weather?.snow_states ?? ["snowy", "snowy-rainy", "hail"], fog_states: this.config?.appearance?.weather?.fog_states ?? ["fog"], cloudy_states: this.config?.appearance?.weather?.cloudy_states ?? ["cloudy", "partlycloudy"] };
+    return {
+      enabled: this.config?.appearance?.weather?.enabled ?? !1,
+      entity: this.config?.appearance?.weather?.entity ?? "weather.home",
+      intensity: this.config?.appearance?.weather?.intensity ?? 0.6,
+      preview_state: this.config?.appearance?.weather?.preview_state ?? "live",
+      rain_states: this.config?.appearance?.weather?.rain_states ?? ["rainy", "pouring"],
+      storm_states: this.config?.appearance?.weather?.storm_states ?? [
+        "lightning",
+        "lightning-rainy"
+      ],
+      snow_states: this.config?.appearance?.weather?.snow_states ?? [
+        "snowy",
+        "snowy-rainy",
+        "hail"
+      ],
+      fog_states: this.config?.appearance?.weather?.fog_states ?? ["fog"],
+      cloudy_states: this.config?.appearance?.weather?.cloudy_states ?? [
+        "cloudy",
+        "partlycloudy"
+      ]
+    };
   }
   emit(e) {
-    this.config && this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: { ...this.config, appearance: e } }, bubbles: !0, composed: !0 }));
+    this.config && this.dispatchEvent(
+      new CustomEvent("config-changed", {
+        detail: { config: { ...this.config, appearance: e } },
+        bubbles: !0,
+        composed: !0
+      })
+    );
   }
   updateTheme(e) {
     this.emit({ ...this.config?.appearance, theme: e });
@@ -4674,21 +4746,522 @@ let wt = class extends L {
   }
   render() {
     if (!this.config) return f;
-    const e = Dt.find((a) => a[0] === this.theme) ?? Dt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
-    return h`<section class="theme-editor"><div class="heading"><div><span>Appearance · v0.40</span><h3>Kortets visuelle stil</h3></div><b>Enchanted Atmosphere</b></div><div class="instruction">Bevar pergament, blæk og den magiske kortstil, mens atmosfære og ornamenter kan finjusteres.</div><label>Tema<select .value=${this.theme} @change=${(a) => this.updateTheme(a.target.value)}>${Dt.map((a) => h`<option value=${a[0]}>${a[1]}</option>`)}</select><small>${e[2]}</small></label><div class="source-panel"><div class="panel-head"><div><strong>🗺️ Tekst i plantegningen</strong><small>Skjul tekst, der allerede findes inde i SVG-plantegningen. Explorer-rumlabels bliver stadig vist.</small></div><label class="switch"><input type="checkbox" .checked=${s} @change=${(a) => this.updateSourceText(a.target.checked)}> Skjul</label></div></div>${this.theme === "enchanted_antique" ? h`<div class="compass-panel"><div class="panel-head"><div><strong>🧭 Kompasrose</strong><small>Drej kompasset så N peger mod den rigtige nordretning på din plantegning.</small></div><label class="switch"><input type="checkbox" .checked=${i.visible} @change=${(a) => this.updateCompass({ visible: a.target.checked })}> Vis</label></div>${i.visible ? h`<div class="grid"><label class="wide">Rotation · ${Math.round(i.rotation)}°<input type="range" min="-180" max="180" step="1" .value=${String(i.rotation)} @input=${(a) => this.updateCompass({ rotation: Number(a.target.value) })}><small>-180° til +180° · ændres direkte i preview.</small></label><label>Rotation i grader<input type="number" min="-180" max="180" step="1" .value=${String(i.rotation)} @change=${(a) => this.updateCompass({ rotation: Math.min(180, Math.max(-180, Number(a.target.value) || 0)) })}></label><label>Størrelse · ${Math.round(i.size * 100)}%<input type="range" min="0.55" max="1.8" step="0.05" .value=${String(i.size)} @input=${(a) => this.updateCompass({ size: Number(a.target.value) })}></label></div>` : f}</div>` : f}<div class="moon-panel"><div class="panel-head"><div><strong>🌙 Moonlight / Day-Night</strong><small>Skift automatisk til en mørkere kortstemning efter solnedgang.</small></div><label class="switch"><input type="checkbox" .checked=${t.enabled} @change=${(a) => this.updateDayNight({ enabled: a.target.checked })}> Aktiv</label></div>${t.enabled ? h`<div class="grid"><label>Tilstand<select .value=${t.mode} @change=${(a) => this.updateDayNight({ mode: a.target.value })}><option value="auto">Automatisk via solen</option><option value="day">Tving dag</option><option value="night">Tving nat</option></select></label>${t.mode === "auto" ? h`<label>Sol-entity<input .value=${t.sun_entity} @change=${(a) => this.updateDayNight({ sun_entity: a.target.value.trim() || "sun.sun" })}></label>` : f}<label class="wide">Nat-intensitet · ${Math.round(t.intensity * 100)}%<input type="range" min="0.25" max="1" step="0.05" .value=${String(t.intensity)} @input=${(a) => this.updateDayNight({ intensity: Number(a.target.value) })}></label></div>` : f}</div><div class="weather-panel"><div class="panel-head"><div><strong>🌧️ Weather Atmosphere</strong><small>Lad vejret udenfor påvirke pergamentkortets stemning.</small></div><label class="switch"><input type="checkbox" .checked=${n.enabled} @change=${(a) => this.updateWeather({ enabled: a.target.checked })}> Aktiv</label></div>${n.enabled ? h`<div class="grid"><label class="wide">Weather-entity<input .value=${n.entity} placeholder="weather.home" @change=${(a) => this.updateWeather({ entity: a.target.value.trim() || "weather.home" })}><small>Home Assistant weather.* entity, fx weather.forecast_home.</small></label><label class="wide">Vejr-intensitet · ${Math.round(n.intensity * 100)}%<input type="range" min="0.25" max="1" step="0.05" .value=${String(n.intensity)} @input=${(a) => this.updateWeather({ intensity: Number(a.target.value) })}><small>Styrer hvor tydeligt regn, storm, sne, tåge og skyer vises.</small></label><div class="state-box wide"><strong>Automatiske vejrstates</strong><small>🌧️ ${n.rain_states.join(", ")} · ⛈️ ${n.storm_states.join(", ")}</small><small>❄️ ${n.snow_states.join(", ")} · 🌫️ ${n.fog_states.join(", ")} · ☁️ ${n.cloudy_states.join(", ")}</small></div></div>` : f}</div><div class="occupancy-panel"><div class="panel-head"><div><strong>🏠 Someone is Home</strong><small>Gør kortet varmere og mere levende, når en konfigureret person er hjemme.</small></div><label class="switch"><input type="checkbox" .checked=${o.enabled} @change=${(a) => this.updateOccupancy({ enabled: a.target.checked })}> Aktiv</label></div>${o.enabled ? h`<div class="grid"><label class="wide">Hjemme-intensitet · ${Math.round(o.intensity * 100)}%<input type="range" min="0.25" max="1" step="0.05" .value=${String(o.intensity)} @input=${(a) => this.updateOccupancy({ intensity: Number(a.target.value) })}><small>Styrer forskellen mellem Someone Home og Empty House.</small></label><div class="state-box wide"><strong>Hjemme-state</strong><small>${o.home_states.join(", ")} · Explorer bruger dine konfigurerede person-presences automatisk.</small></div></div>` : f}</div><div class="alarm-panel"><div class="panel-head"><div><strong>🛡️ Alarm State</strong><small>Lad kortets atmosfære følge et Home Assistant alarm_control_panel.</small></div><label class="switch"><input type="checkbox" .checked=${r.enabled} @change=${(a) => this.updateAlarm({ enabled: a.target.checked })}> Aktiv</label></div>${r.enabled ? h`<div class="grid"><label class="wide">Alarm-entity<input .value=${r.entity} placeholder="alarm_control_panel.home" @change=${(a) => this.updateAlarm({ entity: a.target.value.trim() })}><small>Vælg entity-id'et for dit alarmsystem.</small></label><label class="wide">Alarm-intensitet · ${Math.round(r.intensity * 100)}%<input type="range" min="0.25" max="1" step="0.05" .value=${String(r.intensity)} @input=${(a) => this.updateAlarm({ intensity: Number(a.target.value) })}><small>Styrer hvor kraftig armed/triggered-atmosfæren bliver.</small></label><div class="state-box wide"><strong>Automatiske states</strong><small>Armed: ${r.armed_states.join(", ")}</small><small>Triggered: ${r.triggered_states.join(", ")}</small></div></div>` : f}</div></section>`;
+    const e = jt.find((a) => a[0] === this.theme) ?? jt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
+    return h`
+      <section class="theme-editor">
+        <div class="heading">
+          <div>
+            <span>Appearance · v0.40</span>
+            <h3>Kortets visuelle stil</h3>
+          </div>
+          <b>Enchanted Atmosphere</b>
+        </div>
+
+        <div class="instruction">
+          Bevar pergament, blæk og den magiske kortstil, mens atmosfære og ornamenter kan
+          finjusteres.
+        </div>
+
+        <label>
+          Tema
+          <select
+            .value=${this.theme}
+            @change=${(a) => this.updateTheme(a.target.value)}
+          >
+            ${jt.map(
+      (a) => h`<option value=${a[0]}>${a[1]}</option>`
+    )}
+          </select>
+          <small>${e[2]}</small>
+        </label>
+
+        <div class="source-panel">
+          <div class="panel-head">
+            <div>
+              <strong>🗺️ Tekst i plantegningen</strong>
+              <small>
+                Skjul tekst, der allerede findes inde i SVG-plantegningen. Explorer-rumlabels
+                bliver stadig vist.
+              </small>
+            </div>
+            <label class="switch">
+              <input
+                type="checkbox"
+                .checked=${s}
+                @change=${(a) => this.updateSourceText(a.target.checked)}
+              />
+              Skjul
+            </label>
+          </div>
+        </div>
+
+        ${this.theme === "enchanted_antique" ? h`
+              <div class="compass-panel">
+                <div class="panel-head">
+                  <div>
+                    <strong>🧭 Kompasrose</strong>
+                    <small>
+                      Drej kompasset så N peger mod den rigtige nordretning på din plantegning.
+                    </small>
+                  </div>
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      .checked=${i.visible}
+                      @change=${(a) => this.updateCompass({
+      visible: a.target.checked
+    })}
+                    />
+                    Vis
+                  </label>
+                </div>
+                ${i.visible ? h`
+                      <div class="grid">
+                        <label class="wide">
+                          Rotation · ${Math.round(i.rotation)}°
+                          <input
+                            type="range"
+                            min="-180"
+                            max="180"
+                            step="1"
+                            .value=${String(i.rotation)}
+                            @input=${(a) => this.updateCompass({
+      rotation: Number(a.target.value)
+    })}
+                          />
+                          <small>-180° til +180° · ændres direkte i preview.</small>
+                        </label>
+                        <label>
+                          Rotation i grader
+                          <input
+                            type="number"
+                            min="-180"
+                            max="180"
+                            step="1"
+                            .value=${String(i.rotation)}
+                            @change=${(a) => this.updateCompass({
+      rotation: Math.min(
+        180,
+        Math.max(
+          -180,
+          Number(a.target.value) || 0
+        )
+      )
+    })}
+                          />
+                        </label>
+                        <label>
+                          Størrelse · ${Math.round(i.size * 100)}%
+                          <input
+                            type="range"
+                            min="0.55"
+                            max="1.8"
+                            step="0.05"
+                            .value=${String(i.size)}
+                            @input=${(a) => this.updateCompass({
+      size: Number(a.target.value)
+    })}
+                          />
+                        </label>
+                      </div>
+                    ` : f}
+              </div>
+            ` : f}
+
+        <div class="moon-panel">
+          <div class="panel-head">
+            <div>
+              <strong>🌙 Moonlight / Day-Night</strong>
+              <small>Skift automatisk til en mørkere kortstemning efter solnedgang.</small>
+            </div>
+            <label class="switch">
+              <input
+                type="checkbox"
+                .checked=${t.enabled}
+                @change=${(a) => this.updateDayNight({ enabled: a.target.checked })}
+              />
+              Aktiv
+            </label>
+          </div>
+          ${t.enabled ? h`
+                <div class="grid">
+                  <label>
+                    Tilstand
+                    <select
+                      .value=${t.mode}
+                      @change=${(a) => this.updateDayNight({
+      mode: a.target.value
+    })}
+                    >
+                      <option value="auto">Automatisk via solen</option>
+                      <option value="day">Tving dag</option>
+                      <option value="night">Tving nat</option>
+                    </select>
+                  </label>
+                  ${t.mode === "auto" ? h`
+                        <label>
+                          Sol-entity
+                          <input
+                            .value=${t.sun_entity}
+                            @change=${(a) => this.updateDayNight({
+      sun_entity: a.target.value.trim() || "sun.sun"
+    })}
+                          />
+                        </label>
+                      ` : f}
+                  <label class="wide">
+                    Nat-intensitet · ${Math.round(t.intensity * 100)}%
+                    <input
+                      type="range"
+                      min="0.25"
+                      max="1"
+                      step="0.05"
+                      .value=${String(t.intensity)}
+                      @input=${(a) => this.updateDayNight({
+      intensity: Number(a.target.value)
+    })}
+                    />
+                  </label>
+                </div>
+              ` : f}
+        </div>
+
+        <div class="weather-panel">
+          <div class="panel-head">
+            <div>
+              <strong>🌧️ Weather Atmosphere</strong>
+              <small>Lad vejret udenfor påvirke pergamentkortets stemning.</small>
+            </div>
+            <label class="switch">
+              <input
+                type="checkbox"
+                .checked=${n.enabled}
+                @change=${(a) => this.updateWeather({ enabled: a.target.checked })}
+              />
+              Aktiv
+            </label>
+          </div>
+          ${n.enabled ? h`
+                <div class="grid">
+                  <label class="wide">
+                    Weather-entity
+                    <input
+                      .value=${n.entity}
+                      placeholder="weather.home"
+                      @change=${(a) => this.updateWeather({
+      entity: a.target.value.trim() || "weather.home"
+    })}
+                    />
+                    <small>Home Assistant weather.* entity, fx weather.forecast_home.</small>
+                  </label>
+
+                  <label class="wide simulator-box">
+                    <span class="simulator-title">🌦️ Vejrsimulator · kun preview</span>
+                    <select
+                      .value=${n.preview_state}
+                      @change=${(a) => this.updateWeather({
+      preview_state: a.target.value
+    })}
+                    >
+                      ${Nn.map(
+      ([a, l]) => h`<option value=${a}>${l}</option>`
+    )}
+                    </select>
+                    <small>
+                      Tving en vejrtype i Home Assistants kort-preview. Det gemte dashboard følger
+                      stadig den rigtige weather-entity. Vælg “Følg rigtigt vejr” for normal preview.
+                    </small>
+                  </label>
+
+                  <label class="wide">
+                    Vejr-intensitet · ${Math.round(n.intensity * 100)}%
+                    <input
+                      type="range"
+                      min="0.25"
+                      max="1"
+                      step="0.05"
+                      .value=${String(n.intensity)}
+                      @input=${(a) => this.updateWeather({
+      intensity: Number(a.target.value)
+    })}
+                    />
+                    <small>
+                      Styrer hvor tydeligt regn, storm, sne, tåge og skyer vises.
+                    </small>
+                  </label>
+
+                  <div class="state-box wide">
+                    <strong>Automatiske vejrstates</strong>
+                    <small>
+                      🌧️ ${n.rain_states.join(", ")} · ⛈️
+                      ${n.storm_states.join(", ")}
+                    </small>
+                    <small>
+                      ❄️ ${n.snow_states.join(", ")} · 🌫️
+                      ${n.fog_states.join(", ")} · ☁️
+                      ${n.cloudy_states.join(", ")}
+                    </small>
+                  </div>
+                </div>
+              ` : f}
+        </div>
+
+        <div class="occupancy-panel">
+          <div class="panel-head">
+            <div>
+              <strong>🏠 Someone is Home</strong>
+              <small>
+                Gør kortet varmere og mere levende, når en konfigureret person er hjemme.
+              </small>
+            </div>
+            <label class="switch">
+              <input
+                type="checkbox"
+                .checked=${o.enabled}
+                @change=${(a) => this.updateOccupancy({ enabled: a.target.checked })}
+              />
+              Aktiv
+            </label>
+          </div>
+          ${o.enabled ? h`
+                <div class="grid">
+                  <label class="wide">
+                    Hjemme-intensitet · ${Math.round(o.intensity * 100)}%
+                    <input
+                      type="range"
+                      min="0.25"
+                      max="1"
+                      step="0.05"
+                      .value=${String(o.intensity)}
+                      @input=${(a) => this.updateOccupancy({
+      intensity: Number(a.target.value)
+    })}
+                    />
+                    <small>Styrer forskellen mellem Someone Home og Empty House.</small>
+                  </label>
+                  <div class="state-box wide">
+                    <strong>Hjemme-state</strong>
+                    <small>
+                      ${o.home_states.join(", ")} · Explorer bruger dine konfigurerede
+                      person-presences automatisk.
+                    </small>
+                  </div>
+                </div>
+              ` : f}
+        </div>
+
+        <div class="alarm-panel">
+          <div class="panel-head">
+            <div>
+              <strong>🛡️ Alarm State</strong>
+              <small>Lad kortets atmosfære følge et Home Assistant alarm_control_panel.</small>
+            </div>
+            <label class="switch">
+              <input
+                type="checkbox"
+                .checked=${r.enabled}
+                @change=${(a) => this.updateAlarm({ enabled: a.target.checked })}
+              />
+              Aktiv
+            </label>
+          </div>
+          ${r.enabled ? h`
+                <div class="grid">
+                  <label class="wide">
+                    Alarm-entity
+                    <input
+                      .value=${r.entity}
+                      placeholder="alarm_control_panel.home"
+                      @change=${(a) => this.updateAlarm({
+      entity: a.target.value.trim()
+    })}
+                    />
+                    <small>Vælg entity-id'et for dit alarmsystem.</small>
+                  </label>
+                  <label class="wide">
+                    Alarm-intensitet · ${Math.round(r.intensity * 100)}%
+                    <input
+                      type="range"
+                      min="0.25"
+                      max="1"
+                      step="0.05"
+                      .value=${String(r.intensity)}
+                      @input=${(a) => this.updateAlarm({
+      intensity: Number(a.target.value)
+    })}
+                    />
+                    <small>Styrer hvor kraftig armed/triggered-atmosfæren bliver.</small>
+                  </label>
+                  <div class="state-box wide">
+                    <strong>Automatiske states</strong>
+                    <small>Armed: ${r.armed_states.join(", ")}</small>
+                    <small>Triggered: ${r.triggered_states.join(", ")}</small>
+                  </div>
+                </div>
+              ` : f}
+        </div>
+      </section>
+    `;
   }
 };
-wt.styles = I`:host{display:block}.theme-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.panel-head{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.88rem;line-height:1.45}label{display:grid;gap:6px;font-size:.86rem}select,input{box-sizing:border-box;width:100%;padding:10px;border:1px solid var(--divider-color);border-radius:9px;background:var(--card-background-color);color:var(--primary-text-color)}label small,.panel-head small,.state-box small{color:var(--secondary-text-color)}.moon-panel,.compass-panel,.source-panel,.alarm-panel,.occupancy-panel,.weather-panel{padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:color-mix(in srgb,var(--secondary-background-color) 65%,transparent)}.panel-head>div,.state-box{display:grid;gap:3px}.switch{display:flex;align-items:center;gap:7px;white-space:nowrap}.switch input{width:auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.wide{grid-column:1/-1}.state-box{padding:10px 12px;border-radius:9px;background:var(--card-background-color);font-size:.8rem}@media(max-width:600px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel-head{align-items:flex-start}}`;
+wt.styles = I`
+    :host {
+      display: block;
+    }
+
+    .theme-editor {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--divider-color);
+      border-radius: 14px;
+      background: var(--ha-card-background, var(--card-background-color));
+    }
+
+    .heading,
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .heading span {
+      display: block;
+      color: var(--secondary-text-color);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .heading h3 {
+      margin: 3px 0 0;
+      font-size: 1.08rem;
+    }
+
+    .heading b {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--secondary-background-color);
+      color: var(--secondary-text-color);
+      font-size: 0.75rem;
+      height: max-content;
+    }
+
+    .instruction {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--secondary-background-color);
+      color: var(--secondary-text-color);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 0.86rem;
+    }
+
+    select,
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--divider-color);
+      border-radius: 9px;
+      background: var(--card-background-color);
+      color: var(--primary-text-color);
+    }
+
+    label small,
+    .panel-head small,
+    .state-box small {
+      color: var(--secondary-text-color);
+    }
+
+    .moon-panel,
+    .compass-panel,
+    .source-panel,
+    .alarm-panel,
+    .occupancy-panel,
+    .weather-panel {
+      padding: 13px;
+      border: 1px solid var(--divider-color);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--secondary-background-color) 65%, transparent);
+    }
+
+    .panel-head > div,
+    .state-box {
+      display: grid;
+      gap: 3px;
+    }
+
+    .switch {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .switch input {
+      width: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .state-box,
+    .simulator-box {
+      padding: 10px 12px;
+      border-radius: 9px;
+      background: var(--card-background-color);
+      font-size: 0.8rem;
+    }
+
+    .simulator-box {
+      border: 1px dashed color-mix(in srgb, var(--primary-color, #03a9f4) 48%, var(--divider-color));
+    }
+
+    .simulator-title {
+      font-weight: 800;
+      color: var(--primary-text-color);
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide {
+        grid-column: auto;
+      }
+
+      .panel-head {
+        align-items: flex-start;
+      }
+    }
+  `;
 hr([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], wt.prototype, "config", 2);
 wt = hr([
   z("ha-explorer-theme-editor")
 ], wt);
-var Nn = Object.defineProperty, Pn = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Pn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Pn = Object.defineProperty, Rn = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Rn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Nn(t, i, o), o;
+  return r && o && Pn(t, i, o), o;
 };
 const qi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
 let $t = class extends L {
@@ -4718,21 +5291,21 @@ let $t = class extends L {
 };
 $t.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
 ur([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], $t.prototype, "config", 2);
 $t = ur([
   z("ha-explorer-presence-polish-editor")
 ], $t);
-var Rn = Object.defineProperty, Mn = Object.getOwnPropertyDescriptor, ni = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Mn = Object.defineProperty, zn = Object.getOwnPropertyDescriptor, ni = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Rn(t, i, o), o;
+  return r && o && Mn(t, i, o), o;
 };
-function jt(e) {
+function Dt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function zn(e) {
+function On(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
@@ -4741,7 +5314,7 @@ let rt = class extends L {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).sort((e, t) => jt(e).localeCompare(jt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).sort((e, t) => Dt(e).localeCompare(Dt(t), "da"));
   }
   updatePresence(e, t) {
     if (!this.config) return;
@@ -4750,7 +5323,7 @@ let rt = class extends L {
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: zn({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: On({ ...i.entity_binding, ...t }) });
   }
   addPerson() {
     if (!this.config) return;
@@ -4766,7 +5339,7 @@ let rt = class extends L {
     t.splice(e, 1), this.emit({ ...this.config, presences: t });
   }
   datalist(e) {
-    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${jt(t)}</option>`)}</datalist>`;
+    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Dt(t)}</option>`)}</datalist>`;
   }
   render() {
     const e = (this.config?.presences ?? []).filter((t) => (t.type ?? "person") === "person");
@@ -4778,18 +5351,18 @@ let rt = class extends L {
 };
 rt.styles = I`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 ni([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], rt.prototype, "hass", 2);
 ni([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], rt.prototype, "config", 2);
 rt = ni([
   z("ha-explorer-identity-editor")
 ], rt);
-var On = Object.defineProperty, In = Object.getOwnPropertyDescriptor, ne = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? In(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var In = Object.defineProperty, Tn = Object.getOwnPropertyDescriptor, ne = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Tn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && On(t, i, o), o;
+  return r && o && In(t, i, o), o;
 };
 const ve = 1e3, Bi = [
   { value: "info", label: "Info" },
@@ -4801,7 +5374,7 @@ const ve = 1e3, Bi = [
 function Fi(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Tn(e) {
+function jn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "zone";
 }
 function Lt(e) {
@@ -4848,7 +5421,7 @@ let X = class extends L {
     this.drawing && (this.pendingPoints = [...this.pendingPoints, this.mapPoint(e)]);
   }
   uniqueZoneId(e) {
-    const t = Tn(e), i = new Set(this.zones.map((o) => o.id));
+    const t = jn(e), i = new Set(this.zones.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r += 1;
@@ -5071,10 +5644,10 @@ X.styles = I`
     @media (max-width:700px) { .workspace { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } label.wide { grid-column:auto; } }
   `;
 ne([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], X.prototype, "hass", 2);
 ne([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], X.prototype, "config", 2);
 ne([
   b()
@@ -5103,23 +5676,23 @@ ne([
 X = ne([
   z("ha-explorer-zones-editor")
 ], X);
-var jn = Object.defineProperty, Ln = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Ln(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Ln = Object.defineProperty, qn = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && jn(t, i, o), o;
+  return r && o && Ln(t, i, o), o;
 };
 const Re = 1e3, Vi = ["on", "open", "opened", "true"];
 function Hi(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function qn(e) {
+function Bn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "opening";
 }
 function qt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Bn(e) {
+function Fn(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
@@ -5140,7 +5713,7 @@ let V = class extends L {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   uniqueId(e) {
-    const t = qn(e), i = new Set(this.openings.map((o) => o.id));
+    const t = Bn(e), i = new Set(this.openings.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -5161,7 +5734,7 @@ let V = class extends L {
   }
   openingFromDraft(e) {
     const t = this.draftEntity.trim();
-    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: Bn(this.draftStates) } } : {} };
+    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: Fn(this.draftStates) } } : {} };
   }
   save() {
     if (!this.config) return;
@@ -5207,10 +5780,10 @@ let V = class extends L {
 };
 V.styles = I`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
 G([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], V.prototype, "hass", 2);
 G([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], V.prototype, "config", 2);
 G([
   b()
@@ -5254,10 +5827,10 @@ G([
 V = G([
   z("ha-explorer-openings-editor")
 ], V);
-var Fn = Object.defineProperty, Vn = Object.getOwnPropertyDescriptor, se = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Vn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, se = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Fn(t, i, o), o;
+  return r && o && Vn(t, i, o), o;
 };
 const Bt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Ft = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, Vt = (e) => Math.min(1, Math.max(0, e));
 let W = class extends L {
@@ -5344,10 +5917,10 @@ let W = class extends L {
 };
 W.styles = I`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
 se([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], W.prototype, "config", 2);
 se([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], W.prototype, "hass", 2);
 se([
   b()
@@ -5376,8 +5949,8 @@ se([
 W = se([
   z("ha-explorer-room-reactions-editor")
 ], W);
-var Hn = Object.getOwnPropertyDescriptor, Kn = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Kn = Object.getOwnPropertyDescriptor, Gn = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Kn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
@@ -5398,13 +5971,13 @@ let Ki = class extends W {
     t && t.textContent?.includes("dør/vindue") && (t.innerHTML = "Hele rummet bliver ikke længere farvet af en enkelt entity. Hver lampe, bevægelsessensor, TV/media player og temperatursensor får sit eget punkt på plantegningen. Lamper bruger stadig <code>brightness</code>, og temperatur vises med den aktuelle værdi. Døre og vinduer konfigureres nu under <strong>Dynamic Doors & Windows</strong>.");
   }
 };
-Ki = Kn([
+Ki = Gn([
   z("ha-explorer-room-reactions-editor-clean")
 ], Ki);
-var Gn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, fe = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Zn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, fe = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Gn(t, i, o), o;
+  return r && o && Zn(t, i, o), o;
 };
 let oe = class extends L {
   constructor() {
@@ -5572,10 +6145,10 @@ oe.styles = I`
     }
   `;
 fe([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], oe.prototype, "config", 2);
 fe([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], oe.prototype, "hass", 2);
 fe([
   b()
@@ -5598,10 +6171,10 @@ fe([
 oe = fe([
   z("ha-explorer-room-actions-editor")
 ], oe);
-var Un = Object.defineProperty, Wn = Object.getOwnPropertyDescriptor, H = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Wn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Wn = Object.defineProperty, Yn = Object.getOwnPropertyDescriptor, H = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Un(t, i, o), o;
+  return r && o && Wn(t, i, o), o;
 };
 const U = 1e3;
 let F = class extends L {
@@ -5632,7 +6205,7 @@ let F = class extends L {
     return t.length ? [...new Set(t)] : ["on"];
   }
   nodeState(e) {
-    return je(e, (t) => this.entityState(t));
+    return De(e, (t) => this.entityState(t));
   }
   nodeStateLabel(e) {
     if (e.kind !== "door") return "";
@@ -6011,10 +6584,10 @@ F.styles = I`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
 H([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], F.prototype, "config", 2);
 H([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], F.prototype, "hass", 2);
 H([
   b()
@@ -6061,10 +6634,10 @@ H([
 F = H([
   z("ha-explorer-route-editor")
 ], F);
-var Yn = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Xn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Yn(t, i, o), o;
+  return r && o && Xn(t, i, o), o;
 };
 const Me = 1e3;
 let ie = class extends L {
@@ -6242,7 +6815,7 @@ let ie = class extends L {
         vector-effect="non-scaling-stroke"
       ></line>`;
     }), i = this.endpointOptions().filter((r) => r.point).map((r) => {
-      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? je(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
+      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? De(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
       return E`
           <g transform=${`translate(${o * Me} ${n * Me})`}>
             <circle class=${r.kind === "room" ? "graph-room" : l ? "graph-node blocked" : "graph-node"} r=${r.kind === "room" ? "11" : "13"}></circle>
@@ -6355,10 +6928,10 @@ ie.styles = I`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
 le([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ie.prototype, "config", 2);
 le([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], ie.prototype, "hass", 2);
 le([
   b()
@@ -6384,10 +6957,10 @@ le([
 ie = le([
   z("ha-explorer-route-graph-editor")
 ], ie);
-var Qn = Object.defineProperty, Jn = Object.getOwnPropertyDescriptor, lt = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Jn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Jn = Object.defineProperty, es = Object.getOwnPropertyDescriptor, lt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? es(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Qn(t, i, o), o;
+  return r && o && Jn(t, i, o), o;
 };
 const te = 1e3;
 let Ee = class extends L {
@@ -6665,10 +7238,10 @@ Ee.styles = I`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 lt([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Ee.prototype, "config", 2);
 lt([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Ee.prototype, "hass", 2);
 lt([
   b()
@@ -6679,13 +7252,13 @@ lt([
 Ee = lt([
   z("ha-explorer-route-diagnostics")
 ], Ee);
-var es = Object.defineProperty, ts = Object.getOwnPropertyDescriptor, si = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ts(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ts = Object.defineProperty, is = Object.getOwnPropertyDescriptor, si = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? is(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && es(t, i, o), o;
+  return r && o && ts(t, i, o), o;
 };
-const is = { basic: 0, rooms: 1, presences: 2 };
-let Zt = class extends D {
+const rs = { basic: 0, rooms: 1, presences: 2 };
+let Zt = class extends j {
   updated(e) {
     super.updated(e), e.has("config") && this.config && this.setConfig(this.config);
   }
@@ -6694,7 +7267,7 @@ let Zt = class extends D {
   }
 };
 si([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Zt.prototype, "config", 2);
 Zt = si([
   z("ha-explorer-room-tools")
@@ -6738,7 +7311,7 @@ let Ut = class extends ae {
     const t = e.detail?.target;
     if (!t) return;
     e.stopPropagation();
-    const i = is[t];
+    const i = rs[t];
     let r;
     if (i !== void 0) {
       const o = this.baseSections[i];
@@ -6798,7 +7371,7 @@ function Ht(e, t) {
   }
   return i;
 }
-function rs(e) {
+function os(e) {
   if (!e.length) return [0.5, 0.5];
   const [t, i] = e.reduce(
     ([r, o], [n, s]) => [r + n, o + s],
@@ -6806,7 +7379,7 @@ function rs(e) {
   );
   return [t / e.length, i / e.length];
 }
-function os(e) {
+function ns(e) {
   if (e.length < 3) return;
   let t = 0, i = 0, r = 0;
   for (let o = 0; o < e.length; o += 1) {
@@ -6819,21 +7392,21 @@ function os(e) {
 function ze(e) {
   return { x: Gi(e.x), y: Gi(e.y) };
 }
-function ns(e) {
+function ss(e) {
   return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(gr);
 }
 function mr(e, t) {
   if (!t?.trim()) return;
   const i = gr(t);
-  return e.find((r) => ns(r).includes(i));
+  return e.find((r) => ss(r).includes(i));
 }
-function ss(e) {
+function as(e) {
   if (e.presence_anchor) return ze(e.presence_anchor);
   if (e.label) return ze(e.label);
-  const t = os(e.points);
+  const t = ns(e.points);
   if (t && Ht(t, e.points))
     return ze({ x: t[0], y: t[1] });
-  const i = rs(e.points);
+  const i = os(e.points);
   if (Ht(i, e.points))
     return ze({ x: i[0], y: i[1] });
   if (e.points.length) {
@@ -6845,7 +7418,7 @@ function ss(e) {
   }
   return { x: 0.5, y: 0.5 };
 }
-const as = ["unknown", "unavailable", "not_detected"], ls = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
+const ls = ["unknown", "unavailable", "not_detected"], ds = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
 function Y(e, t) {
   return e && t ? e.attributes[t] : void 0;
 }
@@ -6857,7 +7430,7 @@ function xe(e, t) {
   const i = he(e);
   return i === void 0 ? t : Math.min(1, Math.max(0, i));
 }
-function ds(e, t) {
+function cs(e, t) {
   if (typeof e == "boolean") return e;
   if (typeof e == "number") return e !== 0;
   if (typeof e == "string") {
@@ -6873,9 +7446,9 @@ function ht(e, t) {
 function Zi(e) {
   if (typeof e != "string") return;
   const t = e.trim();
-  return ls.has(t.toLowerCase()) ? void 0 : t;
+  return ds.has(t.toLowerCase()) ? void 0 : t;
 }
-function cs(e, t, i) {
+function ps(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
     return r ? Zi(e.room_attribute ? Y(r, e.room_attribute) : r.state) : void 0;
@@ -6883,7 +7456,7 @@ function cs(e, t, i) {
   if (t)
     return Zi(Y(t, e.room_attribute ?? "explorer_room"));
 }
-function ps(e) {
+function hs(e) {
   if (!e.points.length) return;
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
@@ -6898,8 +7471,8 @@ function Wi(e, t, i, r, o, n, s) {
   const l = i[n], d = r[n], c = o[n], p = (l * (r.sensor_y - o.sensor_y) + d * (o.sensor_y - i.sensor_y) + c * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + d * (i.sensor_x - o.sensor_x) + c * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + d * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + c * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
   return p * e + u * t + g;
 }
-function hs(e, t, i) {
-  const r = e.physical_meters, o = he(r?.width), n = he(r?.height), s = ps(e);
+function us(e, t, i) {
+  const r = e.physical_meters, o = he(r?.width), n = he(r?.height), s = hs(e);
   if (!o || !n || o <= 0 || n <= 0 || !s) return {};
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
   let d = Math.min(1, Math.max(0, a / o)), c = Math.min(1, Math.max(0, l / n));
@@ -6909,18 +7482,18 @@ function hs(e, t, i) {
 function ut(e, t, i) {
   const r = mr(t, i ?? e.room_id);
   if (r) {
-    const s = ss(r);
+    const s = as(r);
     return { ...e, x: s.x, y: s.y, room_id: r.id };
   }
   const o = xe(e.x), n = xe(e.y);
   return o === void 0 || n === void 0 ? { ...e, x: o, y: n, visible: !1 } : { ...e, x: o, y: n };
 }
-function us(e, t, i, r, o, n) {
+function gs(e, t, i, r, o, n) {
   if (!i) return { x: xe(e.x), y: xe(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
     const d = he(Y(i, a)), c = he(Y(i, l)), p = mr(r, o ?? e.room_id);
-    return d === void 0 || c === void 0 || !p ? {} : { ...hs(p, d, c), roomId: p.id };
+    return d === void 0 || c === void 0 || !p ? {} : { ...us(p, d, c), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
     const d = he(Y(i, a)), c = he(Y(i, l)), p = he(n?.width), u = he(n?.height);
@@ -6928,19 +7501,19 @@ function us(e, t, i, r, o, n) {
   }
   return { x: xe(Y(i, a), e.x), y: xe(Y(i, l), e.y) };
 }
-function gs(e, t, i = [], r) {
+function ms(e, t, i = [], r) {
   const o = e.entity_binding;
   if (!o || !t) return ut(e, i);
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...ut(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...ut(e, i), visible: !1 };
-  const l = o.hidden_states ?? as, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = Y(n, o.visible_attribute), u = d || c ? !1 : ds(p, e.visible ?? !0), g = cs(o, n, t) ?? e.room_id, y = us(e, o, a, i, g, r), m = { ...e, x: y.x, y: y.y, room_id: y.roomId ?? e.room_id, name: e.name ?? ht(Y(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? ht(Y(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? ht(Y(n, o.icon_attribute)) : void 0), color: e.color ?? ht(Y(n, o.color_attribute ?? "explorer_color")), visible: u };
+  const l = o.hidden_states ?? ls, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = Y(n, o.visible_attribute), u = d || c ? !1 : cs(p, e.visible ?? !0), g = ps(o, n, t) ?? e.room_id, y = gs(e, o, a, i, g, r), m = { ...e, x: y.x, y: y.y, room_id: y.roomId ?? e.room_id, name: e.name ?? ht(Y(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? ht(Y(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? ht(Y(n, o.icon_attribute)) : void 0), color: e.color ?? ht(Y(n, o.color_attribute ?? "explorer_color")), visible: u };
   return o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : ut(m, i, g);
 }
-function ms(e, t, i = [], r) {
-  return e.map((o) => gs(o, t, i, r));
+function fs(e, t, i = [], r) {
+  return e.map((o) => ms(o, t, i, r));
 }
-const Te = /* @__PURE__ */ new Map(), fs = 0.22, bs = 0.16, ys = 3e4, vs = 0.025, xs = 0.018;
+const Te = /* @__PURE__ */ new Map(), bs = 0.22, ys = 0.16, vs = 3e4, xs = 0.025, ws = 0.018;
 function kt(e) {
   return Number.isFinite(e.x) && Number.isFinite(e.y) ? { x: e.x, y: e.y } : void 0;
 }
@@ -6956,8 +7529,8 @@ function Ue(e) {
 function fr(e) {
   return e.previous ? { x: e.point.x + (e.point.x - e.previous.x), y: e.point.y + (e.point.y - e.previous.y) } : e.point;
 }
-function ws(e, t) {
-  const i = kt(t), r = Wt(e.point, i), o = Wt(fr(e), i), n = e.target && e.target === Ue(t) ? vs : 0;
+function $s(e, t) {
+  const i = kt(t), r = Wt(e.point, i), o = Wt(fr(e), i), n = e.target && e.target === Ue(t) ? xs : 0;
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
 function Yi(e, t, i) {
@@ -6966,8 +7539,8 @@ function Yi(e, t, i) {
   const n = Te.get(r);
   Te.set(r, { point: o, previous: n?.point, target: Ue(t), seenAt: i });
 }
-function $s(e, t = Date.now()) {
-  for (const [a, l] of Te) t - l.seenAt > ys && Te.delete(a);
+function ks(e, t = Date.now()) {
+  for (const [a, l] of Te) t - l.seenAt > vs && Te.delete(a);
   const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && kt(a) && Ue(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
     const l = a.room_id ?? "__no_room__", d = n.get(l) ?? [];
@@ -6983,7 +7556,7 @@ function $s(e, t = Date.now()) {
     const l = [...a], d = [...a].sort((g, y) => Ie(g).localeCompare(Ie(y))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
       const y = Te.get(Ie(g));
       if (!y) return { identity: g, track: void 0, scores: [] };
-      const m = l.map((x) => ws(y, x)).sort((x, $) => x.score - $.score);
+      const m = l.map((x) => $s(y, x)).sort((x, $) => x.score - $.score);
       return { identity: g, track: y, scores: m };
     }).sort((g, y) => (g.scores[0]?.score ?? 1 / 0) - (y.scores[0]?.score ?? 1 / 0));
     for (const g of u) {
@@ -6991,7 +7564,7 @@ function $s(e, t = Date.now()) {
       if (!m) continue;
       const x = g.scores.filter((N) => !p.has(N.candidate));
       if (!x.length) continue;
-      const $ = x[0], A = x[1], w = $.distance <= fs || Wt(fr(m), kt($.candidate)) <= bs, S = !!A && A.score - $.score < xs;
+      const $ = x[0], _ = x[1], w = $.distance <= bs || Wt(fr(m), kt($.candidate)) <= ys, S = !!_ && _.score - $.score < ws;
       w && !S && (c.set(Ie(y), $.candidate), p.add($.candidate));
     }
     for (const g of d) {
@@ -7007,11 +7580,11 @@ function $s(e, t = Date.now()) {
   }
   return [...s, ...o];
 }
-function ks() {
+function _s() {
   Te.clear();
 }
-var As = Object.defineProperty, _s = Object.getOwnPropertyDescriptor, Ct = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? _s(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ss(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
@@ -7028,7 +7601,7 @@ let Fe = class extends L {
   }
   setConfig(e) {
     if (!e) throw new Error("Configuration is required");
-    ks(), this.config = { title: "Home Assistant Explorer", min_zoom: 1, max_zoom: 6, initial_zoom: 1, fit_mode: "contain", rooms: [], zones: [], route_nodes: [], route_graph_edges: [], routes: [], openings: [], presences: [], ...e, appearance: { theme: "classic", ...e.appearance ?? {} } };
+    _s(), this.config = { title: "Home Assistant Explorer", min_zoom: 1, max_zoom: 6, initial_zoom: 1, fit_mode: "contain", rooms: [], zones: [], route_nodes: [], route_graph_edges: [], routes: [], openings: [], presences: [], ...e, appearance: { theme: "classic", ...e.appearance ?? {} } };
   }
   getCardSize() {
     return 6;
@@ -7090,16 +7663,16 @@ let Fe = class extends L {
   }
   render() {
     if (!this.config) return f;
-    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = ms(this.config.presences ?? [], this.hass, t, this.config.floorplan_meters), r = $s(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(1, Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)), l = this.config.appearance?.compass ?? {}, d = this.config.appearance?.hide_source_text ?? !1, c = this.alarmState(), p = Math.min(1, Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), y = Math.min(1, Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)), m = this.config.appearance?.weather?.enabled ?? !1, x = this.weatherState(), $ = this.weatherEffect(x), A = Math.min(1, Math.max(0.25, this.config.appearance?.weather?.intensity ?? 0.6)), w = m && ["partlycloudy", "cloudy", "rainy", "pouring", "lightning", "lightning-rainy", "snowy", "snowy-rainy", "hail"].includes(x), S = m && !s && ["sunny", "clear", "partlycloudy"].includes(x), N = x === "partlycloudy";
-    return h`<ha-card class=${`${n ? "enchanted" : "classic"}${s ? " moonlight" : ""}${S ? " sunlight" : ""}${N ? " partly-cloudy" : ""}${w ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${x}` : ""}${c === "armed" ? " alarm-armed" : ""}${c === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`} style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${y};--weather-intensity:${A}`}><header><div><span>${c === "triggered" ? "⚠ Alarm Triggered" : c === "armed" ? "✦ Map Secured" : x === "partlycloudy" ? s ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : S ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : s ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span><h1>${this.config.title}</h1></div><small>Enchanted Atmosphere · v${br}</small></header><div class="map-stage"><div class="weather-overlay"></div><div class="weather-particles"></div><div class="weather-flash"></div><div class="sun-overlay"></div><div class="sun-disc"></div><explorer-source-clean-canvas .theme=${o} .hideSourceText=${d} .weatherEffect=${m ? $ : "clear"} .weatherIntensity=${A} .weatherNight=${s} .compassVisible=${l.visible ?? !0} .compassRotation=${l.rotation ?? -7} .compassSize=${l.size ?? 1} .hass=${this.hass} .image=${e} .rooms=${t} .zones=${this.config.zones ?? []} .routeNodes=${this.config.route_nodes ?? []} .routeGraphEdges=${this.config.route_graph_edges ?? []} .routes=${this.config.routes ?? []} .openings=${this.config.openings ?? []} .presences=${r} .minZoom=${this.config.min_zoom ?? 1} .maxZoom=${this.config.max_zoom ?? 6} .initialZoom=${this.config.initial_zoom ?? 1} .fitMode=${this.config.fit_mode ?? "contain"}></explorer-source-clean-canvas><div class="occupancy-overlay"></div><div class="moon-overlay"></div><div class="moon-disc"><span></span></div>${N ? this.renderCelestialCloud() : f}<div class="night-vignette"></div><div class="alarm-overlay"></div><div class="alarm-vignette"></div></div></ha-card>`;
+    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = fs(this.config.presences ?? [], this.hass, t, this.config.floorplan_meters), r = ks(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(1, Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)), l = this.config.appearance?.compass ?? {}, d = this.config.appearance?.hide_source_text ?? !1, c = this.alarmState(), p = Math.min(1, Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), y = Math.min(1, Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)), m = this.config.appearance?.weather?.enabled ?? !1, x = this.weatherState(), $ = this.weatherEffect(x), _ = Math.min(1, Math.max(0.25, this.config.appearance?.weather?.intensity ?? 0.6)), w = m && ["partlycloudy", "cloudy", "rainy", "pouring", "lightning", "lightning-rainy", "snowy", "snowy-rainy", "hail"].includes(x), S = m && !s && ["sunny", "clear", "partlycloudy"].includes(x), N = x === "partlycloudy";
+    return h`<ha-card class=${`${n ? "enchanted" : "classic"}${s ? " moonlight" : ""}${S ? " sunlight" : ""}${N ? " partly-cloudy" : ""}${w ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${x}` : ""}${c === "armed" ? " alarm-armed" : ""}${c === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`} style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${y};--weather-intensity:${_}`}><header><div><span>${c === "triggered" ? "⚠ Alarm Triggered" : c === "armed" ? "✦ Map Secured" : x === "partlycloudy" ? s ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : S ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : s ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span><h1>${this.config.title}</h1></div><small>Enchanted Atmosphere · v${br}</small></header><div class="map-stage"><div class="weather-overlay"></div><div class="weather-particles"></div><div class="weather-flash"></div><div class="sun-overlay"></div><div class="sun-disc"></div><explorer-source-clean-canvas .theme=${o} .hideSourceText=${d} .weatherEffect=${m ? $ : "clear"} .weatherIntensity=${_} .weatherNight=${s} .compassVisible=${l.visible ?? !0} .compassRotation=${l.rotation ?? -7} .compassSize=${l.size ?? 1} .hass=${this.hass} .image=${e} .rooms=${t} .zones=${this.config.zones ?? []} .routeNodes=${this.config.route_nodes ?? []} .routeGraphEdges=${this.config.route_graph_edges ?? []} .routes=${this.config.routes ?? []} .openings=${this.config.openings ?? []} .presences=${r} .minZoom=${this.config.min_zoom ?? 1} .maxZoom=${this.config.max_zoom ?? 6} .initialZoom=${this.config.initial_zoom ?? 1} .fitMode=${this.config.fit_mode ?? "contain"}></explorer-source-clean-canvas><div class="occupancy-overlay"></div><div class="moon-overlay"></div><div class="moon-disc"><span></span></div>${N ? this.renderCelestialCloud() : f}<div class="night-vignette"></div><div class="alarm-overlay"></div><div class="alarm-vignette"></div></div></ha-card>`;
   }
 };
 Fe.styles = I`:host{display:block;width:100%;min-width:0}ha-card{width:100%;overflow:hidden;transition:background .6s,color .6s}ha-card.preview explorer-source-clean-canvas{--explorer-viewport-max-height:min(52vh,520px)}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;color:var(--primary-text-color);background:var(--ha-card-background,var(--card-background-color));transition:background .6s,color .6s}header span{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary-text-color)}h1{margin:3px 0 0;font-size:1.25rem}small{color:var(--secondary-text-color);white-space:nowrap}.map-stage{position:relative;overflow:hidden;isolation:isolate}.map-stage explorer-source-clean-canvas{position:relative;z-index:4;display:block}.occupancy-overlay,.weather-overlay,.weather-particles,.weather-flash,.sun-overlay,.sun-disc,.moon-overlay,.night-vignette,.moon-disc,.alarm-overlay,.alarm-vignette{position:absolute;pointer-events:none;opacity:0;transition:opacity .7s,filter .7s}.occupancy-overlay{inset:0;z-index:7}.occupied .occupancy-overlay{opacity:calc(.32 * var(--occupancy-intensity));background:radial-gradient(circle at 34% 28%,rgba(255,220,142,.36),transparent 31%),radial-gradient(circle at 68% 63%,rgba(205,148,70,.18),transparent 38%);mix-blend-mode:soft-light}.empty-house .occupancy-overlay{opacity:calc(.2 * var(--occupancy-intensity));background:linear-gradient(145deg,rgba(71,64,55,.16),rgba(42,49,57,.18));mix-blend-mode:multiply}.weather-overlay,.weather-particles,.weather-flash{inset:0;z-index:3;overflow:hidden}.cloud-field{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;opacity:calc(.96 * var(--weather-intensity));filter:sepia(.42) saturate(.82) contrast(1.03)}.partly-cloudy .cloud-field{opacity:calc(.78 * var(--weather-intensity))}.state-rainy .cloud-field,.state-pouring .cloud-field,.state-lightning .cloud-field,.state-lightning-rainy .cloud-field{opacity:calc(1 * var(--weather-intensity));filter:sepia(.6) saturate(.62) brightness(.84)}.cloud{position:absolute;height:auto;overflow:visible;will-change:transform;transform-origin:center;filter:drop-shadow(0 8px 18px rgba(64,47,29,.22))}.cloud-haze{fill:rgba(211,186,139,.28)}.cloud-core{fill:rgba(232,209,163,.58)}.cloud-v2 .cloud-haze{fill:rgba(196,172,133,.25)}.cloud-v2 .cloud-core{fill:rgba(221,199,158,.52)}.cloud-v3 .cloud-haze{fill:rgba(177,158,129,.24)}.cloud-v3 .cloud-core{fill:rgba(210,190,154,.48)}.cloud-a{left:24%;top:-3%;width:34%;opacity:.8;animation:cloudDriftA 58s ease-in-out infinite alternate}.cloud-b{right:-9%;top:10%;width:38%;opacity:.88;animation:cloudDriftB 46s ease-in-out infinite alternate}.cloud-c{left:-12%;top:26%;width:40%;opacity:.82;animation:cloudDriftC 54s ease-in-out infinite alternate}.cloud-d{right:-11%;top:34%;width:35%;opacity:.74;animation:cloudDriftA 62s ease-in-out infinite alternate-reverse}.cloud-e{left:-8%;top:48%;width:34%;opacity:.7;animation:cloudDriftB 51s ease-in-out infinite alternate}.cloud-f{right:3%;top:55%;width:33%;opacity:.76;animation:cloudDriftC 64s ease-in-out infinite alternate-reverse}.cloud-g{left:7%;top:68%;width:31%;opacity:.72;animation:cloudDriftA 69s ease-in-out infinite alternate-reverse}.cloud-h{right:-8%;top:73%;width:39%;opacity:.82;animation:cloudDriftB 57s ease-in-out infinite alternate}.cloud-i{left:-10%;top:82%;width:37%;opacity:.7;animation:cloudDriftC 66s ease-in-out infinite alternate}.cloud-j{left:33%;top:88%;width:35%;opacity:.66;animation:cloudDriftA 72s ease-in-out infinite alternate}.cloud-k{right:19%;top:24%;width:28%;opacity:.56;animation:cloudDriftC 61s ease-in-out infinite alternate}.cloud-l{left:18%;top:40%;width:27%;opacity:.52;animation:cloudDriftB 67s ease-in-out infinite alternate-reverse}.partly-cloudy .cloud-c,.partly-cloudy .cloud-d,.partly-cloudy .cloud-e,.partly-cloudy .cloud-f,.partly-cloudy .cloud-g,.partly-cloudy .cloud-h,.partly-cloudy .cloud-i{display:none}.partly-cloudy .cloud-a{opacity:.66}.partly-cloudy .cloud-b{opacity:.72}.partly-cloudy .cloud-j{opacity:.42}.partly-cloudy .cloud-k{opacity:.52}.partly-cloudy .cloud-l{opacity:.46}.sun-overlay{inset:0;z-index:5;background:radial-gradient(circle at 12% 14%,rgba(255,236,177,.62) 0,rgba(244,193,92,.24) 18%,transparent 39%),linear-gradient(132deg,rgba(255,222,146,.19) 0,rgba(245,196,91,.08) 34%,transparent 58%);mix-blend-mode:screen}.sun-overlay:after{display:none}.sun-disc{z-index:6;left:7.5%;top:7%;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle,#fff0bc 0,#f2c56d 38%,#d69635 63%,rgba(186,112,32,.08) 72%,transparent 74%);filter:drop-shadow(0 0 10px rgba(224,158,48,.48)) drop-shadow(0 0 30px rgba(244,199,102,.36))}.sun-disc:before{content:"";position:absolute;inset:-44%;border-radius:50%;background:repeating-conic-gradient(rgba(244,197,94,.2) 0deg 5deg,transparent 5deg 15deg);mask-image:radial-gradient(circle,transparent 0 27%,#000 31% 58%,transparent 74%);animation:sunBreathe 8s ease-in-out infinite}.sunlight .sun-overlay{opacity:calc(.82 * var(--weather-intensity))}.sunlight .sun-disc{opacity:calc(.9 * var(--weather-intensity))}.partly-cloudy .sun-overlay{opacity:calc(.62 * var(--weather-intensity))}.partly-cloudy .sun-disc{opacity:calc(.74 * var(--weather-intensity))}.celestial-cloud{position:absolute;pointer-events:none;width:134px;height:64px;opacity:0;z-index:7;will-change:transform,opacity;transform-origin:center;filter:drop-shadow(0 5px 10px rgba(64,48,31,.16))}.celestial-cloud:before{content:"";position:absolute;inset:4px 0 8px;border-radius:48% 52% 46% 54%;background:radial-gradient(ellipse at 14% 67%,rgba(207,191,163,.58) 0 20%,transparent 23%),radial-gradient(ellipse at 30% 44%,rgba(235,222,194,.64) 0 28%,transparent 32%),radial-gradient(ellipse at 48% 30%,rgba(246,232,203,.68) 0 31%,transparent 35%),radial-gradient(ellipse at 67% 40%,rgba(230,215,185,.64) 0 28%,transparent 32%),radial-gradient(ellipse at 84% 65%,rgba(199,180,148,.54) 0 21%,transparent 24%),linear-gradient(to bottom,transparent 26%,rgba(222,205,176,.48) 46%,rgba(177,151,116,.35) 74%,transparent 92%);filter:blur(1.35px);transform:skewX(-7deg);opacity:.92}.celestial-cloud:after{content:"";position:absolute;left:10%;top:41%;width:80%;height:25%;border-radius:50%;background:radial-gradient(ellipse at 24% 50%,rgba(246,233,207,.32) 0 24%,transparent 50%),radial-gradient(ellipse at 56% 45%,rgba(236,221,193,.28) 0 32%,transparent 58%),radial-gradient(ellipse at 82% 52%,rgba(201,181,150,.22) 0 22%,transparent 48%);filter:blur(3.2px);transform:translateY(10px) scaleX(.94);opacity:.86}.partly-cloudy:not(.moonlight) .celestial-cloud{left:2.2%;top:6.3%;opacity:.74;mix-blend-mode:normal;animation:celestialCloudSunDrift 20s ease-in-out infinite}.partly-cloudy:not(.moonlight) .sun-disc{animation:celestialSunVeil 20s ease-in-out infinite}.partly-cloudy:not(.moonlight) .sun-overlay{animation:celestialSunGlow 20s ease-in-out infinite}.partly-cloudy.moonlight .celestial-cloud{right:2.4%;top:4.9%;left:auto;z-index:10;opacity:.60;filter:drop-shadow(0 5px 11px rgba(12,19,28,.22));animation:celestialCloudMoonDrift 24s ease-in-out infinite}.partly-cloudy.moonlight .celestial-cloud:before{background:radial-gradient(ellipse at 14% 67%,rgba(132,143,153,.46) 0 20%,transparent 23%),radial-gradient(ellipse at 30% 44%,rgba(194,201,205,.52) 0 28%,transparent 32%),radial-gradient(ellipse at 48% 30%,rgba(214,218,216,.56) 0 31%,transparent 35%),radial-gradient(ellipse at 67% 40%,rgba(179,188,194,.50) 0 28%,transparent 32%),radial-gradient(ellipse at 84% 65%,rgba(112,124,135,.42) 0 21%,transparent 24%),linear-gradient(to bottom,transparent 26%,rgba(178,187,191,.36) 46%,rgba(85,99,112,.28) 74%,transparent 92%)}.partly-cloudy.moonlight .celestial-cloud:after{background:radial-gradient(ellipse at 24% 50%,rgba(213,219,220,.24) 0 24%,transparent 50%),radial-gradient(ellipse at 56% 45%,rgba(188,197,202,.22) 0 32%,transparent 58%),radial-gradient(ellipse at 82% 52%,rgba(114,128,139,.18) 0 22%,transparent 48%)}.partly-cloudy.moonlight .moon-disc{animation:celestialMoonVeil 24s ease-in-out infinite}.partly-cloudy.moonlight .sun-overlay,.partly-cloudy.moonlight .sun-disc{opacity:0!important;animation:none}.weather-fog .weather-overlay{opacity:calc(.58 * var(--weather-intensity));inset:-8%;background:repeating-linear-gradient(0deg,rgba(238,230,208,.3) 0 24px,rgba(132,130,122,.13) 24px 52px,transparent 52px 84px);filter:blur(8px);animation:weatherDrift 12s linear infinite}.weather-rain .weather-overlay,.weather-storm .weather-overlay{opacity:calc(.36 * var(--weather-intensity));background:linear-gradient(145deg,rgba(38,49,58,.28),rgba(29,36,42,.13));mix-blend-mode:multiply}.weather-rain .weather-particles,.weather-storm .weather-particles{opacity:calc(.54 * var(--weather-intensity));inset:-15% -10%;background:repeating-linear-gradient(105deg,transparent 0 18px,rgba(55,65,68,.34) 18px 19px,transparent 19px 37px);background-size:48px 96px;animation:weatherRain 1.1s linear infinite}.weather-snow .weather-overlay{opacity:calc(.3 * var(--weather-intensity));background:rgba(225,224,214,.22)}.weather-snow .weather-particles{opacity:calc(.64 * var(--weather-intensity));inset:-10%;background-image:radial-gradient(circle,rgba(248,244,226,.9) 0 2px,transparent 2.5px),radial-gradient(circle,rgba(236,232,216,.75) 0 1.5px,transparent 2px);background-size:46px 52px,71px 78px;background-position:0 0,22px 19px;animation:weatherSnow 8s linear infinite}.weather-storm .weather-flash{opacity:0;background:radial-gradient(circle at 72% 18%,rgba(255,246,214,.55),transparent 28%),rgba(255,242,203,.18);mix-blend-mode:screen;animation:weatherLightning 6.5s steps(1,end) infinite}.moon-overlay{inset:0;z-index:8;background:radial-gradient(circle at 88% 11%,rgba(230,224,197,calc(.3 * var(--moon-intensity))) 0,rgba(185,181,161,calc(.1 * var(--moon-intensity))) 16%,transparent 34%),linear-gradient(145deg,rgba(49,52,56,calc(.08 * var(--moon-intensity))),rgba(28,34,42,calc(.25 * var(--moon-intensity))));mix-blend-mode:multiply}.night-vignette{inset:0;background:radial-gradient(ellipse at center,transparent 46%,rgba(18,22,28,calc(.2 * var(--moon-intensity))) 100%);z-index:9}.moon-disc{right:7.5%;top:4.5%;width:72px;height:72px;border-radius:50%;z-index:9;filter:drop-shadow(0 0 9px rgba(87,69,47,.22)) drop-shadow(0 0 22px rgba(225,211,174,.18));transform:rotate(-8deg)}.moon-disc:before,.moon-disc:after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(70,51,32,.28)}.moon-disc:after{inset:-7px;border-color:rgba(83,61,38,.14);transform:rotate(17deg)}.moon-disc span{display:block;position:relative;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 33% 31%,rgba(247,233,190,.82) 0 8%,transparent 9%),radial-gradient(circle at 64% 61%,rgba(85,67,47,.2) 0 8%,transparent 9%),radial-gradient(circle at 45% 72%,rgba(95,75,52,.16) 0 5%,transparent 6%),radial-gradient(circle at 42% 38%,#e7d7a8 0,#c9b681 58%,#8f754f 76%,rgba(87,65,43,.1) 77%,transparent 80%);box-shadow:inset -9px -7px 10px rgba(69,51,36,.22),inset 4px 3px 8px rgba(255,244,205,.24),0 0 18px rgba(215,197,151,.16)}.moon-disc span:after{content:"";position:absolute;left:48%;top:14%;width:34%;height:58%;border-left:1px solid rgba(72,51,33,.18);border-radius:50%;transform:rotate(22deg)}.moonlight .moon-overlay,.moonlight .night-vignette{opacity:1}.moonlight .moon-disc{opacity:calc(.72 * var(--moon-intensity))}.moonlight header{background:linear-gradient(100deg,#403d3a,#34383f);color:#eee8dc}.moonlight{background:#4a4843}.moonlight .map-stage{background:#4a4843}.alarm-overlay,.alarm-vignette{inset:0;z-index:10}.alarm-armed .alarm-overlay{opacity:calc(.13 * var(--alarm-intensity));background:linear-gradient(145deg,rgba(72,54,31,.75),rgba(116,86,42,.28));mix-blend-mode:multiply}.alarm-armed .alarm-vignette{opacity:calc(.38 * var(--alarm-intensity));background:radial-gradient(ellipse at center,transparent 48%,rgba(57,35,18,.55) 100%)}.alarm-triggered .alarm-overlay{opacity:calc(.52 * var(--alarm-intensity));background:repeating-linear-gradient(135deg,rgba(106,15,15,.42) 0 34px,rgba(64,8,8,.18) 34px 68px);mix-blend-mode:multiply;animation:alarmPulse 1.45s ease-in-out infinite}.alarm-triggered .alarm-vignette{opacity:calc(.88 * var(--alarm-intensity));background:radial-gradient(ellipse at center,transparent 32%,rgba(86,7,7,.72) 100%);animation:alarmVignette 1.45s ease-in-out infinite}.alarm-triggered header{color:#f8e6dc;background:linear-gradient(100deg,#5d211c,#321615)!important}.alarm-triggered header span,.alarm-triggered header small{color:#efc6b3}@keyframes cloudDriftA{0%{transform:translate3d(-5%,0,0) scale(.98)}45%{transform:translate3d(2%,1.5%,0) scale(1.015)}100%{transform:translate3d(9%,-1%,0) scale(1.035)}}@keyframes cloudDriftB{0%{transform:translate3d(6%,-1%,0) scale(1.02)}50%{transform:translate3d(0,1%,0) scale(.985)}100%{transform:translate3d(-10%,2%,0) scale(1.01)}}@keyframes cloudDriftC{0%{transform:translate3d(-7%,1%,0) scale(.97)}42%{transform:translate3d(1%,-1%,0) scale(1.025)}100%{transform:translate3d(8%,1.5%,0) scale(.99)}}@keyframes sunBreathe{0%,100%{transform:scale(.96);opacity:.72}50%{transform:scale(1.06);opacity:1}}@keyframes celestialCloudSunDrift{0%{transform:translate3d(-72px,-3px,0) scale(.88);opacity:.08}16%{opacity:.30}36%{transform:translate3d(-16px,-1px,0) scale(.98);opacity:.62}49%{transform:translate3d(2px,1px,0) scale(1.02);opacity:.76}62%{transform:translate3d(20px,0,0) scale(1);opacity:.70}78%{opacity:.34}100%{transform:translate3d(82px,4px,0) scale(.90);opacity:.08}}@keyframes celestialSunVeil{0%,16%,80%,100%{opacity:calc(.74 * var(--weather-intensity));filter:drop-shadow(0 0 10px rgba(224,158,48,.48)) drop-shadow(0 0 30px rgba(244,199,102,.36))}36%,64%{opacity:calc(.63 * var(--weather-intensity));filter:drop-shadow(0 0 9px rgba(224,158,48,.42)) drop-shadow(0 0 23px rgba(244,199,102,.30))}}@keyframes celestialSunGlow{0%,16%,80%,100%{opacity:calc(.62 * var(--weather-intensity))}36%,64%{opacity:calc(.50 * var(--weather-intensity))}}@keyframes celestialCloudMoonDrift{0%{transform:translate3d(72px,-2px,0) scale(.90);opacity:.08}16%{opacity:.26}37%{transform:translate3d(18px,-1px,0) scale(.98);opacity:.52}51%{transform:translate3d(0,1px,0) scale(1.02);opacity:.64}65%{transform:translate3d(-20px,0,0) scale(1);opacity:.56}81%{opacity:.28}100%{transform:translate3d(-78px,4px,0) scale(.91);opacity:.07}}@keyframes celestialMoonVeil{0%,16%,82%,100%{opacity:calc(.72 * var(--moon-intensity));filter:drop-shadow(0 0 9px rgba(87,69,47,.22)) drop-shadow(0 0 22px rgba(225,211,174,.18))}37%,66%{opacity:calc(.59 * var(--moon-intensity));filter:drop-shadow(0 0 7px rgba(87,69,47,.18)) drop-shadow(0 0 17px rgba(205,205,190,.14))}}@keyframes weatherRain{from{transform:translate3d(-3%,-12%,0)}to{transform:translate3d(3%,12%,0)}}@keyframes weatherSnow{from{transform:translate3d(0,-8%,0)}to{transform:translate3d(3%,9%,0)}}@keyframes weatherDrift{from{transform:translateX(-4%)}to{transform:translateX(4%)}}@keyframes weatherLightning{0%,6%,8%,45%,47%,100%{opacity:0}7%,46%{opacity:calc(.7 * var(--weather-intensity))}}@keyframes alarmPulse{0%,100%{opacity:calc(.34 * var(--alarm-intensity))}50%{opacity:calc(.58 * var(--alarm-intensity))}}@keyframes alarmVignette{0%,100%{opacity:calc(.65 * var(--alarm-intensity))}50%{opacity:calc(.95 * var(--alarm-intensity))}}ha-card.enchanted{background:#d3b985;border-color:rgba(80,50,28,.25);box-shadow:0 4px 16px rgba(61,39,24,.16)}ha-card.enchanted header{color:#4b311f;background:radial-gradient(circle at 18% 20%,rgba(255,240,193,.46),transparent 32%),linear-gradient(90deg,#d8c294,#c8a970);border-bottom:1px solid rgba(78,50,30,.18)}ha-card.enchanted header span,ha-card.enchanted header small{color:#6b4a33}ha-card.enchanted h1{font-family:Georgia,Cambria,"Times New Roman",serif;font-style:italic;letter-spacing:.025em}ha-card.enchanted.moonlight{background:#514b42}ha-card.enchanted.moonlight header{color:#eee6d5;background:radial-gradient(circle at 82% 18%,rgba(218,205,169,.13),transparent 30%),linear-gradient(90deg,#5a5145,#403d3a)}@media(prefers-reduced-motion:reduce){.cloud,.celestial-cloud,.partly-cloudy .sun-disc,.partly-cloudy .sun-overlay,.partly-cloudy .moon-disc,.sun-disc:before,.weather-fog .weather-overlay,.weather-rain .weather-particles,.weather-storm .weather-particles,.weather-snow .weather-particles,.weather-storm .weather-flash,.alarm-triggered .alarm-overlay,.alarm-triggered .alarm-vignette{animation:none}}@media(max-width:600px){header{align-items:flex-start;padding:14px 16px}small{font-size:.68rem}.moon-disc{width:54px;height:54px;right:5%;top:3.5%}.sun-disc{width:46px;height:46px;left:7%;top:6.5%}.celestial-cloud{width:108px;height:52px}.partly-cloudy:not(.moonlight) .celestial-cloud{left:2.5%;top:5.9%}.partly-cloudy.moonlight .celestial-cloud{right:1.8%;top:3.9%}}`;
 Ct([
-  _({ attribute: !1 })
+  A({ attribute: !1 })
 ], Fe.prototype, "hass", 2);
 Ct([
-  _({ type: Boolean, attribute: !1 })
+  A({ type: Boolean, attribute: !1 })
 ], Fe.prototype, "preview", 2);
 Ct([
   b()
