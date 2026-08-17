@@ -1,0 +1,43 @@
+name: Recover v0.40.1 release asset
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout v0.40.1
+        uses: actions/checkout@v4
+        with:
+          ref: v0.40.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Build card
+        run: npm run build
+
+      - name: Verify release asset
+        run: test -f dist/ha-explorer-card.js
+
+      - name: Upload asset to v0.40.1
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v0.40.1
+          files: dist/ha-explorer-card.js
+          fail_on_unmatched_files: true
