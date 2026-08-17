@@ -68,7 +68,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     });
 
     const outside = this.svg("rect");
-    this.attrs(outside, { x: "0", y: "0", width: String(VIEWBOX_SIZE), height: String(VIEWBOX_SIZE), fill: "white" });
+    this.attrs(outside, { x: "0", y: "0", width: String(VIEWBOX_SIZE), height: String(VIEWBOX_SIZE), fill: "black" });
     mask.appendChild(outside);
 
     for (const room of this.rooms) {
@@ -76,8 +76,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       const polygon = this.svg("polygon");
       this.attrs(polygon, {
         points: room.points.map(([x, y]) => `${x * VIEWBOX_SIZE},${y * VIEWBOX_SIZE}`).join(" "),
-        fill: "black",
-        stroke: "black",
+        fill: "white",
+        stroke: "white",
         "stroke-width": "16",
         "stroke-linejoin": "round",
       });
