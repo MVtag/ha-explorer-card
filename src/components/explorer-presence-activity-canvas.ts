@@ -154,7 +154,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
     scene.insertBefore(layer, reactionLayer ?? routeLayer ?? footstepsLayer ?? presencesLayer ?? null);
   }
 
-  private entityState(entityId: string) {
+  private atmosphereEntityState(entityId: string) {
     const entity = this.hass?.states[entityId];
     if (!entity) return undefined;
     return { state: entity.state, attributes: entity.attributes };
@@ -191,7 +191,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
   private roomTemperatures(): RoomTemperatureAtmosphere[] {
     return this.rooms.flatMap((room) => {
       if (room.points.length < 3) return [];
-      const values = evaluateRoomReactions(room, (entityId) => this.entityState(entityId))
+      const values = evaluateRoomReactions(room, (entityId) => this.atmosphereEntityState(entityId))
         .filter((status) => status.reaction.kind === "temperature" && status.active)
         .map((status) => this.temperatureCelsius(status))
         .filter((value): value is number => value !== undefined);
