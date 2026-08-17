@@ -336,12 +336,24 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendFog(layer: SVGGElement): void {
-    [105, 245, 405, 610, 805, 930].forEach((y, index) => {
+    const fogBanks: Array<[number, number, number]> = [
+      [55, 14, 0],
+      [145, -19, 1],
+      [245, 23, 2],
+      [345, -16, 3],
+      [455, 20, 4],
+      [565, -24, 5],
+      [675, 17, 6],
+      [785, -21, 7],
+      [895, 19, 8],
+      [985, -15, 9],
+    ];
+
+    fogBanks.forEach(([y, wobble, variant]) => {
       const path = this.svg("path");
-      const wobble = index % 2 === 0 ? 18 : -22;
       this.attrs(path, {
         d: `M -120 ${y} C 180 ${y + wobble}, 390 ${y - wobble}, 620 ${y} S 980 ${y + wobble}, 1120 ${y}`,
-        class: "weather-fog-band",
+        class: `weather-fog-band weather-fog-band-${variant}`,
       });
       layer.appendChild(path);
     });
@@ -514,8 +526,16 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-cloud-strand { fill: rgba(125, 138, 148, .12); }
     .weather-outside-rooms-scene.is-night .weather-cloud-fine-strand { fill: rgba(164, 174, 181, .09); }
     .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(218, 225, 225, .13); }
-    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
-    .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 34; stroke-linecap: round; opacity: .56; filter: blur(11px); animation: explorerFogDrift 16s ease-in-out infinite alternate; }
+    .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #a9a193; opacity: .30; animation-direction: alternate-reverse; }
+    .weather-outside-rooms-scene .weather-fog-band-1,
+    .weather-outside-rooms-scene .weather-fog-band-6 { stroke-width: 48; opacity: .42; animation-duration: 21s; }
+    .weather-outside-rooms-scene .weather-fog-band-2,
+    .weather-outside-rooms-scene .weather-fog-band-8 { stroke-width: 26; opacity: .48; animation-duration: 12s; }
+    .weather-outside-rooms-scene .weather-fog-band-3,
+    .weather-outside-rooms-scene .weather-fog-band-7 { stroke-width: 40; opacity: .34; animation-duration: 19s; }
+    .weather-outside-rooms-scene .weather-fog-band-4,
+    .weather-outside-rooms-scene .weather-fog-band-9 { stroke-width: 30; opacity: .52; animation-duration: 14s; }
     .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
     .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
     .weather-outside-rooms-scene .weather-snow-flake { fill: #fff7df; stroke: #a89b82; stroke-width: 1; opacity: .96; animation: explorerSnowFall 7s linear infinite; }
