@@ -165,12 +165,21 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
     const shapeTransforms = [
       "scale(1 .88) skewX(-4)",
-      "scale(.94 1.02) skewX(5)",
-      "scale(1.08 .84) skewX(-6)",
-      "scale(.97 .91) skewX(3)",
+      "scale(1.18 .72) skewX(5)",
+      "scale(.90 1.03) skewX(-5)",
+      "scale(1.10 .80) skewX(3)",
+      "scale(.96 .94) skewX(-7)",
+      "scale(1.24 .68) skewX(2)",
+    ];
+    const mistTransforms = [
+      "translate(-18 17) scale(1.08 .72)",
+      "translate(20 12) scale(1.30 .56)",
+      "translate(-8 21) scale(.94 .86)",
+      "translate(14 7) scale(1.18 .62)",
     ];
 
     for (const [x, y, scale, index, opacity] of clouds) {
+      const form = index % 4;
       const positionGroup = this.svg("g");
       this.attrs(positionGroup, {
         class: "weather-cloud-position",
@@ -180,13 +189,13 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
       const driftGroup = this.svg("g");
       this.attrs(driftGroup, {
-        class: `weather-cloud weather-cloud-${index % 3} weather-cloud-depth-${index % 2}`,
+        class: `weather-cloud weather-cloud-${index % 3} weather-cloud-depth-${index % 2} weather-cloud-form-${form}`,
       });
 
       const mistBack = this.svg("g");
       this.attrs(mistBack, {
         class: "weather-cloud-mist weather-cloud-mist-back",
-        transform: index % 2 === 0 ? "translate(-18 17) scale(1.08 .72)" : "translate(18 10) scale(.98 .78)",
+        transform: mistTransforms[form],
       });
       [
         [-72, 30, 102, 24, .52],
@@ -254,7 +263,13 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       const mistFront = this.svg("g");
       this.attrs(mistFront, {
         class: "weather-cloud-mist weather-cloud-mist-front",
-        transform: index % 2 === 0 ? "translate(8 49) scale(.95 .55)" : "translate(-16 46) scale(1.05 .52)",
+        transform: form === 1
+          ? "translate(8 51) scale(1.28 .40)"
+          : form === 2
+            ? "translate(-20 43) scale(.88 .62)"
+            : form === 3
+              ? "translate(18 47) scale(1.16 .46)"
+              : "translate(8 49) scale(.95 .55)",
       });
       [
         [-78, 0, 88, 18, .38],
@@ -275,6 +290,17 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         class: "weather-cloud-strand",
       });
       driftGroup.appendChild(strand);
+
+      if (form === 1 || form === 3) {
+        const fineStrand = this.svg("path");
+        this.attrs(fineStrand, {
+          d: form === 1
+            ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z"
+            : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
+          class: "weather-cloud-fine-strand",
+        });
+        driftGroup.appendChild(fineStrand);
+      }
 
       const highlight = this.svg("path");
       this.attrs(highlight, {
@@ -381,7 +407,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(207, 204, 196, .16); }
     .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 252, 244, .19); }
     .weather-outside-rooms-scene .weather-cloud-strand { fill: rgba(226, 222, 213, .14); filter: blur(13px); }
+    .weather-outside-rooms-scene .weather-cloud-fine-strand { fill: rgba(238, 235, 228, .11); filter: blur(9px); }
     .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 253, 246, .20); filter: blur(8px); }
+    .weather-outside-rooms-scene .weather-cloud-form-1 .weather-cloud-base { opacity: .78; }
+    .weather-outside-rooms-scene .weather-cloud-form-1 .weather-cloud-puff { opacity: .70; }
+    .weather-outside-rooms-scene .weather-cloud-form-2 .weather-cloud-body { opacity: .84; }
+    .weather-outside-rooms-scene .weather-cloud-form-2 .weather-cloud-mist { opacity: .88; }
+    .weather-outside-rooms-scene .weather-cloud-form-3 .weather-cloud-shadow { opacity: .62; }
+    .weather-outside-rooms-scene .weather-cloud-form-3 .weather-cloud-highlight { opacity: .64; }
     .weather-outside-rooms-scene .weather-cloud-depth-1 { opacity: .68; }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-mist { fill: rgba(218, 219, 216, .17); }
     .weather-outside-rooms-scene .weather-cloud-depth-1 .weather-cloud-base { fill: rgba(196, 198, 195, .30); }
@@ -395,6 +428,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-cloud-wisp { fill: rgba(100, 114, 125, .15); }
     .weather-outside-rooms-scene.is-night .weather-cloud-detail { fill: rgba(219, 225, 225, .12); }
     .weather-outside-rooms-scene.is-night .weather-cloud-strand { fill: rgba(125, 138, 148, .12); }
+    .weather-outside-rooms-scene.is-night .weather-cloud-fine-strand { fill: rgba(164, 174, 181, .09); }
     .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(218, 225, 225, .13); }
     .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 38; stroke-linecap: round; opacity: .62; filter: blur(10px); animation: explorerFogDrift 14s ease-in-out infinite alternate; }
     .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #8f887a; opacity: .34; animation-direction: alternate-reverse; }
@@ -413,6 +447,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-wisp { fill: rgba(199, 186, 163, .15); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-detail { fill: rgba(255, 246, 228, .17); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-strand { fill: rgba(223, 212, 193, .13); }
+    :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-fine-strand { fill: rgba(239, 229, 212, .10); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-highlight { fill: rgba(255, 247, 232, .18); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-snow-flake { fill: #f1e5c5; }
     @keyframes explorerCloudDriftA {
