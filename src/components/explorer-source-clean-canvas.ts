@@ -148,6 +148,12 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       [1045, 286, .50, 12, .40],
       [1044, 884, .54, 13, .42],
       [344, 1042, .50, 14, .38],
+      [1042, 505, .48, 15, .36],
+      [760, 18, .50, 16, .34],
+      [-18, 305, .44, 17, .30],
+      [655, 1042, .52, 18, .36],
+      [-20, 792, .50, 19, .34],
+      [1042, 955, .44, 20, .30],
     ];
 
     const puffs: Array<[number, number, number, number, number]> = [
