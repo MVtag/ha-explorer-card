@@ -17,7 +17,7 @@ let Yi = class {
     return this.cssText;
   }
 };
-const _r = (e) => new Yi(typeof e == "string" ? e : e + "", void 0, Yt), O = (e, ...t) => {
+const _r = (e) => new Yi(typeof e == "string" ? e : e + "", void 0, Yt), I = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
@@ -35,7 +35,7 @@ const _r = (e) => new Yi(typeof e == "string" ? e : e + "", void 0, Yt), O = (e,
   for (const r of t.cssRules) i += r.cssText;
   return _r(i);
 })(e) : e;
-const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnPropertyNames: Nr, getOwnPropertySymbols: Pr, getPrototypeOf: Mr } = Object, _t = globalThis, gi = _t.trustedTypes, Rr = gi ? gi.emptyScript : "", zr = _t.reactiveElementPolyfillSupport, Ge = (e, t) => e, ft = { toAttribute(e, t) {
+const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnPropertyNames: Mr, getOwnPropertySymbols: Nr, getPrototypeOf: Pr } = Object, _t = globalThis, gi = _t.trustedTypes, Rr = gi ? gi.emptyScript : "", zr = _t.reactiveElementPolyfillSupport, Ge = (e, t) => e, ft = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? Rr : null;
@@ -65,7 +65,7 @@ const { is: Sr, defineProperty: Cr, getOwnPropertyDescriptor: Er, getOwnProperty
   return i;
 } }, Qt = (e, t) => !Sr(e, t), mi = { attribute: !0, type: String, converter: ft, reflect: !1, useDefault: !1, hasChanged: Qt };
 Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), _t.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
-let Te = class extends HTMLElement {
+let Oe = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
   }
@@ -94,13 +94,13 @@ let Te = class extends HTMLElement {
   }
   static _$Ei() {
     if (this.hasOwnProperty(Ge("elementProperties"))) return;
-    const t = Mr(this);
+    const t = Pr(this);
     t.finalize(), t.l !== void 0 && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
   }
   static finalize() {
     if (this.hasOwnProperty(Ge("finalized"))) return;
     if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Ge("properties"))) {
-      const i = this.properties, r = [...Nr(i), ...Pr(i)];
+      const i = this.properties, r = [...Mr(i), ...Nr(i)];
       for (const o of r) this.createProperty(o, i[o]);
     }
     const t = this[Symbol.metadata];
@@ -246,15 +246,15 @@ let Te = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Te.elementStyles = [], Te.shadowRootOptions = { mode: "open" }, Te[Ge("elementProperties")] = /* @__PURE__ */ new Map(), Te[Ge("finalized")] = /* @__PURE__ */ new Map(), zr?.({ ReactiveElement: Te }), (_t.reactiveElementVersions ??= []).push("2.1.2");
-const Jt = globalThis, fi = (e) => e, bt = Jt.trustedTypes, bi = bt ? bt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, Qi = "$lit$", we = `lit$${Math.random().toFixed(9).slice(2)}$`, Ji = "?" + we, Tr = `<${Ji}>`, Ce = document, Xe = () => Ce.createComment(""), Ye = (e) => e === null || typeof e != "object" && typeof e != "function", ei = Array.isArray, Or = (e) => ei(e) || typeof e?.[Symbol.iterator] == "function", Et = `[ 	
+Oe.elementStyles = [], Oe.shadowRootOptions = { mode: "open" }, Oe[Ge("elementProperties")] = /* @__PURE__ */ new Map(), Oe[Ge("finalized")] = /* @__PURE__ */ new Map(), zr?.({ ReactiveElement: Oe }), (_t.reactiveElementVersions ??= []).push("2.1.2");
+const Jt = globalThis, fi = (e) => e, bt = Jt.trustedTypes, bi = bt ? bt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, Qi = "$lit$", we = `lit$${Math.random().toFixed(9).slice(2)}$`, Ji = "?" + we, Or = `<${Ji}>`, Ce = document, Xe = () => Ce.createComment(""), Ye = (e) => e === null || typeof e != "object" && typeof e != "function", ei = Array.isArray, Ir = (e) => ei(e) || typeof e?.[Symbol.iterator] == "function", Et = `[ 	
 \f\r]`, Ze = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, yi = /-->/g, vi = />/g, _e = RegExp(`>|${Et}(?:([^\\s"'>=/]+)(${Et}*=${Et}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), xi = /'/g, wi = /"/g, er = /^(?:script|style|textarea|title)$/i, tr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = tr(1), C = tr(2), oe = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), $i = /* @__PURE__ */ new WeakMap(), Se = Ce.createTreeWalker(Ce, 129);
 function ir(e, t) {
   if (!ei(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return bi !== void 0 ? bi.createHTML(t) : t;
 }
-const Ir = (e, t) => {
+const Tr = (e, t) => {
   const i = e.length - 1, r = [];
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Ze;
   for (let a = 0; a < i; a++) {
@@ -262,7 +262,7 @@ const Ir = (e, t) => {
     let d, c, p = -1, u = 0;
     for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Ze ? c[1] === "!--" ? s = yi : c[1] !== void 0 ? s = vi : c[2] !== void 0 ? (er.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = _e) : c[3] !== void 0 && (s = _e) : s === _e ? c[0] === ">" ? (s = o ?? Ze, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? _e : c[3] === '"' ? wi : xi) : s === wi || s === xi ? s = _e : s === yi || s === vi ? s = Ze : (s = _e, o = void 0);
     const g = s === _e && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Ze ? l + Tr : p >= 0 ? (r.push(d), l.slice(0, p) + Qi + l.slice(p) + we + g) : l + we + (p === -2 ? a : g);
+    n += s === Ze ? l + Or : p >= 0 ? (r.push(d), l.slice(0, p) + Qi + l.slice(p) + we + g) : l + we + (p === -2 ? a : g);
   }
   return [ir(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -271,7 +271,7 @@ class Qe {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [d, c] = Ir(t, i);
+    const a = t.length - 1, l = this.parts, [d, c] = Tr(t, i);
     if (this.el = Qe.createElement(d, r), Se.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
@@ -356,7 +356,7 @@ class nt {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = De(this, t, i), Ye(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== oe && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Or(t) ? this.k(t) : this._(t);
+    t = De(this, t, i), Ye(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== oe && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Ir(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -473,7 +473,7 @@ const Vr = (e, t, i) => {
   return o._$AI(e), o;
 };
 const ti = globalThis;
-let L = class extends Te {
+let L = class extends Oe {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -589,7 +589,7 @@ const Ur = rr(Zt), Xr = {
 function nr(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Pe(e) {
+function Ne(e) {
   return Math.min(1, Math.max(0, e));
 }
 function mt(e) {
@@ -602,12 +602,12 @@ function Qr(e) {
 }
 function We(e, t) {
   const i = t?.position;
-  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Pe(i.x), y: Pe(i.y) } : e.presence_anchor ? {
-    x: Pe(e.presence_anchor.x),
-    y: Pe(e.presence_anchor.y)
+  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Ne(i.x), y: Ne(i.y) } : e.presence_anchor ? {
+    x: Ne(e.presence_anchor.x),
+    y: Ne(e.presence_anchor.y)
   } : e.points.length ? {
-    x: Pe(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
-    y: Pe(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
+    x: Ne(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
+    y: Ne(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
   } : { x: 0.5, y: 0.5 };
 }
 function Jr(e) {
@@ -648,7 +648,7 @@ function sr(e, t, i) {
 function yt(e, t) {
   return (e.reactions ?? []).map((i, r) => sr(i, r, t));
 }
-var eo = Object.defineProperty, to = Object.getOwnPropertyDescriptor, Ne = (e, t, i, r) => {
+var eo = Object.defineProperty, to = Object.getOwnPropertyDescriptor, Me = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? to(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && eo(t, i, o), o;
@@ -848,7 +848,7 @@ let me = class extends L {
     `;
   }
 };
-me.styles = O`
+me.styles = I`
     :host {
       position: absolute;
       z-index: 8;
@@ -1041,25 +1041,25 @@ me.styles = O`
       .panel { animation: none; }
     }
   `;
-Ne([
+Me([
   A({ attribute: !1 })
 ], me.prototype, "room", 2);
-Ne([
+Me([
   A({ attribute: !1 })
 ], me.prototype, "presences", 2);
-Ne([
+Me([
   A({ attribute: !1 })
 ], me.prototype, "hass", 2);
-Ne([
+Me([
   b()
 ], me.prototype, "pendingLights", 2);
-Ne([
+Me([
   b()
 ], me.prototype, "pendingRoomAction", 2);
-Ne([
+Me([
   b()
 ], me.prototype, "actionError", 2);
-me = Ne([
+me = Me([
   z("explorer-room-panel")
 ], me);
 const x = 1e3;
@@ -1101,7 +1101,7 @@ function ho(e) {
   const t = e.getAttribute("viewBox")?.trim().split(/[\s,]+/).map(Number);
   return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: Ei(e.getAttribute("width")) ?? 16, height: Ei(e.getAttribute("height")) ?? 9 };
 }
-function Ni(e) {
+function Mi(e) {
   return e.replace(/@import[^;]+;?/gi, "").replace(/url\(([^)]*)\)/gi, (t, i) => {
     const r = i.trim().replace(/^['"]|['"]$/g, "");
     return r.startsWith("#") ? `url(${r})` : "none";
@@ -1140,12 +1140,12 @@ function mo(e) {
         continue;
       }
       if (s === "style") {
-        const l = Ni(a).trim();
+        const l = Mi(a).trim();
         l ? o.setAttribute(n.name, l) : o.removeAttribute(n.name);
       }
     }
   return i.querySelectorAll("style").forEach((o) => {
-    const n = Ni(o.textContent ?? "").trim();
+    const n = Mi(o.textContent ?? "").trim();
     n ? o.textContent = n : o.remove();
   }), i.hasAttribute("xmlns") || i.setAttribute("xmlns", "http://www.w3.org/2000/svg"), i;
 }
@@ -1243,7 +1243,7 @@ let B = class extends L {
     }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? C`<g class="floorplan-source inline-source">${Ur(this.svgMarkup)}</g>` : this.imageSource ? C`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<div class="zoom-badge">⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</div></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
 };
-B.styles = O`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font-size:.8rem;font-weight:700;pointer-events:none}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
+B.styles = I`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font-size:.8rem;font-weight:700;pointer-events:none}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
 Z([
   A({ attribute: !1 })
 ], B.prototype, "hass", 2);
@@ -1476,7 +1476,7 @@ function ii(e) {
     );
   return t;
 }
-function Pi(e, t, i, r, o, n) {
+function Ni(e, t, i, r, o, n) {
   const s = $e(e, i), a = $e(e, r);
   if (!s || !a) return;
   const l = lr(t), c = (o ? [...l].reverse() : l).map((u, g) => xo(e, u, g)).filter((u) => !!u), p = [
@@ -1568,11 +1568,11 @@ function ri(e, t, i, r) {
   const o = st(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
     (u) => u.from === t && u.to === i
   );
-  if (s) return Pi(e, s, t, i, !1, n);
+  if (s) return Ni(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
     (u) => u.from === i && u.to === t
   );
-  if (a) return Pi(e, a, t, i, !0, n);
+  if (a) return Ni(e, a, t, i, !0, n);
   const l = $o(e, t, i, o, n);
   if (l) return l;
   const d = $e(e, t), c = $e(e, i);
@@ -1603,26 +1603,26 @@ function ri(e, t, i, r) {
 function ko(e) {
   return [ge(e.from), ge(e.to)].sort().join("|");
 }
-function Mi(e, t) {
+function Pi(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
   const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), d = (k) => {
     a.set(k, (a.get(k) ?? 0) + 1);
-  }, c = (k, N) => {
-    const P = l.get(k) ?? /* @__PURE__ */ new Set();
-    P.add(N), l.set(k, P);
-    const T = l.get(N) ?? /* @__PURE__ */ new Set();
-    T.add(k), l.set(N, T);
+  }, c = (k, M) => {
+    const N = l.get(k) ?? /* @__PURE__ */ new Set();
+    N.add(M), l.set(k, N);
+    const O = l.get(M) ?? /* @__PURE__ */ new Set();
+    O.add(k), l.set(M, O);
   };
   i.forEach((k) => {
-    const N = ge(k.from), P = ge(k.to), T = ko(k);
-    N === P && (n += 1), s.has(T) && (o += 1), s.add(T);
+    const M = ge(k.from), N = ge(k.to), O = ko(k);
+    M === N && (n += 1), s.has(O) && (o += 1), s.add(O);
     const J = vt(e, k.from), ee = vt(e, k.to);
-    if (!J || !ee || N === P) {
+    if (!J || !ee || M === N) {
       r += 1;
       return;
     }
-    d(N), d(P), c(N, P);
+    d(M), d(N), c(M, N);
   });
   const p = i.length ? (e.rooms ?? []).filter((k) => $e(e, k.id) && !a.has(`room:${k.id}`)).map((k) => k.id) : [], u = i.length ? (e.route_nodes ?? []).filter((k) => !a.has(`node:${k.id}`)).map((k) => k.id) : [];
   let g = 0;
@@ -1631,17 +1631,17 @@ function Mi(e, t) {
     g += 1;
     const k = y.values().next().value;
     if (!k) break;
-    const N = [k];
-    for (y.delete(k); N.length; ) {
-      const P = N.pop();
-      for (const T of l.get(P) ?? [])
-        y.has(T) && (y.delete(T), N.push(T));
+    const M = [k];
+    for (y.delete(k); M.length; ) {
+      const N = M.pop();
+      for (const O of l.get(N) ?? [])
+        y.has(O) && (y.delete(O), M.push(O));
     }
   }
   const m = [], v = new Set((e.route_nodes ?? []).map((k) => k.id));
   (e.routes ?? []).forEach((k) => {
-    lr(k).forEach((N) => {
-      N.node_id && !v.has(N.node_id) && m.push({ from: k.from, to: k.to, nodeId: N.node_id });
+    lr(k).forEach((M) => {
+      M.node_id && !v.has(M.node_id) && m.push({ from: k.from, to: k.to, nodeId: M.node_id });
     });
   });
   const _ = st(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => je(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), E = /* @__PURE__ */ new Set();
@@ -1669,7 +1669,7 @@ var _o = Object.defineProperty, Ao = Object.getOwnPropertyDescriptor, St = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && _o(t, i, o), o;
 };
-const Nt = 900, Ri = 3600, zi = 58, j = "http://www.w3.org/2000/svg";
+const Mt = 900, Ri = 3600, zi = 58, j = "http://www.w3.org/2000/svg";
 let Le = class extends B {
   constructor() {
     super(...arguments), this.routes = [], this.routeNodes = [], this.routeGraphEdges = [], this.previousPresencePositions = /* @__PURE__ */ new Map(), this.previousPresenceRooms = /* @__PURE__ */ new Map(), this.activeAnimations = /* @__PURE__ */ new Map();
@@ -1690,9 +1690,9 @@ let Le = class extends B {
         const u = this.resolveMovementPath(d, l, c, p);
         this.createFootsteps(u);
         const g = document.createElementNS(j, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((y) => `${y.x} ${y.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Nt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
+        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((y) => `${y.x} ${y.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Mt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
           this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
-        }, Nt + 80);
+        }, Mt + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
     });
@@ -1863,22 +1863,22 @@ let Le = class extends B {
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
       let l = 0, d = i[i.length - 1];
-      for (const T of i) {
-        if (l + T.length >= a) {
-          d = T;
+      for (const O of i) {
+        if (l + O.length >= a) {
+          d = O;
           break;
         }
-        l += T.length;
+        l += O.length;
       }
-      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, y = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, v = 9 * g, _ = d.start.x + p * c + y * v, $ = d.start.y + u * c + m * v, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Nt), E = document.createElementNS(j, "g");
+      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, y = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, v = 9 * g, _ = d.start.x + p * c + y * v, $ = d.start.y + u * c + m * v, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Mt), E = document.createElementNS(j, "g");
       E.setAttribute("transform", `translate(${_} ${$}) rotate(${w + g * 8})`), E.setAttribute("opacity", "0");
       const k = document.createElementNS(j, "ellipse");
       k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
-      const N = document.createElementNS(j, "ellipse");
-      N.setAttribute("cx", "0"), N.setAttribute("cy", "9"), N.setAttribute("rx", "4.5"), N.setAttribute("ry", "5.5"), N.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
-      const P = document.createElementNS(j, "animate");
-      P.setAttribute("attributeName", "opacity"), P.setAttribute("values", "0;0.72;0.56;0"), P.setAttribute("keyTimes", "0;0.08;0.58;1"), P.setAttribute("begin", "indefinite"), P.setAttribute("dur", `${Ri}ms`), P.setAttribute("fill", "freeze"), E.append(k, N, P), t.appendChild(E), window.setTimeout(() => {
-        E.isConnected && P.beginElement();
+      const M = document.createElementNS(j, "ellipse");
+      M.setAttribute("cx", "0"), M.setAttribute("cy", "9"), M.setAttribute("rx", "4.5"), M.setAttribute("ry", "5.5"), M.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
+      const N = document.createElementNS(j, "animate");
+      N.setAttribute("attributeName", "opacity"), N.setAttribute("values", "0;0.72;0.56;0"), N.setAttribute("keyTimes", "0;0.08;0.58;1"), N.setAttribute("begin", "indefinite"), N.setAttribute("dur", `${Ri}ms`), N.setAttribute("fill", "freeze"), E.append(k, M, N), t.appendChild(E), window.setTimeout(() => {
+        E.isConnected && N.beginElement();
       }, S), window.setTimeout(() => E.remove(), S + Ri + 120);
     }
   }
@@ -1900,7 +1900,7 @@ var So = Object.getOwnPropertyDescriptor, Co = (e, t, i, r) => {
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const I = "http://www.w3.org/2000/svg";
+const T = "http://www.w3.org/2000/svg";
 let xt = class extends Le {
   updated(e) {
     super.updated(e), this.syncRoomReactionOverlay();
@@ -1911,14 +1911,14 @@ let xt = class extends Le {
       return { state: t.state, attributes: t.attributes };
   }
   appendTitle(e, t) {
-    const i = document.createElementNS(I, "title");
+    const i = document.createElementNS(T, "title");
     i.textContent = t, e.appendChild(i);
   }
   pointColor(e) {
     return e === "light" ? "var(--explorer-room-light-color, #f6bd60)" : e === "motion" ? "var(--explorer-room-motion-color, var(--primary-color, #03a9f4))" : e === "media" ? "var(--explorer-room-media-color, var(--accent-color, #7e57c2))" : e === "opening" ? "var(--explorer-room-opening-color, var(--warning-color, #ff9800))" : e === "fireplace" ? "var(--explorer-room-fireplace-color, #c46b2d)" : "var(--explorer-room-temperature-neutral, #4f9b78)";
   }
   appendPointBackdrop(e, t, i, r = 11) {
-    const o = document.createElementNS(I, "circle");
+    const o = document.createElementNS(T, "circle");
     return o.setAttribute("r", String(r)), o.setAttribute("fill", "var(--card-background-color, #ffffff)"), o.setAttribute("fill-opacity", i ? ".94" : ".78"), o.setAttribute("stroke", t), o.setAttribute("stroke-width", i ? "3" : "2"), o.setAttribute("stroke-opacity", i ? ".95" : ".42"), o.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(o), o;
   }
   appendLightPoint(e, t, i) {
@@ -1927,66 +1927,66 @@ let xt = class extends Le {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
       [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([d, c], p) => {
-        const u = document.createElementNS(I, "circle");
+        const u = document.createElementNS(T, "circle");
         if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(d * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(c + n * c * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
-          const g = document.createElementNS(I, "animate");
+          const g = document.createElementNS(T, "animate");
           g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${c + n * 0.07};${c + n * 0.13};${c + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
         }
       });
-      const a = document.createElementNS(I, "circle"), l = 24 + n * 24;
+      const a = document.createElementNS(T, "circle"), l = 24 + n * 24;
       if (a.setAttribute("class", "light-halo"), a.setAttribute("r", String(l)), a.setAttribute("fill", r), a.setAttribute("fill-opacity", String(0.08 + n * 0.18)), a.setAttribute("stroke", r), a.setAttribute("stroke-width", "2"), a.setAttribute("stroke-opacity", String(0.1 + n * 0.18)), a.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(a), !i) {
-        const d = document.createElementNS(I, "animate");
+        const d = document.createElementNS(T, "animate");
         d.setAttribute("attributeName", "r"), d.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), d.setAttribute("dur", "4.2s"), d.setAttribute("repeatCount", "indefinite"), a.appendChild(d);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 11);
-    const o = document.createElementNS(I, "text");
+    const o = document.createElementNS(T, "text");
     o.setAttribute("class", "light-glyph"), o.setAttribute("text-anchor", "middle"), o.setAttribute("dominant-baseline", "central"), o.setAttribute("font-size", "15"), o.setAttribute("font-weight", "900"), o.setAttribute("fill", r), o.setAttribute("opacity", t.active ? "1" : ".48"), o.textContent = "✦", e.appendChild(o);
   }
   appendMotionPoint(e, t, i) {
     const r = this.pointColor("motion");
     this.appendPointBackdrop(e, r, t.active, 10);
-    const o = document.createElementNS(I, "circle");
+    const o = document.createElementNS(T, "circle");
     if (o.setAttribute("r", t.active ? "4.5" : "3.5"), o.setAttribute("fill", r), o.setAttribute("opacity", t.active ? "1" : ".42"), e.appendChild(o), !t.active) return;
-    const n = document.createElementNS(I, "circle");
+    const n = document.createElementNS(T, "circle");
     if (n.setAttribute("r", "15"), n.setAttribute("fill", "none"), n.setAttribute("stroke", r), n.setAttribute("stroke-width", "3"), n.setAttribute("stroke-opacity", ".78"), n.setAttribute("vector-effect", "non-scaling-stroke"), e.insertBefore(n, e.firstChild), !i) {
-      const s = document.createElementNS(I, "animate");
+      const s = document.createElementNS(T, "animate");
       s.setAttribute("attributeName", "r"), s.setAttribute("values", "13;31;13"), s.setAttribute("dur", "1.8s"), s.setAttribute("repeatCount", "indefinite"), n.appendChild(s);
     }
   }
   appendMediaPoint(e, t) {
     const i = this.pointColor("media");
     if (t.active) {
-      const n = document.createElementNS(I, "circle");
+      const n = document.createElementNS(T, "circle");
       n.setAttribute("r", "25"), n.setAttribute("fill", i), n.setAttribute("fill-opacity", ".12"), e.appendChild(n);
     }
-    const r = document.createElementNS(I, "rect");
+    const r = document.createElementNS(T, "rect");
     r.setAttribute("x", "-16"), r.setAttribute("y", "-11"), r.setAttribute("width", "32"), r.setAttribute("height", "22"), r.setAttribute("rx", "4"), r.setAttribute("fill", "var(--card-background-color, #ffffff)"), r.setAttribute("fill-opacity", t.active ? ".94" : ".78"), r.setAttribute("stroke", i), r.setAttribute("stroke-width", t.active ? "3" : "2"), r.setAttribute("stroke-opacity", t.active ? ".95" : ".42"), e.appendChild(r);
-    const o = document.createElementNS(I, "path");
+    const o = document.createElementNS(T, "path");
     o.setAttribute("d", "M -4 -6 L 7 0 L -4 6 Z"), o.setAttribute("fill", i), o.setAttribute("opacity", t.active ? "1" : ".40"), e.appendChild(o);
   }
   appendOpeningPoint(e, t) {
     const i = this.pointColor("opening");
     this.appendPointBackdrop(e, i, t.active, 11);
-    const r = document.createElementNS(I, "text");
+    const r = document.createElementNS(T, "text");
     r.setAttribute("text-anchor", "middle"), r.setAttribute("dominant-baseline", "central"), r.setAttribute("font-size", t.active ? "18" : "15"), r.setAttribute("font-weight", "900"), r.setAttribute("fill", i), r.setAttribute("opacity", t.active ? "1" : ".42"), r.textContent = t.active ? "↗" : "━", e.appendChild(r);
   }
   appendFireplacePoint(e, t, i) {
     const r = this.pointColor("fireplace"), o = Math.max(0.2, Math.min(1, t.intensity || 1)), n = t.reaction.radius, s = Number.isFinite(n) ? Math.max(26, Math.min(160, n * x)) : 72;
     if (t.active) {
       e.setAttribute("data-fireplace", "active");
-      const l = document.createElementNS(I, "circle");
+      const l = document.createElementNS(T, "circle");
       l.setAttribute("class", "fireplace-glow fireplace-glow-outer"), l.setAttribute("r", String(s)), l.setAttribute("fill", r), l.setAttribute("fill-opacity", String(0.07 + 0.11 * o)), e.appendChild(l);
-      const d = document.createElementNS(I, "circle");
+      const d = document.createElementNS(T, "circle");
       if (d.setAttribute("class", "fireplace-glow fireplace-glow-inner"), d.setAttribute("r", String(s * 0.56)), d.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), d.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(d), !i) {
-        const c = document.createElementNS(I, "animate");
+        const c = document.createElementNS(T, "animate");
         c.setAttribute("attributeName", "fill-opacity"), c.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), c.setAttribute("dur", "2.1s"), c.setAttribute("repeatCount", "indefinite"), d.appendChild(c);
-        const p = document.createElementNS(I, "animate");
+        const p = document.createElementNS(T, "animate");
         p.setAttribute("attributeName", "r"), p.setAttribute("values", `${s * 0.93};${s * 1.05};${s * 0.97};${s * 0.93}`), p.setAttribute("dur", "3.6s"), p.setAttribute("repeatCount", "indefinite"), l.appendChild(p);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 12);
-    const a = document.createElementNS(I, "path");
+    const a = document.createElementNS(T, "path");
     a.setAttribute("d", "M 0 9 C -8 4 -7 -4 -1 -10 C -1 -5 3 -4 4 -10 C 11 -2 10 5 4 9 C 3 5 1 2 0 -1 C -3 3 -3 6 0 9 Z"), a.setAttribute("fill", r), a.setAttribute("opacity", t.active ? "1" : ".42"), e.appendChild(a);
   }
   temperatureColor(e) {
@@ -2000,13 +2000,13 @@ let xt = class extends Le {
     return e.unit ? `${t} ${e.unit}` : `${t}°`;
   }
   appendTemperaturePoint(e, t) {
-    const i = this.temperatureColor(t), r = this.formatTemperature(t), o = Math.max(58, 24 + r.length * 8.2), n = document.createElementNS(I, "rect");
+    const i = this.temperatureColor(t), r = this.formatTemperature(t), o = Math.max(58, 24 + r.length * 8.2), n = document.createElementNS(T, "rect");
     n.setAttribute("x", String(-o / 2)), n.setAttribute("y", "-15"), n.setAttribute("width", String(o)), n.setAttribute("height", "30"), n.setAttribute("rx", "15"), n.setAttribute("fill", "var(--card-background-color, #ffffff)"), n.setAttribute("fill-opacity", t.active ? ".94" : ".78"), n.setAttribute("stroke", i), n.setAttribute("stroke-width", "2.5"), e.appendChild(n);
-    const s = document.createElementNS(I, "text");
+    const s = document.createElementNS(T, "text");
     s.setAttribute("text-anchor", "middle"), s.setAttribute("dominant-baseline", "central"), s.setAttribute("font-size", "14"), s.setAttribute("font-weight", "800"), s.setAttribute("fill", i), s.textContent = r, e.appendChild(s);
   }
   appendReactionPoint(e, t, i, r) {
-    const o = We(t, i.reaction), n = document.createElementNS(I, "g");
+    const o = We(t, i.reaction), n = document.createElementNS(T, "g");
     n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * x} ${o.y * x})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
     const s = i.reaction.kind === "temperature" ? this.formatTemperature(i) : i.currentState ?? "ukendt";
     this.appendTitle(n, `${t.name ?? t.id} · ${i.reaction.entity} · ${s}`), e.appendChild(n);
@@ -2017,7 +2017,7 @@ let xt = class extends Le {
     e.querySelector(":scope > g.room-reactions-scene")?.remove();
     const t = this.rooms.flatMap((a) => yt(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
     if (!t.length) return;
-    const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(I, "g");
+    const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(T, "g");
     r.setAttribute("class", "room-reactions-scene"), r.setAttribute("aria-label", "Home Assistant entity-punkter"), r.setAttribute("pointer-events", "none"), t.forEach(({ room: a, status: l }) => this.appendReactionPoint(r, a, l, i));
     const o = e.querySelector(":scope > g.route-status-scene"), n = e.querySelector(":scope > g.footsteps-scene"), s = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, o ?? n ?? s ?? null);
@@ -2026,12 +2026,12 @@ let xt = class extends Le {
 xt = Co([
   z("explorer-living-canvas")
 ], xt);
-var Eo = Object.getOwnPropertyDescriptor, No = (e, t, i, r) => {
+var Eo = Object.getOwnPropertyDescriptor, Mo = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Eo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const M = "http://www.w3.org/2000/svg", Pt = 3e4;
+const P = "http://www.w3.org/2000/svg", Nt = 3e4;
 let et = class extends xt {
   constructor() {
     super(...arguments), this.lastOccupiedAt = /* @__PURE__ */ new Map(), this.overcastMaskId = `explorer-overcast-mask-${Math.random().toString(36).slice(2, 10)}`, this.overcastFilterId = `explorer-overcast-soft-${Math.random().toString(36).slice(2, 10)}`;
@@ -2069,7 +2069,7 @@ let et = class extends xt {
       const r = this.roomForPresence(i);
       r && (t.set(r.id, (t.get(r.id) ?? 0) + 1), this.lastOccupiedAt.set(r.id, e));
     }), this.rooms.map((i) => {
-      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < Pt, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / Pt) : 0;
+      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < Nt, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / Nt) : 0;
       return { room: i, active: o, afterglow: s, intensity: a };
     }).filter((i) => i.active || i.afterglow);
   }
@@ -2078,7 +2078,7 @@ let et = class extends xt {
   }
   scheduleAfterglowRefresh(e, t) {
     this.afterglowTimer !== void 0 && window.clearTimeout(this.afterglowTimer);
-    const i = e.filter((r) => r.afterglow).map((r) => Pt - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
+    const i = e.filter((r) => r.afterglow).map((r) => Nt - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
     i.length && (this.afterglowTimer = window.setTimeout(() => {
       this.afterglowTimer = void 0, this.syncPresenceRoomActivity();
     }, Math.max(50, Math.min(...i) + 30)));
@@ -2096,10 +2096,10 @@ let et = class extends xt {
     e.querySelector(":scope > g.presence-room-activity-scene")?.remove();
     const t = Date.now(), i = this.activities(t);
     if (this.syncRoomClasses(i), this.scheduleAfterglowRefresh(i, t), !i.length) return;
-    const r = document.createElementNS(M, "g");
+    const r = document.createElementNS(P, "g");
     r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: d, intensity: c }) => {
       if (l.points.length < 3) return;
-      const p = document.createElementNS(M, "polygon");
+      const p = document.createElementNS(P, "polygon");
       p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", d ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(d ? 0.1 + c * 0.07 : 0.025 + c * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(d ? 0.28 : 0.08 + c * 0.16)), p.setAttribute("stroke-width", d ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
     });
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
@@ -2138,28 +2138,28 @@ let et = class extends xt {
     e.querySelector(":scope > g.room-temperature-atmosphere-scene")?.remove();
     const t = this.roomTemperatures();
     if (!t.length) return;
-    const i = document.createElementNS(M, "g");
+    const i = document.createElementNS(P, "g");
     i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: d }) => {
-      const c = this.temperatureOpacity(d), p = this.atmosphereTemperatureColor(d), u = this.temperatureBand(d), g = document.createElementNS(M, "polygon");
+      const c = this.temperatureOpacity(d), p = this.atmosphereTemperatureColor(d), u = this.temperatureBand(d), g = document.createElementNS(P, "polygon");
       g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(c)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + c * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
-      const y = document.createElementNS(M, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(d);
+      const y = document.createElementNS(P, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(d);
       y.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(y), i.appendChild(g);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
   }
   appendFireplaceAtmosphere(e, t, i, r, o) {
-    const n = We(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(M, "g");
+    const n = We(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(P, "g");
     d.setAttribute("class", "fireplace-atmosphere"), d.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), d.setAttribute("data-room-id", t.id);
-    const c = document.createElementNS(M, "circle");
+    const c = document.createElementNS(P, "circle");
     c.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), c.setAttribute("r", String(l * 1.18)), c.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), c.setAttribute("fill-opacity", String(0.045 + s * 0.055)), d.appendChild(c);
-    const p = document.createElementNS(M, "circle");
+    const p = document.createElementNS(P, "circle");
     p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), d.appendChild(p);
-    const u = document.createElementNS(M, "ellipse");
+    const u = document.createElementNS(P, "ellipse");
     if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), d.appendChild(u), !r) {
-      const m = document.createElementNS(M, "animate");
+      const m = document.createElementNS(P, "animate");
       m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), c.appendChild(m);
-      const v = document.createElementNS(M, "animate");
+      const v = document.createElementNS(P, "animate");
       v.setAttribute("attributeName", "fill-opacity"), v.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), v.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), v.setAttribute("repeatCount", "indefinite"), p.appendChild(v);
     }
     [
@@ -2170,15 +2170,15 @@ let et = class extends xt {
       [-26, -22, 1.4],
       [5, -38, 1.25]
     ].forEach(([m, v, _], $) => {
-      const w = document.createElementNS(M, "circle");
+      const w = document.createElementNS(P, "circle");
       if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(v)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), d.appendChild(w), !r) {
-        const S = document.createElementNS(M, "animate");
+        const S = document.createElementNS(P, "animate");
         S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${v};${v - 22 - $ * 2};${v - 38 - $ * 3}`), S.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), S.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
-        const E = document.createElementNS(M, "animate");
+        const E = document.createElementNS(P, "animate");
         E.setAttribute("attributeName", "opacity"), E.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), E.setAttribute("keyTimes", "0;0.18;0.68;1"), E.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), E.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), E.setAttribute("repeatCount", "indefinite"), w.appendChild(E);
       }
     });
-    const y = document.createElementNS(M, "title");
+    const y = document.createElementNS(P, "title");
     y.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, d.appendChild(y), e.appendChild(d);
   }
   syncFireplaceAtmosphere() {
@@ -2189,7 +2189,7 @@ let et = class extends xt {
       (l) => yt(l, (d) => this.atmosphereEntityState(d)).filter((d) => d.reaction.kind === "fireplace" && d.active).map((d) => ({ room: l, status: d }))
     );
     if (!t.length) return;
-    const i = document.createElementNS(M, "g");
+    const i = document.createElementNS(P, "g");
     i.setAttribute("class", "fireplace-atmosphere-scene"), i.setAttribute("aria-label", "Levende pejsatmosfære"), i.setAttribute("pointer-events", "none");
     const r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
     t.forEach(({ room: l, status: d }, c) => this.appendFireplaceAtmosphere(i, l, d, r, c));
@@ -2205,35 +2205,35 @@ let et = class extends xt {
     };
   }
   createOvercastMask() {
-    const e = document.createElementNS(M, "mask");
+    const e = document.createElementNS(P, "mask");
     e.setAttribute("id", this.overcastMaskId), e.setAttribute("maskUnits", "userSpaceOnUse"), e.setAttribute("x", "0"), e.setAttribute("y", "0"), e.setAttribute("width", String(x)), e.setAttribute("height", String(x));
-    const t = document.createElementNS(M, "rect");
+    const t = document.createElementNS(P, "rect");
     return t.setAttribute("x", "0"), t.setAttribute("y", "0"), t.setAttribute("width", String(x)), t.setAttribute("height", String(x)), t.setAttribute("fill", "white"), e.appendChild(t), this.rooms.forEach((i) => {
       if (i.points.length < 3) return;
-      const r = document.createElementNS(M, "polygon");
+      const r = document.createElementNS(P, "polygon");
       r.setAttribute("points", this.polygonPoints(i)), r.setAttribute("fill", "black"), r.setAttribute("stroke", "black"), r.setAttribute("stroke-width", "16"), r.setAttribute("stroke-linejoin", "round"), e.appendChild(r);
     }), e;
   }
   createOvercastFilter() {
-    const e = document.createElementNS(M, "filter");
+    const e = document.createElementNS(P, "filter");
     e.setAttribute("id", this.overcastFilterId), e.setAttribute("x", "-55%"), e.setAttribute("y", "-65%"), e.setAttribute("width", "210%"), e.setAttribute("height", "240%");
-    const t = document.createElementNS(M, "feGaussianBlur");
+    const t = document.createElementNS(P, "feGaussianBlur");
     t.setAttribute("in", "SourceGraphic"), t.setAttribute("stdDeviation", "3.1"), t.setAttribute("result", "soft"), e.appendChild(t);
-    const i = document.createElementNS(M, "feTurbulence");
+    const i = document.createElementNS(P, "feTurbulence");
     i.setAttribute("type", "fractalNoise"), i.setAttribute("baseFrequency", "0.016 0.029"), i.setAttribute("numOctaves", "3"), i.setAttribute("seed", "43"), i.setAttribute("result", "noise"), e.appendChild(i);
-    const r = document.createElementNS(M, "feDisplacementMap");
+    const r = document.createElementNS(P, "feDisplacementMap");
     return r.setAttribute("in", "soft"), r.setAttribute("in2", "noise"), r.setAttribute("scale", "16"), r.setAttribute("xChannelSelector", "R"), r.setAttribute("yChannelSelector", "G"), e.appendChild(r), e;
   }
   appendOvercastCloud(e, t, i, r, o, n) {
-    const s = document.createElementNS(M, "g");
+    const s = document.createElementNS(P, "g");
     s.setAttribute("class", "overcast-cloud-position"), s.setAttribute("transform", `translate(${t} ${i}) scale(${r})`), s.setAttribute("opacity", String(n));
-    const a = document.createElementNS(M, "g");
+    const a = document.createElementNS(P, "g");
     a.setAttribute("class", `overcast-cloud overcast-cloud-${o % 3} overcast-depth-${o % 3}`);
-    const l = document.createElementNS(M, "ellipse");
+    const l = document.createElementNS(P, "ellipse");
     l.setAttribute("class", "overcast-cloud-mist"), l.setAttribute("cx", o % 2 === 0 ? "-12" : "14"), l.setAttribute("cy", "18"), l.setAttribute("rx", "145"), l.setAttribute("ry", "43"), a.appendChild(l);
-    const d = document.createElementNS(M, "g");
+    const d = document.createElementNS(P, "g");
     d.setAttribute("class", "overcast-cloud-body"), d.setAttribute("filter", `url(#${this.overcastFilterId})`), d.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
-    const c = document.createElementNS(M, "path");
+    const c = document.createElementNS(P, "path");
     c.setAttribute("class", "overcast-cloud-base"), c.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), d.appendChild(c), [
       [-86, -6, 50, 30],
       [-47, -37, 57, 34],
@@ -2242,10 +2242,10 @@ let et = class extends xt {
       [82, -17, 50, 30],
       [14, 23, 92, 27]
     ].forEach(([g, y, m, v], _) => {
-      const $ = document.createElementNS(M, "ellipse");
+      const $ = document.createElementNS(P, "ellipse");
       $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(g)), $.setAttribute("cy", String(y)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(v)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), d.appendChild($);
     }), a.appendChild(d);
-    const u = document.createElementNS(M, "path");
+    const u = document.createElementNS(P, "path");
     u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
@@ -2254,9 +2254,9 @@ let et = class extends xt {
     e.querySelector(`defs[data-overcast-mask="${this.overcastMaskId}"]`)?.remove(), t.querySelector(":scope > g.overcast-cloud-density-scene")?.remove();
     const i = this.descendantWeather();
     if (i.effect !== "cloudy") return;
-    const r = document.createElementNS(M, "defs");
+    const r = document.createElementNS(P, "defs");
     r.setAttribute("data-overcast-mask", this.overcastMaskId), r.appendChild(this.createOvercastMask()), r.appendChild(this.createOvercastFilter()), e.insertBefore(r, e.firstChild);
-    const o = document.createElementNS(M, "g");
+    const o = document.createElementNS(P, "g");
     o.setAttribute("class", `overcast-cloud-density-scene${i.night ? " is-night" : ""}`), o.setAttribute("mask", `url(#${this.overcastMaskId})`), o.setAttribute("pointer-events", "none"), o.style.setProperty("--overcast-intensity", String(i.intensity)), [
       [195, 58, 0.68, 0, 0.4],
       [515, 90, 0.58, 1, 0.31],
@@ -2275,7 +2275,7 @@ let et = class extends xt {
     t.insertBefore(o, s ?? null);
   }
 };
-et.styles = O`
+et.styles = I`
     ${xt.styles}
 
     :host {
@@ -2411,13 +2411,13 @@ et.styles = O`
       }
     }
   `;
-et = No([
+et = Mo([
   z("explorer-presence-activity-canvas")
 ], et);
-var Po = Object.defineProperty, Mo = Object.getOwnPropertyDescriptor, at = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Mo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var No = Object.defineProperty, Po = Object.getOwnPropertyDescriptor, at = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Po(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Po(t, i, o), o;
+  return r && o && No(t, i, o), o;
 };
 const Ro = "http://www.w3.org/2000/svg";
 let fe = class extends et {
@@ -2499,7 +2499,7 @@ let fe = class extends et {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-fe.styles = O`${et.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+fe.styles = I`${et.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
 at([
   A({ attribute: "map-theme", reflect: !0 })
 ], fe.prototype, "theme", 2);
@@ -2515,13 +2515,13 @@ at([
 fe = at([
   z("explorer-themed-canvas")
 ], fe);
-const zo = ["on"], To = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function Oo(e) {
+const zo = ["on"], Oo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function Io(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : [...zo];
 }
 function dr(e, t) {
-  const i = e.visible !== !1, r = e.state_binding, o = Oo(r?.active_states);
+  const i = e.visible !== !1, r = e.state_binding, o = Io(r?.active_states);
   if (!i)
     return {
       zone: e,
@@ -2551,7 +2551,7 @@ function dr(e, t) {
       activeStates: o,
       reason: "missing_entity"
     };
-  if (To.has(s))
+  if (Oo.has(s))
     return {
       zone: e,
       visible: !0,
@@ -2574,7 +2574,7 @@ function dr(e, t) {
     ...a ? {} : { reason: "state_blocked" }
   };
 }
-function Io(e, t) {
+function To(e, t) {
   return e.map((i) => dr(i, t));
 }
 var Do = Object.defineProperty, jo = Object.getOwnPropertyDescriptor, cr = (e, t, i, r) => {
@@ -2644,7 +2644,7 @@ let qe = class extends fe {
   syncZonesOverlay() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
-    const i = Io(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
+    const i = To(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
     if (!i.length) return;
     const r = document.createElementNS(pe, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
@@ -2654,7 +2654,7 @@ let qe = class extends fe {
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-qe.styles = O`
+qe.styles = I`
     ${fe.styles}
 
     :host {
@@ -2757,8 +2757,8 @@ var Bo = Object.getOwnPropertyDescriptor, Fo = (e, t, i, r) => {
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const Vo = "http://www.w3.org/2000/svg", Ho = 4200, Ko = 900, Zo = 54, Go = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ti = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Mt = [58, 64, 54, 61, 56, 66], Wo = [8, 6, 10, 7, 9, 5], Uo = [7, 4, 10, 6, 8, 3];
-function Oi(e) {
+const Vo = "http://www.w3.org/2000/svg", Ho = 4200, Ko = 900, Zo = 54, Go = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Oi = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Pt = [58, 64, 54, 61, 56, 66], Wo = [8, 6, 10, 7, 9, 5], Uo = [7, 4, 10, 6, 8, 3];
+function Ii(e) {
   let t = 2166136261;
   for (let i = 0; i < e.length; i += 1)
     t ^= e.charCodeAt(i), t = Math.imul(t, 16777619);
@@ -2777,7 +2777,7 @@ let tt = class extends qe {
   polishPresenceColor(e) {
     const t = e.color?.trim();
     if (t) return t;
-    const i = e.type ?? "person", r = Ti[i][Oi(e.id) % Ti[i].length];
+    const i = e.type ?? "person", r = Oi[i][Ii(e.id) % Oi[i].length];
     return this.theme === "enchanted_antique" ? `hsl(${r} 34% 38%)` : `hsl(${r} 62% 47%)`;
   }
   polishTrailColor(e) {
@@ -2791,7 +2791,7 @@ let tt = class extends qe {
     return { x: (e.x ?? 0.5) * x, y: (e.y ?? 0.5) * x };
   }
   polishPersonTrailVariant(e) {
-    return Oi(e.id) % Mt.length;
+    return Ii(e.id) % Pt.length;
   }
   polishOffsets(e) {
     const t = /* @__PURE__ */ new Map();
@@ -2884,7 +2884,7 @@ let tt = class extends qe {
     return t || (t = this.polishCreateSvg("g"), t.setAttribute("class", "presence-trails-scene"), t.setAttribute("aria-label", "Person- og objektspor"), t.setAttribute("pointer-events", "none"), e.insertBefore(t, e.querySelector(":scope > g.presences-scene") ?? null), t);
   }
   polishTrailSpacing(e, t = 0) {
-    return e === "person" ? Mt[t] ?? Mt[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
+    return e === "person" ? Pt[t] ?? Pt[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
   }
   polishAppendPersonTrailShape(e, t, i) {
     const r = (n, s, a, l) => {
@@ -2966,8 +2966,8 @@ let tt = class extends qe {
         }
         y += ce.length;
       }
-      const v = m.length > 0 ? (g - y) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Wo[o] ?? 8 : r === "pet" ? 6 : 0, E = r === "person" ? Uo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, N = m.length > 0 ? _ / m.length : 0, P = m.start.x + _ * v + k * S * w, T = m.start.y + $ * v + N * S * w, J = Math.atan2($, _) * 180 / Math.PI + 90, ee = Math.round(u * Ko), R = this.polishCreateSvg("g");
-      R.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), R.setAttribute("data-presence-id", t.id), r === "person" && R.setAttribute("data-trail-style", String(o + 1)), R.setAttribute("transform", `translate(${P} ${T}) rotate(${J + (S ? w * E : 0)})`), R.setAttribute("opacity", "0"), this.polishAppendTrailShape(R, r, n, o);
+      const v = m.length > 0 ? (g - y) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Wo[o] ?? 8 : r === "pet" ? 6 : 0, E = r === "person" ? Uo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, M = m.length > 0 ? _ / m.length : 0, N = m.start.x + _ * v + k * S * w, O = m.start.y + $ * v + M * S * w, J = Math.atan2($, _) * 180 / Math.PI + 90, ee = Math.round(u * Ko), R = this.polishCreateSvg("g");
+      R.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), R.setAttribute("data-presence-id", t.id), r === "person" && R.setAttribute("data-trail-style", String(o + 1)), R.setAttribute("transform", `translate(${N} ${O}) rotate(${J + (S ? w * E : 0)})`), R.setAttribute("opacity", "0"), this.polishAppendTrailShape(R, r, n, o);
       const H = this.polishCreateSvg("animate");
       this.polishSetAttributes(H, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), R.appendChild(H), i.appendChild(R), window.setTimeout(() => {
         R.isConnected && H.beginElement();
@@ -2983,7 +2983,7 @@ let tt = class extends qe {
     for (const r of this.polishPreviousPositions.keys()) i.has(r) || (this.polishPreviousPositions.delete(r), this.polishPreviousRooms.delete(r));
   }
 };
-tt.styles = O`${qe.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+tt.styles = I`${qe.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
 tt = Fo([
   z("explorer-presence-polish-canvas")
 ], tt);
@@ -2992,7 +2992,7 @@ var Xo = Object.getOwnPropertyDescriptor, Yo = (e, t, i, r) => {
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const dt = "http://www.w3.org/2000/svg", Ii = 3e4, Qo = 900;
+const dt = "http://www.w3.org/2000/svg", Ti = 3e4, Qo = 900;
 let it = class extends tt {
   constructor() {
     super(...arguments), this.magicPreviousOccupiedRooms = /* @__PURE__ */ new Set(), this.magicAfterglowStartedAt = /* @__PURE__ */ new Map();
@@ -3035,7 +3035,7 @@ let it = class extends tt {
       i.has(r) || this.magicAfterglowStartedAt.set(r, e);
     for (const r of i) this.magicAfterglowStartedAt.delete(r);
     return this.magicPreviousOccupiedRooms.clear(), i.forEach((r) => this.magicPreviousOccupiedRooms.add(r)), this.rooms.map((r) => {
-      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Ii, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Ii) : 0;
+      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Ti, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Ti) : 0;
       return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: d };
     }).filter((r) => r.active || r.afterglow);
   }
@@ -3072,7 +3072,7 @@ let it = class extends tt {
     );
   }
 };
-it.styles = O`
+it.styles = I`
     ${tt.styles}
 
     :host {
@@ -3148,7 +3148,7 @@ var Jo = Object.defineProperty, en = Object.getOwnPropertyDescriptor, pr = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Jo(t, i, o), o;
 };
-const W = "http://www.w3.org/2000/svg", tn = ["on", "open", "opened", "true"], zt = 600 * 1e3, Tt = 1800 * 1e3, Ot = 3600 * 1e3, Di = 60 * 1e3, ct = (e) => e * Math.PI / 180;
+const W = "http://www.w3.org/2000/svg", tn = ["on", "open", "opened", "true"], zt = 600 * 1e3, Ot = 1800 * 1e3, It = 3600 * 1e3, Di = 60 * 1e3, ct = (e) => e * Math.PI / 180;
 let Be = class extends it {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
@@ -3181,7 +3181,7 @@ let Be = class extends it {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Ot ? "alert" : o >= Tt ? "warning" : o >= zt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= It ? "alert" : o >= Ot ? "warning" : o >= zt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
     return { minutes: n, level: s, label: c, description: d };
   }
   scheduleOpeningAgeRefresh(e) {
@@ -3190,7 +3190,7 @@ let Be = class extends it {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < zt ? zt : n < Tt ? Tt : n < Ot ? Ot : void 0, a = s === void 0 ? Di : Math.max(1e3, s - n + 50);
+      const n = Math.max(0, e - o), s = n < zt ? zt : n < Ot ? Ot : n < It ? It : void 0, a = s === void 0 ? Di : Math.max(1e3, s - n + 50);
       t = Math.min(t, Di, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
@@ -3230,14 +3230,14 @@ let Be = class extends it {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ct(s), y = Math.cos(g), m = Math.sin(g), v = -m, _ = y, $ = { x: c - y * u, y: p - m * u }, w = { x: c + y * u, y: p + m * u }, S = l === "start" ? $ : w, E = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), N = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), P = k + (r ? N * a : 0), T = ct(P), J = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, ee = o ? ` open-age-${o.level}` : "", R = document.createElementNS(W, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ct(s), y = Math.cos(g), m = Math.sin(g), v = -m, _ = y, $ = { x: c - y * u, y: p - m * u }, w = { x: c + y * u, y: p + m * u }, S = l === "start" ? $ : w, E = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), M = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), N = k + (r ? M * a : 0), O = ct(N), J = { x: S.x + Math.cos(O) * n, y: S.y + Math.sin(O) * n }, ee = o ? ` open-age-${o.level}` : "", R = document.createElementNS(W, "g");
     R.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${ee}`), R.setAttribute("data-opening-id", t.id), o && R.setAttribute("data-open-minutes", String(o.minutes)), this.line(R, $.x, $.y, w.x, w.y, "opening-gap");
     const H = Math.max(7, Math.min(12, n * 0.12));
     for (const ye of [$, w]) this.line(R, ye.x - v * H / 2, ye.y - _ * H / 2, ye.x + v * H / 2, ye.y + _ * H / 2, "door-jamb");
     r && this.line(R, S.x, S.y, E.x, E.y, "door-closed-guide"), this.line(R, S.x, S.y, J.x, J.y, "door-leaf");
     const ce = document.createElementNS(W, "circle");
     if (ce.setAttribute("cx", String(S.x)), ce.setAttribute("cy", String(S.y)), ce.setAttribute("r", "4.2"), ce.setAttribute("class", "opening-hinge"), R.appendChild(ce), r) {
-      const ye = document.createElementNS(W, "path"), ci = ct(k), pi = T, yr = S.x + Math.cos(ci) * n, vr = S.y + Math.sin(ci) * n, xr = S.x + Math.cos(pi) * n, wr = S.y + Math.sin(pi) * n, $r = N > 0 ? 1 : 0, kr = Math.abs(a) > 180 ? 1 : 0;
+      const ye = document.createElementNS(W, "path"), ci = ct(k), pi = O, yr = S.x + Math.cos(ci) * n, vr = S.y + Math.sin(ci) * n, xr = S.x + Math.cos(pi) * n, wr = S.y + Math.sin(pi) * n, $r = M > 0 ? 1 : 0, kr = Math.abs(a) > 180 ? 1 : 0;
       ye.setAttribute("d", `M ${yr} ${vr} A ${n} ${n} 0 ${kr} ${$r} ${xr} ${wr}`), ye.setAttribute("class", "door-swing"), R.appendChild(ye);
     }
     const ai = c + v * 14, li = p + _ * 14, Ke = document.createElementNS(W, "circle");
@@ -3250,11 +3250,11 @@ let Be = class extends it {
     w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, v.x, v.y, _.x, _.y, "window-gap"), this.line(w, v.x + u * m, v.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, v.x - u * m, v.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, v.x + u * m, v.y + g * m, v.x - u * m, v.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, v.x + u * m, v.y + g * m, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * y * 0.12 + u * 18, l + p * y * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
     const S = a + u * 17, E = l + g * 17, k = document.createElementNS(W, "circle");
     k.setAttribute("cx", String(S)), k.setAttribute("cy", String(E)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, E, o);
-    const N = document.createElementNS(W, "title");
-    N.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(N), e.appendChild(w);
+    const M = document.createElementNS(W, "title");
+    M.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(M), e.appendChild(w);
   }
 };
-Be.styles = O`${it.styles}
+Be.styles = I`${it.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3441,11 +3441,11 @@ let ke = class extends Be {
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([P, T, J, ee, R]) => {
+      ].forEach(([N, O, J, ee, R]) => {
         const H = this.svg("ellipse");
         this.attrs(H, {
-          cx: String(P),
-          cy: String(T),
+          cx: String(N),
+          cy: String(O),
           rx: String(J),
           ry: String(ee),
           opacity: String(R)
@@ -3467,11 +3467,11 @@ let ke = class extends Be {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-base"
       }), v.appendChild(_);
-      for (const [P, T, J, ee, R] of i) {
+      for (const [N, O, J, ee, R] of i) {
         const H = this.svg("ellipse");
         this.attrs(H, {
-          cx: String(P),
-          cy: String(T),
+          cx: String(N),
+          cy: String(O),
           rx: String(J),
           ry: String(ee),
           opacity: String(R),
@@ -3496,11 +3496,11 @@ let ke = class extends Be {
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([P, T, J, ee, R]) => {
+      ].forEach(([N, O, J, ee, R]) => {
         const H = this.svg("ellipse");
         this.attrs(H, {
-          cx: String(P),
-          cy: String(T),
+          cx: String(N),
+          cy: String(O),
           rx: String(J),
           ry: String(ee),
           opacity: String(R)
@@ -3511,23 +3511,23 @@ let ke = class extends Be {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
       }), g.appendChild(E), c === 1 || c === 3) {
-        const P = this.svg("path");
-        this.attrs(P, {
+        const N = this.svg("path");
+        this.attrs(N, {
           d: c === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), g.appendChild(P);
+        }), g.appendChild(N);
       }
       const k = this.svg("path");
       this.attrs(k, {
         d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
         class: "weather-cloud-highlight"
       }), g.appendChild(k);
-      const N = this.svg("path");
-      this.attrs(N, {
+      const M = this.svg("path");
+      this.attrs(M, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
         transform: r[l % r.length]
-      }), g.appendChild(N), u.appendChild(g), e.appendChild(u);
+      }), g.appendChild(M), u.appendChild(g), e.appendChild(u);
     }
   }
   appendFog(e, t = "fog") {
@@ -3641,7 +3641,7 @@ let ke = class extends Be {
     t.insertBefore(r, s ?? null);
   }
 };
-ke.styles = O`
+ke.styles = I`
     ${Be.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
@@ -3915,7 +3915,7 @@ const hn = [
 function gn(e) {
   return e.split(".", 1)[0] ?? "";
 }
-function It(e) {
+function Tt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -4021,7 +4021,7 @@ let le = class extends L {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => It(e).localeCompare(It(t), "da")
+      (e, t) => Tt(e).localeCompare(Tt(t), "da")
     );
   }
   renderEntityDatalist(e, t = !1) {
@@ -4029,7 +4029,7 @@ let le = class extends L {
     return h`
       <datalist id=${e}>
         ${i.map(
-      (r) => h`<option value=${r.entity_id}>${It(r)}</option>`
+      (r) => h`<option value=${r.entity_id}>${Tt(r)}</option>`
     )}
       </datalist>
     `;
@@ -4290,7 +4290,7 @@ let le = class extends L {
     `;
   }
 };
-le.styles = O`
+le.styles = I`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4530,7 +4530,7 @@ let D = class extends L {
     return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-D.styles = O`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+D.styles = I`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 q([
   A({ attribute: !1 })
 ], D.prototype, "hass", 2);
@@ -4745,7 +4745,7 @@ let rt = class extends L {
     `;
   }
 };
-rt.styles = O`
+rt.styles = I`
     :host { display:block; }
     .overview {
       display:grid;
@@ -4838,7 +4838,7 @@ const Dt = [
     "Enchanted Antique Map",
     "Original magisk kortstil med pergament, sepia-blæk og levende kortdetaljer."
   ]
-], Nn = [
+], Mn = [
   ["live", "Følg rigtigt vejr"],
   ["sunny", "☀️ Solrigt"],
   ["partlycloudy", "🌤️ Delvist overskyet"],
@@ -5172,7 +5172,7 @@ let wt = class extends L {
       preview_state: a.target.value
     })}
                     >
-                      ${Nn.map(
+                      ${Mn.map(
       ([a, l]) => h`<option value=${a}>${l}</option>`
     )}
                     </select>
@@ -5317,7 +5317,7 @@ let wt = class extends L {
     `;
   }
 };
-wt.styles = O`
+wt.styles = I`
     :host {
       display: block;
     }
@@ -5471,10 +5471,10 @@ hr([
 wt = hr([
   z("ha-explorer-theme-editor")
 ], wt);
-var Pn = Object.defineProperty, Mn = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Nn = Object.defineProperty, Pn = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Pn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Pn(t, i, o), o;
+  return r && o && Nn(t, i, o), o;
 };
 const qi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
 let $t = class extends L {
@@ -5502,7 +5502,7 @@ let $t = class extends L {
     })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-$t.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+$t.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
 ur([
   A({ attribute: !1 })
 ], $t.prototype, "config", 2);
@@ -5518,7 +5518,7 @@ function jt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Tn(e) {
+function On(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
@@ -5536,7 +5536,7 @@ let ot = class extends L {
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: Tn({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: On({ ...i.entity_binding, ...t }) });
   }
   addPerson() {
     if (!this.config) return;
@@ -5562,7 +5562,7 @@ let ot = class extends L {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-ot.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+ot.styles = I`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 ni([
   A({ attribute: !1 })
 ], ot.prototype, "hass", 2);
@@ -5572,10 +5572,10 @@ ni([
 ot = ni([
   z("ha-explorer-identity-editor")
 ], ot);
-var On = Object.defineProperty, In = Object.getOwnPropertyDescriptor, se = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? In(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var In = Object.defineProperty, Tn = Object.getOwnPropertyDescriptor, se = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Tn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && On(t, i, o), o;
+  return r && o && In(t, i, o), o;
 };
 const ve = 1e3, Bi = [
   { value: "info", label: "Info" },
@@ -5811,7 +5811,7 @@ let Q = class extends L {
     `;
   }
 };
-Q.styles = O`
+Q.styles = I`
     :host { display:block; margin-top:16px; color:var(--primary-text-color); }
     .panel { border:1px solid var(--divider-color,#d7dbe0); border-radius:14px; padding:16px; background:var(--card-background-color,#fff); }
     .heading { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
@@ -5894,7 +5894,7 @@ var Ln = Object.defineProperty, qn = Object.getOwnPropertyDescriptor, G = (e, t,
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ln(t, i, o), o;
 };
-const Me = 1e3, Vi = ["on", "open", "opened", "true"];
+const Pe = 1e3, Vi = ["on", "open", "opened", "true"];
 function Hi(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
@@ -5971,14 +5971,14 @@ let V = class extends L {
     return t ? `${(e.state_binding.open_states ?? Vi).map((r) => r.toLowerCase()).includes(t.toLowerCase()) ? "Åben" : "Lukket"} · ${t}` : "Entity mangler";
   }
   renderOpening(e) {
-    const t = e.id === this.selectedId, i = e.point[0] * Me, r = e.point[1] * Me, o = (e.length ?? 0.055) * Me, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
+    const t = e.id === this.selectedId, i = e.point[0] * Pe, r = e.point[1] * Pe, o = (e.length ?? 0.055) * Pe, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
     return C`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
       this.placing || (l.stopPropagation(), this.select(e));
     }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? C`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
   }
   renderDraft() {
     if (this.selected || !this.placing && this.draftName === "Ny dør") return f;
-    const e = this.draftPoint[0] * Me, t = this.draftPoint[1] * Me, i = this.draftLength * Me, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
+    const e = this.draftPoint[0] * Pe, t = this.draftPoint[1] * Pe, i = this.draftLength * Pe, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
     return C`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
   }
   render() {
@@ -5991,7 +5991,7 @@ let V = class extends L {
     return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${qt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
-V.styles = O`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
+V.styles = I`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
 G([
   A({ attribute: !1 })
 ], V.prototype, "hass", 2);
@@ -6128,7 +6128,7 @@ let X = class extends L {
     }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Bt).map((o) => h`<option value=${o}>${Bt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Ft[o.kind]}</span><div><strong>${Bt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
-X.styles = O`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
+X.styles = I`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
 ae([
   A({ attribute: !1 })
 ], X.prototype, "config", 2);
@@ -6329,7 +6329,7 @@ let ne = class extends L {
     ` : h`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
   }
 };
-ne.styles = O`
+ne.styles = I`
     :host { display:block; color:var(--primary-text-color); }
     section { display:grid; gap:12px; }
     .notice { display:grid; gap:3px; padding:10px 12px; border-radius:10px; background:color-mix(in srgb,var(--primary-color,#03a9f4) 8%,transparent); font-size:.78rem; line-height:1.4; }
@@ -6793,7 +6793,7 @@ let F = class extends L {
     `;
   }
 };
-F.styles = O`
+F.styles = I`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
 K([
@@ -7137,7 +7137,7 @@ let re = class extends L {
     `;
   }
 };
-re.styles = O`
+re.styles = I`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
 de([
@@ -7291,7 +7291,7 @@ let Ee = class extends L {
   }
   renderDisconnectedMarkers() {
     if (!this.config) return f;
-    const e = Mi(
+    const e = Pi(
       this.config,
       (r) => this.entityState(r)
     ), t = e.disconnectedRoomIds.map((r) => {
@@ -7332,7 +7332,7 @@ let Ee = class extends L {
   }
   renderDiagnostics() {
     if (!this.config) return f;
-    const e = Mi(
+    const e = Pi(
       this.config,
       (r) => this.entityState(r)
     ), t = this.graphEdges.length > 0, i = e.invalidEdges + e.duplicateEdges + e.disconnectedRoomIds.length + e.disconnectedNodeIds.length + e.brokenRouteNodeReferences.length + e.unresolvedConditionEntities.length + Math.max(0, e.components - 1);
@@ -7447,7 +7447,7 @@ let Ee = class extends L {
     `;
   }
 };
-Ee.styles = O`
+Ee.styles = I`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 lt([
@@ -7564,7 +7564,7 @@ let Wt = class extends le {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-Wt.styles = O`${le.styles}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:flex-start}.advanced-hint{max-width:48%}}`;
+Wt.styles = I`${le.styles}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:flex-start}.advanced-hint{max-width:48%}}`;
 Wt = si([
   z("ha-explorer-ha-editor")
 ], Wt);
@@ -7726,14 +7726,14 @@ function ms(e, t, i = [], r) {
 function fs(e, t, i = [], r) {
   return e.map((o) => ms(o, t, i, r));
 }
-const Ie = /* @__PURE__ */ new Map(), bs = 0.22, ys = 0.16, vs = 3e4, xs = 0.025, ws = 0.018;
+const Te = /* @__PURE__ */ new Map(), bs = 0.22, ys = 0.16, vs = 3e4, xs = 0.025, ws = 0.018;
 function kt(e) {
   return Number.isFinite(e.x) && Number.isFinite(e.y) ? { x: e.x, y: e.y } : void 0;
 }
 function Ut(e, t) {
   return Math.hypot(e.x - t.x, e.y - t.y);
 }
-function Oe(e) {
+function Ie(e) {
   return e.entity_binding?.entity ?? e.id;
 }
 function Ue(e) {
@@ -7747,13 +7747,13 @@ function $s(e, t) {
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
 function Xi(e, t, i) {
-  const r = Oe(e), o = kt(t);
+  const r = Ie(e), o = kt(t);
   if (!o) return;
-  const n = Ie.get(r);
-  Ie.set(r, { point: o, previous: n?.point, target: Ue(t), seenAt: i });
+  const n = Te.get(r);
+  Te.set(r, { point: o, previous: n?.point, target: Ue(t), seenAt: i });
 }
 function ks(e, t = Date.now()) {
-  for (const [a, l] of Ie) t - l.seenAt > vs && Ie.delete(a);
+  for (const [a, l] of Te) t - l.seenAt > vs && Te.delete(a);
   const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && kt(a) && Ue(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
     const l = a.room_id ?? "__no_room__", d = n.get(l) ?? [];
@@ -7766,8 +7766,8 @@ function ks(e, t = Date.now()) {
         s.push(g), Xi(g, g, t);
       continue;
     }
-    const l = [...a], d = [...a].sort((g, y) => Oe(g).localeCompare(Oe(y))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
-      const y = Ie.get(Oe(g));
+    const l = [...a], d = [...a].sort((g, y) => Ie(g).localeCompare(Ie(y))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
+      const y = Te.get(Ie(g));
       if (!y) return { identity: g, track: void 0, scores: [] };
       const m = l.map((v) => $s(y, v)).sort((v, _) => v.score - _.score);
       return { identity: g, track: y, scores: m };
@@ -7778,10 +7778,10 @@ function ks(e, t = Date.now()) {
       const v = g.scores.filter((E) => !p.has(E.candidate));
       if (!v.length) continue;
       const _ = v[0], $ = v[1], w = _.distance <= bs || Ut(fr(m), kt(_.candidate)) <= ys, S = !!$ && $.score - _.score < ws;
-      w && !S && (c.set(Oe(y), _.candidate), p.add(_.candidate));
+      w && !S && (c.set(Ie(y), _.candidate), p.add(_.candidate));
     }
     for (const g of d) {
-      const y = Oe(g);
+      const y = Ie(g);
       let m = c.get(y);
       if (m || (m = l.find((_) => !p.has(_) && Ue(_) === Ue(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
         s.push(g);
@@ -7794,14 +7794,14 @@ function ks(e, t = Date.now()) {
   return [...s, ...o];
 }
 function _s() {
-  Ie.clear();
+  Te.clear();
 }
 var As = Object.defineProperty, Ss = Object.getOwnPropertyDescriptor, Ct = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Ss(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && As(t, i, o), o;
 };
-const br = "0.40.9";
+const br = "0.40.10";
 let Fe = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8053,26 +8053,106 @@ let Fe = class extends L {
   renderCastleSurround() {
     const e = (t) => h`<svg
       class=${`enchanted-castle-side enchanted-castle-${t}`}
-      viewBox="0 0 500 900"
-      preserveAspectRatio="xMidYMax meet"
+      viewBox="0 0 560 900"
+      preserveAspectRatio="xMidYMax slice"
       aria-hidden="true"
     >
-      <circle class="castle-moon-glow" cx="118" cy="238" r="82"></circle>
-      <circle class="castle-moon" cx="118" cy="238" r="58"></circle>
-      <path class="castle-far-hills" d="M0 900V685 Q74 616 142 662 T276 642 T410 680 T500 620 V900Z"></path>
-      <path class="castle-near-hills" d="M0 900V770 Q72 701 142 736 T274 704 T408 748 T500 694 V900Z"></path>
-      <path class="castle-silhouette" d="M24 900V721H55V565H42L70 516L98 565H84V721H116V493H98L137 423L176 493H158V675H196V578H183L214 526L246 578H233V712H277V447H256L304 360L352 447H331V632H370V540H355L392 478L429 540H414V704H455V900Z"></path>
-      <path class="castle-spires" d="M63 516L70 458L77 516ZM128 423L137 326L146 423ZM206 526L214 456L222 526ZM294 360L304 244L314 360ZM383 478L392 391L401 478Z"></path>
-      <path class="castle-bridge" d="M84 743 Q126 696 171 743 T258 743 T348 743 T455 743" fill="none"></path>
-      <g class="castle-windows">
-        <path class="castle-window castle-window-0" d="M62 601v31h16v-31q-8-16-16 0Z"></path>
-        <path class="castle-window castle-window-1" d="M128 531v36h18v-36q-9-18-18 0Z"></path>
-        <path class="castle-window castle-window-2" d="M205 612v27h17v-27q-8-14-17 0Z"></path>
-        <path class="castle-window castle-window-0" d="M294 486v43h20v-43q-10-21-20 0Z"></path>
-        <path class="castle-window castle-window-1" d="M383 572v31h18v-31q-9-16-18 0Z"></path>
-        <path class="castle-window castle-window-2" d="M292 584v26h15v-26q-7-13-15 0Z"></path>
-      </g>
-      <path class="castle-mist" d="M-30 736 C80 698 153 758 250 724 S430 702 540 748"></path>
+      <defs>
+        <radialGradient id=${`castle-moon-${t}`} cx="42%" cy="38%" r="62%">
+          <stop offset="0" stop-color="#e8ce91" stop-opacity="0.2"></stop>
+          <stop offset="0.62" stop-color="#b98c51" stop-opacity="0.07"></stop>
+          <stop offset="1" stop-color="#5a402b" stop-opacity="0"></stop>
+        </radialGradient>
+        <linearGradient id=${`castle-stone-${t}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#18130f"></stop>
+          <stop offset="0.52" stop-color="#090807"></stop>
+          <stop offset="1" stop-color="#020303"></stop>
+        </linearGradient>
+        <linearGradient id=${`castle-distance-${t}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#32271e" stop-opacity="0.78"></stop>
+          <stop offset="1" stop-color="#100e0c" stop-opacity="0.92"></stop>
+        </linearGradient>
+        <filter id=${`castle-soft-mist-${t}`} x="-30%" y="-250%" width="160%" height="600%">
+          <feGaussianBlur stdDeviation="14"></feGaussianBlur>
+        </filter>
+      </defs>
+      ${t === "left" ? h`
+            <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
+            <circle class="castle-moon" cx="116" cy="218" r="68" fill=${`url(#castle-moon-${t})`}></circle>
+            <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
+            <path class="castle-distant" d="M0 900V708l54-48 40 12 34-54 49 22 43-77 51 22 41-89 67 42 42-60 52 38 34-43 73 52v355Z"></path>
+            <path class="castle-cliff" d="M64 900V758c41-38 86-46 127-27 33 15 61 7 93-15 51-36 86-27 122-2 48 32 96 1 174-49v235Z"></path>
+            <g class="castle-complex" fill=${`url(#castle-stone-${t})`}>
+              <path d="M67 760V592h18V548h43v44h16v168Z"></path>
+              <path d="M92 548l15-73 15 73Z"></path>
+              <path d="M150 754V522h18v-47h54v47h17v232Z"></path>
+              <path d="M174 475l21-101 22 101Z"></path>
+              <path d="M235 744V566h15v-38h54v38h18v178Z"></path>
+              <path d="M254 528l22-65 23 65Z"></path>
+              <path d="M310 730V439h23v-57h76v57h22v291Z"></path>
+              <path d="M336 382l35-154 34 154Z"></path>
+              <path d="M426 742V548h16v-44h54v44h20v194Z"></path>
+              <path d="M445 504l24-92 23 92Z"></path>
+              <path d="M118 645h48v21h-48zM214 615h50v20h-50zM395 603h54v23h-54z"></path>
+            </g>
+            <g class="castle-roof-detail">
+              <path d="M88 548h38M153 522h84M236 566h85M312 439h116M427 548h86"></path>
+              <path d="M107 477v-29M195 376v-36M371 230v-48M469 414v-35"></path>
+              <path d="M350 438v-56M390 438v-56M183 522v-47M207 522v-47"></path>
+            </g>
+            <g class="castle-buttresses">
+              <path d="M74 610l-18 150M142 578l-15 176M239 590l-18 154M321 475l-25 255M430 579l-19 163M501 570l20 172"></path>
+            </g>
+            <g class="castle-windows">
+              <path class="castle-window castle-window-0" d="M100 615v30h13v-30q-6-13-13 0Z"></path>
+              <path class="castle-window castle-window-2" d="M185 552v36h15v-36q-7-16-15 0Z"></path>
+              <path class="castle-window castle-window-1" d="M267 592v28h13v-28q-6-13-13 0Z"></path>
+              <path class="castle-window castle-window-0" d="M360 468v43h18v-43q-9-20-18 0Z"></path>
+              <path class="castle-window castle-window-2" d="M359 558v29h16v-29q-8-14-16 0Z"></path>
+              <path class="castle-window castle-window-1" d="M463 576v33h15v-33q-7-15-15 0Z"></path>
+            </g>
+          ` : h`
+            <circle class="castle-moon-glow castle-moon-dim" cx="458" cy="258" r="104"></circle>
+            <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
+            <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
+            <path class="castle-cliff" d="M-20 900V711c76-51 135-40 190-7 47 28 84 24 129-9 52-39 94-30 136 1 43 31 91 28 145-4v208Z"></path>
+            <g class="castle-complex" fill=${`url(#castle-stone-${t})`}>
+              <path d="M34 746V552h18v-44h58v44h18v194Z"></path>
+              <path d="M56 508l25-89 24 89Z"></path>
+              <path d="M122 738V607h22v-34h68v34h19v131Z"></path>
+              <path d="M145 573l33-57 31 57Z"></path>
+              <path d="M221 724V472h21v-51h70v51h23v252Z"></path>
+              <path d="M244 421l33-133 32 133Z"></path>
+              <path d="M330 742V541h18v-42h55v42h20v201Z"></path>
+              <path d="M349 499l26-88 24 88Z"></path>
+              <path d="M418 754V585h16v-39h51v39h18v169Z"></path>
+              <path d="M435 546l24-69 23 69Z"></path>
+              <path d="M492 765V625h14v-32h36v32h18v140Z"></path>
+              <path d="M504 593l19-58 17 58Z"></path>
+              <path d="M95 661h58v21H95zM207 626h51v20h-51zM309 590h57v23h-57zM398 650h47v19h-47z"></path>
+            </g>
+            <path class="castle-bridge" d="M111 688C151 656 188 655 226 685s77 28 114-2 73-31 111 4"></path>
+            <g class="castle-roof-detail">
+              <path d="M35 552h92M123 607h106M222 472h112M331 541h91M419 585h83"></path>
+              <path d="M81 420v-38M178 516v-35M277 289v-51M375 411v-36M459 477v-31"></path>
+              <path d="M256 472v-51M296 472v-51M364 541v-42"></path>
+            </g>
+            <g class="castle-buttresses">
+              <path d="M39 586l-20 160M124 584l18 154M224 510l-20 214M334 571l-20 171M421 615l-18 139M501 647l-14 118"></path>
+            </g>
+            <g class="castle-windows">
+              <path class="castle-window castle-window-1" d="M73 576v34h16v-34q-8-16-16 0Z"></path>
+              <path class="castle-window castle-window-0" d="M169 627v28h14v-28q-7-13-14 0Z"></path>
+              <path class="castle-window castle-window-2" d="M268 505v42h18v-42q-9-20-18 0Z"></path>
+              <path class="castle-window castle-window-1" d="M268 586v29h15v-29q-7-14-15 0Z"></path>
+              <path class="castle-window castle-window-0" d="M367 573v34h16v-34q-8-16-16 0Z"></path>
+              <path class="castle-window castle-window-2" d="M451 614v29h14v-29q-7-13-14 0Z"></path>
+              <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
+            </g>
+          `}
+      <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
+      <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${t})`}></path>
+      <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${t})`}></path>
     </svg>`;
     return h`<div class="enchanted-castle-surround" aria-hidden="true">
       ${e("left")}${e("right")}
@@ -8160,7 +8240,7 @@ let Fe = class extends L {
     ></ha-card>`;
   }
 };
-Fe.styles = O`
+Fe.styles = I`
     :host {
       display: block;
       width: 100%;
@@ -8239,51 +8319,90 @@ Fe.styles = O`
       .enchanted-castle-side {
         position: absolute;
         bottom: 0;
-        width: 34%;
-        max-width: 540px;
+        width: 33.5%;
+        max-width: 560px;
         height: 100%;
         overflow: visible;
-        opacity: 0.88;
-        filter: drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.13));
+        opacity: 0.94;
+        filter:
+          drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.11))
+          drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
       }
       .enchanted-castle-left {
         left: 0;
       }
       .enchanted-castle-right {
         right: 0;
-        transform: scaleX(-1);
       }
       .castle-moon-glow {
-        fill: rgba(226, 190, 116, 0.09);
-        filter: blur(24px);
+        fill: rgba(226, 190, 116, 0.1);
+        filter: blur(30px);
       }
       .castle-moon {
-        fill: rgba(205, 168, 102, 0.08);
         stroke: rgba(225, 192, 124, 0.16);
         stroke-width: 2;
       }
+      .castle-moon-dim {
+        opacity: 0.48;
+      }
       .castle-far-hills {
-        fill: rgba(15, 12, 11, 0.48);
+        fill: rgba(24, 19, 16, 0.55);
       }
-      .castle-near-hills {
-        fill: rgba(7, 6, 6, 0.76);
+      .enchanted-castle-left .castle-distant {
+        fill: url(#castle-distance-left);
       }
-      .castle-silhouette,
-      .castle-spires {
-        fill: rgba(5, 5, 6, 0.88);
-        stroke: rgba(205, 162, 91, 0.23);
-        stroke-width: 1.5;
+      .enchanted-castle-right .castle-distant {
+        fill: url(#castle-distance-right);
+      }
+      .castle-distant {
+        opacity: 0.42;
+        filter: blur(0.45px);
+      }
+      .castle-cliff {
+        fill: rgba(5, 5, 5, 0.88);
+      }
+      .castle-complex {
+        stroke: rgba(203, 162, 97, 0.24);
+        stroke-width: 1.25;
         stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+      .castle-roof-detail,
+      .castle-buttresses {
+        fill: none;
+        stroke: rgba(207, 168, 105, 0.22);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+      .castle-buttresses {
+        stroke: rgba(180, 139, 82, 0.14);
+        stroke-width: 3;
       }
       .castle-bridge {
-        stroke: rgba(7, 6, 6, 0.92);
-        stroke-width: 22;
+        fill: none;
+        stroke: rgba(4, 4, 4, 0.94);
+        stroke-width: 19;
         stroke-linecap: round;
-        filter: drop-shadow(0 -1px 0 rgba(208, 165, 94, 0.16));
+        filter:
+          drop-shadow(0 -2px 0 rgba(208, 165, 94, 0.16))
+          drop-shadow(0 7px 5px rgba(0, 0, 0, 0.42));
+      }
+      .castle-ridge {
+        fill: none;
+        stroke: rgba(2, 3, 3, 0.96);
+        stroke-width: 128;
+        stroke-linecap: round;
+        filter: drop-shadow(0 -2px 0 rgba(181, 141, 83, 0.11));
       }
       .castle-window {
-        fill: rgba(244, 190, 91, 0.82);
-        filter: drop-shadow(0 0 4px rgba(239, 164, 55, 0.82));
+        fill: rgba(238, 177, 76, 0.76);
+        stroke: rgba(255, 218, 137, 0.24);
+        stroke-width: 0.8;
+        filter:
+          drop-shadow(0 0 3px rgba(239, 164, 55, 0.82))
+          drop-shadow(0 0 9px rgba(219, 133, 35, 0.38));
         animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
       }
       .castle-window-1 {
@@ -8296,11 +8415,16 @@ Fe.styles = O`
       }
       .castle-mist {
         fill: none;
-        stroke: rgba(221, 191, 135, 0.13);
-        stroke-width: 30;
+        stroke: rgba(224, 199, 151, 0.15);
+        stroke-width: 34;
         stroke-linecap: round;
-        filter: blur(13px);
         animation: explorerCastleMist 14s ease-in-out infinite alternate;
+      }
+      .castle-mist-back {
+        stroke: rgba(198, 174, 133, 0.1);
+        stroke-width: 45;
+        animation-direction: alternate-reverse;
+        animation-duration: 19s;
       }
       ha-card:not(.preview) {
         position: relative;
