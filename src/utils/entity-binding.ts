@@ -1,6 +1,7 @@
 import type { ExplorerFloorplanMeters, ExplorerPresence, ExplorerRoom, PresenceEntityBinding, ExplorerCalibrationPoint } from "../models/config";
 import type { HassEntity, HomeAssistant } from "../types";
 import { findRoomByReference, getRoomPresenceAnchor } from "./room-awareness";
+import { applyShellyPetDetection } from "./shelly-pet-detection";
 
 const DEFAULT_HIDDEN_STATES=["unknown","unavailable","not_detected"];
 const UNKNOWN_ROOM_STATES=new Set(["","unknown","unavailable","none","null"]);
@@ -40,7 +41,7 @@ export function resolvePresence(presence:ExplorerPresence,hass?:HomeAssistant,ro
   const roomReference=readRoomReference(binding,identityEntity,hass)??presence.room_id;
   const coords=entityCoordinates(presence,binding,positionEntity,rooms,roomReference,floorplan);
   const resolved:ExplorerPresence={...presence,x:coords.x,y:coords.y,room_id:coords.roomId??presence.room_id,name:presence.name??stringValue(readAttribute(identityEntity,binding.name_attribute??"friendly_name")),avatar:presence.avatar??stringValue(readAttribute(identityEntity,binding.avatar_attribute??"entity_picture")),icon:presence.icon??(binding.icon_attribute?stringValue(readAttribute(identityEntity,binding.icon_attribute)):undefined),color:presence.color??stringValue(readAttribute(identityEntity,binding.color_attribute??"explorer_color")),visible};
-  if(binding.coordinate_space==="room_meters")return resolved.x===undefined||resolved.y===undefined?{...resolved,visible:false}:resolved;
-  return applyRoomPosition(resolved,rooms,roomReference);
+  const positioned=binding.coordinate_space==="room_meters"?(resolved.x===undefined||resolved.y===undefined?{...resolved,visible:false}:resolved):applyRoomPosition(resolved,rooms,roomReference);
+  return applyShellyPetDetection(positioned,positionEntity);
 }
 export function resolvePresences(presences:ExplorerPresence[],hass?:HomeAssistant,rooms:ExplorerRoom[]=[],floorplan?:ExplorerFloorplanMeters):ExplorerPresence[]{return presences.map(p=>resolvePresence(p,hass,rooms,floorplan));}

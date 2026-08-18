@@ -209,6 +209,35 @@ pet_robot_trails:
 
 Pet profiles receive detailed paw prints in their individual trail colour. Robot profiles receive a continuous route with optional direction arrows.
 
+### Shelly Presence Gen4 Pet Detection
+
+Explorer can filter a Shelly LiveTrack target by height before showing it as a pet. The detector uses hysteresis, several consecutive samples and `target_id` continuity so a short noisy reading is not immediately shown as a rabbit.
+
+```yaml
+presences:
+  - id: kanin
+    name: Kanin
+    type: pet
+    room_id: stue
+    icon: "🐇"
+    entity_binding:
+      position_entity: sensor.stue_presence_stuen_target_1
+      coordinate_space: room_meters
+      x_attribute: x
+      y_attribute: y
+    shelly_pet_detection:
+      enabled: true
+      height_attribute: maxz
+      target_id_attribute: target_id
+      timestamp_attribute: timestamp
+      max_height_m: 0.75
+      release_height_m: 0.95
+      confirmation_updates: 3
+      release_updates: 2
+```
+
+The visual editor contains the same settings under **Shelly Pet Detection**. Room calibration is shared with other `room_meters` targets.
+
 ## Development
 
 ```bash

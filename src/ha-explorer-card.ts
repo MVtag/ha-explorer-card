@@ -14,7 +14,8 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.42.0";
+import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
+const CARD_VERSION = "0.43.0";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -98,6 +99,7 @@ export class HaExplorerCard extends LitElement {
   public setConfig(config: ExplorerCardConfig): void {
     if (!config) throw new Error("Configuration is required");
     resetIdentityTracks();
+    resetShellyPetTracks();
     this.config = {
       title: "Home Assistant Explorer",
       min_zoom: 1,
