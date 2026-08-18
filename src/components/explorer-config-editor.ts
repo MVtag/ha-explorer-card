@@ -45,13 +45,14 @@ export class HaExplorerCardEditor extends LitElement {
   @state() private areas: AreaRegistryEntry[] = [];
   @state() private areaError = "";
   @state() private loadingAreas = false;
+  private areasLoaded = false;
 
   public setConfig(config: ExplorerCardConfig): void {
     this.config = config;
   }
 
   protected updated(changed: Map<PropertyKey, unknown>): void {
-    if (changed.has("hass")) void this.loadAreas();
+    if (changed.has("hass") && !this.areasLoaded && !this.loadingAreas) void this.loadAreas();
   }
 
   private async loadAreas(): Promise<void> {
@@ -65,6 +66,7 @@ export class HaExplorerCardEditor extends LitElement {
     try {
       const areas = await this.hass.callWS<AreaRegistryEntry[]>({ type: "config/area_registry/list" });
       this.areas = [...areas].sort((a, b) => a.name.localeCompare(b.name, "da"));
+      this.areasLoaded = true;
     } catch {
       this.areaError = "Home Assistant Areas kunne ikke hentes. Eksisterende Area ID'er bevares.";
     } finally {
@@ -474,7 +476,7 @@ export class HaExplorerCardEditor extends LitElement {
     summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; cursor: pointer; font-weight: 700; }
     summary::-webkit-details-marker { display: none; }
     .summary-hint { color: var(--secondary-text-color); font-size: .82rem; font-weight: 500; }
-    .section-content { display: grid; gap: 14px; padding: 0 14px 14px; }
+    .section-content { display: grid; gap: 14px; padding: 0 14px 14px; overflow-anchor: none; }
     .grid { display: grid; gap: 12px; }
     .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .grid.compact { gap: 8px; }
