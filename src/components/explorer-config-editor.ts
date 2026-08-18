@@ -302,7 +302,7 @@ export class HaExplorerCardEditor extends LitElement {
           <label>
             Type
             <select
-              .value=${presence.type ?? "person"}
+              .value=${live(presence.type ?? "person")}
               @change=${(event: Event) =>
                 this.updatePresence(index, {
                   type: (event.target as HTMLSelectElement).value as PresenceObjectType,
@@ -348,7 +348,7 @@ export class HaExplorerCardEditor extends LitElement {
         <label>
           Fast rum (fallback)
           <select
-            .value=${presence.room_id ?? ""}
+            .value=${live(presence.room_id ?? "")}
             @change=${(event: Event) =>
               this.updatePresence(index, {
                 room_id: (event.target as HTMLSelectElement).value || undefined,
