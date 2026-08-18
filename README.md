@@ -192,7 +192,22 @@ movement_history:
   show_rooms: true
 ```
 
-Each person keeps an independent fading history using their configured marker or trail colour. Pet and robot history remains reserved for the next roadmap phase.
+Each person keeps an independent fading history using their configured marker or trail colour. Pet and robot histories are configured separately below.
+
+### Pet & Robot Trails 2.0
+
+Pet paws and robot routes have their own optional history layer:
+
+```yaml
+pet_robot_trails:
+  enabled: true
+  duration_minutes: 3
+  show_pet_paws: true
+  show_robot_route: true
+  robot_direction_arrows: true
+```
+
+Pet profiles receive detailed paw prints in their individual trail colour. Robot profiles receive a continuous route with optional direction arrows.
 
 ## Development
 
@@ -212,8 +227,7 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-1. **Pet & Robot Trails 2.0** — improve pet trails with more distinct paw prints and give robot vacuums a clearer continuous movement route.
-2. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
+1. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
 
 ## License
 
