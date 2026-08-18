@@ -1,15 +1,15 @@
-const vt = globalThis, ai = vt.ShadowRoot && (vt.ShadyCSS === void 0 || vt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, li = /* @__PURE__ */ Symbol(), $i = /* @__PURE__ */ new WeakMap();
-let dr = class {
+const xt = globalThis, li = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, di = /* @__PURE__ */ Symbol(), ki = /* @__PURE__ */ new WeakMap();
+let cr = class {
   constructor(t, i, r) {
-    if (this._$cssResult$ = !0, r !== li) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    if (this._$cssResult$ = !0, r !== di) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = i;
   }
   get styleSheet() {
     let t = this.o;
     const i = this.t;
-    if (ai && t === void 0) {
+    if (li && t === void 0) {
       const r = i !== void 0 && i.length === 1;
-      r && (t = $i.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && $i.set(i, t));
+      r && (t = ki.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && ki.set(i, t));
     }
     return t;
   }
@@ -17,28 +17,28 @@ let dr = class {
     return this.cssText;
   }
 };
-const jr = (e) => new dr(typeof e == "string" ? e : e + "", void 0, li), O = (e, ...t) => {
+const Lr = (e) => new cr(typeof e == "string" ? e : e + "", void 0, di), O = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + s + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(o) + e[n + 1], e[0]);
-  return new dr(i, e, li);
-}, Lr = (e, t) => {
-  if (ai) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
+  return new cr(i, e, di);
+}, qr = (e, t) => {
+  if (li) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
   else for (const i of t) {
-    const r = document.createElement("style"), o = vt.litNonce;
+    const r = document.createElement("style"), o = xt.litNonce;
     o !== void 0 && r.setAttribute("nonce", o), r.textContent = i.cssText, e.appendChild(r);
   }
-}, ki = ai ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
+}, _i = li ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
   for (const r of t.cssRules) i += r.cssText;
-  return jr(i);
+  return Lr(i);
 })(e) : e;
-const { is: qr, defineProperty: Br, getOwnPropertyDescriptor: Hr, getOwnPropertyNames: Fr, getOwnPropertySymbols: Vr, getPrototypeOf: Kr } = Object, zt = globalThis, _i = zt.trustedTypes, Zr = _i ? _i.emptyScript : "", Gr = zt.reactiveElementPolyfillSupport, Ye = (e, t) => e, $t = { toAttribute(e, t) {
+const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnPropertyNames: Vr, getOwnPropertySymbols: Kr, getPrototypeOf: Zr } = Object, Tt = globalThis, Ai = Tt.trustedTypes, Gr = Ai ? Ai.emptyScript : "", Ur = Tt.reactiveElementPolyfillSupport, Qe = (e, t) => e, kt = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
-      e = e ? Zr : null;
+      e = e ? Gr : null;
       break;
     case Object:
     case Array:
@@ -63,23 +63,23 @@ const { is: qr, defineProperty: Br, getOwnPropertyDescriptor: Hr, getOwnProperty
       }
   }
   return i;
-} }, di = (e, t) => !qr(e, t), Ai = { attribute: !0, type: String, converter: $t, reflect: !1, useDefault: !1, hasChanged: di };
-Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), zt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
-let je = class extends HTMLElement {
+} }, ci = (e, t) => !Br(e, t), Si = { attribute: !0, type: String, converter: kt, reflect: !1, useDefault: !1, hasChanged: ci };
+Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), Tt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+let Le = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
   }
   static get observedAttributes() {
     return this.finalize(), this._$Eh && [...this._$Eh.keys()];
   }
-  static createProperty(t, i = Ai) {
+  static createProperty(t, i = Si) {
     if (i.state && (i.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(t) && ((i = Object.create(i)).wrapped = !0), this.elementProperties.set(t, i), !i.noAccessor) {
       const r = /* @__PURE__ */ Symbol(), o = this.getPropertyDescriptor(t, r, i);
-      o !== void 0 && Br(this.prototype, t, o);
+      o !== void 0 && Hr(this.prototype, t, o);
     }
   }
   static getPropertyDescriptor(t, i, r) {
-    const { get: o, set: n } = Hr(this.prototype, t) ?? { get() {
+    const { get: o, set: n } = Fr(this.prototype, t) ?? { get() {
       return this[i];
     }, set(s) {
       this[i] = s;
@@ -90,17 +90,17 @@ let je = class extends HTMLElement {
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(t) {
-    return this.elementProperties.get(t) ?? Ai;
+    return this.elementProperties.get(t) ?? Si;
   }
   static _$Ei() {
-    if (this.hasOwnProperty(Ye("elementProperties"))) return;
-    const t = Kr(this);
+    if (this.hasOwnProperty(Qe("elementProperties"))) return;
+    const t = Zr(this);
     t.finalize(), t.l !== void 0 && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
   }
   static finalize() {
-    if (this.hasOwnProperty(Ye("finalized"))) return;
-    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Ye("properties"))) {
-      const i = this.properties, r = [...Fr(i), ...Vr(i)];
+    if (this.hasOwnProperty(Qe("finalized"))) return;
+    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Qe("properties"))) {
+      const i = this.properties, r = [...Vr(i), ...Kr(i)];
       for (const o of r) this.createProperty(o, i[o]);
     }
     const t = this[Symbol.metadata];
@@ -119,8 +119,8 @@ let je = class extends HTMLElement {
     const i = [];
     if (Array.isArray(t)) {
       const r = new Set(t.flat(1 / 0).reverse());
-      for (const o of r) i.unshift(ki(o));
-    } else t !== void 0 && i.push(ki(t));
+      for (const o of r) i.unshift(_i(o));
+    } else t !== void 0 && i.push(_i(t));
     return i;
   }
   static _$Eu(t, i) {
@@ -146,7 +146,7 @@ let je = class extends HTMLElement {
   }
   createRenderRoot() {
     const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return Lr(t, this.constructor.elementStyles), t;
+    return qr(t, this.constructor.elementStyles), t;
   }
   connectedCallback() {
     this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t) => t.hostConnected?.());
@@ -162,14 +162,14 @@ let je = class extends HTMLElement {
   _$ET(t, i) {
     const r = this.constructor.elementProperties.get(t), o = this.constructor._$Eu(t, r);
     if (o !== void 0 && r.reflect === !0) {
-      const n = (r.converter?.toAttribute !== void 0 ? r.converter : $t).toAttribute(i, r.type);
+      const n = (r.converter?.toAttribute !== void 0 ? r.converter : kt).toAttribute(i, r.type);
       this._$Em = t, n == null ? this.removeAttribute(o) : this.setAttribute(o, n), this._$Em = null;
     }
   }
   _$AK(t, i) {
     const r = this.constructor, o = r._$Eh.get(t);
     if (o !== void 0 && this._$Em !== o) {
-      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : $t;
+      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : kt;
       this._$Em = o;
       const a = s.fromAttribute(i, n.type);
       this[o] = a ?? this._$Ej?.get(o) ?? a, this._$Em = null;
@@ -178,7 +178,7 @@ let je = class extends HTMLElement {
   requestUpdate(t, i, r, o = !1, n) {
     if (t !== void 0) {
       const s = this.constructor;
-      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? di)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
+      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? ci)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
       this.C(t, i, r);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
@@ -246,51 +246,51 @@ let je = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-je.elementStyles = [], je.shadowRootOptions = { mode: "open" }, je[Ye("elementProperties")] = /* @__PURE__ */ new Map(), je[Ye("finalized")] = /* @__PURE__ */ new Map(), Gr?.({ ReactiveElement: je }), (zt.reactiveElementVersions ??= []).push("2.1.2");
-const ci = globalThis, Si = (e) => e, kt = ci.trustedTypes, Ci = kt ? kt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, cr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, pr = "?" + $e, Ur = `<${pr}>`, Me = document, et = () => Me.createComment(""), tt = (e) => e === null || typeof e != "object" && typeof e != "function", pi = Array.isArray, Wr = (e) => pi(e) || typeof e?.[Symbol.iterator] == "function", Dt = `[ 	
-\f\r]`, Xe = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ei = /-->/g, Mi = />/g, Se = RegExp(`>|${Dt}(?:([^\\s"'>=/]+)(${Dt}*=${Dt}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Pi = /'/g, Ni = /"/g, hr = /^(?:script|style|textarea|title)$/i, ur = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = ur(1), P = ur(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Ri = /* @__PURE__ */ new WeakMap(), Ee = Me.createTreeWalker(Me, 129);
-function gr(e, t) {
-  if (!pi(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return Ci !== void 0 ? Ci.createHTML(t) : t;
+Le.elementStyles = [], Le.shadowRootOptions = { mode: "open" }, Le[Qe("elementProperties")] = /* @__PURE__ */ new Map(), Le[Qe("finalized")] = /* @__PURE__ */ new Map(), Ur?.({ ReactiveElement: Le }), (Tt.reactiveElementVersions ??= []).push("2.1.2");
+const pi = globalThis, Ci = (e) => e, _t = pi.trustedTypes, Ei = _t ? _t.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + $e, Wr = `<${hr}>`, Pe = document, tt = () => Pe.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Xr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", jt = `[ 	
+\f\r]`, Ye = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Mi = /-->/g, Pi = />/g, Se = RegExp(`>|${jt}(?:([^\\s"'>=/]+)(${jt}*=${jt}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ni = /'/g, Ri = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), P = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), zi = /* @__PURE__ */ new WeakMap(), Ee = Pe.createTreeWalker(Pe, 129);
+function mr(e, t) {
+  if (!hi(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+  return Ei !== void 0 ? Ei.createHTML(t) : t;
 }
-const Xr = (e, t) => {
+const Yr = (e, t) => {
   const i = e.length - 1, r = [];
-  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Xe;
+  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Ye;
   for (let a = 0; a < i; a++) {
     const l = e[a];
     let d, c, p = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Xe ? c[1] === "!--" ? s = Ei : c[1] !== void 0 ? s = Mi : c[2] !== void 0 ? (hr.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = Se) : c[3] !== void 0 && (s = Se) : s === Se ? c[0] === ">" ? (s = o ?? Xe, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? Se : c[3] === '"' ? Ni : Pi) : s === Ni || s === Pi ? s = Se : s === Ei || s === Mi ? s = Xe : (s = Se, o = void 0);
+    for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Ye ? c[1] === "!--" ? s = Mi : c[1] !== void 0 ? s = Pi : c[2] !== void 0 ? (ur.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = Se) : c[3] !== void 0 && (s = Se) : s === Se ? c[0] === ">" ? (s = o ?? Ye, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? Se : c[3] === '"' ? Ri : Ni) : s === Ri || s === Ni ? s = Se : s === Mi || s === Pi ? s = Ye : (s = Se, o = void 0);
     const g = s === Se && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Xe ? l + Ur : p >= 0 ? (r.push(d), l.slice(0, p) + cr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
+    n += s === Ye ? l + Wr : p >= 0 ? (r.push(d), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
   }
-  return [gr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+  return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
-class it {
+class rt {
   constructor({ strings: t, _$litType$: i }, r) {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [d, c] = Xr(t, i);
-    if (this.el = it.createElement(d, r), Ee.currentNode = this.el.content, i === 2 || i === 3) {
+    const a = t.length - 1, l = this.parts, [d, c] = Yr(t, i);
+    if (this.el = rt.createElement(d, r), Ee.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
     }
     for (; (o = Ee.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
-        if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(cr)) {
+        if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
           const u = c[s++], g = o.getAttribute(p).split($e), b = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? Qr : b[1] === "?" ? Jr : b[1] === "@" ? eo : Tt }), o.removeAttribute(p);
+          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? Jr : b[1] === "?" ? eo : b[1] === "@" ? to : Ot }), o.removeAttribute(p);
         } else p.startsWith($e) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
-        if (hr.test(o.tagName)) {
+        if (ur.test(o.tagName)) {
           const p = o.textContent.split($e), u = p.length - 1;
           if (u > 0) {
-            o.textContent = kt ? kt.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(p[g], et()), Ee.nextNode(), l.push({ type: 2, index: ++n });
-            o.append(p[u], et());
+            o.textContent = _t ? _t.emptyScript : "";
+            for (let g = 0; g < u; g++) o.append(p[g], tt()), Ee.nextNode(), l.push({ type: 2, index: ++n });
+            o.append(p[u], tt());
           }
         }
-      } else if (o.nodeType === 8) if (o.data === pr) l.push({ type: 2, index: n });
+      } else if (o.nodeType === 8) if (o.data === hr) l.push({ type: 2, index: n });
       else {
         let p = -1;
         for (; (p = o.data.indexOf($e, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += $e.length - 1;
@@ -299,17 +299,17 @@ class it {
     }
   }
   static createElement(t, i) {
-    const r = Me.createElement("template");
+    const r = Pe.createElement("template");
     return r.innerHTML = t, r;
   }
 }
-function Be(e, t, i = e, r) {
+function He(e, t, i = e, r) {
   if (t === se) return t;
   let o = r !== void 0 ? i._$Co?.[r] : i._$Cl;
-  const n = tt(t) ? void 0 : t._$litDirective$;
-  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = Be(e, o._$AS(e, t.values), o, r)), t;
+  const n = it(t) ? void 0 : t._$litDirective$;
+  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = He(e, o._$AS(e, t.values), o, r)), t;
 }
-class Yr {
+class Qr {
   constructor(t, i) {
     this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
@@ -320,24 +320,24 @@ class Yr {
     return this._$AM._$AU;
   }
   u(t) {
-    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Me).importNode(i, !0);
+    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Pe).importNode(i, !0);
     Ee.currentNode = o;
     let n = Ee.nextNode(), s = 0, a = 0, l = r[0];
     for (; l !== void 0; ) {
       if (s === l.index) {
         let d;
-        l.type === 2 ? d = new dt(n, n.nextSibling, this, t) : l.type === 1 ? d = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (d = new to(n, this, t)), this._$AV.push(d), l = r[++a];
+        l.type === 2 ? d = new ct(n, n.nextSibling, this, t) : l.type === 1 ? d = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (d = new io(n, this, t)), this._$AV.push(d), l = r[++a];
       }
       s !== l?.index && (n = Ee.nextNode(), s++);
     }
-    return Ee.currentNode = Me, o;
+    return Ee.currentNode = Pe, o;
   }
   p(t) {
     let i = 0;
     for (const r of this._$AV) r !== void 0 && (r.strings !== void 0 ? (r._$AI(t, r, i), i += r.strings.length - 2) : r._$AI(t[i])), i++;
   }
 }
-class dt {
+class ct {
   get _$AU() {
     return this._$AM?._$AU ?? this._$Cv;
   }
@@ -356,7 +356,7 @@ class dt {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = Be(this, t, i), tt(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== se && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Wr(t) ? this.k(t) : this._(t);
+    t = He(this, t, i), it(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== se && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Xr(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -365,38 +365,38 @@ class dt {
     this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
   }
   _(t) {
-    this._$AH !== f && tt(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Me.createTextNode(t)), this._$AH = t;
+    this._$AH !== f && it(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Pe.createTextNode(t)), this._$AH = t;
   }
   $(t) {
-    const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = it.createElement(gr(r.h, r.h[0]), this.options)), r);
+    const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = rt.createElement(mr(r.h, r.h[0]), this.options)), r);
     if (this._$AH?._$AD === o) this._$AH.p(i);
     else {
-      const n = new Yr(o, this), s = n.u(this.options);
+      const n = new Qr(o, this), s = n.u(this.options);
       n.p(i), this.T(s), this._$AH = n;
     }
   }
   _$AC(t) {
-    let i = Ri.get(t.strings);
-    return i === void 0 && Ri.set(t.strings, i = new it(t)), i;
+    let i = zi.get(t.strings);
+    return i === void 0 && zi.set(t.strings, i = new rt(t)), i;
   }
   k(t) {
-    pi(this._$AH) || (this._$AH = [], this._$AR());
+    hi(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let r, o = 0;
-    for (const n of t) o === i.length ? i.push(r = new dt(this.O(et()), this.O(et()), this, this.options)) : r = i[o], r._$AI(n), o++;
+    for (const n of t) o === i.length ? i.push(r = new ct(this.O(tt()), this.O(tt()), this, this.options)) : r = i[o], r._$AI(n), o++;
     o < i.length && (this._$AR(r && r._$AB.nextSibling, o), i.length = o);
   }
   _$AR(t = this._$AA.nextSibling, i) {
     for (this._$AP?.(!1, !0, i); t !== this._$AB; ) {
-      const r = Si(t).nextSibling;
-      Si(t).remove(), t = r;
+      const r = Ci(t).nextSibling;
+      Ci(t).remove(), t = r;
     }
   }
   setConnected(t) {
     this._$AM === void 0 && (this._$Cv = t, this._$AP?.(t));
   }
 }
-class Tt {
+class Ot {
   get tagName() {
     return this.element.tagName;
   }
@@ -409,11 +409,11 @@ class Tt {
   _$AI(t, i = this, r, o) {
     const n = this.strings;
     let s = !1;
-    if (n === void 0) t = Be(this, t, i, 0), s = !tt(t) || t !== this._$AH && t !== se, s && (this._$AH = t);
+    if (n === void 0) t = He(this, t, i, 0), s = !it(t) || t !== this._$AH && t !== se, s && (this._$AH = t);
     else {
       const a = t;
       let l, d;
-      for (t = n[0], l = 0; l < n.length - 1; l++) d = Be(this, a[r + l], i, l), d === se && (d = this._$AH[l]), s ||= !tt(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
+      for (t = n[0], l = 0; l < n.length - 1; l++) d = He(this, a[r + l], i, l), d === se && (d = this._$AH[l]), s ||= !it(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
     }
     s && !o && this.j(t);
   }
@@ -421,7 +421,7 @@ class Tt {
     t === f ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
   }
 }
-class Qr extends Tt {
+class Jr extends Ot {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -429,7 +429,7 @@ class Qr extends Tt {
     this.element[this.name] = t === f ? void 0 : t;
   }
 }
-class Jr extends Tt {
+class eo extends Ot {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -437,12 +437,12 @@ class Jr extends Tt {
     this.element.toggleAttribute(this.name, !!t && t !== f);
   }
 }
-class eo extends Tt {
+class to extends Ot {
   constructor(t, i, r, o, n) {
     super(t, i, r, o, n), this.type = 5;
   }
   _$AI(t, i = this) {
-    if ((t = Be(this, t, i, 0) ?? f) === se) return;
+    if ((t = He(this, t, i, 0) ?? f) === se) return;
     const r = this._$AH, o = t === f && r !== f || t.capture !== r.capture || t.once !== r.once || t.passive !== r.passive, n = t !== f && (r === f || o);
     o && this.element.removeEventListener(this.name, this, r), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
@@ -450,7 +450,7 @@ class eo extends Tt {
     typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, t) : this._$AH.handleEvent(t);
   }
 }
-class to {
+class io {
   constructor(t, i, r) {
     this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = r;
   }
@@ -458,22 +458,22 @@ class to {
     return this._$AM._$AU;
   }
   _$AI(t) {
-    Be(this, t);
+    He(this, t);
   }
 }
-const io = ci.litHtmlPolyfillSupport;
-io?.(it, dt), (ci.litHtmlVersions ??= []).push("3.3.3");
-const ro = (e, t, i) => {
+const ro = pi.litHtmlPolyfillSupport;
+ro?.(rt, ct), (pi.litHtmlVersions ??= []).push("3.3.3");
+const oo = (e, t, i) => {
   const r = i?.renderBefore ?? t;
   let o = r._$litPart$;
   if (o === void 0) {
     const n = i?.renderBefore ?? null;
-    r._$litPart$ = o = new dt(t.insertBefore(et(), n), n, void 0, i ?? {});
+    r._$litPart$ = o = new ct(t.insertBefore(tt(), n), n, void 0, i ?? {});
   }
   return o._$AI(e), o;
 };
-const hi = globalThis;
-let j = class extends je {
+const ui = globalThis;
+let j = class extends Le {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -483,7 +483,7 @@ let j = class extends je {
   }
   update(t) {
     const i = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = ro(i, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = oo(i, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     super.connectedCallback(), this._$Do?.setConnected(!0);
@@ -495,16 +495,16 @@ let j = class extends je {
     return se;
   }
 };
-j._$litElement$ = !0, j.finalized = !0, hi.litElementHydrateSupport?.({ LitElement: j });
-const oo = hi.litElementPolyfillSupport;
-oo?.({ LitElement: j });
-(hi.litElementVersions ??= []).push("4.2.2");
+j._$litElement$ = !0, j.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: j });
+const no = ui.litElementPolyfillSupport;
+no?.({ LitElement: j });
+(ui.litElementVersions ??= []).push("4.2.2");
 const z = (e) => (t, i) => {
   i !== void 0 ? i.addInitializer(() => {
     customElements.define(e, t);
   }) : customElements.define(e, t);
 };
-const no = { attribute: !0, type: String, converter: $t, reflect: !1, hasChanged: di }, so = (e = no, t, i) => {
+const so = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged: ci }, ao = (e = so, t, i) => {
   const { kind: r, metadata: o } = i;
   let n = globalThis.litPropertyMetadata.get(o);
   if (n === void 0 && globalThis.litPropertyMetadata.set(o, n = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), r === "accessor") {
@@ -526,7 +526,7 @@ const no = { attribute: !0, type: String, converter: $t, reflect: !1, hasChanged
   throw Error("Unsupported decorator location: " + r);
 };
 function A(e) {
-  return (t, i) => typeof i == "object" ? so(e, t, i) : ((r, o, n) => {
+  return (t, i) => typeof i == "object" ? ao(e, t, i) : ((r, o, n) => {
     const s = o.hasOwnProperty(n);
     return o.constructor.createProperty(n, r), s ? Object.getOwnPropertyDescriptor(o, n) : void 0;
   })(e, t, i);
@@ -534,17 +534,17 @@ function A(e) {
 function v(e) {
   return A({ ...e, state: !0, attribute: !1 });
 }
-const ao = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
-function lo(e, t) {
+const lo = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
+function co(e, t) {
   return (i, r, o) => {
     const n = (s) => s.renderRoot?.querySelector(e) ?? null;
-    return ao(i, r, { get() {
+    return lo(i, r, { get() {
       return n(this);
     } });
   };
 }
-const Ce = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, mr = (e) => (...t) => ({ _$litDirective$: e, values: t });
-class fr {
+const Ce = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, fr = (e) => (...t) => ({ _$litDirective$: e, values: t });
+class br {
   constructor(t) {
   }
   get _$AU() {
@@ -560,7 +560,7 @@ class fr {
     return this.render(...i);
   }
 }
-class ti extends fr {
+class ii extends br {
   constructor(t) {
     if (super(t), this.it = f, t.type !== Ce.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
   }
@@ -574,68 +574,68 @@ class ti extends fr {
     return i.raw = i, this._t = { _$litType$: this.constructor.resultType, strings: i, values: [] };
   }
 }
-ti.directiveName = "unsafeHTML", ti.resultType = 1;
-class ii extends ti {
+ii.directiveName = "unsafeHTML", ii.resultType = 1;
+class ri extends ii {
 }
-ii.directiveName = "unsafeSVG", ii.resultType = 2;
-const co = mr(ii), po = {
+ri.directiveName = "unsafeSVG", ri.resultType = 2;
+const po = fr(ri), ho = {
   light: ["on"],
   motion: ["on"],
   media: ["playing", "on"],
   opening: ["on", "open"],
   temperature: [],
   fireplace: ["on", "heating", "burning", "active"]
-}, ho = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function br(e) {
+}, uo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function yr(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Te(e) {
+function Oe(e) {
   return Math.min(1, Math.max(0, e));
 }
-function xt(e) {
-  return [...po[e]];
-}
-function uo(e) {
-  if (e.kind === "temperature") return [];
-  const t = (e.active_states ?? []).map((i) => i.trim()).filter(Boolean);
-  return t.length ? [...new Set(t)] : xt(e.kind);
-}
-function Qe(e, t) {
-  const i = t?.position;
-  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Te(i.x), y: Te(i.y) } : e.presence_anchor ? {
-    x: Te(e.presence_anchor.x),
-    y: Te(e.presence_anchor.y)
-  } : e.points.length ? {
-    x: Te(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
-    y: Te(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
-  } : { x: 0.5, y: 0.5 };
+function wt(e) {
+  return [...ho[e]];
 }
 function go(e) {
-  const t = e?.brightness;
-  return typeof t != "number" || !Number.isFinite(t) ? 1 : br(t / 255);
+  if (e.kind === "temperature") return [];
+  const t = (e.active_states ?? []).map((i) => i.trim()).filter(Boolean);
+  return t.length ? [...new Set(t)] : wt(e.kind);
 }
-function zi(e) {
-  const t = e.intensity;
-  return typeof t != "number" || !Number.isFinite(t) ? 1 : br(t);
+function Je(e, t) {
+  const i = t?.position;
+  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Oe(i.x), y: Oe(i.y) } : e.presence_anchor ? {
+    x: Oe(e.presence_anchor.x),
+    y: Oe(e.presence_anchor.y)
+  } : e.points.length ? {
+    x: Oe(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
+    y: Oe(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
+  } : { x: 0.5, y: 0.5 };
+}
+function mo(e) {
+  const t = e?.brightness;
+  return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t / 255);
 }
 function Ti(e) {
+  const t = e.intensity;
+  return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t);
+}
+function Oi(e) {
   const t = e?.unit_of_measurement;
   return typeof t == "string" && t.trim() ? t.trim() : void 0;
 }
-function yr(e, t, i) {
-  const r = e.entity?.trim(), o = uo(e);
+function vr(e, t, i) {
+  const r = e.entity?.trim(), o = go(e);
   if (!r)
     return { index: t, reaction: e, active: !1, activeStates: o, intensity: 0, reason: "missing_entity" };
   const n = i?.(r);
-  if (!n || ho.has(n.state.trim().toLowerCase()))
+  if (!n || uo.has(n.state.trim().toLowerCase()))
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
     const d = Number(n.state);
-    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: Ti(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Ti(n.attributes), reason: "state_inactive" };
+    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: Oi(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Oi(n.attributes), reason: "state_inactive" };
   }
   const s = n.state.trim().toLowerCase(), a = o.map((d) => d.toLowerCase()).includes(s);
   let l = 0;
-  return a && (e.kind === "light" ? l = go(n.attributes) * zi(e) : l = zi(e)), {
+  return a && (e.kind === "light" ? l = mo(n.attributes) * Ti(e) : l = Ti(e)), {
     index: t,
     reaction: e,
     active: a,
@@ -645,15 +645,15 @@ function yr(e, t, i) {
     ...a ? {} : { reason: "state_inactive" }
   };
 }
-function _t(e, t) {
-  return (e.reactions ?? []).map((i, r) => yr(i, r, t));
+function At(e, t) {
+  return (e.reactions ?? []).map((i, r) => vr(i, r, t));
 }
-var mo = Object.defineProperty, fo = Object.getOwnPropertyDescriptor, Re = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? fo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var fo = Object.defineProperty, bo = Object.getOwnPropertyDescriptor, ze = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? bo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && mo(t, i, o), o;
+  return r && o && fo(t, i, o), o;
 };
-function bo(e) {
+function yo(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/"))
@@ -666,13 +666,13 @@ function bo(e) {
     }
   }
 }
-const yo = {
+const vo = {
   light: "💡",
   motion: "◉",
   media: "▶",
   opening: "↗",
   temperature: "°"
-}, vo = {
+}, xo = {
   light: "Lys",
   motion: "Bevægelse",
   media: "TV / medie",
@@ -684,7 +684,7 @@ let fe = class extends j {
     super(...arguments), this.presences = [], this.pendingLights = /* @__PURE__ */ new Set(), this.pendingRoomAction = "", this.actionError = "";
   }
   get statuses() {
-    return this.room ? _t(this.room, (e) => {
+    return this.room ? At(this.room, (e) => {
       const t = this.hass?.states[e];
       return t ? { state: t.state, attributes: t.attributes } : void 0;
     }) : [];
@@ -781,7 +781,7 @@ let fe = class extends j {
 
         ${t.length ? h`<div class="occupants" aria-label="Personer og objekter i rummet">
               ${t.map((o) => {
-      const n = bo(o.avatar);
+      const n = yo(o.avatar);
       return h`<span class="occupant">
                   ${n ? h`<img src=${n} alt="" />` : h`<span class="occupant-dot"></span>`}
                   ${o.name ?? o.id}
@@ -833,10 +833,10 @@ let fe = class extends j {
     return h`
       <article class=${`entity ${e.active ? "active" : "inactive"}`}>
         <button class="entity-main" @click=${() => this.openMoreInfo(t)}>
-          <span class=${`entity-icon ${i}`}>${yo[i]}</span>
+          <span class=${`entity-icon ${i}`}>${vo[i]}</span>
           <span class="entity-copy">
             <strong>${this.entityName(t)}</strong>
-            <small>${vo[i]} · ${this.statusText(e)}</small>
+            <small>${xo[i]} · ${this.statusText(e)}</small>
           </span>
         </button>
         ${i === "light" ? h`<button
@@ -1041,35 +1041,35 @@ fe.styles = O`
       .panel { animation: none; }
     }
   `;
-Re([
+ze([
   A({ attribute: !1 })
 ], fe.prototype, "room", 2);
-Re([
+ze([
   A({ attribute: !1 })
 ], fe.prototype, "presences", 2);
-Re([
+ze([
   A({ attribute: !1 })
 ], fe.prototype, "hass", 2);
-Re([
+ze([
   v()
 ], fe.prototype, "pendingLights", 2);
-Re([
+ze([
   v()
 ], fe.prototype, "pendingRoomAction", 2);
-Re([
+ze([
   v()
 ], fe.prototype, "actionError", 2);
-fe = Re([
+fe = ze([
   z("explorer-room-panel")
 ], fe);
 const x = 1e3;
-function jt(e, t, i) {
+function Lt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function xo(e) {
+function wo(e) {
   return `translate(${e.x} ${e.y}) scale(${e.zoom})`;
 }
-function wt(e, t = 1) {
+function $t(e, t = 1) {
   const i = Math.max(t, e.zoom);
   if (i <= t + 1e-4) return { zoom: i, x: 0, y: 0 };
   const r = x * (1 - i);
@@ -1079,49 +1079,49 @@ function wt(e, t = 1) {
     y: Math.min(0, Math.max(r, e.y))
   };
 }
-function Oi(e, t, i, r) {
+function Ii(e, t, i, r) {
   const o = t / e.zoom;
-  return wt({
+  return $t({
     zoom: t,
     x: i - (i - e.x) * o,
     y: r - (r - e.y) * o
   });
 }
-var wo = Object.defineProperty, $o = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? $o(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var $o = Object.defineProperty, ko = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ko(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && wo(t, i, o), o;
+  return r && o && $o(t, i, o), o;
 };
-const Ii = { width: 16, height: 9, status: "idle" }, ko = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, _o = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
-function Di(e) {
+const Di = { width: 16, height: 9, status: "idle" }, _o = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, Ao = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
+function ji(e) {
   try {
     return new URL(e, window.location.href).pathname.toLowerCase().endsWith(".svg");
   } catch {
     return e.split(/[?#]/, 1)[0].toLowerCase().endsWith(".svg");
   }
 }
-function ji(e) {
+function Li(e) {
   if (!e) return;
   const t = e.trim().match(/^(-?\d+(?:\.\d+)?)/);
   if (!t) return;
   const i = Number(t[1]);
   return Number.isFinite(i) && i > 0 ? i : void 0;
 }
-function Ao(e) {
+function So(e) {
   const t = e.getAttribute("viewBox")?.trim().split(/[\s,]+/).map(Number);
-  return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: ji(e.getAttribute("width")) ?? 16, height: ji(e.getAttribute("height")) ?? 9 };
+  return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: Li(e.getAttribute("width")) ?? 16, height: Li(e.getAttribute("height")) ?? 9 };
 }
-function Li(e) {
+function qi(e) {
   return e.replace(/@import[^;]+;?/gi, "").replace(/url\(([^)]*)\)/gi, (t, i) => {
     const r = i.trim().replace(/^['"]|['"]$/g, "");
     return r.startsWith("#") ? `url(${r})` : "none";
   }).replace(/javascript\s*:/gi, "").replace(/expression\s*\(/gi, "");
 }
-function So(e) {
+function Co(e) {
   const t = e.trim();
   return t === "" || t.startsWith("#") || /^data:image\/(?:png|jpe?g|gif|webp|svg\+xml);base64,/i.test(t);
 }
-function Co(e) {
+function Eo(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/")) return t;
@@ -1133,10 +1133,10 @@ function Co(e) {
     }
   }
 }
-function Eo(e) {
+function Mo(e) {
   const t = e.querySelector("parsererror"), i = e.documentElement;
   if (t || i.localName.toLowerCase() !== "svg") throw new Error("Filen indeholder ikke gyldig SVG-kode.");
-  i.querySelectorAll(_o).forEach((o) => o.remove());
+  i.querySelectorAll(Ao).forEach((o) => o.remove());
   const r = [i, ...Array.from(i.querySelectorAll("*"))];
   for (const o of r)
     for (const n of Array.from(o.attributes)) {
@@ -1145,39 +1145,39 @@ function Eo(e) {
         o.removeAttribute(n.name);
         continue;
       }
-      if ((s === "href" || s === "xlink:href") && !So(a)) {
+      if ((s === "href" || s === "xlink:href") && !Co(a)) {
         o.removeAttribute(n.name);
         continue;
       }
       if (s === "style") {
-        const l = Li(a).trim();
+        const l = qi(a).trim();
         l ? o.setAttribute(n.name, l) : o.removeAttribute(n.name);
       }
     }
   return i.querySelectorAll("style").forEach((o) => {
-    const n = Li(o.textContent ?? "").trim();
+    const n = qi(o.textContent ?? "").trim();
     n ? o.textContent = n : o.remove();
   }), i.hasAttribute("xmlns") || i.setAttribute("xmlns", "http://www.w3.org/2000/svg"), i;
 }
 let H = class extends j {
   constructor() {
-    super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Ii }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
+    super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Di }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
   }
   connectedCallback() {
     super.connectedCallback(), this.resetViewport();
   }
   updated(e) {
-    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && Di(this.image)) && this.loadFloorplan();
+    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && ji(this.image)) && this.loadFloorplan();
   }
   async loadFloorplan() {
     const e = ++this.imageRequest;
     if (this.imageSource = "", this.svgMarkup = "", this.loadError = "", !this.image) {
-      this.metadata = { ...Ii }, this.resetViewport();
+      this.metadata = { ...Di }, this.resetViewport();
       return;
     }
     this.metadata = { ...this.metadata, status: "loading" };
     try {
-      Di(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
+      ji(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
     } catch (t) {
       if (e !== this.imageRequest) return;
       this.imageSource = "", this.svgMarkup = "", this.metadata = { ...this.metadata, status: "error" }, this.loadError = t instanceof Error ? t.message : "Plantegningen kunne ikke indlæses.";
@@ -1188,7 +1188,7 @@ let H = class extends j {
     if (!t.ok) throw new Error(`SVG-filen kunne ikke hentes (${t.status}).`);
     const i = await t.text();
     if (e !== this.imageRequest) return;
-    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = Eo(r), n = Ao(o);
+    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = Mo(r), n = So(o);
     o.hasAttribute("viewBox") || o.setAttribute("viewBox", `0 0 ${n.width} ${n.height}`), o.setAttribute("x", "0"), o.setAttribute("y", "0"), o.setAttribute("width", String(x)), o.setAttribute("height", String(x)), o.setAttribute("preserveAspectRatio", this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"), o.setAttribute("class", "inline-floorplan");
     const s = new XMLSerializer().serializeToString(o);
     e === this.imageRequest && (this.svgMarkup = s, this.metadata = { width: n.width, height: n.height, status: "loaded" }, this.resetViewport());
@@ -1203,7 +1203,7 @@ let H = class extends j {
     });
   }
   resetViewport() {
-    this.viewport = { zoom: jt(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
+    this.viewport = { zoom: Lt(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
   }
   toViewBoxPoint(e) {
     const t = this.renderRoot.querySelector("svg.floorplan");
@@ -1213,8 +1213,8 @@ let H = class extends j {
   }
   handleWheel(e) {
     e.preventDefault();
-    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = jt(this.viewport.zoom * i, this.minZoom, this.maxZoom);
-    this.viewport = wt(Oi(this.viewport, r, t.x, t.y), this.minZoom);
+    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = Lt(this.viewport.zoom * i, this.minZoom, this.maxZoom);
+    this.viewport = $t(Ii(this.viewport, r, t.x, t.y), this.minZoom);
   }
   handlePointerDown(e) {
     this.activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }), e.currentTarget.setPointerCapture(e.pointerId);
@@ -1226,12 +1226,12 @@ let H = class extends j {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, d = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, c = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = jt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (d.x - l.x) / r.width * x, g = (d.y - l.y) / r.height * x, b = Oi(this.viewport, p, c.x, c.y);
-        this.viewport = wt({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, d = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, c = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Lt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (d.x - l.x) / r.width * x, g = (d.y - l.y) / r.height * x, b = Ii(this.viewport, p, c.x, c.y);
+        this.viewport = $t({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
       const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
-      this.viewport = wt({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
+      this.viewport = $t({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
     }
     this.activePointers.set(e.pointerId, o);
   }
@@ -1253,15 +1253,15 @@ let H = class extends j {
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? ko[i], a = Co(e.avatar), l = e.color ?? "#03a9f4", d = r ? 31 : 25, c = d * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? _o[i], a = Eo(e.avatar), l = e.color ?? "#03a9f4", d = r ? 31 : 25, c = d * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
       return P`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? P`<defs><clipPath id=${p}><circle r=${d - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${d} fill=${l}></circle><image href=${a} x=${-d + 3} y=${-d + 3} width=${c - 6} height=${c - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${d} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : P`<circle class="presence-marker" r=${d} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
-    const e = xo(this.viewport);
+    const e = wo(this.viewport);
     return h`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${x} ${x}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
       this.selectedRoom = void 0, this.selectedPresence = void 0;
-    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? P`<g class="floorplan-source inline-source">${co(this.svgMarkup)}</g>` : this.imageSource ? P`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
+    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? P`<g class="floorplan-source inline-source">${po(this.svgMarkup)}</g>` : this.imageSource ? P`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
       t.stopPropagation(), this.resetViewport();
     }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
@@ -1326,43 +1326,43 @@ function ke(e, t) {
       ];
   }
 }
-function rt(e, t) {
+function ot(e, t) {
   return (e.rooms ?? []).find((i) => i.id === t)?.name ?? t;
 }
-function Mo(e, t) {
+function Po(e, t) {
   return (e.route_nodes ?? []).find((i) => i.id === t)?.name ?? t;
 }
 function me(e) {
   return `${e.kind}:${e.id}`;
 }
-function At(e, t) {
+function St(e, t) {
   return t.kind === "room" ? ke(e, t.id) : (e.route_nodes ?? []).find((i) => i.id === t.id)?.point;
 }
-function Po(e, t) {
-  const i = At(e, t);
+function No(e, t) {
+  const i = St(e, t);
   if (i)
     return t.kind === "room" ? {
       kind: "room",
       id: t.id,
       key: me(t),
-      label: rt(e, t.id),
+      label: ot(e, t.id),
       point: i
     } : {
       kind: "node",
       id: t.id,
       key: me(t),
-      label: Mo(e, t.id),
+      label: Po(e, t.id),
       point: i
     };
 }
-function vr(e) {
+function xr(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : ["on"];
 }
-function No(e) {
-  return vr(e.condition?.allowed_states);
+function Ro(e) {
+  return xr(e.condition?.allowed_states);
 }
-function He(e, t) {
+function Fe(e, t) {
   if (!e.state_binding)
     return {
       nodeId: e.id,
@@ -1370,7 +1370,7 @@ function He(e, t) {
       active: !0,
       allowedStates: []
     };
-  const i = e.state_binding.entity?.trim(), r = vr(e.state_binding.open_states);
+  const i = e.state_binding.entity?.trim(), r = xr(e.state_binding.open_states);
   if (!i)
     return {
       nodeId: e.id,
@@ -1400,7 +1400,7 @@ function He(e, t) {
     ...n ? {} : { reason: "state_blocked" }
   };
 }
-function Ro(e, t, i) {
+function zo(e, t, i) {
   if (!e.condition)
     return {
       index: t,
@@ -1409,7 +1409,7 @@ function Ro(e, t, i) {
       active: !0,
       allowedStates: []
     };
-  const r = e.condition.entity?.trim(), o = No(e);
+  const r = e.condition.entity?.trim(), o = Ro(e);
   if (!r)
     return {
       index: t,
@@ -1445,10 +1445,10 @@ function Ro(e, t, i) {
     ...s ? {} : { reason: "state_blocked" }
   };
 }
-function ct(e, t) {
+function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = Ro(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => He(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    const n = zo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Fe(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
     return d ? {
       ...n,
       conditional: p,
@@ -1468,10 +1468,10 @@ function ct(e, t) {
     };
   });
 }
-function xr(e) {
+function wr(e) {
   return e.path ? e.path : (e.via ?? []).map((t) => ({ point: t }));
 }
-function zo(e, t, i) {
+function To(e, t, i) {
   if (t.node_id) {
     const r = (e.route_nodes ?? []).find((o) => o.id === t.node_id);
     return r ? {
@@ -1490,7 +1490,7 @@ function zo(e, t, i) {
       point: t.point
     };
 }
-function ui(e) {
+function gi(e) {
   let t = 0;
   for (let i = 1; i < e.length; i += 1)
     t += Math.hypot(
@@ -1499,15 +1499,15 @@ function ui(e) {
     );
   return t;
 }
-function qi(e, t, i, r, o, n) {
+function Bi(e, t, i, r, o, n) {
   const s = ke(e, i), a = ke(e, r);
   if (!s || !a) return;
-  const l = xr(t), c = (o ? [...l].reverse() : l).map((u, g) => zo(e, u, g)).filter((u) => !!u), p = [
+  const l = wr(t), c = (o ? [...l].reverse() : l).map((u, g) => To(e, u, g)).filter((u) => !!u), p = [
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
-      label: rt(e, i),
+      label: ot(e, i),
       point: s
     },
     ...c,
@@ -1515,26 +1515,26 @@ function qi(e, t, i, r, o, n) {
       kind: "room",
       id: r,
       key: `room:${r}`,
-      label: rt(e, r),
+      label: ot(e, r),
       point: a
     }
   ];
   return {
     source: "manual",
     hops: p,
-    distance: ui(p),
+    distance: gi(p),
     manualRoute: t,
     reversedManualRoute: o,
     blockedEdges: n
   };
 }
-function To(e, t) {
+function Oo(e, t) {
   const i = /* @__PURE__ */ new Map(), r = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map(), n = (a) => {
     const l = me(a);
     o.set(l, a);
     const d = r.get(l);
     if (d) return d;
-    const c = At(e, a);
+    const c = St(e, a);
     return c && r.set(l, c), c;
   }, s = (a, l, d) => {
     const c = i.get(a) ?? [];
@@ -1550,9 +1550,9 @@ function To(e, t) {
     s(p, u, g), s(u, p, g);
   }), { adjacency: i, positions: r, endpoints: o };
 }
-function Oo(e, t, i, r, o) {
+function Io(e, t, i, r, o) {
   if (!(e.route_graph_edges ?? []).length) return;
-  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = To(e, r);
+  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Oo(e, r);
   if (!a.has(n) || !a.has(s)) return;
   const d = /* @__PURE__ */ new Map(), c = /* @__PURE__ */ new Map(), p = new Set(a.keys());
   for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => d.set(m, Number.POSITIVE_INFINITY)), d.set(n, 0); p.size; ) {
@@ -1577,26 +1577,26 @@ function Oo(e, t, i, r, o) {
     u.push(m), g = m;
   }
   u.reverse();
-  const b = u.map((m) => l.get(m)).map((m) => m ? Po(e, m) : void 0).filter((m) => !!m);
+  const b = u.map((m) => l.get(m)).map((m) => m ? No(e, m) : void 0).filter((m) => !!m);
   if (!(b.length < 2))
     return {
       source: "graph",
       hops: b,
-      distance: ui(b),
+      distance: gi(b),
       blockedEdges: o
     };
 }
-function gi(e, t, i, r) {
+function mi(e, t, i, r) {
   if (!t || !i || t === i) return;
-  const o = ct(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
+  const o = pt(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
     (u) => u.from === t && u.to === i
   );
-  if (s) return qi(e, s, t, i, !1, n);
+  if (s) return Bi(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
     (u) => u.from === i && u.to === t
   );
-  if (a) return qi(e, a, t, i, !0, n);
-  const l = Oo(e, t, i, o, n);
+  if (a) return Bi(e, a, t, i, !0, n);
+  const l = Io(e, t, i, o, n);
   if (l) return l;
   const d = ke(e, t), c = ke(e, i);
   if (!d || !c) return;
@@ -1605,28 +1605,28 @@ function gi(e, t, i, r) {
       kind: "room",
       id: t,
       key: `room:${t}`,
-      label: rt(e, t),
+      label: ot(e, t),
       point: d
     },
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
-      label: rt(e, i),
+      label: ot(e, i),
       point: c
     }
   ];
   return {
     source: "fallback",
     hops: p,
-    distance: ui(p),
+    distance: gi(p),
     blockedEdges: n
   };
 }
-function Io(e) {
+function Do(e) {
   return [me(e.from), me(e.to)].sort().join("|");
 }
-function Bi(e, t) {
+function Hi(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
   const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), d = (k) => {
@@ -1638,9 +1638,9 @@ function Bi(e, t) {
     T.add(k), l.set(E, T);
   };
   i.forEach((k) => {
-    const E = me(k.from), M = me(k.to), T = Io(k);
+    const E = me(k.from), M = me(k.to), T = Do(k);
     E === M && (n += 1), s.has(T) && (o += 1), s.add(T);
-    const Y = At(e, k.from), W = At(e, k.to);
+    const Y = St(e, k.from), W = St(e, k.to);
     if (!Y || !W || E === M) {
       r += 1;
       return;
@@ -1663,11 +1663,11 @@ function Bi(e, t) {
   }
   const m = [], y = new Set((e.route_nodes ?? []).map((k) => k.id));
   (e.routes ?? []).forEach((k) => {
-    xr(k).forEach((E) => {
+    wr(k).forEach((E) => {
       E.node_id && !y.has(E.node_id) && m.push({ from: k.from, to: k.to, nodeId: E.node_id });
     });
   });
-  const _ = ct(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => He(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), C = /* @__PURE__ */ new Set();
+  const _ = pt(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => Fe(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), C = /* @__PURE__ */ new Set();
   return _.forEach((k) => {
     k.conditionSource === "edge" && (k.reason === "missing_entity" || k.reason === "entity_unavailable") && C.add(k.entity ?? "(mangler entity)");
   }), w.forEach((k) => {
@@ -1687,13 +1687,13 @@ function Bi(e, t) {
     unresolvedConditionEntities: [...C]
   };
 }
-var Do = Object.defineProperty, jo = Object.getOwnPropertyDescriptor, Ot = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? jo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var jo = Object.defineProperty, Lo = Object.getOwnPropertyDescriptor, It = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Lo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Do(t, i, o), o;
+  return r && o && jo(t, i, o), o;
 };
-const Lt = 900, Hi = 3600, Fi = 58, q = "http://www.w3.org/2000/svg";
-let Fe = class extends H {
+const qt = 900, Fi = 3600, Vi = 58, q = "http://www.w3.org/2000/svg";
+let Ve = class extends H {
   constructor() {
     super(...arguments), this.routes = [], this.routeNodes = [], this.routeGraphEdges = [], this.previousPresencePositions = /* @__PURE__ */ new Map(), this.previousPresenceRooms = /* @__PURE__ */ new Map(), this.activeAnimations = /* @__PURE__ */ new Map();
   }
@@ -1713,9 +1713,9 @@ let Fe = class extends H {
         const u = this.resolveMovementPath(d, l, c, p);
         this.createFootsteps(u);
         const g = document.createElementNS(q, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Lt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
+        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${qt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
           this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
-        }, Lt + 80);
+        }, qt + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
     });
@@ -1764,7 +1764,7 @@ let Fe = class extends H {
   }
   doorVisualStatus(e, t) {
     if (e.state_binding)
-      return He(
+      return Fe(
         e,
         (a) => this.hass?.states[a]?.state
       ).active ? "active" : "blocked";
@@ -1789,7 +1789,7 @@ let Fe = class extends H {
     e.querySelector(":scope > g.route-status-scene")?.remove();
     const t = this.routeNodes.filter((s) => s.kind === "door");
     if (!this.routeGraphEdges.length && !t.length) return;
-    const i = ct(
+    const i = pt(
       this.routeConfig(),
       (s) => this.hass?.states[s]?.state
     ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(q, "g");
@@ -1825,7 +1825,7 @@ let Fe = class extends H {
         const w = document.createElementNS(q, "text");
         w.setAttribute("y", "39"), w.setAttribute("text-anchor", "middle"), w.setAttribute("fill", "var(--primary-text-color, #1f2937)"), w.setAttribute("font-size", "20"), w.setAttribute("font-weight", "700"), w.setAttribute("font-family", "system-ui, sans-serif"), w.setAttribute("paint-order", "stroke"), w.setAttribute("stroke", "var(--card-background-color, #ffffff)"), w.setAttribute("stroke-width", "5"), w.setAttribute("stroke-linejoin", "round"), w.textContent = s.name, p.appendChild(w);
       }
-      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", _ = s.state_binding ? He(s, (w) => this.hass?.states[w]?.state) : void 0, $ = _?.entity ? ` · ${_.entity}: ${_.currentState ?? "ukendt"} · åben: ${_.allowedStates.join(", ")}` : "";
+      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", _ = s.state_binding ? Fe(s, (w) => this.hass?.states[w]?.state) : void 0, $ = _?.entity ? ` · ${_.entity}: ${_.currentState ?? "ukendt"} · åben: ${_.allowedStates.join(", ")}` : "";
       this.appendSvgTitle(p, `${s.name ?? s.id} · ${y}${$}`), o.appendChild(p);
     });
     const n = e.querySelector(":scope > g.presences-scene");
@@ -1833,7 +1833,7 @@ let Fe = class extends H {
   }
   resolveMovementPath(e, t, i, r) {
     if (!i || !r || i === r) return [e, t];
-    const o = gi(
+    const o = mi(
       this.routeConfig(),
       i,
       r,
@@ -1881,8 +1881,8 @@ let Fe = class extends H {
         length: Math.hypot(n.x - a.x, n.y - a.y)
       };
     }), r = i.reduce((n, s) => n + s.length, 0);
-    if (r < Fi) return;
-    const o = Math.min(20, Math.max(3, Math.floor(r / Fi)));
+    if (r < Vi) return;
+    const o = Math.min(20, Math.max(3, Math.floor(r / Vi)));
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
       let l = 0, d = i[i.length - 1];
@@ -1893,38 +1893,38 @@ let Fe = class extends H {
         }
         l += T.length;
       }
-      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, b = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, y = 9 * g, _ = d.start.x + p * c + b * y, $ = d.start.y + u * c + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Lt), C = document.createElementNS(q, "g");
+      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, b = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, y = 9 * g, _ = d.start.x + p * c + b * y, $ = d.start.y + u * c + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * qt), C = document.createElementNS(q, "g");
       C.setAttribute("transform", `translate(${_} ${$}) rotate(${w + g * 8})`), C.setAttribute("opacity", "0");
       const k = document.createElementNS(q, "ellipse");
       k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
       const E = document.createElementNS(q, "ellipse");
       E.setAttribute("cx", "0"), E.setAttribute("cy", "9"), E.setAttribute("rx", "4.5"), E.setAttribute("ry", "5.5"), E.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
       const M = document.createElementNS(q, "animate");
-      M.setAttribute("attributeName", "opacity"), M.setAttribute("values", "0;0.72;0.56;0"), M.setAttribute("keyTimes", "0;0.08;0.58;1"), M.setAttribute("begin", "indefinite"), M.setAttribute("dur", `${Hi}ms`), M.setAttribute("fill", "freeze"), C.append(k, E, M), t.appendChild(C), window.setTimeout(() => {
+      M.setAttribute("attributeName", "opacity"), M.setAttribute("values", "0;0.72;0.56;0"), M.setAttribute("keyTimes", "0;0.08;0.58;1"), M.setAttribute("begin", "indefinite"), M.setAttribute("dur", `${Fi}ms`), M.setAttribute("fill", "freeze"), C.append(k, E, M), t.appendChild(C), window.setTimeout(() => {
         C.isConnected && M.beginElement();
-      }, S), window.setTimeout(() => C.remove(), S + Hi + 120);
+      }, S), window.setTimeout(() => C.remove(), S + Fi + 120);
     }
   }
 };
-Ot([
+It([
   A({ attribute: !1 })
-], Fe.prototype, "routes", 2);
-Ot([
+], Ve.prototype, "routes", 2);
+It([
   A({ attribute: !1 })
-], Fe.prototype, "routeNodes", 2);
-Ot([
+], Ve.prototype, "routeNodes", 2);
+It([
   A({ attribute: !1 })
-], Fe.prototype, "routeGraphEdges", 2);
-Fe = Ot([
+], Ve.prototype, "routeGraphEdges", 2);
+Ve = It([
   z("explorer-animated-canvas")
-], Fe);
-var Lo = Object.getOwnPropertyDescriptor, qo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Lo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Ve);
+var qo = Object.getOwnPropertyDescriptor, Bo = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? qo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
 const D = "http://www.w3.org/2000/svg";
-let St = class extends Fe {
+let Ct = class extends Ve {
   updated(e) {
     super.updated(e), this.syncRoomReactionOverlay();
   }
@@ -2029,7 +2029,7 @@ let St = class extends Fe {
     s.setAttribute("text-anchor", "middle"), s.setAttribute("dominant-baseline", "central"), s.setAttribute("font-size", "14"), s.setAttribute("font-weight", "800"), s.setAttribute("fill", i), s.textContent = r, e.appendChild(s);
   }
   appendReactionPoint(e, t, i, r) {
-    const o = Qe(t, i.reaction), n = document.createElementNS(D, "g");
+    const o = Je(t, i.reaction), n = document.createElementNS(D, "g");
     n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * x} ${o.y * x})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
     const s = i.reaction.kind === "temperature" ? this.formatTemperature(i) : i.currentState ?? "ukendt";
     this.appendTitle(n, `${t.name ?? t.id} · ${i.reaction.entity} · ${s}`), e.appendChild(n);
@@ -2038,7 +2038,7 @@ let St = class extends Fe {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e) return;
     e.querySelector(":scope > g.room-reactions-scene")?.remove();
-    const t = this.rooms.flatMap((a) => _t(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
+    const t = this.rooms.flatMap((a) => At(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
     if (!t.length) return;
     const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(D, "g");
     r.setAttribute("class", "room-reactions-scene"), r.setAttribute("aria-label", "Home Assistant entity-punkter"), r.setAttribute("pointer-events", "none"), t.forEach(({ room: a, status: l }) => this.appendReactionPoint(r, a, l, i));
@@ -2046,16 +2046,16 @@ let St = class extends Fe {
     e.insertBefore(r, o ?? n ?? s ?? null);
   }
 };
-St = qo([
+Ct = Bo([
   z("explorer-living-canvas")
-], St);
-var Bo = Object.getOwnPropertyDescriptor, Ho = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Bo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Ct);
+var Ho = Object.getOwnPropertyDescriptor, Fo = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ho(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const R = "http://www.w3.org/2000/svg", qt = 3e4;
-let ot = class extends St {
+const R = "http://www.w3.org/2000/svg", Bt = 3e4;
+let nt = class extends Ct {
   constructor() {
     super(...arguments), this.lastOccupiedAt = /* @__PURE__ */ new Map(), this.overcastMaskId = `explorer-overcast-mask-${Math.random().toString(36).slice(2, 10)}`, this.overcastFilterId = `explorer-overcast-soft-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -2092,7 +2092,7 @@ let ot = class extends St {
       const r = this.roomForPresence(i);
       r && (t.set(r.id, (t.get(r.id) ?? 0) + 1), this.lastOccupiedAt.set(r.id, e));
     }), this.rooms.map((i) => {
-      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < qt, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / qt) : 0;
+      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < Bt, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / Bt) : 0;
       return { room: i, active: o, afterglow: s, intensity: a };
     }).filter((i) => i.active || i.afterglow);
   }
@@ -2101,7 +2101,7 @@ let ot = class extends St {
   }
   scheduleAfterglowRefresh(e, t) {
     this.afterglowTimer !== void 0 && window.clearTimeout(this.afterglowTimer);
-    const i = e.filter((r) => r.afterglow).map((r) => qt - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
+    const i = e.filter((r) => r.afterglow).map((r) => Bt - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
     i.length && (this.afterglowTimer = window.setTimeout(() => {
       this.afterglowTimer = void 0, this.syncPresenceRoomActivity();
     }, Math.max(50, Math.min(...i) + 30)));
@@ -2149,7 +2149,7 @@ let ot = class extends St {
   roomTemperatures() {
     return this.rooms.flatMap((e) => {
       if (e.points.length < 3) return [];
-      const t = _t(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
+      const t = At(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
       if (!t.length) return [];
       const i = t.reduce((r, o) => r + o, 0) / t.length;
       return [{ room: e, celsius: i }];
@@ -2172,7 +2172,7 @@ let ot = class extends St {
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
   }
   appendFireplaceAtmosphere(e, t, i, r, o) {
-    const n = Qe(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(R, "g");
+    const n = Je(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(R, "g");
     d.setAttribute("class", "fireplace-atmosphere"), d.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), d.setAttribute("data-room-id", t.id);
     const c = document.createElementNS(R, "circle");
     c.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), c.setAttribute("r", String(l * 1.18)), c.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), c.setAttribute("fill-opacity", String(0.045 + s * 0.055)), d.appendChild(c);
@@ -2209,7 +2209,7 @@ let ot = class extends St {
     if (!e) return;
     e.querySelector(":scope > g.fireplace-atmosphere-scene")?.remove();
     const t = this.rooms.flatMap(
-      (l) => _t(l, (d) => this.atmosphereEntityState(d)).filter((d) => d.reaction.kind === "fireplace" && d.active).map((d) => ({ room: l, status: d }))
+      (l) => At(l, (d) => this.atmosphereEntityState(d)).filter((d) => d.reaction.kind === "fireplace" && d.active).map((d) => ({ room: l, status: d }))
     );
     if (!t.length) return;
     const i = document.createElementNS(R, "g");
@@ -2298,8 +2298,8 @@ let ot = class extends St {
     t.insertBefore(o, s ?? null);
   }
 };
-ot.styles = O`
-    ${St.styles}
+nt.styles = O`
+    ${Ct.styles}
 
     :host {
       --explorer-presence-room-color: var(--primary-color, #03a9f4);
@@ -2434,16 +2434,16 @@ ot.styles = O`
       }
     }
   `;
-ot = Ho([
+nt = Fo([
   z("explorer-presence-activity-canvas")
-], ot);
-var Fo = Object.defineProperty, Vo = Object.getOwnPropertyDescriptor, pt = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Vo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], nt);
+var Vo = Object.defineProperty, Ko = Object.getOwnPropertyDescriptor, ht = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ko(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Fo(t, i, o), o;
+  return r && o && Vo(t, i, o), o;
 };
-const Ko = "http://www.w3.org/2000/svg";
-let be = class extends ot {
+const Zo = "http://www.w3.org/2000/svg";
+let be = class extends nt {
   constructor() {
     super(...arguments), this.theme = "classic", this.compassRotation = -7, this.compassSize = 1, this.compassVisible = !0, this.artifactId = `explorer-antique-${Math.random().toString(36).slice(2, 10)}`, this.hasRevealedEnchanted = !1;
   }
@@ -2451,7 +2451,7 @@ let be = class extends ot {
     super.updated(e), this.syncThemeArtifacts();
   }
   createSvg(e) {
-    return document.createElementNS(Ko, e);
+    return document.createElementNS(Zo, e);
   }
   setAttributes(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -2522,29 +2522,29 @@ let be = class extends ot {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-be.styles = O`${ot.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
-pt([
+be.styles = O`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+ht([
   A({ attribute: "map-theme", reflect: !0 })
 ], be.prototype, "theme", 2);
-pt([
+ht([
   A({ type: Number, attribute: "compass-rotation" })
 ], be.prototype, "compassRotation", 2);
-pt([
+ht([
   A({ type: Number, attribute: "compass-size" })
 ], be.prototype, "compassSize", 2);
-pt([
+ht([
   A({ type: Boolean, attribute: "compass-visible" })
 ], be.prototype, "compassVisible", 2);
-be = pt([
+be = ht([
   z("explorer-themed-canvas")
 ], be);
-const Zo = ["on"], Go = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function Uo(e) {
+const Go = ["on"], Uo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function Wo(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
-  return t.length ? [...new Set(t)] : [...Zo];
+  return t.length ? [...new Set(t)] : [...Go];
 }
-function wr(e, t) {
-  const i = e.visible !== !1, r = e.state_binding, o = Uo(r?.active_states);
+function $r(e, t) {
+  const i = e.visible !== !1, r = e.state_binding, o = Wo(r?.active_states);
   if (!i)
     return {
       zone: e,
@@ -2574,7 +2574,7 @@ function wr(e, t) {
       activeStates: o,
       reason: "missing_entity"
     };
-  if (Go.has(s))
+  if (Uo.has(s))
     return {
       zone: e,
       visible: !0,
@@ -2597,28 +2597,28 @@ function wr(e, t) {
     ...a ? {} : { reason: "state_blocked" }
   };
 }
-function Wo(e, t) {
-  return e.map((i) => wr(i, t));
+function Xo(e, t) {
+  return e.map((i) => $r(i, t));
 }
-var Xo = Object.defineProperty, Yo = Object.getOwnPropertyDescriptor, $r = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Yo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Yo = Object.defineProperty, Qo = Object.getOwnPropertyDescriptor, kr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Qo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Xo(t, i, o), o;
+  return r && o && Yo(t, i, o), o;
 };
-const he = "http://www.w3.org/2000/svg", Qo = {
+const he = "http://www.w3.org/2000/svg", Jo = {
   info: "var(--explorer-zone-info, #2d8f74)",
   warning: "var(--explorer-zone-warning, #f59e0b)",
   danger: "var(--explorer-zone-danger, #d64545)",
   cleaning: "var(--explorer-zone-cleaning, #3b82c4)",
   restricted: "var(--explorer-zone-restricted, #8b5a9e)"
-}, Jo = {
+}, en = {
   info: "i",
   warning: "!",
   danger: "!",
   cleaning: "✦",
   restricted: "×"
 };
-let Ve = class extends be {
+let Ke = class extends be {
   constructor() {
     super(...arguments), this.zones = [];
   }
@@ -2635,7 +2635,7 @@ let Ve = class extends be {
     } : { x: x / 2, y: x / 2 };
   }
   zoneColor(e) {
-    return e.color?.trim() || Qo[e.kind ?? "info"];
+    return e.color?.trim() || Jo[e.kind ?? "info"];
   }
   appendZoneTitle(e, t) {
     const i = document.createElementNS(he, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
@@ -2658,7 +2658,7 @@ let Ve = class extends be {
     const c = document.createElementNS(he, "circle");
     c.setAttribute("class", "zone-marker-bg"), c.setAttribute("r", "17"), c.setAttribute("fill", "var(--card-background-color, #ffffff)"), c.setAttribute("fill-opacity", ".90"), c.setAttribute("stroke", n), c.setAttribute("stroke-width", "3"), c.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(c);
     const p = document.createElementNS(he, "text");
-    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = Jo[o], d.appendChild(p), s.appendChild(d), r.name) {
+    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = en[o], d.appendChild(p), s.appendChild(d), r.name) {
       const u = document.createElementNS(he, "text");
       u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
     }
@@ -2667,7 +2667,7 @@ let Ve = class extends be {
   syncZonesOverlay() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
-    const i = Wo(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
+    const i = Xo(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
     if (!i.length) return;
     const r = document.createElementNS(he, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
@@ -2677,7 +2677,7 @@ let Ve = class extends be {
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-Ve.styles = O`
+Ke.styles = O`
     ${be.styles}
 
     :host {
@@ -2769,28 +2769,28 @@ Ve.styles = O`
       }
     }
   `;
-$r([
+kr([
   A({ attribute: !1 })
-], Ve.prototype, "zones", 2);
-Ve = $r([
+], Ke.prototype, "zones", 2);
+Ke = kr([
   z("explorer-zones-canvas")
-], Ve);
-var en = Object.defineProperty, tn = Object.getOwnPropertyDescriptor, mi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? tn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Ke);
+var tn = Object.defineProperty, rn = Object.getOwnPropertyDescriptor, fi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? rn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && en(t, i, o), o;
+  return r && o && tn(t, i, o), o;
 };
-const rn = "http://www.w3.org/2000/svg", on = 4200, nn = 900, sn = 54, an = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Vi = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Bt = [58, 64, 54, 61, 56, 66], ln = [8, 6, 10, 7, 9, 5], dn = [7, 4, 10, 6, 8, 3];
-function Ki(e) {
+const on = "http://www.w3.org/2000/svg", nn = 4200, sn = 900, an = 54, ln = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ki = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Ht = [58, 64, 54, 61, 56, 66], dn = [8, 6, 10, 7, 9, 5], cn = [7, 4, 10, 6, 8, 3];
+function Zi(e) {
   let t = 2166136261;
   for (let i = 0; i < e.length; i += 1)
     t ^= e.charCodeAt(i), t = Math.imul(t, 16777619);
   return t >>> 0;
 }
-function ut(e, t, i) {
+function gt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-let Pe = class extends Ve {
+let Ne = class extends Ke {
   constructor() {
     super(...arguments), this.movementHistory = {}, this.petRobotTrails = {}, this.polishPreviousPositions = /* @__PURE__ */ new Map(), this.polishPreviousRooms = /* @__PURE__ */ new Map(), this.movementHistorySamples = /* @__PURE__ */ new Map();
   }
@@ -2803,7 +2803,7 @@ let Pe = class extends Ve {
   polishPresenceColor(e) {
     const t = e.color?.trim();
     if (t) return t;
-    const i = e.type ?? "person", r = Vi[i][Ki(e.id) % Vi[i].length];
+    const i = e.type ?? "person", r = Ki[i][Zi(e.id) % Ki[i].length];
     return this.theme === "enchanted_antique" ? `hsl(${r} 34% 38%)` : `hsl(${r} 62% 47%)`;
   }
   polishTrailColor(e) {
@@ -2811,13 +2811,13 @@ let Pe = class extends Ve {
   }
   polishTrailDuration(e) {
     const t = e.trail_duration;
-    return Number.isFinite(t) ? Math.round(ut(t, 1, 60) * 1e3) : on;
+    return Number.isFinite(t) ? Math.round(gt(t, 1, 60) * 1e3) : nn;
   }
   polishBasePosition(e) {
     return { x: (e.x ?? 0.5) * x, y: (e.y ?? 0.5) * x };
   }
   polishPersonTrailVariant(e) {
-    return Ki(e.id) % Bt.length;
+    return Zi(e.id) % Ht.length;
   }
   polishOffsets(e) {
     const t = /* @__PURE__ */ new Map();
@@ -2833,20 +2833,20 @@ let Pe = class extends Ve {
           const g = r.get(u);
           if (!g) continue;
           const b = this.polishBasePosition(g);
-          Math.hypot(p.x - b.x, p.y - b.y) <= sn && (i.delete(u), s.push(g), a.push(g));
+          Math.hypot(p.x - b.x, p.y - b.y) <= an && (i.delete(u), s.push(g), a.push(g));
         }
       }
       if (s.length < 2) continue;
       const l = [...s].sort((c, p) => c.id.localeCompare(p.id)), d = Math.min(52, 24 + l.length * 4);
       l.forEach((c, p) => {
-        const u = this.polishBasePosition(c), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = ut(u.x + Math.cos(g) * d, 38, x - 38), m = ut(u.y + Math.sin(g) * d, 38, x - 64);
+        const u = this.polishBasePosition(c), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * d, 38, x - 38), m = gt(u.y + Math.sin(g) * d, 38, x - 64);
         t.set(c.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
       });
     }
     return t;
   }
   polishCreateSvg(e) {
-    return document.createElementNS(rn, e);
+    return document.createElementNS(on, e);
   }
   polishSetAttributes(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -2892,7 +2892,7 @@ let Pe = class extends Ve {
       let d = n.querySelector(":scope > g.presence-visual-offset");
       d || (d = this.polishCreateSvg("g"), d.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => d?.appendChild(g)), n.insertBefore(d, n.firstChild)), d.setAttribute("transform", `translate(${l.x} ${l.y})`), d.querySelector(".presence-marker")?.setAttribute("fill", a), d.querySelector(".presence-avatar-background")?.setAttribute("fill", a), d.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(d, r, a), n.querySelector(":scope > title")?.remove();
       const c = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      c.textContent = `${r.name ?? r.id} · ${an[s]}${u}${p}`, n.appendChild(c);
+      c.textContent = `${r.name ?? r.id} · ${ln[s]}${u}${p}`, n.appendChild(c);
     });
   }
   polishRouteConfig() {
@@ -2900,7 +2900,7 @@ let Pe = class extends Ve {
   }
   polishMovementPath(e, t, i, r) {
     if (!i || !r || i === r) return [e, t];
-    const o = gi(this.polishRouteConfig(), i, r, (n) => this.hass?.states[n]?.state);
+    const o = mi(this.polishRouteConfig(), i, r, (n) => this.hass?.states[n]?.state);
     return o ? [e, ...o.hops.slice(1, -1).map((n) => ({ x: n.point[0] * x, y: n.point[1] * x })), t] : [e, t];
   }
   polishEnsureTrailLayer() {
@@ -2910,7 +2910,7 @@ let Pe = class extends Ve {
     return t || (t = this.polishCreateSvg("g"), t.setAttribute("class", "presence-trails-scene"), t.setAttribute("aria-label", "Person- og objektspor"), t.setAttribute("pointer-events", "none"), e.insertBefore(t, e.querySelector(":scope > g.presences-scene") ?? null), t);
   }
   polishTrailSpacing(e, t = 0) {
-    return e === "person" ? Bt[t] ?? Bt[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
+    return e === "person" ? Ht[t] ?? Ht[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
   }
   polishAppendPersonTrailShape(e, t, i) {
     const r = (n, s, a, l) => {
@@ -2995,7 +2995,7 @@ let Pe = class extends Ve {
         }
         b += Z.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? ln[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? dn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, W = Math.round(u * nn), N = this.polishCreateSvg("g");
+      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? dn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? cn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, W = Math.round(u * sn), N = this.polishCreateSvg("g");
       N.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), N.setAttribute("data-presence-id", t.id), r === "person" && N.setAttribute("data-trail-style", String(o + 1)), N.setAttribute("transform", `translate(${M} ${T}) rotate(${Y + (S ? w * C : 0)})`), N.setAttribute("opacity", "0"), this.polishAppendTrailShape(N, r, n, o);
       const I = this.polishCreateSvg("animate");
       this.polishSetAttributes(I, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), N.appendChild(I), i.appendChild(N), window.setTimeout(() => {
@@ -3016,7 +3016,7 @@ let Pe = class extends Ve {
   }
   polishHistoryDurationMs(e) {
     const t = e?.type ?? "person", i = t === "person" ? this.movementHistory.duration_minutes ?? 3 : this.petRobotTrails.duration_minutes ?? 3;
-    return ut(i, 1, 5) * 6e4;
+    return gt(i, 1, 5) * 6e4;
   }
   polishTrackedHistoryPresences() {
     return this.presences.filter((e) => {
@@ -3085,16 +3085,16 @@ let Pe = class extends Ve {
             if (this.petRobotTrails.show_robot_route === !1) continue;
             const I = this.polishCreateSvg("line");
             if (this.polishSetAttributes(I, { x1: String(S.x), y1: String(S.y), x2: String(C.x), y2: String(C.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String($), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), I.setAttribute("class", "robot-history-route"), o.appendChild(I), this.petRobotTrails.robot_direction_arrows !== !1 && M > 45) {
-              const Z = this.polishCreateSvg("path"), ve = (S.x + C.x) / 2, ze = (S.y + C.y) / 2;
-              this.polishSetAttributes(Z, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, $ + 0.12)), transform: `translate(${ve} ${ze}) rotate(${T})`, "data-presence-id": a }), Z.setAttribute("class", "robot-history-arrow"), o.appendChild(Z);
+              const Z = this.polishCreateSvg("path"), ve = (S.x + C.x) / 2, Te = (S.y + C.y) / 2;
+              this.polishSetAttributes(Z, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, $ + 0.12)), transform: `translate(${ve} ${Te}) rotate(${T})`, "data-presence-id": a }), Z.setAttribute("class", "robot-history-arrow"), o.appendChild(Z);
             }
             continue;
           }
           if (c === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
           const Y = c === "pet" ? 52 : 70, W = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
           for (let I = 1; I <= W; I += 1) {
-            const Z = I / (W + 1), ve = I % 2 === 0 ? -1 : 1, ze = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, We = c === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
-            X.setAttribute("class", `movement-history-mark trail-${c}${c === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + ze * We * ve} ${S.y + E * Z + Ae * We * ve}) rotate(${N + ve * 4}) scale(${c === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, c, u, g), o.appendChild(X);
+            const Z = I / (W + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = c === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
+            X.setAttribute("class", `movement-history-mark trail-${c}${c === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + Te * Xe * ve} ${S.y + E * Z + Ae * Xe * ve}) rotate(${N + ve * 4}) scale(${c === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, c, u, g), o.appendChild(X);
           }
         }
       }
@@ -3103,23 +3103,23 @@ let Pe = class extends Ve {
     i.insertBefore(r, s ?? null), i.insertBefore(o, s ?? null);
   }
 };
-Pe.styles = O`${Ve.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
-mi([
+Ne.styles = O`${Ke.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+fi([
   A({ attribute: !1 })
-], Pe.prototype, "movementHistory", 2);
-mi([
+], Ne.prototype, "movementHistory", 2);
+fi([
   A({ attribute: !1 })
-], Pe.prototype, "petRobotTrails", 2);
-Pe = mi([
+], Ne.prototype, "petRobotTrails", 2);
+Ne = fi([
   z("explorer-presence-polish-canvas")
-], Pe);
-var cn = Object.getOwnPropertyDescriptor, pn = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? cn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Ne);
+var pn = Object.getOwnPropertyDescriptor, hn = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? pn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const gt = "http://www.w3.org/2000/svg", Zi = 3e4, hn = 900;
-let nt = class extends Pe {
+const mt = "http://www.w3.org/2000/svg", Gi = 3e4, un = 900;
+let st = class extends Ne {
   constructor() {
     super(...arguments), this.magicPreviousOccupiedRooms = /* @__PURE__ */ new Set(), this.magicAfterglowStartedAt = /* @__PURE__ */ new Map();
   }
@@ -3161,7 +3161,7 @@ let nt = class extends Pe {
       i.has(r) || this.magicAfterglowStartedAt.set(r, e);
     for (const r of i) this.magicAfterglowStartedAt.delete(r);
     return this.magicPreviousOccupiedRooms.clear(), i.forEach((r) => this.magicPreviousOccupiedRooms.add(r)), this.rooms.map((r) => {
-      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Zi, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Zi) : 0;
+      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Gi, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Gi) : 0;
       return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: d };
     }).filter((r) => r.active || r.afterglow);
   }
@@ -3171,16 +3171,16 @@ let nt = class extends Pe {
   magicScheduleRefresh(e) {
     this.magicRefreshTimer !== void 0 && window.clearTimeout(this.magicRefreshTimer), e.some((t) => t.afterglow) && (this.magicRefreshTimer = window.setTimeout(() => {
       this.magicRefreshTimer = void 0, this.magicSyncRoomAtmosphere();
-    }, hn));
+    }, un));
   }
   magicAppendRoom(e, t) {
     const { room: i, active: r, intensity: o } = t;
     if (i.points.length < 3) return;
-    const n = this.magicPolygonPoints(i), s = document.createElementNS(gt, "g");
+    const n = this.magicPolygonPoints(i), s = document.createElementNS(mt, "g");
     s.setAttribute("class", `room-magic ${r ? "active" : "afterglow"}`), s.setAttribute("data-room-id", i.id);
-    const a = document.createElementNS(gt, "polygon");
+    const a = document.createElementNS(mt, "polygon");
     a.setAttribute("class", "room-magic-aura"), a.setAttribute("points", n), a.setAttribute("fill", "var(--explorer-room-magic-color, var(--primary-color, #03a9f4))"), a.setAttribute("fill-opacity", String(r ? 0.028 + o * 0.026 : 8e-3 + o * 0.028)), a.setAttribute("stroke", "none"), s.appendChild(a);
-    const l = document.createElementNS(gt, "polygon");
+    const l = document.createElementNS(mt, "polygon");
     l.setAttribute("class", "room-magic-edge"), l.setAttribute("points", n), l.setAttribute("fill", "none"), l.setAttribute("stroke", "var(--explorer-room-magic-color, var(--primary-color, #03a9f4))"), l.setAttribute("stroke-opacity", String(r ? 0.08 + o * 0.055 : 0.02 + o * 0.07)), l.setAttribute("stroke-width", r ? "4" : "3"), l.setAttribute("stroke-linejoin", "round"), l.setAttribute("vector-effect", "non-scaling-stroke"), s.appendChild(l), e.appendChild(s);
   }
   magicSyncRoomAtmosphere() {
@@ -3189,7 +3189,7 @@ let nt = class extends Pe {
     e.querySelector(":scope > g.room-magic-scene")?.remove();
     const t = this.magicActivities(Date.now());
     if (this.magicScheduleRefresh(t), !t.length) return;
-    const i = document.createElementNS(gt, "g");
+    const i = document.createElementNS(mt, "g");
     i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((d) => this.magicAppendRoom(i, d));
     const r = e.querySelector(":scope > g.room-temperature-atmosphere-scene"), o = e.querySelector(":scope > g.presence-room-activity-scene"), n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.presence-trails-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(
@@ -3198,8 +3198,8 @@ let nt = class extends Pe {
     );
   }
 };
-nt.styles = O`
-    ${Pe.styles}
+st.styles = O`
+    ${Ne.styles}
 
     :host {
       --explorer-room-magic-color: var(--primary-color, #03a9f4);
@@ -3266,16 +3266,16 @@ nt.styles = O`
       }
     }
   `;
-nt = pn([
+st = hn([
   z("explorer-room-magic-canvas")
-], nt);
-var un = Object.defineProperty, gn = Object.getOwnPropertyDescriptor, kr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? gn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], st);
+var gn = Object.defineProperty, mn = Object.getOwnPropertyDescriptor, _r = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && un(t, i, o), o;
+  return r && o && gn(t, i, o), o;
 };
-const Q = "http://www.w3.org/2000/svg", mn = ["on", "open", "opened", "true"], Ht = 600 * 1e3, Ft = 1800 * 1e3, Vt = 3600 * 1e3, Gi = 60 * 1e3, mt = (e) => e * Math.PI / 180;
-let Ke = class extends nt {
+const Q = "http://www.w3.org/2000/svg", fn = ["on", "open", "opened", "true"], Ft = 600 * 1e3, Vt = 1800 * 1e3, Kt = 3600 * 1e3, Ui = 60 * 1e3, ft = (e) => e * Math.PI / 180;
+let Ze = class extends st {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
   }
@@ -3289,7 +3289,7 @@ let Ke = class extends nt {
     const t = e.state_binding;
     if (!t) return !1;
     const i = this.hass?.states[t.entity]?.state?.toLowerCase();
-    return i ? (t.open_states ?? mn).map((r) => r.toLowerCase()).includes(i) : !1;
+    return i ? (t.open_states ?? fn).map((r) => r.toLowerCase()).includes(i) : !1;
   }
   openingOpenSince(e, t) {
     if (!t || !e.state_binding) {
@@ -3307,7 +3307,7 @@ let Ke = class extends nt {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Vt ? "alert" : o >= Ft ? "warning" : o >= Ht ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Kt ? "alert" : o >= Vt ? "warning" : o >= Ft ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
     return { minutes: n, level: s, label: c, description: d };
   }
   scheduleOpeningAgeRefresh(e) {
@@ -3316,8 +3316,8 @@ let Ke = class extends nt {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < Ht ? Ht : n < Ft ? Ft : n < Vt ? Vt : void 0, a = s === void 0 ? Gi : Math.max(1e3, s - n + 50);
-      t = Math.min(t, Gi, a);
+      const n = Math.max(0, e - o), s = n < Ft ? Ft : n < Vt ? Vt : n < Kt ? Kt : void 0, a = s === void 0 ? Ui : Math.max(1e3, s - n + 50);
+      t = Math.min(t, Ui, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
       this.openingAgeTimer = void 0, this.syncOpenings();
@@ -3356,23 +3356,23 @@ let Ke = class extends nt {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = mt(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = mt(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, W = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, W = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
     N.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${W}`), N.setAttribute("data-opening-id", t.id), o && N.setAttribute("data-open-minutes", String(o.minutes)), this.line(N, $.x, $.y, w.x, w.y, "opening-gap");
     const I = Math.max(7, Math.min(12, n * 0.12));
     for (const X of [$, w]) this.line(N, X.x - y * I / 2, X.y - _ * I / 2, X.x + y * I / 2, X.y + _ * I / 2, "door-jamb");
     r && this.line(N, S.x, S.y, C.x, C.y, "door-closed-guide"), this.line(N, S.x, S.y, Y.x, Y.y, "door-leaf");
     const Z = document.createElementNS(Q, "circle");
     if (Z.setAttribute("cx", String(S.x)), Z.setAttribute("cy", String(S.y)), Z.setAttribute("r", "4.2"), Z.setAttribute("class", "opening-hinge"), N.appendChild(Z), r) {
-      const X = document.createElementNS(Q, "path"), xi = mt(k), wi = T, Rr = S.x + Math.cos(xi) * n, zr = S.y + Math.sin(xi) * n, Tr = S.x + Math.cos(wi) * n, Or = S.y + Math.sin(wi) * n, Ir = E > 0 ? 1 : 0, Dr = Math.abs(a) > 180 ? 1 : 0;
-      X.setAttribute("d", `M ${Rr} ${zr} A ${n} ${n} 0 ${Dr} ${Ir} ${Tr} ${Or}`), X.setAttribute("class", "door-swing"), N.appendChild(X);
+      const X = document.createElementNS(Q, "path"), wi = ft(k), $i = T, zr = S.x + Math.cos(wi) * n, Tr = S.y + Math.sin(wi) * n, Or = S.x + Math.cos($i) * n, Ir = S.y + Math.sin($i) * n, Dr = E > 0 ? 1 : 0, jr = Math.abs(a) > 180 ? 1 : 0;
+      X.setAttribute("d", `M ${zr} ${Tr} A ${n} ${n} 0 ${jr} ${Dr} ${Or} ${Ir}`), X.setAttribute("class", "door-swing"), N.appendChild(X);
     }
-    const ve = c + y * 14, ze = p + _ * 14, Ae = document.createElementNS(Q, "circle");
-    Ae.setAttribute("cx", String(ve)), Ae.setAttribute("cy", String(ze)), Ae.setAttribute("r", "5.2"), Ae.setAttribute("class", "opening-status-dot"), N.appendChild(Ae), this.appendAgeIndicator(N, ve, ze, o);
-    const We = document.createElementNS(Q, "title");
-    We.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, N.appendChild(We), e.appendChild(N);
+    const ve = c + y * 14, Te = p + _ * 14, Ae = document.createElementNS(Q, "circle");
+    Ae.setAttribute("cx", String(ve)), Ae.setAttribute("cy", String(Te)), Ae.setAttribute("r", "5.2"), Ae.setAttribute("class", "opening-status-dot"), N.appendChild(Ae), this.appendAgeIndicator(N, ve, Te, o);
+    const Xe = document.createElementNS(Q, "title");
+    Xe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, N.appendChild(Xe), e.appendChild(N);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, d = mt(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, b = n / 2, m = 5.5, y = { x: a - c * b, y: l - p * b }, _ = { x: a + c * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Q, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, d = ft(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, b = n / 2, m = 5.5, y = { x: a - c * b, y: l - p * b }, _ = { x: a + c * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Q, "g");
     w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, _.x, _.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
     const S = a + u * 17, C = l + g * 17, k = document.createElementNS(Q, "circle");
     k.setAttribute("cx", String(S)), k.setAttribute("cy", String(C)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, C, o);
@@ -3380,7 +3380,7 @@ let Ke = class extends nt {
     E.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(E), e.appendChild(w);
   }
 };
-Ke.styles = O`${nt.styles}
+Ze.styles = O`${st.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3403,19 +3403,19 @@ Ke.styles = O`${nt.styles}
     @keyframes explorerOpeningAgePulse{0%,100%{opacity:.5;transform:scale(.92)}50%{opacity:1;transform:scale(1.16)}}
     @media(prefers-reduced-motion:reduce){.dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{transition:none}.dynamic-opening.open-age-alert .opening-age-ring{animation:none}}
   `;
-kr([
+_r([
   A({ attribute: !1 })
-], Ke.prototype, "openings", 2);
-Ke = kr([
+], Ze.prototype, "openings", 2);
+Ze = _r([
   z("explorer-openings-canvas")
-], Ke);
-var fn = Object.defineProperty, bn = Object.getOwnPropertyDescriptor, Ge = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? bn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Ze);
+var bn = Object.defineProperty, yn = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && fn(t, i, o), o;
+  return r && o && bn(t, i, o), o;
 };
-const yn = "http://www.w3.org/2000/svg";
-let _e = class extends Ke {
+const vn = "http://www.w3.org/2000/svg";
+let _e = class extends Ze {
   constructor() {
     super(...arguments), this.hideSourceText = !1, this.weatherEffect = "clear", this.weatherState = "clear", this.weatherIntensity = 0.6, this.weatherNight = !1, this.weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`, this.cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -3429,7 +3429,7 @@ let _e = class extends Ke {
     });
   }
   svg(e) {
-    return document.createElementNS(yn, e);
+    return document.createElementNS(vn, e);
   }
   attrs(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -3768,7 +3768,7 @@ let _e = class extends Ke {
   }
 };
 _e.styles = O`
-    ${Ke.styles}
+    ${Ze.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
     .weather-outside-rooms-scene.state-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.18)); }
@@ -3988,29 +3988,29 @@ _e.styles = O`
       .weather-outside-rooms-scene .weather-storm-flash { animation: none; }
     }
   `;
-Ge([
+Ue([
   A({ type: Boolean, attribute: "hide-source-text" })
 ], _e.prototype, "hideSourceText", 2);
-Ge([
+Ue([
   A({ attribute: "weather-effect" })
 ], _e.prototype, "weatherEffect", 2);
-Ge([
+Ue([
   A({ attribute: "weather-state" })
 ], _e.prototype, "weatherState", 2);
-Ge([
+Ue([
   A({ type: Number, attribute: "weather-intensity" })
 ], _e.prototype, "weatherIntensity", 2);
-Ge([
+Ue([
   A({ type: Boolean, attribute: "weather-night" })
 ], _e.prototype, "weatherNight", 2);
-_e = Ge([
+_e = Ue([
   z("explorer-source-clean-canvas")
 ], _e);
-const vn = (e) => e.strings === void 0, xn = {}, wn = (e, t = xn) => e._$AH = t;
-const $n = mr(class extends fr {
+const xn = (e) => e.strings === void 0, wn = {}, $n = (e, t = wn) => e._$AH = t;
+const Me = fr(class extends br {
   constructor(e) {
     if (super(e), e.type !== Ce.PROPERTY && e.type !== Ce.ATTRIBUTE && e.type !== Ce.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
-    if (!vn(e)) throw Error("`live` bindings can only contain a single expression");
+    if (!xn(e)) throw Error("`live` bindings can only contain a single expression");
   }
   render(e) {
     return e;
@@ -4023,10 +4023,10 @@ const $n = mr(class extends fr {
     } else if (e.type === Ce.BOOLEAN_ATTRIBUTE) {
       if (!!t === i.hasAttribute(r)) return se;
     } else if (e.type === Ce.ATTRIBUTE && i.getAttribute(r) === t + "") return se;
-    return wn(e), t;
+    return $n(e), t;
   }
 });
-var kn = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
+var kn = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, We = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? _n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && kn(t, i, o), o;
@@ -4041,7 +4041,7 @@ const An = [
 function Cn(e) {
   return e.split(".", 1)[0] ?? "";
 }
-function Kt(e) {
+function Zt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -4147,7 +4147,7 @@ let ce = class extends j {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => Kt(e).localeCompare(Kt(t), "da")
+      (e, t) => Zt(e).localeCompare(Zt(t), "da")
     );
   }
   renderEntityDatalist(e, t = !1) {
@@ -4155,7 +4155,7 @@ let ce = class extends j {
     return h`
       <datalist id=${e}>
         ${i.map(
-      (r) => h`<option value=${r.entity_id}>${Kt(r)}</option>`
+      (r) => h`<option value=${r.entity_id}>${Zt(r)}</option>`
     )}
       </datalist>
     `;
@@ -4183,7 +4183,7 @@ let ce = class extends j {
           <label>
             Home Assistant Area
             <select
-              .value=${$n(e.area_id ?? "")}
+              .value=${Me(e.area_id ?? "")}
               @change=${(r) => this.updateRoom(t, {
       area_id: r.target.value || void 0
     })}
@@ -4263,7 +4263,7 @@ let ce = class extends j {
           <label>
             Type
             <select
-              .value=${e.type ?? "person"}
+              .value=${Me(e.type ?? "person")}
               @change=${(n) => this.updatePresence(t, {
       type: n.target.value
     })}
@@ -4306,7 +4306,7 @@ let ce = class extends j {
         <label>
           Fast rum (fallback)
           <select
-            .value=${e.room_id ?? ""}
+            .value=${Me(e.room_id ?? "")}
             @change=${(n) => this.updatePresence(t, {
       room_id: n.target.value || void 0
     })}
@@ -4453,22 +4453,22 @@ ce.styles = O`
       .item-card { padding: 12px; }
     }
   `;
-Ue([
+We([
   A({ attribute: !1 })
 ], ce.prototype, "hass", 2);
-Ue([
+We([
   v()
 ], ce.prototype, "config", 2);
-Ue([
+We([
   v()
 ], ce.prototype, "areas", 2);
-Ue([
+We([
   v()
 ], ce.prototype, "areaError", 2);
-Ue([
+We([
   v()
 ], ce.prototype, "loadingAreas", 2);
-ce = Ue([
+ce = We([
   z("ha-explorer-card-editor")
 ], ce);
 var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
@@ -4476,8 +4476,8 @@ var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t,
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Pn(t, i, o), o;
 };
-const re = 1e3, ft = (e) => Math.min(1, Math.max(0, e));
-function Ui(e) {
+const re = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
+function Wi(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
 function Rn(e) {
@@ -4487,7 +4487,7 @@ function Rn(e) {
 function zn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "room";
 }
-function Wi(e) {
+function Xi(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
@@ -4526,7 +4526,7 @@ let L = class extends j {
   }
   mapPoint(e) {
     const t = e.currentTarget.getBoundingClientRect();
-    return t.width && t.height ? [ft((e.clientX - t.left) / t.width), ft((e.clientY - t.top) / t.height)] : [0.5, 0.5];
+    return t.width && t.height ? [bt((e.clientX - t.left) / t.width), bt((e.clientY - t.top) / t.height)] : [0.5, 0.5];
   }
   selectedPresence() {
     const e = this.selectedRoom;
@@ -4542,9 +4542,9 @@ let L = class extends j {
     if (!t || !i || !r) return;
     const o = i.entity_binding, n = r.states[o.entity];
     if (!n) return;
-    const s = Wi(n.attributes[o.x_attribute ?? "map_x"]), a = Wi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
+    const s = Xi(n.attributes[o.x_attribute ?? "map_x"]), a = Xi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const d = Rn(t), c = ft((e[0] - d.minX) / (d.maxX - d.minX || 1)), p = ft((e[1] - d.minY) / (d.maxY - d.minY || 1));
+    const d = Rn(t), c = bt((e[0] - d.minX) / (d.maxX - d.minX || 1)), p = bt((e[1] - d.minY) / (d.maxY - d.minY || 1));
     return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: c, room_y: p };
   }
   handleMapClick(e) {
@@ -4596,7 +4596,7 @@ let L = class extends j {
   finishPolygon() {
     if (!(this.pendingPoints.length < 3 || !this.roomConfig)) {
       if (this.drawingMode === "draw-new") {
-        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Ui(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
+        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Wi(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
         this.selectedRoomId = t, this.emitConfig({ ...this.roomConfig, rooms: [...this.rooms, o] });
       } else this.selectedRoom && this.emitConfig({ ...this.roomConfig, rooms: this.rooms.map((e) => e.id === this.selectedRoomId ? { ...e, points: this.pendingPoints } : e) });
       this.pendingPoints = [], this.drawingMode = "idle";
@@ -4631,7 +4631,7 @@ let L = class extends j {
   }
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
-    const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Ui(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
+    const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Wi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
     return P`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * re} y=${r.y * re} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? P`<circle cx=${o.x * re} cy=${o.y * re} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
@@ -4712,7 +4712,7 @@ B([
   v()
 ], L.prototype, "drawingAreaError", 2);
 B([
-  lo("ha-explorer-card-editor")
+  co("ha-explorer-card-editor")
 ], L.prototype, "baseEditor", 2);
 L = B([
   z("ha-explorer-room-drawing-editor")
@@ -4772,7 +4772,7 @@ function In(e, t) {
   const g = u.filter(($) => !$.unavailable), b = r.filter(($) => !Tn($)), m = i.filter(($) => $.points.length < 3), y = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: d.length ? `${d.length} rumreaktion${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: d.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: c.length ? `${c.length} scene- eller scripthandling${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: c.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
   return { items: _, entityIssues: u, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: d.length, actionCount: c.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
-var Dn = Object.defineProperty, jn = Object.getOwnPropertyDescriptor, fi = (e, t, i, r) => {
+var Dn = Object.defineProperty, jn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? jn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Dn(t, i, o), o;
@@ -4782,7 +4782,7 @@ const Ln = {
   attention: "Tjek",
   optional: "Valgfrit"
 };
-let st = class extends j {
+let at = class extends j {
   navigate(e) {
     this.dispatchEvent(new CustomEvent("explorer-editor-navigate", {
       detail: { target: e },
@@ -4871,7 +4871,7 @@ let st = class extends j {
     `;
   }
 };
-st.styles = O`
+at.styles = O`
     :host { display:block; }
     .overview {
       display:grid;
@@ -4943,21 +4943,21 @@ st.styles = O`
       .entity-issues button small { grid-column:2; }
     }
   `;
-fi([
+bi([
   A({ attribute: !1 })
-], st.prototype, "config", 2);
-fi([
+], at.prototype, "config", 2);
+bi([
   A({ attribute: !1 })
-], st.prototype, "hass", 2);
-st = fi([
+], at.prototype, "hass", 2);
+at = bi([
   z("ha-explorer-setup-overview")
-], st);
-var qn = Object.defineProperty, Bn = Object.getOwnPropertyDescriptor, _r = (e, t, i, r) => {
+], at);
+var qn = Object.defineProperty, Bn = Object.getOwnPropertyDescriptor, Ar = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Bn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && qn(t, i, o), o;
 };
-const Zt = [
+const Gt = [
   ["classic", "Classic", "Den neutrale Home Assistant Explorer-stil."],
   [
     "enchanted_antique",
@@ -4982,7 +4982,7 @@ const Zt = [
   ["clear-night", "🌙 Klar nat"],
   ["exceptional", "⚠️ Ekstremt / usædvanligt vejr"]
 ];
-let Ct = class extends j {
+let Et = class extends j {
   get theme() {
     return this.config?.appearance?.theme ?? "classic";
   }
@@ -5081,7 +5081,7 @@ let Ct = class extends j {
   }
   render() {
     if (!this.config) return f;
-    const e = Zt.find((a) => a[0] === this.theme) ?? Zt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
+    const e = Gt.find((a) => a[0] === this.theme) ?? Gt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
     return h`
       <section class="theme-editor">
         <div class="heading">
@@ -5103,7 +5103,7 @@ let Ct = class extends j {
             .value=${this.theme}
             @change=${(a) => this.updateTheme(a.target.value)}
           >
-            ${Zt.map(
+            ${Gt.map(
       (a) => h`<option value=${a[0]}>${a[1]}</option>`
     )}
           </select>
@@ -5443,7 +5443,7 @@ let Ct = class extends j {
     `;
   }
 };
-Ct.styles = O`
+Et.styles = O`
     :host {
       display: block;
     }
@@ -5591,19 +5591,19 @@ Ct.styles = O`
       }
     }
   `;
-_r([
+Ar([
   A({ attribute: !1 })
-], Ct.prototype, "config", 2);
-Ct = _r([
+], Et.prototype, "config", 2);
+Et = Ar([
   z("ha-explorer-theme-editor")
-], Ct);
-var Fn = Object.defineProperty, Vn = Object.getOwnPropertyDescriptor, Ar = (e, t, i, r) => {
+], Et);
+var Fn = Object.defineProperty, Vn = Object.getOwnPropertyDescriptor, Sr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Fn(t, i, o), o;
 };
-const Xi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
-let Et = class extends j {
+const Yi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
+let Mt = class extends j {
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5624,23 +5624,23 @@ let Et = class extends j {
     const e = this.config?.presences ?? [];
     return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-person & Object Polish · Trail Controls</span><h3>Visuel profil for personer & objekter</h3></div><span class="count">${e.length}</span></div><p class="intro">Personer og objekter på samme position spredes automatisk omkring deres room-anchor. Markør og bevægelsesspor kan nu tilpasses uafhængigt af hinanden.</p>${e.length ? h`<div class="profiles">${e.map((t, i) => {
       const r = t.type ?? "person";
-      return h`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Xi[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Xi[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
+      return h`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Yi[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Yi[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
     })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-Et.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
-Ar([
+Mt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+Sr([
   A({ attribute: !1 })
-], Et.prototype, "config", 2);
-Et = Ar([
+], Mt.prototype, "config", 2);
+Mt = Sr([
   z("ha-explorer-presence-polish-editor")
-], Et);
-var Kn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, Sr = (e, t, i, r) => {
+], Mt);
+var Kn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, Cr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Kn(t, i, o), o;
 };
-let Mt = class extends j {
+let Pt = class extends j {
   updateHistory(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config.movement_history ?? {}, ...e };
@@ -5657,19 +5657,19 @@ let Mt = class extends j {
     </section>`;
   }
 };
-Mt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
-Sr([
+Pt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+Cr([
   A({ attribute: !1 })
-], Mt.prototype, "config", 2);
-Mt = Sr([
+], Pt.prototype, "config", 2);
+Pt = Cr([
   z("ha-explorer-movement-history-editor")
-], Mt);
-var Gn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, Cr = (e, t, i, r) => {
+], Pt);
+var Gn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gn(t, i, o), o;
 };
-let Pt = class extends j {
+let Nt = class extends j {
   updateTrails(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_pet_paws: !0, show_robot_route: !0, robot_direction_arrows: !0, ...this.config.pet_robot_trails ?? {}, ...e };
@@ -5687,40 +5687,40 @@ let Pt = class extends j {
     </section>`;
   }
 };
-Pt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
-Cr([
+Nt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+Er([
   A({ attribute: !1 })
-], Pt.prototype, "config", 2);
-Pt = Cr([
+], Nt.prototype, "config", 2);
+Nt = Er([
   z("ha-explorer-pet-robot-trails-editor")
-], Pt);
-var Wn = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
+], Nt);
+var Wn = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Wn(t, i, o), o;
 };
-function Gt(e) {
+function Ut(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Yi(e) {
+function Qi(e) {
   return Object.fromEntries(Object.entries(e).filter(([, t]) => t !== void 0 && t !== ""));
 }
-let at = class extends j {
+let lt = class extends j {
   emit(e) {
     this.config && this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: { ...this.config, presences: e } }, bubbles: !0, composed: !0 }));
   }
   updatePresence(e, t) {
     const i = [...this.config?.presences ?? []], r = i[e];
-    r && (i[e] = { ...r, ...t }, this.emit(i));
+    r && (i[e] = { ...r, type: "pet", ...t }, this.emit(i));
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: Yi({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: Qi({ ...i.entity_binding, ...t }) });
   }
   updateDetection(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { shelly_pet_detection: Yi({ enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2, ...i.shelly_pet_detection, ...t }) });
+    i && this.updatePresence(e, { shelly_pet_detection: Qi({ enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2, ...i.shelly_pet_detection, ...t }) });
   }
   addRabbit() {
     const e = [...this.config?.presences ?? []], t = new Set(e.map((o) => o.id));
@@ -5730,7 +5730,7 @@ let at = class extends j {
     e.push({ id: r, name: "Kanin", type: "pet", visible: !0, trail_visible: !0, icon: "🐇", entity_binding: { coordinate_space: "room_meters", x_attribute: "x", y_attribute: "y" }, shelly_pet_detection: { enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2 } }), this.emit(e);
   }
   entities() {
-    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("sensor.")).sort((e, t) => Gt(e).localeCompare(Gt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("sensor.")).sort((e, t) => Ut(e).localeCompare(Ut(t), "da"));
   }
   render() {
     const e = this.config?.presences ?? [], t = e.map((i, r) => ({ presence: i, index: r })).filter(({ presence: i }) => (i.type ?? "person") === "pet");
@@ -5740,34 +5740,34 @@ let at = class extends j {
       const o = i.entity_binding ?? {}, n = i.shelly_pet_detection ?? {};
       return h`<article class="pet-card"><div class="pet-heading"><strong>🐇 ${i.name ?? i.id}</strong><span>${n.enabled ? "Aktiv" : "Deaktiveret"}</span></div>
         <label class="toggle"><input type="checkbox" .checked=${n.enabled === !0} @change=${(s) => this.updateDetection(r, { enabled: s.target.checked })}/><span><strong>Automatisk kæledyrsregistrering</strong><small>Påvirker kun denne kæledyrsprofil.</small></span></label>
-        <label>LiveTrack-entitet<input list="shelly-pet-entities" .value=${o.position_entity ?? o.entity ?? ""} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(r, { position_entity: s.target.value.trim() || void 0 })}/><small>Entiteten skal have attributterne x, y, maxz og helst target_id.</small></label>
-        <div class="grid three"><label>Rum<select .value=${i.room_id ?? ""} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${o.x_attribute ?? "x"} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${o.y_attribute ?? "y"} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
+        <label>LiveTrack-entitet<input list="shelly-pet-entities" .value=${Me(o.position_entity ?? o.entity ?? "")} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(r, { position_entity: s.target.value.trim() || void 0 })}/><small>Entiteten skal have attributterne x, y, maxz og helst target_id.</small></label>
+        <div class="grid three"><label>Rum<select .value=${Me(i.room_id ?? "")} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${Me(o.x_attribute ?? "x")} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${Me(o.y_attribute ?? "y")} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
         <div class="grid three"><label>Højde-attribut<input .value=${n.height_attribute ?? "maxz"} @change=${(s) => this.updateDetection(r, { height_attribute: s.target.value.trim() || "maxz" })}/></label><label>Target-ID-attribut<input .value=${n.target_id_attribute ?? "target_id"} @change=${(s) => this.updateDetection(r, { target_id_attribute: s.target.value.trim() || "target_id" })}/></label><label>Tidsstempel-attribut<input .value=${n.timestamp_attribute ?? "timestamp"} @change=${(s) => this.updateDetection(r, { timestamp_attribute: s.target.value.trim() || "timestamp" })}/></label></div>
         <div class="grid two"><label>Maks. kaninhøjde: <strong>${n.max_height_m ?? 0.75} m</strong><input type="range" min="0.15" max="1.2" step="0.05" .value=${String(n.max_height_m ?? 0.75)} @input=${(s) => this.updateDetection(r, { max_height_m: Number(s.target.value) })}/></label><label>Skjul igen over: <strong>${n.release_height_m ?? 0.95} m</strong><input type="range" min="0.25" max="1.6" step="0.05" .value=${String(n.release_height_m ?? 0.95)} @input=${(s) => this.updateDetection(r, { release_height_m: Number(s.target.value) })}/></label></div>
         <div class="grid two"><label>Bekræft efter målinger<input type="number" min="1" max="12" .value=${String(n.confirmation_updates ?? 3)} @change=${(s) => this.updateDetection(r, { confirmation_updates: Number(s.target.value) })}/><small>Flere målinger giver færre falske kaniner.</small></label><label>Skjul efter høje målinger<input type="number" min="1" max="12" .value=${String(n.release_updates ?? 2)} @change=${(s) => this.updateDetection(r, { release_updates: Number(s.target.value) })}/></label></div>
       </article>`;
     }) : h`<div class="empty">Ingen kæledyrsprofil endnu. Tryk “Tilføj kanin”.</div>`}
-      <datalist id="shelly-pet-entities">${this.entities().map((i) => h`<option value=${i.entity_id}>${Gt(i)}</option>`)}</datalist>
+      <datalist id="shelly-pet-entities">${this.entities().map((i) => h`<option value=${i.entity_id}>${Ut(i)}</option>`)}</datalist>
       ${t.length ? h`<div class="note">Start med 0,75 m. Test derefter i Shellys target-visning og sænk grænsen, hvis et menneske på gulvet bliver registreret som kanin.</div>` : f}
     </section>`;
   }
 };
-at.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
-bi([
+lt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
+yi([
   A({ attribute: !1 })
-], at.prototype, "hass", 2);
-bi([
+], lt.prototype, "hass", 2);
+yi([
   A({ attribute: !1 })
-], at.prototype, "config", 2);
-at = bi([
+], lt.prototype, "config", 2);
+lt = yi([
   z("ha-explorer-shelly-pet-editor")
-], at);
-var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
+], lt);
+var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, vi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Yn(t, i, o), o;
 };
-function Ut(e) {
+function Wt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -5775,12 +5775,12 @@ function Jn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let lt = class extends j {
+let dt = class extends j {
   emit(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).sort((e, t) => Ut(e).localeCompare(Ut(t), "da"));
+    return Object.values(this.hass?.states ?? {}).sort((e, t) => Wt(e).localeCompare(Wt(t), "da"));
   }
   updatePresence(e, t) {
     if (!this.config) return;
@@ -5805,7 +5805,7 @@ let lt = class extends j {
     t.splice(e, 1), this.emit({ ...this.config, presences: t });
   }
   datalist(e) {
-    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Ut(t)}</option>`)}</datalist>`;
+    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Wt(t)}</option>`)}</datalist>`;
   }
   render() {
     const e = (this.config?.presences ?? []).filter((t) => (t.type ?? "person") === "person");
@@ -5815,35 +5815,35 @@ let lt = class extends j {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-lt.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
-yi([
+dt.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+vi([
   A({ attribute: !1 })
-], lt.prototype, "hass", 2);
-yi([
+], dt.prototype, "hass", 2);
+vi([
   A({ attribute: !1 })
-], lt.prototype, "config", 2);
-lt = yi([
+], dt.prototype, "config", 2);
+dt = vi([
   z("ha-explorer-identity-editor")
-], lt);
+], dt);
 var es = Object.defineProperty, ts = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ts(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && es(t, i, o), o;
 };
-const xe = 1e3, Qi = [
+const xe = 1e3, Ji = [
   { value: "info", label: "Info" },
   { value: "warning", label: "Advarsel" },
   { value: "danger", label: "Fare / alarm" },
   { value: "cleaning", label: "Rengøring" },
   { value: "restricted", label: "Begrænset område" }
 ];
-function Ji(e) {
+function er(e) {
   return Math.min(1, Math.max(0, e));
 }
 function is(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "zone";
 }
-function Wt(e) {
+function Xt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -5863,7 +5863,7 @@ let ie = class extends j {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => Wt(e).localeCompare(Wt(t), "da")
+      (e, t) => Xt(e).localeCompare(Xt(t), "da")
     );
   }
   updated(e) {
@@ -5879,8 +5879,8 @@ let ie = class extends j {
   mapPoint(e) {
     const i = e.currentTarget.getBoundingClientRect();
     return !i.width || !i.height ? [0.5, 0.5] : [
-      Ji((e.clientX - i.left) / i.width),
-      Ji((e.clientY - i.top) / i.height)
+      er((e.clientX - i.left) / i.width),
+      er((e.clientY - i.top) / i.height)
     ];
   }
   handleMapClick(e) {
@@ -5940,7 +5940,7 @@ let ie = class extends j {
     this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.emitConfig({ ...this.config, zones: t });
   }
   statusText(e) {
-    const t = wr(e, (i) => this.hass?.states[i]?.state);
+    const t = $r(e, (i) => this.hass?.states[i]?.state);
     return e.visible === !1 ? "Skjult manuelt" : t.conditional ? t.active ? `Aktiv · ${t.currentState ?? "ukendt"}` : t.reason === "missing_entity" ? "Entity mangler" : t.reason === "entity_unavailable" ? `Utilgængelig · ${t.currentState}` : `Inaktiv · ${t.currentState ?? "ukendt"}` : "Altid aktiv";
   }
   renderZonePolygon(e) {
@@ -5980,14 +5980,14 @@ let ie = class extends j {
         <label>
           Zonetype
           <select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}>
-            ${Qi.map((t) => h`<option value=${t.value}>${t.label}</option>`)}
+            ${Ji.map((t) => h`<option value=${t.value}>${t.label}</option>`)}
           </select>
         </label>
         <label class="wide">
           Home Assistant entity · valgfri
           <input list=${e} .value=${this.draftEntity} placeholder="input_boolean.alarm_zone" @change=${(t) => this.draftEntity = t.target.value} />
           <datalist id=${e}>
-            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Wt(t)}</option>`)}
+            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Xt(t)}</option>`)}
           </datalist>
           <small>Tom = zonen er altid aktiv. Med entity vises zonen kun i de valgte states.</small>
         </label>
@@ -6034,7 +6034,7 @@ let ie = class extends j {
               <div class="zone-list">
                 ${this.zones.map((r) => h`
                   <button class=${r.id === this.selectedZoneId ? "zone-row selected" : "zone-row"} @click=${() => this.selectZone(r)}>
-                    <span><strong>${r.name ?? r.id}</strong><small>${Qi.find((o) => o.value === (r.kind ?? "info"))?.label}</small></span>
+                    <span><strong>${r.name ?? r.id}</strong><small>${Ji.find((o) => o.value === (r.kind ?? "info"))?.label}</small></span>
                     <em>${this.statusText(r)}</em>
                   </button>
                 `)}
@@ -6147,14 +6147,14 @@ var os = Object.defineProperty, ns = Object.getOwnPropertyDescriptor, U = (e, t,
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && os(t, i, o), o;
 };
-const Oe = 1e3, er = ["on", "open", "opened", "true"];
-function tr(e, t, i) {
+const Ie = 1e3, tr = ["on", "open", "opened", "true"];
+function ir(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
 function ss(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "opening";
 }
-function Xt(e) {
+function Yt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -6173,7 +6173,7 @@ let V = class extends j {
     return this.openings.find((e) => e.id === this.selectedId);
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Xt(e).localeCompare(Xt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Yt(e).localeCompare(Yt(t), "da"));
   }
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
@@ -6187,7 +6187,7 @@ let V = class extends j {
   }
   mapPoint(e) {
     const t = e.currentTarget.getBoundingClientRect();
-    return !t.width || !t.height ? [0.5, 0.5] : [tr((e.clientX - t.left) / t.width, 0, 1), tr((e.clientY - t.top) / t.height, 0, 1)];
+    return !t.width || !t.height ? [0.5, 0.5] : [ir((e.clientX - t.left) / t.width, 0, 1), ir((e.clientY - t.top) / t.height, 0, 1)];
   }
   handleMapClick(e) {
     this.placing && (this.draftPoint = this.mapPoint(e), this.placing = !1);
@@ -6196,7 +6196,7 @@ let V = class extends j {
     this.selectedId = "", this.draftKind = e, this.draftName = e === "door" ? `Dør ${this.openings.filter((t) => t.kind === "door").length + 1}` : `Vindue ${this.openings.filter((t) => t.kind === "window").length + 1}`, this.draftPoint = [0.5, 0.5], this.draftAngle = 0, this.draftLength = e === "door" ? 0.055 : 0.05, this.draftHinge = "start", this.draftSwing = "left", this.draftOpenAngle = 82, this.draftEntity = "", this.draftStates = "on, open", this.draftVisible = !0, this.placing = !0;
   }
   select(e) {
-    this.selectedId = e.id, this.placing = !1, this.draftName = e.name ?? e.id, this.draftKind = e.kind, this.draftPoint = [...e.point], this.draftAngle = e.angle ?? 0, this.draftLength = e.length ?? (e.kind === "door" ? 0.055 : 0.05), this.draftHinge = e.hinge ?? "start", this.draftSwing = e.swing ?? "left", this.draftOpenAngle = e.open_angle ?? 82, this.draftEntity = e.state_binding?.entity ?? "", this.draftStates = (e.state_binding?.open_states ?? er).join(", "), this.draftVisible = e.visible !== !1;
+    this.selectedId = e.id, this.placing = !1, this.draftName = e.name ?? e.id, this.draftKind = e.kind, this.draftPoint = [...e.point], this.draftAngle = e.angle ?? 0, this.draftLength = e.length ?? (e.kind === "door" ? 0.055 : 0.05), this.draftHinge = e.hinge ?? "start", this.draftSwing = e.swing ?? "left", this.draftOpenAngle = e.open_angle ?? 82, this.draftEntity = e.state_binding?.entity ?? "", this.draftStates = (e.state_binding?.open_states ?? tr).join(", "), this.draftVisible = e.visible !== !1;
   }
   openingFromDraft(e) {
     const t = this.draftEntity.trim();
@@ -6221,17 +6221,17 @@ let V = class extends j {
     if (e.visible === !1) return "Skjult";
     if (!e.state_binding) return "Ingen entity";
     const t = this.hass?.states[e.state_binding.entity]?.state;
-    return t ? `${(e.state_binding.open_states ?? er).map((r) => r.toLowerCase()).includes(t.toLowerCase()) ? "Åben" : "Lukket"} · ${t}` : "Entity mangler";
+    return t ? `${(e.state_binding.open_states ?? tr).map((r) => r.toLowerCase()).includes(t.toLowerCase()) ? "Åben" : "Lukket"} · ${t}` : "Entity mangler";
   }
   renderOpening(e) {
-    const t = e.id === this.selectedId, i = e.point[0] * Oe, r = e.point[1] * Oe, o = (e.length ?? 0.055) * Oe, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
+    const t = e.id === this.selectedId, i = e.point[0] * Ie, r = e.point[1] * Ie, o = (e.length ?? 0.055) * Ie, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
     return P`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
       this.placing || (l.stopPropagation(), this.select(e));
     }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? P`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
   }
   renderDraft() {
     if (this.selected || !this.placing && this.draftName === "Ny dør") return f;
-    const e = this.draftPoint[0] * Oe, t = this.draftPoint[1] * Oe, i = this.draftLength * Oe, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
+    const e = this.draftPoint[0] * Ie, t = this.draftPoint[1] * Ie, i = this.draftLength * Ie, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
     return P`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
   }
   render() {
@@ -6241,7 +6241,7 @@ let V = class extends j {
   }
   renderForm() {
     const e = "explorer-opening-entities";
-    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Xt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
+    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Yt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
 V.styles = O`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
@@ -6298,7 +6298,7 @@ var ls = Object.defineProperty, ds = Object.getOwnPropertyDescriptor, de = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ls(t, i, o), o;
 };
-const Yt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Qt = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, Jt = (e) => Math.min(1, Math.max(0, e));
+const Qt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Jt = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, ei = (e) => Math.min(1, Math.max(0, e));
 let ee = class extends j {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.draftKind = "light", this.draftEntity = "", this.draftStates = "on", this.draftIntensity = 0.75, this.draftRadius = 90;
@@ -6332,21 +6332,21 @@ let ee = class extends j {
   }
   save() {
     if (!this.selectedRoom || !this.draftEntity.trim() || this.isDuplicate()) return;
-    const e = this.parseStates(this.draftStates), t = { kind: this.draftKind, entity: this.draftEntity.trim(), ...this.draftKind === "temperature" || !e.length ? {} : { active_states: e }, ...this.draftPosition ? { position: { ...this.draftPosition } } : {}, ...this.draftKind === "fireplace" ? { intensity: Jt(this.draftIntensity), radius: Math.min(220, Math.max(30, this.draftRadius)) } : {} }, i = [...this.selectedRoom.reactions ?? []];
+    const e = this.parseStates(this.draftStates), t = { kind: this.draftKind, entity: this.draftEntity.trim(), ...this.draftKind === "temperature" || !e.length ? {} : { active_states: e }, ...this.draftPosition ? { position: { ...this.draftPosition } } : {}, ...this.draftKind === "fireplace" ? { intensity: ei(this.draftIntensity), radius: Math.min(220, Math.max(30, this.draftRadius)) } : {} }, i = [...this.selectedRoom.reactions ?? []];
     this.editingIndex === void 0 ? i.push(t) : i[this.editingIndex] = t, this.updateSelectedRoom(i), this.cancelEdit();
   }
   beginEdit(e) {
     const t = this.selectedRoom, i = t?.reactions?.[e];
-    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : xt(i.kind)).join(", "), this.draftPosition = Qe(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
+    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : wt(i.kind)).join(", "), this.draftPosition = Je(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
   }
   cancelEdit() {
-    this.editingIndex = void 0, this.draftKind = "light", this.draftEntity = "", this.draftStates = xt("light").join(", "), this.draftPosition = void 0, this.draftIntensity = 0.75, this.draftRadius = 90;
+    this.editingIndex = void 0, this.draftKind = "light", this.draftEntity = "", this.draftStates = wt("light").join(", "), this.draftPosition = void 0, this.draftIntensity = 0.75, this.draftRadius = 90;
   }
   removeReaction(e) {
     this.selectedRoom && (this.updateSelectedRoom((this.selectedRoom.reactions ?? []).filter((t, i) => i !== e)), this.editingIndex === e && this.cancelEdit());
   }
   changeKind(e) {
-    this.draftKind = e, this.draftEntity = "", this.draftStates = e === "temperature" ? "" : xt(e).join(", "), e === "fireplace" && (this.draftIntensity = 0.75, this.draftRadius = 90);
+    this.draftKind = e, this.draftEntity = "", this.draftStates = e === "temperature" ? "" : wt(e).join(", "), e === "fireplace" && (this.draftIntensity = 0.75, this.draftRadius = 90);
   }
   options() {
     return this.hass ? Object.entries(this.hass.states).filter(([e, t]) => {
@@ -6360,17 +6360,17 @@ let ee = class extends j {
   }
   handlePreviewClick(e) {
     const t = e.currentTarget, i = t.getBoundingClientRect();
-    !i.width || !i.height || (this.draftPosition = { x: Jt((e.clientX - i.left) / i.width), y: Jt((e.clientY - i.top) / i.height) });
+    !i.width || !i.height || (this.draftPosition = { x: ei((e.clientX - i.left) / i.width), y: ei((e.clientY - i.top) / i.height) });
   }
   preview(e) {
-    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? Qe(e);
+    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? Je(e);
     return h`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? h`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${x} ${x}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * x},${o * x}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
-      const o = Qe(e, r);
-      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${Qt[r.kind]}</text></g>`;
-    })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Qt[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
+      const o = Je(e, r);
+      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${Jt[r.kind]}</text></g>`;
+    })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Jt[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
   }
   statusLabel(e, t) {
-    const i = yr(e, t, (r) => this.state(r));
+    const i = vr(e, t, (r) => this.state(r));
     return e.kind === "temperature" && i.numericValue !== void 0 ? `${i.numericValue}${i.unit ? ` ${i.unit}` : "°"}` : i.active ? `Aktiv · ${i.currentState}` : `Inaktiv · ${i.currentState ?? "ukendt"}`;
   }
   render() {
@@ -6378,7 +6378,7 @@ let ee = class extends j {
     const e = this.selectedRoom, t = e?.reactions ?? [], i = this.options(), r = i.some((o) => o.id === this.draftEntity);
     return h`<section class="editor"><div class="heading"><div><span>Living Entity Points · Fireplace</span><h3>Rumreaktioner</h3></div><b>${this.rooms.reduce((o, n) => o + (n.reactions?.length ?? 0), 0)} punkter</b></div><p class="intro">Placér lys, sensorer, medier og nu også pejs/ildsted direkte på kortet.</p>${this.rooms.length ? h`<label>Rum<select .value=${this.selectedRoomId} @change=${(o) => {
       this.selectedRoomId = o.target.value, this.cancelEdit();
-    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Yt).map((o) => h`<option value=${o}>${Yt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Qt[o.kind]}</span><div><strong>${Yt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
+    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Qt).map((o) => h`<option value=${o}>${Qt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Jt[o.kind]}</span><div><strong>${Qt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
 ee.styles = O`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
@@ -6420,7 +6420,7 @@ var cs = Object.getOwnPropertyDescriptor, ps = (e, t, i, r) => {
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-let ir = class extends ee {
+let rr = class extends ee {
   updated(e) {
     super.updated(e), queueMicrotask(() => this.cleanOpeningControls());
   }
@@ -6437,9 +6437,9 @@ let ir = class extends ee {
     t && t.textContent?.includes("dør/vindue") && (t.innerHTML = "Hele rummet bliver ikke længere farvet af en enkelt entity. Hver lampe, bevægelsessensor, TV/media player og temperatursensor får sit eget punkt på plantegningen. Lamper bruger stadig <code>brightness</code>, og temperatur vises med den aktuelle værdi. Døre og vinduer konfigureres nu under <strong>Dynamic Doors & Windows</strong>.");
   }
 };
-ir = ps([
+rr = ps([
   z("ha-explorer-room-reactions-editor-clean")
-], ir);
+], rr);
 var hs = Object.defineProperty, us = Object.getOwnPropertyDescriptor, ye = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? us(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
@@ -6671,7 +6671,7 @@ let F = class extends j {
     return t.length ? [...new Set(t)] : ["on"];
   }
   nodeState(e) {
-    return He(e, (t) => this.entityState(t));
+    return Fe(e, (t) => this.entityState(t));
   }
   nodeStateLabel(e) {
     if (e.kind !== "door") return "";
@@ -7105,7 +7105,7 @@ var fs = Object.defineProperty, bs = Object.getOwnPropertyDescriptor, pe = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && fs(t, i, o), o;
 };
-const Ie = 1e3;
+const De = 1e3;
 let ne = class extends j {
   constructor() {
     super(...arguments), this.fromKey = "", this.toKey = "", this.conditionEntity = "", this.conditionStates = "on", this.editingEntity = "", this.editingStates = "on";
@@ -7181,7 +7181,7 @@ let ne = class extends j {
     return this.hass?.states[e]?.state;
   }
   edgeStatuses() {
-    return this.config ? ct(
+    return this.config ? pt(
       this.config,
       (e) => this.entityState(e)
     ) : [];
@@ -7273,17 +7273,17 @@ let ne = class extends j {
       if (!n || !s) return f;
       const a = e[o] ?? this.edgeStatus(o), l = ["graph-edge", a.conditional ? "conditional" : "", a.active ? "" : "blocked"].filter(Boolean).join(" ");
       return P`<line
-        x1=${n[0] * Ie}
-        y1=${n[1] * Ie}
-        x2=${s[0] * Ie}
-        y2=${s[1] * Ie}
+        x1=${n[0] * De}
+        y1=${n[1] * De}
+        x2=${s[0] * De}
+        y2=${s[1] * De}
         class=${l}
         vector-effect="non-scaling-stroke"
       ></line>`;
     }), i = this.endpointOptions().filter((r) => r.point).map((r) => {
-      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? He(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
+      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? Fe(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
       return P`
-          <g transform=${`translate(${o * Ie} ${n * Ie})`}>
+          <g transform=${`translate(${o * De} ${n * De})`}>
             <circle class=${r.kind === "room" ? "graph-room" : l ? "graph-node blocked" : "graph-node"} r=${r.kind === "room" ? "11" : "13"}></circle>
           </g>
         `;
@@ -7423,13 +7423,13 @@ pe([
 ne = pe([
   z("ha-explorer-route-graph-editor")
 ], ne);
-var ys = Object.defineProperty, vs = Object.getOwnPropertyDescriptor, ht = (e, t, i, r) => {
+var ys = Object.defineProperty, vs = Object.getOwnPropertyDescriptor, ut = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? vs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ys(t, i, o), o;
 };
 const oe = 1e3;
-let Ne = class extends j {
+let Re = class extends j {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "";
   }
@@ -7459,7 +7459,7 @@ let Ne = class extends j {
     return this.hass?.states[e]?.state;
   }
   edgeStatuses() {
-    return this.config ? ct(
+    return this.config ? pt(
       this.config,
       (e) => this.entityState(e)
     ) : [];
@@ -7475,7 +7475,7 @@ let Ne = class extends j {
   }
   selectedResolution() {
     if (!(!this.config || !this.fromRoom || !this.toRoom || this.fromRoom === this.toRoom))
-      return gi(
+      return mi(
         this.config,
         this.fromRoom,
         this.toRoom,
@@ -7544,7 +7544,7 @@ let Ne = class extends j {
   }
   renderDisconnectedMarkers() {
     if (!this.config) return f;
-    const e = Bi(
+    const e = Hi(
       this.config,
       (r) => this.entityState(r)
     ), t = e.disconnectedRoomIds.map((r) => {
@@ -7585,7 +7585,7 @@ let Ne = class extends j {
   }
   renderDiagnostics() {
     if (!this.config) return f;
-    const e = Bi(
+    const e = Hi(
       this.config,
       (r) => this.entityState(r)
     ), t = this.graphEdges.length > 0, i = e.invalidEdges + e.duplicateEdges + e.disconnectedRoomIds.length + e.disconnectedNodeIds.length + e.brokenRouteNodeReferences.length + e.unresolvedConditionEntities.length + Math.max(0, e.components - 1);
@@ -7700,31 +7700,31 @@ let Ne = class extends j {
     `;
   }
 };
-Ne.styles = O`
+Re.styles = O`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
-ht([
+ut([
   A({ attribute: !1 })
-], Ne.prototype, "config", 2);
-ht([
+], Re.prototype, "config", 2);
+ut([
   A({ attribute: !1 })
-], Ne.prototype, "hass", 2);
-ht([
+], Re.prototype, "hass", 2);
+ut([
   v()
-], Ne.prototype, "fromRoom", 2);
-ht([
+], Re.prototype, "fromRoom", 2);
+ut([
   v()
-], Ne.prototype, "toRoom", 2);
-Ne = ht([
+], Re.prototype, "toRoom", 2);
+Re = ut([
   z("ha-explorer-route-diagnostics")
-], Ne);
-var xs = Object.defineProperty, ws = Object.getOwnPropertyDescriptor, vi = (e, t, i, r) => {
+], Re);
+var xs = Object.defineProperty, ws = Object.getOwnPropertyDescriptor, xi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ws(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && xs(t, i, o), o;
 };
 const $s = { basic: 0, rooms: 1, presences: 2 };
-let ri = class extends L {
+let oi = class extends L {
   updated(e) {
     super.updated(e), e.has("config") && this.config && this.setConfig(this.config);
   }
@@ -7732,13 +7732,13 @@ let ri = class extends L {
     return this.renderRoomDrawingEditor();
   }
 };
-vi([
+xi([
   A({ attribute: !1 })
-], ri.prototype, "config", 2);
-ri = vi([
+], oi.prototype, "config", 2);
+oi = xi([
   z("ha-explorer-room-tools")
-], ri);
-let oi = class extends ce {
+], oi);
+let ni = class extends ce {
   constructor() {
     super(...arguments), this.handleNativeControlChange = (e) => {
       e.stopPropagation(), queueMicrotask(() => {
@@ -7820,17 +7820,17 @@ let oi = class extends ce {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-oi.styles = O`${ce.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
-oi = vi([
+ni.styles = O`${ce.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+ni = xi([
   z("ha-explorer-ha-editor")
-], oi);
-function rr(e) {
+], ni);
+function or(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Er(e) {
+function Mr(e) {
   return e.trim().toLocaleLowerCase().replace(/[\s_-]+/g, " ");
 }
-function ei(e, t) {
+function ti(e, t) {
   if (t.length < 3) return !1;
   let i = !1;
   const [r, o] = e;
@@ -7858,66 +7858,66 @@ function _s(e) {
   if (!(Math.abs(t) < Number.EPSILON))
     return [i / (3 * t), r / (3 * t)];
 }
-function De(e) {
-  return { x: rr(e.x), y: rr(e.y) };
+function je(e) {
+  return { x: or(e.x), y: or(e.y) };
 }
 function As(e) {
-  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(Er);
+  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(Mr);
 }
-function Mr(e, t) {
+function Pr(e, t) {
   if (!t?.trim()) return;
-  const i = Er(t);
+  const i = Mr(t);
   return e.find((r) => As(r).includes(i));
 }
 function Ss(e) {
-  if (e.presence_anchor) return De(e.presence_anchor);
-  if (e.label) return De(e.label);
+  if (e.presence_anchor) return je(e.presence_anchor);
+  if (e.label) return je(e.label);
   const t = _s(e.points);
-  if (t && ei(t, e.points))
-    return De({ x: t[0], y: t[1] });
+  if (t && ti(t, e.points))
+    return je({ x: t[0], y: t[1] });
   const i = ks(e.points);
-  if (ei(i, e.points))
-    return De({ x: i[0], y: i[1] });
+  if (ti(i, e.points))
+    return je({ x: i[0], y: i[1] });
   if (e.points.length) {
     const r = e.points.map(([s]) => s), o = e.points.map(([, s]) => s), n = [
       (Math.min(...r) + Math.max(...r)) / 2,
       (Math.min(...o) + Math.max(...o)) / 2
     ];
-    return ei(n, e.points) ? De({ x: n[0], y: n[1] }) : De({ x: e.points[0][0], y: e.points[0][1] });
+    return ti(n, e.points) ? je({ x: n[0], y: n[1] }) : je({ x: e.points[0][0], y: e.points[0][1] });
   }
   return { x: 0.5, y: 0.5 };
 }
-const ni = /* @__PURE__ */ new Map();
-function Nt(e) {
+const si = /* @__PURE__ */ new Map();
+function Rt(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
-function or(e, t) {
-  return Math.max(1, Math.round(Nt(e) ?? t));
+function nr(e, t) {
+  return Math.max(1, Math.round(Rt(e) ?? t));
 }
 function Cs(e) {
-  const t = Math.max(0.05, Nt(e.max_height_m) ?? 0.75);
+  const t = Math.max(0.05, Rt(e.max_height_m) ?? 0.75);
   return {
     heightAttribute: e.height_attribute?.trim() || "maxz",
     targetIdAttribute: e.target_id_attribute?.trim() || "target_id",
     timestampAttribute: e.timestamp_attribute?.trim() || "timestamp",
     maxHeight: t,
-    releaseHeight: Math.max(t + 0.05, Nt(e.release_height_m) ?? t + 0.2),
-    confirmationUpdates: or(e.confirmation_updates, 3),
-    releaseUpdates: or(e.release_updates, 2)
+    releaseHeight: Math.max(t + 0.05, Rt(e.release_height_m) ?? t + 0.2),
+    confirmationUpdates: nr(e.confirmation_updates, 3),
+    releaseUpdates: nr(e.release_updates, 2)
   };
 }
 function Es() {
-  ni.clear();
+  si.clear();
 }
 function Ms(e, t) {
   const i = e.shelly_pet_detection;
   if (!i?.enabled || !t) return e;
-  const r = Cs(i), o = Nt(t.attributes[r.heightAttribute]);
+  const r = Cs(i), o = Rt(t.attributes[r.heightAttribute]);
   if (o === void 0) return { ...e, visible: !1 };
   const n = t.attributes[r.targetIdAttribute], s = n === void 0 ? t.entity_id : String(n), a = t.attributes[r.timestampAttribute], l = a === void 0 ? `${s}:${o}:${t.attributes.x ?? ""}:${t.attributes.y ?? ""}` : `${s}:${String(a)}`;
-  let d = ni.get(e.id);
-  return (!d || d.targetId !== s) && (d = { targetId: s, low: 0, high: 0, confirmed: !1 }, ni.set(e.id, d)), d.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed } : (d.lastSample = l, o <= r.maxHeight ? (d.low += 1, d.high = 0, d.low >= r.confirmationUpdates && (d.confirmed = !0)) : o >= r.releaseHeight ? (d.high += 1, d.low = 0, d.high >= r.releaseUpdates && (d.confirmed = !1)) : (d.low = 0, d.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed });
+  let d = si.get(e.id);
+  return (!d || d.targetId !== s) && (d = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, d)), d.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed } : (d.lastSample = l, o <= r.maxHeight ? (d.low += 1, d.high = 0, d.low >= r.confirmationUpdates && (d.confirmed = !0)) : o >= r.releaseHeight ? (d.high += 1, d.low = 0, d.high >= r.releaseUpdates && (d.confirmed = !1)) : (d.low = 0, d.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed });
 }
 const Ps = ["unknown", "unavailable", "not_detected"], Ns = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
 function te(e, t) {
@@ -7941,10 +7941,10 @@ function Rs(e, t) {
   }
   return t;
 }
-function bt(e, t) {
+function yt(e, t) {
   return typeof e == "string" && e.trim() ? e : t;
 }
-function nr(e) {
+function sr(e) {
   if (typeof e != "string") return;
   const t = e.trim();
   return Ns.has(t.toLowerCase()) ? void 0 : t;
@@ -7952,21 +7952,21 @@ function nr(e) {
 function zs(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
-    return r ? nr(e.room_attribute ? te(r, e.room_attribute) : r.state) : void 0;
+    return r ? sr(e.room_attribute ? te(r, e.room_attribute) : r.state) : void 0;
   }
   if (t)
-    return nr(te(t, e.room_attribute ?? "explorer_room"));
+    return sr(te(t, e.room_attribute ?? "explorer_room"));
 }
 function Ts(e) {
   if (!e.points.length) return;
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
 }
-function sr(e, t, i, r, o, n) {
+function ar(e, t, i, r, o, n) {
   const s = i - t;
   return Math.abs(s) < 1e-6 ? n : r + (e - t) / s * (o - r);
 }
-function ar(e, t, i, r, o, n, s) {
+function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
   const l = i[n], d = r[n], c = o[n], p = (l * (r.sensor_y - o.sensor_y) + d * (o.sensor_y - i.sensor_y) + c * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + d * (i.sensor_x - o.sensor_x) + c * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + d * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + c * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
@@ -7978,10 +7978,10 @@ function Os(e, t, i) {
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
   let d = Math.min(1, Math.max(0, a / o)), c = Math.min(1, Math.max(0, l / n));
   const p = r?.position_calibration;
-  return p?.c ? (d = ar(a, l, p.a, p.b, p.c, "room_x", d), c = ar(a, l, p.a, p.b, p.c, "room_y", c)) : p && (d = sr(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, d), c = sr(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, c)), d = Math.min(1, Math.max(0, d)), c = Math.min(1, Math.max(0, c)), { x: s.minX + d * (s.maxX - s.minX), y: s.minY + c * (s.maxY - s.minY) };
+  return p?.c ? (d = lr(a, l, p.a, p.b, p.c, "room_x", d), c = lr(a, l, p.a, p.b, p.c, "room_y", c)) : p && (d = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, d), c = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, c)), d = Math.min(1, Math.max(0, d)), c = Math.min(1, Math.max(0, c)), { x: s.minX + d * (s.maxX - s.minX), y: s.minY + c * (s.maxY - s.minY) };
 }
-function yt(e, t, i) {
-  const r = Mr(t, i ?? e.room_id);
+function vt(e, t, i) {
+  const r = Pr(t, i ?? e.room_id);
   if (r) {
     const s = Ss(r);
     return { ...e, x: s.x, y: s.y, room_id: r.id };
@@ -7993,7 +7993,7 @@ function Is(e, t, i, r, o, n) {
   if (!i) return { x: we(e.x), y: we(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
-    const d = ge(te(i, a)), c = ge(te(i, l)), p = Mr(r, o ?? e.room_id);
+    const d = ge(te(i, a)), c = ge(te(i, l)), p = Pr(r, o ?? e.room_id);
     return d === void 0 || c === void 0 || !p ? {} : { ...Os(p, d, c), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
@@ -8004,45 +8004,45 @@ function Is(e, t, i, r, o, n) {
 }
 function Ds(e, t, i = [], r) {
   const o = e.entity_binding;
-  if (!o || !t) return yt(e, i);
+  if (!o || !t) return vt(e, i);
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
-  if (o.entity && !n) return { ...yt(e, i), visible: !1 };
-  if (o.position_entity && !a) return { ...yt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ps, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = d || c ? !1 : Rs(p, e.visible ?? !0), g = zs(o, n, t) ?? e.room_id, b = Is(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? bt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? bt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? bt(te(n, o.icon_attribute)) : void 0), color: e.color ?? bt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : yt(m, i, g);
+  if (o.entity && !n) return { ...vt(e, i), visible: !1 };
+  if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
+  const l = o.hidden_states ?? Ps, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = d || c ? !1 : Rs(p, e.visible ?? !0), g = zs(o, n, t) ?? e.room_id, b = Is(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
   return Ms(y, a);
 }
 function js(e, t, i = [], r) {
   return e.map((o) => Ds(o, t, i, r));
 }
-const qe = /* @__PURE__ */ new Map(), Ls = 0.22, qs = 0.16, Bs = 3e4, Hs = 0.025, Fs = 0.018;
-function Rt(e) {
+const Be = /* @__PURE__ */ new Map(), Ls = 0.22, qs = 0.16, Bs = 3e4, Hs = 0.025, Fs = 0.018;
+function zt(e) {
   return Number.isFinite(e.x) && Number.isFinite(e.y) ? { x: e.x, y: e.y } : void 0;
 }
-function si(e, t) {
+function ai(e, t) {
   return Math.hypot(e.x - t.x, e.y - t.y);
 }
-function Le(e) {
+function qe(e) {
   return e.entity_binding?.entity ?? e.id;
 }
-function Je(e) {
+function et(e) {
   return e.entity_binding?.position_entity;
 }
-function Pr(e) {
+function Nr(e) {
   return e.previous ? { x: e.point.x + (e.point.x - e.previous.x), y: e.point.y + (e.point.y - e.previous.y) } : e.point;
 }
 function Vs(e, t) {
-  const i = Rt(t), r = si(e.point, i), o = si(Pr(e), i), n = e.target && e.target === Je(t) ? Hs : 0;
+  const i = zt(t), r = ai(e.point, i), o = ai(Nr(e), i), n = e.target && e.target === et(t) ? Hs : 0;
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
-function lr(e, t, i) {
-  const r = Le(e), o = Rt(t);
+function dr(e, t, i) {
+  const r = qe(e), o = zt(t);
   if (!o) return;
-  const n = qe.get(r);
-  qe.set(r, { point: o, previous: n?.point, target: Je(t), seenAt: i });
+  const n = Be.get(r);
+  Be.set(r, { point: o, previous: n?.point, target: et(t), seenAt: i });
 }
 function Ks(e, t = Date.now()) {
-  for (const [a, l] of qe) t - l.seenAt > Bs && qe.delete(a);
-  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && Rt(a) && Je(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
+  for (const [a, l] of Be) t - l.seenAt > Bs && Be.delete(a);
+  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && zt(a) && et(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
     const l = a.room_id ?? "__no_room__", d = n.get(l) ?? [];
     d.push(a), n.set(l, d);
@@ -8051,11 +8051,11 @@ function Ks(e, t = Date.now()) {
   for (const a of n.values()) {
     if (a.length < 2) {
       for (const g of a)
-        s.push(g), lr(g, g, t);
+        s.push(g), dr(g, g, t);
       continue;
     }
-    const l = [...a], d = [...a].sort((g, b) => Le(g).localeCompare(Le(b))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
-      const b = qe.get(Le(g));
+    const l = [...a], d = [...a].sort((g, b) => qe(g).localeCompare(qe(b))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
+      const b = Be.get(qe(g));
       if (!b) return { identity: g, track: void 0, scores: [] };
       const m = l.map((y) => Vs(b, y)).sort((y, _) => y.score - _.score);
       return { identity: g, track: b, scores: m };
@@ -8065,32 +8065,32 @@ function Ks(e, t = Date.now()) {
       if (!m) continue;
       const y = g.scores.filter((C) => !p.has(C.candidate));
       if (!y.length) continue;
-      const _ = y[0], $ = y[1], w = _.distance <= Ls || si(Pr(m), Rt(_.candidate)) <= qs, S = !!$ && $.score - _.score < Fs;
-      w && !S && (c.set(Le(b), _.candidate), p.add(_.candidate));
+      const _ = y[0], $ = y[1], w = _.distance <= Ls || ai(Nr(m), zt(_.candidate)) <= qs, S = !!$ && $.score - _.score < Fs;
+      w && !S && (c.set(qe(b), _.candidate), p.add(_.candidate));
     }
     for (const g of d) {
-      const b = Le(g);
+      const b = qe(g);
       let m = c.get(b);
-      if (m || (m = l.find((_) => !p.has(_) && Je(_) === Je(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
+      if (m || (m = l.find((_) => !p.has(_) && et(_) === et(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
         s.push(g);
         continue;
       }
       const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), lr(g, m, t);
+      s.push(y), dr(g, m, t);
     }
   }
   return [...s, ...o];
 }
 function Zs() {
-  qe.clear();
+  Be.clear();
 }
-var Gs = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, It = (e, t, i, r) => {
+var Gs = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, Dt = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Us(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gs(t, i, o), o;
 };
-const Nr = "0.43.0";
-let Ze = class extends j {
+const Rr = "0.43.1";
+let Ge = class extends j {
   constructor() {
     super(...arguments), this.preview = !1;
   }
@@ -8492,7 +8492,7 @@ let Ze = class extends j {
           >
           <h1>${this.config.title}</h1>
         </div>
-        <small>Enchanted Atmosphere · v${Nr}</small>
+        <small>Enchanted Atmosphere · v${Rr}</small>
       </header>
       <div class="map-stage">
         <div class="weather-flash"></div>
@@ -8534,7 +8534,7 @@ let Ze = class extends j {
     ></ha-card>`;
   }
 };
-Ze.styles = O`
+Ge.styles = O`
     :host {
       display: block;
       width: 100%;
@@ -9904,18 +9904,18 @@ Ze.styles = O`
       }
     }
   `;
-It([
+Dt([
   A({ attribute: !1 })
-], Ze.prototype, "hass", 2);
-It([
+], Ge.prototype, "hass", 2);
+Dt([
   A({ type: Boolean, attribute: !1 })
-], Ze.prototype, "preview", 2);
-It([
+], Ge.prototype, "preview", 2);
+Dt([
   v()
-], Ze.prototype, "config", 2);
-Ze = It([
+], Ge.prototype, "config", 2);
+Ge = Dt([
   z("ha-explorer-card")
-], Ze);
+], Ge);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "ha-explorer-card",
@@ -9924,11 +9924,11 @@ window.customCards.push({
   preview: !0
 });
 console.info(
-  `%c HOME ASSISTANT EXPLORER %c v${Nr} `,
+  `%c HOME ASSISTANT EXPLORER %c v${Rr} `,
   "color:white;background:#594431;font-weight:700;",
   "color:#594431;background:#d8c39b;font-weight:700;"
 );
 export {
-  Ze as HaExplorerCard
+  Ge as HaExplorerCard
 };
 //# sourceMappingURL=ha-explorer-card.js.map
