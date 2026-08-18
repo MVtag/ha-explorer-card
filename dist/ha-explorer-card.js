@@ -8089,7 +8089,7 @@ var Gs = Object.defineProperty, Ws = Object.getOwnPropertyDescriptor, Dt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gs(t, i, o), o;
 };
-const Rr = "0.44.2";
+const Rr = "0.44.3";
 let Ge = class extends j {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8360,23 +8360,17 @@ let Ge = class extends j {
       </g>
       ${t === "left" ? h`
             <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
-            <circle class="castle-moon" cx="116" cy="218" r="68" fill="#f4d998"></circle>
+            <circle class="castle-moon-solid" cx="116" cy="218" r="68" fill="#f4d998" stroke="#e3bd72" stroke-width="2"></circle>
             <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
             <path class="castle-distant" d="M0 900V708l54-48 40 12 34-54 49 22 43-77 51 22 41-89 67 42 42-60 52 38 34-43 73 52v355Z"></path>
             <path class="castle-cliff" d="M64 900V758c41-38 86-46 127-27 33 15 61 7 93-15 51-36 86-27 122-2 48 32 96 1 174-49v235Z"></path>
-            <g class="castle-complex" fill="#0a0604" stroke="#6f4b2d" opacity="1" visibility="visible">
-              <path d="M67 760V592h18V548h43v44h16v168Z"></path>
-              <path d="M92 548l15-73 15 73Z"></path>
-              <path d="M150 754V522h18v-47h54v47h17v232Z"></path>
-              <path d="M174 475l21-101 22 101Z"></path>
-              <path d="M235 744V566h15v-38h54v38h18v178Z"></path>
-              <path d="M254 528l22-65 23 65Z"></path>
-              <path d="M310 730V439h23v-57h76v57h22v291Z"></path>
-              <path d="M336 382l35-154 34 154Z"></path>
-              <path d="M426 742V548h16v-44h54v44h20v194Z"></path>
-              <path d="M445 504l24-92 23 92Z"></path>
-              <path d="M118 645h48v21h-48zM214 615h50v20h-50zM395 603h54v23h-54z"></path>
-            </g>
+            <path
+              class="castle-silhouette"
+              fill="#0a0604"
+              stroke="#6f4b2d"
+              stroke-width="1.25"
+              d="M67 760V592h18V548h43v44h16v168ZM92 548l15-73 15 73ZM150 754V522h18v-47h54v47h17v232ZM174 475l21-101 22 101ZM235 744V566h15v-38h54v38h18v178ZM254 528l22-65 23 65ZM310 730V439h23v-57h76v57h22v291ZM336 382l35-154 34 154ZM426 742V548h16v-44h54v44h20v194ZM445 504l24-92 23 92ZM118 645h48v21h-48zM214 615h50v20h-50zM395 603h54v23h-54z"
+            ></path>
             <g class="castle-roof-detail">
               <path d="M88 548h38M153 522h84M236 566h85M312 439h116M427 548h86"></path>
               <path d="M107 477v-29M195 376v-36M371 230v-48M469 414v-35"></path>
@@ -8398,21 +8392,13 @@ let Ge = class extends j {
             <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
             <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
             <path class="castle-cliff" d="M-20 900V711c76-51 135-40 190-7 47 28 84 24 129-9 52-39 94-30 136 1 43 31 91 28 145-4v208Z"></path>
-            <g class="castle-complex" fill="#0a0604" stroke="#6f4b2d" opacity="1" visibility="visible">
-              <path d="M34 746V552h18v-44h58v44h18v194Z"></path>
-              <path d="M56 508l25-89 24 89Z"></path>
-              <path d="M122 738V607h22v-34h68v34h19v131Z"></path>
-              <path d="M145 573l33-57 31 57Z"></path>
-              <path d="M221 724V472h21v-51h70v51h23v252Z"></path>
-              <path d="M244 421l33-133 32 133Z"></path>
-              <path d="M330 742V541h18v-42h55v42h20v201Z"></path>
-              <path d="M349 499l26-88 24 88Z"></path>
-              <path d="M418 754V585h16v-39h51v39h18v169Z"></path>
-              <path d="M435 546l24-69 23 69Z"></path>
-              <path d="M492 765V625h14v-32h36v32h18v140Z"></path>
-              <path d="M504 593l19-58 17 58Z"></path>
-              <path d="M95 661h58v21H95zM207 626h51v20h-51zM309 590h57v23h-57zM398 650h47v19h-47z"></path>
-            </g>
+            <path
+              class="castle-silhouette"
+              fill="#0a0604"
+              stroke="#6f4b2d"
+              stroke-width="1.25"
+              d="M34 746V552h18v-44h58v44h18v194ZM56 508l25-89 24 89ZM122 738V607h22v-34h68v34h19v131ZM145 573l33-57 31 57ZM221 724V472h21v-51h70v51h23v252ZM244 421l33-133 32 133ZM330 742V541h18v-42h55v42h20v201ZM349 499l26-88 24 88ZM418 754V585h16v-39h51v39h18v169ZM435 546l24-69 23 69ZM492 765V625h14v-32h36v32h18v140ZM504 593l19-58 17 58ZM95 661h58v21H95zM207 626h51v20h-51zM309 590h57v23h-57zM398 650h47v19h-47z"
+            ></path>
             <path class="castle-bridge" d="M111 688C151 656 188 655 226 685s77 28 114-2 73-31 111 4"></path>
             <g class="castle-roof-detail">
               <path d="M35 552h92M123 607h106M222 472h112M331 541h91M419 585h83"></path>
@@ -8612,8 +8598,8 @@ Ge.styles = O`
       .enchanted-castle-side {
         position: absolute;
         bottom: 0;
-        width: 38%;
-        max-width: 680px;
+        width: 42%;
+        max-width: 720px;
         height: 100%;
         overflow: visible;
         opacity: 0.98;
@@ -8622,20 +8608,20 @@ Ge.styles = O`
           drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
       }
       .enchanted-castle-left {
-        left: 0;
+        left: -4%;
       }
       .enchanted-castle-right {
-        right: 0;
+        right: -4%;
       }
       .castle-moon-glow {
         fill: rgba(227, 185, 105, 0.24);
         filter: blur(34px);
       }
-      .castle-moon {
-        fill: rgba(255, 236, 187, 0.94);
-        stroke: rgba(255, 224, 158, 0.42);
+      .castle-moon-solid {
+        fill: #f4d998;
+        stroke: #e3bd72;
         stroke-width: 2;
-        filter: drop-shadow(0 0 18px rgba(225, 175, 89, 0.58));
+        opacity: 0.94;
       }
       .castle-moon-dim {
         opacity: 0.48;
@@ -8665,6 +8651,15 @@ Ge.styles = O`
         filter:
           drop-shadow(0 -3px 0 rgba(153, 108, 62, 0.24))
           drop-shadow(0 9px 14px rgba(0, 0, 0, 0.68));
+      }
+      .castle-silhouette {
+        fill: #0a0604;
+        stroke: #6f4b2d;
+        stroke-width: 1.25;
+        stroke-linejoin: round;
+        opacity: 1;
+        visibility: visible;
+        vector-effect: non-scaling-stroke;
       }
       .castle-roof-detail,
       .castle-buttresses {
