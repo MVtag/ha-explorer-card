@@ -1,15 +1,15 @@
-const gt = globalThis, Qt = gt.ShadowRoot && (gt.ShadyCSS === void 0 || gt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Jt = /* @__PURE__ */ Symbol(), gi = /* @__PURE__ */ new WeakMap();
-let Ji = class {
+const bt = globalThis, ti = bt.ShadowRoot && (bt.ShadyCSS === void 0 || bt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, ii = /* @__PURE__ */ Symbol(), mi = /* @__PURE__ */ new WeakMap();
+let er = class {
   constructor(t, i, r) {
-    if (this._$cssResult$ = !0, r !== Jt) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    if (this._$cssResult$ = !0, r !== ii) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = i;
   }
   get styleSheet() {
     let t = this.o;
     const i = this.t;
-    if (Qt && t === void 0) {
+    if (ti && t === void 0) {
       const r = i !== void 0 && i.length === 1;
-      r && (t = gi.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && gi.set(i, t));
+      r && (t = mi.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && mi.set(i, t));
     }
     return t;
   }
@@ -17,28 +17,28 @@ let Ji = class {
     return this.cssText;
   }
 };
-const Sr = (e) => new Ji(typeof e == "string" ? e : e + "", void 0, Jt), T = (e, ...t) => {
+const Mr = (e) => new er(typeof e == "string" ? e : e + "", void 0, ii), O = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + s + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(o) + e[n + 1], e[0]);
-  return new Ji(i, e, Jt);
-}, Cr = (e, t) => {
-  if (Qt) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
+  return new er(i, e, ii);
+}, Nr = (e, t) => {
+  if (ti) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
   else for (const i of t) {
-    const r = document.createElement("style"), o = gt.litNonce;
+    const r = document.createElement("style"), o = bt.litNonce;
     o !== void 0 && r.setAttribute("nonce", o), r.textContent = i.cssText, e.appendChild(r);
   }
-}, mi = Qt ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
+}, fi = ti ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
   for (const r of t.cssRules) i += r.cssText;
-  return Sr(i);
+  return Mr(i);
 })(e) : e;
-const { is: Er, defineProperty: Mr, getOwnPropertyDescriptor: Nr, getOwnPropertyNames: Pr, getOwnPropertySymbols: Rr, getPrototypeOf: zr } = Object, At = globalThis, fi = At.trustedTypes, Or = fi ? fi.emptyScript : "", Tr = At.reactiveElementPolyfillSupport, Ge = (e, t) => e, bt = { toAttribute(e, t) {
+const { is: Pr, defineProperty: Rr, getOwnPropertyDescriptor: zr, getOwnPropertyNames: Tr, getOwnPropertySymbols: Or, getPrototypeOf: Ir } = Object, Mt = globalThis, bi = Mt.trustedTypes, Dr = bi ? bi.emptyScript : "", jr = Mt.reactiveElementPolyfillSupport, Ue = (e, t) => e, xt = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
-      e = e ? Or : null;
+      e = e ? Dr : null;
       break;
     case Object:
     case Array:
@@ -63,8 +63,8 @@ const { is: Er, defineProperty: Mr, getOwnPropertyDescriptor: Nr, getOwnProperty
       }
   }
   return i;
-} }, ei = (e, t) => !Er(e, t), bi = { attribute: !0, type: String, converter: bt, reflect: !1, useDefault: !1, hasChanged: ei };
-Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), At.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+} }, ri = (e, t) => !Pr(e, t), yi = { attribute: !0, type: String, converter: xt, reflect: !1, useDefault: !1, hasChanged: ri };
+Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), Mt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let Oe = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
@@ -72,14 +72,14 @@ let Oe = class extends HTMLElement {
   static get observedAttributes() {
     return this.finalize(), this._$Eh && [...this._$Eh.keys()];
   }
-  static createProperty(t, i = bi) {
+  static createProperty(t, i = yi) {
     if (i.state && (i.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(t) && ((i = Object.create(i)).wrapped = !0), this.elementProperties.set(t, i), !i.noAccessor) {
       const r = /* @__PURE__ */ Symbol(), o = this.getPropertyDescriptor(t, r, i);
-      o !== void 0 && Mr(this.prototype, t, o);
+      o !== void 0 && Rr(this.prototype, t, o);
     }
   }
   static getPropertyDescriptor(t, i, r) {
-    const { get: o, set: n } = Nr(this.prototype, t) ?? { get() {
+    const { get: o, set: n } = zr(this.prototype, t) ?? { get() {
       return this[i];
     }, set(s) {
       this[i] = s;
@@ -90,17 +90,17 @@ let Oe = class extends HTMLElement {
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(t) {
-    return this.elementProperties.get(t) ?? bi;
+    return this.elementProperties.get(t) ?? yi;
   }
   static _$Ei() {
-    if (this.hasOwnProperty(Ge("elementProperties"))) return;
-    const t = zr(this);
+    if (this.hasOwnProperty(Ue("elementProperties"))) return;
+    const t = Ir(this);
     t.finalize(), t.l !== void 0 && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
   }
   static finalize() {
-    if (this.hasOwnProperty(Ge("finalized"))) return;
-    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Ge("properties"))) {
-      const i = this.properties, r = [...Pr(i), ...Rr(i)];
+    if (this.hasOwnProperty(Ue("finalized"))) return;
+    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Ue("properties"))) {
+      const i = this.properties, r = [...Tr(i), ...Or(i)];
       for (const o of r) this.createProperty(o, i[o]);
     }
     const t = this[Symbol.metadata];
@@ -119,8 +119,8 @@ let Oe = class extends HTMLElement {
     const i = [];
     if (Array.isArray(t)) {
       const r = new Set(t.flat(1 / 0).reverse());
-      for (const o of r) i.unshift(mi(o));
-    } else t !== void 0 && i.push(mi(t));
+      for (const o of r) i.unshift(fi(o));
+    } else t !== void 0 && i.push(fi(t));
     return i;
   }
   static _$Eu(t, i) {
@@ -146,7 +146,7 @@ let Oe = class extends HTMLElement {
   }
   createRenderRoot() {
     const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return Cr(t, this.constructor.elementStyles), t;
+    return Nr(t, this.constructor.elementStyles), t;
   }
   connectedCallback() {
     this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t) => t.hostConnected?.());
@@ -162,14 +162,14 @@ let Oe = class extends HTMLElement {
   _$ET(t, i) {
     const r = this.constructor.elementProperties.get(t), o = this.constructor._$Eu(t, r);
     if (o !== void 0 && r.reflect === !0) {
-      const n = (r.converter?.toAttribute !== void 0 ? r.converter : bt).toAttribute(i, r.type);
+      const n = (r.converter?.toAttribute !== void 0 ? r.converter : xt).toAttribute(i, r.type);
       this._$Em = t, n == null ? this.removeAttribute(o) : this.setAttribute(o, n), this._$Em = null;
     }
   }
   _$AK(t, i) {
     const r = this.constructor, o = r._$Eh.get(t);
     if (o !== void 0 && this._$Em !== o) {
-      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : bt;
+      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : xt;
       this._$Em = o;
       const a = s.fromAttribute(i, n.type);
       this[o] = a ?? this._$Ej?.get(o) ?? a, this._$Em = null;
@@ -178,7 +178,7 @@ let Oe = class extends HTMLElement {
   requestUpdate(t, i, r, o = !1, n) {
     if (t !== void 0) {
       const s = this.constructor;
-      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? ei)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
+      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? ri)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
       this.C(t, i, r);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
@@ -246,70 +246,70 @@ let Oe = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Oe.elementStyles = [], Oe.shadowRootOptions = { mode: "open" }, Oe[Ge("elementProperties")] = /* @__PURE__ */ new Map(), Oe[Ge("finalized")] = /* @__PURE__ */ new Map(), Tr?.({ ReactiveElement: Oe }), (At.reactiveElementVersions ??= []).push("2.1.2");
-const ti = globalThis, yi = (e) => e, yt = ti.trustedTypes, vi = yt ? yt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, er = "$lit$", we = `lit$${Math.random().toFixed(9).slice(2)}$`, tr = "?" + we, Ir = `<${tr}>`, Ce = document, Xe = () => Ce.createComment(""), Ye = (e) => e === null || typeof e != "object" && typeof e != "function", ii = Array.isArray, Dr = (e) => ii(e) || typeof e?.[Symbol.iterator] == "function", Mt = `[ 	
-\f\r]`, Ze = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, xi = /-->/g, wi = />/g, _e = RegExp(`>|${Mt}(?:([^\\s"'>=/]+)(${Mt}*=${Mt}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), $i = /'/g, ki = /"/g, ir = /^(?:script|style|textarea|title)$/i, rr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = rr(1), C = rr(2), oe = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), _i = /* @__PURE__ */ new WeakMap(), Se = Ce.createTreeWalker(Ce, 129);
-function or(e, t) {
-  if (!ii(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return vi !== void 0 ? vi.createHTML(t) : t;
+Oe.elementStyles = [], Oe.shadowRootOptions = { mode: "open" }, Oe[Ue("elementProperties")] = /* @__PURE__ */ new Map(), Oe[Ue("finalized")] = /* @__PURE__ */ new Map(), jr?.({ ReactiveElement: Oe }), (Mt.reactiveElementVersions ??= []).push("2.1.2");
+const oi = globalThis, vi = (e) => e, wt = oi.trustedTypes, xi = wt ? wt.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, tr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, ir = "?" + $e, Lr = `<${ir}>`, Ee = document, Qe = () => Ee.createComment(""), Je = (e) => e === null || typeof e != "object" && typeof e != "function", ni = Array.isArray, qr = (e) => ni(e) || typeof e?.[Symbol.iterator] == "function", zt = `[ 	
+\f\r]`, We = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, wi = /-->/g, $i = />/g, Ae = RegExp(`>|${zt}(?:([^\\s"'>=/]+)(${zt}*=${zt}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), ki = /'/g, _i = /"/g, rr = /^(?:script|style|textarea|title)$/i, or = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = or(1), N = or(2), ne = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Ai = /* @__PURE__ */ new WeakMap(), Ce = Ee.createTreeWalker(Ee, 129);
+function nr(e, t) {
+  if (!ni(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+  return xi !== void 0 ? xi.createHTML(t) : t;
 }
-const jr = (e, t) => {
+const Br = (e, t) => {
   const i = e.length - 1, r = [];
-  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Ze;
+  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = We;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let c, d, p = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, d = s.exec(l), d !== null); ) u = s.lastIndex, s === Ze ? d[1] === "!--" ? s = xi : d[1] !== void 0 ? s = wi : d[2] !== void 0 ? (ir.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = _e) : d[3] !== void 0 && (s = _e) : s === _e ? d[0] === ">" ? (s = o ?? Ze, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? _e : d[3] === '"' ? ki : $i) : s === ki || s === $i ? s = _e : s === xi || s === wi ? s = Ze : (s = _e, o = void 0);
-    const g = s === _e && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Ze ? l + Ir : p >= 0 ? (r.push(c), l.slice(0, p) + er + l.slice(p) + we + g) : l + we + (p === -2 ? a : g);
+    let c, d, p = -1, g = 0;
+    for (; g < l.length && (s.lastIndex = g, d = s.exec(l), d !== null); ) g = s.lastIndex, s === We ? d[1] === "!--" ? s = wi : d[1] !== void 0 ? s = $i : d[2] !== void 0 ? (rr.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ae) : d[3] !== void 0 && (s = Ae) : s === Ae ? d[0] === ">" ? (s = o ?? We, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ae : d[3] === '"' ? _i : ki) : s === _i || s === ki ? s = Ae : s === wi || s === $i ? s = We : (s = Ae, o = void 0);
+    const u = s === Ae && e[a + 1].startsWith("/>") ? " " : "";
+    n += s === We ? l + Lr : p >= 0 ? (r.push(c), l.slice(0, p) + tr + l.slice(p) + $e + u) : l + $e + (p === -2 ? a : u);
   }
-  return [or(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+  return [nr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
-class Qe {
+class et {
   constructor({ strings: t, _$litType$: i }, r) {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [c, d] = jr(t, i);
-    if (this.el = Qe.createElement(c, r), Se.currentNode = this.el.content, i === 2 || i === 3) {
+    const a = t.length - 1, l = this.parts, [c, d] = Br(t, i);
+    if (this.el = et.createElement(c, r), Ce.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
     }
-    for (; (o = Se.nextNode()) !== null && l.length < a; ) {
+    for (; (o = Ce.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
-        if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(er)) {
-          const u = d[s++], g = o.getAttribute(p).split(we), b = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? qr : b[1] === "?" ? Br : b[1] === "@" ? Fr : St }), o.removeAttribute(p);
-        } else p.startsWith(we) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
-        if (ir.test(o.tagName)) {
-          const p = o.textContent.split(we), u = p.length - 1;
-          if (u > 0) {
-            o.textContent = yt ? yt.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(p[g], Xe()), Se.nextNode(), l.push({ type: 2, index: ++n });
-            o.append(p[u], Xe());
+        if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(tr)) {
+          const g = d[s++], u = o.getAttribute(p).split($e), b = /([.?@])?(.*)/.exec(g);
+          l.push({ type: 1, index: n, name: b[2], strings: u, ctor: b[1] === "." ? Fr : b[1] === "?" ? Vr : b[1] === "@" ? Kr : Nt }), o.removeAttribute(p);
+        } else p.startsWith($e) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
+        if (rr.test(o.tagName)) {
+          const p = o.textContent.split($e), g = p.length - 1;
+          if (g > 0) {
+            o.textContent = wt ? wt.emptyScript : "";
+            for (let u = 0; u < g; u++) o.append(p[u], Qe()), Ce.nextNode(), l.push({ type: 2, index: ++n });
+            o.append(p[g], Qe());
           }
         }
-      } else if (o.nodeType === 8) if (o.data === tr) l.push({ type: 2, index: n });
+      } else if (o.nodeType === 8) if (o.data === ir) l.push({ type: 2, index: n });
       else {
         let p = -1;
-        for (; (p = o.data.indexOf(we, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += we.length - 1;
+        for (; (p = o.data.indexOf($e, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += $e.length - 1;
       }
       n++;
     }
   }
   static createElement(t, i) {
-    const r = Ce.createElement("template");
+    const r = Ee.createElement("template");
     return r.innerHTML = t, r;
   }
 }
-function De(e, t, i = e, r) {
-  if (t === oe) return t;
+function je(e, t, i = e, r) {
+  if (t === ne) return t;
   let o = r !== void 0 ? i._$Co?.[r] : i._$Cl;
-  const n = Ye(t) ? void 0 : t._$litDirective$;
-  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = De(e, o._$AS(e, t.values), o, r)), t;
+  const n = Je(t) ? void 0 : t._$litDirective$;
+  return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = je(e, o._$AS(e, t.values), o, r)), t;
 }
-class Lr {
+class Hr {
   constructor(t, i) {
     this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
@@ -320,24 +320,24 @@ class Lr {
     return this._$AM._$AU;
   }
   u(t) {
-    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Ce).importNode(i, !0);
-    Se.currentNode = o;
-    let n = Se.nextNode(), s = 0, a = 0, l = r[0];
+    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Ee).importNode(i, !0);
+    Ce.currentNode = o;
+    let n = Ce.nextNode(), s = 0, a = 0, l = r[0];
     for (; l !== void 0; ) {
       if (s === l.index) {
         let c;
-        l.type === 2 ? c = new nt(n, n.nextSibling, this, t) : l.type === 1 ? c = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (c = new Vr(n, this, t)), this._$AV.push(c), l = r[++a];
+        l.type === 2 ? c = new st(n, n.nextSibling, this, t) : l.type === 1 ? c = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (c = new Zr(n, this, t)), this._$AV.push(c), l = r[++a];
       }
-      s !== l?.index && (n = Se.nextNode(), s++);
+      s !== l?.index && (n = Ce.nextNode(), s++);
     }
-    return Se.currentNode = Ce, o;
+    return Ce.currentNode = Ee, o;
   }
   p(t) {
     let i = 0;
     for (const r of this._$AV) r !== void 0 && (r.strings !== void 0 ? (r._$AI(t, r, i), i += r.strings.length - 2) : r._$AI(t[i])), i++;
   }
 }
-class nt {
+class st {
   get _$AU() {
     return this._$AM?._$AU ?? this._$Cv;
   }
@@ -356,7 +356,7 @@ class nt {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = De(this, t, i), Ye(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== oe && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Dr(t) ? this.k(t) : this._(t);
+    t = je(this, t, i), Je(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== ne && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : qr(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -365,38 +365,38 @@ class nt {
     this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
   }
   _(t) {
-    this._$AH !== f && Ye(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Ce.createTextNode(t)), this._$AH = t;
+    this._$AH !== f && Je(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Ee.createTextNode(t)), this._$AH = t;
   }
   $(t) {
-    const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = Qe.createElement(or(r.h, r.h[0]), this.options)), r);
+    const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = et.createElement(nr(r.h, r.h[0]), this.options)), r);
     if (this._$AH?._$AD === o) this._$AH.p(i);
     else {
-      const n = new Lr(o, this), s = n.u(this.options);
+      const n = new Hr(o, this), s = n.u(this.options);
       n.p(i), this.T(s), this._$AH = n;
     }
   }
   _$AC(t) {
-    let i = _i.get(t.strings);
-    return i === void 0 && _i.set(t.strings, i = new Qe(t)), i;
+    let i = Ai.get(t.strings);
+    return i === void 0 && Ai.set(t.strings, i = new et(t)), i;
   }
   k(t) {
-    ii(this._$AH) || (this._$AH = [], this._$AR());
+    ni(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let r, o = 0;
-    for (const n of t) o === i.length ? i.push(r = new nt(this.O(Xe()), this.O(Xe()), this, this.options)) : r = i[o], r._$AI(n), o++;
+    for (const n of t) o === i.length ? i.push(r = new st(this.O(Qe()), this.O(Qe()), this, this.options)) : r = i[o], r._$AI(n), o++;
     o < i.length && (this._$AR(r && r._$AB.nextSibling, o), i.length = o);
   }
   _$AR(t = this._$AA.nextSibling, i) {
     for (this._$AP?.(!1, !0, i); t !== this._$AB; ) {
-      const r = yi(t).nextSibling;
-      yi(t).remove(), t = r;
+      const r = vi(t).nextSibling;
+      vi(t).remove(), t = r;
     }
   }
   setConnected(t) {
     this._$AM === void 0 && (this._$Cv = t, this._$AP?.(t));
   }
 }
-class St {
+class Nt {
   get tagName() {
     return this.element.tagName;
   }
@@ -409,11 +409,11 @@ class St {
   _$AI(t, i = this, r, o) {
     const n = this.strings;
     let s = !1;
-    if (n === void 0) t = De(this, t, i, 0), s = !Ye(t) || t !== this._$AH && t !== oe, s && (this._$AH = t);
+    if (n === void 0) t = je(this, t, i, 0), s = !Je(t) || t !== this._$AH && t !== ne, s && (this._$AH = t);
     else {
       const a = t;
       let l, c;
-      for (t = n[0], l = 0; l < n.length - 1; l++) c = De(this, a[r + l], i, l), c === oe && (c = this._$AH[l]), s ||= !Ye(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
+      for (t = n[0], l = 0; l < n.length - 1; l++) c = je(this, a[r + l], i, l), c === ne && (c = this._$AH[l]), s ||= !Je(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
     }
     s && !o && this.j(t);
   }
@@ -421,7 +421,7 @@ class St {
     t === f ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
   }
 }
-class qr extends St {
+class Fr extends Nt {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -429,7 +429,7 @@ class qr extends St {
     this.element[this.name] = t === f ? void 0 : t;
   }
 }
-class Br extends St {
+class Vr extends Nt {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -437,12 +437,12 @@ class Br extends St {
     this.element.toggleAttribute(this.name, !!t && t !== f);
   }
 }
-class Fr extends St {
+class Kr extends Nt {
   constructor(t, i, r, o, n) {
     super(t, i, r, o, n), this.type = 5;
   }
   _$AI(t, i = this) {
-    if ((t = De(this, t, i, 0) ?? f) === oe) return;
+    if ((t = je(this, t, i, 0) ?? f) === ne) return;
     const r = this._$AH, o = t === f && r !== f || t.capture !== r.capture || t.once !== r.once || t.passive !== r.passive, n = t !== f && (r === f || o);
     o && this.element.removeEventListener(this.name, this, r), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
@@ -450,7 +450,7 @@ class Fr extends St {
     typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, t) : this._$AH.handleEvent(t);
   }
 }
-class Vr {
+class Zr {
   constructor(t, i, r) {
     this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = r;
   }
@@ -458,21 +458,21 @@ class Vr {
     return this._$AM._$AU;
   }
   _$AI(t) {
-    De(this, t);
+    je(this, t);
   }
 }
-const Hr = ti.litHtmlPolyfillSupport;
-Hr?.(Qe, nt), (ti.litHtmlVersions ??= []).push("3.3.3");
-const Kr = (e, t, i) => {
+const Gr = oi.litHtmlPolyfillSupport;
+Gr?.(et, st), (oi.litHtmlVersions ??= []).push("3.3.3");
+const Wr = (e, t, i) => {
   const r = i?.renderBefore ?? t;
   let o = r._$litPart$;
   if (o === void 0) {
     const n = i?.renderBefore ?? null;
-    r._$litPart$ = o = new nt(t.insertBefore(Xe(), n), n, void 0, i ?? {});
+    r._$litPart$ = o = new st(t.insertBefore(Qe(), n), n, void 0, i ?? {});
   }
   return o._$AI(e), o;
 };
-const ri = globalThis;
+const si = globalThis;
 let L = class extends Oe {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
@@ -483,7 +483,7 @@ let L = class extends Oe {
   }
   update(t) {
     const i = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = Kr(i, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = Wr(i, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     super.connectedCallback(), this._$Do?.setConnected(!0);
@@ -492,19 +492,19 @@ let L = class extends Oe {
     super.disconnectedCallback(), this._$Do?.setConnected(!1);
   }
   render() {
-    return oe;
+    return ne;
   }
 };
-L._$litElement$ = !0, L.finalized = !0, ri.litElementHydrateSupport?.({ LitElement: L });
-const Zr = ri.litElementPolyfillSupport;
-Zr?.({ LitElement: L });
-(ri.litElementVersions ??= []).push("4.2.2");
+L._$litElement$ = !0, L.finalized = !0, si.litElementHydrateSupport?.({ LitElement: L });
+const Ur = si.litElementPolyfillSupport;
+Ur?.({ LitElement: L });
+(si.litElementVersions ??= []).push("4.2.2");
 const z = (e) => (t, i) => {
   i !== void 0 ? i.addInitializer(() => {
     customElements.define(e, t);
   }) : customElements.define(e, t);
 };
-const Gr = { attribute: !0, type: String, converter: bt, reflect: !1, hasChanged: ei }, Wr = (e = Gr, t, i) => {
+const Xr = { attribute: !0, type: String, converter: xt, reflect: !1, hasChanged: ri }, Yr = (e = Xr, t, i) => {
   const { kind: r, metadata: o } = i;
   let n = globalThis.litPropertyMetadata.get(o);
   if (n === void 0 && globalThis.litPropertyMetadata.set(o, n = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), r === "accessor") {
@@ -526,25 +526,25 @@ const Gr = { attribute: !0, type: String, converter: bt, reflect: !1, hasChanged
   throw Error("Unsupported decorator location: " + r);
 };
 function A(e) {
-  return (t, i) => typeof i == "object" ? Wr(e, t, i) : ((r, o, n) => {
+  return (t, i) => typeof i == "object" ? Yr(e, t, i) : ((r, o, n) => {
     const s = o.hasOwnProperty(n);
     return o.constructor.createProperty(n, r), s ? Object.getOwnPropertyDescriptor(o, n) : void 0;
   })(e, t, i);
 }
-function y(e) {
+function v(e) {
   return A({ ...e, state: !0, attribute: !1 });
 }
-const Ur = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
-function Xr(e, t) {
+const Qr = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
+function Jr(e, t) {
   return (i, r, o) => {
     const n = (s) => s.renderRoot?.querySelector(e) ?? null;
-    return Ur(i, r, { get() {
+    return Qr(i, r, { get() {
       return n(this);
     } });
   };
 }
-const Ae = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, nr = (e) => (...t) => ({ _$litDirective$: e, values: t });
-class sr {
+const Se = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, sr = (e) => (...t) => ({ _$litDirective$: e, values: t });
+class ar {
   constructor(t) {
   }
   get _$AU() {
@@ -560,13 +560,13 @@ class sr {
     return this.render(...i);
   }
 }
-class Gt extends sr {
+class Xt extends ar {
   constructor(t) {
-    if (super(t), this.it = f, t.type !== Ae.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
+    if (super(t), this.it = f, t.type !== Se.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
   }
   render(t) {
     if (t === f || t == null) return this._t = void 0, this.it = t;
-    if (t === oe) return t;
+    if (t === ne) return t;
     if (typeof t != "string") throw Error(this.constructor.directiveName + "() called with a non-string value");
     if (t === this.it) return this._t;
     this.it = t;
@@ -574,68 +574,68 @@ class Gt extends sr {
     return i.raw = i, this._t = { _$litType$: this.constructor.resultType, strings: i, values: [] };
   }
 }
-Gt.directiveName = "unsafeHTML", Gt.resultType = 1;
-class Wt extends Gt {
+Xt.directiveName = "unsafeHTML", Xt.resultType = 1;
+class Yt extends Xt {
 }
-Wt.directiveName = "unsafeSVG", Wt.resultType = 2;
-const Yr = nr(Wt), Qr = {
+Yt.directiveName = "unsafeSVG", Yt.resultType = 2;
+const eo = sr(Yt), to = {
   light: ["on"],
   motion: ["on"],
   media: ["playing", "on"],
   opening: ["on", "open"],
   temperature: [],
   fireplace: ["on", "heating", "burning", "active"]
-}, Jr = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function ar(e) {
+}, io = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function lr(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Ne(e) {
+function Pe(e) {
   return Math.min(1, Math.max(0, e));
 }
-function mt(e) {
-  return [...Qr[e]];
+function yt(e) {
+  return [...to[e]];
 }
-function eo(e) {
+function ro(e) {
   if (e.kind === "temperature") return [];
   const t = (e.active_states ?? []).map((i) => i.trim()).filter(Boolean);
-  return t.length ? [...new Set(t)] : mt(e.kind);
+  return t.length ? [...new Set(t)] : yt(e.kind);
 }
-function We(e, t) {
+function Xe(e, t) {
   const i = t?.position;
-  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Ne(i.x), y: Ne(i.y) } : e.presence_anchor ? {
-    x: Ne(e.presence_anchor.x),
-    y: Ne(e.presence_anchor.y)
+  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Pe(i.x), y: Pe(i.y) } : e.presence_anchor ? {
+    x: Pe(e.presence_anchor.x),
+    y: Pe(e.presence_anchor.y)
   } : e.points.length ? {
-    x: Ne(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
-    y: Ne(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
+    x: Pe(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
+    y: Pe(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
   } : { x: 0.5, y: 0.5 };
 }
-function to(e) {
+function oo(e) {
   const t = e?.brightness;
-  return typeof t != "number" || !Number.isFinite(t) ? 1 : ar(t / 255);
-}
-function Ai(e) {
-  const t = e.intensity;
-  return typeof t != "number" || !Number.isFinite(t) ? 1 : ar(t);
+  return typeof t != "number" || !Number.isFinite(t) ? 1 : lr(t / 255);
 }
 function Si(e) {
+  const t = e.intensity;
+  return typeof t != "number" || !Number.isFinite(t) ? 1 : lr(t);
+}
+function Ci(e) {
   const t = e?.unit_of_measurement;
   return typeof t == "string" && t.trim() ? t.trim() : void 0;
 }
-function lr(e, t, i) {
-  const r = e.entity?.trim(), o = eo(e);
+function cr(e, t, i) {
+  const r = e.entity?.trim(), o = ro(e);
   if (!r)
     return { index: t, reaction: e, active: !1, activeStates: o, intensity: 0, reason: "missing_entity" };
   const n = i?.(r);
-  if (!n || Jr.has(n.state.trim().toLowerCase()))
+  if (!n || io.has(n.state.trim().toLowerCase()))
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
     const c = Number(n.state);
-    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: Si(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Si(n.attributes), reason: "state_inactive" };
+    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: Ci(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Ci(n.attributes), reason: "state_inactive" };
   }
   const s = n.state.trim().toLowerCase(), a = o.map((c) => c.toLowerCase()).includes(s);
   let l = 0;
-  return a && (e.kind === "light" ? l = to(n.attributes) * Ai(e) : l = Ai(e)), {
+  return a && (e.kind === "light" ? l = oo(n.attributes) * Si(e) : l = Si(e)), {
     index: t,
     reaction: e,
     active: a,
@@ -645,15 +645,15 @@ function lr(e, t, i) {
     ...a ? {} : { reason: "state_inactive" }
   };
 }
-function vt(e, t) {
-  return (e.reactions ?? []).map((i, r) => lr(i, r, t));
+function $t(e, t) {
+  return (e.reactions ?? []).map((i, r) => cr(i, r, t));
 }
-var io = Object.defineProperty, ro = Object.getOwnPropertyDescriptor, Me = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ro(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var no = Object.defineProperty, so = Object.getOwnPropertyDescriptor, Ne = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? so(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && io(t, i, o), o;
+  return r && o && no(t, i, o), o;
 };
-function oo(e) {
+function ao(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/"))
@@ -666,25 +666,25 @@ function oo(e) {
     }
   }
 }
-const no = {
+const lo = {
   light: "💡",
   motion: "◉",
   media: "▶",
   opening: "↗",
   temperature: "°"
-}, so = {
+}, co = {
   light: "Lys",
   motion: "Bevægelse",
   media: "TV / medie",
   opening: "Dør / vindue",
   temperature: "Temperatur"
 };
-let me = class extends L {
+let fe = class extends L {
   constructor() {
     super(...arguments), this.presences = [], this.pendingLights = /* @__PURE__ */ new Set(), this.pendingRoomAction = "", this.actionError = "";
   }
   get statuses() {
-    return this.room ? vt(this.room, (e) => {
+    return this.room ? $t(this.room, (e) => {
       const t = this.hass?.states[e];
       return t ? { state: t.state, attributes: t.attributes } : void 0;
     }) : [];
@@ -781,7 +781,7 @@ let me = class extends L {
 
         ${t.length ? h`<div class="occupants" aria-label="Personer og objekter i rummet">
               ${t.map((o) => {
-      const n = oo(o.avatar);
+      const n = ao(o.avatar);
       return h`<span class="occupant">
                   ${n ? h`<img src=${n} alt="" />` : h`<span class="occupant-dot"></span>`}
                   ${o.name ?? o.id}
@@ -833,10 +833,10 @@ let me = class extends L {
     return h`
       <article class=${`entity ${e.active ? "active" : "inactive"}`}>
         <button class="entity-main" @click=${() => this.openMoreInfo(t)}>
-          <span class=${`entity-icon ${i}`}>${no[i]}</span>
+          <span class=${`entity-icon ${i}`}>${lo[i]}</span>
           <span class="entity-copy">
             <strong>${this.entityName(t)}</strong>
-            <small>${so[i]} · ${this.statusText(e)}</small>
+            <small>${co[i]} · ${this.statusText(e)}</small>
           </span>
         </button>
         ${i === "light" ? h`<button
@@ -848,7 +848,7 @@ let me = class extends L {
     `;
   }
 };
-me.styles = T`
+fe.styles = O`
     :host {
       position: absolute;
       z-index: 8;
@@ -1041,87 +1041,87 @@ me.styles = T`
       .panel { animation: none; }
     }
   `;
-Me([
+Ne([
   A({ attribute: !1 })
-], me.prototype, "room", 2);
-Me([
+], fe.prototype, "room", 2);
+Ne([
   A({ attribute: !1 })
-], me.prototype, "presences", 2);
-Me([
+], fe.prototype, "presences", 2);
+Ne([
   A({ attribute: !1 })
-], me.prototype, "hass", 2);
-Me([
-  y()
-], me.prototype, "pendingLights", 2);
-Me([
-  y()
-], me.prototype, "pendingRoomAction", 2);
-Me([
-  y()
-], me.prototype, "actionError", 2);
-me = Me([
+], fe.prototype, "hass", 2);
+Ne([
+  v()
+], fe.prototype, "pendingLights", 2);
+Ne([
+  v()
+], fe.prototype, "pendingRoomAction", 2);
+Ne([
+  v()
+], fe.prototype, "actionError", 2);
+fe = Ne([
   z("explorer-room-panel")
-], me);
-const v = 1e3;
-function Nt(e, t, i) {
+], fe);
+const x = 1e3;
+function Tt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function ao(e) {
+function po(e) {
   return `translate(${e.x} ${e.y}) scale(${e.zoom})`;
 }
-function ft(e, t = 1) {
+function vt(e, t = 1) {
   const i = Math.max(t, e.zoom);
   if (i <= t + 1e-4) return { zoom: i, x: 0, y: 0 };
-  const r = v * (1 - i);
+  const r = x * (1 - i);
   return {
     zoom: i,
     x: Math.min(0, Math.max(r, e.x)),
     y: Math.min(0, Math.max(r, e.y))
   };
 }
-function Ci(e, t, i, r) {
+function Ei(e, t, i, r) {
   const o = t / e.zoom;
-  return ft({
+  return vt({
     zoom: t,
     x: i - (i - e.x) * o,
     y: r - (r - e.y) * o
   });
 }
-var lo = Object.defineProperty, co = Object.getOwnPropertyDescriptor, Z = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? co(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ho = Object.defineProperty, uo = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? uo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && lo(t, i, o), o;
+  return r && o && ho(t, i, o), o;
 };
-const Ei = { width: 16, height: 9, status: "idle" }, po = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, ho = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
-function Mi(e) {
+const Mi = { width: 16, height: 9, status: "idle" }, go = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, mo = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
+function Ni(e) {
   try {
     return new URL(e, window.location.href).pathname.toLowerCase().endsWith(".svg");
   } catch {
     return e.split(/[?#]/, 1)[0].toLowerCase().endsWith(".svg");
   }
 }
-function Ni(e) {
+function Pi(e) {
   if (!e) return;
   const t = e.trim().match(/^(-?\d+(?:\.\d+)?)/);
   if (!t) return;
   const i = Number(t[1]);
   return Number.isFinite(i) && i > 0 ? i : void 0;
 }
-function uo(e) {
+function fo(e) {
   const t = e.getAttribute("viewBox")?.trim().split(/[\s,]+/).map(Number);
-  return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: Ni(e.getAttribute("width")) ?? 16, height: Ni(e.getAttribute("height")) ?? 9 };
+  return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: Pi(e.getAttribute("width")) ?? 16, height: Pi(e.getAttribute("height")) ?? 9 };
 }
-function Pi(e) {
+function Ri(e) {
   return e.replace(/@import[^;]+;?/gi, "").replace(/url\(([^)]*)\)/gi, (t, i) => {
     const r = i.trim().replace(/^['"]|['"]$/g, "");
     return r.startsWith("#") ? `url(${r})` : "none";
   }).replace(/javascript\s*:/gi, "").replace(/expression\s*\(/gi, "");
 }
-function go(e) {
+function bo(e) {
   const t = e.trim();
   return t === "" || t.startsWith("#") || /^data:image\/(?:png|jpe?g|gif|webp|svg\+xml);base64,/i.test(t);
 }
-function mo(e) {
+function yo(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/")) return t;
@@ -1133,10 +1133,10 @@ function mo(e) {
     }
   }
 }
-function fo(e) {
+function vo(e) {
   const t = e.querySelector("parsererror"), i = e.documentElement;
   if (t || i.localName.toLowerCase() !== "svg") throw new Error("Filen indeholder ikke gyldig SVG-kode.");
-  i.querySelectorAll(ho).forEach((o) => o.remove());
+  i.querySelectorAll(mo).forEach((o) => o.remove());
   const r = [i, ...Array.from(i.querySelectorAll("*"))];
   for (const o of r)
     for (const n of Array.from(o.attributes)) {
@@ -1145,39 +1145,39 @@ function fo(e) {
         o.removeAttribute(n.name);
         continue;
       }
-      if ((s === "href" || s === "xlink:href") && !go(a)) {
+      if ((s === "href" || s === "xlink:href") && !bo(a)) {
         o.removeAttribute(n.name);
         continue;
       }
       if (s === "style") {
-        const l = Pi(a).trim();
+        const l = Ri(a).trim();
         l ? o.setAttribute(n.name, l) : o.removeAttribute(n.name);
       }
     }
   return i.querySelectorAll("style").forEach((o) => {
-    const n = Pi(o.textContent ?? "").trim();
+    const n = Ri(o.textContent ?? "").trim();
     n ? o.textContent = n : o.remove();
   }), i.hasAttribute("xmlns") || i.setAttribute("xmlns", "http://www.w3.org/2000/svg"), i;
 }
-let B = class extends L {
+let H = class extends L {
   constructor() {
-    super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Ei }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
+    super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Mi }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
   }
   connectedCallback() {
     super.connectedCallback(), this.resetViewport();
   }
   updated(e) {
-    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && Mi(this.image)) && this.loadFloorplan();
+    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && Ni(this.image)) && this.loadFloorplan();
   }
   async loadFloorplan() {
     const e = ++this.imageRequest;
     if (this.imageSource = "", this.svgMarkup = "", this.loadError = "", !this.image) {
-      this.metadata = { ...Ei }, this.resetViewport();
+      this.metadata = { ...Mi }, this.resetViewport();
       return;
     }
     this.metadata = { ...this.metadata, status: "loading" };
     try {
-      Mi(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
+      Ni(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
     } catch (t) {
       if (e !== this.imageRequest) return;
       this.imageSource = "", this.svgMarkup = "", this.metadata = { ...this.metadata, status: "error" }, this.loadError = t instanceof Error ? t.message : "Plantegningen kunne ikke indlæses.";
@@ -1188,8 +1188,8 @@ let B = class extends L {
     if (!t.ok) throw new Error(`SVG-filen kunne ikke hentes (${t.status}).`);
     const i = await t.text();
     if (e !== this.imageRequest) return;
-    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = fo(r), n = uo(o);
-    o.hasAttribute("viewBox") || o.setAttribute("viewBox", `0 0 ${n.width} ${n.height}`), o.setAttribute("x", "0"), o.setAttribute("y", "0"), o.setAttribute("width", String(v)), o.setAttribute("height", String(v)), o.setAttribute("preserveAspectRatio", this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"), o.setAttribute("class", "inline-floorplan");
+    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = vo(r), n = fo(o);
+    o.hasAttribute("viewBox") || o.setAttribute("viewBox", `0 0 ${n.width} ${n.height}`), o.setAttribute("x", "0"), o.setAttribute("y", "0"), o.setAttribute("width", String(x)), o.setAttribute("height", String(x)), o.setAttribute("preserveAspectRatio", this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"), o.setAttribute("class", "inline-floorplan");
     const s = new XMLSerializer().serializeToString(o);
     e === this.imageRequest && (this.svgMarkup = s, this.metadata = { width: n.width, height: n.height, status: "loaded" }, this.resetViewport());
   }
@@ -1203,18 +1203,18 @@ let B = class extends L {
     });
   }
   resetViewport() {
-    this.viewport = { zoom: Nt(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
+    this.viewport = { zoom: Tt(this.initialZoom, this.minZoom, this.maxZoom), x: 0, y: 0 };
   }
   toViewBoxPoint(e) {
     const t = this.renderRoot.querySelector("svg.floorplan");
-    if (!t) return { x: v / 2, y: v / 2 };
+    if (!t) return { x: x / 2, y: x / 2 };
     const i = t.getBoundingClientRect();
-    return { x: (e.clientX - i.left) / i.width * v, y: (e.clientY - i.top) / i.height * v };
+    return { x: (e.clientX - i.left) / i.width * x, y: (e.clientY - i.top) / i.height * x };
   }
   handleWheel(e) {
     e.preventDefault();
-    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = Nt(this.viewport.zoom * i, this.minZoom, this.maxZoom);
-    this.viewport = ft(Ci(this.viewport, r, t.x, t.y), this.minZoom);
+    const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = Tt(this.viewport.zoom * i, this.minZoom, this.maxZoom);
+    this.viewport = vt(Ei(this.viewport, r, t.x, t.y), this.minZoom);
   }
   handlePointerDown(e) {
     this.activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }), e.currentTarget.setPointerCapture(e.pointerId);
@@ -1226,12 +1226,12 @@ let B = class extends L {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * v, y: (l.y - r.top) / r.height * v }, p = Nt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * v, g = (c.y - l.y) / r.height * v, b = Ci(this.viewport, p, d.x, d.y);
-        this.viewport = ft({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Tt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), g = (c.x - l.x) / r.width * x, u = (c.y - l.y) / r.height * x, b = Ei(this.viewport, p, d.x, d.y);
+        this.viewport = vt({ ...b, x: b.x + g, y: b.y + u }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
-      const s = (o.x - t.x) / r.width * v, a = (o.y - t.y) / r.height * v;
-      this.viewport = ft({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
+      const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
+      this.viewport = vt({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
     }
     this.activePointers.set(e.pointerId, o);
   }
@@ -1247,75 +1247,75 @@ let B = class extends L {
   renderRooms() {
     return this.rooms.map((e) => {
       if (!e.points.length) return f;
-      const t = e.points.map(([c, d]) => `${c * v},${d * v}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, d) => c + d[0], 0) / e.points.length, o = e.points.reduce((c, d) => c + d[1], 0) / e.points.length, n = (e.label?.x ?? r) * v, s = (e.label?.y ?? o) * v, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
-      return C`<g class=${i ? "room selected" : "room"} @pointerdown=${(c) => c.stopPropagation()} @click=${(c) => this.selectRoom(c, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? C`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
+      const t = e.points.map(([c, d]) => `${c * x},${d * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, d) => c + d[0], 0) / e.points.length, o = e.points.reduce((c, d) => c + d[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
+      return N`<g class=${i ? "room selected" : "room"} @pointerdown=${(c) => c.stopPropagation()} @click=${(c) => this.selectRoom(c, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? N`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
     });
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * v, n = (e.y ?? 0.5) * v, s = e.icon ?? po[i], a = mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
-      return C`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? C`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : C`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? go[i], a = yo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, g = r ? 58 : 52;
+      return N`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(u) => u.stopPropagation()} @click=${(u) => this.selectPresence(u, e)}>${a ? N`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : N`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${g} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
-    const e = ao(this.viewport);
-    return h`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${v} ${v}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
+    const e = po(this.viewport);
+    return h`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${x} ${x}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
       this.selectedRoom = void 0, this.selectedPresence = void 0;
-    }}><rect class="backdrop" width=${v} height=${v}></rect><g class="scene" transform=${e}>${this.svgMarkup ? C`<g class="floorplan-source inline-source">${Yr(this.svgMarkup)}</g>` : this.imageSource ? C`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${v} height=${v} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
+    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? N`<g class="floorplan-source inline-source">${eo(this.svgMarkup)}</g>` : this.imageSource ? N`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
       t.stopPropagation(), this.resetViewport();
     }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
 };
-B.styles = T`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
-Z([
+H.styles = O`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
+G([
   A({ attribute: !1 })
-], B.prototype, "hass", 2);
-Z([
+], H.prototype, "hass", 2);
+G([
   A()
-], B.prototype, "image", 2);
-Z([
+], H.prototype, "image", 2);
+G([
   A({ attribute: !1 })
-], B.prototype, "rooms", 2);
-Z([
+], H.prototype, "rooms", 2);
+G([
   A({ attribute: !1 })
-], B.prototype, "presences", 2);
-Z([
+], H.prototype, "presences", 2);
+G([
   A({ type: Number, attribute: "min-zoom" })
-], B.prototype, "minZoom", 2);
-Z([
+], H.prototype, "minZoom", 2);
+G([
   A({ type: Number, attribute: "max-zoom" })
-], B.prototype, "maxZoom", 2);
-Z([
+], H.prototype, "maxZoom", 2);
+G([
   A({ type: Number, attribute: "initial-zoom" })
-], B.prototype, "initialZoom", 2);
-Z([
+], H.prototype, "initialZoom", 2);
+G([
   A({ attribute: "fit-mode" })
-], B.prototype, "fitMode", 2);
-Z([
-  y()
-], B.prototype, "viewport", 2);
-Z([
-  y()
-], B.prototype, "selectedRoom", 2);
-Z([
-  y()
-], B.prototype, "selectedPresence", 2);
-Z([
-  y()
-], B.prototype, "metadata", 2);
-Z([
-  y()
-], B.prototype, "imageSource", 2);
-Z([
-  y()
-], B.prototype, "svgMarkup", 2);
-Z([
-  y()
-], B.prototype, "loadError", 2);
-B = Z([
+], H.prototype, "fitMode", 2);
+G([
+  v()
+], H.prototype, "viewport", 2);
+G([
+  v()
+], H.prototype, "selectedRoom", 2);
+G([
+  v()
+], H.prototype, "selectedPresence", 2);
+G([
+  v()
+], H.prototype, "metadata", 2);
+G([
+  v()
+], H.prototype, "imageSource", 2);
+G([
+  v()
+], H.prototype, "svgMarkup", 2);
+G([
+  v()
+], H.prototype, "loadError", 2);
+H = G([
   z("explorer-canvas")
-], B);
-function $e(e, t) {
+], H);
+function ke(e, t) {
   const i = (e.rooms ?? []).find((r) => r.id === t);
   if (i) {
     if (i.presence_anchor) return [i.presence_anchor.x, i.presence_anchor.y];
@@ -1326,43 +1326,43 @@ function $e(e, t) {
       ];
   }
 }
-function Je(e, t) {
+function tt(e, t) {
   return (e.rooms ?? []).find((i) => i.id === t)?.name ?? t;
 }
-function bo(e, t) {
+function xo(e, t) {
   return (e.route_nodes ?? []).find((i) => i.id === t)?.name ?? t;
 }
-function ge(e) {
+function me(e) {
   return `${e.kind}:${e.id}`;
 }
-function xt(e, t) {
-  return t.kind === "room" ? $e(e, t.id) : (e.route_nodes ?? []).find((i) => i.id === t.id)?.point;
+function kt(e, t) {
+  return t.kind === "room" ? ke(e, t.id) : (e.route_nodes ?? []).find((i) => i.id === t.id)?.point;
 }
-function yo(e, t) {
-  const i = xt(e, t);
+function wo(e, t) {
+  const i = kt(e, t);
   if (i)
     return t.kind === "room" ? {
       kind: "room",
       id: t.id,
-      key: ge(t),
-      label: Je(e, t.id),
+      key: me(t),
+      label: tt(e, t.id),
       point: i
     } : {
       kind: "node",
       id: t.id,
-      key: ge(t),
-      label: bo(e, t.id),
+      key: me(t),
+      label: xo(e, t.id),
       point: i
     };
 }
-function cr(e) {
+function dr(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : ["on"];
 }
-function vo(e) {
-  return cr(e.condition?.allowed_states);
+function $o(e) {
+  return dr(e.condition?.allowed_states);
 }
-function je(e, t) {
+function Le(e, t) {
   if (!e.state_binding)
     return {
       nodeId: e.id,
@@ -1370,7 +1370,7 @@ function je(e, t) {
       active: !0,
       allowedStates: []
     };
-  const i = e.state_binding.entity?.trim(), r = cr(e.state_binding.open_states);
+  const i = e.state_binding.entity?.trim(), r = dr(e.state_binding.open_states);
   if (!i)
     return {
       nodeId: e.id,
@@ -1400,7 +1400,7 @@ function je(e, t) {
     ...n ? {} : { reason: "state_blocked" }
   };
 }
-function xo(e, t, i) {
+function ko(e, t, i) {
   if (!e.condition)
     return {
       index: t,
@@ -1409,7 +1409,7 @@ function xo(e, t, i) {
       active: !0,
       allowedStates: []
     };
-  const r = e.condition.entity?.trim(), o = vo(e);
+  const r = e.condition.entity?.trim(), o = $o(e);
   if (!r)
     return {
       index: t,
@@ -1445,10 +1445,10 @@ function xo(e, t, i) {
     ...s ? {} : { reason: "state_blocked" }
   };
 }
-function st(e, t) {
+function at(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = xo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => je(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    const n = ko(r, o, t), a = [r.from, r.to].filter((g) => g.kind === "node").map((g) => i.get(g.id)).filter((g) => !!g).map((g) => Le(g, t)).filter((g) => g.conditional), c = a.find((g) => !g.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((g) => g.active), p = n.conditional || a.length > 0;
     return c ? {
       ...n,
       conditional: p,
@@ -1468,10 +1468,10 @@ function st(e, t) {
     };
   });
 }
-function dr(e) {
+function pr(e) {
   return e.path ? e.path : (e.via ?? []).map((t) => ({ point: t }));
 }
-function wo(e, t, i) {
+function _o(e, t, i) {
   if (t.node_id) {
     const r = (e.route_nodes ?? []).find((o) => o.id === t.node_id);
     return r ? {
@@ -1490,7 +1490,7 @@ function wo(e, t, i) {
       point: t.point
     };
 }
-function oi(e) {
+function ai(e) {
   let t = 0;
   for (let i = 1; i < e.length; i += 1)
     t += Math.hypot(
@@ -1499,15 +1499,15 @@ function oi(e) {
     );
   return t;
 }
-function Ri(e, t, i, r, o, n) {
-  const s = $e(e, i), a = $e(e, r);
+function zi(e, t, i, r, o, n) {
+  const s = ke(e, i), a = ke(e, r);
   if (!s || !a) return;
-  const l = dr(t), d = (o ? [...l].reverse() : l).map((u, g) => wo(e, u, g)).filter((u) => !!u), p = [
+  const l = pr(t), d = (o ? [...l].reverse() : l).map((g, u) => _o(e, g, u)).filter((g) => !!g), p = [
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
-      label: Je(e, i),
+      label: tt(e, i),
       point: s
     },
     ...d,
@@ -1515,26 +1515,26 @@ function Ri(e, t, i, r, o, n) {
       kind: "room",
       id: r,
       key: `room:${r}`,
-      label: Je(e, r),
+      label: tt(e, r),
       point: a
     }
   ];
   return {
     source: "manual",
     hops: p,
-    distance: oi(p),
+    distance: ai(p),
     manualRoute: t,
     reversedManualRoute: o,
     blockedEdges: n
   };
 }
-function $o(e, t) {
+function Ao(e, t) {
   const i = /* @__PURE__ */ new Map(), r = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map(), n = (a) => {
-    const l = ge(a);
+    const l = me(a);
     o.set(l, a);
     const c = r.get(l);
     if (c) return c;
-    const d = xt(e, a);
+    const d = kt(e, a);
     return d && r.set(l, d), d;
   }, s = (a, l, c) => {
     const d = i.get(a) ?? [];
@@ -1544,156 +1544,156 @@ function $o(e, t) {
     if (!a.active) return;
     const l = a.edge, c = n(l.from), d = n(l.to);
     if (!c || !d) return;
-    const p = ge(l.from), u = ge(l.to);
-    if (p === u) return;
-    const g = Math.hypot(d[0] - c[0], d[1] - c[1]);
-    s(p, u, g), s(u, p, g);
+    const p = me(l.from), g = me(l.to);
+    if (p === g) return;
+    const u = Math.hypot(d[0] - c[0], d[1] - c[1]);
+    s(p, g, u), s(g, p, u);
   }), { adjacency: i, positions: r, endpoints: o };
 }
-function ko(e, t, i, r, o) {
+function So(e, t, i, r, o) {
   if (!(e.route_graph_edges ?? []).length) return;
-  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = $o(e, r);
+  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Ao(e, r);
   if (!a.has(n) || !a.has(s)) return;
   const c = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Map(), p = new Set(a.keys());
-  for (a.forEach((m) => m.forEach((x) => p.add(x.key))), p.forEach((m) => c.set(m, Number.POSITIVE_INFINITY)), c.set(n, 0); p.size; ) {
-    let m, x = Number.POSITIVE_INFINITY;
+  for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => c.set(m, Number.POSITIVE_INFINITY)), c.set(n, 0); p.size; ) {
+    let m, y = Number.POSITIVE_INFINITY;
     for (const _ of p) {
       const $ = c.get(_) ?? Number.POSITIVE_INFINITY;
-      $ < x && (m = _, x = $);
+      $ < y && (m = _, y = $);
     }
-    if (!m || !Number.isFinite(x) || (p.delete(m), m === s)) break;
+    if (!m || !Number.isFinite(y) || (p.delete(m), m === s)) break;
     for (const _ of a.get(m) ?? []) {
       if (!p.has(_.key)) continue;
-      const $ = x + _.weight;
+      const $ = y + _.weight;
       $ < (c.get(_.key) ?? Number.POSITIVE_INFINITY) && (c.set(_.key, $), d.set(_.key, m));
     }
   }
   if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
-  const u = [s];
-  let g = s;
-  for (; g !== n; ) {
-    const m = d.get(g);
+  const g = [s];
+  let u = s;
+  for (; u !== n; ) {
+    const m = d.get(u);
     if (!m) return;
-    u.push(m), g = m;
+    g.push(m), u = m;
   }
-  u.reverse();
-  const b = u.map((m) => l.get(m)).map((m) => m ? yo(e, m) : void 0).filter((m) => !!m);
+  g.reverse();
+  const b = g.map((m) => l.get(m)).map((m) => m ? wo(e, m) : void 0).filter((m) => !!m);
   if (!(b.length < 2))
     return {
       source: "graph",
       hops: b,
-      distance: oi(b),
+      distance: ai(b),
       blockedEdges: o
     };
 }
-function ni(e, t, i, r) {
+function li(e, t, i, r) {
   if (!t || !i || t === i) return;
-  const o = st(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
-    (u) => u.from === t && u.to === i
+  const o = at(e, r), n = o.filter((g) => !g.active), s = (e.routes ?? []).find(
+    (g) => g.from === t && g.to === i
   );
-  if (s) return Ri(e, s, t, i, !1, n);
+  if (s) return zi(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
-    (u) => u.from === i && u.to === t
+    (g) => g.from === i && g.to === t
   );
-  if (a) return Ri(e, a, t, i, !0, n);
-  const l = ko(e, t, i, o, n);
+  if (a) return zi(e, a, t, i, !0, n);
+  const l = So(e, t, i, o, n);
   if (l) return l;
-  const c = $e(e, t), d = $e(e, i);
+  const c = ke(e, t), d = ke(e, i);
   if (!c || !d) return;
   const p = [
     {
       kind: "room",
       id: t,
       key: `room:${t}`,
-      label: Je(e, t),
+      label: tt(e, t),
       point: c
     },
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
-      label: Je(e, i),
+      label: tt(e, i),
       point: d
     }
   ];
   return {
     source: "fallback",
     hops: p,
-    distance: oi(p),
+    distance: ai(p),
     blockedEdges: n
   };
 }
-function _o(e) {
-  return [ge(e.from), ge(e.to)].sort().join("|");
+function Co(e) {
+  return [me(e.from), me(e.to)].sort().join("|");
 }
-function zi(e, t) {
+function Ti(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
   const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), c = (k) => {
     a.set(k, (a.get(k) ?? 0) + 1);
-  }, d = (k, M) => {
-    const N = l.get(k) ?? /* @__PURE__ */ new Set();
-    N.add(M), l.set(k, N);
-    const O = l.get(M) ?? /* @__PURE__ */ new Set();
-    O.add(k), l.set(M, O);
+  }, d = (k, E) => {
+    const M = l.get(k) ?? /* @__PURE__ */ new Set();
+    M.add(E), l.set(k, M);
+    const T = l.get(E) ?? /* @__PURE__ */ new Set();
+    T.add(k), l.set(E, T);
   };
   i.forEach((k) => {
-    const M = ge(k.from), N = ge(k.to), O = _o(k);
-    M === N && (n += 1), s.has(O) && (o += 1), s.add(O);
-    const J = xt(e, k.from), ee = xt(e, k.to);
-    if (!J || !ee || M === N) {
+    const E = me(k.from), M = me(k.to), T = Co(k);
+    E === M && (n += 1), s.has(T) && (o += 1), s.add(T);
+    const U = kt(e, k.from), K = kt(e, k.to);
+    if (!U || !K || E === M) {
       r += 1;
       return;
     }
-    c(M), c(N), d(M, N);
+    c(E), c(M), d(E, M);
   });
-  const p = i.length ? (e.rooms ?? []).filter((k) => $e(e, k.id) && !a.has(`room:${k.id}`)).map((k) => k.id) : [], u = i.length ? (e.route_nodes ?? []).filter((k) => !a.has(`node:${k.id}`)).map((k) => k.id) : [];
-  let g = 0;
+  const p = i.length ? (e.rooms ?? []).filter((k) => ke(e, k.id) && !a.has(`room:${k.id}`)).map((k) => k.id) : [], g = i.length ? (e.route_nodes ?? []).filter((k) => !a.has(`node:${k.id}`)).map((k) => k.id) : [];
+  let u = 0;
   const b = new Set(l.keys());
   for (; b.size; ) {
-    g += 1;
+    u += 1;
     const k = b.values().next().value;
     if (!k) break;
-    const M = [k];
-    for (b.delete(k); M.length; ) {
-      const N = M.pop();
-      for (const O of l.get(N) ?? [])
-        b.has(O) && (b.delete(O), M.push(O));
+    const E = [k];
+    for (b.delete(k); E.length; ) {
+      const M = E.pop();
+      for (const T of l.get(M) ?? [])
+        b.has(T) && (b.delete(T), E.push(T));
     }
   }
-  const m = [], x = new Set((e.route_nodes ?? []).map((k) => k.id));
+  const m = [], y = new Set((e.route_nodes ?? []).map((k) => k.id));
   (e.routes ?? []).forEach((k) => {
-    dr(k).forEach((M) => {
-      M.node_id && !x.has(M.node_id) && m.push({ from: k.from, to: k.to, nodeId: M.node_id });
+    pr(k).forEach((E) => {
+      E.node_id && !y.has(E.node_id) && m.push({ from: k.from, to: k.to, nodeId: E.node_id });
     });
   });
-  const _ = st(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => je(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), E = /* @__PURE__ */ new Set();
+  const _ = at(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => Le(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), C = /* @__PURE__ */ new Set();
   return _.forEach((k) => {
-    k.conditionSource === "edge" && (k.reason === "missing_entity" || k.reason === "entity_unavailable") && E.add(k.entity ?? "(mangler entity)");
+    k.conditionSource === "edge" && (k.reason === "missing_entity" || k.reason === "entity_unavailable") && C.add(k.entity ?? "(mangler entity)");
   }), w.forEach((k) => {
-    (k.reason === "missing_entity" || k.reason === "entity_unavailable") && E.add(k.entity ?? "(mangler entity)");
+    (k.reason === "missing_entity" || k.reason === "entity_unavailable") && C.add(k.entity ?? "(mangler entity)");
   }), {
     invalidEdges: r,
     duplicateEdges: o,
     selfEdges: n,
-    components: g,
+    components: u,
     disconnectedRoomIds: p,
-    disconnectedNodeIds: u,
+    disconnectedNodeIds: g,
     brokenRouteNodeReferences: m,
     conditionalEdges: _.filter((k) => k.conditional).length,
     blockedEdges: $,
     conditionalNodes: w.length,
     blockedNodes: S,
-    unresolvedConditionEntities: [...E]
+    unresolvedConditionEntities: [...C]
   };
 }
-var Ao = Object.defineProperty, So = Object.getOwnPropertyDescriptor, Ct = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? So(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Eo = Object.defineProperty, Mo = Object.getOwnPropertyDescriptor, Pt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Mo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Ao(t, i, o), o;
+  return r && o && Eo(t, i, o), o;
 };
-const Pt = 900, Oi = 3600, Ti = 58, j = "http://www.w3.org/2000/svg";
-let Le = class extends B {
+const Ot = 900, Oi = 3600, Ii = 58, q = "http://www.w3.org/2000/svg";
+let qe = class extends H {
   constructor() {
     super(...arguments), this.routes = [], this.routeNodes = [], this.routeGraphEdges = [], this.previousPresencePositions = /* @__PURE__ */ new Map(), this.previousPresenceRooms = /* @__PURE__ */ new Map(), this.activeAnimations = /* @__PURE__ */ new Map();
   }
@@ -1706,16 +1706,16 @@ let Le = class extends B {
       const a = i[s];
       if (!a) return;
       const l = {
-        x: (n.x ?? 0.5) * v,
-        y: (n.y ?? 0.5) * v
+        x: (n.x ?? 0.5) * x,
+        y: (n.y ?? 0.5) * x
       }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
       if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
-        const u = this.resolveMovementPath(c, l, d, p);
-        this.createFootsteps(u);
-        const g = document.createElementNS(j, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Pt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
-          this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
-        }, Pt + 80);
+        const g = this.resolveMovementPath(c, l, d, p);
+        this.createFootsteps(g);
+        const u = document.createElementNS(q, "animateTransform");
+        u.setAttribute("attributeName", "transform"), u.setAttribute("attributeType", "XML"), u.setAttribute("type", "translate"), u.setAttribute("values", g.map((b) => `${b.x} ${b.y}`).join(";")), u.setAttribute("keyTimes", this.buildKeyTimes(g).join(";")), u.setAttribute("dur", `${Ot}ms`), u.setAttribute("begin", "indefinite"), u.setAttribute("fill", "freeze"), u.setAttribute("calcMode", "linear"), a.appendChild(u), this.activeAnimations.set(n.id, u), u.beginElement(), window.setTimeout(() => {
+          this.activeAnimations.get(n.id) === u && (u.remove(), this.activeAnimations.delete(n.id));
+        }, Ot + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
     });
@@ -1734,19 +1734,19 @@ let Le = class extends B {
   endpointPoint(e) {
     if (e.kind === "node") {
       const i = this.routeNodes.find((r) => r.id === e.id);
-      return i ? { x: i.point[0] * v, y: i.point[1] * v } : void 0;
+      return i ? { x: i.point[0] * x, y: i.point[1] * x } : void 0;
     }
     const t = this.rooms.find((i) => i.id === e.id);
     if (t) {
       if (t.presence_anchor)
         return {
-          x: t.presence_anchor.x * v,
-          y: t.presence_anchor.y * v
+          x: t.presence_anchor.x * x,
+          y: t.presence_anchor.y * x
         };
       if (t.points.length)
         return {
-          x: t.points.reduce((i, r) => i + r[0], 0) / t.points.length * v,
-          y: t.points.reduce((i, r) => i + r[1], 0) / t.points.length * v
+          x: t.points.reduce((i, r) => i + r[0], 0) / t.points.length * x,
+          y: t.points.reduce((i, r) => i + r[1], 0) / t.points.length * x
         };
     }
   }
@@ -1764,7 +1764,7 @@ let Le = class extends B {
   }
   doorVisualStatus(e, t) {
     if (e.state_binding)
-      return je(
+      return Le(
         e,
         (a) => this.hass?.states[a]?.state
       ).active ? "active" : "blocked";
@@ -1780,7 +1780,7 @@ let Le = class extends B {
     return e === "active" ? "var(--success-color, #43a047)" : e === "blocked" ? "var(--error-color, #db4437)" : e === "mixed" ? "var(--warning-color, #ff9800)" : "var(--secondary-text-color, #667085)";
   }
   appendSvgTitle(e, t) {
-    const i = document.createElementNS(j, "title");
+    const i = document.createElementNS(q, "title");
     i.textContent = t, e.appendChild(i);
   }
   syncRouteStatusOverlay() {
@@ -1789,51 +1789,51 @@ let Le = class extends B {
     e.querySelector(":scope > g.route-status-scene")?.remove();
     const t = this.routeNodes.filter((s) => s.kind === "door");
     if (!this.routeGraphEdges.length && !t.length) return;
-    const i = st(
+    const i = at(
       this.routeConfig(),
       (s) => this.hass?.states[s]?.state
-    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(j, "g");
+    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(q, "g");
     o.setAttribute("class", "route-status-scene"), o.setAttribute("aria-label", "Live rutestatus og døre"), o.setAttribute("pointer-events", "none"), i.forEach((s) => {
       const a = this.endpointPoint(s.edge.from), l = this.endpointPoint(s.edge.to);
       if (!a || !l) return;
-      const c = this.edgeStatusColor(s), d = document.createElementNS(j, "line");
+      const c = this.edgeStatusColor(s), d = document.createElementNS(q, "line");
       if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
-      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(j, "g");
-      g.setAttribute("transform", `translate(${p} ${u})`);
-      const b = document.createElementNS(j, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
-      const m = document.createElementNS(j, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
-        const x = document.createElementNS(j, "animate");
-        x.setAttribute("attributeName", "opacity"), x.setAttribute("values", "1;.45;1"), x.setAttribute("dur", "1.8s"), x.setAttribute("repeatCount", "indefinite"), g.appendChild(x);
+      const p = (a.x + l.x) / 2, g = (a.y + l.y) / 2, u = document.createElementNS(q, "g");
+      u.setAttribute("transform", `translate(${p} ${g})`);
+      const b = document.createElementNS(q, "circle");
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), u.appendChild(b);
+      const m = document.createElementNS(q, "text");
+      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", u.appendChild(m), !s.active && !r) {
+        const y = document.createElementNS(q, "animate");
+        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), u.appendChild(y);
       }
-      this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
+      this.appendSvgTitle(u, this.statusDescription(s)), o.appendChild(u);
     }), t.forEach((s) => {
-      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * v, d = s.point[1] * v, p = document.createElementNS(j, "g");
+      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(q, "g");
       p.setAttribute("transform", `translate(${c} ${d})`);
-      const u = document.createElementNS(j, "circle");
-      u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
-      const g = document.createElementNS(j, "rect");
-      g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
-      const b = document.createElementNS(j, "circle");
+      const g = document.createElementNS(q, "circle");
+      g.setAttribute("r", "22"), g.setAttribute("fill", "var(--card-background-color, #ffffff)"), g.setAttribute("fill-opacity", ".9"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "4"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
+      const u = document.createElementNS(q, "rect");
+      u.setAttribute("x", "-9"), u.setAttribute("y", "-13"), u.setAttribute("width", "15"), u.setAttribute("height", "26"), u.setAttribute("rx", "1.5"), u.setAttribute("fill", "none"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "3"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
+      const b = document.createElementNS(q, "circle");
       if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), p.appendChild(b), a === "blocked") {
-        const w = document.createElementNS(j, "line");
+        const w = document.createElementNS(q, "line");
         w.setAttribute("x1", "-12"), w.setAttribute("y1", "-15"), w.setAttribute("x2", "12"), w.setAttribute("y2", "15"), w.setAttribute("stroke", l), w.setAttribute("stroke-width", "4"), w.setAttribute("stroke-linecap", "round"), w.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(w);
       }
-      const m = document.createElementNS(j, "circle");
+      const m = document.createElementNS(q, "circle");
       if (m.setAttribute("cx", "16"), m.setAttribute("cy", "-16"), m.setAttribute("r", "6"), m.setAttribute("fill", l), m.setAttribute("stroke", "var(--card-background-color, #ffffff)"), m.setAttribute("stroke-width", "2"), m.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(m), s.name) {
-        const w = document.createElementNS(j, "text");
+        const w = document.createElementNS(q, "text");
         w.setAttribute("y", "39"), w.setAttribute("text-anchor", "middle"), w.setAttribute("fill", "var(--primary-text-color, #1f2937)"), w.setAttribute("font-size", "20"), w.setAttribute("font-weight", "700"), w.setAttribute("font-family", "system-ui, sans-serif"), w.setAttribute("paint-order", "stroke"), w.setAttribute("stroke", "var(--card-background-color, #ffffff)"), w.setAttribute("stroke-width", "5"), w.setAttribute("stroke-linejoin", "round"), w.textContent = s.name, p.appendChild(w);
       }
-      const x = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", _ = s.state_binding ? je(s, (w) => this.hass?.states[w]?.state) : void 0, $ = _?.entity ? ` · ${_.entity}: ${_.currentState ?? "ukendt"} · åben: ${_.allowedStates.join(", ")}` : "";
-      this.appendSvgTitle(p, `${s.name ?? s.id} · ${x}${$}`), o.appendChild(p);
+      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", _ = s.state_binding ? Le(s, (w) => this.hass?.states[w]?.state) : void 0, $ = _?.entity ? ` · ${_.entity}: ${_.currentState ?? "ukendt"} · åben: ${_.allowedStates.join(", ")}` : "";
+      this.appendSvgTitle(p, `${s.name ?? s.id} · ${y}${$}`), o.appendChild(p);
     });
     const n = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(o, n ?? null);
   }
   resolveMovementPath(e, t, i, r) {
     if (!i || !r || i === r) return [e, t];
-    const o = ni(
+    const o = li(
       this.routeConfig(),
       i,
       r,
@@ -1841,8 +1841,8 @@ let Le = class extends B {
     );
     if (!o) return [e, t];
     const n = o.hops.slice(1, -1).map((s) => ({
-      x: s.point[0] * v,
-      y: s.point[1] * v
+      x: s.point[0] * x,
+      y: s.point[1] * x
     }));
     return [e, ...n, t];
   }
@@ -1866,7 +1866,7 @@ let Le = class extends B {
     if (!e) return;
     let t = e.querySelector(":scope > g.footsteps-scene");
     if (t) return t;
-    t = document.createElementNS(j, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
+    t = document.createElementNS(q, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
     const i = e.querySelector(":scope > g.presences-scene");
     return e.insertBefore(t, i ?? null), t;
   }
@@ -1881,50 +1881,50 @@ let Le = class extends B {
         length: Math.hypot(n.x - a.x, n.y - a.y)
       };
     }), r = i.reduce((n, s) => n + s.length, 0);
-    if (r < Ti) return;
-    const o = Math.min(20, Math.max(3, Math.floor(r / Ti)));
+    if (r < Ii) return;
+    const o = Math.min(20, Math.max(3, Math.floor(r / Ii)));
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
       let l = 0, c = i[i.length - 1];
-      for (const O of i) {
-        if (l + O.length >= a) {
-          c = O;
+      for (const T of i) {
+        if (l + T.length >= a) {
+          c = T;
           break;
         }
-        l += O.length;
+        l += T.length;
       }
-      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? p / c.length : 0, x = 9 * g, _ = c.start.x + p * d + b * x, $ = c.start.y + u * d + m * x, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * Pt), E = document.createElementNS(j, "g");
-      E.setAttribute("transform", `translate(${_} ${$}) rotate(${w + g * 8})`), E.setAttribute("opacity", "0");
-      const k = document.createElementNS(j, "ellipse");
+      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, g = c.end.y - c.start.y, u = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -g / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * u, _ = c.start.x + p * d + b * y, $ = c.start.y + g * d + m * y, w = Math.atan2(g, p) * 180 / Math.PI + 90, S = Math.round(s * Ot), C = document.createElementNS(q, "g");
+      C.setAttribute("transform", `translate(${_} ${$}) rotate(${w + u * 8})`), C.setAttribute("opacity", "0");
+      const k = document.createElementNS(q, "ellipse");
       k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
-      const M = document.createElementNS(j, "ellipse");
-      M.setAttribute("cx", "0"), M.setAttribute("cy", "9"), M.setAttribute("rx", "4.5"), M.setAttribute("ry", "5.5"), M.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
-      const N = document.createElementNS(j, "animate");
-      N.setAttribute("attributeName", "opacity"), N.setAttribute("values", "0;0.72;0.56;0"), N.setAttribute("keyTimes", "0;0.08;0.58;1"), N.setAttribute("begin", "indefinite"), N.setAttribute("dur", `${Oi}ms`), N.setAttribute("fill", "freeze"), E.append(k, M, N), t.appendChild(E), window.setTimeout(() => {
-        E.isConnected && N.beginElement();
-      }, S), window.setTimeout(() => E.remove(), S + Oi + 120);
+      const E = document.createElementNS(q, "ellipse");
+      E.setAttribute("cx", "0"), E.setAttribute("cy", "9"), E.setAttribute("rx", "4.5"), E.setAttribute("ry", "5.5"), E.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
+      const M = document.createElementNS(q, "animate");
+      M.setAttribute("attributeName", "opacity"), M.setAttribute("values", "0;0.72;0.56;0"), M.setAttribute("keyTimes", "0;0.08;0.58;1"), M.setAttribute("begin", "indefinite"), M.setAttribute("dur", `${Oi}ms`), M.setAttribute("fill", "freeze"), C.append(k, E, M), t.appendChild(C), window.setTimeout(() => {
+        C.isConnected && M.beginElement();
+      }, S), window.setTimeout(() => C.remove(), S + Oi + 120);
     }
   }
 };
-Ct([
+Pt([
   A({ attribute: !1 })
-], Le.prototype, "routes", 2);
-Ct([
+], qe.prototype, "routes", 2);
+Pt([
   A({ attribute: !1 })
-], Le.prototype, "routeNodes", 2);
-Ct([
+], qe.prototype, "routeNodes", 2);
+Pt([
   A({ attribute: !1 })
-], Le.prototype, "routeGraphEdges", 2);
-Le = Ct([
+], qe.prototype, "routeGraphEdges", 2);
+qe = Pt([
   z("explorer-animated-canvas")
-], Le);
-var Co = Object.getOwnPropertyDescriptor, Eo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Co(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], qe);
+var No = Object.getOwnPropertyDescriptor, Po = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? No(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
 const I = "http://www.w3.org/2000/svg";
-let wt = class extends Le {
+let _t = class extends qe {
   updated(e) {
     super.updated(e), this.syncRoomReactionOverlay();
   }
@@ -1950,10 +1950,10 @@ let wt = class extends Le {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
       [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
-        const u = document.createElementNS(I, "circle");
-        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(d + n * d * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
-          const g = document.createElementNS(I, "animate");
-          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
+        const g = document.createElementNS(I, "circle");
+        if (g.setAttribute("class", `magical-light-glow glow-${p + 1}`), g.setAttribute("r", String(c * (0.82 + n * 0.34))), g.setAttribute("fill", r), g.setAttribute("fill-opacity", String(d + n * d * 1.8)), g.setAttribute("stroke", "none"), e.appendChild(g), !i && p === 1) {
+          const u = document.createElementNS(I, "animate");
+          u.setAttribute("attributeName", "fill-opacity"), u.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), u.setAttribute("dur", "4.8s"), u.setAttribute("repeatCount", "indefinite"), g.appendChild(u);
         }
       });
       const a = document.createElementNS(I, "circle"), l = 24 + n * 24;
@@ -1995,7 +1995,7 @@ let wt = class extends Le {
     r.setAttribute("text-anchor", "middle"), r.setAttribute("dominant-baseline", "central"), r.setAttribute("font-size", t.active ? "18" : "15"), r.setAttribute("font-weight", "900"), r.setAttribute("fill", i), r.setAttribute("opacity", t.active ? "1" : ".42"), r.textContent = t.active ? "↗" : "━", e.appendChild(r);
   }
   appendFireplacePoint(e, t, i) {
-    const r = this.pointColor("fireplace"), o = Math.max(0.2, Math.min(1, t.intensity || 1)), n = t.reaction.radius, s = Number.isFinite(n) ? Math.max(26, Math.min(160, n * v)) : 72;
+    const r = this.pointColor("fireplace"), o = Math.max(0.2, Math.min(1, t.intensity || 1)), n = t.reaction.radius, s = Number.isFinite(n) ? Math.max(26, Math.min(160, n * x)) : 72;
     if (t.active) {
       e.setAttribute("data-fireplace", "active");
       const l = document.createElementNS(I, "circle");
@@ -2029,8 +2029,8 @@ let wt = class extends Le {
     s.setAttribute("text-anchor", "middle"), s.setAttribute("dominant-baseline", "central"), s.setAttribute("font-size", "14"), s.setAttribute("font-weight", "800"), s.setAttribute("fill", i), s.textContent = r, e.appendChild(s);
   }
   appendReactionPoint(e, t, i, r) {
-    const o = We(t, i.reaction), n = document.createElementNS(I, "g");
-    n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * v} ${o.y * v})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
+    const o = Xe(t, i.reaction), n = document.createElementNS(I, "g");
+    n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * x} ${o.y * x})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
     const s = i.reaction.kind === "temperature" ? this.formatTemperature(i) : i.currentState ?? "ukendt";
     this.appendTitle(n, `${t.name ?? t.id} · ${i.reaction.entity} · ${s}`), e.appendChild(n);
   }
@@ -2038,7 +2038,7 @@ let wt = class extends Le {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e) return;
     e.querySelector(":scope > g.room-reactions-scene")?.remove();
-    const t = this.rooms.flatMap((a) => vt(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
+    const t = this.rooms.flatMap((a) => $t(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
     if (!t.length) return;
     const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(I, "g");
     r.setAttribute("class", "room-reactions-scene"), r.setAttribute("aria-label", "Home Assistant entity-punkter"), r.setAttribute("pointer-events", "none"), t.forEach(({ room: a, status: l }) => this.appendReactionPoint(r, a, l, i));
@@ -2046,16 +2046,16 @@ let wt = class extends Le {
     e.insertBefore(r, o ?? n ?? s ?? null);
   }
 };
-wt = Eo([
+_t = Po([
   z("explorer-living-canvas")
-], wt);
-var Mo = Object.getOwnPropertyDescriptor, No = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Mo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], _t);
+var Ro = Object.getOwnPropertyDescriptor, zo = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ro(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const P = "http://www.w3.org/2000/svg", Rt = 3e4;
-let et = class extends wt {
+const R = "http://www.w3.org/2000/svg", It = 3e4;
+let it = class extends _t {
   constructor() {
     super(...arguments), this.lastOccupiedAt = /* @__PURE__ */ new Map(), this.overcastMaskId = `explorer-overcast-mask-${Math.random().toString(36).slice(2, 10)}`, this.overcastFilterId = `explorer-overcast-soft-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -2092,16 +2092,16 @@ let et = class extends wt {
       const r = this.roomForPresence(i);
       r && (t.set(r.id, (t.get(r.id) ?? 0) + 1), this.lastOccupiedAt.set(r.id, e));
     }), this.rooms.map((i) => {
-      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < Rt, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / Rt) : 0;
+      const r = t.get(i.id) ?? 0, o = r > 0, n = e - (this.lastOccupiedAt.get(i.id) ?? -1 / 0), s = !o && n >= 0 && n < It, a = o ? Math.min(1, 0.72 + Math.max(0, r - 1) * 0.12) : s ? Math.max(0, 1 - n / It) : 0;
       return { room: i, active: o, afterglow: s, intensity: a };
     }).filter((i) => i.active || i.afterglow);
   }
   polygonPoints(e) {
-    return e.points.map(([t, i]) => `${t * v},${i * v}`).join(" ");
+    return e.points.map(([t, i]) => `${t * x},${i * x}`).join(" ");
   }
   scheduleAfterglowRefresh(e, t) {
     this.afterglowTimer !== void 0 && window.clearTimeout(this.afterglowTimer);
-    const i = e.filter((r) => r.afterglow).map((r) => Rt - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
+    const i = e.filter((r) => r.afterglow).map((r) => It - (t - (this.lastOccupiedAt.get(r.room.id) ?? t)));
     i.length && (this.afterglowTimer = window.setTimeout(() => {
       this.afterglowTimer = void 0, this.syncPresenceRoomActivity();
     }, Math.max(50, Math.min(...i) + 30)));
@@ -2119,10 +2119,10 @@ let et = class extends wt {
     e.querySelector(":scope > g.presence-room-activity-scene")?.remove();
     const t = Date.now(), i = this.activities(t);
     if (this.syncRoomClasses(i), this.scheduleAfterglowRefresh(i, t), !i.length) return;
-    const r = document.createElementNS(P, "g");
+    const r = document.createElementNS(R, "g");
     r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: c, intensity: d }) => {
       if (l.points.length < 3) return;
-      const p = document.createElementNS(P, "polygon");
+      const p = document.createElementNS(R, "polygon");
       p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", c ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(c ? 0.1 + d * 0.07 : 0.025 + d * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(c ? 0.28 : 0.08 + d * 0.16)), p.setAttribute("stroke-width", c ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
     });
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
@@ -2149,7 +2149,7 @@ let et = class extends wt {
   roomTemperatures() {
     return this.rooms.flatMap((e) => {
       if (e.points.length < 3) return [];
-      const t = vt(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
+      const t = $t(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
       if (!t.length) return [];
       const i = t.reduce((r, o) => r + o, 0) / t.length;
       return [{ room: e, celsius: i }];
@@ -2161,29 +2161,29 @@ let et = class extends wt {
     e.querySelector(":scope > g.room-temperature-atmosphere-scene")?.remove();
     const t = this.roomTemperatures();
     if (!t.length) return;
-    const i = document.createElementNS(P, "g");
+    const i = document.createElementNS(R, "g");
     i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
-      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(P, "polygon");
-      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(d)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
-      const b = document.createElementNS(P, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
-      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
+      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), g = this.temperatureBand(c), u = document.createElementNS(R, "polygon");
+      u.setAttribute("points", this.polygonPoints(l)), u.setAttribute("class", `room-temperature-atmosphere temperature-${g}`), u.setAttribute("data-temperature-band", g), u.setAttribute("fill", p), u.setAttribute("fill-opacity", String(d)), u.setAttribute("stroke", p), u.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), u.setAttribute("stroke-width", "2"), u.setAttribute("stroke-linejoin", "round"), u.setAttribute("vector-effect", "non-scaling-stroke");
+      const b = document.createElementNS(R, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
+      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, u.appendChild(b), i.appendChild(u);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
   }
   appendFireplaceAtmosphere(e, t, i, r, o) {
-    const n = We(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * v)) : 82, c = document.createElementNS(P, "g");
-    c.setAttribute("class", "fireplace-atmosphere"), c.setAttribute("transform", `translate(${n.x * v} ${n.y * v})`), c.setAttribute("data-room-id", t.id);
-    const d = document.createElementNS(P, "circle");
+    const n = Xe(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, c = document.createElementNS(R, "g");
+    c.setAttribute("class", "fireplace-atmosphere"), c.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), c.setAttribute("data-room-id", t.id);
+    const d = document.createElementNS(R, "circle");
     d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
-    const p = document.createElementNS(P, "circle");
+    const p = document.createElementNS(R, "circle");
     p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
-    const u = document.createElementNS(P, "ellipse");
-    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
-      const m = document.createElementNS(P, "animate");
+    const g = document.createElementNS(R, "ellipse");
+    if (g.setAttribute("class", "fireplace-atmosphere-core"), g.setAttribute("cx", "0"), g.setAttribute("cy", String(-l * 0.05)), g.setAttribute("rx", String(l * 0.39)), g.setAttribute("ry", String(l * 0.31)), g.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), g.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(g), !r) {
+      const m = document.createElementNS(R, "animate");
       m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), d.appendChild(m);
-      const x = document.createElementNS(P, "animate");
-      x.setAttribute("attributeName", "fill-opacity"), x.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), x.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), x.setAttribute("repeatCount", "indefinite"), p.appendChild(x);
+      const y = document.createElementNS(R, "animate");
+      y.setAttribute("attributeName", "fill-opacity"), y.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), y.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), y.setAttribute("repeatCount", "indefinite"), p.appendChild(y);
     }
     [
       [-18, -10, 2.4],
@@ -2192,16 +2192,16 @@ let et = class extends wt {
       [22, -6, 1.5],
       [-26, -22, 1.4],
       [5, -38, 1.25]
-    ].forEach(([m, x, _], $) => {
-      const w = document.createElementNS(P, "circle");
-      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(x)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(w), !r) {
-        const S = document.createElementNS(P, "animate");
-        S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${x};${x - 22 - $ * 2};${x - 38 - $ * 3}`), S.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), S.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
-        const E = document.createElementNS(P, "animate");
-        E.setAttribute("attributeName", "opacity"), E.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), E.setAttribute("keyTimes", "0;0.18;0.68;1"), E.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), E.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), E.setAttribute("repeatCount", "indefinite"), w.appendChild(E);
+    ].forEach(([m, y, _], $) => {
+      const w = document.createElementNS(R, "circle");
+      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(y)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(w), !r) {
+        const S = document.createElementNS(R, "animate");
+        S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${y};${y - 22 - $ * 2};${y - 38 - $ * 3}`), S.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), S.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
+        const C = document.createElementNS(R, "animate");
+        C.setAttribute("attributeName", "opacity"), C.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), C.setAttribute("keyTimes", "0;0.18;0.68;1"), C.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), C.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), C.setAttribute("repeatCount", "indefinite"), w.appendChild(C);
       }
     });
-    const b = document.createElementNS(P, "title");
+    const b = document.createElementNS(R, "title");
     b.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, c.appendChild(b), e.appendChild(c);
   }
   syncFireplaceAtmosphere() {
@@ -2209,10 +2209,10 @@ let et = class extends wt {
     if (!e) return;
     e.querySelector(":scope > g.fireplace-atmosphere-scene")?.remove();
     const t = this.rooms.flatMap(
-      (l) => vt(l, (c) => this.atmosphereEntityState(c)).filter((c) => c.reaction.kind === "fireplace" && c.active).map((c) => ({ room: l, status: c }))
+      (l) => $t(l, (c) => this.atmosphereEntityState(c)).filter((c) => c.reaction.kind === "fireplace" && c.active).map((c) => ({ room: l, status: c }))
     );
     if (!t.length) return;
-    const i = document.createElementNS(P, "g");
+    const i = document.createElementNS(R, "g");
     i.setAttribute("class", "fireplace-atmosphere-scene"), i.setAttribute("aria-label", "Levende pejsatmosfære"), i.setAttribute("pointer-events", "none");
     const r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
     t.forEach(({ room: l, status: c }, d) => this.appendFireplaceAtmosphere(i, l, c, r, d));
@@ -2228,35 +2228,35 @@ let et = class extends wt {
     };
   }
   createOvercastMask() {
-    const e = document.createElementNS(P, "mask");
-    e.setAttribute("id", this.overcastMaskId), e.setAttribute("maskUnits", "userSpaceOnUse"), e.setAttribute("x", "0"), e.setAttribute("y", "0"), e.setAttribute("width", String(v)), e.setAttribute("height", String(v));
-    const t = document.createElementNS(P, "rect");
-    return t.setAttribute("x", "0"), t.setAttribute("y", "0"), t.setAttribute("width", String(v)), t.setAttribute("height", String(v)), t.setAttribute("fill", "white"), e.appendChild(t), this.rooms.forEach((i) => {
+    const e = document.createElementNS(R, "mask");
+    e.setAttribute("id", this.overcastMaskId), e.setAttribute("maskUnits", "userSpaceOnUse"), e.setAttribute("x", "0"), e.setAttribute("y", "0"), e.setAttribute("width", String(x)), e.setAttribute("height", String(x));
+    const t = document.createElementNS(R, "rect");
+    return t.setAttribute("x", "0"), t.setAttribute("y", "0"), t.setAttribute("width", String(x)), t.setAttribute("height", String(x)), t.setAttribute("fill", "white"), e.appendChild(t), this.rooms.forEach((i) => {
       if (i.points.length < 3) return;
-      const r = document.createElementNS(P, "polygon");
+      const r = document.createElementNS(R, "polygon");
       r.setAttribute("points", this.polygonPoints(i)), r.setAttribute("fill", "black"), r.setAttribute("stroke", "black"), r.setAttribute("stroke-width", "16"), r.setAttribute("stroke-linejoin", "round"), e.appendChild(r);
     }), e;
   }
   createOvercastFilter() {
-    const e = document.createElementNS(P, "filter");
+    const e = document.createElementNS(R, "filter");
     e.setAttribute("id", this.overcastFilterId), e.setAttribute("x", "-55%"), e.setAttribute("y", "-65%"), e.setAttribute("width", "210%"), e.setAttribute("height", "240%");
-    const t = document.createElementNS(P, "feGaussianBlur");
+    const t = document.createElementNS(R, "feGaussianBlur");
     t.setAttribute("in", "SourceGraphic"), t.setAttribute("stdDeviation", "3.1"), t.setAttribute("result", "soft"), e.appendChild(t);
-    const i = document.createElementNS(P, "feTurbulence");
+    const i = document.createElementNS(R, "feTurbulence");
     i.setAttribute("type", "fractalNoise"), i.setAttribute("baseFrequency", "0.016 0.029"), i.setAttribute("numOctaves", "3"), i.setAttribute("seed", "43"), i.setAttribute("result", "noise"), e.appendChild(i);
-    const r = document.createElementNS(P, "feDisplacementMap");
+    const r = document.createElementNS(R, "feDisplacementMap");
     return r.setAttribute("in", "soft"), r.setAttribute("in2", "noise"), r.setAttribute("scale", "16"), r.setAttribute("xChannelSelector", "R"), r.setAttribute("yChannelSelector", "G"), e.appendChild(r), e;
   }
   appendOvercastCloud(e, t, i, r, o, n) {
-    const s = document.createElementNS(P, "g");
+    const s = document.createElementNS(R, "g");
     s.setAttribute("class", "overcast-cloud-position"), s.setAttribute("transform", `translate(${t} ${i}) scale(${r})`), s.setAttribute("opacity", String(n));
-    const a = document.createElementNS(P, "g");
+    const a = document.createElementNS(R, "g");
     a.setAttribute("class", `overcast-cloud overcast-cloud-${o % 3} overcast-depth-${o % 3}`);
-    const l = document.createElementNS(P, "ellipse");
+    const l = document.createElementNS(R, "ellipse");
     l.setAttribute("class", "overcast-cloud-mist"), l.setAttribute("cx", o % 2 === 0 ? "-12" : "14"), l.setAttribute("cy", "18"), l.setAttribute("rx", "145"), l.setAttribute("ry", "43"), a.appendChild(l);
-    const c = document.createElementNS(P, "g");
+    const c = document.createElementNS(R, "g");
     c.setAttribute("class", "overcast-cloud-body"), c.setAttribute("filter", `url(#${this.overcastFilterId})`), c.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
-    const d = document.createElementNS(P, "path");
+    const d = document.createElementNS(R, "path");
     d.setAttribute("class", "overcast-cloud-base"), d.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), c.appendChild(d), [
       [-86, -6, 50, 30],
       [-47, -37, 57, 34],
@@ -2264,12 +2264,12 @@ let et = class extends wt {
       [43, -43, 58, 35],
       [82, -17, 50, 30],
       [14, 23, 92, 27]
-    ].forEach(([g, b, m, x], _) => {
-      const $ = document.createElementNS(P, "ellipse");
-      $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(g)), $.setAttribute("cy", String(b)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(x)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), c.appendChild($);
+    ].forEach(([u, b, m, y], _) => {
+      const $ = document.createElementNS(R, "ellipse");
+      $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(u)), $.setAttribute("cy", String(b)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(y)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), c.appendChild($);
     }), a.appendChild(c);
-    const u = document.createElementNS(P, "path");
-    u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
+    const g = document.createElementNS(R, "path");
+    g.setAttribute("class", "overcast-cloud-strand"), g.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(g), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
     const e = this.renderRoot.querySelector("svg.floorplan"), t = this.renderRoot.querySelector("g.scene");
@@ -2277,9 +2277,9 @@ let et = class extends wt {
     e.querySelector(`defs[data-overcast-mask="${this.overcastMaskId}"]`)?.remove(), t.querySelector(":scope > g.overcast-cloud-density-scene")?.remove();
     const i = this.descendantWeather();
     if (i.effect !== "cloudy") return;
-    const r = document.createElementNS(P, "defs");
+    const r = document.createElementNS(R, "defs");
     r.setAttribute("data-overcast-mask", this.overcastMaskId), r.appendChild(this.createOvercastMask()), r.appendChild(this.createOvercastFilter()), e.insertBefore(r, e.firstChild);
-    const o = document.createElementNS(P, "g");
+    const o = document.createElementNS(R, "g");
     o.setAttribute("class", `overcast-cloud-density-scene${i.night ? " is-night" : ""}`), o.setAttribute("mask", `url(#${this.overcastMaskId})`), o.setAttribute("pointer-events", "none"), o.style.setProperty("--overcast-intensity", String(i.intensity)), [
       [195, 58, 0.68, 0, 0.4],
       [515, 90, 0.58, 1, 0.31],
@@ -2298,8 +2298,8 @@ let et = class extends wt {
     t.insertBefore(o, s ?? null);
   }
 };
-et.styles = T`
-    ${wt.styles}
+it.styles = O`
+    ${_t.styles}
 
     :host {
       --explorer-presence-room-color: var(--primary-color, #03a9f4);
@@ -2434,16 +2434,16 @@ et.styles = T`
       }
     }
   `;
-et = No([
+it = zo([
   z("explorer-presence-activity-canvas")
-], et);
-var Po = Object.defineProperty, Ro = Object.getOwnPropertyDescriptor, at = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Ro(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], it);
+var To = Object.defineProperty, Oo = Object.getOwnPropertyDescriptor, lt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Oo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Po(t, i, o), o;
+  return r && o && To(t, i, o), o;
 };
-const zo = "http://www.w3.org/2000/svg";
-let fe = class extends et {
+const Io = "http://www.w3.org/2000/svg";
+let be = class extends it {
   constructor() {
     super(...arguments), this.theme = "classic", this.compassRotation = -7, this.compassSize = 1, this.compassVisible = !0, this.artifactId = `explorer-antique-${Math.random().toString(36).slice(2, 10)}`, this.hasRevealedEnchanted = !1;
   }
@@ -2451,7 +2451,7 @@ let fe = class extends et {
     super.updated(e), this.syncThemeArtifacts();
   }
   createSvg(e) {
-    return document.createElementNS(zo, e);
+    return document.createElementNS(Io, e);
   }
   setAttributes(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -2499,9 +2499,9 @@ let fe = class extends et {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, u]) => {
-      const g = this.createSvg("line");
-      this.setAttributes(g, { x1: String(c), y1: String(d), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, g]) => {
+      const u = this.createSvg("line");
+      this.setAttributes(u, { x1: String(c), y1: String(d), x2: String(p), y2: String(g), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(u);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2522,29 +2522,29 @@ let fe = class extends et {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-fe.styles = T`${et.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
-at([
+be.styles = O`${it.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+lt([
   A({ attribute: "map-theme", reflect: !0 })
-], fe.prototype, "theme", 2);
-at([
+], be.prototype, "theme", 2);
+lt([
   A({ type: Number, attribute: "compass-rotation" })
-], fe.prototype, "compassRotation", 2);
-at([
+], be.prototype, "compassRotation", 2);
+lt([
   A({ type: Number, attribute: "compass-size" })
-], fe.prototype, "compassSize", 2);
-at([
+], be.prototype, "compassSize", 2);
+lt([
   A({ type: Boolean, attribute: "compass-visible" })
-], fe.prototype, "compassVisible", 2);
-fe = at([
+], be.prototype, "compassVisible", 2);
+be = lt([
   z("explorer-themed-canvas")
-], fe);
-const Oo = ["on"], To = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function Io(e) {
+], be);
+const Do = ["on"], jo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function Lo(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
-  return t.length ? [...new Set(t)] : [...Oo];
+  return t.length ? [...new Set(t)] : [...Do];
 }
-function pr(e, t) {
-  const i = e.visible !== !1, r = e.state_binding, o = Io(r?.active_states);
+function hr(e, t) {
+  const i = e.visible !== !1, r = e.state_binding, o = Lo(r?.active_states);
   if (!i)
     return {
       zone: e,
@@ -2574,7 +2574,7 @@ function pr(e, t) {
       activeStates: o,
       reason: "missing_entity"
     };
-  if (To.has(s))
+  if (jo.has(s))
     return {
       zone: e,
       visible: !0,
@@ -2597,28 +2597,28 @@ function pr(e, t) {
     ...a ? {} : { reason: "state_blocked" }
   };
 }
-function Do(e, t) {
-  return e.map((i) => pr(i, t));
+function qo(e, t) {
+  return e.map((i) => hr(i, t));
 }
-var jo = Object.defineProperty, Lo = Object.getOwnPropertyDescriptor, hr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Lo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Bo = Object.defineProperty, Ho = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ho(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && jo(t, i, o), o;
+  return r && o && Bo(t, i, o), o;
 };
-const pe = "http://www.w3.org/2000/svg", qo = {
+const he = "http://www.w3.org/2000/svg", Fo = {
   info: "var(--explorer-zone-info, #2d8f74)",
   warning: "var(--explorer-zone-warning, #f59e0b)",
   danger: "var(--explorer-zone-danger, #d64545)",
   cleaning: "var(--explorer-zone-cleaning, #3b82c4)",
   restricted: "var(--explorer-zone-restricted, #8b5a9e)"
-}, Bo = {
+}, Vo = {
   info: "i",
   warning: "!",
   danger: "!",
   cleaning: "✦",
   restricted: "×"
 };
-let qe = class extends fe {
+let Be = class extends be {
   constructor() {
     super(...arguments), this.zones = [];
   }
@@ -2626,50 +2626,50 @@ let qe = class extends fe {
     super.updated(e), (e.has("zones") || e.has("hass") || e.has("theme") || e.has("rooms")) && this.syncZonesOverlay();
   }
   zonePolygonPoints(e) {
-    return e.map(([t, i]) => `${t * v},${i * v}`).join(" ");
+    return e.map(([t, i]) => `${t * x},${i * x}`).join(" ");
   }
   zoneCenter(e) {
-    return e.label ? { x: e.label.x * v, y: e.label.y * v } : e.points.length ? {
-      x: e.points.reduce((t, i) => t + i[0], 0) / e.points.length * v,
-      y: e.points.reduce((t, i) => t + i[1], 0) / e.points.length * v
-    } : { x: v / 2, y: v / 2 };
+    return e.label ? { x: e.label.x * x, y: e.label.y * x } : e.points.length ? {
+      x: e.points.reduce((t, i) => t + i[0], 0) / e.points.length * x,
+      y: e.points.reduce((t, i) => t + i[1], 0) / e.points.length * x
+    } : { x: x / 2, y: x / 2 };
   }
   zoneColor(e) {
-    return e.color?.trim() || qo[e.kind ?? "info"];
+    return e.color?.trim() || Fo[e.kind ?? "info"];
   }
   appendZoneTitle(e, t) {
-    const i = document.createElementNS(pe, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
+    const i = document.createElementNS(he, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
     i.textContent = `${r.name ?? r.id}${o}`, e.appendChild(i);
   }
   appendZoneAccent(e, t, i, r) {
     if (i !== "cleaning" && i !== "restricted") return;
-    const o = document.createElementNS(pe, "polygon");
+    const o = document.createElementNS(he, "polygon");
     o.setAttribute("points", this.zonePolygonPoints(t.points)), o.setAttribute("class", `zone-accent zone-accent-${i}`), o.setAttribute("fill", "none"), o.setAttribute("stroke", r), o.setAttribute("vector-effect", "non-scaling-stroke"), o.setAttribute("stroke-linejoin", "round"), o.setAttribute("pointer-events", "none"), i === "cleaning" ? (o.setAttribute("stroke-width", "8"), o.setAttribute("stroke-opacity", ".30"), o.setAttribute("stroke-dasharray", "3 15")) : (o.setAttribute("stroke-width", "9"), o.setAttribute("stroke-opacity", ".20"), o.setAttribute("stroke-dasharray", "2 11")), e.appendChild(o);
   }
   renderZone(e, t, i) {
     const r = t.zone;
     if (!t.active || r.points.length < 3) return;
-    const o = r.kind ?? "info", n = this.zoneColor(r), s = document.createElementNS(pe, "g");
+    const o = r.kind ?? "info", n = this.zoneColor(r), s = document.createElementNS(he, "g");
     s.setAttribute("class", `dynamic-zone zone-${o} zone-${r.id}${i ? " reduced-motion" : ""}`), s.setAttribute("pointer-events", "none");
-    const a = document.createElementNS(pe, "polygon");
+    const a = document.createElementNS(he, "polygon");
     a.setAttribute("class", "zone-shape"), a.setAttribute("points", this.zonePolygonPoints(r.points)), a.setAttribute("fill", n), a.setAttribute("fill-opacity", o === "danger" || o === "restricted" ? ".18" : ".13"), a.setAttribute("stroke", n), a.setAttribute("stroke-width", o === "danger" ? "5" : "4"), a.setAttribute("stroke-opacity", ".88"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("vector-effect", "non-scaling-stroke"), o === "warning" && a.setAttribute("stroke-dasharray", "16 9"), o === "restricted" && a.setAttribute("stroke-dasharray", "7 7"), o === "cleaning" && a.setAttribute("stroke-dasharray", "4 8"), s.appendChild(a), this.appendZoneAccent(s, r, o, n);
-    const l = this.zoneCenter(r), c = document.createElementNS(pe, "g");
+    const l = this.zoneCenter(r), c = document.createElementNS(he, "g");
     c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.setAttribute("class", "zone-marker");
-    const d = document.createElementNS(pe, "circle");
+    const d = document.createElementNS(he, "circle");
     d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
-    const p = document.createElementNS(pe, "text");
-    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = Bo[o], c.appendChild(p), s.appendChild(c), r.name) {
-      const u = document.createElementNS(pe, "text");
-      u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
+    const p = document.createElementNS(he, "text");
+    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = Vo[o], c.appendChild(p), s.appendChild(c), r.name) {
+      const g = document.createElementNS(he, "text");
+      g.setAttribute("x", String(l.x)), g.setAttribute("y", String(l.y + 36)), g.setAttribute("text-anchor", "middle"), g.setAttribute("class", "zone-label"), g.setAttribute("fill", n), g.setAttribute("font-size", "22"), g.setAttribute("font-weight", "800"), g.setAttribute("font-family", "system-ui, sans-serif"), g.setAttribute("paint-order", "stroke"), g.setAttribute("stroke", "var(--card-background-color, #ffffff)"), g.setAttribute("stroke-width", "5"), g.setAttribute("stroke-linejoin", "round"), g.textContent = r.name, s.appendChild(g);
     }
     this.appendZoneTitle(s, t), e.appendChild(s);
   }
   syncZonesOverlay() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
-    const i = Do(this.zones, (c) => this.hass?.states[c]?.state).filter((c) => c.active && c.zone.points.length >= 3);
+    const i = qo(this.zones, (c) => this.hass?.states[c]?.state).filter((c) => c.active && c.zone.points.length >= 3);
     if (!i.length) return;
-    const r = document.createElementNS(pe, "g");
+    const r = document.createElementNS(he, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
     const o = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
     i.forEach((c) => this.renderZone(r, c, o));
@@ -2677,8 +2677,8 @@ let qe = class extends fe {
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-qe.styles = T`
-    ${fe.styles}
+Be.styles = O`
+    ${be.styles}
 
     :host {
       --explorer-zone-info: #2d8f74;
@@ -2769,38 +2769,41 @@ qe.styles = T`
       }
     }
   `;
-hr([
+ur([
   A({ attribute: !1 })
-], qe.prototype, "zones", 2);
-qe = hr([
+], Be.prototype, "zones", 2);
+Be = ur([
   z("explorer-zones-canvas")
-], qe);
-var Fo = Object.getOwnPropertyDescriptor, Vo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Fo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
-    (s = e[n]) && (o = s(o) || o);
-  return o;
+], Be);
+var Ko = Object.defineProperty, Zo = Object.getOwnPropertyDescriptor, gr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Zo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+    (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
+  return r && o && Ko(t, i, o), o;
 };
-const Ho = "http://www.w3.org/2000/svg", Ko = 4200, Zo = 900, Go = 54, Wo = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ii = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, zt = [58, 64, 54, 61, 56, 66], Uo = [8, 6, 10, 7, 9, 5], Xo = [7, 4, 10, 6, 8, 3];
-function Di(e) {
+const Go = "http://www.w3.org/2000/svg", Wo = 4200, Uo = 900, Xo = 54, Yo = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Di = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Dt = [58, 64, 54, 61, 56, 66], Qo = [8, 6, 10, 7, 9, 5], Jo = [7, 4, 10, 6, 8, 3];
+function ji(e) {
   let t = 2166136261;
   for (let i = 0; i < e.length; i += 1)
     t ^= e.charCodeAt(i), t = Math.imul(t, 16777619);
   return t >>> 0;
 }
-function Ot(e, t, i) {
+function pt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-let tt = class extends qe {
+let He = class extends Be {
   constructor() {
-    super(...arguments), this.polishPreviousPositions = /* @__PURE__ */ new Map(), this.polishPreviousRooms = /* @__PURE__ */ new Map();
+    super(...arguments), this.movementHistory = {}, this.polishPreviousPositions = /* @__PURE__ */ new Map(), this.polishPreviousRooms = /* @__PURE__ */ new Map(), this.movementHistorySamples = /* @__PURE__ */ new Map();
   }
   updated(e) {
-    super.updated(e), (e.has("presences") || e.has("theme")) && this.polishSyncPresenceVisuals(), e.has("presences") && this.polishSyncTrails();
+    super.updated(e), (e.has("presences") || e.has("theme")) && this.polishSyncPresenceVisuals(), e.has("presences") && this.polishSyncTrails(), (e.has("presences") || e.has("movementHistory") || e.has("rooms") || e.has("theme")) && this.polishSyncMovementHistory();
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback(), this.movementHistoryTimer !== void 0 && window.clearTimeout(this.movementHistoryTimer);
   }
   polishPresenceColor(e) {
     const t = e.color?.trim();
     if (t) return t;
-    const i = e.type ?? "person", r = Ii[i][Di(e.id) % Ii[i].length];
+    const i = e.type ?? "person", r = Di[i][ji(e.id) % Di[i].length];
     return this.theme === "enchanted_antique" ? `hsl(${r} 34% 38%)` : `hsl(${r} 62% 47%)`;
   }
   polishTrailColor(e) {
@@ -2808,13 +2811,13 @@ let tt = class extends qe {
   }
   polishTrailDuration(e) {
     const t = e.trail_duration;
-    return Number.isFinite(t) ? Math.round(Ot(t, 1, 60) * 1e3) : Ko;
+    return Number.isFinite(t) ? Math.round(pt(t, 1, 60) * 1e3) : Wo;
   }
   polishBasePosition(e) {
-    return { x: (e.x ?? 0.5) * v, y: (e.y ?? 0.5) * v };
+    return { x: (e.x ?? 0.5) * x, y: (e.y ?? 0.5) * x };
   }
   polishPersonTrailVariant(e) {
-    return Di(e.id) % zt.length;
+    return ji(e.id) % Dt.length;
   }
   polishOffsets(e) {
     const t = /* @__PURE__ */ new Map();
@@ -2826,24 +2829,24 @@ let tt = class extends qe {
       const s = [n], a = [n];
       for (; a.length; ) {
         const d = a.shift(), p = this.polishBasePosition(d);
-        for (const u of [...i]) {
-          const g = r.get(u);
-          if (!g) continue;
-          const b = this.polishBasePosition(g);
-          Math.hypot(p.x - b.x, p.y - b.y) <= Go && (i.delete(u), s.push(g), a.push(g));
+        for (const g of [...i]) {
+          const u = r.get(g);
+          if (!u) continue;
+          const b = this.polishBasePosition(u);
+          Math.hypot(p.x - b.x, p.y - b.y) <= Xo && (i.delete(g), s.push(u), a.push(u));
         }
       }
       if (s.length < 2) continue;
       const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
       l.forEach((d, p) => {
-        const u = this.polishBasePosition(d), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = Ot(u.x + Math.cos(g) * c, 38, v - 38), m = Ot(u.y + Math.sin(g) * c, 38, v - 64);
-        t.set(d.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
+        const g = this.polishBasePosition(d), u = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = pt(g.x + Math.cos(u) * c, 38, x - 38), m = pt(g.y + Math.sin(u) * c, 38, x - 64);
+        t.set(d.id, { x: b - g.x, y: m - g.y, groupSize: l.length });
       });
     }
     return t;
   }
   polishCreateSvg(e) {
-    return document.createElementNS(Ho, e);
+    return document.createElementNS(Go, e);
   }
   polishSetAttributes(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -2887,9 +2890,9 @@ let tt = class extends qe {
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
       let c = n.querySelector(":scope > g.presence-visual-offset");
-      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
-      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      d.textContent = `${r.name ?? r.id} · ${Wo[s]}${u}${p}`, n.appendChild(d);
+      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((u) => u.localName.toLowerCase() !== "animatetransform").forEach((u) => c?.appendChild(u)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
+      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", g = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      d.textContent = `${r.name ?? r.id} · ${Yo[s]}${g}${p}`, n.appendChild(d);
     });
   }
   polishRouteConfig() {
@@ -2897,8 +2900,8 @@ let tt = class extends qe {
   }
   polishMovementPath(e, t, i, r) {
     if (!i || !r || i === r) return [e, t];
-    const o = ni(this.polishRouteConfig(), i, r, (n) => this.hass?.states[n]?.state);
-    return o ? [e, ...o.hops.slice(1, -1).map((n) => ({ x: n.point[0] * v, y: n.point[1] * v })), t] : [e, t];
+    const o = li(this.polishRouteConfig(), i, r, (n) => this.hass?.states[n]?.state);
+    return o ? [e, ...o.hops.slice(1, -1).map((n) => ({ x: n.point[0] * x, y: n.point[1] * x })), t] : [e, t];
   }
   polishEnsureTrailLayer() {
     const e = this.renderRoot.querySelector("g.scene");
@@ -2907,7 +2910,7 @@ let tt = class extends qe {
     return t || (t = this.polishCreateSvg("g"), t.setAttribute("class", "presence-trails-scene"), t.setAttribute("aria-label", "Person- og objektspor"), t.setAttribute("pointer-events", "none"), e.insertBefore(t, e.querySelector(":scope > g.presences-scene") ?? null), t);
   }
   polishTrailSpacing(e, t = 0) {
-    return e === "person" ? zt[t] ?? zt[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
+    return e === "person" ? Dt[t] ?? Dt[0] : e === "pet" ? 46 : e === "robot" ? 42 : e === "vehicle" ? 54 : e === "object" ? 62 : 58;
   }
   polishAppendPersonTrailShape(e, t, i) {
     const r = (n, s, a, l) => {
@@ -2973,28 +2976,28 @@ let tt = class extends qe {
     if (t.trail_visible === !1) return;
     const i = this.polishEnsureTrailLayer();
     if (!i || e.length < 2) return;
-    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, u) => {
-      const g = e[u];
-      return { start: g, end: p, length: Math.hypot(p.x - g.x, p.y - g.y) };
-    }), l = a.reduce((p, u) => p + u.length, 0), c = this.polishTrailSpacing(r, o);
+    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, g) => {
+      const u = e[g];
+      return { start: u, end: p, length: Math.hypot(p.x - u.x, p.y - u.y) };
+    }), l = a.reduce((p, g) => p + g.length, 0), c = this.polishTrailSpacing(r, o);
     if (l < c) return;
     const d = Math.min(24, Math.max(3, Math.floor(l / c)));
     for (let p = 0; p < d; p += 1) {
-      const u = (p + 1) / (d + 1), g = l * u;
+      const g = (p + 1) / (d + 1), u = l * g;
       let b = 0, m = a[a.length - 1];
-      for (const de of a) {
-        if (b + de.length >= g) {
-          m = de;
+      for (const oe of a) {
+        if (b + oe.length >= u) {
+          m = oe;
           break;
         }
-        b += de.length;
+        b += oe.length;
       }
-      const x = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Uo[o] ?? 8 : r === "pet" ? 6 : 0, E = r === "person" ? Xo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, M = m.length > 0 ? _ / m.length : 0, N = m.start.x + _ * x + k * S * w, O = m.start.y + $ * x + M * S * w, J = Math.atan2($, _) * 180 / Math.PI + 90, ee = Math.round(u * Zo), R = this.polishCreateSvg("g");
-      R.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), R.setAttribute("data-presence-id", t.id), r === "person" && R.setAttribute("data-trail-style", String(o + 1)), R.setAttribute("transform", `translate(${N} ${O}) rotate(${J + (S ? w * E : 0)})`), R.setAttribute("opacity", "0"), this.polishAppendTrailShape(R, r, n, o);
-      const H = this.polishCreateSvg("animate");
-      this.polishSetAttributes(H, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), R.appendChild(H), i.appendChild(R), window.setTimeout(() => {
-        R.isConnected && H.beginElement();
-      }, ee), window.setTimeout(() => R.remove(), ee + s + 120);
+      const y = m.length > 0 ? (u - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? Qo[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? Jo[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, U = Math.atan2($, _) * 180 / Math.PI + 90, K = Math.round(g * Uo), P = this.polishCreateSvg("g");
+      P.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), P.setAttribute("data-presence-id", t.id), r === "person" && P.setAttribute("data-trail-style", String(o + 1)), P.setAttribute("transform", `translate(${M} ${T}) rotate(${U + (S ? w * C : 0)})`), P.setAttribute("opacity", "0"), this.polishAppendTrailShape(P, r, n, o);
+      const j = this.polishCreateSvg("animate");
+      this.polishSetAttributes(j, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), P.appendChild(j), i.appendChild(P), window.setTimeout(() => {
+        P.isConnected && j.beginElement();
+      }, K), window.setTimeout(() => P.remove(), K + s + 120);
     }
   }
   polishSyncTrails() {
@@ -3005,18 +3008,88 @@ let tt = class extends qe {
     });
     for (const r of this.polishPreviousPositions.keys()) i.has(r) || (this.polishPreviousPositions.delete(r), this.polishPreviousRooms.delete(r));
   }
+  polishHistoryDurationMs() {
+    return pt(this.movementHistory.duration_minutes ?? 3, 1, 5) * 6e4;
+  }
+  polishRemoveHistoryLayers() {
+    const e = this.renderRoot.querySelector("g.scene");
+    e?.querySelector(":scope > g.movement-history-rooms-scene")?.remove(), e?.querySelector(":scope > g.movement-history-scene")?.remove();
+  }
+  polishScheduleHistoryRefresh() {
+    this.movementHistoryTimer !== void 0 && window.clearTimeout(this.movementHistoryTimer), this.movementHistory.enabled === !0 && (this.movementHistoryTimer = window.setTimeout(() => {
+      this.movementHistoryTimer = void 0, this.polishSyncMovementHistory();
+    }, 5e3));
+  }
+  polishSyncMovementHistory() {
+    if (this.movementHistory.enabled !== !0) {
+      this.movementHistorySamples.clear(), this.polishRemoveHistoryLayers(), this.polishScheduleHistoryRefresh();
+      return;
+    }
+    const e = Date.now(), t = this.polishHistoryDurationMs(), i = e - t, r = this.presences.filter((n) => n.visible !== !1 && (n.type ?? "person") === "person"), o = new Set(r.map((n) => n.id));
+    for (const [n, s] of this.movementHistorySamples) {
+      if (!o.has(n)) {
+        this.movementHistorySamples.delete(n);
+        continue;
+      }
+      const a = s.filter((l) => l.at >= i);
+      a.length ? this.movementHistorySamples.set(n, a) : this.movementHistorySamples.delete(n);
+    }
+    for (const n of r) {
+      const s = this.polishBasePosition(n), a = this.movementHistorySamples.get(n.id) ?? [], l = a[a.length - 1];
+      (!l || Math.hypot(l.x - s.x, l.y - s.y) > 10 || l.roomId !== n.room_id) && (a.push({ ...s, roomId: n.room_id, at: e }), this.movementHistorySamples.set(n.id, a.slice(-120)));
+    }
+    this.polishRenderMovementHistory(r, e, t), this.polishScheduleHistoryRefresh();
+  }
+  polishRenderMovementHistory(e, t, i) {
+    const r = this.renderRoot.querySelector("g.scene");
+    if (!r) return;
+    this.polishRemoveHistoryLayers();
+    const o = this.polishCreateSvg("g"), n = this.polishCreateSvg("g");
+    o.setAttribute("class", "movement-history-rooms-scene"), n.setAttribute("class", "movement-history-scene"), o.setAttribute("pointer-events", "none"), n.setAttribute("pointer-events", "none");
+    const s = new Map(e.map((l) => [l.id, l]));
+    for (const [l, c] of this.movementHistorySamples) {
+      const d = s.get(l);
+      if (!d || d.trail_visible === !1) continue;
+      const p = this.polishTrailColor(d), g = this.polishPersonTrailVariant(d);
+      if (this.movementHistory.show_rooms !== !1) {
+        const u = /* @__PURE__ */ new Map();
+        for (const b of c) b.roomId && u.set(b.roomId, b);
+        for (const [b, m] of u) {
+          const y = this.rooms.find((S) => S.id === b || S.area_id === b);
+          if (!y || y.points.length < 3) continue;
+          const _ = t - m.at, $ = Math.max(0, 0.16 * (1 - _ / i)), w = this.polishCreateSvg("polygon");
+          this.polishSetAttributes(w, { points: y.points.map(([S, C]) => `${S * x},${C * x}`).join(" "), fill: p, "fill-opacity": String($), stroke: p, "stroke-opacity": String($ * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": l }), o.appendChild(w);
+        }
+      }
+      for (let u = 1; u < c.length; u += 1) {
+        const b = c[u - 1], m = c[u], y = this.polishMovementPath(b, m, b.roomId, m.roomId), _ = t - m.at, $ = Math.max(0, 0.72 * (1 - _ / i));
+        for (let w = 1; w < y.length; w += 1) {
+          const S = y[w - 1], C = y[w], k = C.x - S.x, E = C.y - S.y, M = Math.hypot(k, E), T = Math.min(12, Math.max(1, Math.floor(M / 70))), U = Math.atan2(E, k) * 180 / Math.PI + 90;
+          for (let K = 1; K <= T; K += 1) {
+            const P = K / (T + 1), j = K % 2 === 0 ? -1 : 1, oe = M > 0 ? -E / M : 0, dt = M > 0 ? k / M : 0, pe = this.polishCreateSvg("g");
+            pe.setAttribute("class", `movement-history-mark trail-person-v${g + 1}`), pe.setAttribute("data-presence-id", l), pe.setAttribute("transform", `translate(${S.x + k * P + oe * 6 * j} ${S.y + E * P + dt * 6 * j}) rotate(${U + j * 4}) scale(.62)`), pe.setAttribute("opacity", String($)), this.polishAppendTrailShape(pe, "person", p, g), n.appendChild(pe);
+          }
+        }
+      }
+    }
+    const a = r.querySelector(":scope > g.presence-trails-scene") ?? r.querySelector(":scope > g.presences-scene");
+    r.insertBefore(o, a ?? null), r.insertBefore(n, a ?? null);
+  }
 };
-tt.styles = T`${qe.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
-tt = Vo([
+He.styles = O`${Be.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+gr([
+  A({ attribute: !1 })
+], He.prototype, "movementHistory", 2);
+He = gr([
   z("explorer-presence-polish-canvas")
-], tt);
-var Yo = Object.getOwnPropertyDescriptor, Qo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Yo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], He);
+var en = Object.getOwnPropertyDescriptor, tn = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? en(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const ct = "http://www.w3.org/2000/svg", ji = 3e4, Jo = 900;
-let it = class extends tt {
+const ht = "http://www.w3.org/2000/svg", Li = 3e4, rn = 900;
+let rt = class extends He {
   constructor() {
     super(...arguments), this.magicPreviousOccupiedRooms = /* @__PURE__ */ new Set(), this.magicAfterglowStartedAt = /* @__PURE__ */ new Map();
   }
@@ -3058,26 +3131,26 @@ let it = class extends tt {
       i.has(r) || this.magicAfterglowStartedAt.set(r, e);
     for (const r of i) this.magicAfterglowStartedAt.delete(r);
     return this.magicPreviousOccupiedRooms.clear(), i.forEach((r) => this.magicPreviousOccupiedRooms.add(r)), this.rooms.map((r) => {
-      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < ji, c = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / ji) : 0;
+      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Li, c = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Li) : 0;
       return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: c };
     }).filter((r) => r.active || r.afterglow);
   }
   magicPolygonPoints(e) {
-    return e.points.map(([t, i]) => `${t * v},${i * v}`).join(" ");
+    return e.points.map(([t, i]) => `${t * x},${i * x}`).join(" ");
   }
   magicScheduleRefresh(e) {
     this.magicRefreshTimer !== void 0 && window.clearTimeout(this.magicRefreshTimer), e.some((t) => t.afterglow) && (this.magicRefreshTimer = window.setTimeout(() => {
       this.magicRefreshTimer = void 0, this.magicSyncRoomAtmosphere();
-    }, Jo));
+    }, rn));
   }
   magicAppendRoom(e, t) {
     const { room: i, active: r, intensity: o } = t;
     if (i.points.length < 3) return;
-    const n = this.magicPolygonPoints(i), s = document.createElementNS(ct, "g");
+    const n = this.magicPolygonPoints(i), s = document.createElementNS(ht, "g");
     s.setAttribute("class", `room-magic ${r ? "active" : "afterglow"}`), s.setAttribute("data-room-id", i.id);
-    const a = document.createElementNS(ct, "polygon");
+    const a = document.createElementNS(ht, "polygon");
     a.setAttribute("class", "room-magic-aura"), a.setAttribute("points", n), a.setAttribute("fill", "var(--explorer-room-magic-color, var(--primary-color, #03a9f4))"), a.setAttribute("fill-opacity", String(r ? 0.028 + o * 0.026 : 8e-3 + o * 0.028)), a.setAttribute("stroke", "none"), s.appendChild(a);
-    const l = document.createElementNS(ct, "polygon");
+    const l = document.createElementNS(ht, "polygon");
     l.setAttribute("class", "room-magic-edge"), l.setAttribute("points", n), l.setAttribute("fill", "none"), l.setAttribute("stroke", "var(--explorer-room-magic-color, var(--primary-color, #03a9f4))"), l.setAttribute("stroke-opacity", String(r ? 0.08 + o * 0.055 : 0.02 + o * 0.07)), l.setAttribute("stroke-width", r ? "4" : "3"), l.setAttribute("stroke-linejoin", "round"), l.setAttribute("vector-effect", "non-scaling-stroke"), s.appendChild(l), e.appendChild(s);
   }
   magicSyncRoomAtmosphere() {
@@ -3086,7 +3159,7 @@ let it = class extends tt {
     e.querySelector(":scope > g.room-magic-scene")?.remove();
     const t = this.magicActivities(Date.now());
     if (this.magicScheduleRefresh(t), !t.length) return;
-    const i = document.createElementNS(ct, "g");
+    const i = document.createElementNS(ht, "g");
     i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((c) => this.magicAppendRoom(i, c));
     const r = e.querySelector(":scope > g.room-temperature-atmosphere-scene"), o = e.querySelector(":scope > g.presence-room-activity-scene"), n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.presence-trails-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(
@@ -3095,8 +3168,8 @@ let it = class extends tt {
     );
   }
 };
-it.styles = T`
-    ${tt.styles}
+rt.styles = O`
+    ${He.styles}
 
     :host {
       --explorer-room-magic-color: var(--primary-color, #03a9f4);
@@ -3163,16 +3236,16 @@ it.styles = T`
       }
     }
   `;
-it = Qo([
+rt = tn([
   z("explorer-room-magic-canvas")
-], it);
-var en = Object.defineProperty, tn = Object.getOwnPropertyDescriptor, ur = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? tn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], rt);
+var on = Object.defineProperty, nn = Object.getOwnPropertyDescriptor, mr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? nn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && en(t, i, o), o;
+  return r && o && on(t, i, o), o;
 };
-const W = "http://www.w3.org/2000/svg", rn = ["on", "open", "opened", "true"], Tt = 600 * 1e3, It = 1800 * 1e3, Dt = 3600 * 1e3, Li = 60 * 1e3, dt = (e) => e * Math.PI / 180;
-let Be = class extends it {
+const X = "http://www.w3.org/2000/svg", sn = ["on", "open", "opened", "true"], jt = 600 * 1e3, Lt = 1800 * 1e3, qt = 3600 * 1e3, qi = 60 * 1e3, ut = (e) => e * Math.PI / 180;
+let Fe = class extends rt {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
   }
@@ -3186,7 +3259,7 @@ let Be = class extends it {
     const t = e.state_binding;
     if (!t) return !1;
     const i = this.hass?.states[t.entity]?.state?.toLowerCase();
-    return i ? (t.open_states ?? rn).map((r) => r.toLowerCase()).includes(i) : !1;
+    return i ? (t.open_states ?? sn).map((r) => r.toLowerCase()).includes(i) : !1;
   }
   openingOpenSince(e, t) {
     if (!t || !e.state_binding) {
@@ -3204,7 +3277,7 @@ let Be = class extends it {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Dt ? "alert" : o >= It ? "warning" : o >= Tt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, d = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= qt ? "alert" : o >= Lt ? "warning" : o >= jt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, d = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
     return { minutes: n, level: s, label: d, description: c };
   }
   scheduleOpeningAgeRefresh(e) {
@@ -3213,8 +3286,8 @@ let Be = class extends it {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < Tt ? Tt : n < It ? It : n < Dt ? Dt : void 0, a = s === void 0 ? Li : Math.max(1e3, s - n + 50);
-      t = Math.min(t, Li, a);
+      const n = Math.max(0, e - o), s = n < jt ? jt : n < Lt ? Lt : n < qt ? qt : void 0, a = s === void 0 ? qi : Math.max(1e3, s - n + 50);
+      t = Math.min(t, qi, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
       this.openingAgeTimer = void 0, this.syncOpenings();
@@ -3229,7 +3302,7 @@ let Be = class extends it {
       this.scheduleOpeningAgeRefresh(Date.now());
       return;
     }
-    const i = document.createElementNS(W, "g");
+    const i = document.createElementNS(X, "g");
     i.setAttribute("class", "dynamic-openings-scene"), i.setAttribute("aria-label", "Dynamiske døre og vinduer"), i.setAttribute("pointer-events", "none");
     const r = Date.now();
     for (const n of t)
@@ -3238,46 +3311,46 @@ let Be = class extends it {
     e.insertBefore(i, o ?? null), this.scheduleOpeningAgeRefresh(r);
   }
   line(e, t, i, r, o, n) {
-    const s = document.createElementNS(W, "line");
+    const s = document.createElementNS(X, "line");
     return s.setAttribute("x1", String(t)), s.setAttribute("y1", String(i)), s.setAttribute("x2", String(r)), s.setAttribute("y2", String(o)), s.setAttribute("class", n), e.appendChild(s), s;
   }
   appendAgeIndicator(e, t, i, r) {
     if (!r || r.level === "fresh") return;
-    const o = document.createElementNS(W, "g");
+    const o = document.createElementNS(X, "g");
     o.setAttribute("class", `opening-age-indicator level-${r.level}`), o.setAttribute("transform", `translate(${t} ${i})`);
-    const n = document.createElementNS(W, "circle");
+    const n = document.createElementNS(X, "circle");
     n.setAttribute("r", r.level === "alert" ? "12" : "10"), n.setAttribute("class", "opening-age-ring"), o.appendChild(n);
-    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS(W, "rect");
+    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS(X, "rect");
     a.setAttribute("x", "11"), a.setAttribute("y", "-18"), a.setAttribute("width", String(s)), a.setAttribute("height", "17"), a.setAttribute("rx", "8.5"), a.setAttribute("class", "opening-age-badge"), o.appendChild(a);
-    const l = document.createElementNS(W, "text");
+    const l = document.createElementNS(X, "text");
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * v), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * v, p = t.point[1] * v, u = n / 2, g = dt(s), b = Math.cos(g), m = Math.sin(g), x = -m, _ = b, $ = { x: d - b * u, y: p - m * u }, w = { x: d + b * u, y: p + m * u }, S = l === "start" ? $ : w, E = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), M = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), N = k + (r ? M * a : 0), O = dt(N), J = { x: S.x + Math.cos(O) * n, y: S.y + Math.sin(O) * n }, ee = o ? ` open-age-${o.level}` : "", R = document.createElementNS(W, "g");
-    R.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${ee}`), R.setAttribute("data-opening-id", t.id), o && R.setAttribute("data-open-minutes", String(o.minutes)), this.line(R, $.x, $.y, w.x, w.y, "opening-gap");
-    const H = Math.max(7, Math.min(12, n * 0.12));
-    for (const ye of [$, w]) this.line(R, ye.x - x * H / 2, ye.y - _ * H / 2, ye.x + x * H / 2, ye.y + _ * H / 2, "door-jamb");
-    r && this.line(R, S.x, S.y, E.x, E.y, "door-closed-guide"), this.line(R, S.x, S.y, J.x, J.y, "door-leaf");
-    const de = document.createElementNS(W, "circle");
-    if (de.setAttribute("cx", String(S.x)), de.setAttribute("cy", String(S.y)), de.setAttribute("r", "4.2"), de.setAttribute("class", "opening-hinge"), R.appendChild(de), r) {
-      const ye = document.createElementNS(W, "path"), hi = dt(k), ui = O, xr = S.x + Math.cos(hi) * n, wr = S.y + Math.sin(hi) * n, $r = S.x + Math.cos(ui) * n, kr = S.y + Math.sin(ui) * n, _r = M > 0 ? 1 : 0, Ar = Math.abs(a) > 180 ? 1 : 0;
-      ye.setAttribute("d", `M ${xr} ${wr} A ${n} ${n} 0 ${Ar} ${_r} ${$r} ${kr}`), ye.setAttribute("class", "door-swing"), R.appendChild(ye);
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, g = n / 2, u = ut(s), b = Math.cos(u), m = Math.sin(u), y = -m, _ = b, $ = { x: d - b * g, y: p - m * g }, w = { x: d + b * g, y: p + m * g }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ut(M), U = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, K = o ? ` open-age-${o.level}` : "", P = document.createElementNS(X, "g");
+    P.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${K}`), P.setAttribute("data-opening-id", t.id), o && P.setAttribute("data-open-minutes", String(o.minutes)), this.line(P, $.x, $.y, w.x, w.y, "opening-gap");
+    const j = Math.max(7, Math.min(12, n * 0.12));
+    for (const ve of [$, w]) this.line(P, ve.x - y * j / 2, ve.y - _ * j / 2, ve.x + y * j / 2, ve.y + _ * j / 2, "door-jamb");
+    r && this.line(P, S.x, S.y, C.x, C.y, "door-closed-guide"), this.line(P, S.x, S.y, U.x, U.y, "door-leaf");
+    const oe = document.createElementNS(X, "circle");
+    if (oe.setAttribute("cx", String(S.x)), oe.setAttribute("cy", String(S.y)), oe.setAttribute("r", "4.2"), oe.setAttribute("class", "opening-hinge"), P.appendChild(oe), r) {
+      const ve = document.createElementNS(X, "path"), ui = ut(k), gi = T, kr = S.x + Math.cos(ui) * n, _r = S.y + Math.sin(ui) * n, Ar = S.x + Math.cos(gi) * n, Sr = S.y + Math.sin(gi) * n, Cr = E > 0 ? 1 : 0, Er = Math.abs(a) > 180 ? 1 : 0;
+      ve.setAttribute("d", `M ${kr} ${_r} A ${n} ${n} 0 ${Er} ${Cr} ${Ar} ${Sr}`), ve.setAttribute("class", "door-swing"), P.appendChild(ve);
     }
-    const ci = d + x * 14, di = p + _ * 14, Ke = document.createElementNS(W, "circle");
-    Ke.setAttribute("cx", String(ci)), Ke.setAttribute("cy", String(di)), Ke.setAttribute("r", "5.2"), Ke.setAttribute("class", "opening-status-dot"), R.appendChild(Ke), this.appendAgeIndicator(R, ci, di, o);
-    const pi = document.createElementNS(W, "title");
-    pi.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, R.appendChild(pi), e.appendChild(R);
+    const dt = d + y * 14, pe = p + _ * 14, Ge = document.createElementNS(X, "circle");
+    Ge.setAttribute("cx", String(dt)), Ge.setAttribute("cy", String(pe)), Ge.setAttribute("r", "5.2"), Ge.setAttribute("class", "opening-status-dot"), P.appendChild(Ge), this.appendAgeIndicator(P, dt, pe, o);
+    const hi = document.createElementNS(X, "title");
+    hi.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, P.appendChild(hi), e.appendChild(P);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * v), s = t.angle ?? 0, a = t.point[0] * v, l = t.point[1] * v, c = dt(s), d = Math.cos(c), p = Math.sin(c), u = -p, g = d, b = n / 2, m = 5.5, x = { x: a - d * b, y: l - p * b }, _ = { x: a + d * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(W, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, x.x, x.y, _.x, _.y, "window-gap"), this.line(w, x.x + u * m, x.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, x.x - u * m, x.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, x.x + u * m, x.y + g * m, x.x - u * m, x.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, x.x + u * m, x.y + g * m, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
-    const S = a + u * 17, E = l + g * 17, k = document.createElementNS(W, "circle");
-    k.setAttribute("cx", String(S)), k.setAttribute("cy", String(E)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, E, o);
-    const M = document.createElementNS(W, "title");
-    M.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(M), e.appendChild(w);
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ut(s), d = Math.cos(c), p = Math.sin(c), g = -p, u = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, _ = { x: a + d * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(X, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, _.x, _.y, "window-gap"), this.line(w, y.x + g * m, y.y + u * m, _.x + g * m, _.y + u * m, "window-pane"), this.line(w, y.x - g * m, y.y - u * m, _.x - g * m, _.y - u * m, "window-pane"), this.line(w, y.x + g * m, y.y + u * m, y.x - g * m, y.y - u * m, "window-frame-end"), this.line(w, _.x + g * m, _.y + u * m, _.x - g * m, _.y - u * m, "window-frame-end"), r && (this.line(w, y.x + g * m, y.y + u * m, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, _.x + g * m, _.y + u * m, "window-open-sash"));
+    const S = a + g * 17, C = l + u * 17, k = document.createElementNS(X, "circle");
+    k.setAttribute("cx", String(S)), k.setAttribute("cy", String(C)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, C, o);
+    const E = document.createElementNS(X, "title");
+    E.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(E), e.appendChild(w);
   }
 };
-Be.styles = T`${it.styles}
+Fe.styles = O`${rt.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3300,19 +3373,19 @@ Be.styles = T`${it.styles}
     @keyframes explorerOpeningAgePulse{0%,100%{opacity:.5;transform:scale(.92)}50%{opacity:1;transform:scale(1.16)}}
     @media(prefers-reduced-motion:reduce){.dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{transition:none}.dynamic-opening.open-age-alert .opening-age-ring{animation:none}}
   `;
-ur([
+mr([
   A({ attribute: !1 })
-], Be.prototype, "openings", 2);
-Be = ur([
+], Fe.prototype, "openings", 2);
+Fe = mr([
   z("explorer-openings-canvas")
-], Be);
-var on = Object.defineProperty, nn = Object.getOwnPropertyDescriptor, Ve = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? nn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Fe);
+var an = Object.defineProperty, ln = Object.getOwnPropertyDescriptor, Ke = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ln(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && on(t, i, o), o;
+  return r && o && an(t, i, o), o;
 };
-const sn = "http://www.w3.org/2000/svg";
-let ke = class extends Be {
+const cn = "http://www.w3.org/2000/svg";
+let _e = class extends Fe {
   constructor() {
     super(...arguments), this.hideSourceText = !1, this.weatherEffect = "clear", this.weatherState = "clear", this.weatherIntensity = 0.6, this.weatherNight = !1, this.weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`, this.cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -3326,7 +3399,7 @@ let ke = class extends Be {
     });
   }
   svg(e) {
-    return document.createElementNS(sn, e);
+    return document.createElementNS(cn, e);
   }
   attrs(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -3338,16 +3411,16 @@ let ke = class extends Be {
       maskUnits: "userSpaceOnUse",
       x: "0",
       y: "0",
-      width: String(v),
-      height: String(v)
+      width: String(x),
+      height: String(x)
     });
     const t = this.svg("rect");
-    this.attrs(t, { x: "0", y: "0", width: String(v), height: String(v), fill: "white" }), e.appendChild(t);
+    this.attrs(t, { x: "0", y: "0", width: String(x), height: String(x), fill: "white" }), e.appendChild(t);
     for (const i of this.rooms) {
       if (i.points.length < 3) continue;
       const r = this.svg("polygon");
       this.attrs(r, {
-        points: i.points.map(([o, n]) => `${o * v},${n * v}`).join(" "),
+        points: i.points.map(([o, n]) => `${o * x},${n * x}`).join(" "),
         fill: "black",
         stroke: "black",
         "stroke-width": "16",
@@ -3446,14 +3519,14 @@ let ke = class extends Be {
       "translate(14 7) scale(1.18 .62)"
     ];
     for (const [n, s, a, l, c] of t) {
-      const d = l % 4, p = l % 3, u = this.svg("g");
-      this.attrs(u, {
+      const d = l % 4, p = l % 3, g = this.svg("g");
+      this.attrs(g, {
         class: "weather-cloud-position",
         transform: `translate(${n} ${s}) scale(${a * 0.64})`,
         opacity: String(c)
       });
-      const g = this.svg("g");
-      this.attrs(g, {
+      const u = this.svg("g");
+      this.attrs(u, {
         class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${d}`
       });
       const b = this.svg("g");
@@ -3464,23 +3537,23 @@ let ke = class extends Be {
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([N, O, J, ee, R]) => {
-        const H = this.svg("ellipse");
-        this.attrs(H, {
-          cx: String(N),
-          cy: String(O),
-          rx: String(J),
-          ry: String(ee),
-          opacity: String(R)
-        }), b.appendChild(H);
-      }), g.appendChild(b);
+      ].forEach(([M, T, U, K, P]) => {
+        const j = this.svg("ellipse");
+        this.attrs(j, {
+          cx: String(M),
+          cy: String(T),
+          rx: String(U),
+          ry: String(K),
+          opacity: String(P)
+        }), b.appendChild(j);
+      }), u.appendChild(b);
       const m = this.svg("path");
       this.attrs(m, {
         d: "M-145 40 C-112 12 -84 2 -55 10 C-30 20 -9 20 15 10 C43 -3 77 1 104 18 C128 32 135 51 121 64 C92 84 48 84 10 79 C-33 78 -82 88 -119 72 C-138 64 -151 51 -145 40 Z",
         class: "weather-cloud-shadow"
-      }), g.appendChild(m);
-      const x = this.svg("g");
-      this.attrs(x, {
+      }), u.appendChild(m);
+      const y = this.svg("g");
+      this.attrs(y, {
         class: "weather-cloud-body",
         filter: `url(#${this.cloudFilterId})`,
         transform: r[l % r.length]
@@ -3489,28 +3562,28 @@ let ke = class extends Be {
       this.attrs(_, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-base"
-      }), x.appendChild(_);
-      for (const [N, O, J, ee, R] of i) {
-        const H = this.svg("ellipse");
-        this.attrs(H, {
-          cx: String(N),
-          cy: String(O),
-          rx: String(J),
-          ry: String(ee),
-          opacity: String(R),
+      }), y.appendChild(_);
+      for (const [M, T, U, K, P] of i) {
+        const j = this.svg("ellipse");
+        this.attrs(j, {
+          cx: String(M),
+          cy: String(T),
+          rx: String(U),
+          ry: String(K),
+          opacity: String(P),
           class: "weather-cloud-puff"
-        }), x.appendChild(H);
+        }), y.appendChild(j);
       }
       const $ = this.svg("path");
       this.attrs($, {
         d: "M-104 -12 C-76 -34 -47 -40 -20 -30 C8 -19 33 -21 62 -39 C46 -13 22 1 -3 2 C-32 4 -57 -3 -79 3 C-92 4 -101 -2 -104 -12 Z",
         class: "weather-cloud-detail"
-      }), x.appendChild($);
+      }), y.appendChild($);
       const w = this.svg("path");
       this.attrs(w, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
         class: "weather-cloud-wisp"
-      }), x.appendChild(w), g.appendChild(x);
+      }), y.appendChild(w), u.appendChild(y);
       const S = this.svg("g");
       this.attrs(S, {
         class: "weather-cloud-mist weather-cloud-mist-front",
@@ -3519,38 +3592,38 @@ let ke = class extends Be {
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([N, O, J, ee, R]) => {
-        const H = this.svg("ellipse");
-        this.attrs(H, {
-          cx: String(N),
-          cy: String(O),
-          rx: String(J),
-          ry: String(ee),
-          opacity: String(R)
-        }), S.appendChild(H);
-      }), g.appendChild(S);
-      const E = this.svg("path");
-      if (this.attrs(E, {
+      ].forEach(([M, T, U, K, P]) => {
+        const j = this.svg("ellipse");
+        this.attrs(j, {
+          cx: String(M),
+          cy: String(T),
+          rx: String(U),
+          ry: String(K),
+          opacity: String(P)
+        }), S.appendChild(j);
+      }), u.appendChild(S);
+      const C = this.svg("path");
+      if (this.attrs(C, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), g.appendChild(E), d === 1 || d === 3) {
-        const N = this.svg("path");
-        this.attrs(N, {
+      }), u.appendChild(C), d === 1 || d === 3) {
+        const M = this.svg("path");
+        this.attrs(M, {
           d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), g.appendChild(N);
+        }), u.appendChild(M);
       }
       const k = this.svg("path");
       this.attrs(k, {
         d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
         class: "weather-cloud-highlight"
-      }), g.appendChild(k);
-      const M = this.svg("path");
-      this.attrs(M, {
+      }), u.appendChild(k);
+      const E = this.svg("path");
+      this.attrs(E, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
         transform: r[l % r.length]
-      }), g.appendChild(M), u.appendChild(g), e.appendChild(u);
+      }), u.appendChild(E), g.appendChild(u), e.appendChild(g);
     }
   }
   appendFog(e, t = "fog") {
@@ -3578,26 +3651,26 @@ let ke = class extends Be {
     const i = t ? 62 : 92, r = t ? 48 : 72;
     for (let o = -1; o < (t ? 18 : 13); o += 1)
       for (let n = -1; n < (t ? 24 : 17); n += 1) {
-        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, c = (t ? 15 : 10) + s % (t ? 12 : 8), d = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
-        this.attrs(u, {
+        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, c = (t ? 15 : 10) + s % (t ? 12 : 8), d = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, g = this.svg("path");
+        this.attrs(g, {
           d: `M ${a} ${l} C ${a - d * 0.7} ${l + c * 0.32}, ${a - p - d} ${l + c * 0.72}, ${a - p} ${l + c} C ${a - p + d} ${l + c * 0.72}, ${a + d * 0.45} ${l + c * 0.31}, ${a} ${l} Z`,
           class: `weather-rain-drop${t ? " is-heavy" : ""}`
-        }), u.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + s % 7 * 0.06}s`), u.style.setProperty("--rain-delay", `${-(s % 17) * 0.11}s`), e.appendChild(u);
+        }), g.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + s % 7 * 0.06}s`), g.style.setProperty("--rain-delay", `${-(s % 17) * 0.11}s`), e.appendChild(g);
       }
   }
   appendSnow(e, t = !1) {
     const i = t ? 9 : 11, r = t ? 11 : 12;
     for (let o = 0; o < i; o += 1)
       for (let n = 0; n < r; n += 1) {
-        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), g = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
         if (d) {
-          const g = c * 0.78;
+          const u = c * 0.78;
           this.attrs(p, {
-            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
-            class: u
+            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - u} ${l - u} L ${a + u} ${l + u} M ${a + u} ${l - u} L ${a - u} ${l + u}`,
+            class: g
           });
         } else
-          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: u });
+          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: g });
         p.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + s % 8 * 0.42}s`), p.style.setProperty("--snow-delay", `${-(s % 19) * 0.31}s`), e.appendChild(p);
       }
   }
@@ -3658,14 +3731,14 @@ let ke = class extends Be {
     const r = this.svg("g"), o = this.weatherState.replace(/[^a-z0-9_-]/g, "");
     if (r.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${o}${this.weatherNight ? " is-night" : ""}`), r.setAttribute("mask", `url(#${this.weatherMaskId})`), r.setAttribute("pointer-events", "none"), r.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0.25, this.weatherIntensity || 0.6)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && (this.appendClouds(r), this.appendMagicMotes(r, "cloud")), this.weatherEffect === "fog" && this.appendFog(r), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(r, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(r, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(r, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(r, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && (this.appendSnow(r, this.weatherState === "snowy-rainy"), this.appendMagicMotes(r, "snow")), this.weatherState === "snowy-rainy" && this.appendRain(r), this.weatherState === "hail" && this.appendHail(r), this.weatherEffect === "wind" && (this.appendWind(r), this.appendMagicMotes(r, "wind")), this.weatherEffect === "exceptional" && (this.appendClouds(r), this.appendWind(r), this.appendMagicMotes(r, "cloud"), this.appendExceptionalMagic(r)), this.weatherEffect === "storm") {
       const a = this.svg("rect");
-      this.attrs(a, { x: "0", y: "0", width: String(v), height: String(v), class: "weather-storm-flash" }), r.appendChild(a);
+      this.attrs(a, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), r.appendChild(a);
     }
     const s = t.querySelector(":scope > g.rooms-scene");
     t.insertBefore(r, s ?? null);
   }
 };
-ke.styles = T`
-    ${Be.styles}
+_e.styles = O`
+    ${Fe.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
     .weather-outside-rooms-scene.state-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.18)); }
@@ -3885,71 +3958,71 @@ ke.styles = T`
       .weather-outside-rooms-scene .weather-storm-flash { animation: none; }
     }
   `;
-Ve([
+Ke([
   A({ type: Boolean, attribute: "hide-source-text" })
-], ke.prototype, "hideSourceText", 2);
-Ve([
+], _e.prototype, "hideSourceText", 2);
+Ke([
   A({ attribute: "weather-effect" })
-], ke.prototype, "weatherEffect", 2);
-Ve([
+], _e.prototype, "weatherEffect", 2);
+Ke([
   A({ attribute: "weather-state" })
-], ke.prototype, "weatherState", 2);
-Ve([
+], _e.prototype, "weatherState", 2);
+Ke([
   A({ type: Number, attribute: "weather-intensity" })
-], ke.prototype, "weatherIntensity", 2);
-Ve([
+], _e.prototype, "weatherIntensity", 2);
+Ke([
   A({ type: Boolean, attribute: "weather-night" })
-], ke.prototype, "weatherNight", 2);
-ke = Ve([
+], _e.prototype, "weatherNight", 2);
+_e = Ke([
   z("explorer-source-clean-canvas")
-], ke);
-const an = (e) => e.strings === void 0, ln = {}, cn = (e, t = ln) => e._$AH = t;
-const dn = nr(class extends sr {
+], _e);
+const dn = (e) => e.strings === void 0, pn = {}, hn = (e, t = pn) => e._$AH = t;
+const un = sr(class extends ar {
   constructor(e) {
-    if (super(e), e.type !== Ae.PROPERTY && e.type !== Ae.ATTRIBUTE && e.type !== Ae.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
-    if (!an(e)) throw Error("`live` bindings can only contain a single expression");
+    if (super(e), e.type !== Se.PROPERTY && e.type !== Se.ATTRIBUTE && e.type !== Se.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
+    if (!dn(e)) throw Error("`live` bindings can only contain a single expression");
   }
   render(e) {
     return e;
   }
   update(e, [t]) {
-    if (t === oe || t === f) return t;
+    if (t === ne || t === f) return t;
     const i = e.element, r = e.name;
-    if (e.type === Ae.PROPERTY) {
-      if (t === i[r]) return oe;
-    } else if (e.type === Ae.BOOLEAN_ATTRIBUTE) {
-      if (!!t === i.hasAttribute(r)) return oe;
-    } else if (e.type === Ae.ATTRIBUTE && i.getAttribute(r) === t + "") return oe;
-    return cn(e), t;
+    if (e.type === Se.PROPERTY) {
+      if (t === i[r]) return ne;
+    } else if (e.type === Se.BOOLEAN_ATTRIBUTE) {
+      if (!!t === i.hasAttribute(r)) return ne;
+    } else if (e.type === Se.ATTRIBUTE && i.getAttribute(r) === t + "") return ne;
+    return hn(e), t;
   }
 });
-var pn = Object.defineProperty, hn = Object.getOwnPropertyDescriptor, He = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var gn = Object.defineProperty, mn = Object.getOwnPropertyDescriptor, Ze = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && pn(t, i, o), o;
+  return r && o && gn(t, i, o), o;
 };
-const un = [
+const fn = [
   { value: "person", label: "Person" },
   { value: "pet", label: "Kæledyr" },
   { value: "robot", label: "Robot" },
   { value: "vehicle", label: "Køretøj" },
   { value: "object", label: "Objekt" }
-], gn = /* @__PURE__ */ new Set(["sensor", "input_select", "select"]);
-function mn(e) {
+], bn = /* @__PURE__ */ new Set(["sensor", "input_select", "select"]);
+function yn(e) {
   return e.split(".", 1)[0] ?? "";
 }
-function jt(e) {
+function Bt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function fn(e) {
+function vn(e) {
   return Math.min(1, Math.max(0, e));
 }
-function bn(e) {
+function xn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let le = class extends L {
+let ce = class extends L {
   constructor() {
     super(...arguments), this.areas = [], this.areaError = "", this.loadingAreas = !1, this.areasLoaded = !1;
   }
@@ -4004,7 +4077,7 @@ let le = class extends L {
     if (!o) return;
     const n = o.presence_anchor ?? { x: 0.5, y: 0.5 };
     this.updateRoom(e, {
-      presence_anchor: { ...n, [t]: fn(r) }
+      presence_anchor: { ...n, [t]: vn(r) }
     });
   }
   updateRoomAliases(e, t) {
@@ -4019,7 +4092,7 @@ let le = class extends L {
   updatePresenceBinding(e, t, i) {
     const r = this.config?.presences?.[e];
     if (!r) return;
-    const o = bn({
+    const o = xn({
       ...r.entity_binding ?? {},
       [t]: i.trim() || void 0
     });
@@ -4044,15 +4117,15 @@ let le = class extends L {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => jt(e).localeCompare(jt(t), "da")
+      (e, t) => Bt(e).localeCompare(Bt(t), "da")
     );
   }
   renderEntityDatalist(e, t = !1) {
-    const i = t ? this.entities.filter((r) => gn.has(mn(r.entity_id))) : this.entities;
+    const i = t ? this.entities.filter((r) => bn.has(yn(r.entity_id))) : this.entities;
     return h`
       <datalist id=${e}>
         ${i.map(
-      (r) => h`<option value=${r.entity_id}>${jt(r)}</option>`
+      (r) => h`<option value=${r.entity_id}>${Bt(r)}</option>`
     )}
       </datalist>
     `;
@@ -4080,7 +4153,7 @@ let le = class extends L {
           <label>
             Home Assistant Area
             <select
-              .value=${dn(e.area_id ?? "")}
+              .value=${un(e.area_id ?? "")}
               @change=${(r) => this.updateRoom(t, {
       area_id: r.target.value || void 0
     })}
@@ -4165,7 +4238,7 @@ let le = class extends L {
       type: n.target.value
     })}
             >
-              ${un.map(
+              ${fn.map(
       (n) => h`<option value=${n.value}>${n.label}</option>`
     )}
             </select>
@@ -4313,7 +4386,7 @@ let le = class extends L {
     `;
   }
 };
-le.styles = T`
+ce.styles = O`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4350,41 +4423,41 @@ le.styles = T`
       .item-card { padding: 12px; }
     }
   `;
-He([
+Ze([
   A({ attribute: !1 })
-], le.prototype, "hass", 2);
-He([
-  y()
-], le.prototype, "config", 2);
-He([
-  y()
-], le.prototype, "areas", 2);
-He([
-  y()
-], le.prototype, "areaError", 2);
-He([
-  y()
-], le.prototype, "loadingAreas", 2);
-le = He([
+], ce.prototype, "hass", 2);
+Ze([
+  v()
+], ce.prototype, "config", 2);
+Ze([
+  v()
+], ce.prototype, "areas", 2);
+Ze([
+  v()
+], ce.prototype, "areaError", 2);
+Ze([
+  v()
+], ce.prototype, "loadingAreas", 2);
+ce = Ze([
   z("ha-explorer-card-editor")
-], le);
-var yn = Object.defineProperty, vn = Object.getOwnPropertyDescriptor, q = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], ce);
+var wn = Object.defineProperty, $n = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? $n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && yn(t, i, o), o;
+  return r && o && wn(t, i, o), o;
 };
-const te = 1e3, pt = (e) => Math.min(1, Math.max(0, e));
-function qi(e) {
+const te = 1e3, gt = (e) => Math.min(1, Math.max(0, e));
+function Bi(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
-function xn(e) {
+function kn(e) {
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
 }
-function wn(e) {
+function _n(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "room";
 }
-function Bi(e) {
+function Hi(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
@@ -4423,7 +4496,7 @@ let D = class extends L {
   }
   mapPoint(e) {
     const t = e.currentTarget.getBoundingClientRect();
-    return t.width && t.height ? [pt((e.clientX - t.left) / t.width), pt((e.clientY - t.top) / t.height)] : [0.5, 0.5];
+    return t.width && t.height ? [gt((e.clientX - t.left) / t.width), gt((e.clientY - t.top) / t.height)] : [0.5, 0.5];
   }
   selectedPresence() {
     const e = this.selectedRoom;
@@ -4439,9 +4512,9 @@ let D = class extends L {
     if (!t || !i || !r) return;
     const o = i.entity_binding, n = r.states[o.entity];
     if (!n) return;
-    const s = Bi(n.attributes[o.x_attribute ?? "map_x"]), a = Bi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
+    const s = Hi(n.attributes[o.x_attribute ?? "map_x"]), a = Hi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const c = xn(t), d = pt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = pt((e[1] - c.minY) / (c.maxY - c.minY || 1));
+    const c = kn(t), d = gt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = gt((e[1] - c.minY) / (c.maxY - c.minY || 1));
     return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: d, room_y: p };
   }
   handleMapClick(e) {
@@ -4465,7 +4538,7 @@ let D = class extends L {
     this.draftWidth = i?.physical_meters?.width?.toString() ?? "", this.draftHeight = i?.physical_meters?.height?.toString() ?? "", this.draftFlipX = i?.physical_meters?.flip_x ?? !1, this.draftFlipY = i?.physical_meters?.flip_y ?? !1, this.calA = i?.physical_meters?.position_calibration?.a, this.calB = i?.physical_meters?.position_calibration?.b, this.calC = i?.physical_meters?.position_calibration?.c, this.calibrationMessage = "";
   }
   uniqueRoomId(e) {
-    const t = wn(e), i = new Set(this.rooms.map((o) => o.id));
+    const t = _n(e), i = new Set(this.rooms.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -4493,7 +4566,7 @@ let D = class extends L {
   finishPolygon() {
     if (!(this.pendingPoints.length < 3 || !this.roomConfig)) {
       if (this.drawingMode === "draw-new") {
-        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = qi(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
+        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Bi(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
         this.selectedRoomId = t, this.emitConfig({ ...this.roomConfig, rooms: [...this.rooms, o] });
       } else this.selectedRoom && this.emitConfig({ ...this.roomConfig, rooms: this.rooms.map((e) => e.id === this.selectedRoomId ? { ...e, points: this.pendingPoints } : e) });
       this.pendingPoints = [], this.drawingMode = "idle";
@@ -4528,13 +4601,13 @@ let D = class extends L {
   }
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
-    const t = e.points.map(([n, s]) => `${n * te},${s * te}`).join(" "), i = e.id === this.selectedRoomId, r = qi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
-    return C`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * te} y=${r.y * te} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? C`<circle cx=${o.x * te} cy=${o.y * te} r="15" class="anchor"/>` : f}</g>`;
+    const t = e.points.map(([n, s]) => `${n * te},${s * te}`).join(" "), i = e.id === this.selectedRoomId, r = Bi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
+    return N`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * te} y=${r.y * te} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? N`<circle cx=${o.x * te} cy=${o.y * te} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
     if (!this.pendingPoints.length) return f;
     const e = this.pendingPoints.map(([t, i]) => `${t * te},${i * te}`).join(" ");
-    return C`${this.pendingPoints.length >= 3 ? C`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => C`<circle cx=${t * te} cy=${i * te} r="13" class="pending-point"/><text x=${t * te} y=${i * te - 22} text-anchor="middle">${r + 1}</text>`)}`;
+    return N`${this.pendingPoints.length >= 3 ? N`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => N`<circle cx=${t * te} cy=${i * te} r="13" class="pending-point"/><text x=${t * te} y=${i * te - 22} text-anchor="middle">${r + 1}</text>`)}`;
   }
   dimensionFields() {
     return h`<div class="dimensions"><label>Bredde (m)<input inputmode="decimal" placeholder="4,3" .value=${this.draftWidth} @input=${(e) => this.draftWidth = e.target.value}></label><label>Længde (m)<input inputmode="decimal" placeholder="5,4" .value=${this.draftHeight} @input=${(e) => this.draftHeight = e.target.value}></label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipX} @change=${(e) => this.draftFlipX = e.target.checked}> Vend vandret (X)</label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipY} @change=${(e) => this.draftFlipY = e.target.checked}> Vend lodret (Y)</label>${this.drawingMode === "idle" && this.selectedRoom ? h`<button class="primary" ?disabled=${!this.meters()} @click=${this.saveMeters}>Gem rumkalibrering</button>` : f}</div>`;
@@ -4553,133 +4626,133 @@ let D = class extends L {
     return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-D.styles = T`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
-q([
+D.styles = O`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+B([
   A({ attribute: !1 })
 ], D.prototype, "hass", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "roomConfig", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "drawingMode", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "selectedRoomId", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "pendingPoints", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "pendingAnchor", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftRoomName", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftAreaId", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftWidth", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftHeight", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftFlipX", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "draftFlipY", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "calA", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "calB", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "calC", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "calibrationMessage", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "drawingAreas", 2);
-q([
-  y()
+B([
+  v()
 ], D.prototype, "drawingAreaError", 2);
-q([
-  Xr("ha-explorer-card-editor")
+B([
+  Jr("ha-explorer-card-editor")
 ], D.prototype, "baseEditor", 2);
-D = q([
+D = B([
   z("ha-explorer-room-drawing-editor")
 ], D);
-function he(e) {
+function ue(e) {
   return e?.trim() || void 0;
 }
-function $n(e) {
+function An(e) {
   const t = e.entity_binding;
-  return !!(he(t?.room_entity) || e.room_id || Number.isFinite(e.x) && Number.isFinite(e.y));
+  return !!(ue(t?.room_entity) || e.room_id || Number.isFinite(e.x) && Number.isFinite(e.y));
 }
-function kn(e) {
+function Sn(e) {
   const t = [];
   for (const i of e.presences ?? []) {
-    const r = he(i.entity_binding?.entity), o = he(i.entity_binding?.room_entity);
+    const r = ue(i.entity_binding?.entity), o = ue(i.entity_binding?.room_entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "presences" }), o && t.push({ entity: o, source: `${i.name ?? i.id} · rum-tracking`, target: "presences" });
   }
   for (const i of e.rooms ?? []) {
     for (const r of i.reactions ?? []) {
-      const o = he(r.entity);
+      const o = ue(r.entity);
       o && t.push({ entity: o, source: `${i.name ?? i.id} · ${r.kind}`, target: "room-reactions" });
     }
     for (const r of i.quick_actions ?? []) {
-      const o = he(r.entity);
+      const o = ue(r.entity);
       o && t.push({ entity: o, source: `${i.name ?? i.id} · ${r.name}`, target: "room-actions" });
     }
   }
   for (const i of e.zones ?? []) {
-    const r = he(i.state_binding?.entity);
+    const r = ue(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "zones" });
   }
   for (const i of e.openings ?? []) {
-    const r = he(i.state_binding?.entity);
+    const r = ue(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "openings" });
   }
   for (const i of e.route_nodes ?? []) {
-    const r = he(i.state_binding?.entity);
+    const r = ue(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "route-graph" });
   }
   for (const i of e.route_graph_edges ?? []) {
-    const r = he(i.condition?.entity);
+    const r = ue(i.condition?.entity);
     r && t.push({ entity: r, source: "Betinget route edge", target: "route-graph" });
   }
   return t;
 }
-function _n(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap(($) => $.reactions ?? []), d = i.flatMap(($) => $.quick_actions ?? []), p = kn(e), u = [];
+function Cn(e, t) {
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap(($) => $.reactions ?? []), d = i.flatMap(($) => $.quick_actions ?? []), p = Sn(e), g = [];
   if (t)
     for (const $ of p) {
       const w = t.states[$.entity];
       if (!w) {
-        u.push({ ...$, unavailable: !1 });
+        g.push({ ...$, unavailable: !1 });
         continue;
       }
-      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...$, unavailable: !0 });
+      (w.state === "unavailable" || w.state === "unknown") && g.push({ ...$, unavailable: !0 });
     }
-  const g = u.filter(($) => !$.unavailable), b = r.filter(($) => !$n($)), m = i.filter(($) => $.points.length < 3), x = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: x ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: x ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: _, entityIssues: u, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const u = g.filter(($) => !$.unavailable), b = r.filter(($) => !An($)), m = i.filter(($) => $.points.length < 3), y = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? u.length ? `${u.length} binding${u.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : g.length ? `${p.length} bindings fundet · ${g.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: u.length ? "attention" : p.length ? "ready" : "optional", target: u[0]?.target ?? g[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: _, entityIssues: g, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
-var An = Object.defineProperty, Sn = Object.getOwnPropertyDescriptor, si = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Sn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var En = Object.defineProperty, Mn = Object.getOwnPropertyDescriptor, ci = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && An(t, i, o), o;
+  return r && o && En(t, i, o), o;
 };
-const Cn = {
+const Nn = {
   ready: "Klar",
   attention: "Tjek",
   optional: "Valgfrit"
 };
-let rt = class extends L {
+let ot = class extends L {
   navigate(e) {
     this.dispatchEvent(new CustomEvent("explorer-editor-navigate", {
       detail: { target: e },
@@ -4702,14 +4775,14 @@ let rt = class extends L {
           <strong>${e.label}</strong>
           <small>${e.detail}</small>
         </span>
-        <span class="state-label">${Cn[e.state]}</span>
+        <span class="state-label">${Nn[e.state]}</span>
         <span class="chevron" aria-hidden="true">›</span>
       </button>
     `;
   }
   render() {
     if (!this.config) return f;
-    const e = _n(this.config, this.hass), t = e.attentionCount === 0, i = e.entityIssues.slice(0, 4);
+    const e = Cn(this.config, this.hass), t = e.attentionCount === 0, i = e.entityIssues.slice(0, 4);
     return h`
       <section class="overview">
         <div class="hero">
@@ -4768,7 +4841,7 @@ let rt = class extends L {
     `;
   }
 };
-rt.styles = T`
+ot.styles = O`
     :host { display:block; }
     .overview {
       display:grid;
@@ -4840,28 +4913,28 @@ rt.styles = T`
       .entity-issues button small { grid-column:2; }
     }
   `;
-si([
+ci([
   A({ attribute: !1 })
-], rt.prototype, "config", 2);
-si([
+], ot.prototype, "config", 2);
+ci([
   A({ attribute: !1 })
-], rt.prototype, "hass", 2);
-rt = si([
+], ot.prototype, "hass", 2);
+ot = ci([
   z("ha-explorer-setup-overview")
-], rt);
-var En = Object.defineProperty, Mn = Object.getOwnPropertyDescriptor, gr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], ot);
+var Pn = Object.defineProperty, Rn = Object.getOwnPropertyDescriptor, fr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Rn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && En(t, i, o), o;
+  return r && o && Pn(t, i, o), o;
 };
-const Lt = [
+const Ht = [
   ["classic", "Classic", "Den neutrale Home Assistant Explorer-stil."],
   [
     "enchanted_antique",
     "Enchanted Antique Map",
     "Original magisk kortstil med pergament, sepia-blæk og levende kortdetaljer."
   ]
-], Nn = [
+], zn = [
   ["live", "Følg rigtigt vejr"],
   ["sunny", "☀️ Solrigt"],
   ["partlycloudy", "🌤️ Delvist overskyet"],
@@ -4879,7 +4952,7 @@ const Lt = [
   ["clear-night", "🌙 Klar nat"],
   ["exceptional", "⚠️ Ekstremt / usædvanligt vejr"]
 ];
-let $t = class extends L {
+let At = class extends L {
   get theme() {
     return this.config?.appearance?.theme ?? "classic";
   }
@@ -4978,7 +5051,7 @@ let $t = class extends L {
   }
   render() {
     if (!this.config) return f;
-    const e = Lt.find((a) => a[0] === this.theme) ?? Lt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
+    const e = Ht.find((a) => a[0] === this.theme) ?? Ht[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
     return h`
       <section class="theme-editor">
         <div class="heading">
@@ -5000,7 +5073,7 @@ let $t = class extends L {
             .value=${this.theme}
             @change=${(a) => this.updateTheme(a.target.value)}
           >
-            ${Lt.map(
+            ${Ht.map(
       (a) => h`<option value=${a[0]}>${a[1]}</option>`
     )}
           </select>
@@ -5195,7 +5268,7 @@ let $t = class extends L {
       preview_state: a.target.value
     })}
                     >
-                      ${Nn.map(
+                      ${zn.map(
       ([a, l]) => h`<option value=${a}>${l}</option>`
     )}
                     </select>
@@ -5340,7 +5413,7 @@ let $t = class extends L {
     `;
   }
 };
-$t.styles = T`
+At.styles = O`
     :host {
       display: block;
     }
@@ -5488,19 +5561,19 @@ $t.styles = T`
       }
     }
   `;
-gr([
+fr([
   A({ attribute: !1 })
-], $t.prototype, "config", 2);
-$t = gr([
+], At.prototype, "config", 2);
+At = fr([
   z("ha-explorer-theme-editor")
-], $t);
-var Pn = Object.defineProperty, Rn = Object.getOwnPropertyDescriptor, mr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Rn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], At);
+var Tn = Object.defineProperty, On = Object.getOwnPropertyDescriptor, br = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? On(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Pn(t, i, o), o;
+  return r && o && Tn(t, i, o), o;
 };
 const Fi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
-let kt = class extends L {
+let St = class extends L {
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5525,32 +5598,61 @@ let kt = class extends L {
     })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-kt.styles = T`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
-mr([
+St.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+br([
   A({ attribute: !1 })
-], kt.prototype, "config", 2);
-kt = mr([
+], St.prototype, "config", 2);
+St = br([
   z("ha-explorer-presence-polish-editor")
-], kt);
-var zn = Object.defineProperty, On = Object.getOwnPropertyDescriptor, ai = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? On(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], St);
+var In = Object.defineProperty, Dn = Object.getOwnPropertyDescriptor, yr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Dn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && zn(t, i, o), o;
+  return r && o && In(t, i, o), o;
 };
-function qt(e) {
+let Ct = class extends L {
+  updateHistory(e) {
+    if (!this.config) return;
+    const t = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config.movement_history ?? {}, ...e };
+    this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: { ...this.config, movement_history: t } }, bubbles: !0, composed: !0 }));
+  }
+  render() {
+    const e = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config?.movement_history ?? {} };
+    return h`<section class="panel">
+      <div><span class="eyebrow">Movement History 2.0</span><h3>Magisk bevægelseshistorik</h3></div>
+      <p>Gemmer kun historikken lokalt i kortet i 1–5 minutter. Home Assistant-databasen ændres ikke, og den normale plantegning fungerer uafhængigt.</p>
+      <label class="toggle"><input type="checkbox" .checked=${e.enabled} @change=${(t) => this.updateHistory({ enabled: t.target.checked })}/><span><strong>Vis bevægelseshistorik</strong><small>Gælder personer. Kæledyr og robotter kommer i næste roadmap-del.</small></span></label>
+      <label>Historiklængde: <strong>${e.duration_minutes} min.</strong><input type="range" min="1" max="5" step="1" .value=${String(e.duration_minutes)} @input=${(t) => this.updateHistory({ duration_minutes: Number(t.target.value) })}/><small>Ældre fodspor toner gradvist ud og fjernes automatisk.</small></label>
+      <label class="toggle"><input type="checkbox" .checked=${e.show_rooms} @change=${(t) => this.updateHistory({ show_rooms: t.target.checked })}/><span><strong>Fremhæv senest besøgte rum</strong><small>Rummene får et meget diskret skær i personens sporfarve.</small></span></label>
+    </section>`;
+  }
+};
+Ct.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+yr([
+  A({ attribute: !1 })
+], Ct.prototype, "config", 2);
+Ct = yr([
+  z("ha-explorer-movement-history-editor")
+], Ct);
+var jn = Object.defineProperty, Ln = Object.getOwnPropertyDescriptor, di = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ln(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+    (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
+  return r && o && jn(t, i, o), o;
+};
+function Ft(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Tn(e) {
+function qn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let ot = class extends L {
+let nt = class extends L {
   emit(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).sort((e, t) => qt(e).localeCompare(qt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).sort((e, t) => Ft(e).localeCompare(Ft(t), "da"));
   }
   updatePresence(e, t) {
     if (!this.config) return;
@@ -5559,7 +5661,7 @@ let ot = class extends L {
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: Tn({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: qn({ ...i.entity_binding, ...t }) });
   }
   addPerson() {
     if (!this.config) return;
@@ -5575,7 +5677,7 @@ let ot = class extends L {
     t.splice(e, 1), this.emit({ ...this.config, presences: t });
   }
   datalist(e) {
-    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${qt(t)}</option>`)}</datalist>`;
+    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Ft(t)}</option>`)}</datalist>`;
   }
   render() {
     const e = (this.config?.presences ?? []).filter((t) => (t.type ?? "person") === "person");
@@ -5585,43 +5687,43 @@ let ot = class extends L {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-ot.styles = T`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
-ai([
+nt.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+di([
   A({ attribute: !1 })
-], ot.prototype, "hass", 2);
-ai([
+], nt.prototype, "hass", 2);
+di([
   A({ attribute: !1 })
-], ot.prototype, "config", 2);
-ot = ai([
+], nt.prototype, "config", 2);
+nt = di([
   z("ha-explorer-identity-editor")
-], ot);
-var In = Object.defineProperty, Dn = Object.getOwnPropertyDescriptor, se = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Dn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], nt);
+var Bn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, ae = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && In(t, i, o), o;
+  return r && o && Bn(t, i, o), o;
 };
-const ve = 1e3, Vi = [
+const xe = 1e3, Vi = [
   { value: "info", label: "Info" },
   { value: "warning", label: "Advarsel" },
   { value: "danger", label: "Fare / alarm" },
   { value: "cleaning", label: "Rengøring" },
   { value: "restricted", label: "Begrænset område" }
 ];
-function Hi(e) {
+function Ki(e) {
   return Math.min(1, Math.max(0, e));
 }
-function jn(e) {
+function Fn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "zone";
 }
-function Bt(e) {
+function Vt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Ln(e) {
+function Vn(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
-let Q = class extends L {
+let ee = class extends L {
   constructor() {
     super(...arguments), this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.draftName = "Ny zone", this.draftKind = "info", this.draftEntity = "", this.draftStates = "on", this.draftVisible = !0;
   }
@@ -5633,7 +5735,7 @@ let Q = class extends L {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => Bt(e).localeCompare(Bt(t), "da")
+      (e, t) => Vt(e).localeCompare(Vt(t), "da")
     );
   }
   updated(e) {
@@ -5649,15 +5751,15 @@ let Q = class extends L {
   mapPoint(e) {
     const i = e.currentTarget.getBoundingClientRect();
     return !i.width || !i.height ? [0.5, 0.5] : [
-      Hi((e.clientX - i.left) / i.width),
-      Hi((e.clientY - i.top) / i.height)
+      Ki((e.clientX - i.left) / i.width),
+      Ki((e.clientY - i.top) / i.height)
     ];
   }
   handleMapClick(e) {
     this.drawing && (this.pendingPoints = [...this.pendingPoints, this.mapPoint(e)]);
   }
   uniqueZoneId(e) {
-    const t = jn(e), i = new Set(this.zones.map((o) => o.id));
+    const t = Fn(e), i = new Set(this.zones.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r += 1;
@@ -5689,7 +5791,7 @@ let Q = class extends L {
       ...i ? {
         state_binding: {
           entity: i,
-          active_states: Ln(this.draftStates)
+          active_states: Vn(this.draftStates)
         }
       } : {}
     };
@@ -5710,28 +5812,28 @@ let Q = class extends L {
     this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.emitConfig({ ...this.config, zones: t });
   }
   statusText(e) {
-    const t = pr(e, (i) => this.hass?.states[i]?.state);
+    const t = hr(e, (i) => this.hass?.states[i]?.state);
     return e.visible === !1 ? "Skjult manuelt" : t.conditional ? t.active ? `Aktiv · ${t.currentState ?? "ukendt"}` : t.reason === "missing_entity" ? "Entity mangler" : t.reason === "entity_unavailable" ? `Utilgængelig · ${t.currentState}` : `Inaktiv · ${t.currentState ?? "ukendt"}` : "Altid aktiv";
   }
   renderZonePolygon(e) {
-    const t = e.points.map(([r, o]) => `${r * ve},${o * ve}`).join(" "), i = e.id === this.selectedZoneId;
-    return C`
+    const t = e.points.map(([r, o]) => `${r * xe},${o * xe}`).join(" "), i = e.id === this.selectedZoneId;
+    return N`
       <g class=${i ? "zone selected" : "zone"} @click=${(r) => {
       this.drawing || (r.stopPropagation(), this.selectZone(e));
     }}>
         <polygon points=${t}></polygon>
-        ${e.name ? C`<text x=${e.points.reduce((r, o) => r + o[0], 0) / e.points.length * ve} y=${e.points.reduce((r, o) => r + o[1], 0) / e.points.length * ve} text-anchor="middle">${e.name}</text>` : f}
+        ${e.name ? N`<text x=${e.points.reduce((r, o) => r + o[0], 0) / e.points.length * xe} y=${e.points.reduce((r, o) => r + o[1], 0) / e.points.length * xe} text-anchor="middle">${e.name}</text>` : f}
       </g>
     `;
   }
   renderPending() {
     if (!this.pendingPoints.length) return f;
-    const e = this.pendingPoints.map(([t, i]) => `${t * ve},${i * ve}`).join(" ");
-    return C`
-      ${this.pendingPoints.length >= 3 ? C`<polygon class="pending-fill" points=${e}></polygon>` : f}
+    const e = this.pendingPoints.map(([t, i]) => `${t * xe},${i * xe}`).join(" ");
+    return N`
+      ${this.pendingPoints.length >= 3 ? N`<polygon class="pending-fill" points=${e}></polygon>` : f}
       <polyline class="pending-line" points=${e}></polyline>
-      ${this.pendingPoints.map(([t, i], r) => C`
-        <g transform=${`translate(${t * ve} ${i * ve})`}>
+      ${this.pendingPoints.map(([t, i], r) => N`
+        <g transform=${`translate(${t * xe} ${i * xe})`}>
           <circle class="pending-point" r="12"></circle>
           <text class="point-number" y="-20" text-anchor="middle">${r + 1}</text>
         </g>
@@ -5757,7 +5859,7 @@ let Q = class extends L {
           Home Assistant entity · valgfri
           <input list=${e} .value=${this.draftEntity} placeholder="input_boolean.alarm_zone" @change=${(t) => this.draftEntity = t.target.value} />
           <datalist id=${e}>
-            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Bt(t)}</option>`)}
+            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Vt(t)}</option>`)}
           </datalist>
           <small>Tom = zonen er altid aktiv. Med entity vises zonen kun i de valgte states.</small>
         </label>
@@ -5791,7 +5893,7 @@ let Q = class extends L {
           <div class="map-wrap">
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}>
               <rect width="1000" height="1000" class="backdrop"></rect>
-              ${e ? C`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}
+              ${e ? N`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}
               ${this.zones.map((r) => this.renderZonePolygon(r))}
               ${this.renderPending()}
             </svg>
@@ -5834,7 +5936,7 @@ let Q = class extends L {
     `;
   }
 };
-Q.styles = T`
+ee.styles = O`
     :host { display:block; margin-top:16px; color:var(--primary-text-color); }
     .panel { border:1px solid var(--divider-color,#d7dbe0); border-radius:14px; padding:16px; background:var(--card-background-color,#fff); }
     .heading { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
@@ -5879,56 +5981,56 @@ Q.styles = T`
     .note { margin-top:12px; padding:9px 11px; border-radius:9px; background:var(--secondary-background-color,#f3f5f7); color:var(--secondary-text-color); font-size:.75rem; }
     @media (max-width:700px) { .workspace { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } label.wide { grid-column:auto; } }
   `;
-se([
+ae([
   A({ attribute: !1 })
-], Q.prototype, "hass", 2);
-se([
+], ee.prototype, "hass", 2);
+ae([
   A({ attribute: !1 })
-], Q.prototype, "config", 2);
-se([
-  y()
-], Q.prototype, "selectedZoneId", 2);
-se([
-  y()
-], Q.prototype, "drawing", 2);
-se([
-  y()
-], Q.prototype, "pendingPoints", 2);
-se([
-  y()
-], Q.prototype, "draftName", 2);
-se([
-  y()
-], Q.prototype, "draftKind", 2);
-se([
-  y()
-], Q.prototype, "draftEntity", 2);
-se([
-  y()
-], Q.prototype, "draftStates", 2);
-se([
-  y()
-], Q.prototype, "draftVisible", 2);
-Q = se([
+], ee.prototype, "config", 2);
+ae([
+  v()
+], ee.prototype, "selectedZoneId", 2);
+ae([
+  v()
+], ee.prototype, "drawing", 2);
+ae([
+  v()
+], ee.prototype, "pendingPoints", 2);
+ae([
+  v()
+], ee.prototype, "draftName", 2);
+ae([
+  v()
+], ee.prototype, "draftKind", 2);
+ae([
+  v()
+], ee.prototype, "draftEntity", 2);
+ae([
+  v()
+], ee.prototype, "draftStates", 2);
+ae([
+  v()
+], ee.prototype, "draftVisible", 2);
+ee = ae([
   z("ha-explorer-zones-editor")
-], Q);
-var qn = Object.defineProperty, Bn = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Bn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], ee);
+var Kn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, W = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && qn(t, i, o), o;
+  return r && o && Kn(t, i, o), o;
 };
-const Pe = 1e3, Ki = ["on", "open", "opened", "true"];
-function Zi(e, t, i) {
+const Re = 1e3, Zi = ["on", "open", "opened", "true"];
+function Gi(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function Fn(e) {
+function Gn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "opening";
 }
-function Ft(e) {
+function Kt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Vn(e) {
+function Wn(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
@@ -5943,13 +6045,13 @@ let V = class extends L {
     return this.openings.find((e) => e.id === this.selectedId);
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Ft(e).localeCompare(Ft(t), "da"));
+    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Kt(e).localeCompare(Kt(t), "da"));
   }
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   uniqueId(e) {
-    const t = Fn(e), i = new Set(this.openings.map((o) => o.id));
+    const t = Gn(e), i = new Set(this.openings.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -5957,7 +6059,7 @@ let V = class extends L {
   }
   mapPoint(e) {
     const t = e.currentTarget.getBoundingClientRect();
-    return !t.width || !t.height ? [0.5, 0.5] : [Zi((e.clientX - t.left) / t.width, 0, 1), Zi((e.clientY - t.top) / t.height, 0, 1)];
+    return !t.width || !t.height ? [0.5, 0.5] : [Gi((e.clientX - t.left) / t.width, 0, 1), Gi((e.clientY - t.top) / t.height, 0, 1)];
   }
   handleMapClick(e) {
     this.placing && (this.draftPoint = this.mapPoint(e), this.placing = !1);
@@ -5966,11 +6068,11 @@ let V = class extends L {
     this.selectedId = "", this.draftKind = e, this.draftName = e === "door" ? `Dør ${this.openings.filter((t) => t.kind === "door").length + 1}` : `Vindue ${this.openings.filter((t) => t.kind === "window").length + 1}`, this.draftPoint = [0.5, 0.5], this.draftAngle = 0, this.draftLength = e === "door" ? 0.055 : 0.05, this.draftHinge = "start", this.draftSwing = "left", this.draftOpenAngle = 82, this.draftEntity = "", this.draftStates = "on, open", this.draftVisible = !0, this.placing = !0;
   }
   select(e) {
-    this.selectedId = e.id, this.placing = !1, this.draftName = e.name ?? e.id, this.draftKind = e.kind, this.draftPoint = [...e.point], this.draftAngle = e.angle ?? 0, this.draftLength = e.length ?? (e.kind === "door" ? 0.055 : 0.05), this.draftHinge = e.hinge ?? "start", this.draftSwing = e.swing ?? "left", this.draftOpenAngle = e.open_angle ?? 82, this.draftEntity = e.state_binding?.entity ?? "", this.draftStates = (e.state_binding?.open_states ?? Ki).join(", "), this.draftVisible = e.visible !== !1;
+    this.selectedId = e.id, this.placing = !1, this.draftName = e.name ?? e.id, this.draftKind = e.kind, this.draftPoint = [...e.point], this.draftAngle = e.angle ?? 0, this.draftLength = e.length ?? (e.kind === "door" ? 0.055 : 0.05), this.draftHinge = e.hinge ?? "start", this.draftSwing = e.swing ?? "left", this.draftOpenAngle = e.open_angle ?? 82, this.draftEntity = e.state_binding?.entity ?? "", this.draftStates = (e.state_binding?.open_states ?? Zi).join(", "), this.draftVisible = e.visible !== !1;
   }
   openingFromDraft(e) {
     const t = this.draftEntity.trim();
-    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: Vn(this.draftStates) } } : {} };
+    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: Wn(this.draftStates) } } : {} };
   }
   save() {
     if (!this.config) return;
@@ -5991,85 +6093,85 @@ let V = class extends L {
     if (e.visible === !1) return "Skjult";
     if (!e.state_binding) return "Ingen entity";
     const t = this.hass?.states[e.state_binding.entity]?.state;
-    return t ? `${(e.state_binding.open_states ?? Ki).map((r) => r.toLowerCase()).includes(t.toLowerCase()) ? "Åben" : "Lukket"} · ${t}` : "Entity mangler";
+    return t ? `${(e.state_binding.open_states ?? Zi).map((r) => r.toLowerCase()).includes(t.toLowerCase()) ? "Åben" : "Lukket"} · ${t}` : "Entity mangler";
   }
   renderOpening(e) {
-    const t = e.id === this.selectedId, i = e.point[0] * Pe, r = e.point[1] * Pe, o = (e.length ?? 0.055) * Pe, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
-    return C`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
+    const t = e.id === this.selectedId, i = e.point[0] * Re, r = e.point[1] * Re, o = (e.length ?? 0.055) * Re, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
+    return N`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
       this.placing || (l.stopPropagation(), this.select(e));
-    }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? C`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
+    }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? N`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
   }
   renderDraft() {
     if (this.selected || !this.placing && this.draftName === "Ny dør") return f;
-    const e = this.draftPoint[0] * Pe, t = this.draftPoint[1] * Pe, i = this.draftLength * Pe, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
-    return C`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
+    const e = this.draftPoint[0] * Re, t = this.draftPoint[1] * Re, i = this.draftLength * Re, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
+    return N`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
   }
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = !!this.selected || this.placing || this.draftName !== "Ny dør";
-    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? C`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? h`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => h`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : h`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
+    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? N`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? h`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => h`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : h`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
   }
   renderForm() {
     const e = "explorer-opening-entities";
-    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Ft(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
+    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Kt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
-V.styles = T`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
-G([
+V.styles = O`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
+W([
   A({ attribute: !1 })
 ], V.prototype, "hass", 2);
-G([
+W([
   A({ attribute: !1 })
 ], V.prototype, "config", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "selectedId", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "placing", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftName", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftKind", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftPoint", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftAngle", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftLength", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftHinge", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftSwing", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftOpenAngle", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftEntity", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftStates", 2);
-G([
-  y()
+W([
+  v()
 ], V.prototype, "draftVisible", 2);
-V = G([
+V = W([
   z("ha-explorer-openings-editor")
 ], V);
-var Hn = Object.defineProperty, Kn = Object.getOwnPropertyDescriptor, ae = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Kn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Un = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Hn(t, i, o), o;
+  return r && o && Un(t, i, o), o;
 };
-const Vt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Ht = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, Kt = (e) => Math.min(1, Math.max(0, e));
-let X = class extends L {
+const Zt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Gt = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, Wt = (e) => Math.min(1, Math.max(0, e));
+let Q = class extends L {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.draftKind = "light", this.draftEntity = "", this.draftStates = "on", this.draftIntensity = 0.75, this.draftRadius = 90;
   }
@@ -6102,21 +6204,21 @@ let X = class extends L {
   }
   save() {
     if (!this.selectedRoom || !this.draftEntity.trim() || this.isDuplicate()) return;
-    const e = this.parseStates(this.draftStates), t = { kind: this.draftKind, entity: this.draftEntity.trim(), ...this.draftKind === "temperature" || !e.length ? {} : { active_states: e }, ...this.draftPosition ? { position: { ...this.draftPosition } } : {}, ...this.draftKind === "fireplace" ? { intensity: Kt(this.draftIntensity), radius: Math.min(220, Math.max(30, this.draftRadius)) } : {} }, i = [...this.selectedRoom.reactions ?? []];
+    const e = this.parseStates(this.draftStates), t = { kind: this.draftKind, entity: this.draftEntity.trim(), ...this.draftKind === "temperature" || !e.length ? {} : { active_states: e }, ...this.draftPosition ? { position: { ...this.draftPosition } } : {}, ...this.draftKind === "fireplace" ? { intensity: Wt(this.draftIntensity), radius: Math.min(220, Math.max(30, this.draftRadius)) } : {} }, i = [...this.selectedRoom.reactions ?? []];
     this.editingIndex === void 0 ? i.push(t) : i[this.editingIndex] = t, this.updateSelectedRoom(i), this.cancelEdit();
   }
   beginEdit(e) {
     const t = this.selectedRoom, i = t?.reactions?.[e];
-    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : mt(i.kind)).join(", "), this.draftPosition = We(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
+    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : yt(i.kind)).join(", "), this.draftPosition = Xe(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
   }
   cancelEdit() {
-    this.editingIndex = void 0, this.draftKind = "light", this.draftEntity = "", this.draftStates = mt("light").join(", "), this.draftPosition = void 0, this.draftIntensity = 0.75, this.draftRadius = 90;
+    this.editingIndex = void 0, this.draftKind = "light", this.draftEntity = "", this.draftStates = yt("light").join(", "), this.draftPosition = void 0, this.draftIntensity = 0.75, this.draftRadius = 90;
   }
   removeReaction(e) {
     this.selectedRoom && (this.updateSelectedRoom((this.selectedRoom.reactions ?? []).filter((t, i) => i !== e)), this.editingIndex === e && this.cancelEdit());
   }
   changeKind(e) {
-    this.draftKind = e, this.draftEntity = "", this.draftStates = e === "temperature" ? "" : mt(e).join(", "), e === "fireplace" && (this.draftIntensity = 0.75, this.draftRadius = 90);
+    this.draftKind = e, this.draftEntity = "", this.draftStates = e === "temperature" ? "" : yt(e).join(", "), e === "fireplace" && (this.draftIntensity = 0.75, this.draftRadius = 90);
   }
   options() {
     return this.hass ? Object.entries(this.hass.states).filter(([e, t]) => {
@@ -6130,17 +6232,17 @@ let X = class extends L {
   }
   handlePreviewClick(e) {
     const t = e.currentTarget, i = t.getBoundingClientRect();
-    !i.width || !i.height || (this.draftPosition = { x: Kt((e.clientX - i.left) / i.width), y: Kt((e.clientY - i.top) / i.height) });
+    !i.width || !i.height || (this.draftPosition = { x: Wt((e.clientX - i.left) / i.width), y: Wt((e.clientY - i.top) / i.height) });
   }
   preview(e) {
-    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? We(e);
-    return h`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? h`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${v} ${v}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * v},${o * v}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
-      const o = We(e, r);
-      return h`<g class="existing" transform=${`translate(${o.x * v} ${o.y * v})`}><circle r="13"></circle><text>${Ht[r.kind]}</text></g>`;
-    })}<g class="draft-point" transform=${`translate(${i.x * v} ${i.y * v})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Ht[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
+    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? Xe(e);
+    return h`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? h`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${x} ${x}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * x},${o * x}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
+      const o = Xe(e, r);
+      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${Gt[r.kind]}</text></g>`;
+    })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Gt[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
   }
   statusLabel(e, t) {
-    const i = lr(e, t, (r) => this.state(r));
+    const i = cr(e, t, (r) => this.state(r));
     return e.kind === "temperature" && i.numericValue !== void 0 ? `${i.numericValue}${i.unit ? ` ${i.unit}` : "°"}` : i.active ? `Aktiv · ${i.currentState}` : `Inaktiv · ${i.currentState ?? "ukendt"}`;
   }
   render() {
@@ -6148,49 +6250,49 @@ let X = class extends L {
     const e = this.selectedRoom, t = e?.reactions ?? [], i = this.options(), r = i.some((o) => o.id === this.draftEntity);
     return h`<section class="editor"><div class="heading"><div><span>Living Entity Points · Fireplace</span><h3>Rumreaktioner</h3></div><b>${this.rooms.reduce((o, n) => o + (n.reactions?.length ?? 0), 0)} punkter</b></div><p class="intro">Placér lys, sensorer, medier og nu også pejs/ildsted direkte på kortet.</p>${this.rooms.length ? h`<label>Rum<select .value=${this.selectedRoomId} @change=${(o) => {
       this.selectedRoomId = o.target.value, this.cancelEdit();
-    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Vt).map((o) => h`<option value=${o}>${Vt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Ht[o.kind]}</span><div><strong>${Vt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
+    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Zt).map((o) => h`<option value=${o}>${Zt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Gt[o.kind]}</span><div><strong>${Zt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
-X.styles = T`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
-ae([
+Q.styles = O`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
+le([
   A({ attribute: !1 })
-], X.prototype, "config", 2);
-ae([
+], Q.prototype, "config", 2);
+le([
   A({ attribute: !1 })
-], X.prototype, "hass", 2);
-ae([
-  y()
-], X.prototype, "selectedRoomId", 2);
-ae([
-  y()
-], X.prototype, "draftKind", 2);
-ae([
-  y()
-], X.prototype, "draftEntity", 2);
-ae([
-  y()
-], X.prototype, "draftStates", 2);
-ae([
-  y()
-], X.prototype, "draftPosition", 2);
-ae([
-  y()
-], X.prototype, "editingIndex", 2);
-ae([
-  y()
-], X.prototype, "draftIntensity", 2);
-ae([
-  y()
-], X.prototype, "draftRadius", 2);
-X = ae([
+], Q.prototype, "hass", 2);
+le([
+  v()
+], Q.prototype, "selectedRoomId", 2);
+le([
+  v()
+], Q.prototype, "draftKind", 2);
+le([
+  v()
+], Q.prototype, "draftEntity", 2);
+le([
+  v()
+], Q.prototype, "draftStates", 2);
+le([
+  v()
+], Q.prototype, "draftPosition", 2);
+le([
+  v()
+], Q.prototype, "editingIndex", 2);
+le([
+  v()
+], Q.prototype, "draftIntensity", 2);
+le([
+  v()
+], Q.prototype, "draftRadius", 2);
+Q = le([
   z("ha-explorer-room-reactions-editor")
-], X);
-var Zn = Object.getOwnPropertyDescriptor, Gn = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Q);
+var Yn = Object.getOwnPropertyDescriptor, Qn = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-let Gi = class extends X {
+let Wi = class extends Q {
   updated(e) {
     super.updated(e), queueMicrotask(() => this.cleanOpeningControls());
   }
@@ -6207,15 +6309,15 @@ let Gi = class extends X {
     t && t.textContent?.includes("dør/vindue") && (t.innerHTML = "Hele rummet bliver ikke længere farvet af en enkelt entity. Hver lampe, bevægelsessensor, TV/media player og temperatursensor får sit eget punkt på plantegningen. Lamper bruger stadig <code>brightness</code>, og temperatur vises med den aktuelle værdi. Døre og vinduer konfigureres nu under <strong>Dynamic Doors & Windows</strong>.");
   }
 };
-Gi = Gn([
+Wi = Qn([
   z("ha-explorer-room-reactions-editor-clean")
-], Gi);
-var Wn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, be = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Wi);
+var Jn = Object.defineProperty, es = Object.getOwnPropertyDescriptor, ye = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? es(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Wn(t, i, o), o;
+  return r && o && Jn(t, i, o), o;
 };
-let ne = class extends L {
+let se = class extends L {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.kind = "scene", this.entity = "", this.name = "", this.icon = "", this.editingId = "";
   }
@@ -6352,7 +6454,7 @@ let ne = class extends L {
     ` : h`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
   }
 };
-ne.styles = T`
+se.styles = O`
     :host { display:block; color:var(--primary-text-color); }
     section { display:grid; gap:12px; }
     .notice { display:grid; gap:3px; padding:10px 12px; border-radius:10px; background:color-mix(in srgb,var(--primary-color,#03a9f4) 8%,transparent); font-size:.78rem; line-height:1.4; }
@@ -6380,39 +6482,39 @@ ne.styles = T`
       article .danger { grid-column:3; }
     }
   `;
-be([
+ye([
   A({ attribute: !1 })
-], ne.prototype, "config", 2);
-be([
+], se.prototype, "config", 2);
+ye([
   A({ attribute: !1 })
-], ne.prototype, "hass", 2);
-be([
-  y()
-], ne.prototype, "selectedRoomId", 2);
-be([
-  y()
-], ne.prototype, "kind", 2);
-be([
-  y()
-], ne.prototype, "entity", 2);
-be([
-  y()
-], ne.prototype, "name", 2);
-be([
-  y()
-], ne.prototype, "icon", 2);
-be([
-  y()
-], ne.prototype, "editingId", 2);
-ne = be([
+], se.prototype, "hass", 2);
+ye([
+  v()
+], se.prototype, "selectedRoomId", 2);
+ye([
+  v()
+], se.prototype, "kind", 2);
+ye([
+  v()
+], se.prototype, "entity", 2);
+ye([
+  v()
+], se.prototype, "name", 2);
+ye([
+  v()
+], se.prototype, "icon", 2);
+ye([
+  v()
+], se.prototype, "editingId", 2);
+se = ye([
   z("ha-explorer-room-actions-editor")
-], ne);
-var Xn = Object.defineProperty, Yn = Object.getOwnPropertyDescriptor, K = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], se);
+var ts = Object.defineProperty, is = Object.getOwnPropertyDescriptor, Z = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? is(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Xn(t, i, o), o;
+  return r && o && ts(t, i, o), o;
 };
-const U = 1e3;
+const Y = 1e3;
 let F = class extends L {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "", this.drawing = !1, this.pending = [], this.placingNode = !1, this.draftNodeName = "", this.draftNodeKind = "door", this.draftNodeEntity = "", this.draftNodeOpenStates = "on", this.editingNodeName = "", this.editingNodeKind = "door", this.editingNodeEntity = "", this.editingNodeOpenStates = "on";
@@ -6441,7 +6543,7 @@ let F = class extends L {
     return t.length ? [...new Set(t)] : ["on"];
   }
   nodeState(e) {
-    return je(e, (t) => this.entityState(t));
+    return Le(e, (t) => this.entityState(t));
   }
   nodeStateLabel(e) {
     if (e.kind !== "door") return "";
@@ -6604,15 +6706,15 @@ let F = class extends L {
         this.drawing ? "selectable" : "",
         o.conditional && !o.active ? "blocked" : ""
       ].filter(Boolean).join(" ");
-      return C`
+      return N`
         <g
           class=${n}
-          transform=${`translate(${i * U} ${r * U})`}
+          transform=${`translate(${i * Y} ${r * Y})`}
           @click=${(s) => this.useSharedNode(s, e)}
         >
           <circle r="15"></circle>
           <text y="-24" text-anchor="middle">${this.routeNodeLabel(e)}</text>
-          ${t > 0 ? C`<text class="usage" y="7" text-anchor="middle">${t}</text>` : f}
+          ${t > 0 ? N`<text class="usage" y="7" text-anchor="middle">${t}</text>` : f}
         </g>
       `;
     });
@@ -6622,8 +6724,8 @@ let F = class extends L {
       if (this.routeMatchesSelection(e)) return f;
       const i = this.routePoints(e);
       if (!i) return f;
-      const r = i.map(([o, n]) => `${o * U},${n * U}`).join(" ");
-      return C`
+      const r = i.map(([o, n]) => `${o * Y},${n * Y}`).join(" ");
+      return N`
         <polyline
           points=${r}
           class="network-route"
@@ -6637,8 +6739,8 @@ let F = class extends L {
         ></polyline>
         <text
           class="network-number"
-          x=${i[Math.floor(i.length / 2)][0] * U}
-          y=${i[Math.floor(i.length / 2)][1] * U - 18}
+          x=${i[Math.floor(i.length / 2)][0] * Y}
+          y=${i[Math.floor(i.length / 2)][1] * Y - 18}
           text-anchor="middle"
         >${t + 1}</text>
       `;
@@ -6656,17 +6758,17 @@ let F = class extends L {
         i = s.from === this.fromRoom ? a : [...a].reverse();
       }
     }
-    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * U},${a * U}`).join(" ");
-    return C`
+    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * Y},${a * Y}`).join(" ");
+    return N`
       <polyline points=${n} class="route-line" fill="none" vector-effect="non-scaling-stroke"></polyline>
-      <g transform=${`translate(${e[0] * U} ${e[1] * U})`}><circle class="endpoint" r="14"></circle></g>
-      ${r.map(({ step: s, point: a }, l) => C`
-        <g transform=${`translate(${a[0] * U} ${a[1] * U})`}>
+      <g transform=${`translate(${e[0] * Y} ${e[1] * Y})`}><circle class="endpoint" r="14"></circle></g>
+      ${r.map(({ step: s, point: a }, l) => N`
+        <g transform=${`translate(${a[0] * Y} ${a[1] * Y})`}>
           <circle class=${s.node_id ? "waypoint shared-waypoint" : "waypoint"} r="11"></circle>
           <text y="-20" text-anchor="middle">${l + 1}</text>
         </g>
       `)}
-      <g transform=${`translate(${t[0] * U} ${t[1] * U})`}><circle class="endpoint" r="14"></circle></g>
+      <g transform=${`translate(${t[0] * Y} ${t[1] * Y})`}><circle class="endpoint" r="14"></circle></g>
     `;
   }
   renderRouteList() {
@@ -6816,66 +6918,66 @@ let F = class extends L {
     `;
   }
 };
-F.styles = T`
+F.styles = O`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
-K([
+Z([
   A({ attribute: !1 })
 ], F.prototype, "config", 2);
-K([
+Z([
   A({ attribute: !1 })
 ], F.prototype, "hass", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "fromRoom", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "toRoom", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "drawing", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "pending", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "placingNode", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "draftNodeName", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "draftNodeKind", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "draftNodeEntity", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "draftNodeOpenStates", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "editingNodeId", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "editingNodeName", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "editingNodeKind", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "editingNodeEntity", 2);
-K([
-  y()
+Z([
+  v()
 ], F.prototype, "editingNodeOpenStates", 2);
-F = K([
+F = Z([
   z("ha-explorer-route-editor")
 ], F);
-var Qn = Object.defineProperty, Jn = Object.getOwnPropertyDescriptor, ce = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Jn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var rs = Object.defineProperty, os = Object.getOwnPropertyDescriptor, de = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? os(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Qn(t, i, o), o;
+  return r && o && rs(t, i, o), o;
 };
-const Re = 1e3;
+const ze = 1e3;
 let re = class extends L {
   constructor() {
     super(...arguments), this.fromKey = "", this.toKey = "", this.conditionEntity = "", this.conditionStates = "on", this.editingEntity = "", this.editingStates = "on";
@@ -6951,7 +7053,7 @@ let re = class extends L {
     return this.hass?.states[e]?.state;
   }
   edgeStatuses() {
-    return this.config ? st(
+    return this.config ? at(
       this.config,
       (e) => this.entityState(e)
     ) : [];
@@ -7042,23 +7144,23 @@ let re = class extends L {
       const n = this.endpointPoint(r.from), s = this.endpointPoint(r.to);
       if (!n || !s) return f;
       const a = e[o] ?? this.edgeStatus(o), l = ["graph-edge", a.conditional ? "conditional" : "", a.active ? "" : "blocked"].filter(Boolean).join(" ");
-      return C`<line
-        x1=${n[0] * Re}
-        y1=${n[1] * Re}
-        x2=${s[0] * Re}
-        y2=${s[1] * Re}
+      return N`<line
+        x1=${n[0] * ze}
+        y1=${n[1] * ze}
+        x2=${s[0] * ze}
+        y2=${s[1] * ze}
         class=${l}
         vector-effect="non-scaling-stroke"
       ></line>`;
     }), i = this.endpointOptions().filter((r) => r.point).map((r) => {
-      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((c) => c.id === r.id) : void 0, a = s ? je(s, (c) => this.entityState(c)) : void 0, l = !!(a?.conditional && !a.active);
-      return C`
-          <g transform=${`translate(${o * Re} ${n * Re})`}>
+      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((c) => c.id === r.id) : void 0, a = s ? Le(s, (c) => this.entityState(c)) : void 0, l = !!(a?.conditional && !a.active);
+      return N`
+          <g transform=${`translate(${o * ze} ${n * ze})`}>
             <circle class=${r.kind === "room" ? "graph-room" : l ? "graph-node blocked" : "graph-node"} r=${r.kind === "room" ? "11" : "13"}></circle>
           </g>
         `;
     });
-    return C`${t}${i}`;
+    return N`${t}${i}`;
   }
   render() {
     if (!this.config) return f;
@@ -7160,46 +7262,46 @@ let re = class extends L {
     `;
   }
 };
-re.styles = T`
+re.styles = O`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
-ce([
+de([
   A({ attribute: !1 })
 ], re.prototype, "config", 2);
-ce([
+de([
   A({ attribute: !1 })
 ], re.prototype, "hass", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "fromKey", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "toKey", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "conditionEntity", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "conditionStates", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "editingConditionIndex", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "editingEntity", 2);
-ce([
-  y()
+de([
+  v()
 ], re.prototype, "editingStates", 2);
-re = ce([
+re = de([
   z("ha-explorer-route-graph-editor")
 ], re);
-var es = Object.defineProperty, ts = Object.getOwnPropertyDescriptor, lt = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ts(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ns = Object.defineProperty, ss = Object.getOwnPropertyDescriptor, ct = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ss(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && es(t, i, o), o;
+  return r && o && ns(t, i, o), o;
 };
 const ie = 1e3;
-let Ee = class extends L {
+let Me = class extends L {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "";
   }
@@ -7223,13 +7325,13 @@ let Ee = class extends L {
   }
   endpointPoint(e) {
     if (this.config)
-      return e.kind === "room" ? $e(this.config, e.id) : this.routeNodes.find((t) => t.id === e.id)?.point;
+      return e.kind === "room" ? ke(this.config, e.id) : this.routeNodes.find((t) => t.id === e.id)?.point;
   }
   entityState(e) {
     return this.hass?.states[e]?.state;
   }
   edgeStatuses() {
-    return this.config ? st(
+    return this.config ? at(
       this.config,
       (e) => this.entityState(e)
     ) : [];
@@ -7245,7 +7347,7 @@ let Ee = class extends L {
   }
   selectedResolution() {
     if (!(!this.config || !this.fromRoom || !this.toRoom || this.fromRoom === this.toRoom))
-      return ni(
+      return li(
         this.config,
         this.fromRoom,
         this.toRoom,
@@ -7279,7 +7381,7 @@ let Ee = class extends L {
         n.conditional ? "conditional" : "",
         n.active ? "" : "blocked"
       ].filter(Boolean).join(" ");
-      return C`
+      return N`
         <line
           x1=${r[0] * ie}
           y1=${r[1] * ie}
@@ -7294,14 +7396,14 @@ let Ee = class extends L {
   renderPreviewOverlay(e) {
     if (!e || e.hops.length < 2) return f;
     const t = e.hops.map((i) => `${i.point[0] * ie},${i.point[1] * ie}`).join(" ");
-    return C`
+    return N`
       <polyline
         points=${t}
         class=${`preview-line ${e.source}`}
         fill="none"
         vector-effect="non-scaling-stroke"
       ></polyline>
-      ${e.hops.map((i, r) => C`
+      ${e.hops.map((i, r) => N`
         <g transform=${`translate(${i.point[0] * ie} ${i.point[1] * ie})`}>
           <circle
             class=${i.kind === "room" ? "preview-room" : i.kind === "node" ? "preview-node" : "preview-point"}
@@ -7314,12 +7416,12 @@ let Ee = class extends L {
   }
   renderDisconnectedMarkers() {
     if (!this.config) return f;
-    const e = zi(
+    const e = Ti(
       this.config,
       (r) => this.entityState(r)
     ), t = e.disconnectedRoomIds.map((r) => {
-      const o = $e(this.config, r);
-      return o ? C`
+      const o = ke(this.config, r);
+      return o ? N`
         <g transform=${`translate(${o[0] * ie} ${o[1] * ie})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
@@ -7327,14 +7429,14 @@ let Ee = class extends L {
       ` : f;
     }), i = e.disconnectedNodeIds.map((r) => {
       const o = this.routeNodes.find((n) => n.id === r);
-      return o ? C`
+      return o ? N`
         <g transform=${`translate(${o.point[0] * ie} ${o.point[1] * ie})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
         </g>
       ` : f;
     });
-    return C`${t}${i}`;
+    return N`${t}${i}`;
   }
   renderBlockedEdges(e) {
     return e.length ? h`
@@ -7355,7 +7457,7 @@ let Ee = class extends L {
   }
   renderDiagnostics() {
     if (!this.config) return f;
-    const e = zi(
+    const e = Ti(
       this.config,
       (r) => this.entityState(r)
     ), t = this.graphEdges.length > 0, i = e.invalidEdges + e.duplicateEdges + e.disconnectedRoomIds.length + e.disconnectedNodeIds.length + e.brokenRouteNodeReferences.length + e.unresolvedConditionEntities.length + Math.max(0, e.components - 1);
@@ -7470,31 +7572,31 @@ let Ee = class extends L {
     `;
   }
 };
-Ee.styles = T`
+Me.styles = O`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
-lt([
+ct([
   A({ attribute: !1 })
-], Ee.prototype, "config", 2);
-lt([
+], Me.prototype, "config", 2);
+ct([
   A({ attribute: !1 })
-], Ee.prototype, "hass", 2);
-lt([
-  y()
-], Ee.prototype, "fromRoom", 2);
-lt([
-  y()
-], Ee.prototype, "toRoom", 2);
-Ee = lt([
+], Me.prototype, "hass", 2);
+ct([
+  v()
+], Me.prototype, "fromRoom", 2);
+ct([
+  v()
+], Me.prototype, "toRoom", 2);
+Me = ct([
   z("ha-explorer-route-diagnostics")
-], Ee);
-var is = Object.defineProperty, rs = Object.getOwnPropertyDescriptor, li = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? rs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], Me);
+var as = Object.defineProperty, ls = Object.getOwnPropertyDescriptor, pi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ls(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && is(t, i, o), o;
+  return r && o && as(t, i, o), o;
 };
-const os = { basic: 0, rooms: 1, presences: 2 };
-let Ut = class extends D {
+const cs = { basic: 0, rooms: 1, presences: 2 };
+let Qt = class extends D {
   updated(e) {
     super.updated(e), e.has("config") && this.config && this.setConfig(this.config);
   }
@@ -7502,13 +7604,13 @@ let Ut = class extends D {
     return this.renderRoomDrawingEditor();
   }
 };
-li([
+pi([
   A({ attribute: !1 })
-], Ut.prototype, "config", 2);
-Ut = li([
+], Qt.prototype, "config", 2);
+Qt = pi([
   z("ha-explorer-room-tools")
-], Ut);
-let Xt = class extends le {
+], Qt);
+let Jt = class extends ce {
   constructor() {
     super(...arguments), this.handleNativeControlChange = (e) => {
       e.stopPropagation(), queueMicrotask(() => {
@@ -7547,7 +7649,7 @@ let Xt = class extends le {
     const t = e.detail?.target;
     if (!t) return;
     e.stopPropagation();
-    const i = os[t];
+    const i = cs[t];
     let r;
     if (i !== void 0) {
       const o = this.baseSections[i];
@@ -7572,6 +7674,7 @@ let Xt = class extends le {
       ${this.renderAdvancedSection("room-tools", "Visuel rum-editor", "Tegn rum og presence-anchors", h`<ha-explorer-room-tools .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-tools>`)}
       ${this.renderAdvancedSection("presences", "Multi-Person & Identity", "Navne, profiler og separate mmWave-targets", h`<ha-explorer-identity-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-identity-editor>`)}
       ${this.renderAdvancedSection("presences", "Visuel profil", "Farver, ikoner og synlighed", h`<ha-explorer-presence-polish-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-presence-polish-editor>`)}
+      ${this.renderAdvancedSection("presences", "Movement History 2.0", "1–5 min. historik og udtoning", h`<ha-explorer-movement-history-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-movement-history-editor>`)}
       ${this.renderAdvancedSection("openings", "Dynamic Doors & Windows", "Placér døre/vinduer, hængsel, sving og entity", h`<ha-explorer-openings-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-openings-editor>`)}
       ${this.renderAdvancedSection("zones", "Zones / Dynamic Areas", "Alarm, rengøring og dynamiske områder", h`<ha-explorer-zones-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-zones-editor>`)}
       ${this.renderAdvancedSection("room-reactions", "Living Entity Points", "Lamper, TV, sensorer og temperatur", h`<ha-explorer-room-reactions-editor-clean .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-reactions-editor-clean>`)}
@@ -7587,17 +7690,17 @@ let Xt = class extends le {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-Xt.styles = T`${le.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
-Xt = li([
+Jt.styles = O`${ce.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+Jt = pi([
   z("ha-explorer-ha-editor")
-], Xt);
-function Wi(e) {
+], Jt);
+function Ui(e) {
   return Math.min(1, Math.max(0, e));
 }
-function fr(e) {
+function vr(e) {
   return e.trim().toLocaleLowerCase().replace(/[\s_-]+/g, " ");
 }
-function Zt(e, t) {
+function Ut(e, t) {
   if (t.length < 3) return !1;
   let i = !1;
   const [r, o] = e;
@@ -7607,7 +7710,7 @@ function Zt(e, t) {
   }
   return i;
 }
-function ns(e) {
+function ds(e) {
   if (!e.length) return [0.5, 0.5];
   const [t, i] = e.reduce(
     ([r, o], [n, s]) => [r + n, o + s],
@@ -7615,7 +7718,7 @@ function ns(e) {
   );
   return [t / e.length, i / e.length];
 }
-function ss(e) {
+function ps(e) {
   if (e.length < 3) return;
   let t = 0, i = 0, r = 0;
   for (let o = 0; o < e.length; o += 1) {
@@ -7625,48 +7728,48 @@ function ss(e) {
   if (!(Math.abs(t) < Number.EPSILON))
     return [i / (3 * t), r / (3 * t)];
 }
-function ze(e) {
-  return { x: Wi(e.x), y: Wi(e.y) };
+function Te(e) {
+  return { x: Ui(e.x), y: Ui(e.y) };
 }
-function as(e) {
-  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(fr);
+function hs(e) {
+  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(vr);
 }
-function br(e, t) {
+function xr(e, t) {
   if (!t?.trim()) return;
-  const i = fr(t);
-  return e.find((r) => as(r).includes(i));
+  const i = vr(t);
+  return e.find((r) => hs(r).includes(i));
 }
-function ls(e) {
-  if (e.presence_anchor) return ze(e.presence_anchor);
-  if (e.label) return ze(e.label);
-  const t = ss(e.points);
-  if (t && Zt(t, e.points))
-    return ze({ x: t[0], y: t[1] });
-  const i = ns(e.points);
-  if (Zt(i, e.points))
-    return ze({ x: i[0], y: i[1] });
+function us(e) {
+  if (e.presence_anchor) return Te(e.presence_anchor);
+  if (e.label) return Te(e.label);
+  const t = ps(e.points);
+  if (t && Ut(t, e.points))
+    return Te({ x: t[0], y: t[1] });
+  const i = ds(e.points);
+  if (Ut(i, e.points))
+    return Te({ x: i[0], y: i[1] });
   if (e.points.length) {
     const r = e.points.map(([s]) => s), o = e.points.map(([, s]) => s), n = [
       (Math.min(...r) + Math.max(...r)) / 2,
       (Math.min(...o) + Math.max(...o)) / 2
     ];
-    return Zt(n, e.points) ? ze({ x: n[0], y: n[1] }) : ze({ x: e.points[0][0], y: e.points[0][1] });
+    return Ut(n, e.points) ? Te({ x: n[0], y: n[1] }) : Te({ x: e.points[0][0], y: e.points[0][1] });
   }
   return { x: 0.5, y: 0.5 };
 }
-const cs = ["unknown", "unavailable", "not_detected"], ds = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
-function Y(e, t) {
+const gs = ["unknown", "unavailable", "not_detected"], ms = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
+function J(e, t) {
   return e && t ? e.attributes[t] : void 0;
 }
-function ue(e) {
+function ge(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
-function xe(e, t) {
-  const i = ue(e);
+function we(e, t) {
+  const i = ge(e);
   return i === void 0 ? t : Math.min(1, Math.max(0, i));
 }
-function ps(e, t) {
+function fs(e, t) {
   if (typeof e == "boolean") return e;
   if (typeof e == "number") return e !== 0;
   if (typeof e == "string") {
@@ -7676,108 +7779,108 @@ function ps(e, t) {
   }
   return t;
 }
-function ht(e, t) {
+function mt(e, t) {
   return typeof e == "string" && e.trim() ? e : t;
 }
-function Ui(e) {
+function Xi(e) {
   if (typeof e != "string") return;
   const t = e.trim();
-  return ds.has(t.toLowerCase()) ? void 0 : t;
+  return ms.has(t.toLowerCase()) ? void 0 : t;
 }
-function hs(e, t, i) {
+function bs(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
-    return r ? Ui(e.room_attribute ? Y(r, e.room_attribute) : r.state) : void 0;
+    return r ? Xi(e.room_attribute ? J(r, e.room_attribute) : r.state) : void 0;
   }
   if (t)
-    return Ui(Y(t, e.room_attribute ?? "explorer_room"));
+    return Xi(J(t, e.room_attribute ?? "explorer_room"));
 }
-function us(e) {
+function ys(e) {
   if (!e.points.length) return;
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
 }
-function Xi(e, t, i, r, o, n) {
+function Yi(e, t, i, r, o, n) {
   const s = i - t;
   return Math.abs(s) < 1e-6 ? n : r + (e - t) / s * (o - r);
 }
-function Yi(e, t, i, r, o, n, s) {
+function Qi(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
-  return p * e + u * t + g;
+  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, g = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, u = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  return p * e + g * t + u;
 }
-function gs(e, t, i) {
-  const r = e.physical_meters, o = ue(r?.width), n = ue(r?.height), s = us(e);
+function vs(e, t, i) {
+  const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = ys(e);
   if (!o || !n || o <= 0 || n <= 0 || !s) return {};
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
   let c = Math.min(1, Math.max(0, a / o)), d = Math.min(1, Math.max(0, l / n));
   const p = r?.position_calibration;
-  return p?.c ? (c = Yi(a, l, p.a, p.b, p.c, "room_x", c), d = Yi(a, l, p.a, p.b, p.c, "room_y", d)) : p && (c = Xi(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, c), d = Xi(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, d)), c = Math.min(1, Math.max(0, c)), d = Math.min(1, Math.max(0, d)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + d * (s.maxY - s.minY) };
+  return p?.c ? (c = Qi(a, l, p.a, p.b, p.c, "room_x", c), d = Qi(a, l, p.a, p.b, p.c, "room_y", d)) : p && (c = Yi(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, c), d = Yi(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, d)), c = Math.min(1, Math.max(0, c)), d = Math.min(1, Math.max(0, d)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + d * (s.maxY - s.minY) };
 }
-function ut(e, t, i) {
-  const r = br(t, i ?? e.room_id);
+function ft(e, t, i) {
+  const r = xr(t, i ?? e.room_id);
   if (r) {
-    const s = ls(r);
+    const s = us(r);
     return { ...e, x: s.x, y: s.y, room_id: r.id };
   }
-  const o = xe(e.x), n = xe(e.y);
+  const o = we(e.x), n = we(e.y);
   return o === void 0 || n === void 0 ? { ...e, x: o, y: n, visible: !1 } : { ...e, x: o, y: n };
 }
-function ms(e, t, i, r, o, n) {
-  if (!i) return { x: xe(e.x), y: xe(e.y) };
+function xs(e, t, i, r, o, n) {
+  if (!i) return { x: we(e.x), y: we(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
-    const c = ue(Y(i, a)), d = ue(Y(i, l)), p = br(r, o ?? e.room_id);
-    return c === void 0 || d === void 0 || !p ? {} : { ...gs(p, c, d), roomId: p.id };
+    const c = ge(J(i, a)), d = ge(J(i, l)), p = xr(r, o ?? e.room_id);
+    return c === void 0 || d === void 0 || !p ? {} : { ...vs(p, c, d), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const c = ue(Y(i, a)), d = ue(Y(i, l)), p = ue(n?.width), u = ue(n?.height);
-    return c === void 0 || d === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: xe(c / p), y: xe(d / u) };
+    const c = ge(J(i, a)), d = ge(J(i, l)), p = ge(n?.width), g = ge(n?.height);
+    return c === void 0 || d === void 0 || !p || !g || p <= 0 || g <= 0 ? {} : { x: we(c / p), y: we(d / g) };
   }
-  return { x: xe(Y(i, a), e.x), y: xe(Y(i, l), e.y) };
+  return { x: we(J(i, a), e.x), y: we(J(i, l), e.y) };
 }
-function fs(e, t, i = [], r) {
+function ws(e, t, i = [], r) {
   const o = e.entity_binding;
-  if (!o || !t) return ut(e, i);
+  if (!o || !t) return ft(e, i);
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
-  if (o.entity && !n) return { ...ut(e, i), visible: !1 };
-  if (o.position_entity && !a) return { ...ut(e, i), visible: !1 };
-  const l = o.hidden_states ?? cs, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = Y(n, o.visible_attribute), u = c || d ? !1 : ps(p, e.visible ?? !0), g = hs(o, n, t) ?? e.room_id, b = ms(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? ht(Y(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? ht(Y(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? ht(Y(n, o.icon_attribute)) : void 0), color: e.color ?? ht(Y(n, o.color_attribute ?? "explorer_color")), visible: u };
-  return o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : ut(m, i, g);
+  if (o.entity && !n) return { ...ft(e, i), visible: !1 };
+  if (o.position_entity && !a) return { ...ft(e, i), visible: !1 };
+  const l = o.hidden_states ?? gs, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = J(n, o.visible_attribute), g = c || d ? !1 : fs(p, e.visible ?? !0), u = bs(o, n, t) ?? e.room_id, b = xs(e, o, a, i, u, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? mt(J(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? mt(J(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? mt(J(n, o.icon_attribute)) : void 0), color: e.color ?? mt(J(n, o.color_attribute ?? "explorer_color")), visible: g };
+  return o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : ft(m, i, u);
 }
-function bs(e, t, i = [], r) {
-  return e.map((o) => fs(o, t, i, r));
+function $s(e, t, i = [], r) {
+  return e.map((o) => ws(o, t, i, r));
 }
-const Ie = /* @__PURE__ */ new Map(), ys = 0.22, vs = 0.16, xs = 3e4, ws = 0.025, $s = 0.018;
-function _t(e) {
+const De = /* @__PURE__ */ new Map(), ks = 0.22, _s = 0.16, As = 3e4, Ss = 0.025, Cs = 0.018;
+function Et(e) {
   return Number.isFinite(e.x) && Number.isFinite(e.y) ? { x: e.x, y: e.y } : void 0;
 }
-function Yt(e, t) {
+function ei(e, t) {
   return Math.hypot(e.x - t.x, e.y - t.y);
 }
-function Te(e) {
+function Ie(e) {
   return e.entity_binding?.entity ?? e.id;
 }
-function Ue(e) {
+function Ye(e) {
   return e.entity_binding?.position_entity;
 }
-function yr(e) {
+function wr(e) {
   return e.previous ? { x: e.point.x + (e.point.x - e.previous.x), y: e.point.y + (e.point.y - e.previous.y) } : e.point;
 }
-function ks(e, t) {
-  const i = _t(t), r = Yt(e.point, i), o = Yt(yr(e), i), n = e.target && e.target === Ue(t) ? ws : 0;
+function Es(e, t) {
+  const i = Et(t), r = ei(e.point, i), o = ei(wr(e), i), n = e.target && e.target === Ye(t) ? Ss : 0;
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
-function Qi(e, t, i) {
-  const r = Te(e), o = _t(t);
+function Ji(e, t, i) {
+  const r = Ie(e), o = Et(t);
   if (!o) return;
-  const n = Ie.get(r);
-  Ie.set(r, { point: o, previous: n?.point, target: Ue(t), seenAt: i });
+  const n = De.get(r);
+  De.set(r, { point: o, previous: n?.point, target: Ye(t), seenAt: i });
 }
-function _s(e, t = Date.now()) {
-  for (const [a, l] of Ie) t - l.seenAt > xs && Ie.delete(a);
-  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && _t(a) && Ue(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
+function Ms(e, t = Date.now()) {
+  for (const [a, l] of De) t - l.seenAt > As && De.delete(a);
+  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && Et(a) && Ye(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
     const l = a.room_id ?? "__no_room__", c = n.get(l) ?? [];
     c.push(a), n.set(l, c);
@@ -7785,47 +7888,47 @@ function _s(e, t = Date.now()) {
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
-      for (const g of a)
-        s.push(g), Qi(g, g, t);
+      for (const u of a)
+        s.push(u), Ji(u, u, t);
       continue;
     }
-    const l = [...a], c = [...a].sort((g, b) => Te(g).localeCompare(Te(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = c.map((g) => {
-      const b = Ie.get(Te(g));
-      if (!b) return { identity: g, track: void 0, scores: [] };
-      const m = l.map((x) => ks(b, x)).sort((x, _) => x.score - _.score);
-      return { identity: g, track: b, scores: m };
-    }).sort((g, b) => (g.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
-    for (const g of u) {
-      const { identity: b, track: m } = g;
+    const l = [...a], c = [...a].sort((u, b) => Ie(u).localeCompare(Ie(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), g = c.map((u) => {
+      const b = De.get(Ie(u));
+      if (!b) return { identity: u, track: void 0, scores: [] };
+      const m = l.map((y) => Es(b, y)).sort((y, _) => y.score - _.score);
+      return { identity: u, track: b, scores: m };
+    }).sort((u, b) => (u.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
+    for (const u of g) {
+      const { identity: b, track: m } = u;
       if (!m) continue;
-      const x = g.scores.filter((E) => !p.has(E.candidate));
-      if (!x.length) continue;
-      const _ = x[0], $ = x[1], w = _.distance <= ys || Yt(yr(m), _t(_.candidate)) <= vs, S = !!$ && $.score - _.score < $s;
-      w && !S && (d.set(Te(b), _.candidate), p.add(_.candidate));
+      const y = u.scores.filter((C) => !p.has(C.candidate));
+      if (!y.length) continue;
+      const _ = y[0], $ = y[1], w = _.distance <= ks || ei(wr(m), Et(_.candidate)) <= _s, S = !!$ && $.score - _.score < Cs;
+      w && !S && (d.set(Ie(b), _.candidate), p.add(_.candidate));
     }
-    for (const g of c) {
-      const b = Te(g);
+    for (const u of c) {
+      const b = Ie(u);
       let m = d.get(b);
-      if (m || (m = l.find((_) => !p.has(_) && Ue(_) === Ue(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
-        s.push(g);
+      if (m || (m = l.find((_) => !p.has(_) && Ye(_) === Ye(u)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
+        s.push(u);
         continue;
       }
-      const x = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(x), Qi(g, m, t);
+      const y = { ...u, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
+      s.push(y), Ji(u, m, t);
     }
   }
   return [...s, ...o];
 }
-function As() {
-  Ie.clear();
+function Ns() {
+  De.clear();
 }
-var Ss = Object.defineProperty, Cs = Object.getOwnPropertyDescriptor, Et = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Cs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Ps = Object.defineProperty, Rs = Object.getOwnPropertyDescriptor, Rt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Rs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Ss(t, i, o), o;
+  return r && o && Ps(t, i, o), o;
 };
-const vr = "0.40.12";
-let Fe = class extends L {
+const $r = "0.41.0";
+let Ve = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
   }
@@ -7898,12 +8001,13 @@ let Fe = class extends L {
       route_graph_edges: [],
       routes: [],
       openings: [],
-      presences: []
+      presences: [],
+      movement_history: { enabled: !1, duration_minutes: 3, show_rooms: !0 }
     };
   }
   setConfig(e) {
     if (!e) throw new Error("Configuration is required");
-    As(), this.config = {
+    Ns(), this.config = {
       title: "Home Assistant Explorer",
       min_zoom: 1,
       max_zoom: 6,
@@ -7916,6 +8020,7 @@ let Fe = class extends L {
       routes: [],
       openings: [],
       presences: [],
+      movement_history: { enabled: !1, duration_minutes: 3, show_rooms: !0 },
       ...e,
       appearance: { theme: "classic", ...e.appearance ?? {} }
     };
@@ -8183,21 +8288,21 @@ let Fe = class extends L {
   }
   render() {
     if (!this.config) return f;
-    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = bs(
+    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = $s(
       this.config.presences ?? [],
       this.hass,
       t,
       this.config.floorplan_meters
-    ), r = _s(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
+    ), r = Ms(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)
     ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
-    ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
+    ), g = this.config.appearance?.occupancy?.enabled ?? !1, u = this.someoneHome(r), b = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)
-    ), m = this.config.appearance?.weather?.enabled ?? !1, x = this.weatherState(), _ = s || x === "clear-night", $ = this.weatherEffect(x), w = Math.min(
+    ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), _ = s || y === "clear-night", $ = this.weatherEffect(y), w = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.weather?.intensity ?? 0.6)
     ), S = m && [
@@ -8212,18 +8317,18 @@ let Fe = class extends L {
       "hail",
       "windy-variant",
       "exceptional"
-    ].includes(x), E = m && !_ && ["sunny", "clear", "partlycloudy"].includes(x), k = x === "partlycloudy";
+    ].includes(y), C = m && !_ && ["sunny", "clear", "partlycloudy"].includes(y), k = y === "partlycloudy";
     return h`${this.renderCastleSurround()}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${_ ? " moonlight" : ""}${E ? " sunlight" : ""}${k ? " partly-cloudy" : ""}${S ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${x}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      class=${`${n ? "enchanted" : "classic"}${_ ? " moonlight" : ""}${C ? " sunlight" : ""}${k ? " partly-cloudy" : ""}${S ? " has-clouds" : ""}${g ? u ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${w}`}
       ><header>
         <div>
           <span
-            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : x === "partlycloudy" ? _ ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : x === "clear-night" ? "☾ Clear Night Map" : $ === "exceptional" ? "⚠ Exceptional Weather" : $ === "wind" ? "➳ Wind over the Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : E ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : _ ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? _ ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : $ === "exceptional" ? "⚠ Exceptional Weather" : $ === "wind" ? "➳ Wind over the Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : C ? "☀ Sunlit Map" : g && u ? "✦ Someone is Home" : g ? "◇ Empty House" : _ ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
-        <small>Enchanted Atmosphere · v${vr}</small>
+        <small>Enchanted Atmosphere · v${$r}</small>
       </header>
       <div class="map-stage">
         <div class="weather-flash"></div>
@@ -8233,7 +8338,7 @@ let Fe = class extends L {
           .theme=${o}
           .hideSourceText=${c}
           .weatherEffect=${m ? $ : "clear"}
-          .weatherState=${x}
+          .weatherState=${y}
           .weatherIntensity=${w}
           .weatherNight=${_}
           .compassVisible=${l.visible ?? !0}
@@ -8248,6 +8353,7 @@ let Fe = class extends L {
           .routes=${this.config.routes ?? []}
           .openings=${this.config.openings ?? []}
           .presences=${r}
+          .movementHistory=${this.config.movement_history ?? { enabled: !1, duration_minutes: 3, show_rooms: !0 }}
           .minZoom=${this.config.min_zoom ?? 1}
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
@@ -8263,7 +8369,7 @@ let Fe = class extends L {
     ></ha-card>`;
   }
 };
-Fe.styles = T`
+Ve.styles = O`
     :host {
       display: block;
       width: 100%;
@@ -9633,18 +9739,18 @@ Fe.styles = T`
       }
     }
   `;
-Et([
+Rt([
   A({ attribute: !1 })
-], Fe.prototype, "hass", 2);
-Et([
+], Ve.prototype, "hass", 2);
+Rt([
   A({ type: Boolean, attribute: !1 })
-], Fe.prototype, "preview", 2);
-Et([
-  y()
-], Fe.prototype, "config", 2);
-Fe = Et([
+], Ve.prototype, "preview", 2);
+Rt([
+  v()
+], Ve.prototype, "config", 2);
+Ve = Rt([
   z("ha-explorer-card")
-], Fe);
+], Ve);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "ha-explorer-card",
@@ -9653,11 +9759,11 @@ window.customCards.push({
   preview: !0
 });
 console.info(
-  `%c HOME ASSISTANT EXPLORER %c v${vr} `,
+  `%c HOME ASSISTANT EXPLORER %c v${$r} `,
   "color:white;background:#594431;font-weight:700;",
   "color:#594431;background:#d8c39b;font-weight:700;"
 );
 export {
-  Fe as HaExplorerCard
+  Ve as HaExplorerCard
 };
 //# sourceMappingURL=ha-explorer-card.js.map

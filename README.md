@@ -181,6 +181,19 @@ explorer_room: kitchen
 
 Custom attribute names can be configured with `x_attribute`, `y_attribute`, `name_attribute`, `icon_attribute`, `avatar_attribute`, `color_attribute`, `visible_attribute` and `room_attribute`.
 
+### Movement History 2.0
+
+Movement history is optional and disabled by default. It is stored only in the running card and is automatically discarded after 1–5 minutes.
+
+```yaml
+movement_history:
+  enabled: true
+  duration_minutes: 3
+  show_rooms: true
+```
+
+Each person keeps an independent fading history using their configured marker or trail colour. Pet and robot history remains reserved for the next roadmap phase.
+
 ## Development
 
 ```bash
@@ -199,10 +212,8 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-1. **Weather simulator** — preview `sunny`, `partlycloudy`, `cloudy`, `rain`, `storm`, `fog` and `snow` without changing the real Home Assistant weather entity.
-2. **Movement History 2.0** — safely restore the optional 1–5 minute movement history without risking the main floorplan rendering path.
-3. **Pet & Robot Trails 2.0** — improve pet trails with more distinct paw prints and give robot vacuums a clearer continuous movement route.
-4. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
+1. **Pet & Robot Trails 2.0** — improve pet trails with more distinct paw prints and give robot vacuums a clearer continuous movement route.
+2. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
 
 ## License
 
