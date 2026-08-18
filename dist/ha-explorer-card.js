@@ -8089,7 +8089,7 @@ var Gs = Object.defineProperty, Ws = Object.getOwnPropertyDescriptor, Dt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gs(t, i, o), o;
 };
-const Rr = "0.44.0";
+const Rr = "0.44.1";
 let Ge = class extends j {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8351,22 +8351,22 @@ let Ge = class extends j {
     >
       <defs>
         <radialGradient id=${`castle-moon-${t}`} cx="42%" cy="38%" r="62%">
-          <stop offset="0" stop-color="#f3f5df" stop-opacity="0.98"></stop>
-          <stop offset="0.48" stop-color="#b7d5dc" stop-opacity="0.72"></stop>
-          <stop offset="1" stop-color="#4c8da1" stop-opacity="0"></stop>
+          <stop offset="0" stop-color="#fff0bf" stop-opacity="0.98"></stop>
+          <stop offset="0.48" stop-color="#d4ad68" stop-opacity="0.7"></stop>
+          <stop offset="1" stop-color="#76502e" stop-opacity="0"></stop>
         </radialGradient>
         <linearGradient id=${`castle-stone-${t}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#17242b"></stop>
-          <stop offset="0.52" stop-color="#091116"></stop>
-          <stop offset="1" stop-color="#020609"></stop>
+          <stop offset="0" stop-color="#211711"></stop>
+          <stop offset="0.52" stop-color="#100b08"></stop>
+          <stop offset="1" stop-color="#050302"></stop>
         </linearGradient>
         <linearGradient id=${`castle-distance-${t}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#285266" stop-opacity="0.68"></stop>
-          <stop offset="1" stop-color="#08131b" stop-opacity="0.96"></stop>
+          <stop offset="0" stop-color="#6d5036" stop-opacity="0.65"></stop>
+          <stop offset="1" stop-color="#17100c" stop-opacity="0.96"></stop>
         </linearGradient>
         <linearGradient id=${`castle-water-${t}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#102c39" stop-opacity="0.88"></stop>
-          <stop offset="1" stop-color="#02070b" stop-opacity="0.98"></stop>
+          <stop offset="0" stop-color="#2a1c13" stop-opacity="0.9"></stop>
+          <stop offset="1" stop-color="#080503" stop-opacity="0.99"></stop>
         </linearGradient>
         <filter id=${`castle-soft-mist-${t}`} x="-30%" y="-250%" width="160%" height="600%">
           <feGaussianBlur stdDeviation="14"></feGaussianBlur>
@@ -8575,20 +8575,21 @@ Ge.styles = O`
         background:
           radial-gradient(
             ellipse at 50% 33%,
-            rgba(77, 164, 190, 0.36) 0%,
-            rgba(24, 66, 84, 0.28) 38%,
+            rgba(192, 139, 72, 0.42) 0%,
+            rgba(87, 57, 34, 0.32) 38%,
             transparent 60%
           ),
           repeating-linear-gradient(
             112deg,
             transparent 0 55px,
-            rgba(137, 202, 218, 0.035) 56px 57px,
+            rgba(225, 190, 124, 0.045) 56px 57px,
             transparent 58px 112px
           ),
-          linear-gradient(180deg, #07121d 0%, #102d3c 38%, #071117 72%, #02070b 100%);
+          repeating-linear-gradient(4deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 5px),
+          linear-gradient(180deg, #201711 0%, #3d2b1d 38%, #1a120d 72%, #080503 100%);
         box-shadow:
-          inset 0 0 96px rgba(0, 3, 8, 0.82),
-          inset 0 0 2px rgba(150, 211, 223, 0.26);
+          inset 0 0 104px rgba(5, 3, 2, 0.84),
+          inset 0 0 2px rgba(237, 202, 139, 0.3);
       }
       :host::before {
         content: "";
@@ -8597,15 +8598,15 @@ Ge.styles = O`
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(circle at 8% 17%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 17% 42%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 8% 17%, rgba(255, 231, 177, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 17% 42%, rgba(226, 188, 119, 0.7) 0 1.2px, transparent 2.5px),
           radial-gradient(circle at 11% 73%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 25% 88%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px),
-          radial-gradient(circle at 92% 20%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 83% 47%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 25% 88%, rgba(190, 143, 79, 0.55) 0 1px, transparent 2.4px),
+          radial-gradient(circle at 92% 20%, rgba(255, 231, 177, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 83% 47%, rgba(226, 188, 119, 0.7) 0 1.2px, transparent 2.5px),
           radial-gradient(circle at 90% 76%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 76% 91%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px);
-        filter: drop-shadow(0 0 7px rgba(154, 218, 229, 0.54));
+          radial-gradient(circle at 76% 91%, rgba(190, 143, 79, 0.55) 0 1px, transparent 2.4px);
+        filter: drop-shadow(0 0 7px rgba(231, 190, 112, 0.5));
         animation: explorerSurroundTwinkle 7.5s ease-in-out infinite alternate;
       }
       :host::after {
@@ -8615,8 +8616,8 @@ Ge.styles = O`
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(ellipse at center, transparent 35%, rgba(2, 9, 15, 0.3) 73%, rgba(0, 4, 8, 0.76) 100%),
-          linear-gradient(90deg, rgba(126, 205, 220, 0.06), transparent 20% 80%, rgba(126, 205, 220, 0.06));
+          radial-gradient(ellipse at center, transparent 35%, rgba(20, 12, 7, 0.3) 73%, rgba(6, 3, 2, 0.78) 100%),
+          linear-gradient(90deg, rgba(231, 193, 121, 0.07), transparent 20% 80%, rgba(231, 193, 121, 0.07));
       }
       .enchanted-castle-surround {
         display: block;
@@ -8635,7 +8636,7 @@ Ge.styles = O`
         overflow: visible;
         opacity: 0.98;
         filter:
-          drop-shadow(0 -12px 30px rgba(87, 177, 201, 0.2))
+          drop-shadow(0 -12px 30px rgba(187, 134, 69, 0.2))
           drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
       }
       .enchanted-castle-left {
@@ -8645,38 +8646,43 @@ Ge.styles = O`
         right: 0;
       }
       .castle-moon-glow {
-        fill: rgba(137, 214, 229, 0.28);
+        fill: rgba(227, 185, 105, 0.24);
         filter: blur(34px);
       }
       .castle-moon {
-        stroke: rgba(225, 246, 244, 0.42);
+        fill: rgba(255, 236, 187, 0.94);
+        stroke: rgba(255, 224, 158, 0.42);
         stroke-width: 2;
-        filter: drop-shadow(0 0 18px rgba(142, 219, 230, 0.62));
+        filter: drop-shadow(0 0 18px rgba(225, 175, 89, 0.58));
       }
       .castle-moon-dim {
         opacity: 0.48;
       }
       .castle-far-hills {
-        fill: rgba(12, 28, 37, 0.7);
+        fill: rgba(43, 30, 22, 0.74);
       }
       .enchanted-castle-left .castle-distant {
-        fill: url(#castle-distance-left);
+        fill: rgba(82, 57, 38, 0.82);
       }
       .enchanted-castle-right .castle-distant {
-        fill: url(#castle-distance-right);
+        fill: rgba(74, 50, 34, 0.84);
       }
       .castle-distant {
         opacity: 0.42;
         filter: blur(0.45px);
       }
       .castle-cliff {
-        fill: rgba(2, 7, 10, 0.94);
+        fill: rgba(8, 5, 3, 0.95);
       }
       .castle-complex {
-        stroke: rgba(111, 172, 187, 0.3);
+        fill: #070402;
+        stroke: rgba(190, 145, 84, 0.3);
         stroke-width: 1.25;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
+        filter:
+          drop-shadow(0 -3px 0 rgba(153, 108, 62, 0.24))
+          drop-shadow(0 9px 14px rgba(0, 0, 0, 0.68));
       }
       .castle-roof-detail,
       .castle-buttresses {
@@ -8739,12 +8745,13 @@ Ge.styles = O`
       }
       .castle-cloud-bank {
         fill: none;
-        stroke: rgba(101, 180, 202, 0.13);
+        stroke: rgba(206, 166, 105, 0.13);
         stroke-width: 72;
         stroke-linecap: round;
         filter: blur(24px);
       }
       .castle-water {
+        fill: #120c08;
         opacity: 0.96;
       }
       .castle-reflections {
@@ -8756,12 +8763,12 @@ Ge.styles = O`
         animation: explorerWaterShimmer 6.5s ease-in-out infinite alternate;
       }
       .castle-reflections .moon-reflection {
-        stroke: rgba(174, 228, 235, 0.32);
+        stroke: rgba(236, 201, 137, 0.32);
         stroke-width: 18;
       }
       .castle-water-ripples {
         fill: none;
-        stroke: rgba(132, 205, 218, 0.16);
+        stroke: rgba(208, 167, 105, 0.16);
         stroke-width: 2;
         stroke-linecap: round;
       }
