@@ -15,7 +15,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.44.1";
+const CARD_VERSION = "0.44.2";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -320,24 +320,6 @@ export class HaExplorerCard extends LitElement {
       aria-hidden="true"
     >
       <defs>
-        <radialGradient id=${`castle-moon-${side}`} cx="42%" cy="38%" r="62%">
-          <stop offset="0" stop-color="#fff0bf" stop-opacity="0.98"></stop>
-          <stop offset="0.48" stop-color="#d4ad68" stop-opacity="0.7"></stop>
-          <stop offset="1" stop-color="#76502e" stop-opacity="0"></stop>
-        </radialGradient>
-        <linearGradient id=${`castle-stone-${side}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#211711"></stop>
-          <stop offset="0.52" stop-color="#100b08"></stop>
-          <stop offset="1" stop-color="#050302"></stop>
-        </linearGradient>
-        <linearGradient id=${`castle-distance-${side}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#6d5036" stop-opacity="0.65"></stop>
-          <stop offset="1" stop-color="#17100c" stop-opacity="0.96"></stop>
-        </linearGradient>
-        <linearGradient id=${`castle-water-${side}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#2a1c13" stop-opacity="0.9"></stop>
-          <stop offset="1" stop-color="#080503" stop-opacity="0.99"></stop>
-        </linearGradient>
         <filter id=${`castle-soft-mist-${side}`} x="-30%" y="-250%" width="160%" height="600%">
           <feGaussianBlur stdDeviation="14"></feGaussianBlur>
         </filter>
@@ -349,11 +331,11 @@ export class HaExplorerCard extends LitElement {
       ${side === "left"
         ? html`
             <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
-            <circle class="castle-moon" cx="116" cy="218" r="68" fill=${`url(#castle-moon-${side})`}></circle>
+            <circle class="castle-moon" cx="116" cy="218" r="68" fill="#f4d998"></circle>
             <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
             <path class="castle-distant" d="M0 900V708l54-48 40 12 34-54 49 22 43-77 51 22 41-89 67 42 42-60 52 38 34-43 73 52v355Z"></path>
             <path class="castle-cliff" d="M64 900V758c41-38 86-46 127-27 33 15 61 7 93-15 51-36 86-27 122-2 48 32 96 1 174-49v235Z"></path>
-            <g class="castle-complex" fill=${`url(#castle-stone-${side})`}>
+            <g class="castle-complex" fill="#0a0604" stroke="#6f4b2d" opacity="1" visibility="visible">
               <path d="M67 760V592h18V548h43v44h16v168Z"></path>
               <path d="M92 548l15-73 15 73Z"></path>
               <path d="M150 754V522h18v-47h54v47h17v232Z"></path>
@@ -388,7 +370,7 @@ export class HaExplorerCard extends LitElement {
             <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
             <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
             <path class="castle-cliff" d="M-20 900V711c76-51 135-40 190-7 47 28 84 24 129-9 52-39 94-30 136 1 43 31 91 28 145-4v208Z"></path>
-            <g class="castle-complex" fill=${`url(#castle-stone-${side})`}>
+            <g class="castle-complex" fill="#0a0604" stroke="#6f4b2d" opacity="1" visibility="visible">
               <path d="M34 746V552h18v-44h58v44h18v194Z"></path>
               <path d="M56 508l25-89 24 89Z"></path>
               <path d="M122 738V607h22v-34h68v34h19v131Z"></path>
@@ -422,7 +404,7 @@ export class HaExplorerCard extends LitElement {
               <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
             </g>
           `}
-      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill=${`url(#castle-water-${side})`}></rect>
+      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill="#120c08"></rect>
       <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
       <g class="castle-reflections">
         <path d="M112 805v72M192 798v89M276 800v78M371 790v103M468 802v72"></path>
