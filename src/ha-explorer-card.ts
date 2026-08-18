@@ -14,7 +14,7 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.40.9";
+const CARD_VERSION = "0.40.10";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -309,26 +309,108 @@ export class HaExplorerCard extends LitElement {
   private renderCastleSurround() {
     const castle = (side: "left" | "right") => html`<svg
       class=${`enchanted-castle-side enchanted-castle-${side}`}
-      viewBox="0 0 500 900"
-      preserveAspectRatio="xMidYMax meet"
+      viewBox="0 0 560 900"
+      preserveAspectRatio="xMidYMax slice"
       aria-hidden="true"
     >
-      <circle class="castle-moon-glow" cx="118" cy="238" r="82"></circle>
-      <circle class="castle-moon" cx="118" cy="238" r="58"></circle>
-      <path class="castle-far-hills" d="M0 900V685 Q74 616 142 662 T276 642 T410 680 T500 620 V900Z"></path>
-      <path class="castle-near-hills" d="M0 900V770 Q72 701 142 736 T274 704 T408 748 T500 694 V900Z"></path>
-      <path class="castle-silhouette" d="M24 900V721H55V565H42L70 516L98 565H84V721H116V493H98L137 423L176 493H158V675H196V578H183L214 526L246 578H233V712H277V447H256L304 360L352 447H331V632H370V540H355L392 478L429 540H414V704H455V900Z"></path>
-      <path class="castle-spires" d="M63 516L70 458L77 516ZM128 423L137 326L146 423ZM206 526L214 456L222 526ZM294 360L304 244L314 360ZM383 478L392 391L401 478Z"></path>
-      <path class="castle-bridge" d="M84 743 Q126 696 171 743 T258 743 T348 743 T455 743" fill="none"></path>
-      <g class="castle-windows">
-        <path class="castle-window castle-window-0" d="M62 601v31h16v-31q-8-16-16 0Z"></path>
-        <path class="castle-window castle-window-1" d="M128 531v36h18v-36q-9-18-18 0Z"></path>
-        <path class="castle-window castle-window-2" d="M205 612v27h17v-27q-8-14-17 0Z"></path>
-        <path class="castle-window castle-window-0" d="M294 486v43h20v-43q-10-21-20 0Z"></path>
-        <path class="castle-window castle-window-1" d="M383 572v31h18v-31q-9-16-18 0Z"></path>
-        <path class="castle-window castle-window-2" d="M292 584v26h15v-26q-7-13-15 0Z"></path>
-      </g>
-      <path class="castle-mist" d="M-30 736 C80 698 153 758 250 724 S430 702 540 748"></path>
+      <defs>
+        <radialGradient id=${`castle-moon-${side}`} cx="42%" cy="38%" r="62%">
+          <stop offset="0" stop-color="#e8ce91" stop-opacity="0.2"></stop>
+          <stop offset="0.62" stop-color="#b98c51" stop-opacity="0.07"></stop>
+          <stop offset="1" stop-color="#5a402b" stop-opacity="0"></stop>
+        </radialGradient>
+        <linearGradient id=${`castle-stone-${side}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#18130f"></stop>
+          <stop offset="0.52" stop-color="#090807"></stop>
+          <stop offset="1" stop-color="#020303"></stop>
+        </linearGradient>
+        <linearGradient id=${`castle-distance-${side}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#32271e" stop-opacity="0.78"></stop>
+          <stop offset="1" stop-color="#100e0c" stop-opacity="0.92"></stop>
+        </linearGradient>
+        <filter id=${`castle-soft-mist-${side}`} x="-30%" y="-250%" width="160%" height="600%">
+          <feGaussianBlur stdDeviation="14"></feGaussianBlur>
+        </filter>
+      </defs>
+      ${side === "left"
+        ? html`
+            <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
+            <circle class="castle-moon" cx="116" cy="218" r="68" fill=${`url(#castle-moon-${side})`}></circle>
+            <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
+            <path class="castle-distant" d="M0 900V708l54-48 40 12 34-54 49 22 43-77 51 22 41-89 67 42 42-60 52 38 34-43 73 52v355Z"></path>
+            <path class="castle-cliff" d="M64 900V758c41-38 86-46 127-27 33 15 61 7 93-15 51-36 86-27 122-2 48 32 96 1 174-49v235Z"></path>
+            <g class="castle-complex" fill=${`url(#castle-stone-${side})`}>
+              <path d="M67 760V592h18V548h43v44h16v168Z"></path>
+              <path d="M92 548l15-73 15 73Z"></path>
+              <path d="M150 754V522h18v-47h54v47h17v232Z"></path>
+              <path d="M174 475l21-101 22 101Z"></path>
+              <path d="M235 744V566h15v-38h54v38h18v178Z"></path>
+              <path d="M254 528l22-65 23 65Z"></path>
+              <path d="M310 730V439h23v-57h76v57h22v291Z"></path>
+              <path d="M336 382l35-154 34 154Z"></path>
+              <path d="M426 742V548h16v-44h54v44h20v194Z"></path>
+              <path d="M445 504l24-92 23 92Z"></path>
+              <path d="M118 645h48v21h-48zM214 615h50v20h-50zM395 603h54v23h-54z"></path>
+            </g>
+            <g class="castle-roof-detail">
+              <path d="M88 548h38M153 522h84M236 566h85M312 439h116M427 548h86"></path>
+              <path d="M107 477v-29M195 376v-36M371 230v-48M469 414v-35"></path>
+              <path d="M350 438v-56M390 438v-56M183 522v-47M207 522v-47"></path>
+            </g>
+            <g class="castle-buttresses">
+              <path d="M74 610l-18 150M142 578l-15 176M239 590l-18 154M321 475l-25 255M430 579l-19 163M501 570l20 172"></path>
+            </g>
+            <g class="castle-windows">
+              <path class="castle-window castle-window-0" d="M100 615v30h13v-30q-6-13-13 0Z"></path>
+              <path class="castle-window castle-window-2" d="M185 552v36h15v-36q-7-16-15 0Z"></path>
+              <path class="castle-window castle-window-1" d="M267 592v28h13v-28q-6-13-13 0Z"></path>
+              <path class="castle-window castle-window-0" d="M360 468v43h18v-43q-9-20-18 0Z"></path>
+              <path class="castle-window castle-window-2" d="M359 558v29h16v-29q-8-14-16 0Z"></path>
+              <path class="castle-window castle-window-1" d="M463 576v33h15v-33q-7-15-15 0Z"></path>
+            </g>
+          `
+        : html`
+            <circle class="castle-moon-glow castle-moon-dim" cx="458" cy="258" r="104"></circle>
+            <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
+            <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
+            <path class="castle-cliff" d="M-20 900V711c76-51 135-40 190-7 47 28 84 24 129-9 52-39 94-30 136 1 43 31 91 28 145-4v208Z"></path>
+            <g class="castle-complex" fill=${`url(#castle-stone-${side})`}>
+              <path d="M34 746V552h18v-44h58v44h18v194Z"></path>
+              <path d="M56 508l25-89 24 89Z"></path>
+              <path d="M122 738V607h22v-34h68v34h19v131Z"></path>
+              <path d="M145 573l33-57 31 57Z"></path>
+              <path d="M221 724V472h21v-51h70v51h23v252Z"></path>
+              <path d="M244 421l33-133 32 133Z"></path>
+              <path d="M330 742V541h18v-42h55v42h20v201Z"></path>
+              <path d="M349 499l26-88 24 88Z"></path>
+              <path d="M418 754V585h16v-39h51v39h18v169Z"></path>
+              <path d="M435 546l24-69 23 69Z"></path>
+              <path d="M492 765V625h14v-32h36v32h18v140Z"></path>
+              <path d="M504 593l19-58 17 58Z"></path>
+              <path d="M95 661h58v21H95zM207 626h51v20h-51zM309 590h57v23h-57zM398 650h47v19h-47z"></path>
+            </g>
+            <path class="castle-bridge" d="M111 688C151 656 188 655 226 685s77 28 114-2 73-31 111 4"></path>
+            <g class="castle-roof-detail">
+              <path d="M35 552h92M123 607h106M222 472h112M331 541h91M419 585h83"></path>
+              <path d="M81 420v-38M178 516v-35M277 289v-51M375 411v-36M459 477v-31"></path>
+              <path d="M256 472v-51M296 472v-51M364 541v-42"></path>
+            </g>
+            <g class="castle-buttresses">
+              <path d="M39 586l-20 160M124 584l18 154M224 510l-20 214M334 571l-20 171M421 615l-18 139M501 647l-14 118"></path>
+            </g>
+            <g class="castle-windows">
+              <path class="castle-window castle-window-1" d="M73 576v34h16v-34q-8-16-16 0Z"></path>
+              <path class="castle-window castle-window-0" d="M169 627v28h14v-28q-7-13-14 0Z"></path>
+              <path class="castle-window castle-window-2" d="M268 505v42h18v-42q-9-20-18 0Z"></path>
+              <path class="castle-window castle-window-1" d="M268 586v29h15v-29q-7-14-15 0Z"></path>
+              <path class="castle-window castle-window-0" d="M367 573v34h16v-34q-8-16-16 0Z"></path>
+              <path class="castle-window castle-window-2" d="M451 614v29h14v-29q-7-13-14 0Z"></path>
+              <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
+            </g>
+          `}
+      <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
+      <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${side})`}></path>
+      <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${side})`}></path>
     </svg>`;
     return html`<div class="enchanted-castle-surround" aria-hidden="true">
       ${castle("left")}${castle("right")}
@@ -555,51 +637,90 @@ export class HaExplorerCard extends LitElement {
       .enchanted-castle-side {
         position: absolute;
         bottom: 0;
-        width: 34%;
-        max-width: 540px;
+        width: 33.5%;
+        max-width: 560px;
         height: 100%;
         overflow: visible;
-        opacity: 0.88;
-        filter: drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.13));
+        opacity: 0.94;
+        filter:
+          drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.11))
+          drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
       }
       .enchanted-castle-left {
         left: 0;
       }
       .enchanted-castle-right {
         right: 0;
-        transform: scaleX(-1);
       }
       .castle-moon-glow {
-        fill: rgba(226, 190, 116, 0.09);
-        filter: blur(24px);
+        fill: rgba(226, 190, 116, 0.1);
+        filter: blur(30px);
       }
       .castle-moon {
-        fill: rgba(205, 168, 102, 0.08);
         stroke: rgba(225, 192, 124, 0.16);
         stroke-width: 2;
       }
+      .castle-moon-dim {
+        opacity: 0.48;
+      }
       .castle-far-hills {
-        fill: rgba(15, 12, 11, 0.48);
+        fill: rgba(24, 19, 16, 0.55);
       }
-      .castle-near-hills {
-        fill: rgba(7, 6, 6, 0.76);
+      .enchanted-castle-left .castle-distant {
+        fill: url(#castle-distance-left);
       }
-      .castle-silhouette,
-      .castle-spires {
-        fill: rgba(5, 5, 6, 0.88);
-        stroke: rgba(205, 162, 91, 0.23);
-        stroke-width: 1.5;
+      .enchanted-castle-right .castle-distant {
+        fill: url(#castle-distance-right);
+      }
+      .castle-distant {
+        opacity: 0.42;
+        filter: blur(0.45px);
+      }
+      .castle-cliff {
+        fill: rgba(5, 5, 5, 0.88);
+      }
+      .castle-complex {
+        stroke: rgba(203, 162, 97, 0.24);
+        stroke-width: 1.25;
         stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+      .castle-roof-detail,
+      .castle-buttresses {
+        fill: none;
+        stroke: rgba(207, 168, 105, 0.22);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+      .castle-buttresses {
+        stroke: rgba(180, 139, 82, 0.14);
+        stroke-width: 3;
       }
       .castle-bridge {
-        stroke: rgba(7, 6, 6, 0.92);
-        stroke-width: 22;
+        fill: none;
+        stroke: rgba(4, 4, 4, 0.94);
+        stroke-width: 19;
         stroke-linecap: round;
-        filter: drop-shadow(0 -1px 0 rgba(208, 165, 94, 0.16));
+        filter:
+          drop-shadow(0 -2px 0 rgba(208, 165, 94, 0.16))
+          drop-shadow(0 7px 5px rgba(0, 0, 0, 0.42));
+      }
+      .castle-ridge {
+        fill: none;
+        stroke: rgba(2, 3, 3, 0.96);
+        stroke-width: 128;
+        stroke-linecap: round;
+        filter: drop-shadow(0 -2px 0 rgba(181, 141, 83, 0.11));
       }
       .castle-window {
-        fill: rgba(244, 190, 91, 0.82);
-        filter: drop-shadow(0 0 4px rgba(239, 164, 55, 0.82));
+        fill: rgba(238, 177, 76, 0.76);
+        stroke: rgba(255, 218, 137, 0.24);
+        stroke-width: 0.8;
+        filter:
+          drop-shadow(0 0 3px rgba(239, 164, 55, 0.82))
+          drop-shadow(0 0 9px rgba(219, 133, 35, 0.38));
         animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
       }
       .castle-window-1 {
@@ -612,11 +733,16 @@ export class HaExplorerCard extends LitElement {
       }
       .castle-mist {
         fill: none;
-        stroke: rgba(221, 191, 135, 0.13);
-        stroke-width: 30;
+        stroke: rgba(224, 199, 151, 0.15);
+        stroke-width: 34;
         stroke-linecap: round;
-        filter: blur(13px);
         animation: explorerCastleMist 14s ease-in-out infinite alternate;
+      }
+      .castle-mist-back {
+        stroke: rgba(198, 174, 133, 0.1);
+        stroke-width: 45;
+        animation-direction: alternate-reverse;
+        animation-duration: 19s;
       }
       ha-card:not(.preview) {
         position: relative;
