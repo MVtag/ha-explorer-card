@@ -15,7 +15,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.43.1";
+const CARD_VERSION = "0.44.0";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -321,23 +321,31 @@ export class HaExplorerCard extends LitElement {
     >
       <defs>
         <radialGradient id=${`castle-moon-${side}`} cx="42%" cy="38%" r="62%">
-          <stop offset="0" stop-color="#e8ce91" stop-opacity="0.2"></stop>
-          <stop offset="0.62" stop-color="#b98c51" stop-opacity="0.07"></stop>
-          <stop offset="1" stop-color="#5a402b" stop-opacity="0"></stop>
+          <stop offset="0" stop-color="#f3f5df" stop-opacity="0.98"></stop>
+          <stop offset="0.48" stop-color="#b7d5dc" stop-opacity="0.72"></stop>
+          <stop offset="1" stop-color="#4c8da1" stop-opacity="0"></stop>
         </radialGradient>
         <linearGradient id=${`castle-stone-${side}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#18130f"></stop>
-          <stop offset="0.52" stop-color="#090807"></stop>
-          <stop offset="1" stop-color="#020303"></stop>
+          <stop offset="0" stop-color="#17242b"></stop>
+          <stop offset="0.52" stop-color="#091116"></stop>
+          <stop offset="1" stop-color="#020609"></stop>
         </linearGradient>
         <linearGradient id=${`castle-distance-${side}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#32271e" stop-opacity="0.78"></stop>
-          <stop offset="1" stop-color="#100e0c" stop-opacity="0.92"></stop>
+          <stop offset="0" stop-color="#285266" stop-opacity="0.68"></stop>
+          <stop offset="1" stop-color="#08131b" stop-opacity="0.96"></stop>
+        </linearGradient>
+        <linearGradient id=${`castle-water-${side}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#102c39" stop-opacity="0.88"></stop>
+          <stop offset="1" stop-color="#02070b" stop-opacity="0.98"></stop>
         </linearGradient>
         <filter id=${`castle-soft-mist-${side}`} x="-30%" y="-250%" width="160%" height="600%">
           <feGaussianBlur stdDeviation="14"></feGaussianBlur>
         </filter>
       </defs>
+      <g class="castle-cloud-bank">
+        <path d="M-80 232C21 163 102 209 158 174s143-45 215 5 135 11 240-24"></path>
+        <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
+      </g>
       ${side === "left"
         ? html`
             <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
@@ -414,7 +422,15 @@ export class HaExplorerCard extends LitElement {
               <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
             </g>
           `}
+      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill=${`url(#castle-water-${side})`}></rect>
       <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
+      <g class="castle-reflections">
+        <path d="M112 805v72M192 798v89M276 800v78M371 790v103M468 802v72"></path>
+        <path class="moon-reflection" d=${side === "left" ? "M112 798c-17 23-25 50-12 96m31-96c11 31 5 61-4 96" : "M455 802c-12 27-17 57-6 91m24-91c8 32 2 60-8 91"}></path>
+      </g>
+      <g class="castle-water-ripples">
+        <path d="M8 824h126m-74 22h154m-99 25h176m35-46h153m-112 25h185m-80 26h112"></path>
+      </g>
       <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${side})`}></path>
       <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${side})`}></path>
     </svg>`;
@@ -590,21 +606,21 @@ export class HaExplorerCard extends LitElement {
         border-radius: 18px;
         background:
           radial-gradient(
-            ellipse at 50% 46%,
-            rgba(194, 144, 74, 0.34) 0%,
-            rgba(82, 60, 40, 0.22) 34%,
+            ellipse at 50% 33%,
+            rgba(77, 164, 190, 0.36) 0%,
+            rgba(24, 66, 84, 0.28) 38%,
             transparent 60%
           ),
           repeating-linear-gradient(
             112deg,
             transparent 0 55px,
-            rgba(222, 187, 119, 0.055) 56px 57px,
+            rgba(137, 202, 218, 0.035) 56px 57px,
             transparent 58px 112px
           ),
-          linear-gradient(90deg, #211b18 0%, #3f3328 28%, #493927 50%, #3f3328 72%, #211b18 100%);
+          linear-gradient(180deg, #07121d 0%, #102d3c 38%, #071117 72%, #02070b 100%);
         box-shadow:
-          inset 0 0 78px rgba(7, 5, 4, 0.72),
-          inset 0 0 2px rgba(238, 205, 142, 0.28);
+          inset 0 0 96px rgba(0, 3, 8, 0.82),
+          inset 0 0 2px rgba(150, 211, 223, 0.26);
       }
       :host::before {
         content: "";
@@ -613,15 +629,15 @@ export class HaExplorerCard extends LitElement {
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(circle at 8% 17%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 17% 42%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
-          radial-gradient(circle at 11% 73%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 25% 88%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px),
-          radial-gradient(circle at 92% 20%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 83% 47%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
-          radial-gradient(circle at 90% 76%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 76% 91%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px);
-        filter: drop-shadow(0 0 6px rgba(231, 190, 107, 0.62));
+          radial-gradient(circle at 8% 17%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 17% 42%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 11% 73%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 25% 88%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px),
+          radial-gradient(circle at 92% 20%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 83% 47%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 90% 76%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 76% 91%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px);
+        filter: drop-shadow(0 0 7px rgba(154, 218, 229, 0.54));
         animation: explorerSurroundTwinkle 7.5s ease-in-out infinite alternate;
       }
       :host::after {
@@ -631,8 +647,8 @@ export class HaExplorerCard extends LitElement {
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(ellipse at center, transparent 36%, rgba(11, 8, 6, 0.28) 76%, rgba(8, 6, 5, 0.58) 100%),
-          linear-gradient(90deg, rgba(231, 196, 127, 0.05), transparent 18% 82%, rgba(231, 196, 127, 0.05));
+          radial-gradient(ellipse at center, transparent 35%, rgba(2, 9, 15, 0.3) 73%, rgba(0, 4, 8, 0.76) 100%),
+          linear-gradient(90deg, rgba(126, 205, 220, 0.06), transparent 20% 80%, rgba(126, 205, 220, 0.06));
       }
       .enchanted-castle-surround {
         display: block;
@@ -645,14 +661,14 @@ export class HaExplorerCard extends LitElement {
       .enchanted-castle-side {
         position: absolute;
         bottom: 0;
-        width: 33.5%;
-        max-width: 560px;
+        width: 38%;
+        max-width: 680px;
         height: 100%;
         overflow: visible;
-        opacity: 0.94;
+        opacity: 0.98;
         filter:
-          drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.11))
-          drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
+          drop-shadow(0 -12px 30px rgba(87, 177, 201, 0.2))
+          drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
       }
       .enchanted-castle-left {
         left: 0;
@@ -661,18 +677,19 @@ export class HaExplorerCard extends LitElement {
         right: 0;
       }
       .castle-moon-glow {
-        fill: rgba(226, 190, 116, 0.1);
-        filter: blur(30px);
+        fill: rgba(137, 214, 229, 0.28);
+        filter: blur(34px);
       }
       .castle-moon {
-        stroke: rgba(225, 192, 124, 0.16);
+        stroke: rgba(225, 246, 244, 0.42);
         stroke-width: 2;
+        filter: drop-shadow(0 0 18px rgba(142, 219, 230, 0.62));
       }
       .castle-moon-dim {
         opacity: 0.48;
       }
       .castle-far-hills {
-        fill: rgba(24, 19, 16, 0.55);
+        fill: rgba(12, 28, 37, 0.7);
       }
       .enchanted-castle-left .castle-distant {
         fill: url(#castle-distance-left);
@@ -685,10 +702,10 @@ export class HaExplorerCard extends LitElement {
         filter: blur(0.45px);
       }
       .castle-cliff {
-        fill: rgba(5, 5, 5, 0.88);
+        fill: rgba(2, 7, 10, 0.94);
       }
       .castle-complex {
-        stroke: rgba(203, 162, 97, 0.24);
+        stroke: rgba(111, 172, 187, 0.3);
         stroke-width: 1.25;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
@@ -751,6 +768,34 @@ export class HaExplorerCard extends LitElement {
         stroke-width: 45;
         animation-direction: alternate-reverse;
         animation-duration: 19s;
+      }
+      .castle-cloud-bank {
+        fill: none;
+        stroke: rgba(101, 180, 202, 0.13);
+        stroke-width: 72;
+        stroke-linecap: round;
+        filter: blur(24px);
+      }
+      .castle-water {
+        opacity: 0.96;
+      }
+      .castle-reflections {
+        fill: none;
+        stroke: rgba(235, 178, 76, 0.24);
+        stroke-width: 12;
+        stroke-linecap: round;
+        filter: blur(7px);
+        animation: explorerWaterShimmer 6.5s ease-in-out infinite alternate;
+      }
+      .castle-reflections .moon-reflection {
+        stroke: rgba(174, 228, 235, 0.32);
+        stroke-width: 18;
+      }
+      .castle-water-ripples {
+        fill: none;
+        stroke: rgba(132, 205, 218, 0.16);
+        stroke-width: 2;
+        stroke-linecap: round;
       }
       ha-card:not(.preview) {
         position: relative;
@@ -1878,10 +1923,15 @@ export class HaExplorerCard extends LitElement {
       from { transform: translateX(-28px); opacity: 0.45; }
       to { transform: translateX(34px); opacity: 0.9; }
     }
+    @keyframes explorerWaterShimmer {
+      from { transform: scaleX(0.94); opacity: 0.42; }
+      to { transform: scaleX(1.06); opacity: 0.88; }
+    }
     @media (prefers-reduced-motion: reduce) {
       :host::before,
       .castle-window,
       .castle-mist,
+      .castle-reflections,
       .cloud,
       .celestial-cloud,
       .partly-cloudy .sun-disc,

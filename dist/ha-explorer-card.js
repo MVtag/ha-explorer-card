@@ -35,7 +35,7 @@ const Lr = (e) => new cr(typeof e == "string" ? e : e + "", void 0, di), O = (e,
   for (const r of t.cssRules) i += r.cssText;
   return Lr(i);
 })(e) : e;
-const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnPropertyNames: Vr, getOwnPropertySymbols: Kr, getPrototypeOf: Zr } = Object, Tt = globalThis, Ai = Tt.trustedTypes, Gr = Ai ? Ai.emptyScript : "", Ur = Tt.reactiveElementPolyfillSupport, Qe = (e, t) => e, kt = { toAttribute(e, t) {
+const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnPropertyNames: Vr, getOwnPropertySymbols: Kr, getPrototypeOf: Zr } = Object, Tt = globalThis, Ai = Tt.trustedTypes, Gr = Ai ? Ai.emptyScript : "", Wr = Tt.reactiveElementPolyfillSupport, Qe = (e, t) => e, kt = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? Gr : null;
@@ -246,8 +246,8 @@ let Le = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Le.elementStyles = [], Le.shadowRootOptions = { mode: "open" }, Le[Qe("elementProperties")] = /* @__PURE__ */ new Map(), Le[Qe("finalized")] = /* @__PURE__ */ new Map(), Ur?.({ ReactiveElement: Le }), (Tt.reactiveElementVersions ??= []).push("2.1.2");
-const pi = globalThis, Ci = (e) => e, _t = pi.trustedTypes, Ei = _t ? _t.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + $e, Wr = `<${hr}>`, Pe = document, tt = () => Pe.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Xr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", jt = `[ 	
+Le.elementStyles = [], Le.shadowRootOptions = { mode: "open" }, Le[Qe("elementProperties")] = /* @__PURE__ */ new Map(), Le[Qe("finalized")] = /* @__PURE__ */ new Map(), Wr?.({ ReactiveElement: Le }), (Tt.reactiveElementVersions ??= []).push("2.1.2");
+const pi = globalThis, Ci = (e) => e, _t = pi.trustedTypes, Ei = _t ? _t.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + $e, Ur = `<${hr}>`, Pe = document, tt = () => Pe.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Xr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", jt = `[ 	
 \f\r]`, Ye = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Mi = /-->/g, Pi = />/g, Se = RegExp(`>|${jt}(?:([^\\s"'>=/]+)(${jt}*=${jt}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), Ni = /'/g, Ri = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), P = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), zi = /* @__PURE__ */ new WeakMap(), Ee = Pe.createTreeWalker(Pe, 129);
 function mr(e, t) {
@@ -262,7 +262,7 @@ const Yr = (e, t) => {
     let d, c, p = -1, u = 0;
     for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Ye ? c[1] === "!--" ? s = Mi : c[1] !== void 0 ? s = Pi : c[2] !== void 0 ? (ur.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = Se) : c[3] !== void 0 && (s = Se) : s === Se ? c[0] === ">" ? (s = o ?? Ye, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? Se : c[3] === '"' ? Ri : Ni) : s === Ri || s === Ni ? s = Se : s === Mi || s === Pi ? s = Ye : (s = Se, o = void 0);
     const g = s === Se && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Ye ? l + Wr : p >= 0 ? (r.push(d), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
+    n += s === Ye ? l + Ur : p >= 0 ? (r.push(d), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -1640,8 +1640,8 @@ function Hi(e, t) {
   i.forEach((k) => {
     const E = me(k.from), M = me(k.to), T = Do(k);
     E === M && (n += 1), s.has(T) && (o += 1), s.add(T);
-    const Y = St(e, k.from), W = St(e, k.to);
-    if (!Y || !W || E === M) {
+    const Y = St(e, k.from), U = St(e, k.to);
+    if (!Y || !U || E === M) {
       r += 1;
       return;
     }
@@ -2538,13 +2538,13 @@ ht([
 be = ht([
   z("explorer-themed-canvas")
 ], be);
-const Go = ["on"], Uo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function Wo(e) {
+const Go = ["on"], Wo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function Uo(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : [...Go];
 }
 function $r(e, t) {
-  const i = e.visible !== !1, r = e.state_binding, o = Wo(r?.active_states);
+  const i = e.visible !== !1, r = e.state_binding, o = Uo(r?.active_states);
   if (!i)
     return {
       zone: e,
@@ -2574,7 +2574,7 @@ function $r(e, t) {
       activeStates: o,
       reason: "missing_entity"
     };
-  if (Uo.has(s))
+  if (Wo.has(s))
     return {
       zone: e,
       visible: !0,
@@ -2995,12 +2995,12 @@ let Ne = class extends Ke {
         }
         b += Z.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? dn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? cn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, W = Math.round(u * sn), N = this.polishCreateSvg("g");
+      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? dn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? cn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, U = Math.round(u * sn), N = this.polishCreateSvg("g");
       N.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), N.setAttribute("data-presence-id", t.id), r === "person" && N.setAttribute("data-trail-style", String(o + 1)), N.setAttribute("transform", `translate(${M} ${T}) rotate(${Y + (S ? w * C : 0)})`), N.setAttribute("opacity", "0"), this.polishAppendTrailShape(N, r, n, o);
       const I = this.polishCreateSvg("animate");
       this.polishSetAttributes(I, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), N.appendChild(I), i.appendChild(N), window.setTimeout(() => {
         N.isConnected && I.beginElement();
-      }, W), window.setTimeout(() => N.remove(), W + s + 120);
+      }, U), window.setTimeout(() => N.remove(), U + s + 120);
     }
   }
   polishSyncTrails() {
@@ -3091,9 +3091,9 @@ let Ne = class extends Ke {
             continue;
           }
           if (c === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
-          const Y = c === "pet" ? 52 : 70, W = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
-          for (let I = 1; I <= W; I += 1) {
-            const Z = I / (W + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = c === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
+          const Y = c === "pet" ? 52 : 70, U = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
+          for (let I = 1; I <= U; I += 1) {
+            const Z = I / (U + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = c === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
             X.setAttribute("class", `movement-history-mark trail-${c}${c === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + Te * Xe * ve} ${S.y + E * Z + Ae * Xe * ve}) rotate(${N + ve * 4}) scale(${c === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, c, u, g), o.appendChild(X);
           }
         }
@@ -3274,7 +3274,7 @@ var gn = Object.defineProperty, mn = Object.getOwnPropertyDescriptor, _r = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && gn(t, i, o), o;
 };
-const Q = "http://www.w3.org/2000/svg", fn = ["on", "open", "opened", "true"], Ft = 600 * 1e3, Vt = 1800 * 1e3, Kt = 3600 * 1e3, Ui = 60 * 1e3, ft = (e) => e * Math.PI / 180;
+const Q = "http://www.w3.org/2000/svg", fn = ["on", "open", "opened", "true"], Ft = 600 * 1e3, Vt = 1800 * 1e3, Kt = 3600 * 1e3, Wi = 60 * 1e3, ft = (e) => e * Math.PI / 180;
 let Ze = class extends st {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
@@ -3316,8 +3316,8 @@ let Ze = class extends st {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < Ft ? Ft : n < Vt ? Vt : n < Kt ? Kt : void 0, a = s === void 0 ? Ui : Math.max(1e3, s - n + 50);
-      t = Math.min(t, Ui, a);
+      const n = Math.max(0, e - o), s = n < Ft ? Ft : n < Vt ? Vt : n < Kt ? Kt : void 0, a = s === void 0 ? Wi : Math.max(1e3, s - n + 50);
+      t = Math.min(t, Wi, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
       this.openingAgeTimer = void 0, this.syncOpenings();
@@ -3356,8 +3356,8 @@ let Ze = class extends st {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, W = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
-    N.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${W}`), N.setAttribute("data-opening-id", t.id), o && N.setAttribute("data-open-minutes", String(o.minutes)), this.line(N, $.x, $.y, w.x, w.y, "opening-gap");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, U = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
+    N.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${U}`), N.setAttribute("data-opening-id", t.id), o && N.setAttribute("data-open-minutes", String(o.minutes)), this.line(N, $.x, $.y, w.x, w.y, "opening-gap");
     const I = Math.max(7, Math.min(12, n * 0.12));
     for (const X of [$, w]) this.line(N, X.x - y * I / 2, X.y - _ * I / 2, X.x + y * I / 2, X.y + _ * I / 2, "door-jamb");
     r && this.line(N, S.x, S.y, C.x, C.y, "door-closed-guide"), this.line(N, S.x, S.y, Y.x, Y.y, "door-leaf");
@@ -3409,7 +3409,7 @@ _r([
 Ze = _r([
   z("explorer-openings-canvas")
 ], Ze);
-var bn = Object.defineProperty, yn = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
+var bn = Object.defineProperty, yn = Object.getOwnPropertyDescriptor, We = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && bn(t, i, o), o;
@@ -3567,13 +3567,13 @@ let _e = class extends Ze {
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([M, T, Y, W, N]) => {
+      ].forEach(([M, T, Y, U, N]) => {
         const I = this.svg("ellipse");
         this.attrs(I, {
           cx: String(M),
           cy: String(T),
           rx: String(Y),
-          ry: String(W),
+          ry: String(U),
           opacity: String(N)
         }), b.appendChild(I);
       }), g.appendChild(b);
@@ -3593,13 +3593,13 @@ let _e = class extends Ze {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-base"
       }), y.appendChild(_);
-      for (const [M, T, Y, W, N] of i) {
+      for (const [M, T, Y, U, N] of i) {
         const I = this.svg("ellipse");
         this.attrs(I, {
           cx: String(M),
           cy: String(T),
           rx: String(Y),
-          ry: String(W),
+          ry: String(U),
           opacity: String(N),
           class: "weather-cloud-puff"
         }), y.appendChild(I);
@@ -3622,13 +3622,13 @@ let _e = class extends Ze {
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([M, T, Y, W, N]) => {
+      ].forEach(([M, T, Y, U, N]) => {
         const I = this.svg("ellipse");
         this.attrs(I, {
           cx: String(M),
           cy: String(T),
           rx: String(Y),
-          ry: String(W),
+          ry: String(U),
           opacity: String(N)
         }), S.appendChild(I);
       }), g.appendChild(S);
@@ -3988,22 +3988,22 @@ _e.styles = O`
       .weather-outside-rooms-scene .weather-storm-flash { animation: none; }
     }
   `;
-Ue([
+We([
   A({ type: Boolean, attribute: "hide-source-text" })
 ], _e.prototype, "hideSourceText", 2);
-Ue([
+We([
   A({ attribute: "weather-effect" })
 ], _e.prototype, "weatherEffect", 2);
-Ue([
+We([
   A({ attribute: "weather-state" })
 ], _e.prototype, "weatherState", 2);
-Ue([
+We([
   A({ type: Number, attribute: "weather-intensity" })
 ], _e.prototype, "weatherIntensity", 2);
-Ue([
+We([
   A({ type: Boolean, attribute: "weather-night" })
 ], _e.prototype, "weatherNight", 2);
-_e = Ue([
+_e = We([
   z("explorer-source-clean-canvas")
 ], _e);
 const xn = (e) => e.strings === void 0, wn = {}, $n = (e, t = wn) => e._$AH = t;
@@ -4026,7 +4026,7 @@ const Me = fr(class extends br {
     return $n(e), t;
   }
 });
-var kn = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, We = (e, t, i, r) => {
+var kn = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? _n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && kn(t, i, o), o;
@@ -4453,22 +4453,22 @@ ce.styles = O`
       .item-card { padding: 12px; }
     }
   `;
-We([
+Ue([
   A({ attribute: !1 })
 ], ce.prototype, "hass", 2);
-We([
+Ue([
   v()
 ], ce.prototype, "config", 2);
-We([
+Ue([
   v()
 ], ce.prototype, "areas", 2);
-We([
+Ue([
   v()
 ], ce.prototype, "areaError", 2);
-We([
+Ue([
   v()
 ], ce.prototype, "loadingAreas", 2);
-ce = We([
+ce = Ue([
   z("ha-explorer-card-editor")
 ], ce);
 var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
@@ -4477,7 +4477,7 @@ var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t,
   return r && o && Pn(t, i, o), o;
 };
 const re = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
-function Wi(e) {
+function Ui(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
 function Rn(e) {
@@ -4596,7 +4596,7 @@ let L = class extends j {
   finishPolygon() {
     if (!(this.pendingPoints.length < 3 || !this.roomConfig)) {
       if (this.drawingMode === "draw-new") {
-        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Wi(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
+        const e = this.draftRoomName.trim() || `Rum ${this.rooms.length + 1}`, t = this.uniqueRoomId(e), i = Ui(this.pendingPoints), r = this.meters(), o = { id: t, name: e, points: this.pendingPoints, presence_anchor: i, ...this.draftAreaId ? { area_id: this.draftAreaId } : {}, ...r ? { physical_meters: r } : {} };
         this.selectedRoomId = t, this.emitConfig({ ...this.roomConfig, rooms: [...this.rooms, o] });
       } else this.selectedRoom && this.emitConfig({ ...this.roomConfig, rooms: this.rooms.map((e) => e.id === this.selectedRoomId ? { ...e, points: this.pendingPoints } : e) });
       this.pendingPoints = [], this.drawingMode = "idle";
@@ -4631,7 +4631,7 @@ let L = class extends j {
   }
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
-    const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Wi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
+    const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Ui(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
     return P`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * re} y=${r.y * re} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? P`<circle cx=${o.x * re} cy=${o.y * re} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
@@ -5664,8 +5664,8 @@ Cr([
 Pt = Cr([
   z("ha-explorer-movement-history-editor")
 ], Pt);
-var Gn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Gn = Object.defineProperty, Wn = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Wn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gn(t, i, o), o;
 };
@@ -5694,12 +5694,12 @@ Er([
 Nt = Er([
   z("ha-explorer-pet-robot-trails-editor")
 ], Nt);
-var Wn = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
+var Un = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Wn(t, i, o), o;
+  return r && o && Un(t, i, o), o;
 };
-function Ut(e) {
+function Wt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -5730,7 +5730,7 @@ let lt = class extends j {
     e.push({ id: r, name: "Kanin", type: "pet", visible: !0, trail_visible: !0, icon: "🐇", entity_binding: { coordinate_space: "room_meters", x_attribute: "x", y_attribute: "y" }, shelly_pet_detection: { enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2 } }), this.emit(e);
   }
   entities() {
-    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("sensor.")).sort((e, t) => Ut(e).localeCompare(Ut(t), "da"));
+    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("sensor.")).sort((e, t) => Wt(e).localeCompare(Wt(t), "da"));
   }
   render() {
     const e = this.config?.presences ?? [], t = e.map((i, r) => ({ presence: i, index: r })).filter(({ presence: i }) => (i.type ?? "person") === "pet");
@@ -5747,7 +5747,7 @@ let lt = class extends j {
         <div class="grid two"><label>Bekræft efter målinger<input type="number" min="1" max="12" .value=${String(n.confirmation_updates ?? 3)} @change=${(s) => this.updateDetection(r, { confirmation_updates: Number(s.target.value) })}/><small>Flere målinger giver færre falske kaniner.</small></label><label>Skjul efter høje målinger<input type="number" min="1" max="12" .value=${String(n.release_updates ?? 2)} @change=${(s) => this.updateDetection(r, { release_updates: Number(s.target.value) })}/></label></div>
       </article>`;
     }) : h`<div class="empty">Ingen kæledyrsprofil endnu. Tryk “Tilføj kanin”.</div>`}
-      <datalist id="shelly-pet-entities">${this.entities().map((i) => h`<option value=${i.entity_id}>${Ut(i)}</option>`)}</datalist>
+      <datalist id="shelly-pet-entities">${this.entities().map((i) => h`<option value=${i.entity_id}>${Wt(i)}</option>`)}</datalist>
       ${t.length ? h`<div class="note">Start med 0,75 m. Test derefter i Shellys target-visning og sænk grænsen, hvis et menneske på gulvet bliver registreret som kanin.</div>` : f}
     </section>`;
   }
@@ -5767,7 +5767,7 @@ var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, vi = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Yn(t, i, o), o;
 };
-function Wt(e) {
+function Ut(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
@@ -5780,7 +5780,7 @@ let dt = class extends j {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).sort((e, t) => Wt(e).localeCompare(Wt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).sort((e, t) => Ut(e).localeCompare(Ut(t), "da"));
   }
   updatePresence(e, t) {
     if (!this.config) return;
@@ -5805,7 +5805,7 @@ let dt = class extends j {
     t.splice(e, 1), this.emit({ ...this.config, presences: t });
   }
   datalist(e) {
-    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Wt(t)}</option>`)}</datalist>`;
+    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Ut(t)}</option>`)}</datalist>`;
   }
   render() {
     const e = (this.config?.presences ?? []).filter((t) => (t.type ?? "person") === "person");
@@ -6142,7 +6142,7 @@ le([
 ie = le([
   z("ha-explorer-zones-editor")
 ], ie);
-var os = Object.defineProperty, ns = Object.getOwnPropertyDescriptor, U = (e, t, i, r) => {
+var os = Object.defineProperty, ns = Object.getOwnPropertyDescriptor, W = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ns(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && os(t, i, o), o;
@@ -6245,52 +6245,52 @@ let V = class extends j {
   }
 };
 V.styles = O`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
-U([
+W([
   A({ attribute: !1 })
 ], V.prototype, "hass", 2);
-U([
+W([
   A({ attribute: !1 })
 ], V.prototype, "config", 2);
-U([
+W([
   v()
 ], V.prototype, "selectedId", 2);
-U([
+W([
   v()
 ], V.prototype, "placing", 2);
-U([
+W([
   v()
 ], V.prototype, "draftName", 2);
-U([
+W([
   v()
 ], V.prototype, "draftKind", 2);
-U([
+W([
   v()
 ], V.prototype, "draftPoint", 2);
-U([
+W([
   v()
 ], V.prototype, "draftAngle", 2);
-U([
+W([
   v()
 ], V.prototype, "draftLength", 2);
-U([
+W([
   v()
 ], V.prototype, "draftHinge", 2);
-U([
+W([
   v()
 ], V.prototype, "draftSwing", 2);
-U([
+W([
   v()
 ], V.prototype, "draftOpenAngle", 2);
-U([
+W([
   v()
 ], V.prototype, "draftEntity", 2);
-U([
+W([
   v()
 ], V.prototype, "draftStates", 2);
-U([
+W([
   v()
 ], V.prototype, "draftVisible", 2);
-V = U([
+V = W([
   z("ha-explorer-openings-editor")
 ], V);
 var ls = Object.defineProperty, ds = Object.getOwnPropertyDescriptor, de = (e, t, i, r) => {
@@ -8084,12 +8084,12 @@ function Ks(e, t = Date.now()) {
 function Zs() {
   Be.clear();
 }
-var Gs = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, Dt = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Us(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Gs = Object.defineProperty, Ws = Object.getOwnPropertyDescriptor, Dt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ws(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gs(t, i, o), o;
 };
-const Rr = "0.43.1";
+const Rr = "0.44.0";
 let Ge = class extends j {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8351,23 +8351,31 @@ let Ge = class extends j {
     >
       <defs>
         <radialGradient id=${`castle-moon-${t}`} cx="42%" cy="38%" r="62%">
-          <stop offset="0" stop-color="#e8ce91" stop-opacity="0.2"></stop>
-          <stop offset="0.62" stop-color="#b98c51" stop-opacity="0.07"></stop>
-          <stop offset="1" stop-color="#5a402b" stop-opacity="0"></stop>
+          <stop offset="0" stop-color="#f3f5df" stop-opacity="0.98"></stop>
+          <stop offset="0.48" stop-color="#b7d5dc" stop-opacity="0.72"></stop>
+          <stop offset="1" stop-color="#4c8da1" stop-opacity="0"></stop>
         </radialGradient>
         <linearGradient id=${`castle-stone-${t}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#18130f"></stop>
-          <stop offset="0.52" stop-color="#090807"></stop>
-          <stop offset="1" stop-color="#020303"></stop>
+          <stop offset="0" stop-color="#17242b"></stop>
+          <stop offset="0.52" stop-color="#091116"></stop>
+          <stop offset="1" stop-color="#020609"></stop>
         </linearGradient>
         <linearGradient id=${`castle-distance-${t}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#32271e" stop-opacity="0.78"></stop>
-          <stop offset="1" stop-color="#100e0c" stop-opacity="0.92"></stop>
+          <stop offset="0" stop-color="#285266" stop-opacity="0.68"></stop>
+          <stop offset="1" stop-color="#08131b" stop-opacity="0.96"></stop>
+        </linearGradient>
+        <linearGradient id=${`castle-water-${t}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#102c39" stop-opacity="0.88"></stop>
+          <stop offset="1" stop-color="#02070b" stop-opacity="0.98"></stop>
         </linearGradient>
         <filter id=${`castle-soft-mist-${t}`} x="-30%" y="-250%" width="160%" height="600%">
           <feGaussianBlur stdDeviation="14"></feGaussianBlur>
         </filter>
       </defs>
+      <g class="castle-cloud-bank">
+        <path d="M-80 232C21 163 102 209 158 174s143-45 215 5 135 11 240-24"></path>
+        <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
+      </g>
       ${t === "left" ? h`
             <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
             <circle class="castle-moon" cx="116" cy="218" r="68" fill=${`url(#castle-moon-${t})`}></circle>
@@ -8442,7 +8450,15 @@ let Ge = class extends j {
               <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
             </g>
           `}
+      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill=${`url(#castle-water-${t})`}></rect>
       <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
+      <g class="castle-reflections">
+        <path d="M112 805v72M192 798v89M276 800v78M371 790v103M468 802v72"></path>
+        <path class="moon-reflection" d=${t === "left" ? "M112 798c-17 23-25 50-12 96m31-96c11 31 5 61-4 96" : "M455 802c-12 27-17 57-6 91m24-91c8 32 2 60-8 91"}></path>
+      </g>
+      <g class="castle-water-ripples">
+        <path d="M8 824h126m-74 22h154m-99 25h176m35-46h153m-112 25h185m-80 26h112"></path>
+      </g>
       <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${t})`}></path>
       <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${t})`}></path>
     </svg>`;
@@ -8558,21 +8574,21 @@ Ge.styles = O`
         border-radius: 18px;
         background:
           radial-gradient(
-            ellipse at 50% 46%,
-            rgba(194, 144, 74, 0.34) 0%,
-            rgba(82, 60, 40, 0.22) 34%,
+            ellipse at 50% 33%,
+            rgba(77, 164, 190, 0.36) 0%,
+            rgba(24, 66, 84, 0.28) 38%,
             transparent 60%
           ),
           repeating-linear-gradient(
             112deg,
             transparent 0 55px,
-            rgba(222, 187, 119, 0.055) 56px 57px,
+            rgba(137, 202, 218, 0.035) 56px 57px,
             transparent 58px 112px
           ),
-          linear-gradient(90deg, #211b18 0%, #3f3328 28%, #493927 50%, #3f3328 72%, #211b18 100%);
+          linear-gradient(180deg, #07121d 0%, #102d3c 38%, #071117 72%, #02070b 100%);
         box-shadow:
-          inset 0 0 78px rgba(7, 5, 4, 0.72),
-          inset 0 0 2px rgba(238, 205, 142, 0.28);
+          inset 0 0 96px rgba(0, 3, 8, 0.82),
+          inset 0 0 2px rgba(150, 211, 223, 0.26);
       }
       :host::before {
         content: "";
@@ -8581,15 +8597,15 @@ Ge.styles = O`
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(circle at 8% 17%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 17% 42%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
-          radial-gradient(circle at 11% 73%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 25% 88%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px),
-          radial-gradient(circle at 92% 20%, rgba(249, 218, 145, 0.88) 0 1px, transparent 2.2px),
-          radial-gradient(circle at 83% 47%, rgba(230, 192, 118, 0.68) 0 1.2px, transparent 2.5px),
-          radial-gradient(circle at 90% 76%, rgba(248, 219, 151, 0.72) 0 0.9px, transparent 2.2px),
-          radial-gradient(circle at 76% 91%, rgba(217, 174, 99, 0.58) 0 1px, transparent 2.4px);
-        filter: drop-shadow(0 0 6px rgba(231, 190, 107, 0.62));
+          radial-gradient(circle at 8% 17%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 17% 42%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 11% 73%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 25% 88%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px),
+          radial-gradient(circle at 92% 20%, rgba(212, 238, 240, 0.9) 0 1px, transparent 2.2px),
+          radial-gradient(circle at 83% 47%, rgba(164, 213, 226, 0.7) 0 1.2px, transparent 2.5px),
+          radial-gradient(circle at 90% 76%, rgba(231, 202, 140, 0.7) 0 0.9px, transparent 2.2px),
+          radial-gradient(circle at 76% 91%, rgba(134, 197, 214, 0.55) 0 1px, transparent 2.4px);
+        filter: drop-shadow(0 0 7px rgba(154, 218, 229, 0.54));
         animation: explorerSurroundTwinkle 7.5s ease-in-out infinite alternate;
       }
       :host::after {
@@ -8599,8 +8615,8 @@ Ge.styles = O`
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(ellipse at center, transparent 36%, rgba(11, 8, 6, 0.28) 76%, rgba(8, 6, 5, 0.58) 100%),
-          linear-gradient(90deg, rgba(231, 196, 127, 0.05), transparent 18% 82%, rgba(231, 196, 127, 0.05));
+          radial-gradient(ellipse at center, transparent 35%, rgba(2, 9, 15, 0.3) 73%, rgba(0, 4, 8, 0.76) 100%),
+          linear-gradient(90deg, rgba(126, 205, 220, 0.06), transparent 20% 80%, rgba(126, 205, 220, 0.06));
       }
       .enchanted-castle-surround {
         display: block;
@@ -8613,14 +8629,14 @@ Ge.styles = O`
       .enchanted-castle-side {
         position: absolute;
         bottom: 0;
-        width: 33.5%;
-        max-width: 560px;
+        width: 38%;
+        max-width: 680px;
         height: 100%;
         overflow: visible;
-        opacity: 0.94;
+        opacity: 0.98;
         filter:
-          drop-shadow(0 -8px 22px rgba(194, 143, 74, 0.11))
-          drop-shadow(0 10px 22px rgba(0, 0, 0, 0.32));
+          drop-shadow(0 -12px 30px rgba(87, 177, 201, 0.2))
+          drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
       }
       .enchanted-castle-left {
         left: 0;
@@ -8629,18 +8645,19 @@ Ge.styles = O`
         right: 0;
       }
       .castle-moon-glow {
-        fill: rgba(226, 190, 116, 0.1);
-        filter: blur(30px);
+        fill: rgba(137, 214, 229, 0.28);
+        filter: blur(34px);
       }
       .castle-moon {
-        stroke: rgba(225, 192, 124, 0.16);
+        stroke: rgba(225, 246, 244, 0.42);
         stroke-width: 2;
+        filter: drop-shadow(0 0 18px rgba(142, 219, 230, 0.62));
       }
       .castle-moon-dim {
         opacity: 0.48;
       }
       .castle-far-hills {
-        fill: rgba(24, 19, 16, 0.55);
+        fill: rgba(12, 28, 37, 0.7);
       }
       .enchanted-castle-left .castle-distant {
         fill: url(#castle-distance-left);
@@ -8653,10 +8670,10 @@ Ge.styles = O`
         filter: blur(0.45px);
       }
       .castle-cliff {
-        fill: rgba(5, 5, 5, 0.88);
+        fill: rgba(2, 7, 10, 0.94);
       }
       .castle-complex {
-        stroke: rgba(203, 162, 97, 0.24);
+        stroke: rgba(111, 172, 187, 0.3);
         stroke-width: 1.25;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
@@ -8719,6 +8736,34 @@ Ge.styles = O`
         stroke-width: 45;
         animation-direction: alternate-reverse;
         animation-duration: 19s;
+      }
+      .castle-cloud-bank {
+        fill: none;
+        stroke: rgba(101, 180, 202, 0.13);
+        stroke-width: 72;
+        stroke-linecap: round;
+        filter: blur(24px);
+      }
+      .castle-water {
+        opacity: 0.96;
+      }
+      .castle-reflections {
+        fill: none;
+        stroke: rgba(235, 178, 76, 0.24);
+        stroke-width: 12;
+        stroke-linecap: round;
+        filter: blur(7px);
+        animation: explorerWaterShimmer 6.5s ease-in-out infinite alternate;
+      }
+      .castle-reflections .moon-reflection {
+        stroke: rgba(174, 228, 235, 0.32);
+        stroke-width: 18;
+      }
+      .castle-water-ripples {
+        fill: none;
+        stroke: rgba(132, 205, 218, 0.16);
+        stroke-width: 2;
+        stroke-linecap: round;
       }
       ha-card:not(.preview) {
         position: relative;
@@ -9846,10 +9891,15 @@ Ge.styles = O`
       from { transform: translateX(-28px); opacity: 0.45; }
       to { transform: translateX(34px); opacity: 0.9; }
     }
+    @keyframes explorerWaterShimmer {
+      from { transform: scaleX(0.94); opacity: 0.42; }
+      to { transform: scaleX(1.06); opacity: 0.88; }
+    }
     @media (prefers-reduced-motion: reduce) {
       :host::before,
       .castle-window,
       .castle-mist,
+      .castle-reflections,
       .cloud,
       .celestial-cloud,
       .partly-cloudy .sun-disc,
