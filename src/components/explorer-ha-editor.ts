@@ -7,6 +7,7 @@ import { HaExplorerRoomDrawingEditor } from "./explorer-room-drawing-editor";
 import "./explorer-setup-overview";
 import "./explorer-theme-editor";
 import "./explorer-presence-polish-editor";
+import "./explorer-movement-history-editor";
 import "./explorer-identity-editor";
 import "./explorer-zones-editor";
 import "./explorer-openings-editor";
@@ -49,6 +50,7 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
       ${this.renderAdvancedSection("room-tools","Visuel rum-editor","Tegn rum og presence-anchors",html`<ha-explorer-room-tools .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-tools>`)}
       ${this.renderAdvancedSection("presences","Multi-Person & Identity","Navne, profiler og separate mmWave-targets",html`<ha-explorer-identity-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-identity-editor>`)}
       ${this.renderAdvancedSection("presences","Visuel profil","Farver, ikoner og synlighed",html`<ha-explorer-presence-polish-editor .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-presence-polish-editor>`)}
+      ${this.renderAdvancedSection("presences","Movement History 2.0","1–5 min. historik og udtoning",html`<ha-explorer-movement-history-editor .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-movement-history-editor>`)}
       ${this.renderAdvancedSection("openings","Dynamic Doors & Windows","Placér døre/vinduer, hængsel, sving og entity",html`<ha-explorer-openings-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-openings-editor>`)}
       ${this.renderAdvancedSection("zones","Zones / Dynamic Areas","Alarm, rengøring og dynamiske områder",html`<ha-explorer-zones-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-zones-editor>`)}
       ${this.renderAdvancedSection("room-reactions","Living Entity Points","Lamper, TV, sensorer og temperatur",html`<ha-explorer-room-reactions-editor-clean .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-reactions-editor-clean>`)}

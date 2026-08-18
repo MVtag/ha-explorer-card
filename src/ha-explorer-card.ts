@@ -14,7 +14,7 @@ import {
   matchPresenceIdentities,
   resetIdentityTracks,
 } from "./utils/identity-matcher";
-const CARD_VERSION = "0.40.12";
+const CARD_VERSION = "0.41.0";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -91,6 +91,7 @@ export class HaExplorerCard extends LitElement {
       routes: [],
       openings: [],
       presences: [],
+      movement_history: { enabled: false, duration_minutes: 3, show_rooms: true },
     };
   }
   public setConfig(config: ExplorerCardConfig): void {
@@ -109,6 +110,7 @@ export class HaExplorerCard extends LitElement {
       routes: [],
       openings: [],
       presences: [],
+      movement_history: { enabled: false, duration_minutes: 3, show_rooms: true },
       ...config,
       appearance: { theme: "classic", ...(config.appearance ?? {}) },
     };
@@ -544,6 +546,7 @@ export class HaExplorerCard extends LitElement {
           .routes=${this.config.routes ?? []}
           .openings=${this.config.openings ?? []}
           .presences=${presences}
+          .movementHistory=${this.config.movement_history ?? { enabled:false, duration_minutes:3, show_rooms:true }}
           .minZoom=${this.config.min_zoom ?? 1}
           .maxZoom=${this.config.max_zoom ?? 6}
           .initialZoom=${this.config.initial_zoom ?? 1}
