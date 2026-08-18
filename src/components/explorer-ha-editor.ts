@@ -9,6 +9,7 @@ import "./explorer-theme-editor";
 import "./explorer-presence-polish-editor";
 import "./explorer-movement-history-editor";
 import "./explorer-pet-robot-trails-editor";
+import "./explorer-shelly-pet-editor";
 import "./explorer-identity-editor";
 import "./explorer-zones-editor";
 import "./explorer-openings-editor";
@@ -53,6 +54,7 @@ export class HaExplorerHaEditor extends HaExplorerCardEditor {
       ${this.renderAdvancedSection("presences","Visuel profil","Farver, ikoner og synlighed",html`<ha-explorer-presence-polish-editor .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-presence-polish-editor>`)}
       ${this.renderAdvancedSection("presences","Movement History 2.0","1–5 min. historik og udtoning",html`<ha-explorer-movement-history-editor .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-movement-history-editor>`)}
       ${this.renderAdvancedSection("presences","Pet & Robot Trails 2.0","Poter, ruter og retning",html`<ha-explorer-pet-robot-trails-editor .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-pet-robot-trails-editor>`)}
+      ${this.renderAdvancedSection("presences","Shelly Pet Detection","Kanin via Presence Gen4",html`<ha-explorer-shelly-pet-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-shelly-pet-editor>`)}
       ${this.renderAdvancedSection("openings","Dynamic Doors & Windows","Placér døre/vinduer, hængsel, sving og entity",html`<ha-explorer-openings-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-openings-editor>`)}
       ${this.renderAdvancedSection("zones","Zones / Dynamic Areas","Alarm, rengøring og dynamiske områder",html`<ha-explorer-zones-editor .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-zones-editor>`)}
       ${this.renderAdvancedSection("room-reactions","Living Entity Points","Lamper, TV, sensorer og temperatur",html`<ha-explorer-room-reactions-editor-clean .hass=${this.hass} .config=${config} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-reactions-editor-clean>`)}
