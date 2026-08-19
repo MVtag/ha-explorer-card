@@ -8090,7 +8090,7 @@ var Ws = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, Dt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ws(t, i, o), o;
 };
-const zr = "0.44.7";
+const zr = "0.44.8";
 let Ze = class extends q {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8530,10 +8530,10 @@ Ze.styles = j`
         background-size: cover;
         opacity: 0.98;
         filter:
-          sepia(0.16)
-          saturate(0.76)
-          brightness(0.72)
-          contrast(1.18);
+          sepia(0.13)
+          saturate(0.84)
+          brightness(0.86)
+          contrast(1.12);
         transform: scale(1.012);
         transform-origin: center bottom;
       }
@@ -8605,11 +8605,11 @@ Ze.styles = j`
           radial-gradient(
             ellipse at center,
             transparent 36%,
-            rgba(4, 5, 7, 0.08) 65%,
-            rgba(2, 3, 4, 0.52) 100%
+            rgba(4, 5, 7, 0.06) 65%,
+            rgba(2, 3, 4, 0.36) 100%
           );
         box-shadow:
-          inset 0 0 120px rgba(1, 2, 3, 0.58),
+          inset 0 0 120px rgba(1, 2, 3, 0.42),
           inset 0 0 2px rgba(222, 191, 135, 0.24);
       }
       ha-card:not(.preview) {
