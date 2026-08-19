@@ -1,7 +1,7 @@
-const xt = globalThis, li = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, di = /* @__PURE__ */ Symbol(), ki = /* @__PURE__ */ new WeakMap();
-let cr = class {
+const xt = globalThis, li = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, ci = /* @__PURE__ */ Symbol(), ki = /* @__PURE__ */ new WeakMap();
+let dr = class {
   constructor(t, i, r) {
-    if (this._$cssResult$ = !0, r !== di) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    if (this._$cssResult$ = !0, r !== ci) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = i;
   }
   get styleSheet() {
@@ -17,13 +17,13 @@ let cr = class {
     return this.cssText;
   }
 };
-const Lr = (e) => new cr(typeof e == "string" ? e : e + "", void 0, di), O = (e, ...t) => {
+const Lr = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), O = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + s + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(o) + e[n + 1], e[0]);
-  return new cr(i, e, di);
+  return new dr(i, e, ci);
 }, qr = (e, t) => {
   if (li) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
   else for (const i of t) {
@@ -63,7 +63,7 @@ const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnProperty
       }
   }
   return i;
-} }, ci = (e, t) => !Br(e, t), Si = { attribute: !0, type: String, converter: kt, reflect: !1, useDefault: !1, hasChanged: ci };
+} }, di = (e, t) => !Br(e, t), Si = { attribute: !0, type: String, converter: kt, reflect: !1, useDefault: !1, hasChanged: di };
 Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), Tt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let Le = class extends HTMLElement {
   static addInitializer(t) {
@@ -178,7 +178,7 @@ let Le = class extends HTMLElement {
   requestUpdate(t, i, r, o = !1, n) {
     if (t !== void 0) {
       const s = this.constructor;
-      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? ci)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
+      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? di)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
       this.C(t, i, r);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
@@ -259,10 +259,10 @@ const Yr = (e, t) => {
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Ye;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let d, c, p = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Ye ? c[1] === "!--" ? s = Mi : c[1] !== void 0 ? s = Pi : c[2] !== void 0 ? (ur.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = Se) : c[3] !== void 0 && (s = Se) : s === Se ? c[0] === ">" ? (s = o ?? Ye, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? Se : c[3] === '"' ? Ri : Ni) : s === Ri || s === Ni ? s = Se : s === Mi || s === Pi ? s = Ye : (s = Se, o = void 0);
+    let c, d, p = -1, u = 0;
+    for (; u < l.length && (s.lastIndex = u, d = s.exec(l), d !== null); ) u = s.lastIndex, s === Ye ? d[1] === "!--" ? s = Mi : d[1] !== void 0 ? s = Pi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Se) : d[3] !== void 0 && (s = Se) : s === Se ? d[0] === ">" ? (s = o ?? Ye, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Se : d[3] === '"' ? Ri : Ni) : s === Ri || s === Ni ? s = Se : s === Mi || s === Pi ? s = Ye : (s = Se, o = void 0);
     const g = s === Se && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Ye ? l + Ur : p >= 0 ? (r.push(d), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
+    n += s === Ye ? l + Ur : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -271,15 +271,15 @@ class rt {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [d, c] = Yr(t, i);
-    if (this.el = rt.createElement(d, r), Ee.currentNode = this.el.content, i === 2 || i === 3) {
+    const a = t.length - 1, l = this.parts, [c, d] = Yr(t, i);
+    if (this.el = rt.createElement(c, r), Ee.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
     }
     for (; (o = Ee.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
         if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
-          const u = c[s++], g = o.getAttribute(p).split($e), b = /([.?@])?(.*)/.exec(u);
+          const u = d[s++], g = o.getAttribute(p).split($e), b = /([.?@])?(.*)/.exec(u);
           l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? Jr : b[1] === "?" ? eo : b[1] === "@" ? to : Ot }), o.removeAttribute(p);
         } else p.startsWith($e) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (ur.test(o.tagName)) {
@@ -325,8 +325,8 @@ class Qr {
     let n = Ee.nextNode(), s = 0, a = 0, l = r[0];
     for (; l !== void 0; ) {
       if (s === l.index) {
-        let d;
-        l.type === 2 ? d = new ct(n, n.nextSibling, this, t) : l.type === 1 ? d = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (d = new io(n, this, t)), this._$AV.push(d), l = r[++a];
+        let c;
+        l.type === 2 ? c = new dt(n, n.nextSibling, this, t) : l.type === 1 ? c = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (c = new io(n, this, t)), this._$AV.push(c), l = r[++a];
       }
       s !== l?.index && (n = Ee.nextNode(), s++);
     }
@@ -337,7 +337,7 @@ class Qr {
     for (const r of this._$AV) r !== void 0 && (r.strings !== void 0 ? (r._$AI(t, r, i), i += r.strings.length - 2) : r._$AI(t[i])), i++;
   }
 }
-class ct {
+class dt {
   get _$AU() {
     return this._$AM?._$AU ?? this._$Cv;
   }
@@ -383,7 +383,7 @@ class ct {
     hi(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let r, o = 0;
-    for (const n of t) o === i.length ? i.push(r = new ct(this.O(tt()), this.O(tt()), this, this.options)) : r = i[o], r._$AI(n), o++;
+    for (const n of t) o === i.length ? i.push(r = new dt(this.O(tt()), this.O(tt()), this, this.options)) : r = i[o], r._$AI(n), o++;
     o < i.length && (this._$AR(r && r._$AB.nextSibling, o), i.length = o);
   }
   _$AR(t = this._$AA.nextSibling, i) {
@@ -412,8 +412,8 @@ class Ot {
     if (n === void 0) t = He(this, t, i, 0), s = !it(t) || t !== this._$AH && t !== se, s && (this._$AH = t);
     else {
       const a = t;
-      let l, d;
-      for (t = n[0], l = 0; l < n.length - 1; l++) d = He(this, a[r + l], i, l), d === se && (d = this._$AH[l]), s ||= !it(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
+      let l, c;
+      for (t = n[0], l = 0; l < n.length - 1; l++) c = He(this, a[r + l], i, l), c === se && (c = this._$AH[l]), s ||= !it(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
     }
     s && !o && this.j(t);
   }
@@ -462,13 +462,13 @@ class io {
   }
 }
 const ro = pi.litHtmlPolyfillSupport;
-ro?.(rt, ct), (pi.litHtmlVersions ??= []).push("3.3.3");
+ro?.(rt, dt), (pi.litHtmlVersions ??= []).push("3.3.3");
 const oo = (e, t, i) => {
   const r = i?.renderBefore ?? t;
   let o = r._$litPart$;
   if (o === void 0) {
     const n = i?.renderBefore ?? null;
-    r._$litPart$ = o = new ct(t.insertBefore(tt(), n), n, void 0, i ?? {});
+    r._$litPart$ = o = new dt(t.insertBefore(tt(), n), n, void 0, i ?? {});
   }
   return o._$AI(e), o;
 };
@@ -504,7 +504,7 @@ const z = (e) => (t, i) => {
     customElements.define(e, t);
   }) : customElements.define(e, t);
 };
-const so = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged: ci }, ao = (e = so, t, i) => {
+const so = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged: di }, ao = (e = so, t, i) => {
   const { kind: r, metadata: o } = i;
   let n = globalThis.litPropertyMetadata.get(o);
   if (n === void 0 && globalThis.litPropertyMetadata.set(o, n = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), r === "accessor") {
@@ -630,10 +630,10 @@ function vr(e, t, i) {
   if (!n || uo.has(n.state.trim().toLowerCase()))
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
-    const d = Number(n.state);
-    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: Oi(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Oi(n.attributes), reason: "state_inactive" };
+    const c = Number(n.state);
+    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: Oi(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Oi(n.attributes), reason: "state_inactive" };
   }
-  const s = n.state.trim().toLowerCase(), a = o.map((d) => d.toLowerCase()).includes(s);
+  const s = n.state.trim().toLowerCase(), a = o.map((c) => c.toLowerCase()).includes(s);
   let l = 0;
   return a && (e.kind === "light" ? l = mo(n.attributes) * Ti(e) : l = Ti(e)), {
     index: t,
@@ -1226,7 +1226,7 @@ let H = class extends j {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, d = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, c = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Lt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (d.x - l.x) / r.width * x, g = (d.y - l.y) / r.height * x, b = Ii(this.viewport, p, c.x, c.y);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Lt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * x, g = (c.y - l.y) / r.height * x, b = Ii(this.viewport, p, d.x, d.y);
         this.viewport = $t({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
@@ -1247,14 +1247,14 @@ let H = class extends j {
   renderRooms() {
     return this.rooms.map((e) => {
       if (!e.points.length) return f;
-      const t = e.points.map(([d, c]) => `${d * x},${c * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((d, c) => d + c[0], 0) / e.points.length, o = e.points.reduce((d, c) => d + c[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
-      return P`<g class=${i ? "room selected" : "room"} @pointerdown=${(d) => d.stopPropagation()} @click=${(d) => this.selectRoom(d, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? P`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
+      const t = e.points.map(([c, d]) => `${c * x},${d * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, d) => c + d[0], 0) / e.points.length, o = e.points.reduce((c, d) => c + d[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
+      return P`<g class=${i ? "room selected" : "room"} @pointerdown=${(c) => c.stopPropagation()} @click=${(c) => this.selectRoom(c, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? P`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
     });
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? _o[i], a = Eo(e.avatar), l = e.color ?? "#03a9f4", d = r ? 31 : 25, c = d * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
-      return P`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? P`<defs><clipPath id=${p}><circle r=${d - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${d} fill=${l}></circle><image href=${a} x=${-d + 3} y=${-d + 3} width=${c - 6} height=${c - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${d} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : P`<circle class="presence-marker" r=${d} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? _o[i], a = Eo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
+      return P`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? P`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : P`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
@@ -1448,22 +1448,22 @@ function zo(e, t, i) {
 function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = zo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Fe(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
-    return d ? {
+    const n = zo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Fe(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    return c ? {
       ...n,
       conditional: p,
-      active: c,
-      entity: d.entity,
-      currentState: d.currentState,
-      allowedStates: d.allowedStates,
-      reason: c ? void 0 : d.reason,
+      active: d,
+      entity: c.entity,
+      currentState: c.currentState,
+      allowedStates: c.allowedStates,
+      reason: d ? void 0 : c.reason,
       conditionSource: "node",
-      nodeId: d.nodeId,
+      nodeId: c.nodeId,
       nodeStatuses: a
     } : {
       ...n,
       conditional: p,
-      active: c,
+      active: d,
       nodeStatuses: a
     };
   });
@@ -1502,7 +1502,7 @@ function gi(e) {
 function Bi(e, t, i, r, o, n) {
   const s = ke(e, i), a = ke(e, r);
   if (!s || !a) return;
-  const l = wr(t), c = (o ? [...l].reverse() : l).map((u, g) => To(e, u, g)).filter((u) => !!u), p = [
+  const l = wr(t), d = (o ? [...l].reverse() : l).map((u, g) => To(e, u, g)).filter((u) => !!u), p = [
     {
       kind: "room",
       id: i,
@@ -1510,7 +1510,7 @@ function Bi(e, t, i, r, o, n) {
       label: ot(e, i),
       point: s
     },
-    ...c,
+    ...d,
     {
       kind: "room",
       id: r,
@@ -1532,21 +1532,21 @@ function Oo(e, t) {
   const i = /* @__PURE__ */ new Map(), r = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map(), n = (a) => {
     const l = me(a);
     o.set(l, a);
-    const d = r.get(l);
-    if (d) return d;
-    const c = St(e, a);
-    return c && r.set(l, c), c;
-  }, s = (a, l, d) => {
-    const c = i.get(a) ?? [];
-    c.push({ key: l, weight: d }), i.set(a, c);
+    const c = r.get(l);
+    if (c) return c;
+    const d = St(e, a);
+    return d && r.set(l, d), d;
+  }, s = (a, l, c) => {
+    const d = i.get(a) ?? [];
+    d.push({ key: l, weight: c }), i.set(a, d);
   };
   return t.forEach((a) => {
     if (!a.active) return;
-    const l = a.edge, d = n(l.from), c = n(l.to);
-    if (!d || !c) return;
+    const l = a.edge, c = n(l.from), d = n(l.to);
+    if (!c || !d) return;
     const p = me(l.from), u = me(l.to);
     if (p === u) return;
-    const g = Math.hypot(c[0] - d[0], c[1] - d[1]);
+    const g = Math.hypot(d[0] - c[0], d[1] - c[1]);
     s(p, u, g), s(u, p, g);
   }), { adjacency: i, positions: r, endpoints: o };
 }
@@ -1554,25 +1554,25 @@ function Io(e, t, i, r, o) {
   if (!(e.route_graph_edges ?? []).length) return;
   const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Oo(e, r);
   if (!a.has(n) || !a.has(s)) return;
-  const d = /* @__PURE__ */ new Map(), c = /* @__PURE__ */ new Map(), p = new Set(a.keys());
-  for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => d.set(m, Number.POSITIVE_INFINITY)), d.set(n, 0); p.size; ) {
+  const c = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Map(), p = new Set(a.keys());
+  for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => c.set(m, Number.POSITIVE_INFINITY)), c.set(n, 0); p.size; ) {
     let m, y = Number.POSITIVE_INFINITY;
     for (const _ of p) {
-      const $ = d.get(_) ?? Number.POSITIVE_INFINITY;
+      const $ = c.get(_) ?? Number.POSITIVE_INFINITY;
       $ < y && (m = _, y = $);
     }
     if (!m || !Number.isFinite(y) || (p.delete(m), m === s)) break;
     for (const _ of a.get(m) ?? []) {
       if (!p.has(_.key)) continue;
       const $ = y + _.weight;
-      $ < (d.get(_.key) ?? Number.POSITIVE_INFINITY) && (d.set(_.key, $), c.set(_.key, m));
+      $ < (c.get(_.key) ?? Number.POSITIVE_INFINITY) && (c.set(_.key, $), d.set(_.key, m));
     }
   }
-  if (!Number.isFinite(d.get(s) ?? Number.POSITIVE_INFINITY)) return;
+  if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
   const u = [s];
   let g = s;
   for (; g !== n; ) {
-    const m = c.get(g);
+    const m = d.get(g);
     if (!m) return;
     u.push(m), g = m;
   }
@@ -1598,22 +1598,22 @@ function mi(e, t, i, r) {
   if (a) return Bi(e, a, t, i, !0, n);
   const l = Io(e, t, i, o, n);
   if (l) return l;
-  const d = ke(e, t), c = ke(e, i);
-  if (!d || !c) return;
+  const c = ke(e, t), d = ke(e, i);
+  if (!c || !d) return;
   const p = [
     {
       kind: "room",
       id: t,
       key: `room:${t}`,
       label: ot(e, t),
-      point: d
+      point: c
     },
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
       label: ot(e, i),
-      point: c
+      point: d
     }
   ];
   return {
@@ -1629,9 +1629,9 @@ function Do(e) {
 function Hi(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
-  const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), d = (k) => {
+  const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), c = (k) => {
     a.set(k, (a.get(k) ?? 0) + 1);
-  }, c = (k, E) => {
+  }, d = (k, E) => {
     const M = l.get(k) ?? /* @__PURE__ */ new Set();
     M.add(E), l.set(k, M);
     const T = l.get(E) ?? /* @__PURE__ */ new Set();
@@ -1645,7 +1645,7 @@ function Hi(e, t) {
       r += 1;
       return;
     }
-    d(E), d(M), c(E, M);
+    c(E), c(M), d(E, M);
   });
   const p = i.length ? (e.rooms ?? []).filter((k) => ke(e, k.id) && !a.has(`room:${k.id}`)).map((k) => k.id) : [], u = i.length ? (e.route_nodes ?? []).filter((k) => !a.has(`node:${k.id}`)).map((k) => k.id) : [];
   let g = 0;
@@ -1708,9 +1708,9 @@ let Ve = class extends H {
       const l = {
         x: (n.x ?? 0.5) * x,
         y: (n.y ?? 0.5) * x
-      }, d = this.previousPresencePositions.get(n.id), c = this.previousPresenceRooms.get(n.id), p = n.room_id;
-      if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && d && (Math.abs(d.x - l.x) > 0.01 || Math.abs(d.y - l.y) > 0.01)) {
-        const u = this.resolveMovementPath(d, l, c, p);
+      }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
+      if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
+        const u = this.resolveMovementPath(c, l, d, p);
         this.createFootsteps(u);
         const g = document.createElementNS(q, "animateTransform");
         g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${qt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
@@ -1796,21 +1796,21 @@ let Ve = class extends H {
     o.setAttribute("class", "route-status-scene"), o.setAttribute("aria-label", "Live rutestatus og døre"), o.setAttribute("pointer-events", "none"), i.forEach((s) => {
       const a = this.endpointPoint(s.edge.from), l = this.endpointPoint(s.edge.to);
       if (!a || !l) return;
-      const d = this.edgeStatusColor(s), c = document.createElementNS(q, "line");
-      if (c.setAttribute("x1", String(a.x)), c.setAttribute("y1", String(a.y)), c.setAttribute("x2", String(l.x)), c.setAttribute("y2", String(l.y)), c.setAttribute("stroke", d), c.setAttribute("stroke-linecap", "round"), c.setAttribute("vector-effect", "non-scaling-stroke"), c.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), c.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || c.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && c.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(c, this.statusDescription(s)), o.appendChild(c), !s.conditional) return;
+      const c = this.edgeStatusColor(s), d = document.createElementNS(q, "line");
+      if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
       const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(q, "g");
       g.setAttribute("transform", `translate(${p} ${u})`);
       const b = document.createElementNS(q, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", d), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
       const m = document.createElementNS(q, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", d), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
+      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
         const y = document.createElementNS(q, "animate");
         y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), g.appendChild(y);
       }
       this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
     }), t.forEach((s) => {
-      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), d = s.point[0] * x, c = s.point[1] * x, p = document.createElementNS(q, "g");
-      p.setAttribute("transform", `translate(${d} ${c})`);
+      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(q, "g");
+      p.setAttribute("transform", `translate(${c} ${d})`);
       const u = document.createElementNS(q, "circle");
       u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
       const g = document.createElementNS(q, "rect");
@@ -1885,15 +1885,15 @@ let Ve = class extends H {
     const o = Math.min(20, Math.max(3, Math.floor(r / Vi)));
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
-      let l = 0, d = i[i.length - 1];
+      let l = 0, c = i[i.length - 1];
       for (const T of i) {
         if (l + T.length >= a) {
-          d = T;
+          c = T;
           break;
         }
         l += T.length;
       }
-      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, b = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, y = 9 * g, _ = d.start.x + p * c + b * y, $ = d.start.y + u * c + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * qt), C = document.createElementNS(q, "g");
+      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * g, _ = c.start.x + p * d + b * y, $ = c.start.y + u * d + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * qt), C = document.createElementNS(q, "g");
       C.setAttribute("transform", `translate(${_} ${$}) rotate(${w + g * 8})`), C.setAttribute("opacity", "0");
       const k = document.createElementNS(q, "ellipse");
       k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
@@ -1949,17 +1949,17 @@ let Ct = class extends Ve {
     if (t.active) {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
-      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([d, c], p) => {
+      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
         const u = document.createElementNS(D, "circle");
-        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(d * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(c + n * c * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
+        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(d + n * d * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
           const g = document.createElementNS(D, "animate");
-          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${c + n * 0.07};${c + n * 0.13};${c + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
+          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
         }
       });
       const a = document.createElementNS(D, "circle"), l = 24 + n * 24;
       if (a.setAttribute("class", "light-halo"), a.setAttribute("r", String(l)), a.setAttribute("fill", r), a.setAttribute("fill-opacity", String(0.08 + n * 0.18)), a.setAttribute("stroke", r), a.setAttribute("stroke-width", "2"), a.setAttribute("stroke-opacity", String(0.1 + n * 0.18)), a.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(a), !i) {
-        const d = document.createElementNS(D, "animate");
-        d.setAttribute("attributeName", "r"), d.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), d.setAttribute("dur", "4.2s"), d.setAttribute("repeatCount", "indefinite"), a.appendChild(d);
+        const c = document.createElementNS(D, "animate");
+        c.setAttribute("attributeName", "r"), c.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), c.setAttribute("dur", "4.2s"), c.setAttribute("repeatCount", "indefinite"), a.appendChild(c);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 11);
@@ -2000,10 +2000,10 @@ let Ct = class extends Ve {
       e.setAttribute("data-fireplace", "active");
       const l = document.createElementNS(D, "circle");
       l.setAttribute("class", "fireplace-glow fireplace-glow-outer"), l.setAttribute("r", String(s)), l.setAttribute("fill", r), l.setAttribute("fill-opacity", String(0.07 + 0.11 * o)), e.appendChild(l);
-      const d = document.createElementNS(D, "circle");
-      if (d.setAttribute("class", "fireplace-glow fireplace-glow-inner"), d.setAttribute("r", String(s * 0.56)), d.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), d.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(d), !i) {
-        const c = document.createElementNS(D, "animate");
-        c.setAttribute("attributeName", "fill-opacity"), c.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), c.setAttribute("dur", "2.1s"), c.setAttribute("repeatCount", "indefinite"), d.appendChild(c);
+      const c = document.createElementNS(D, "circle");
+      if (c.setAttribute("class", "fireplace-glow fireplace-glow-inner"), c.setAttribute("r", String(s * 0.56)), c.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), c.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(c), !i) {
+        const d = document.createElementNS(D, "animate");
+        d.setAttribute("attributeName", "fill-opacity"), d.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), d.setAttribute("dur", "2.1s"), d.setAttribute("repeatCount", "indefinite"), c.appendChild(d);
         const p = document.createElementNS(D, "animate");
         p.setAttribute("attributeName", "r"), p.setAttribute("values", `${s * 0.93};${s * 1.05};${s * 0.97};${s * 0.93}`), p.setAttribute("dur", "3.6s"), p.setAttribute("repeatCount", "indefinite"), l.appendChild(p);
       }
@@ -2070,8 +2070,8 @@ let nt = class extends Ct {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [d, c] = t[s];
-      l > r != c > r && i < (d - a) * (r - l) / (c - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [c, d] = t[s];
+      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -2120,10 +2120,10 @@ let nt = class extends Ct {
     const t = Date.now(), i = this.activities(t);
     if (this.syncRoomClasses(i), this.scheduleAfterglowRefresh(i, t), !i.length) return;
     const r = document.createElementNS(R, "g");
-    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: d, intensity: c }) => {
+    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: c, intensity: d }) => {
       if (l.points.length < 3) return;
       const p = document.createElementNS(R, "polygon");
-      p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", d ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(d ? 0.1 + c * 0.07 : 0.025 + c * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(d ? 0.28 : 0.08 + c * 0.16)), p.setAttribute("stroke-width", d ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
+      p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", c ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(c ? 0.1 + d * 0.07 : 0.025 + d * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(c ? 0.28 : 0.08 + d * 0.16)), p.setAttribute("stroke-width", c ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
     });
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, o ?? n ?? s ?? a ?? null);
@@ -2162,26 +2162,26 @@ let nt = class extends Ct {
     const t = this.roomTemperatures();
     if (!t.length) return;
     const i = document.createElementNS(R, "g");
-    i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: d }) => {
-      const c = this.temperatureOpacity(d), p = this.atmosphereTemperatureColor(d), u = this.temperatureBand(d), g = document.createElementNS(R, "polygon");
-      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(c)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + c * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
-      const b = document.createElementNS(R, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(d);
+    i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
+      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(R, "polygon");
+      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(d)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
+      const b = document.createElementNS(R, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
       b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
   }
   appendFireplaceAtmosphere(e, t, i, r, o) {
-    const n = Je(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(R, "g");
-    d.setAttribute("class", "fireplace-atmosphere"), d.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), d.setAttribute("data-room-id", t.id);
-    const c = document.createElementNS(R, "circle");
-    c.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), c.setAttribute("r", String(l * 1.18)), c.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), c.setAttribute("fill-opacity", String(0.045 + s * 0.055)), d.appendChild(c);
+    const n = Je(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, c = document.createElementNS(R, "g");
+    c.setAttribute("class", "fireplace-atmosphere"), c.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), c.setAttribute("data-room-id", t.id);
+    const d = document.createElementNS(R, "circle");
+    d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
     const p = document.createElementNS(R, "circle");
-    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), d.appendChild(p);
+    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
     const u = document.createElementNS(R, "ellipse");
-    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), d.appendChild(u), !r) {
+    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
       const m = document.createElementNS(R, "animate");
-      m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), c.appendChild(m);
+      m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), d.appendChild(m);
       const y = document.createElementNS(R, "animate");
       y.setAttribute("attributeName", "fill-opacity"), y.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), y.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), y.setAttribute("repeatCount", "indefinite"), p.appendChild(y);
     }
@@ -2194,7 +2194,7 @@ let nt = class extends Ct {
       [5, -38, 1.25]
     ].forEach(([m, y, _], $) => {
       const w = document.createElementNS(R, "circle");
-      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(y)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), d.appendChild(w), !r) {
+      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(y)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(w), !r) {
         const S = document.createElementNS(R, "animate");
         S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${y};${y - 22 - $ * 2};${y - 38 - $ * 3}`), S.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), S.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
         const C = document.createElementNS(R, "animate");
@@ -2202,20 +2202,20 @@ let nt = class extends Ct {
       }
     });
     const b = document.createElementNS(R, "title");
-    b.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, d.appendChild(b), e.appendChild(d);
+    b.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, c.appendChild(b), e.appendChild(c);
   }
   syncFireplaceAtmosphere() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e) return;
     e.querySelector(":scope > g.fireplace-atmosphere-scene")?.remove();
     const t = this.rooms.flatMap(
-      (l) => At(l, (d) => this.atmosphereEntityState(d)).filter((d) => d.reaction.kind === "fireplace" && d.active).map((d) => ({ room: l, status: d }))
+      (l) => At(l, (c) => this.atmosphereEntityState(c)).filter((c) => c.reaction.kind === "fireplace" && c.active).map((c) => ({ room: l, status: c }))
     );
     if (!t.length) return;
     const i = document.createElementNS(R, "g");
     i.setAttribute("class", "fireplace-atmosphere-scene"), i.setAttribute("aria-label", "Levende pejsatmosfære"), i.setAttribute("pointer-events", "none");
     const r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
-    t.forEach(({ room: l, status: d }, c) => this.appendFireplaceAtmosphere(i, l, d, r, c));
+    t.forEach(({ room: l, status: c }, d) => this.appendFireplaceAtmosphere(i, l, c, r, d));
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, o ?? n ?? s ?? a ?? null);
   }
@@ -2254,10 +2254,10 @@ let nt = class extends Ct {
     a.setAttribute("class", `overcast-cloud overcast-cloud-${o % 3} overcast-depth-${o % 3}`);
     const l = document.createElementNS(R, "ellipse");
     l.setAttribute("class", "overcast-cloud-mist"), l.setAttribute("cx", o % 2 === 0 ? "-12" : "14"), l.setAttribute("cy", "18"), l.setAttribute("rx", "145"), l.setAttribute("ry", "43"), a.appendChild(l);
-    const d = document.createElementNS(R, "g");
-    d.setAttribute("class", "overcast-cloud-body"), d.setAttribute("filter", `url(#${this.overcastFilterId})`), d.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
-    const c = document.createElementNS(R, "path");
-    c.setAttribute("class", "overcast-cloud-base"), c.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), d.appendChild(c), [
+    const c = document.createElementNS(R, "g");
+    c.setAttribute("class", "overcast-cloud-body"), c.setAttribute("filter", `url(#${this.overcastFilterId})`), c.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
+    const d = document.createElementNS(R, "path");
+    d.setAttribute("class", "overcast-cloud-base"), d.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), c.appendChild(d), [
       [-86, -6, 50, 30],
       [-47, -37, 57, 34],
       [-3, -51, 65, 38],
@@ -2266,8 +2266,8 @@ let nt = class extends Ct {
       [14, 23, 92, 27]
     ].forEach(([g, b, m, y], _) => {
       const $ = document.createElementNS(R, "ellipse");
-      $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(g)), $.setAttribute("cy", String(b)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(y)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), d.appendChild($);
-    }), a.appendChild(d);
+      $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(g)), $.setAttribute("cy", String(b)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(y)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), c.appendChild($);
+    }), a.appendChild(c);
     const u = document.createElementNS(R, "path");
     u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
   }
@@ -2293,7 +2293,7 @@ let nt = class extends Ct {
       [265, 1035, 0.63, 9, 0.36],
       [585, 1038, 0.56, 10, 0.31],
       [890, 1028, 0.64, 11, 0.36]
-    ].forEach(([a, l, d, c, p]) => this.appendOvercastCloud(o, a, l, d, c, p));
+    ].forEach(([a, l, c, d, p]) => this.appendOvercastCloud(o, a, l, c, d, p));
     const s = t.querySelector(":scope > g.rooms-scene");
     t.insertBefore(o, s ?? null);
   }
@@ -2469,9 +2469,9 @@ let be = class extends nt {
     const r = this.createSvg("feColorMatrix");
     this.setAttributes(r, { in: "noise", type: "matrix", values: "0 0 0 0 0.30  0 0 0 0 0.20  0 0 0 0 0.11  0 0 0 .24 0" }), t.appendChild(r), e.appendChild(t);
     const o = this.createSvg("radialGradient");
-    o.setAttribute("id", `${this.artifactId}-vignette`), [["0%", "#f6e3b7", "0"], ["70%", "#9b6c3d", ".04"], ["100%", "#3f291c", ".30"]].forEach(([a, l, d]) => {
-      const c = this.createSvg("stop");
-      this.setAttributes(c, { offset: a, "stop-color": l, "stop-opacity": d }), o.appendChild(c);
+    o.setAttribute("id", `${this.artifactId}-vignette`), [["0%", "#f6e3b7", "0"], ["70%", "#9b6c3d", ".04"], ["100%", "#3f291c", ".30"]].forEach(([a, l, c]) => {
+      const d = this.createSvg("stop");
+      this.setAttributes(d, { offset: a, "stop-color": l, "stop-opacity": c }), o.appendChild(d);
     }), e.appendChild(o);
     const n = this.createSvg("pattern");
     this.setAttributes(n, { id: `${this.artifactId}-floor`, width: "28", height: "28", patternUnits: "userSpaceOnUse", patternTransform: "rotate(-8)" });
@@ -2499,9 +2499,9 @@ let be = class extends nt {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([d, c, p, u]) => {
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, u]) => {
       const g = this.createSvg("line");
-      this.setAttributes(g, { x1: String(d), y1: String(c), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
+      this.setAttributes(g, { x1: String(c), y1: String(d), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2653,12 +2653,12 @@ let Ke = class extends be {
     s.setAttribute("class", `dynamic-zone zone-${o} zone-${r.id}${i ? " reduced-motion" : ""}`), s.setAttribute("pointer-events", "none");
     const a = document.createElementNS(he, "polygon");
     a.setAttribute("class", "zone-shape"), a.setAttribute("points", this.zonePolygonPoints(r.points)), a.setAttribute("fill", n), a.setAttribute("fill-opacity", o === "danger" || o === "restricted" ? ".18" : ".13"), a.setAttribute("stroke", n), a.setAttribute("stroke-width", o === "danger" ? "5" : "4"), a.setAttribute("stroke-opacity", ".88"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("vector-effect", "non-scaling-stroke"), o === "warning" && a.setAttribute("stroke-dasharray", "16 9"), o === "restricted" && a.setAttribute("stroke-dasharray", "7 7"), o === "cleaning" && a.setAttribute("stroke-dasharray", "4 8"), s.appendChild(a), this.appendZoneAccent(s, r, o, n);
-    const l = this.zoneCenter(r), d = document.createElementNS(he, "g");
-    d.setAttribute("transform", `translate(${l.x} ${l.y})`), d.setAttribute("class", "zone-marker");
-    const c = document.createElementNS(he, "circle");
-    c.setAttribute("class", "zone-marker-bg"), c.setAttribute("r", "17"), c.setAttribute("fill", "var(--card-background-color, #ffffff)"), c.setAttribute("fill-opacity", ".90"), c.setAttribute("stroke", n), c.setAttribute("stroke-width", "3"), c.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(c);
+    const l = this.zoneCenter(r), c = document.createElementNS(he, "g");
+    c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.setAttribute("class", "zone-marker");
+    const d = document.createElementNS(he, "circle");
+    d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
     const p = document.createElementNS(he, "text");
-    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = en[o], d.appendChild(p), s.appendChild(d), r.name) {
+    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = en[o], c.appendChild(p), s.appendChild(c), r.name) {
       const u = document.createElementNS(he, "text");
       u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
     }
@@ -2667,12 +2667,12 @@ let Ke = class extends be {
   syncZonesOverlay() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
-    const i = Xo(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
+    const i = Xo(this.zones, (c) => this.hass?.states[c]?.state).filter((c) => c.active && c.zone.points.length >= 3);
     if (!i.length) return;
     const r = document.createElementNS(he, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
     const o = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
-    i.forEach((d) => this.renderZone(r, d, o));
+    i.forEach((c) => this.renderZone(r, c, o));
     const n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.route-status-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
@@ -2780,7 +2780,7 @@ var tn = Object.defineProperty, rn = Object.getOwnPropertyDescriptor, fi = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && tn(t, i, o), o;
 };
-const on = "http://www.w3.org/2000/svg", nn = 4200, sn = 900, an = 54, ln = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ki = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Ht = [58, 64, 54, 61, 56, 66], dn = [8, 6, 10, 7, 9, 5], cn = [7, 4, 10, 6, 8, 3];
+const on = "http://www.w3.org/2000/svg", nn = 4200, sn = 900, an = 54, ln = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ki = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Ht = [58, 64, 54, 61, 56, 66], cn = [8, 6, 10, 7, 9, 5], dn = [7, 4, 10, 6, 8, 3];
 function Zi(e) {
   let t = 2166136261;
   for (let i = 0; i < e.length; i += 1)
@@ -2828,7 +2828,7 @@ let Ne = class extends Ke {
       if (i.delete(o), !n) continue;
       const s = [n], a = [n];
       for (; a.length; ) {
-        const c = a.shift(), p = this.polishBasePosition(c);
+        const d = a.shift(), p = this.polishBasePosition(d);
         for (const u of [...i]) {
           const g = r.get(u);
           if (!g) continue;
@@ -2837,10 +2837,10 @@ let Ne = class extends Ke {
         }
       }
       if (s.length < 2) continue;
-      const l = [...s].sort((c, p) => c.id.localeCompare(p.id)), d = Math.min(52, 24 + l.length * 4);
-      l.forEach((c, p) => {
-        const u = this.polishBasePosition(c), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * d, 38, x - 38), m = gt(u.y + Math.sin(g) * d, 38, x - 64);
-        t.set(c.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
+      const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
+      l.forEach((d, p) => {
+        const u = this.polishBasePosition(d), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * c, 38, x - 38), m = gt(u.y + Math.sin(g) * c, 38, x - 64);
+        t.set(d.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
       });
     }
     return t;
@@ -2864,8 +2864,8 @@ let Ne = class extends Ke {
     } else if (r === "pet") {
       const s = this.polishCreateSvg("ellipse");
       this.polishSetAttributes(s, { cx: "0", cy: "2", rx: "3.4", ry: "3", fill: i }), o.appendChild(s), [[-4, -2], [-1.5, -4.6], [1.5, -4.6], [4, -2]].forEach(([a, l]) => {
-        const d = this.polishCreateSvg("circle");
-        this.polishSetAttributes(d, { cx: String(a), cy: String(l), r: "1.5", fill: i }), o.appendChild(d);
+        const c = this.polishCreateSvg("circle");
+        this.polishSetAttributes(c, { cx: String(a), cy: String(l), r: "1.5", fill: i }), o.appendChild(c);
       });
     } else if (r === "robot") {
       const s = this.polishCreateSvg("rect");
@@ -2889,10 +2889,10 @@ let Ne = class extends Ke {
       if (!n) return;
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
-      let d = n.querySelector(":scope > g.presence-visual-offset");
-      d || (d = this.polishCreateSvg("g"), d.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => d?.appendChild(g)), n.insertBefore(d, n.firstChild)), d.setAttribute("transform", `translate(${l.x} ${l.y})`), d.querySelector(".presence-marker")?.setAttribute("fill", a), d.querySelector(".presence-avatar-background")?.setAttribute("fill", a), d.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(d, r, a), n.querySelector(":scope > title")?.remove();
-      const c = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      c.textContent = `${r.name ?? r.id} · ${ln[s]}${u}${p}`, n.appendChild(c);
+      let c = n.querySelector(":scope > g.presence-visual-offset");
+      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
+      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      d.textContent = `${r.name ?? r.id} · ${ln[s]}${u}${p}`, n.appendChild(d);
     });
   }
   polishRouteConfig() {
@@ -2914,8 +2914,8 @@ let Ne = class extends Ke {
   }
   polishAppendPersonTrailShape(e, t, i) {
     const r = (n, s, a, l) => {
-      const d = this.polishCreateSvg("ellipse");
-      this.polishSetAttributes(d, { cx: String(n), cy: String(s), rx: String(a), ry: String(l), fill: t }), e.appendChild(d);
+      const c = this.polishCreateSvg("ellipse");
+      this.polishSetAttributes(c, { cx: String(n), cy: String(s), rx: String(a), ry: String(l), fill: t }), e.appendChild(c);
     };
     if (i === 0) {
       r(0, -5, 5.5, 11), r(0, 8, 4, 5);
@@ -2982,11 +2982,11 @@ let Ne = class extends Ke {
     const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, u) => {
       const g = e[u];
       return { start: g, end: p, length: Math.hypot(p.x - g.x, p.y - g.y) };
-    }), l = a.reduce((p, u) => p + u.length, 0), d = this.polishTrailSpacing(r, o);
-    if (l < d) return;
-    const c = Math.min(24, Math.max(3, Math.floor(l / d)));
-    for (let p = 0; p < c; p += 1) {
-      const u = (p + 1) / (c + 1), g = l * u;
+    }), l = a.reduce((p, u) => p + u.length, 0), c = this.polishTrailSpacing(r, o);
+    if (l < c) return;
+    const d = Math.min(24, Math.max(3, Math.floor(l / c)));
+    for (let p = 0; p < d; p += 1) {
+      const u = (p + 1) / (d + 1), g = l * u;
       let b = 0, m = a[a.length - 1];
       for (const Z of a) {
         if (b + Z.length >= g) {
@@ -2995,7 +2995,7 @@ let Ne = class extends Ke {
         }
         b += Z.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? dn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? cn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, U = Math.round(u * sn), N = this.polishCreateSvg("g");
+      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? cn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? dn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, U = Math.round(u * sn), N = this.polishCreateSvg("g");
       N.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), N.setAttribute("data-presence-id", t.id), r === "person" && N.setAttribute("data-trail-style", String(o + 1)), N.setAttribute("transform", `translate(${M} ${T}) rotate(${Y + (S ? w * C : 0)})`), N.setAttribute("opacity", "0"), this.polishAppendTrailShape(N, r, n, o);
       const I = this.polishCreateSvg("animate");
       this.polishSetAttributes(I, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), N.appendChild(I), i.appendChild(N), window.setTimeout(() => {
@@ -3046,7 +3046,7 @@ let Ne = class extends Ke {
         this.movementHistorySamples.delete(o);
         continue;
       }
-      const a = e - this.polishHistoryDurationMs(s), l = n.filter((d) => d.at >= a);
+      const a = e - this.polishHistoryDurationMs(s), l = n.filter((c) => c.at >= a);
       l.length ? this.movementHistorySamples.set(o, l) : this.movementHistorySamples.delete(o);
     }
     for (const o of t) {
@@ -3064,10 +3064,10 @@ let Ne = class extends Ke {
     r.setAttribute("class", "movement-history-rooms-scene"), o.setAttribute("class", "movement-history-scene"), r.setAttribute("pointer-events", "none"), o.setAttribute("pointer-events", "none");
     const n = new Map(e.map((a) => [a.id, a]));
     for (const [a, l] of this.movementHistorySamples) {
-      const d = n.get(a);
-      if (!d) continue;
-      const c = d.type ?? "person", p = this.polishHistoryDurationMs(d), u = this.polishTrailColor(d), g = c === "person" ? this.polishPersonTrailVariant(d) : 0;
-      if (c === "person" && this.movementHistory.show_rooms !== !1) {
+      const c = n.get(a);
+      if (!c) continue;
+      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), u = this.polishTrailColor(c), g = d === "person" ? this.polishPersonTrailVariant(c) : 0;
+      if (d === "person" && this.movementHistory.show_rooms !== !1) {
         const b = /* @__PURE__ */ new Map();
         for (const m of l) m.roomId && b.set(m.roomId, m);
         for (const [m, y] of b) {
@@ -3081,7 +3081,7 @@ let Ne = class extends Ke {
         const m = l[b - 1], y = l[b], _ = this.polishMovementPath(m, y, m.roomId, y.roomId), $ = Math.max(0, 0.72 * (1 - (t - y.at) / p));
         for (let w = 1; w < _.length; w += 1) {
           const S = _[w - 1], C = _[w], k = C.x - S.x, E = C.y - S.y, M = Math.hypot(k, E), T = Math.atan2(E, k) * 180 / Math.PI;
-          if (c === "robot") {
+          if (d === "robot") {
             if (this.petRobotTrails.show_robot_route === !1) continue;
             const I = this.polishCreateSvg("line");
             if (this.polishSetAttributes(I, { x1: String(S.x), y1: String(S.y), x2: String(C.x), y2: String(C.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String($), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), I.setAttribute("class", "robot-history-route"), o.appendChild(I), this.petRobotTrails.robot_direction_arrows !== !1 && M > 45) {
@@ -3090,11 +3090,11 @@ let Ne = class extends Ke {
             }
             continue;
           }
-          if (c === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
-          const Y = c === "pet" ? 52 : 70, U = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
+          if (d === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
+          const Y = d === "pet" ? 52 : 70, U = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
           for (let I = 1; I <= U; I += 1) {
-            const Z = I / (U + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = c === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
-            X.setAttribute("class", `movement-history-mark trail-${c}${c === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + Te * Xe * ve} ${S.y + E * Z + Ae * Xe * ve}) rotate(${N + ve * 4}) scale(${c === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, c, u, g), o.appendChild(X);
+            const Z = I / (U + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = d === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
+            X.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + Te * Xe * ve} ${S.y + E * Z + Ae * Xe * ve}) rotate(${N + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, d, u, g), o.appendChild(X);
           }
         }
       }
@@ -3134,8 +3134,8 @@ let st = class extends Ne {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [d, c] = t[s];
-      l > r != c > r && i < (d - a) * (r - l) / (c - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [c, d] = t[s];
+      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -3161,8 +3161,8 @@ let st = class extends Ne {
       i.has(r) || this.magicAfterglowStartedAt.set(r, e);
     for (const r of i) this.magicAfterglowStartedAt.delete(r);
     return this.magicPreviousOccupiedRooms.clear(), i.forEach((r) => this.magicPreviousOccupiedRooms.add(r)), this.rooms.map((r) => {
-      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Gi, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Gi) : 0;
-      return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: d };
+      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Gi, c = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Gi) : 0;
+      return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: c };
     }).filter((r) => r.active || r.afterglow);
   }
   magicPolygonPoints(e) {
@@ -3190,7 +3190,7 @@ let st = class extends Ne {
     const t = this.magicActivities(Date.now());
     if (this.magicScheduleRefresh(t), !t.length) return;
     const i = document.createElementNS(mt, "g");
-    i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((d) => this.magicAppendRoom(i, d));
+    i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((c) => this.magicAppendRoom(i, c));
     const r = e.querySelector(":scope > g.room-temperature-atmosphere-scene"), o = e.querySelector(":scope > g.presence-room-activity-scene"), n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.presence-trails-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(
       i,
@@ -3307,8 +3307,8 @@ let Ze = class extends st {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Kt ? "alert" : o >= Vt ? "warning" : o >= Ft ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
-    return { minutes: n, level: s, label: c, description: d };
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Kt ? "alert" : o >= Vt ? "warning" : o >= Ft ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, d = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    return { minutes: n, level: s, label: d, description: c };
   }
   scheduleOpeningAgeRefresh(e) {
     this.openingAgeTimer !== void 0 && window.clearTimeout(this.openingAgeTimer);
@@ -3356,7 +3356,7 @@ let Ze = class extends st {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, U = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: d - b * u, y: p - m * u }, w = { x: d + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, U = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
     N.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${U}`), N.setAttribute("data-opening-id", t.id), o && N.setAttribute("data-open-minutes", String(o.minutes)), this.line(N, $.x, $.y, w.x, w.y, "opening-gap");
     const I = Math.max(7, Math.min(12, n * 0.12));
     for (const X of [$, w]) this.line(N, X.x - y * I / 2, X.y - _ * I / 2, X.x + y * I / 2, X.y + _ * I / 2, "door-jamb");
@@ -3366,14 +3366,14 @@ let Ze = class extends st {
       const X = document.createElementNS(Q, "path"), wi = ft(k), $i = T, zr = S.x + Math.cos(wi) * n, Tr = S.y + Math.sin(wi) * n, Or = S.x + Math.cos($i) * n, Ir = S.y + Math.sin($i) * n, Dr = E > 0 ? 1 : 0, jr = Math.abs(a) > 180 ? 1 : 0;
       X.setAttribute("d", `M ${zr} ${Tr} A ${n} ${n} 0 ${jr} ${Dr} ${Or} ${Ir}`), X.setAttribute("class", "door-swing"), N.appendChild(X);
     }
-    const ve = c + y * 14, Te = p + _ * 14, Ae = document.createElementNS(Q, "circle");
+    const ve = d + y * 14, Te = p + _ * 14, Ae = document.createElementNS(Q, "circle");
     Ae.setAttribute("cx", String(ve)), Ae.setAttribute("cy", String(Te)), Ae.setAttribute("r", "5.2"), Ae.setAttribute("class", "opening-status-dot"), N.appendChild(Ae), this.appendAgeIndicator(N, ve, Te, o);
     const Xe = document.createElementNS(Q, "title");
     Xe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, N.appendChild(Xe), e.appendChild(N);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, d = ft(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, b = n / 2, m = 5.5, y = { x: a - c * b, y: l - p * b }, _ = { x: a + c * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Q, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, _.x, _.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), u = -p, g = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, _ = { x: a + d * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Q, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, _.x, _.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
     const S = a + u * 17, C = l + g * 17, k = document.createElementNS(Q, "circle");
     k.setAttribute("cx", String(S)), k.setAttribute("cy", String(C)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, C, o);
     const E = document.createElementNS(Q, "title");
@@ -3548,21 +3548,21 @@ let _e = class extends Ze {
       "translate(-8 21) scale(.94 .86)",
       "translate(14 7) scale(1.18 .62)"
     ];
-    for (const [n, s, a, l, d] of t) {
-      const c = l % 4, p = l % 3, u = this.svg("g");
+    for (const [n, s, a, l, c] of t) {
+      const d = l % 4, p = l % 3, u = this.svg("g");
       this.attrs(u, {
         class: "weather-cloud-position",
         transform: `translate(${n} ${s}) scale(${a * 0.64})`,
-        opacity: String(d)
+        opacity: String(c)
       });
       const g = this.svg("g");
       this.attrs(g, {
-        class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${c}`
+        class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${d}`
       });
       const b = this.svg("g");
       this.attrs(b, {
         class: "weather-cloud-mist weather-cloud-mist-back",
-        transform: o[c]
+        transform: o[d]
       }), [
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
@@ -3617,7 +3617,7 @@ let _e = class extends Ze {
       const S = this.svg("g");
       this.attrs(S, {
         class: "weather-cloud-mist weather-cloud-mist-front",
-        transform: c === 1 ? "translate(8 51) scale(1.28 .40)" : c === 2 ? "translate(-20 43) scale(.88 .62)" : c === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
+        transform: d === 1 ? "translate(8 51) scale(1.28 .40)" : d === 2 ? "translate(-20 43) scale(.88 .62)" : d === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
       }), [
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
@@ -3636,10 +3636,10 @@ let _e = class extends Ze {
       if (this.attrs(C, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), g.appendChild(C), c === 1 || c === 3) {
+      }), g.appendChild(C), d === 1 || d === 3) {
         const M = this.svg("path");
         this.attrs(M, {
-          d: c === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
+          d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
         }), g.appendChild(M);
       }
@@ -3681,9 +3681,9 @@ let _e = class extends Ze {
     const i = t ? 62 : 92, r = t ? 48 : 72;
     for (let o = -1; o < (t ? 18 : 13); o += 1)
       for (let n = -1; n < (t ? 24 : 17); n += 1) {
-        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, d = (t ? 15 : 10) + s % (t ? 12 : 8), c = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
+        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, c = (t ? 15 : 10) + s % (t ? 12 : 8), d = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
         this.attrs(u, {
-          d: `M ${a} ${l} C ${a - c * 0.7} ${l + d * 0.32}, ${a - p - c} ${l + d * 0.72}, ${a - p} ${l + d} C ${a - p + c} ${l + d * 0.72}, ${a + c * 0.45} ${l + d * 0.31}, ${a} ${l} Z`,
+          d: `M ${a} ${l} C ${a - d * 0.7} ${l + c * 0.32}, ${a - p - d} ${l + c * 0.72}, ${a - p} ${l + c} C ${a - p + d} ${l + c * 0.72}, ${a + d * 0.45} ${l + c * 0.31}, ${a} ${l} Z`,
           class: `weather-rain-drop${t ? " is-heavy" : ""}`
         }), u.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + s % 7 * 0.06}s`), u.style.setProperty("--rain-delay", `${-(s % 17) * 0.11}s`), e.appendChild(u);
       }
@@ -3692,15 +3692,15 @@ let _e = class extends Ze {
     const i = t ? 9 : 11, r = t ? 11 : 12;
     for (let o = 0; o < i; o += 1)
       for (let n = 0; n < r; n += 1) {
-        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, d = (t ? 1.7 : 2.1) + s % 4 * 0.72, c = s % (t ? 7 : 5) === 0, p = c ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${c ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
-        if (c) {
-          const g = d * 0.78;
+        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        if (d) {
+          const g = c * 0.78;
           this.attrs(p, {
-            d: `M ${a} ${l - d * 1.8} L ${a} ${l + d * 1.8} M ${a - d * 1.8} ${l} L ${a + d * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
+            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
             class: u
           });
         } else
-          this.attrs(p, { cx: String(a), cy: String(l), r: String(d), class: u });
+          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: u });
         p.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + s % 8 * 0.42}s`), p.style.setProperty("--snow-delay", `${-(s % 19) * 0.31}s`), e.appendChild(p);
       }
   }
@@ -3728,13 +3728,13 @@ let _e = class extends Ze {
   appendMagicMotes(e, t) {
     const i = t === "exceptional" ? 30 : t === "cloud" ? 24 : 18;
     for (let r = 0; r < i; r += 1) {
-      const o = r * 47 + r % 5 * 29, n = 22 + (o * 13 + r * r * 7) % 1035, s = 25 + (o * 19 + r * r * 11) % 1015, a = (t === "exceptional" ? 3.1 : 2.1) + o % 4 * 0.65, l = a * 0.24, d = this.svg("g");
-      this.attrs(d, { transform: `translate(${n} ${s})`, class: "weather-magic-mote-position" });
-      const c = this.svg("path");
-      this.attrs(c, {
+      const o = r * 47 + r % 5 * 29, n = 22 + (o * 13 + r * r * 7) % 1035, s = 25 + (o * 19 + r * r * 11) % 1015, a = (t === "exceptional" ? 3.1 : 2.1) + o % 4 * 0.65, l = a * 0.24, c = this.svg("g");
+      this.attrs(c, { transform: `translate(${n} ${s})`, class: "weather-magic-mote-position" });
+      const d = this.svg("path");
+      this.attrs(d, {
         d: `M 0 ${-a} L ${l} ${-l} L ${a} 0 L ${l} ${l} L 0 ${a} L ${-l} ${l} L ${-a} 0 L ${-l} ${-l} Z`,
         class: `weather-magic-mote weather-magic-mote-${t} weather-magic-mote-${r % 3}`
-      }), c.style.setProperty("--mote-duration", `${4.6 + o % 8 * 0.73}s`), c.style.setProperty("--mote-delay", `${-(o % 17) * 0.47}s`), d.appendChild(c), e.appendChild(d);
+      }), d.style.setProperty("--mote-duration", `${4.6 + o % 8 * 0.73}s`), d.style.setProperty("--mote-delay", `${-(o % 17) * 0.47}s`), c.appendChild(d), e.appendChild(c);
     }
   }
   appendExceptionalMagic(e) {
@@ -4052,7 +4052,7 @@ function Mn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let ce = class extends j {
+let de = class extends j {
   constructor() {
     super(...arguments), this.areas = [], this.areaError = "", this.loadingAreas = !1, this.areasLoaded = !1;
   }
@@ -4416,7 +4416,7 @@ let ce = class extends j {
     `;
   }
 };
-ce.styles = O`
+de.styles = O`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4455,22 +4455,22 @@ ce.styles = O`
   `;
 Ue([
   A({ attribute: !1 })
-], ce.prototype, "hass", 2);
+], de.prototype, "hass", 2);
 Ue([
   v()
-], ce.prototype, "config", 2);
+], de.prototype, "config", 2);
 Ue([
   v()
-], ce.prototype, "areas", 2);
+], de.prototype, "areas", 2);
 Ue([
   v()
-], ce.prototype, "areaError", 2);
+], de.prototype, "areaError", 2);
 Ue([
   v()
-], ce.prototype, "loadingAreas", 2);
-ce = Ue([
+], de.prototype, "loadingAreas", 2);
+de = Ue([
   z("ha-explorer-card-editor")
-], ce);
+], de);
 var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Nn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
@@ -4544,8 +4544,8 @@ let L = class extends j {
     if (!n) return;
     const s = Xi(n.attributes[o.x_attribute ?? "map_x"]), a = Xi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const d = Rn(t), c = bt((e[0] - d.minX) / (d.maxX - d.minX || 1)), p = bt((e[1] - d.minY) / (d.maxY - d.minY || 1));
-    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: c, room_y: p };
+    const c = Rn(t), d = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
+    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: d, room_y: p };
   }
   handleMapClick(e) {
     const t = this.mapPoint(e);
@@ -4759,7 +4759,7 @@ function On(e) {
   return t;
 }
 function In(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], d = i.flatMap(($) => $.reactions ?? []), c = i.flatMap(($) => $.quick_actions ?? []), p = On(e), u = [];
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap(($) => $.reactions ?? []), d = i.flatMap(($) => $.quick_actions ?? []), p = On(e), u = [];
   if (t)
     for (const $ of p) {
       const w = t.states[$.entity];
@@ -4769,8 +4769,8 @@ function In(e, t) {
       }
       (w.state === "unavailable" || w.state === "unknown") && u.push({ ...$, unavailable: !0 });
     }
-  const g = u.filter(($) => !$.unavailable), b = r.filter(($) => !Tn($)), m = i.filter(($) => $.points.length < 3), y = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: d.length ? `${d.length} rumreaktion${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: d.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: c.length ? `${c.length} scene- eller scripthandling${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: c.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: _, entityIssues: u, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: d.length, actionCount: c.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const g = u.filter(($) => !$.unavailable), b = r.filter(($) => !Tn($)), m = i.filter(($) => $.points.length < 3), y = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: _, entityIssues: u, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
 var Dn = Object.defineProperty, jn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? jn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -5775,7 +5775,7 @@ function Jn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let dt = class extends j {
+let ct = class extends j {
   emit(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5815,16 +5815,16 @@ let dt = class extends j {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-dt.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+ct.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 vi([
   A({ attribute: !1 })
-], dt.prototype, "hass", 2);
+], ct.prototype, "hass", 2);
 vi([
   A({ attribute: !1 })
-], dt.prototype, "config", 2);
-dt = vi([
+], ct.prototype, "config", 2);
+ct = vi([
   z("ha-explorer-identity-editor")
-], dt);
+], ct);
 var es = Object.defineProperty, ts = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ts(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
@@ -6293,8 +6293,8 @@ W([
 V = W([
   z("ha-explorer-openings-editor")
 ], V);
-var ls = Object.defineProperty, ds = Object.getOwnPropertyDescriptor, de = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ds(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ls = Object.defineProperty, cs = Object.getOwnPropertyDescriptor, ce = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? cs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ls(t, i, o), o;
 };
@@ -6382,41 +6382,41 @@ let ee = class extends j {
   }
 };
 ee.styles = O`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
-de([
+ce([
   A({ attribute: !1 })
 ], ee.prototype, "config", 2);
-de([
+ce([
   A({ attribute: !1 })
 ], ee.prototype, "hass", 2);
-de([
+ce([
   v()
 ], ee.prototype, "selectedRoomId", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftKind", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftEntity", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftStates", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftPosition", 2);
-de([
+ce([
   v()
 ], ee.prototype, "editingIndex", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftIntensity", 2);
-de([
+ce([
   v()
 ], ee.prototype, "draftRadius", 2);
-ee = de([
+ee = ce([
   z("ha-explorer-room-reactions-editor")
 ], ee);
-var cs = Object.getOwnPropertyDescriptor, ps = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? cs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ds = Object.getOwnPropertyDescriptor, ps = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ds(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
@@ -7281,7 +7281,7 @@ let ne = class extends j {
         vector-effect="non-scaling-stroke"
       ></line>`;
     }), i = this.endpointOptions().filter((r) => r.point).map((r) => {
-      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? Fe(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
+      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((c) => c.id === r.id) : void 0, a = s ? Fe(s, (c) => this.entityState(c)) : void 0, l = !!(a?.conditional && !a.active);
       return P`
           <g transform=${`translate(${o * De} ${n * De})`}>
             <circle class=${r.kind === "room" ? "graph-room" : l ? "graph-node blocked" : "graph-node"} r=${r.kind === "room" ? "11" : "13"}></circle>
@@ -7363,8 +7363,8 @@ let ne = class extends j {
                 </div>
                 ${l ? h`
                   <div class="condition-edit">
-                    <label>Entity<input .value=${this.editingEntity} @input=${(d) => this.editingEntity = d.target.value}></label>
-                    <label>Tilladte states<input .value=${this.editingStates} @input=${(d) => this.editingStates = d.target.value}></label>
+                    <label>Entity<input .value=${this.editingEntity} @input=${(c) => this.editingEntity = c.target.value}></label>
+                    <label>Tilladte states<input .value=${this.editingStates} @input=${(c) => this.editingStates = c.target.value}></label>
                     <div class="condition-actions">
                       <button class="primary mini" @click=${() => this.saveCondition(s)}>Gem route-condition</button>
                       ${n.condition ? h`<button class="secondary mini" @click=${() => this.removeCondition(s)}>Fjern route-condition</button>` : f}
@@ -7738,7 +7738,7 @@ xi([
 oi = xi([
   z("ha-explorer-room-tools")
 ], oi);
-let ni = class extends ce {
+let ni = class extends de {
   constructor() {
     super(...arguments), this.handleNativeControlChange = (e) => {
       e.stopPropagation(), queueMicrotask(() => {
@@ -7820,7 +7820,7 @@ let ni = class extends ce {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-ni.styles = O`${ce.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+ni.styles = O`${de.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
 ni = xi([
   z("ha-explorer-ha-editor")
 ], ni);
@@ -7835,8 +7835,8 @@ function ti(e, t) {
   let i = !1;
   const [r, o] = e;
   for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-    const [a, l] = t[n], [d, c] = t[s];
-    l > o != c > o && r < (d - a) * (o - l) / (c - l || Number.EPSILON) + a && (i = !i);
+    const [a, l] = t[n], [c, d] = t[s];
+    l > o != d > o && r < (c - a) * (o - l) / (d - l || Number.EPSILON) + a && (i = !i);
   }
   return i;
 }
@@ -7852,8 +7852,8 @@ function _s(e) {
   if (e.length < 3) return;
   let t = 0, i = 0, r = 0;
   for (let o = 0; o < e.length; o += 1) {
-    const [n, s] = e[o], [a, l] = e[(o + 1) % e.length], d = n * l - a * s;
-    t += d, i += (n + a) * d, r += (s + l) * d;
+    const [n, s] = e[o], [a, l] = e[(o + 1) % e.length], c = n * l - a * s;
+    t += c, i += (n + a) * c, r += (s + l) * c;
   }
   if (!(Math.abs(t) < Number.EPSILON))
     return [i / (3 * t), r / (3 * t)];
@@ -7916,8 +7916,8 @@ function Ms(e, t) {
   const r = Cs(i), o = Rt(t.attributes[r.heightAttribute]);
   if (o === void 0) return { ...e, visible: !1 };
   const n = t.attributes[r.targetIdAttribute], s = n === void 0 ? t.entity_id : String(n), a = t.attributes[r.timestampAttribute], l = a === void 0 ? `${s}:${o}:${t.attributes.x ?? ""}:${t.attributes.y ?? ""}` : `${s}:${String(a)}`;
-  let d = si.get(e.id);
-  return (!d || d.targetId !== s) && (d = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, d)), d.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed } : (d.lastSample = l, o <= r.maxHeight ? (d.low += 1, d.high = 0, d.low >= r.confirmationUpdates && (d.confirmed = !0)) : o >= r.releaseHeight ? (d.high += 1, d.low = 0, d.high >= r.releaseUpdates && (d.confirmed = !1)) : (d.low = 0, d.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed });
+  let c = si.get(e.id);
+  return (!c || c.targetId !== s) && (c = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, c)), c.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed } : (c.lastSample = l, o <= r.maxHeight ? (c.low += 1, c.high = 0, c.low >= r.confirmationUpdates && (c.confirmed = !0)) : o >= r.releaseHeight ? (c.high += 1, c.low = 0, c.high >= r.releaseUpdates && (c.confirmed = !1)) : (c.low = 0, c.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed });
 }
 const Ps = ["unknown", "unavailable", "not_detected"], Ns = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
 function te(e, t) {
@@ -7969,16 +7969,16 @@ function ar(e, t, i, r, o, n) {
 function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], d = r[n], c = o[n], p = (l * (r.sensor_y - o.sensor_y) + d * (o.sensor_y - i.sensor_y) + c * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + d * (i.sensor_x - o.sensor_x) + c * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + d * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + c * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
   return p * e + u * t + g;
 }
 function Os(e, t, i) {
   const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = Ts(e);
   if (!o || !n || o <= 0 || n <= 0 || !s) return {};
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
-  let d = Math.min(1, Math.max(0, a / o)), c = Math.min(1, Math.max(0, l / n));
+  let c = Math.min(1, Math.max(0, a / o)), d = Math.min(1, Math.max(0, l / n));
   const p = r?.position_calibration;
-  return p?.c ? (d = lr(a, l, p.a, p.b, p.c, "room_x", d), c = lr(a, l, p.a, p.b, p.c, "room_y", c)) : p && (d = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, d), c = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, c)), d = Math.min(1, Math.max(0, d)), c = Math.min(1, Math.max(0, c)), { x: s.minX + d * (s.maxX - s.minX), y: s.minY + c * (s.maxY - s.minY) };
+  return p?.c ? (c = lr(a, l, p.a, p.b, p.c, "room_x", c), d = lr(a, l, p.a, p.b, p.c, "room_y", d)) : p && (c = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, c), d = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, d)), c = Math.min(1, Math.max(0, c)), d = Math.min(1, Math.max(0, d)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + d * (s.maxY - s.minY) };
 }
 function vt(e, t, i) {
   const r = Pr(t, i ?? e.room_id);
@@ -7993,12 +7993,12 @@ function Is(e, t, i, r, o, n) {
   if (!i) return { x: we(e.x), y: we(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
-    const d = ge(te(i, a)), c = ge(te(i, l)), p = Pr(r, o ?? e.room_id);
-    return d === void 0 || c === void 0 || !p ? {} : { ...Os(p, d, c), roomId: p.id };
+    const c = ge(te(i, a)), d = ge(te(i, l)), p = Pr(r, o ?? e.room_id);
+    return c === void 0 || d === void 0 || !p ? {} : { ...Os(p, c, d), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const d = ge(te(i, a)), c = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
-    return d === void 0 || c === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(d / p), y: we(c / u) };
+    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
+    return c === void 0 || d === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(c / p), y: we(d / u) };
   }
   return { x: we(te(i, a), e.x), y: we(te(i, l), e.y) };
 }
@@ -8008,7 +8008,7 @@ function Ds(e, t, i = [], r) {
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...vt(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ps, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = d || c ? !1 : Rs(p, e.visible ?? !0), g = zs(o, n, t) ?? e.room_id, b = Is(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
+  const l = o.hidden_states ?? Ps, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = c || d ? !1 : Rs(p, e.visible ?? !0), g = zs(o, n, t) ?? e.room_id, b = Is(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
   return Ms(y, a);
 }
 function js(e, t, i = [], r) {
@@ -8034,7 +8034,7 @@ function Vs(e, t) {
   const i = zt(t), r = ai(e.point, i), o = ai(Nr(e), i), n = e.target && e.target === et(t) ? Hs : 0;
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
-function dr(e, t, i) {
+function cr(e, t, i) {
   const r = qe(e), o = zt(t);
   if (!o) return;
   const n = Be.get(r);
@@ -8044,17 +8044,17 @@ function Ks(e, t = Date.now()) {
   for (const [a, l] of Be) t - l.seenAt > Bs && Be.delete(a);
   const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && zt(a) && et(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
-    const l = a.room_id ?? "__no_room__", d = n.get(l) ?? [];
-    d.push(a), n.set(l, d);
+    const l = a.room_id ?? "__no_room__", c = n.get(l) ?? [];
+    c.push(a), n.set(l, c);
   }
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
       for (const g of a)
-        s.push(g), dr(g, g, t);
+        s.push(g), cr(g, g, t);
       continue;
     }
-    const l = [...a], d = [...a].sort((g, b) => qe(g).localeCompare(qe(b))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
+    const l = [...a], c = [...a].sort((g, b) => qe(g).localeCompare(qe(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = c.map((g) => {
       const b = Be.get(qe(g));
       if (!b) return { identity: g, track: void 0, scores: [] };
       const m = l.map((y) => Vs(b, y)).sort((y, _) => y.score - _.score);
@@ -8066,17 +8066,17 @@ function Ks(e, t = Date.now()) {
       const y = g.scores.filter((C) => !p.has(C.candidate));
       if (!y.length) continue;
       const _ = y[0], $ = y[1], w = _.distance <= Ls || ai(Nr(m), zt(_.candidate)) <= qs, S = !!$ && $.score - _.score < Fs;
-      w && !S && (c.set(qe(b), _.candidate), p.add(_.candidate));
+      w && !S && (d.set(qe(b), _.candidate), p.add(_.candidate));
     }
-    for (const g of d) {
+    for (const g of c) {
       const b = qe(g);
-      let m = c.get(b);
+      let m = d.get(b);
       if (m || (m = l.find((_) => !p.has(_) && et(_) === et(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
         s.push(g);
         continue;
       }
       const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), dr(g, m, t);
+      s.push(y), cr(g, m, t);
     }
   }
   return [...s, ...o];
@@ -8089,7 +8089,7 @@ var Gs = Object.defineProperty, Ws = Object.getOwnPropertyDescriptor, Dt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Gs(t, i, o), o;
 };
-const Rr = "0.44.4";
+const Rr = "0.44.5";
 let Ge = class extends j {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8359,63 +8359,78 @@ let Ge = class extends j {
         <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
       </g>
       ${t === "left" ? P`
-            <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
-            <circle class="castle-moon-solid" cx="116" cy="218" r="68" fill="#f4d998" stroke="#e3bd72" stroke-width="2"></circle>
-            <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
-            <path class="castle-distant" d="M0 900V708l54-48 40 12 34-54 49 22 43-77 51 22 41-89 67 42 42-60 52 38 34-43 73 52v355Z"></path>
-            <path class="castle-cliff" d="M64 900V758c41-38 86-46 127-27 33 15 61 7 93-15 51-36 86-27 122-2 48 32 96 1 174-49v235Z"></path>
-            <path
-              class="castle-silhouette"
-              fill="#0a0604"
-              stroke="#6f4b2d"
-              stroke-width="1.25"
-              d="M67 760V592h18V548h43v44h16v168ZM92 548l15-73 15 73ZM150 754V522h18v-47h54v47h17v232ZM174 475l21-101 22 101ZM235 744V566h15v-38h54v38h18v178ZM254 528l22-65 23 65ZM310 730V439h23v-57h76v57h22v291ZM336 382l35-154 34 154ZM426 742V548h16v-44h54v44h20v194ZM445 504l24-92 23 92ZM118 645h48v21h-48zM214 615h50v20h-50zM395 603h54v23h-54z"
-            ></path>
+            <circle class="castle-moon-glow" cx="432" cy="302" r="86"></circle>
+            <circle class="castle-moon-solid" cx="432" cy="302" r="39"></circle>
+            <path class="castle-far-hills" d="M-20 900V696C62 631 121 651 184 673c73 25 119-36 193-29 66 6 112 55 203-16v272Z"></path>
+            <path class="castle-distant" d="M-20 900V670l61-50 44 19 40-61 46 29 53-92 54 57 49-104 61 61 55-86 48 63 69-72v466Z"></path>
+            <path class="castle-cliff" d="M-20 900V738l52-17 35-42 58 10 40-31 62 13 48-42 57 7 50-37 72 20 43-39 83 27v293Z"></path>
+            <g class="castle-main-cluster">
+              <path class="castle-complex" d="M22 705V617l23-20 96-8 35 28v88H22Zm38-110v-43l15-15h49l18 15v39Zm103 110V539h19v-32h58v32h18v166h-95Zm18-199 14-46 11-42 12 42 16 46h-53Zm77 199V574l22-18h96l23 18v131H258Zm28-149v-32l18-17h51l17 17v32Zm89 149V445h22v-42h91v42h23v260H375Zm24-303 12-54 9-73 12 73 14 54h-47Zm15-1v-67h15v67Zm43 0v-67h14v67Zm39 304V552h14v-30h42v30h18v153h-74Zm13-184 13-42 10-48 10 48 13 42h-46Z"></path>
+              <path class="castle-complex castle-annex" d="M111 706v-70l25-18h56l22 18v70H111Zm111-1v-77h29v-26h77v26h29v77H222Zm217 0v-70h20v-26h69v26h20v70H439Z"></path>
+              <path class="castle-bridge" d="M124 649C181 626 223 630 272 650s89 17 137-8 81-22 126 6"></path>
+            </g>
             <g class="castle-roof-detail">
-              <path d="M88 548h38M153 522h84M236 566h85M312 439h116M427 548h86"></path>
-              <path d="M107 477v-29M195 376v-36M371 230v-48M469 414v-35"></path>
-              <path d="M350 438v-56M390 438v-56M183 522v-47M207 522v-47"></path>
+              <path d="M22 617l23-20 96-8 35 28M163 539h95M258 574l22-18h96l23 18M375 445h136M496 552h74"></path>
+              <path d="M67 588v-31m35 31v-43m97-42v-28m19 28v-28m201-74v-70m52 70v-70m-46 13h40m51 177v-35"></path>
+              <path d="M391 478h104M276 605h108M36 648h118M450 660h105"></path>
             </g>
             <g class="castle-buttresses">
-              <path d="M74 610l-18 150M142 578l-15 176M239 590l-18 154M321 475l-25 255M430 579l-19 163M501 570l20 172"></path>
+              <path d="M39 623 20 715m142-164-18 160m111-126-16 125m136-252-23 253m160-153 20 149M96 604 82 706m211-140-17 143"></path>
             </g>
-            <g class="castle-windows">
-              <path class="castle-window castle-window-0" d="M100 615v30h13v-30q-6-13-13 0Z"></path>
-              <path class="castle-window castle-window-2" d="M185 552v36h15v-36q-7-16-15 0Z"></path>
-              <path class="castle-window castle-window-1" d="M267 592v28h13v-28q-6-13-13 0Z"></path>
-              <path class="castle-window castle-window-0" d="M360 468v43h18v-43q-9-20-18 0Z"></path>
-              <path class="castle-window castle-window-2" d="M359 558v29h16v-29q-8-14-16 0Z"></path>
-              <path class="castle-window castle-window-1" d="M463 576v33h15v-33q-7-15-15 0Z"></path>
+            <g class="castle-windows castle-window-grid">
+              <rect class="castle-window castle-window-0" x="61" y="622" width="5" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="91" y="615" width="4" height="8" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="119" y="627" width="5" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="190" y="553" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="220" y="557" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="194" y="593" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="224" y="600" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="301" y="593" width="5" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="335" y="582" width="4" height="8" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="405" y="471" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="438" y="459" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="470" y="477" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="405" y="524" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="438" y="515" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="475" y="537" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="522" y="574" width="5" height="10" rx="2"></rect>
             </g>
           ` : P`
-            <circle class="castle-moon-glow castle-moon-dim" cx="458" cy="258" r="104"></circle>
-            <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
-            <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
-            <path class="castle-cliff" d="M-20 900V711c76-51 135-40 190-7 47 28 84 24 129-9 52-39 94-30 136 1 43 31 91 28 145-4v208Z"></path>
-            <path
-              class="castle-silhouette"
-              fill="#0a0604"
-              stroke="#6f4b2d"
-              stroke-width="1.25"
-              d="M34 746V552h18v-44h58v44h18v194ZM56 508l25-89 24 89ZM122 738V607h22v-34h68v34h19v131ZM145 573l33-57 31 57ZM221 724V472h21v-51h70v51h23v252ZM244 421l33-133 32 133ZM330 742V541h18v-42h55v42h20v201ZM349 499l26-88 24 88ZM418 754V585h16v-39h51v39h18v169ZM435 546l24-69 23 69ZM492 765V625h14v-32h36v32h18v140ZM504 593l19-58 17 58ZM95 661h58v21H95zM207 626h51v20h-51zM309 590h57v23h-57zM398 650h47v19h-47z"
-            ></path>
-            <path class="castle-bridge" d="M111 688C151 656 188 655 226 685s77 28 114-2 73-31 111 4"></path>
+            <circle class="castle-moon-glow castle-moon-dim" cx="95" cy="305" r="76"></circle>
+            <path class="castle-far-hills" d="M-20 900V675c87-53 151-9 212-10 68-1 97-56 170-49 68 7 117 58 218 5v279Z"></path>
+            <path class="castle-distant" d="M-20 900V511l63 52 51-86 44 53 55-113 56 85 48-66 58 75 56-101 51 76 48-49 70 79v384Z"></path>
+            <path class="castle-cliff" d="M-20 900V622l58-26 43 37 63-18 49 31 57-24 56 47 70-21 43 39 67-8 94 51v170Z"></path>
+            <g class="castle-main-cluster">
+              <path class="castle-complex" d="M-18 704V503h21v-38h82v38h23v201H-18Zm20-240 13-50 10-72 12 72 16 50H2Zm89 240V568h18v-35h61v35h18v136H91Zm20-172 14-49 13-61 13 61 16 49h-54Zm76 172V456h22v-44h92v44h23v248H187Zm22-293 14-54 11-79 12 79 16 54h-53Zm20 0v-75h15v75Zm44 0v-75h14v75Zm49 293V546h19v-35h65v35h19v158H322Zm20-194 15-45 12-61 13 61 17 45h-57Zm81 194V605l20-19h73l24 19v99H423Zm31-119v-34l14-14h37l14 14v34Z"></path>
+              <path class="castle-complex castle-annex" d="M48 704v-76h24v-25h75v25h26v76H48Zm234 0v-81h26v-28h78v28h28v81H282Zm193 0v-65h16v-26h57v26h22v65h-95Z"></path>
+              <path class="castle-bridge" d="M-14 655c50-27 96-24 143 3s90 27 137-4 91-29 137 0 86 30 145-4"></path>
+            </g>
             <g class="castle-roof-detail">
-              <path d="M35 552h92M123 607h106M222 472h112M331 541h91M419 585h83"></path>
-              <path d="M81 420v-38M178 516v-35M277 289v-51M375 411v-36M459 477v-31"></path>
-              <path d="M256 472v-51M296 472v-51M364 541v-42"></path>
+              <path d="M-18 503H108M91 568h97M187 456h137M322 546h101M423 605l20-19h73l24 19"></path>
+              <path d="M17 462v-54m25 54v-54m190 2v-76m54 76v-76m-43-9h31m80 184v-38m35 38v-38m76 113v-32"></path>
+              <path d="M4 542h89m109-42h107m35 91h64m33 42h88"></path>
             </g>
             <g class="castle-buttresses">
-              <path d="M39 586l-20 160M124 584l18 154M224 510l-20 214M334 571l-20 171M421 615l-18 139M501 647l-14 118"></path>
+              <path d="M-2 525-22 712m128-128 17 125m65-238-22 238m157-148-19 148m117-93-17 94m126-94 21 90M73 614 55 705m227-81-17 84"></path>
             </g>
-            <g class="castle-windows">
-              <path class="castle-window castle-window-1" d="M73 576v34h16v-34q-8-16-16 0Z"></path>
-              <path class="castle-window castle-window-0" d="M169 627v28h14v-28q-7-13-14 0Z"></path>
-              <path class="castle-window castle-window-2" d="M268 505v42h18v-42q-9-20-18 0Z"></path>
-              <path class="castle-window castle-window-1" d="M268 586v29h15v-29q-7-14-15 0Z"></path>
-              <path class="castle-window castle-window-0" d="M367 573v34h16v-34q-8-16-16 0Z"></path>
-              <path class="castle-window castle-window-2" d="M451 614v29h14v-29q-7-13-14 0Z"></path>
-              <path class="castle-window castle-window-1" d="M516 647v25h12v-25q-6-12-12 0Z"></path>
+            <g class="castle-windows castle-window-grid">
+              <rect class="castle-window castle-window-1" x="14" y="519" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="45" y="507" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="74" y="528" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="16" y="575" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="49" y="567" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="123" y="587" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="151" y="599" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="213" y="481" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="245" y="469" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="278" y="488" width="5" height="11" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="214" y="540" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="248" y="530" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="279" y="551" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="350" y="570" width="5" height="10" rx="2"></rect>
+              <rect class="castle-window castle-window-2" x="386" y="581" width="4" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-1" x="465" y="618" width="5" height="9" rx="2"></rect>
+              <rect class="castle-window castle-window-0" x="498" y="628" width="4" height="8" rx="2"></rect>
             </g>
           `}
       <rect class="castle-water" x="-10" y="792" width="590" height="128" fill="#120c08"></rect>
@@ -8444,7 +8459,7 @@ let Ge = class extends j {
     ), r = Ks(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)
-    ), l = this.config.appearance?.compass ?? {}, d = this.config.appearance?.hide_source_text ?? !1, c = this.alarmState(), p = Math.min(
+    ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
     ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
@@ -8467,12 +8482,12 @@ let Ge = class extends j {
       "exceptional"
     ].includes(y), C = m && !_ && ["sunny", "clear", "partlycloudy"].includes(y), k = y === "partlycloudy";
     return h`${this.renderCastleSurround()}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${_ ? " moonlight" : ""}${C ? " sunlight" : ""}${k ? " partly-cloudy" : ""}${S ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${y}` : ""}${c === "armed" ? " alarm-armed" : ""}${c === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      class=${`${n ? "enchanted" : "classic"}${_ ? " moonlight" : ""}${C ? " sunlight" : ""}${k ? " partly-cloudy" : ""}${S ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${w}`}
       ><header>
         <div>
           <span
-            >${c === "triggered" ? "⚠ Alarm Triggered" : c === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? _ ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : $ === "exceptional" ? "⚠ Exceptional Weather" : $ === "wind" ? "➳ Wind over the Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : C ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : _ ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? _ ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : $ === "exceptional" ? "⚠ Exceptional Weather" : $ === "wind" ? "➳ Wind over the Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : C ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : _ ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
@@ -8484,7 +8499,7 @@ let Ge = class extends j {
         <div class="sun-disc"></div>
         <explorer-source-clean-canvas
           .theme=${o}
-          .hideSourceText=${d}
+          .hideSourceText=${c}
           .weatherEffect=${m ? $ : "clear"}
           .weatherState=${y}
           .weatherIntensity=${w}
@@ -8614,43 +8629,51 @@ Ge.styles = O`
         right: -4%;
       }
       .castle-moon-glow {
-        fill: rgba(227, 185, 105, 0.24);
-        filter: blur(34px);
+        fill: rgba(218, 211, 181, 0.2);
+        filter: blur(27px);
       }
       .castle-moon-solid {
-        fill: #f4d998;
-        stroke: #e3bd72;
-        stroke-width: 2;
-        opacity: 0.94;
+        fill: #d9d1b7;
+        stroke: rgba(241, 226, 187, 0.65);
+        stroke-width: 1.2;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 12px rgba(219, 208, 171, 0.36));
       }
       .castle-moon-dim {
         opacity: 0.48;
       }
       .castle-far-hills {
-        fill: rgba(43, 30, 22, 0.74);
+        fill: rgba(21, 23, 23, 0.78);
       }
       .enchanted-castle-left .castle-distant {
-        fill: rgba(82, 57, 38, 0.82);
+        fill: rgba(31, 34, 34, 0.84);
       }
       .enchanted-castle-right .castle-distant {
-        fill: rgba(74, 50, 34, 0.84);
+        fill: rgba(27, 31, 32, 0.86);
       }
       .castle-distant {
         opacity: 0.42;
         filter: blur(0.45px);
       }
       .castle-cliff {
-        fill: rgba(8, 5, 3, 0.95);
+        fill: rgba(5, 7, 8, 0.97);
+        filter: drop-shadow(0 -5px 11px rgba(0, 0, 0, 0.42));
+      }
+      .castle-main-cluster {
+        filter:
+          drop-shadow(0 -3px 0 rgba(116, 101, 78, 0.12))
+          drop-shadow(0 12px 17px rgba(0, 0, 0, 0.76));
       }
       .castle-complex {
-        fill: #070402;
-        stroke: rgba(190, 145, 84, 0.3);
-        stroke-width: 1.25;
+        fill: #080a0a;
+        stroke: rgba(172, 143, 98, 0.2);
+        stroke-width: 0.85;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
-        filter:
-          drop-shadow(0 -3px 0 rgba(153, 108, 62, 0.24))
-          drop-shadow(0 9px 14px rgba(0, 0, 0, 0.68));
+      }
+      .castle-annex {
+        fill: #060808;
+        opacity: 0.98;
       }
       .castle-silhouette {
         fill: #0a0604;
@@ -8664,20 +8687,20 @@ Ge.styles = O`
       .castle-roof-detail,
       .castle-buttresses {
         fill: none;
-        stroke: rgba(207, 168, 105, 0.22);
-        stroke-width: 2;
+        stroke: rgba(198, 171, 126, 0.14);
+        stroke-width: 1.25;
         stroke-linecap: round;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
       }
       .castle-buttresses {
-        stroke: rgba(180, 139, 82, 0.14);
-        stroke-width: 3;
+        stroke: rgba(160, 137, 101, 0.1);
+        stroke-width: 2.2;
       }
       .castle-bridge {
         fill: none;
-        stroke: rgba(4, 4, 4, 0.94);
-        stroke-width: 19;
+        stroke: rgba(5, 7, 7, 0.97);
+        stroke-width: 12;
         stroke-linecap: round;
         filter:
           drop-shadow(0 -2px 0 rgba(208, 165, 94, 0.16))
@@ -8691,13 +8714,16 @@ Ge.styles = O`
         filter: drop-shadow(0 -2px 0 rgba(181, 141, 83, 0.11));
       }
       .castle-window {
-        fill: rgba(238, 177, 76, 0.76);
-        stroke: rgba(255, 218, 137, 0.24);
-        stroke-width: 0.8;
+        fill: rgba(240, 179, 78, 0.84);
+        stroke: rgba(255, 225, 157, 0.18);
+        stroke-width: 0.45;
         filter:
-          drop-shadow(0 0 3px rgba(239, 164, 55, 0.82))
-          drop-shadow(0 0 9px rgba(219, 133, 35, 0.38));
+          drop-shadow(0 0 2px rgba(239, 164, 55, 0.78))
+          drop-shadow(0 0 5px rgba(219, 133, 35, 0.3));
         animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
+      }
+      .castle-window-grid {
+        opacity: 0.92;
       }
       .castle-window-1 {
         animation-delay: -2.2s;
