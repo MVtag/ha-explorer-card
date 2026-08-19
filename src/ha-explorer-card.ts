@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from "lit";
+import { LitElement, css, html, nothing, svg } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "./components/explorer-source-clean-canvas";
 import "./components/explorer-ha-editor";
@@ -15,7 +15,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.44.3";
+const CARD_VERSION = "0.44.4";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -329,7 +329,7 @@ export class HaExplorerCard extends LitElement {
         <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
       </g>
       ${side === "left"
-        ? html`
+        ? svg`
             <circle class="castle-moon-glow" cx="116" cy="218" r="116"></circle>
             <circle class="castle-moon-solid" cx="116" cy="218" r="68" fill="#f4d998" stroke="#e3bd72" stroke-width="2"></circle>
             <path class="castle-far-hills" d="M-20 900V662C55 602 116 614 176 647c65 36 113-12 181-7 72 5 117 46 223-28v288Z"></path>
@@ -359,7 +359,7 @@ export class HaExplorerCard extends LitElement {
               <path class="castle-window castle-window-1" d="M463 576v33h15v-33q-7-15-15 0Z"></path>
             </g>
           `
-        : html`
+        : svg`
             <circle class="castle-moon-glow castle-moon-dim" cx="458" cy="258" r="104"></circle>
             <path class="castle-far-hills" d="M-20 900V629c88 47 145 4 213 19 61 13 92 63 163 29 66-32 111-68 224-10v233Z"></path>
             <path class="castle-distant" d="M-20 900V560l67-47 41 47 48-72 42 32 50-105 62 67 45-83 63 65 43-47 43 53 76-55 40 44v441Z"></path>
