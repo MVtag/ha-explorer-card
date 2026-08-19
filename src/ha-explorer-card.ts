@@ -1,5 +1,6 @@
-import { LitElement, css, html, nothing, svg } from "lit";
+import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import castleSurroundImage from "./assets/castle-surround-v2.webp";
 import "./components/explorer-source-clean-canvas";
 import "./components/explorer-ha-editor";
 import type {
@@ -15,7 +16,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.44.5";
+const CARD_VERSION = "0.44.6";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -313,112 +314,13 @@ export class HaExplorerCard extends LitElement {
     return html`<div class="celestial-cloud" aria-hidden="true"></div>`;
   }
   private renderCastleSurround() {
-    const castle = (side: "left" | "right") => html`<svg
-      class=${`enchanted-castle-side enchanted-castle-${side}`}
-      viewBox="0 0 560 900"
-      preserveAspectRatio="xMidYMax slice"
-      aria-hidden="true"
-    >
-      <defs>
-        <filter id=${`castle-soft-mist-${side}`} x="-30%" y="-250%" width="160%" height="600%">
-          <feGaussianBlur stdDeviation="14"></feGaussianBlur>
-        </filter>
-      </defs>
-      <g class="castle-cloud-bank">
-        <path d="M-80 232C21 163 102 209 158 174s143-45 215 5 135 11 240-24"></path>
-        <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
-      </g>
-      ${side === "left"
-        ? svg`
-            <circle class="castle-moon-glow" cx="432" cy="302" r="86"></circle>
-            <circle class="castle-moon-solid" cx="432" cy="302" r="39"></circle>
-            <path class="castle-far-hills" d="M-20 900V696C62 631 121 651 184 673c73 25 119-36 193-29 66 6 112 55 203-16v272Z"></path>
-            <path class="castle-distant" d="M-20 900V670l61-50 44 19 40-61 46 29 53-92 54 57 49-104 61 61 55-86 48 63 69-72v466Z"></path>
-            <path class="castle-cliff" d="M-20 900V738l52-17 35-42 58 10 40-31 62 13 48-42 57 7 50-37 72 20 43-39 83 27v293Z"></path>
-            <g class="castle-main-cluster">
-              <path class="castle-complex" d="M22 705V617l23-20 96-8 35 28v88H22Zm38-110v-43l15-15h49l18 15v39Zm103 110V539h19v-32h58v32h18v166h-95Zm18-199 14-46 11-42 12 42 16 46h-53Zm77 199V574l22-18h96l23 18v131H258Zm28-149v-32l18-17h51l17 17v32Zm89 149V445h22v-42h91v42h23v260H375Zm24-303 12-54 9-73 12 73 14 54h-47Zm15-1v-67h15v67Zm43 0v-67h14v67Zm39 304V552h14v-30h42v30h18v153h-74Zm13-184 13-42 10-48 10 48 13 42h-46Z"></path>
-              <path class="castle-complex castle-annex" d="M111 706v-70l25-18h56l22 18v70H111Zm111-1v-77h29v-26h77v26h29v77H222Zm217 0v-70h20v-26h69v26h20v70H439Z"></path>
-              <path class="castle-bridge" d="M124 649C181 626 223 630 272 650s89 17 137-8 81-22 126 6"></path>
-            </g>
-            <g class="castle-roof-detail">
-              <path d="M22 617l23-20 96-8 35 28M163 539h95M258 574l22-18h96l23 18M375 445h136M496 552h74"></path>
-              <path d="M67 588v-31m35 31v-43m97-42v-28m19 28v-28m201-74v-70m52 70v-70m-46 13h40m51 177v-35"></path>
-              <path d="M391 478h104M276 605h108M36 648h118M450 660h105"></path>
-            </g>
-            <g class="castle-buttresses">
-              <path d="M39 623 20 715m142-164-18 160m111-126-16 125m136-252-23 253m160-153 20 149M96 604 82 706m211-140-17 143"></path>
-            </g>
-            <g class="castle-windows castle-window-grid">
-              <rect class="castle-window castle-window-0" x="61" y="622" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="91" y="615" width="4" height="8" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="119" y="627" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="190" y="553" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="220" y="557" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="194" y="593" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="224" y="600" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="301" y="593" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="335" y="582" width="4" height="8" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="405" y="471" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="438" y="459" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="470" y="477" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="405" y="524" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="438" y="515" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="475" y="537" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="522" y="574" width="5" height="10" rx="2"></rect>
-            </g>
-          `
-        : svg`
-            <circle class="castle-moon-glow castle-moon-dim" cx="95" cy="305" r="76"></circle>
-            <path class="castle-far-hills" d="M-20 900V675c87-53 151-9 212-10 68-1 97-56 170-49 68 7 117 58 218 5v279Z"></path>
-            <path class="castle-distant" d="M-20 900V511l63 52 51-86 44 53 55-113 56 85 48-66 58 75 56-101 51 76 48-49 70 79v384Z"></path>
-            <path class="castle-cliff" d="M-20 900V622l58-26 43 37 63-18 49 31 57-24 56 47 70-21 43 39 67-8 94 51v170Z"></path>
-            <g class="castle-main-cluster">
-              <path class="castle-complex" d="M-18 704V503h21v-38h82v38h23v201H-18Zm20-240 13-50 10-72 12 72 16 50H2Zm89 240V568h18v-35h61v35h18v136H91Zm20-172 14-49 13-61 13 61 16 49h-54Zm76 172V456h22v-44h92v44h23v248H187Zm22-293 14-54 11-79 12 79 16 54h-53Zm20 0v-75h15v75Zm44 0v-75h14v75Zm49 293V546h19v-35h65v35h19v158H322Zm20-194 15-45 12-61 13 61 17 45h-57Zm81 194V605l20-19h73l24 19v99H423Zm31-119v-34l14-14h37l14 14v34Z"></path>
-              <path class="castle-complex castle-annex" d="M48 704v-76h24v-25h75v25h26v76H48Zm234 0v-81h26v-28h78v28h28v81H282Zm193 0v-65h16v-26h57v26h22v65h-95Z"></path>
-              <path class="castle-bridge" d="M-14 655c50-27 96-24 143 3s90 27 137-4 91-29 137 0 86 30 145-4"></path>
-            </g>
-            <g class="castle-roof-detail">
-              <path d="M-18 503H108M91 568h97M187 456h137M322 546h101M423 605l20-19h73l24 19"></path>
-              <path d="M17 462v-54m25 54v-54m190 2v-76m54 76v-76m-43-9h31m80 184v-38m35 38v-38m76 113v-32"></path>
-              <path d="M4 542h89m109-42h107m35 91h64m33 42h88"></path>
-            </g>
-            <g class="castle-buttresses">
-              <path d="M-2 525-22 712m128-128 17 125m65-238-22 238m157-148-19 148m117-93-17 94m126-94 21 90M73 614 55 705m227-81-17 84"></path>
-            </g>
-            <g class="castle-windows castle-window-grid">
-              <rect class="castle-window castle-window-1" x="14" y="519" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="45" y="507" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="74" y="528" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="16" y="575" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="49" y="567" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="123" y="587" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="151" y="599" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="213" y="481" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="245" y="469" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="278" y="488" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="214" y="540" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="248" y="530" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="279" y="551" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="350" y="570" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="386" y="581" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="465" y="618" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="498" y="628" width="4" height="8" rx="2"></rect>
-            </g>
-          `}
-      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill="#120c08"></rect>
-      <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
-      <g class="castle-reflections">
-        <path d="M112 805v72M192 798v89M276 800v78M371 790v103M468 802v72"></path>
-        <path class="moon-reflection" d=${side === "left" ? "M112 798c-17 23-25 50-12 96m31-96c11 31 5 61-4 96" : "M455 802c-12 27-17 57-6 91m24-91c8 32 2 60-8 91"}></path>
-      </g>
-      <g class="castle-water-ripples">
-        <path d="M8 824h126m-74 22h154m-99 25h176m35-46h153m-112 25h185m-80 26h112"></path>
-      </g>
-      <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${side})`}></path>
-      <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${side})`}></path>
-    </svg>`;
     return html`<div class="enchanted-castle-surround" aria-hidden="true">
-      ${castle("left")}${castle("right")}
+      <div
+        class="castle-cinematic-backdrop"
+        style=${`background-image: url("${castleSurroundImage}")`}
+      ></div>
+      <div class="castle-cinematic-parchment"></div>
+      <div class="castle-cinematic-vignette"></div>
     </div>`;
   }
   protected render() {
@@ -642,170 +544,64 @@ export class HaExplorerCard extends LitElement {
         overflow: hidden;
         pointer-events: none;
       }
-      .enchanted-castle-side {
+      .castle-cinematic-backdrop,
+      .castle-cinematic-parchment,
+      .castle-cinematic-vignette {
         position: absolute;
-        bottom: 0;
-        width: 42%;
-        max-width: 720px;
-        height: 100%;
-        overflow: visible;
+        inset: 0;
+        pointer-events: none;
+      }
+      .castle-cinematic-backdrop {
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
         opacity: 0.98;
         filter:
-          drop-shadow(0 -12px 30px rgba(187, 134, 69, 0.2))
-          drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
+          sepia(0.16)
+          saturate(0.76)
+          brightness(0.72)
+          contrast(1.18);
+        transform: scale(1.012);
+        transform-origin: center bottom;
       }
-      .enchanted-castle-left {
-        left: -4%;
+      .castle-cinematic-parchment {
+        background:
+          radial-gradient(
+            ellipse at 50% 35%,
+            rgba(206, 166, 99, 0.12),
+            transparent 57%
+          ),
+          repeating-linear-gradient(
+            112deg,
+            transparent 0 61px,
+            rgba(229, 196, 133, 0.025) 62px 63px,
+            transparent 64px 124px
+          ),
+          linear-gradient(
+            180deg,
+            rgba(111, 73, 35, 0.08),
+            rgba(39, 24, 14, 0.2) 68%,
+            rgba(5, 5, 6, 0.38)
+          );
+        mix-blend-mode: soft-light;
       }
-      .enchanted-castle-right {
-        right: -4%;
-      }
-      .castle-moon-glow {
-        fill: rgba(218, 211, 181, 0.2);
-        filter: blur(27px);
-      }
-      .castle-moon-solid {
-        fill: #d9d1b7;
-        stroke: rgba(241, 226, 187, 0.65);
-        stroke-width: 1.2;
-        opacity: 0.9;
-        filter: drop-shadow(0 0 12px rgba(219, 208, 171, 0.36));
-      }
-      .castle-moon-dim {
-        opacity: 0.48;
-      }
-      .castle-far-hills {
-        fill: rgba(21, 23, 23, 0.78);
-      }
-      .enchanted-castle-left .castle-distant {
-        fill: rgba(31, 34, 34, 0.84);
-      }
-      .enchanted-castle-right .castle-distant {
-        fill: rgba(27, 31, 32, 0.86);
-      }
-      .castle-distant {
-        opacity: 0.42;
-        filter: blur(0.45px);
-      }
-      .castle-cliff {
-        fill: rgba(5, 7, 8, 0.97);
-        filter: drop-shadow(0 -5px 11px rgba(0, 0, 0, 0.42));
-      }
-      .castle-main-cluster {
-        filter:
-          drop-shadow(0 -3px 0 rgba(116, 101, 78, 0.12))
-          drop-shadow(0 12px 17px rgba(0, 0, 0, 0.76));
-      }
-      .castle-complex {
-        fill: #080a0a;
-        stroke: rgba(172, 143, 98, 0.2);
-        stroke-width: 0.85;
-        stroke-linejoin: round;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-annex {
-        fill: #060808;
-        opacity: 0.98;
-      }
-      .castle-silhouette {
-        fill: #0a0604;
-        stroke: #6f4b2d;
-        stroke-width: 1.25;
-        stroke-linejoin: round;
-        opacity: 1;
-        visibility: visible;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-roof-detail,
-      .castle-buttresses {
-        fill: none;
-        stroke: rgba(198, 171, 126, 0.14);
-        stroke-width: 1.25;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-buttresses {
-        stroke: rgba(160, 137, 101, 0.1);
-        stroke-width: 2.2;
-      }
-      .castle-bridge {
-        fill: none;
-        stroke: rgba(5, 7, 7, 0.97);
-        stroke-width: 12;
-        stroke-linecap: round;
-        filter:
-          drop-shadow(0 -2px 0 rgba(208, 165, 94, 0.16))
-          drop-shadow(0 7px 5px rgba(0, 0, 0, 0.42));
-      }
-      .castle-ridge {
-        fill: none;
-        stroke: rgba(2, 3, 3, 0.96);
-        stroke-width: 128;
-        stroke-linecap: round;
-        filter: drop-shadow(0 -2px 0 rgba(181, 141, 83, 0.11));
-      }
-      .castle-window {
-        fill: rgba(240, 179, 78, 0.84);
-        stroke: rgba(255, 225, 157, 0.18);
-        stroke-width: 0.45;
-        filter:
-          drop-shadow(0 0 2px rgba(239, 164, 55, 0.78))
-          drop-shadow(0 0 5px rgba(219, 133, 35, 0.3));
-        animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
-      }
-      .castle-window-grid {
-        opacity: 0.92;
-      }
-      .castle-window-1 {
-        animation-delay: -2.2s;
-        animation-duration: 7.1s;
-      }
-      .castle-window-2 {
-        animation-delay: -4.1s;
-        animation-duration: 4.9s;
-      }
-      .castle-mist {
-        fill: none;
-        stroke: rgba(224, 199, 151, 0.15);
-        stroke-width: 34;
-        stroke-linecap: round;
-        animation: explorerCastleMist 14s ease-in-out infinite alternate;
-      }
-      .castle-mist-back {
-        stroke: rgba(198, 174, 133, 0.1);
-        stroke-width: 45;
-        animation-direction: alternate-reverse;
-        animation-duration: 19s;
-      }
-      .castle-cloud-bank {
-        fill: none;
-        stroke: rgba(206, 166, 105, 0.13);
-        stroke-width: 72;
-        stroke-linecap: round;
-        filter: blur(24px);
-      }
-      .castle-water {
-        fill: #120c08;
-        opacity: 0.96;
-      }
-      .castle-reflections {
-        fill: none;
-        stroke: rgba(235, 178, 76, 0.24);
-        stroke-width: 12;
-        stroke-linecap: round;
-        filter: blur(7px);
-        animation: explorerWaterShimmer 6.5s ease-in-out infinite alternate;
-      }
-      .castle-reflections .moon-reflection {
-        stroke: rgba(236, 201, 137, 0.32);
-        stroke-width: 18;
-      }
-      .castle-water-ripples {
-        fill: none;
-        stroke: rgba(208, 167, 105, 0.16);
-        stroke-width: 2;
-        stroke-linecap: round;
+      .castle-cinematic-vignette {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(4, 5, 7, 0.26),
+            transparent 20% 80%,
+            rgba(4, 5, 7, 0.26)
+          ),
+          radial-gradient(
+            ellipse at center,
+            transparent 36%,
+            rgba(4, 5, 7, 0.08) 65%,
+            rgba(2, 3, 4, 0.52) 100%
+          );
+        box-shadow:
+          inset 0 0 120px rgba(1, 2, 3, 0.58),
+          inset 0 0 2px rgba(222, 191, 135, 0.24);
       }
       ha-card:not(.preview) {
         position: relative;
