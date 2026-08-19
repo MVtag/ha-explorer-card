@@ -8090,7 +8090,7 @@ var Ws = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, Dt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ws(t, i, o), o;
 };
-const zr = "0.44.6";
+const zr = "0.44.7";
 let Ze = class extends q {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8349,6 +8349,8 @@ let Ze = class extends q {
         class="castle-cinematic-backdrop"
         style=${`background-image: url("${po}")`}
       ></div>
+      <div class="castle-window-lights castle-window-lights-a"></div>
+      <div class="castle-window-lights castle-window-lights-b"></div>
       <div class="castle-cinematic-parchment"></div>
       <div class="castle-cinematic-vignette"></div>
     </div>`;
@@ -8515,6 +8517,7 @@ Ze.styles = j`
         pointer-events: none;
       }
       .castle-cinematic-backdrop,
+      .castle-window-lights,
       .castle-cinematic-parchment,
       .castle-cinematic-vignette {
         position: absolute;
@@ -8533,6 +8536,42 @@ Ze.styles = j`
           contrast(1.18);
         transform: scale(1.012);
         transform-origin: center bottom;
+      }
+      .castle-window-lights {
+        z-index: 1;
+        background-repeat: no-repeat;
+        mix-blend-mode: screen;
+        filter: drop-shadow(0 0 3px rgba(242, 171, 64, 0.28));
+      }
+      .castle-window-lights-a {
+        background:
+          radial-gradient(circle at 7.6% 35%, rgba(255, 235, 164, 0.98) 0 1px, rgba(239, 165, 60, 0.72) 1.5px 2.4px, transparent 6px),
+          radial-gradient(circle at 11.4% 31%, rgba(255, 229, 145, 0.94) 0 1px, rgba(236, 158, 52, 0.68) 1.5px 2.3px, transparent 5.5px),
+          radial-gradient(circle at 15.9% 38%, rgba(255, 235, 164, 0.96) 0 1px, rgba(239, 165, 60, 0.7) 1.5px 2.4px, transparent 6px),
+          radial-gradient(circle at 21.1% 32%, rgba(255, 226, 137, 0.92) 0 1px, rgba(230, 149, 44, 0.66) 1.5px 2.2px, transparent 5.5px),
+          radial-gradient(circle at 25.2% 27%, rgba(255, 237, 171, 0.96) 0 1px, rgba(241, 172, 64, 0.72) 1.5px 2.5px, transparent 6px),
+          radial-gradient(circle at 9.6% 55%, rgba(255, 226, 137, 0.9) 0 1px, rgba(230, 149, 44, 0.62) 1.5px 2.2px, transparent 5px),
+          radial-gradient(circle at 82.6% 31%, rgba(255, 235, 164, 0.98) 0 1px, rgba(239, 165, 60, 0.72) 1.5px 2.4px, transparent 6px),
+          radial-gradient(circle at 88.7% 26%, rgba(255, 229, 145, 0.94) 0 1px, rgba(236, 158, 52, 0.68) 1.5px 2.3px, transparent 5.5px),
+          radial-gradient(circle at 93.2% 34%, rgba(255, 235, 164, 0.96) 0 1px, rgba(239, 165, 60, 0.7) 1.5px 2.4px, transparent 6px),
+          radial-gradient(circle at 96.4% 39%, rgba(255, 226, 137, 0.92) 0 1px, rgba(230, 149, 44, 0.66) 1.5px 2.2px, transparent 5.5px),
+          radial-gradient(circle at 84.7% 54%, rgba(255, 237, 171, 0.94) 0 1px, rgba(241, 172, 64, 0.68) 1.5px 2.4px, transparent 5.5px),
+          radial-gradient(circle at 91.5% 48%, rgba(255, 226, 137, 0.9) 0 1px, rgba(230, 149, 44, 0.62) 1.5px 2.2px, transparent 5px);
+        animation: explorerCastleLightsA 8.6s ease-in-out infinite alternate;
+      }
+      .castle-window-lights-b {
+        background:
+          radial-gradient(circle at 5.2% 42%, rgba(255, 224, 132, 0.9) 0 1px, rgba(231, 151, 47, 0.62) 1.5px 2.2px, transparent 5px),
+          radial-gradient(circle at 13.8% 45%, rgba(255, 236, 168, 0.94) 0 1px, rgba(239, 166, 59, 0.68) 1.5px 2.4px, transparent 5.5px),
+          radial-gradient(circle at 18.9% 35%, rgba(255, 227, 140, 0.92) 0 1px, rgba(233, 154, 48, 0.64) 1.5px 2.3px, transparent 5px),
+          radial-gradient(circle at 23.3% 51%, rgba(255, 235, 162, 0.9) 0 1px, rgba(238, 162, 55, 0.62) 1.5px 2.3px, transparent 5.5px),
+          radial-gradient(circle at 77.2% 39%, rgba(255, 224, 132, 0.9) 0 1px, rgba(231, 151, 47, 0.62) 1.5px 2.2px, transparent 5px),
+          radial-gradient(circle at 80.4% 46%, rgba(255, 236, 168, 0.94) 0 1px, rgba(239, 166, 59, 0.68) 1.5px 2.4px, transparent 5.5px),
+          radial-gradient(circle at 86.1% 37%, rgba(255, 227, 140, 0.92) 0 1px, rgba(233, 154, 48, 0.64) 1.5px 2.3px, transparent 5px),
+          radial-gradient(circle at 90.1% 31%, rgba(255, 235, 162, 0.92) 0 1px, rgba(238, 162, 55, 0.64) 1.5px 2.3px, transparent 5.5px),
+          radial-gradient(circle at 95.1% 28%, rgba(255, 229, 148, 0.9) 0 1px, rgba(235, 157, 51, 0.62) 1.5px 2.2px, transparent 5px),
+          radial-gradient(circle at 97.2% 55%, rgba(255, 235, 162, 0.9) 0 1px, rgba(238, 162, 55, 0.62) 1.5px 2.3px, transparent 5.5px);
+        animation: explorerCastleLightsB 10.8s ease-in-out -4.2s infinite alternate;
       }
       .castle-cinematic-parchment {
         background:
@@ -9695,6 +9734,18 @@ Ze.styles = j`
       46% { opacity: 0.92; }
       100% { opacity: 0.52; }
     }
+    @keyframes explorerCastleLightsA {
+      0% { opacity: 0.26; }
+      38% { opacity: 0.58; }
+      72% { opacity: 0.4; }
+      100% { opacity: 0.72; }
+    }
+    @keyframes explorerCastleLightsB {
+      0% { opacity: 0.64; }
+      43% { opacity: 0.34; }
+      76% { opacity: 0.7; }
+      100% { opacity: 0.42; }
+    }
     @keyframes explorerCastleMist {
       from { transform: translateX(-28px); opacity: 0.45; }
       to { transform: translateX(34px); opacity: 0.9; }
@@ -9705,6 +9756,7 @@ Ze.styles = j`
     }
     @media (prefers-reduced-motion: reduce) {
       :host::before,
+      .castle-window-lights,
       .castle-window,
       .castle-mist,
       .castle-reflections,
