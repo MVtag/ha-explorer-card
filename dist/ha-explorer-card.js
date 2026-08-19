@@ -1,7 +1,7 @@
-const xt = globalThis, li = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, ci = /* @__PURE__ */ Symbol(), ki = /* @__PURE__ */ new WeakMap();
-let dr = class {
+const xt = globalThis, li = xt.ShadowRoot && (xt.ShadyCSS === void 0 || xt.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, di = /* @__PURE__ */ Symbol(), Ai = /* @__PURE__ */ new WeakMap();
+let cr = class {
   constructor(t, i, r) {
-    if (this._$cssResult$ = !0, r !== ci) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    if (this._$cssResult$ = !0, r !== di) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t, this.t = i;
   }
   get styleSheet() {
@@ -9,7 +9,7 @@ let dr = class {
     const i = this.t;
     if (li && t === void 0) {
       const r = i !== void 0 && i.length === 1;
-      r && (t = ki.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && ki.set(i, t));
+      r && (t = Ai.get(i)), t === void 0 && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), r && Ai.set(i, t));
     }
     return t;
   }
@@ -17,28 +17,28 @@ let dr = class {
     return this.cssText;
   }
 };
-const Lr = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), O = (e, ...t) => {
+const Lr = (e) => new cr(typeof e == "string" ? e : e + "", void 0, di), j = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + s + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(o) + e[n + 1], e[0]);
-  return new dr(i, e, ci);
-}, qr = (e, t) => {
+  return new cr(i, e, di);
+}, Fr = (e, t) => {
   if (li) e.adoptedStyleSheets = t.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet);
   else for (const i of t) {
     const r = document.createElement("style"), o = xt.litNonce;
     o !== void 0 && r.setAttribute("nonce", o), r.textContent = i.cssText, e.appendChild(r);
   }
-}, _i = li ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
+}, Si = li ? (e) => e : (e) => e instanceof CSSStyleSheet ? ((t) => {
   let i = "";
   for (const r of t.cssRules) i += r.cssText;
   return Lr(i);
 })(e) : e;
-const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnPropertyNames: Vr, getOwnPropertySymbols: Kr, getPrototypeOf: Zr } = Object, Tt = globalThis, Ai = Tt.trustedTypes, Gr = Ai ? Ai.emptyScript : "", Wr = Tt.reactiveElementPolyfillSupport, Qe = (e, t) => e, kt = { toAttribute(e, t) {
+const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: _r, getOwnPropertyNames: Vr, getOwnPropertySymbols: Kr, getPrototypeOf: Gr } = Object, Ot = globalThis, Ci = Ot.trustedTypes, Zr = Ci ? Ci.emptyScript : "", Wr = Ot.reactiveElementPolyfillSupport, Je = (e, t) => e, At = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
-      e = e ? Gr : null;
+      e = e ? Zr : null;
       break;
     case Object:
     case Array:
@@ -63,8 +63,8 @@ const { is: Br, defineProperty: Hr, getOwnPropertyDescriptor: Fr, getOwnProperty
       }
   }
   return i;
-} }, di = (e, t) => !Br(e, t), Si = { attribute: !0, type: String, converter: kt, reflect: !1, useDefault: !1, hasChanged: di };
-Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), Tt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+} }, ci = (e, t) => !Br(e, t), Ei = { attribute: !0, type: String, converter: At, reflect: !1, useDefault: !1, hasChanged: ci };
+Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), Ot.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let Le = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
@@ -72,14 +72,14 @@ let Le = class extends HTMLElement {
   static get observedAttributes() {
     return this.finalize(), this._$Eh && [...this._$Eh.keys()];
   }
-  static createProperty(t, i = Si) {
+  static createProperty(t, i = Ei) {
     if (i.state && (i.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(t) && ((i = Object.create(i)).wrapped = !0), this.elementProperties.set(t, i), !i.noAccessor) {
       const r = /* @__PURE__ */ Symbol(), o = this.getPropertyDescriptor(t, r, i);
       o !== void 0 && Hr(this.prototype, t, o);
     }
   }
   static getPropertyDescriptor(t, i, r) {
-    const { get: o, set: n } = Fr(this.prototype, t) ?? { get() {
+    const { get: o, set: n } = _r(this.prototype, t) ?? { get() {
       return this[i];
     }, set(s) {
       this[i] = s;
@@ -90,16 +90,16 @@ let Le = class extends HTMLElement {
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(t) {
-    return this.elementProperties.get(t) ?? Si;
+    return this.elementProperties.get(t) ?? Ei;
   }
   static _$Ei() {
-    if (this.hasOwnProperty(Qe("elementProperties"))) return;
-    const t = Zr(this);
+    if (this.hasOwnProperty(Je("elementProperties"))) return;
+    const t = Gr(this);
     t.finalize(), t.l !== void 0 && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
   }
   static finalize() {
-    if (this.hasOwnProperty(Qe("finalized"))) return;
-    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Qe("properties"))) {
+    if (this.hasOwnProperty(Je("finalized"))) return;
+    if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Je("properties"))) {
       const i = this.properties, r = [...Vr(i), ...Kr(i)];
       for (const o of r) this.createProperty(o, i[o]);
     }
@@ -119,8 +119,8 @@ let Le = class extends HTMLElement {
     const i = [];
     if (Array.isArray(t)) {
       const r = new Set(t.flat(1 / 0).reverse());
-      for (const o of r) i.unshift(_i(o));
-    } else t !== void 0 && i.push(_i(t));
+      for (const o of r) i.unshift(Si(o));
+    } else t !== void 0 && i.push(Si(t));
     return i;
   }
   static _$Eu(t, i) {
@@ -146,7 +146,7 @@ let Le = class extends HTMLElement {
   }
   createRenderRoot() {
     const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return qr(t, this.constructor.elementStyles), t;
+    return Fr(t, this.constructor.elementStyles), t;
   }
   connectedCallback() {
     this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t) => t.hostConnected?.());
@@ -162,14 +162,14 @@ let Le = class extends HTMLElement {
   _$ET(t, i) {
     const r = this.constructor.elementProperties.get(t), o = this.constructor._$Eu(t, r);
     if (o !== void 0 && r.reflect === !0) {
-      const n = (r.converter?.toAttribute !== void 0 ? r.converter : kt).toAttribute(i, r.type);
+      const n = (r.converter?.toAttribute !== void 0 ? r.converter : At).toAttribute(i, r.type);
       this._$Em = t, n == null ? this.removeAttribute(o) : this.setAttribute(o, n), this._$Em = null;
     }
   }
   _$AK(t, i) {
     const r = this.constructor, o = r._$Eh.get(t);
     if (o !== void 0 && this._$Em !== o) {
-      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : kt;
+      const n = r.getPropertyOptions(o), s = typeof n.converter == "function" ? { fromAttribute: n.converter } : n.converter?.fromAttribute !== void 0 ? n.converter : At;
       this._$Em = o;
       const a = s.fromAttribute(i, n.type);
       this[o] = a ?? this._$Ej?.get(o) ?? a, this._$Em = null;
@@ -178,7 +178,7 @@ let Le = class extends HTMLElement {
   requestUpdate(t, i, r, o = !1, n) {
     if (t !== void 0) {
       const s = this.constructor;
-      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? di)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
+      if (o === !1 && (n = this[t]), r ??= s.getPropertyOptions(t), !((r.hasChanged ?? ci)(n, i) || r.useDefault && r.reflect && n === this._$Ej?.get(t) && !this.hasAttribute(s._$Eu(t, r)))) return;
       this.C(t, i, r);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
@@ -246,23 +246,23 @@ let Le = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Le.elementStyles = [], Le.shadowRootOptions = { mode: "open" }, Le[Qe("elementProperties")] = /* @__PURE__ */ new Map(), Le[Qe("finalized")] = /* @__PURE__ */ new Map(), Wr?.({ ReactiveElement: Le }), (Tt.reactiveElementVersions ??= []).push("2.1.2");
-const pi = globalThis, Ci = (e) => e, _t = pi.trustedTypes, Ei = _t ? _t.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", $e = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + $e, Ur = `<${hr}>`, Pe = document, tt = () => Pe.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Xr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", jt = `[ 	
-\f\r]`, Ye = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Mi = /-->/g, Pi = />/g, Se = RegExp(`>|${jt}(?:([^\\s"'>=/]+)(${jt}*=${jt}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ni = /'/g, Ri = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), P = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), zi = /* @__PURE__ */ new WeakMap(), Ee = Pe.createTreeWalker(Pe, 129);
+Le.elementStyles = [], Le.shadowRootOptions = { mode: "open" }, Le[Je("elementProperties")] = /* @__PURE__ */ new Map(), Le[Je("finalized")] = /* @__PURE__ */ new Map(), Wr?.({ ReactiveElement: Le }), (Ot.reactiveElementVersions ??= []).push("2.1.2");
+const pi = globalThis, $i = (e) => e, St = pi.trustedTypes, Pi = St ? St.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", ke = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + ke, Ur = `<${hr}>`, Me = document, tt = () => Me.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Yr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", qt = `[ 	
+\f\r]`, Qe = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ni = /-->/g, Mi = />/g, Ee = RegExp(`>|${qt}(?:([^\\s"'>=/]+)(${qt}*=${qt}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ri = /'/g, zi = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), M = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Ti = /* @__PURE__ */ new WeakMap(), Pe = Me.createTreeWalker(Me, 129);
 function mr(e, t) {
   if (!hi(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return Ei !== void 0 ? Ei.createHTML(t) : t;
+  return Pi !== void 0 ? Pi.createHTML(t) : t;
 }
-const Yr = (e, t) => {
+const Qr = (e, t) => {
   const i = e.length - 1, r = [];
-  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Ye;
+  let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Qe;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let c, d, p = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, d = s.exec(l), d !== null); ) u = s.lastIndex, s === Ye ? d[1] === "!--" ? s = Mi : d[1] !== void 0 ? s = Pi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Se) : d[3] !== void 0 && (s = Se) : s === Se ? d[0] === ">" ? (s = o ?? Ye, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Se : d[3] === '"' ? Ri : Ni) : s === Ri || s === Ni ? s = Se : s === Mi || s === Pi ? s = Ye : (s = Se, o = void 0);
-    const g = s === Se && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Ye ? l + Ur : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + $e + g) : l + $e + (p === -2 ? a : g);
+    let d, c, p = -1, u = 0;
+    for (; u < l.length && (s.lastIndex = u, c = s.exec(l), c !== null); ) u = s.lastIndex, s === Qe ? c[1] === "!--" ? s = Ni : c[1] !== void 0 ? s = Mi : c[2] !== void 0 ? (ur.test(c[2]) && (o = RegExp("</" + c[2], "g")), s = Ee) : c[3] !== void 0 && (s = Ee) : s === Ee ? c[0] === ">" ? (s = o ?? Qe, p = -1) : c[1] === void 0 ? p = -2 : (p = s.lastIndex - c[2].length, d = c[1], s = c[3] === void 0 ? Ee : c[3] === '"' ? zi : Ri) : s === zi || s === Ri ? s = Ee : s === Ni || s === Mi ? s = Qe : (s = Ee, o = void 0);
+    const g = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
+    n += s === Qe ? l + Ur : p >= 0 ? (r.push(d), l.slice(0, p) + pr + l.slice(p) + ke + g) : l + ke + (p === -2 ? a : g);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -271,35 +271,35 @@ class rt {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [c, d] = Yr(t, i);
-    if (this.el = rt.createElement(c, r), Ee.currentNode = this.el.content, i === 2 || i === 3) {
+    const a = t.length - 1, l = this.parts, [d, c] = Qr(t, i);
+    if (this.el = rt.createElement(d, r), Pe.currentNode = this.el.content, i === 2 || i === 3) {
       const p = this.el.content.firstChild;
       p.replaceWith(...p.childNodes);
     }
-    for (; (o = Ee.nextNode()) !== null && l.length < a; ) {
+    for (; (o = Pe.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
         if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
-          const u = d[s++], g = o.getAttribute(p).split($e), b = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? Jr : b[1] === "?" ? eo : b[1] === "@" ? to : Ot }), o.removeAttribute(p);
-        } else p.startsWith($e) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
+          const u = c[s++], g = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(u);
+          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? Xr : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(p);
+        } else p.startsWith(ke) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (ur.test(o.tagName)) {
-          const p = o.textContent.split($e), u = p.length - 1;
+          const p = o.textContent.split(ke), u = p.length - 1;
           if (u > 0) {
-            o.textContent = _t ? _t.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(p[g], tt()), Ee.nextNode(), l.push({ type: 2, index: ++n });
+            o.textContent = St ? St.emptyScript : "";
+            for (let g = 0; g < u; g++) o.append(p[g], tt()), Pe.nextNode(), l.push({ type: 2, index: ++n });
             o.append(p[u], tt());
           }
         }
       } else if (o.nodeType === 8) if (o.data === hr) l.push({ type: 2, index: n });
       else {
         let p = -1;
-        for (; (p = o.data.indexOf($e, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += $e.length - 1;
+        for (; (p = o.data.indexOf(ke, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += ke.length - 1;
       }
       n++;
     }
   }
   static createElement(t, i) {
-    const r = Pe.createElement("template");
+    const r = Me.createElement("template");
     return r.innerHTML = t, r;
   }
 }
@@ -309,7 +309,7 @@ function He(e, t, i = e, r) {
   const n = it(t) ? void 0 : t._$litDirective$;
   return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = He(e, o._$AS(e, t.values), o, r)), t;
 }
-class Qr {
+class Jr {
   constructor(t, i) {
     this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
@@ -320,24 +320,24 @@ class Qr {
     return this._$AM._$AU;
   }
   u(t) {
-    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Pe).importNode(i, !0);
-    Ee.currentNode = o;
-    let n = Ee.nextNode(), s = 0, a = 0, l = r[0];
+    const { el: { content: i }, parts: r } = this._$AD, o = (t?.creationScope ?? Me).importNode(i, !0);
+    Pe.currentNode = o;
+    let n = Pe.nextNode(), s = 0, a = 0, l = r[0];
     for (; l !== void 0; ) {
       if (s === l.index) {
-        let c;
-        l.type === 2 ? c = new dt(n, n.nextSibling, this, t) : l.type === 1 ? c = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (c = new io(n, this, t)), this._$AV.push(c), l = r[++a];
+        let d;
+        l.type === 2 ? d = new ct(n, n.nextSibling, this, t) : l.type === 1 ? d = new l.ctor(n, l.name, l.strings, this, t) : l.type === 6 && (d = new io(n, this, t)), this._$AV.push(d), l = r[++a];
       }
-      s !== l?.index && (n = Ee.nextNode(), s++);
+      s !== l?.index && (n = Pe.nextNode(), s++);
     }
-    return Ee.currentNode = Pe, o;
+    return Pe.currentNode = Me, o;
   }
   p(t) {
     let i = 0;
     for (const r of this._$AV) r !== void 0 && (r.strings !== void 0 ? (r._$AI(t, r, i), i += r.strings.length - 2) : r._$AI(t[i])), i++;
   }
 }
-class dt {
+class ct {
   get _$AU() {
     return this._$AM?._$AU ?? this._$Cv;
   }
@@ -356,7 +356,7 @@ class dt {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = He(this, t, i), it(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== se && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Xr(t) ? this.k(t) : this._(t);
+    t = He(this, t, i), it(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== se && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Yr(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -365,38 +365,38 @@ class dt {
     this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
   }
   _(t) {
-    this._$AH !== f && it(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Pe.createTextNode(t)), this._$AH = t;
+    this._$AH !== f && it(this._$AH) ? this._$AA.nextSibling.data = t : this.T(Me.createTextNode(t)), this._$AH = t;
   }
   $(t) {
     const { values: i, _$litType$: r } = t, o = typeof r == "number" ? this._$AC(t) : (r.el === void 0 && (r.el = rt.createElement(mr(r.h, r.h[0]), this.options)), r);
     if (this._$AH?._$AD === o) this._$AH.p(i);
     else {
-      const n = new Qr(o, this), s = n.u(this.options);
+      const n = new Jr(o, this), s = n.u(this.options);
       n.p(i), this.T(s), this._$AH = n;
     }
   }
   _$AC(t) {
-    let i = zi.get(t.strings);
-    return i === void 0 && zi.set(t.strings, i = new rt(t)), i;
+    let i = Ti.get(t.strings);
+    return i === void 0 && Ti.set(t.strings, i = new rt(t)), i;
   }
   k(t) {
     hi(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let r, o = 0;
-    for (const n of t) o === i.length ? i.push(r = new dt(this.O(tt()), this.O(tt()), this, this.options)) : r = i[o], r._$AI(n), o++;
+    for (const n of t) o === i.length ? i.push(r = new ct(this.O(tt()), this.O(tt()), this, this.options)) : r = i[o], r._$AI(n), o++;
     o < i.length && (this._$AR(r && r._$AB.nextSibling, o), i.length = o);
   }
   _$AR(t = this._$AA.nextSibling, i) {
     for (this._$AP?.(!1, !0, i); t !== this._$AB; ) {
-      const r = Ci(t).nextSibling;
-      Ci(t).remove(), t = r;
+      const r = $i(t).nextSibling;
+      $i(t).remove(), t = r;
     }
   }
   setConnected(t) {
     this._$AM === void 0 && (this._$Cv = t, this._$AP?.(t));
   }
 }
-class Ot {
+class jt {
   get tagName() {
     return this.element.tagName;
   }
@@ -412,8 +412,8 @@ class Ot {
     if (n === void 0) t = He(this, t, i, 0), s = !it(t) || t !== this._$AH && t !== se, s && (this._$AH = t);
     else {
       const a = t;
-      let l, c;
-      for (t = n[0], l = 0; l < n.length - 1; l++) c = He(this, a[r + l], i, l), c === se && (c = this._$AH[l]), s ||= !it(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
+      let l, d;
+      for (t = n[0], l = 0; l < n.length - 1; l++) d = He(this, a[r + l], i, l), d === se && (d = this._$AH[l]), s ||= !it(d) || d !== this._$AH[l], d === f ? t = f : t !== f && (t += (d ?? "") + n[l + 1]), this._$AH[l] = d;
     }
     s && !o && this.j(t);
   }
@@ -421,7 +421,7 @@ class Ot {
     t === f ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
   }
 }
-class Jr extends Ot {
+class Xr extends jt {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -429,7 +429,7 @@ class Jr extends Ot {
     this.element[this.name] = t === f ? void 0 : t;
   }
 }
-class eo extends Ot {
+class eo extends jt {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -437,7 +437,7 @@ class eo extends Ot {
     this.element.toggleAttribute(this.name, !!t && t !== f);
   }
 }
-class to extends Ot {
+class to extends jt {
   constructor(t, i, r, o, n) {
     super(t, i, r, o, n), this.type = 5;
   }
@@ -462,18 +462,18 @@ class io {
   }
 }
 const ro = pi.litHtmlPolyfillSupport;
-ro?.(rt, dt), (pi.litHtmlVersions ??= []).push("3.3.3");
+ro?.(rt, ct), (pi.litHtmlVersions ??= []).push("3.3.3");
 const oo = (e, t, i) => {
   const r = i?.renderBefore ?? t;
   let o = r._$litPart$;
   if (o === void 0) {
     const n = i?.renderBefore ?? null;
-    r._$litPart$ = o = new dt(t.insertBefore(tt(), n), n, void 0, i ?? {});
+    r._$litPart$ = o = new ct(t.insertBefore(tt(), n), n, void 0, i ?? {});
   }
   return o._$AI(e), o;
 };
 const ui = globalThis;
-let j = class extends Le {
+let q = class extends Le {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -495,16 +495,16 @@ let j = class extends Le {
     return se;
   }
 };
-j._$litElement$ = !0, j.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: j });
+q._$litElement$ = !0, q.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: q });
 const no = ui.litElementPolyfillSupport;
-no?.({ LitElement: j });
+no?.({ LitElement: q });
 (ui.litElementVersions ??= []).push("4.2.2");
-const z = (e) => (t, i) => {
+const T = (e) => (t, i) => {
   i !== void 0 ? i.addInitializer(() => {
     customElements.define(e, t);
   }) : customElements.define(e, t);
 };
-const so = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged: di }, ao = (e = so, t, i) => {
+const so = { attribute: !0, type: String, converter: At, reflect: !1, hasChanged: ci }, ao = (e = so, t, i) => {
   const { kind: r, metadata: o } = i;
   let n = globalThis.litPropertyMetadata.get(o);
   if (n === void 0 && globalThis.litPropertyMetadata.set(o, n = /* @__PURE__ */ new Map()), r === "setter" && ((e = Object.create(e)).wrapped = !0), n.set(i.name, e), r === "accessor") {
@@ -525,14 +525,14 @@ const so = { attribute: !0, type: String, converter: kt, reflect: !1, hasChanged
   }
   throw Error("Unsupported decorator location: " + r);
 };
-function A(e) {
+function C(e) {
   return (t, i) => typeof i == "object" ? ao(e, t, i) : ((r, o, n) => {
     const s = o.hasOwnProperty(n);
     return o.constructor.createProperty(n, r), s ? Object.getOwnPropertyDescriptor(o, n) : void 0;
   })(e, t, i);
 }
 function v(e) {
-  return A({ ...e, state: !0, attribute: !1 });
+  return C({ ...e, state: !0, attribute: !1 });
 }
 const lo = (e, t, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorate && typeof t != "object" && Object.defineProperty(e, t, i), i);
 function co(e, t) {
@@ -543,7 +543,8 @@ function co(e, t) {
     } });
   };
 }
-const Ce = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, fr = (e) => (...t) => ({ _$litDirective$: e, values: t });
+const po = "data:image/webp;base64,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";
+const $e = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4 }, fr = (e) => (...t) => ({ _$litDirective$: e, values: t });
 class br {
   constructor(t) {
   }
@@ -562,7 +563,7 @@ class br {
 }
 class ii extends br {
   constructor(t) {
-    if (super(t), this.it = f, t.type !== Ce.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
+    if (super(t), this.it = f, t.type !== $e.CHILD) throw Error(this.constructor.directiveName + "() can only be used in child bindings");
   }
   render(t) {
     if (t === f || t == null) return this._t = void 0, this.it = t;
@@ -578,64 +579,64 @@ ii.directiveName = "unsafeHTML", ii.resultType = 1;
 class ri extends ii {
 }
 ri.directiveName = "unsafeSVG", ri.resultType = 2;
-const po = fr(ri), ho = {
+const ho = fr(ri), uo = {
   light: ["on"],
   motion: ["on"],
   media: ["playing", "on"],
   opening: ["on", "open"],
   temperature: [],
   fireplace: ["on", "heating", "burning", "active"]
-}, uo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+}, go = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
 function yr(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Oe(e) {
+function je(e) {
   return Math.min(1, Math.max(0, e));
 }
 function wt(e) {
-  return [...ho[e]];
+  return [...uo[e]];
 }
-function go(e) {
+function mo(e) {
   if (e.kind === "temperature") return [];
   const t = (e.active_states ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : wt(e.kind);
 }
-function Je(e, t) {
+function Xe(e, t) {
   const i = t?.position;
-  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Oe(i.x), y: Oe(i.y) } : e.presence_anchor ? {
-    x: Oe(e.presence_anchor.x),
-    y: Oe(e.presence_anchor.y)
+  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: je(i.x), y: je(i.y) } : e.presence_anchor ? {
+    x: je(e.presence_anchor.x),
+    y: je(e.presence_anchor.y)
   } : e.points.length ? {
-    x: Oe(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
-    y: Oe(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
+    x: je(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
+    y: je(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
   } : { x: 0.5, y: 0.5 };
 }
-function mo(e) {
+function fo(e) {
   const t = e?.brightness;
   return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t / 255);
 }
-function Ti(e) {
+function Oi(e) {
   const t = e.intensity;
   return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t);
 }
-function Oi(e) {
+function ji(e) {
   const t = e?.unit_of_measurement;
   return typeof t == "string" && t.trim() ? t.trim() : void 0;
 }
 function vr(e, t, i) {
-  const r = e.entity?.trim(), o = go(e);
+  const r = e.entity?.trim(), o = mo(e);
   if (!r)
     return { index: t, reaction: e, active: !1, activeStates: o, intensity: 0, reason: "missing_entity" };
   const n = i?.(r);
-  if (!n || uo.has(n.state.trim().toLowerCase()))
+  if (!n || go.has(n.state.trim().toLowerCase()))
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
-    const c = Number(n.state);
-    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: Oi(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Oi(n.attributes), reason: "state_inactive" };
+    const d = Number(n.state);
+    return Number.isFinite(d) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: d, unit: ji(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: ji(n.attributes), reason: "state_inactive" };
   }
-  const s = n.state.trim().toLowerCase(), a = o.map((c) => c.toLowerCase()).includes(s);
+  const s = n.state.trim().toLowerCase(), a = o.map((d) => d.toLowerCase()).includes(s);
   let l = 0;
-  return a && (e.kind === "light" ? l = mo(n.attributes) * Ti(e) : l = Ti(e)), {
+  return a && (e.kind === "light" ? l = fo(n.attributes) * Oi(e) : l = Oi(e)), {
     index: t,
     reaction: e,
     active: a,
@@ -645,15 +646,15 @@ function vr(e, t, i) {
     ...a ? {} : { reason: "state_inactive" }
   };
 }
-function At(e, t) {
+function Ct(e, t) {
   return (e.reactions ?? []).map((i, r) => vr(i, r, t));
 }
-var fo = Object.defineProperty, bo = Object.getOwnPropertyDescriptor, ze = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? bo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var bo = Object.defineProperty, yo = Object.getOwnPropertyDescriptor, Te = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? yo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && fo(t, i, o), o;
+  return r && o && bo(t, i, o), o;
 };
-function yo(e) {
+function vo(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/"))
@@ -666,25 +667,25 @@ function yo(e) {
     }
   }
 }
-const vo = {
+const xo = {
   light: "💡",
   motion: "◉",
   media: "▶",
   opening: "↗",
   temperature: "°"
-}, xo = {
+}, wo = {
   light: "Lys",
   motion: "Bevægelse",
   media: "TV / medie",
   opening: "Dør / vindue",
   temperature: "Temperatur"
 };
-let fe = class extends j {
+let fe = class extends q {
   constructor() {
     super(...arguments), this.presences = [], this.pendingLights = /* @__PURE__ */ new Set(), this.pendingRoomAction = "", this.actionError = "";
   }
   get statuses() {
-    return this.room ? At(this.room, (e) => {
+    return this.room ? Ct(this.room, (e) => {
       const t = this.hass?.states[e];
       return t ? { state: t.state, attributes: t.attributes } : void 0;
     }) : [];
@@ -781,7 +782,7 @@ let fe = class extends j {
 
         ${t.length ? h`<div class="occupants" aria-label="Personer og objekter i rummet">
               ${t.map((o) => {
-      const n = yo(o.avatar);
+      const n = vo(o.avatar);
       return h`<span class="occupant">
                   ${n ? h`<img src=${n} alt="" />` : h`<span class="occupant-dot"></span>`}
                   ${o.name ?? o.id}
@@ -833,10 +834,10 @@ let fe = class extends j {
     return h`
       <article class=${`entity ${e.active ? "active" : "inactive"}`}>
         <button class="entity-main" @click=${() => this.openMoreInfo(t)}>
-          <span class=${`entity-icon ${i}`}>${vo[i]}</span>
+          <span class=${`entity-icon ${i}`}>${xo[i]}</span>
           <span class="entity-copy">
             <strong>${this.entityName(t)}</strong>
-            <small>${xo[i]} · ${this.statusText(e)}</small>
+            <small>${wo[i]} · ${this.statusText(e)}</small>
           </span>
         </button>
         ${i === "light" ? h`<button
@@ -848,7 +849,7 @@ let fe = class extends j {
     `;
   }
 };
-fe.styles = O`
+fe.styles = j`
     :host {
       position: absolute;
       z-index: 8;
@@ -1041,35 +1042,35 @@ fe.styles = O`
       .panel { animation: none; }
     }
   `;
-ze([
-  A({ attribute: !1 })
+Te([
+  C({ attribute: !1 })
 ], fe.prototype, "room", 2);
-ze([
-  A({ attribute: !1 })
+Te([
+  C({ attribute: !1 })
 ], fe.prototype, "presences", 2);
-ze([
-  A({ attribute: !1 })
+Te([
+  C({ attribute: !1 })
 ], fe.prototype, "hass", 2);
-ze([
+Te([
   v()
 ], fe.prototype, "pendingLights", 2);
-ze([
+Te([
   v()
 ], fe.prototype, "pendingRoomAction", 2);
-ze([
+Te([
   v()
 ], fe.prototype, "actionError", 2);
-fe = ze([
-  z("explorer-room-panel")
+fe = Te([
+  T("explorer-room-panel")
 ], fe);
 const x = 1e3;
 function Lt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function wo(e) {
+function ko(e) {
   return `translate(${e.x} ${e.y}) scale(${e.zoom})`;
 }
-function $t(e, t = 1) {
+function kt(e, t = 1) {
   const i = Math.max(t, e.zoom);
   if (i <= t + 1e-4) return { zoom: i, x: 0, y: 0 };
   const r = x * (1 - i);
@@ -1081,19 +1082,19 @@ function $t(e, t = 1) {
 }
 function Ii(e, t, i, r) {
   const o = t / e.zoom;
-  return $t({
+  return kt({
     zoom: t,
     x: i - (i - e.x) * o,
     y: r - (r - e.y) * o
   });
 }
-var $o = Object.defineProperty, ko = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ko(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Ao = Object.defineProperty, So = Object.getOwnPropertyDescriptor, Z = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? So(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && $o(t, i, o), o;
+  return r && o && Ao(t, i, o), o;
 };
-const Di = { width: 16, height: 9, status: "idle" }, _o = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, Ao = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
-function ji(e) {
+const Di = { width: 16, height: 9, status: "idle" }, Co = { person: "●", pet: "◆", robot: "■", vehicle: "▰", object: "✦" }, Eo = "script,foreignObject,iframe,object,embed,link,meta,audio,video,canvas";
+function qi(e) {
   try {
     return new URL(e, window.location.href).pathname.toLowerCase().endsWith(".svg");
   } catch {
@@ -1107,21 +1108,21 @@ function Li(e) {
   const i = Number(t[1]);
   return Number.isFinite(i) && i > 0 ? i : void 0;
 }
-function So(e) {
+function $o(e) {
   const t = e.getAttribute("viewBox")?.trim().split(/[\s,]+/).map(Number);
   return t?.length === 4 && t.every(Number.isFinite) && t[2] > 0 && t[3] > 0 ? { width: t[2], height: t[3] } : { width: Li(e.getAttribute("width")) ?? 16, height: Li(e.getAttribute("height")) ?? 9 };
 }
-function qi(e) {
+function Fi(e) {
   return e.replace(/@import[^;]+;?/gi, "").replace(/url\(([^)]*)\)/gi, (t, i) => {
     const r = i.trim().replace(/^['"]|['"]$/g, "");
     return r.startsWith("#") ? `url(${r})` : "none";
   }).replace(/javascript\s*:/gi, "").replace(/expression\s*\(/gi, "");
 }
-function Co(e) {
+function Po(e) {
   const t = e.trim();
   return t === "" || t.startsWith("#") || /^data:image\/(?:png|jpe?g|gif|webp|svg\+xml);base64,/i.test(t);
 }
-function Eo(e) {
+function No(e) {
   const t = e?.trim();
   if (t) {
     if (/^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(t) || t.startsWith("/")) return t;
@@ -1136,7 +1137,7 @@ function Eo(e) {
 function Mo(e) {
   const t = e.querySelector("parsererror"), i = e.documentElement;
   if (t || i.localName.toLowerCase() !== "svg") throw new Error("Filen indeholder ikke gyldig SVG-kode.");
-  i.querySelectorAll(Ao).forEach((o) => o.remove());
+  i.querySelectorAll(Eo).forEach((o) => o.remove());
   const r = [i, ...Array.from(i.querySelectorAll("*"))];
   for (const o of r)
     for (const n of Array.from(o.attributes)) {
@@ -1145,21 +1146,21 @@ function Mo(e) {
         o.removeAttribute(n.name);
         continue;
       }
-      if ((s === "href" || s === "xlink:href") && !Co(a)) {
+      if ((s === "href" || s === "xlink:href") && !Po(a)) {
         o.removeAttribute(n.name);
         continue;
       }
       if (s === "style") {
-        const l = qi(a).trim();
+        const l = Fi(a).trim();
         l ? o.setAttribute(n.name, l) : o.removeAttribute(n.name);
       }
     }
   return i.querySelectorAll("style").forEach((o) => {
-    const n = qi(o.textContent ?? "").trim();
+    const n = Fi(o.textContent ?? "").trim();
     n ? o.textContent = n : o.remove();
   }), i.hasAttribute("xmlns") || i.setAttribute("xmlns", "http://www.w3.org/2000/svg"), i;
 }
-let H = class extends j {
+let H = class extends q {
   constructor() {
     super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Di }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
   }
@@ -1167,7 +1168,7 @@ let H = class extends j {
     super.connectedCallback(), this.resetViewport();
   }
   updated(e) {
-    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && ji(this.image)) && this.loadFloorplan();
+    e.has("rooms") && this.selectedRoom && (this.selectedRoom = this.rooms.find((t) => t.id === this.selectedRoom?.id)), (e.has("image") || e.has("fitMode") && this.image && qi(this.image)) && this.loadFloorplan();
   }
   async loadFloorplan() {
     const e = ++this.imageRequest;
@@ -1177,7 +1178,7 @@ let H = class extends j {
     }
     this.metadata = { ...this.metadata, status: "loading" };
     try {
-      ji(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
+      qi(this.image) ? await this.loadSvgFloorplan(e) : await this.loadRasterFloorplan(e);
     } catch (t) {
       if (e !== this.imageRequest) return;
       this.imageSource = "", this.svgMarkup = "", this.metadata = { ...this.metadata, status: "error" }, this.loadError = t instanceof Error ? t.message : "Plantegningen kunne ikke indlæses.";
@@ -1188,7 +1189,7 @@ let H = class extends j {
     if (!t.ok) throw new Error(`SVG-filen kunne ikke hentes (${t.status}).`);
     const i = await t.text();
     if (e !== this.imageRequest) return;
-    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = Mo(r), n = So(o);
+    const r = new DOMParser().parseFromString(i, "image/svg+xml"), o = Mo(r), n = $o(o);
     o.hasAttribute("viewBox") || o.setAttribute("viewBox", `0 0 ${n.width} ${n.height}`), o.setAttribute("x", "0"), o.setAttribute("y", "0"), o.setAttribute("width", String(x)), o.setAttribute("height", String(x)), o.setAttribute("preserveAspectRatio", this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"), o.setAttribute("class", "inline-floorplan");
     const s = new XMLSerializer().serializeToString(o);
     e === this.imageRequest && (this.svgMarkup = s, this.metadata = { width: n.width, height: n.height, status: "loaded" }, this.resetViewport());
@@ -1214,7 +1215,7 @@ let H = class extends j {
   handleWheel(e) {
     e.preventDefault();
     const t = this.toViewBoxPoint(e), i = e.deltaY < 0 ? 1.12 : 1 / 1.12, r = Lt(this.viewport.zoom * i, this.minZoom, this.maxZoom);
-    this.viewport = $t(Ii(this.viewport, r, t.x, t.y), this.minZoom);
+    this.viewport = kt(Ii(this.viewport, r, t.x, t.y), this.minZoom);
   }
   handlePointerDown(e) {
     this.activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }), e.currentTarget.setPointerCapture(e.pointerId);
@@ -1226,12 +1227,12 @@ let H = class extends j {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Lt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * x, g = (c.y - l.y) / r.height * x, b = Ii(this.viewport, p, d.x, d.y);
-        this.viewport = $t({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, d = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, c = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Lt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (d.x - l.x) / r.width * x, g = (d.y - l.y) / r.height * x, b = Ii(this.viewport, p, c.x, c.y);
+        this.viewport = kt({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
       const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
-      this.viewport = $t({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
+      this.viewport = kt({ ...this.viewport, x: this.viewport.x + s, y: this.viewport.y + a }, this.minZoom);
     }
     this.activePointers.set(e.pointerId, o);
   }
@@ -1247,75 +1248,75 @@ let H = class extends j {
   renderRooms() {
     return this.rooms.map((e) => {
       if (!e.points.length) return f;
-      const t = e.points.map(([c, d]) => `${c * x},${d * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, d) => c + d[0], 0) / e.points.length, o = e.points.reduce((c, d) => c + d[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
-      return P`<g class=${i ? "room selected" : "room"} @pointerdown=${(c) => c.stopPropagation()} @click=${(c) => this.selectRoom(c, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? P`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
+      const t = e.points.map(([d, c]) => `${d * x},${c * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((d, c) => d + c[0], 0) / e.points.length, o = e.points.reduce((d, c) => d + c[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
+      return M`<g class=${i ? "room selected" : "room"} @pointerdown=${(d) => d.stopPropagation()} @click=${(d) => this.selectRoom(d, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? M`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
     });
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? _o[i], a = Eo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
-      return P`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? P`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : P`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Co[i], a = No(e.avatar), l = e.color ?? "#03a9f4", d = r ? 31 : 25, c = d * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
+      return M`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? M`<defs><clipPath id=${p}><circle r=${d - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${d} fill=${l}></circle><image href=${a} x=${-d + 3} y=${-d + 3} width=${c - 6} height=${c - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${d} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : M`<circle class="presence-marker" r=${d} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
-    const e = wo(this.viewport);
+    const e = ko(this.viewport);
     return h`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${x} ${x}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
       this.selectedRoom = void 0, this.selectedPresence = void 0;
-    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? P`<g class="floorplan-source inline-source">${po(this.svgMarkup)}</g>` : this.imageSource ? P`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
+    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? M`<g class="floorplan-source inline-source">${ho(this.svgMarkup)}</g>` : this.imageSource ? M`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
       t.stopPropagation(), this.resetViewport();
     }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
 };
-H.styles = O`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
-G([
-  A({ attribute: !1 })
+H.styles = j`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
+Z([
+  C({ attribute: !1 })
 ], H.prototype, "hass", 2);
-G([
-  A()
+Z([
+  C()
 ], H.prototype, "image", 2);
-G([
-  A({ attribute: !1 })
+Z([
+  C({ attribute: !1 })
 ], H.prototype, "rooms", 2);
-G([
-  A({ attribute: !1 })
+Z([
+  C({ attribute: !1 })
 ], H.prototype, "presences", 2);
-G([
-  A({ type: Number, attribute: "min-zoom" })
+Z([
+  C({ type: Number, attribute: "min-zoom" })
 ], H.prototype, "minZoom", 2);
-G([
-  A({ type: Number, attribute: "max-zoom" })
+Z([
+  C({ type: Number, attribute: "max-zoom" })
 ], H.prototype, "maxZoom", 2);
-G([
-  A({ type: Number, attribute: "initial-zoom" })
+Z([
+  C({ type: Number, attribute: "initial-zoom" })
 ], H.prototype, "initialZoom", 2);
-G([
-  A({ attribute: "fit-mode" })
+Z([
+  C({ attribute: "fit-mode" })
 ], H.prototype, "fitMode", 2);
-G([
+Z([
   v()
 ], H.prototype, "viewport", 2);
-G([
+Z([
   v()
 ], H.prototype, "selectedRoom", 2);
-G([
+Z([
   v()
 ], H.prototype, "selectedPresence", 2);
-G([
+Z([
   v()
 ], H.prototype, "metadata", 2);
-G([
+Z([
   v()
 ], H.prototype, "imageSource", 2);
-G([
+Z([
   v()
 ], H.prototype, "svgMarkup", 2);
-G([
+Z([
   v()
 ], H.prototype, "loadError", 2);
-H = G([
-  z("explorer-canvas")
+H = Z([
+  T("explorer-canvas")
 ], H);
-function ke(e, t) {
+function Ae(e, t) {
   const i = (e.rooms ?? []).find((r) => r.id === t);
   if (i) {
     if (i.presence_anchor) return [i.presence_anchor.x, i.presence_anchor.y];
@@ -1329,17 +1330,17 @@ function ke(e, t) {
 function ot(e, t) {
   return (e.rooms ?? []).find((i) => i.id === t)?.name ?? t;
 }
-function Po(e, t) {
+function Ro(e, t) {
   return (e.route_nodes ?? []).find((i) => i.id === t)?.name ?? t;
 }
 function me(e) {
   return `${e.kind}:${e.id}`;
 }
-function St(e, t) {
-  return t.kind === "room" ? ke(e, t.id) : (e.route_nodes ?? []).find((i) => i.id === t.id)?.point;
+function Et(e, t) {
+  return t.kind === "room" ? Ae(e, t.id) : (e.route_nodes ?? []).find((i) => i.id === t.id)?.point;
 }
-function No(e, t) {
-  const i = St(e, t);
+function zo(e, t) {
+  const i = Et(e, t);
   if (i)
     return t.kind === "room" ? {
       kind: "room",
@@ -1351,7 +1352,7 @@ function No(e, t) {
       kind: "node",
       id: t.id,
       key: me(t),
-      label: Po(e, t.id),
+      label: Ro(e, t.id),
       point: i
     };
 }
@@ -1359,10 +1360,10 @@ function xr(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : ["on"];
 }
-function Ro(e) {
+function To(e) {
   return xr(e.condition?.allowed_states);
 }
-function Fe(e, t) {
+function _e(e, t) {
   if (!e.state_binding)
     return {
       nodeId: e.id,
@@ -1400,7 +1401,7 @@ function Fe(e, t) {
     ...n ? {} : { reason: "state_blocked" }
   };
 }
-function zo(e, t, i) {
+function Oo(e, t, i) {
   if (!e.condition)
     return {
       index: t,
@@ -1409,7 +1410,7 @@ function zo(e, t, i) {
       active: !0,
       allowedStates: []
     };
-  const r = e.condition.entity?.trim(), o = Ro(e);
+  const r = e.condition.entity?.trim(), o = To(e);
   if (!r)
     return {
       index: t,
@@ -1448,22 +1449,22 @@ function zo(e, t, i) {
 function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = zo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Fe(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
-    return c ? {
+    const n = Oo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => _e(u, t)).filter((u) => u.conditional), d = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), c = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    return d ? {
       ...n,
       conditional: p,
-      active: d,
-      entity: c.entity,
-      currentState: c.currentState,
-      allowedStates: c.allowedStates,
-      reason: d ? void 0 : c.reason,
+      active: c,
+      entity: d.entity,
+      currentState: d.currentState,
+      allowedStates: d.allowedStates,
+      reason: c ? void 0 : d.reason,
       conditionSource: "node",
-      nodeId: c.nodeId,
+      nodeId: d.nodeId,
       nodeStatuses: a
     } : {
       ...n,
       conditional: p,
-      active: d,
+      active: c,
       nodeStatuses: a
     };
   });
@@ -1471,7 +1472,7 @@ function pt(e, t) {
 function wr(e) {
   return e.path ? e.path : (e.via ?? []).map((t) => ({ point: t }));
 }
-function To(e, t, i) {
+function jo(e, t, i) {
   if (t.node_id) {
     const r = (e.route_nodes ?? []).find((o) => o.id === t.node_id);
     return r ? {
@@ -1500,9 +1501,9 @@ function gi(e) {
   return t;
 }
 function Bi(e, t, i, r, o, n) {
-  const s = ke(e, i), a = ke(e, r);
+  const s = Ae(e, i), a = Ae(e, r);
   if (!s || !a) return;
-  const l = wr(t), d = (o ? [...l].reverse() : l).map((u, g) => To(e, u, g)).filter((u) => !!u), p = [
+  const l = wr(t), c = (o ? [...l].reverse() : l).map((u, g) => jo(e, u, g)).filter((u) => !!u), p = [
     {
       kind: "room",
       id: i,
@@ -1510,7 +1511,7 @@ function Bi(e, t, i, r, o, n) {
       label: ot(e, i),
       point: s
     },
-    ...d,
+    ...c,
     {
       kind: "room",
       id: r,
@@ -1528,56 +1529,56 @@ function Bi(e, t, i, r, o, n) {
     blockedEdges: n
   };
 }
-function Oo(e, t) {
+function Io(e, t) {
   const i = /* @__PURE__ */ new Map(), r = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map(), n = (a) => {
     const l = me(a);
     o.set(l, a);
-    const c = r.get(l);
-    if (c) return c;
-    const d = St(e, a);
-    return d && r.set(l, d), d;
-  }, s = (a, l, c) => {
-    const d = i.get(a) ?? [];
-    d.push({ key: l, weight: c }), i.set(a, d);
+    const d = r.get(l);
+    if (d) return d;
+    const c = Et(e, a);
+    return c && r.set(l, c), c;
+  }, s = (a, l, d) => {
+    const c = i.get(a) ?? [];
+    c.push({ key: l, weight: d }), i.set(a, c);
   };
   return t.forEach((a) => {
     if (!a.active) return;
-    const l = a.edge, c = n(l.from), d = n(l.to);
-    if (!c || !d) return;
+    const l = a.edge, d = n(l.from), c = n(l.to);
+    if (!d || !c) return;
     const p = me(l.from), u = me(l.to);
     if (p === u) return;
-    const g = Math.hypot(d[0] - c[0], d[1] - c[1]);
+    const g = Math.hypot(c[0] - d[0], c[1] - d[1]);
     s(p, u, g), s(u, p, g);
   }), { adjacency: i, positions: r, endpoints: o };
 }
-function Io(e, t, i, r, o) {
+function Do(e, t, i, r, o) {
   if (!(e.route_graph_edges ?? []).length) return;
-  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Oo(e, r);
+  const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Io(e, r);
   if (!a.has(n) || !a.has(s)) return;
-  const c = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Map(), p = new Set(a.keys());
-  for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => c.set(m, Number.POSITIVE_INFINITY)), c.set(n, 0); p.size; ) {
+  const d = /* @__PURE__ */ new Map(), c = /* @__PURE__ */ new Map(), p = new Set(a.keys());
+  for (a.forEach((m) => m.forEach((y) => p.add(y.key))), p.forEach((m) => d.set(m, Number.POSITIVE_INFINITY)), d.set(n, 0); p.size; ) {
     let m, y = Number.POSITIVE_INFINITY;
-    for (const _ of p) {
-      const $ = c.get(_) ?? Number.POSITIVE_INFINITY;
-      $ < y && (m = _, y = $);
+    for (const S of p) {
+      const k = d.get(S) ?? Number.POSITIVE_INFINITY;
+      k < y && (m = S, y = k);
     }
     if (!m || !Number.isFinite(y) || (p.delete(m), m === s)) break;
-    for (const _ of a.get(m) ?? []) {
-      if (!p.has(_.key)) continue;
-      const $ = y + _.weight;
-      $ < (c.get(_.key) ?? Number.POSITIVE_INFINITY) && (c.set(_.key, $), d.set(_.key, m));
+    for (const S of a.get(m) ?? []) {
+      if (!p.has(S.key)) continue;
+      const k = y + S.weight;
+      k < (d.get(S.key) ?? Number.POSITIVE_INFINITY) && (d.set(S.key, k), c.set(S.key, m));
     }
   }
-  if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
+  if (!Number.isFinite(d.get(s) ?? Number.POSITIVE_INFINITY)) return;
   const u = [s];
   let g = s;
   for (; g !== n; ) {
-    const m = d.get(g);
+    const m = c.get(g);
     if (!m) return;
     u.push(m), g = m;
   }
   u.reverse();
-  const b = u.map((m) => l.get(m)).map((m) => m ? No(e, m) : void 0).filter((m) => !!m);
+  const b = u.map((m) => l.get(m)).map((m) => m ? zo(e, m) : void 0).filter((m) => !!m);
   if (!(b.length < 2))
     return {
       source: "graph",
@@ -1596,24 +1597,24 @@ function mi(e, t, i, r) {
     (u) => u.from === i && u.to === t
   );
   if (a) return Bi(e, a, t, i, !0, n);
-  const l = Io(e, t, i, o, n);
+  const l = Do(e, t, i, o, n);
   if (l) return l;
-  const c = ke(e, t), d = ke(e, i);
-  if (!c || !d) return;
+  const d = Ae(e, t), c = Ae(e, i);
+  if (!d || !c) return;
   const p = [
     {
       kind: "room",
       id: t,
       key: `room:${t}`,
       label: ot(e, t),
-      point: c
+      point: d
     },
     {
       kind: "room",
       id: i,
       key: `room:${i}`,
       label: ot(e, i),
-      point: d
+      point: c
     }
   ];
   return {
@@ -1623,55 +1624,55 @@ function mi(e, t, i, r) {
     blockedEdges: n
   };
 }
-function Do(e) {
+function qo(e) {
   return [me(e.from), me(e.to)].sort().join("|");
 }
 function Hi(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
-  const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), c = (k) => {
-    a.set(k, (a.get(k) ?? 0) + 1);
-  }, d = (k, E) => {
-    const M = l.get(k) ?? /* @__PURE__ */ new Set();
-    M.add(E), l.set(k, M);
-    const T = l.get(E) ?? /* @__PURE__ */ new Set();
-    T.add(k), l.set(E, T);
+  const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), d = (A) => {
+    a.set(A, (a.get(A) ?? 0) + 1);
+  }, c = (A, P) => {
+    const N = l.get(A) ?? /* @__PURE__ */ new Set();
+    N.add(P), l.set(A, N);
+    const O = l.get(P) ?? /* @__PURE__ */ new Set();
+    O.add(A), l.set(P, O);
   };
-  i.forEach((k) => {
-    const E = me(k.from), M = me(k.to), T = Do(k);
-    E === M && (n += 1), s.has(T) && (o += 1), s.add(T);
-    const Y = St(e, k.from), U = St(e, k.to);
-    if (!Y || !U || E === M) {
+  i.forEach((A) => {
+    const P = me(A.from), N = me(A.to), O = qo(A);
+    P === N && (n += 1), s.has(O) && (o += 1), s.add(O);
+    const Q = Et(e, A.from), U = Et(e, A.to);
+    if (!Q || !U || P === N) {
       r += 1;
       return;
     }
-    c(E), c(M), d(E, M);
+    d(P), d(N), c(P, N);
   });
-  const p = i.length ? (e.rooms ?? []).filter((k) => ke(e, k.id) && !a.has(`room:${k.id}`)).map((k) => k.id) : [], u = i.length ? (e.route_nodes ?? []).filter((k) => !a.has(`node:${k.id}`)).map((k) => k.id) : [];
+  const p = i.length ? (e.rooms ?? []).filter((A) => Ae(e, A.id) && !a.has(`room:${A.id}`)).map((A) => A.id) : [], u = i.length ? (e.route_nodes ?? []).filter((A) => !a.has(`node:${A.id}`)).map((A) => A.id) : [];
   let g = 0;
   const b = new Set(l.keys());
   for (; b.size; ) {
     g += 1;
-    const k = b.values().next().value;
-    if (!k) break;
-    const E = [k];
-    for (b.delete(k); E.length; ) {
-      const M = E.pop();
-      for (const T of l.get(M) ?? [])
-        b.has(T) && (b.delete(T), E.push(T));
+    const A = b.values().next().value;
+    if (!A) break;
+    const P = [A];
+    for (b.delete(A); P.length; ) {
+      const N = P.pop();
+      for (const O of l.get(N) ?? [])
+        b.has(O) && (b.delete(O), P.push(O));
     }
   }
-  const m = [], y = new Set((e.route_nodes ?? []).map((k) => k.id));
-  (e.routes ?? []).forEach((k) => {
-    wr(k).forEach((E) => {
-      E.node_id && !y.has(E.node_id) && m.push({ from: k.from, to: k.to, nodeId: E.node_id });
+  const m = [], y = new Set((e.route_nodes ?? []).map((A) => A.id));
+  (e.routes ?? []).forEach((A) => {
+    wr(A).forEach((P) => {
+      P.node_id && !y.has(P.node_id) && m.push({ from: A.from, to: A.to, nodeId: P.node_id });
     });
   });
-  const _ = pt(e, t), $ = _.filter((k) => !k.active), w = (e.route_nodes ?? []).map((k) => Fe(k, t)).filter((k) => k.conditional), S = w.filter((k) => !k.active), C = /* @__PURE__ */ new Set();
-  return _.forEach((k) => {
-    k.conditionSource === "edge" && (k.reason === "missing_entity" || k.reason === "entity_unavailable") && C.add(k.entity ?? "(mangler entity)");
-  }), w.forEach((k) => {
-    (k.reason === "missing_entity" || k.reason === "entity_unavailable") && C.add(k.entity ?? "(mangler entity)");
+  const S = pt(e, t), k = S.filter((A) => !A.active), w = (e.route_nodes ?? []).map((A) => _e(A, t)).filter((A) => A.conditional), E = w.filter((A) => !A.active), $ = /* @__PURE__ */ new Set();
+  return S.forEach((A) => {
+    A.conditionSource === "edge" && (A.reason === "missing_entity" || A.reason === "entity_unavailable") && $.add(A.entity ?? "(mangler entity)");
+  }), w.forEach((A) => {
+    (A.reason === "missing_entity" || A.reason === "entity_unavailable") && $.add(A.entity ?? "(mangler entity)");
   }), {
     invalidEdges: r,
     duplicateEdges: o,
@@ -1680,19 +1681,19 @@ function Hi(e, t) {
     disconnectedRoomIds: p,
     disconnectedNodeIds: u,
     brokenRouteNodeReferences: m,
-    conditionalEdges: _.filter((k) => k.conditional).length,
-    blockedEdges: $,
+    conditionalEdges: S.filter((A) => A.conditional).length,
+    blockedEdges: k,
     conditionalNodes: w.length,
-    blockedNodes: S,
-    unresolvedConditionEntities: [...C]
+    blockedNodes: E,
+    unresolvedConditionEntities: [...$]
   };
 }
-var jo = Object.defineProperty, Lo = Object.getOwnPropertyDescriptor, It = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Lo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Lo = Object.defineProperty, Fo = Object.getOwnPropertyDescriptor, It = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Fo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && jo(t, i, o), o;
+  return r && o && Lo(t, i, o), o;
 };
-const qt = 900, Fi = 3600, Vi = 58, q = "http://www.w3.org/2000/svg";
+const Ft = 900, _i = 3600, Vi = 58, F = "http://www.w3.org/2000/svg";
 let Ve = class extends H {
   constructor() {
     super(...arguments), this.routes = [], this.routeNodes = [], this.routeGraphEdges = [], this.previousPresencePositions = /* @__PURE__ */ new Map(), this.previousPresenceRooms = /* @__PURE__ */ new Map(), this.activeAnimations = /* @__PURE__ */ new Map();
@@ -1708,14 +1709,14 @@ let Ve = class extends H {
       const l = {
         x: (n.x ?? 0.5) * x,
         y: (n.y ?? 0.5) * x
-      }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
-      if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
-        const u = this.resolveMovementPath(c, l, d, p);
+      }, d = this.previousPresencePositions.get(n.id), c = this.previousPresenceRooms.get(n.id), p = n.room_id;
+      if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && d && (Math.abs(d.x - l.x) > 0.01 || Math.abs(d.y - l.y) > 0.01)) {
+        const u = this.resolveMovementPath(d, l, c, p);
         this.createFootsteps(u);
-        const g = document.createElementNS(q, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${qt}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
+        const g = document.createElementNS(F, "animateTransform");
+        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Ft}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
           this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
-        }, qt + 80);
+        }, Ft + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
     });
@@ -1764,7 +1765,7 @@ let Ve = class extends H {
   }
   doorVisualStatus(e, t) {
     if (e.state_binding)
-      return Fe(
+      return _e(
         e,
         (a) => this.hass?.states[a]?.state
       ).active ? "active" : "blocked";
@@ -1780,7 +1781,7 @@ let Ve = class extends H {
     return e === "active" ? "var(--success-color, #43a047)" : e === "blocked" ? "var(--error-color, #db4437)" : e === "mixed" ? "var(--warning-color, #ff9800)" : "var(--secondary-text-color, #667085)";
   }
   appendSvgTitle(e, t) {
-    const i = document.createElementNS(q, "title");
+    const i = document.createElementNS(F, "title");
     i.textContent = t, e.appendChild(i);
   }
   syncRouteStatusOverlay() {
@@ -1792,41 +1793,41 @@ let Ve = class extends H {
     const i = pt(
       this.routeConfig(),
       (s) => this.hass?.states[s]?.state
-    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(q, "g");
+    ), r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, o = document.createElementNS(F, "g");
     o.setAttribute("class", "route-status-scene"), o.setAttribute("aria-label", "Live rutestatus og døre"), o.setAttribute("pointer-events", "none"), i.forEach((s) => {
       const a = this.endpointPoint(s.edge.from), l = this.endpointPoint(s.edge.to);
       if (!a || !l) return;
-      const c = this.edgeStatusColor(s), d = document.createElementNS(q, "line");
-      if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
-      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(q, "g");
+      const d = this.edgeStatusColor(s), c = document.createElementNS(F, "line");
+      if (c.setAttribute("x1", String(a.x)), c.setAttribute("y1", String(a.y)), c.setAttribute("x2", String(l.x)), c.setAttribute("y2", String(l.y)), c.setAttribute("stroke", d), c.setAttribute("stroke-linecap", "round"), c.setAttribute("vector-effect", "non-scaling-stroke"), c.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), c.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || c.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && c.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(c, this.statusDescription(s)), o.appendChild(c), !s.conditional) return;
+      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(F, "g");
       g.setAttribute("transform", `translate(${p} ${u})`);
-      const b = document.createElementNS(q, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
-      const m = document.createElementNS(q, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
-        const y = document.createElementNS(q, "animate");
+      const b = document.createElementNS(F, "circle");
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", d), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
+      const m = document.createElementNS(F, "text");
+      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", d), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
+        const y = document.createElementNS(F, "animate");
         y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), g.appendChild(y);
       }
       this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
     }), t.forEach((s) => {
-      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(q, "g");
-      p.setAttribute("transform", `translate(${c} ${d})`);
-      const u = document.createElementNS(q, "circle");
+      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), d = s.point[0] * x, c = s.point[1] * x, p = document.createElementNS(F, "g");
+      p.setAttribute("transform", `translate(${d} ${c})`);
+      const u = document.createElementNS(F, "circle");
       u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
-      const g = document.createElementNS(q, "rect");
+      const g = document.createElementNS(F, "rect");
       g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
-      const b = document.createElementNS(q, "circle");
+      const b = document.createElementNS(F, "circle");
       if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), p.appendChild(b), a === "blocked") {
-        const w = document.createElementNS(q, "line");
+        const w = document.createElementNS(F, "line");
         w.setAttribute("x1", "-12"), w.setAttribute("y1", "-15"), w.setAttribute("x2", "12"), w.setAttribute("y2", "15"), w.setAttribute("stroke", l), w.setAttribute("stroke-width", "4"), w.setAttribute("stroke-linecap", "round"), w.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(w);
       }
-      const m = document.createElementNS(q, "circle");
+      const m = document.createElementNS(F, "circle");
       if (m.setAttribute("cx", "16"), m.setAttribute("cy", "-16"), m.setAttribute("r", "6"), m.setAttribute("fill", l), m.setAttribute("stroke", "var(--card-background-color, #ffffff)"), m.setAttribute("stroke-width", "2"), m.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(m), s.name) {
-        const w = document.createElementNS(q, "text");
+        const w = document.createElementNS(F, "text");
         w.setAttribute("y", "39"), w.setAttribute("text-anchor", "middle"), w.setAttribute("fill", "var(--primary-text-color, #1f2937)"), w.setAttribute("font-size", "20"), w.setAttribute("font-weight", "700"), w.setAttribute("font-family", "system-ui, sans-serif"), w.setAttribute("paint-order", "stroke"), w.setAttribute("stroke", "var(--card-background-color, #ffffff)"), w.setAttribute("stroke-width", "5"), w.setAttribute("stroke-linejoin", "round"), w.textContent = s.name, p.appendChild(w);
       }
-      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", _ = s.state_binding ? Fe(s, (w) => this.hass?.states[w]?.state) : void 0, $ = _?.entity ? ` · ${_.entity}: ${_.currentState ?? "ukendt"} · åben: ${_.allowedStates.join(", ")}` : "";
-      this.appendSvgTitle(p, `${s.name ?? s.id} · ${y}${$}`), o.appendChild(p);
+      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", S = s.state_binding ? _e(s, (w) => this.hass?.states[w]?.state) : void 0, k = S?.entity ? ` · ${S.entity}: ${S.currentState ?? "ukendt"} · åben: ${S.allowedStates.join(", ")}` : "";
+      this.appendSvgTitle(p, `${s.name ?? s.id} · ${y}${k}`), o.appendChild(p);
     });
     const n = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(o, n ?? null);
@@ -1866,7 +1867,7 @@ let Ve = class extends H {
     if (!e) return;
     let t = e.querySelector(":scope > g.footsteps-scene");
     if (t) return t;
-    t = document.createElementNS(q, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
+    t = document.createElementNS(F, "g"), t.setAttribute("class", "footsteps-scene"), t.setAttribute("aria-label", "Bevægelsesspor"), t.setAttribute("pointer-events", "none");
     const i = e.querySelector(":scope > g.presences-scene");
     return e.insertBefore(t, i ?? null), t;
   }
@@ -1885,46 +1886,46 @@ let Ve = class extends H {
     const o = Math.min(20, Math.max(3, Math.floor(r / Vi)));
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
-      let l = 0, c = i[i.length - 1];
-      for (const T of i) {
-        if (l + T.length >= a) {
-          c = T;
+      let l = 0, d = i[i.length - 1];
+      for (const O of i) {
+        if (l + O.length >= a) {
+          d = O;
           break;
         }
-        l += T.length;
+        l += O.length;
       }
-      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * g, _ = c.start.x + p * d + b * y, $ = c.start.y + u * d + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, S = Math.round(s * qt), C = document.createElementNS(q, "g");
-      C.setAttribute("transform", `translate(${_} ${$}) rotate(${w + g * 8})`), C.setAttribute("opacity", "0");
-      const k = document.createElementNS(q, "ellipse");
-      k.setAttribute("cx", "0"), k.setAttribute("cy", "-5"), k.setAttribute("rx", "6"), k.setAttribute("ry", "12"), k.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
-      const E = document.createElementNS(q, "ellipse");
-      E.setAttribute("cx", "0"), E.setAttribute("cy", "9"), E.setAttribute("rx", "4.5"), E.setAttribute("ry", "5.5"), E.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
-      const M = document.createElementNS(q, "animate");
-      M.setAttribute("attributeName", "opacity"), M.setAttribute("values", "0;0.72;0.56;0"), M.setAttribute("keyTimes", "0;0.08;0.58;1"), M.setAttribute("begin", "indefinite"), M.setAttribute("dur", `${Fi}ms`), M.setAttribute("fill", "freeze"), C.append(k, E, M), t.appendChild(C), window.setTimeout(() => {
-        C.isConnected && M.beginElement();
-      }, S), window.setTimeout(() => C.remove(), S + Fi + 120);
+      const c = d.length > 0 ? (a - l) / d.length : 0, p = d.end.x - d.start.x, u = d.end.y - d.start.y, g = n % 2 === 0 ? -1 : 1, b = d.length > 0 ? -u / d.length : 0, m = d.length > 0 ? p / d.length : 0, y = 9 * g, S = d.start.x + p * c + b * y, k = d.start.y + u * c + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, E = Math.round(s * Ft), $ = document.createElementNS(F, "g");
+      $.setAttribute("transform", `translate(${S} ${k}) rotate(${w + g * 8})`), $.setAttribute("opacity", "0");
+      const A = document.createElementNS(F, "ellipse");
+      A.setAttribute("cx", "0"), A.setAttribute("cy", "-5"), A.setAttribute("rx", "6"), A.setAttribute("ry", "12"), A.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
+      const P = document.createElementNS(F, "ellipse");
+      P.setAttribute("cx", "0"), P.setAttribute("cy", "9"), P.setAttribute("rx", "4.5"), P.setAttribute("ry", "5.5"), P.setAttribute("fill", "rgba(67, 48, 31, 0.68)");
+      const N = document.createElementNS(F, "animate");
+      N.setAttribute("attributeName", "opacity"), N.setAttribute("values", "0;0.72;0.56;0"), N.setAttribute("keyTimes", "0;0.08;0.58;1"), N.setAttribute("begin", "indefinite"), N.setAttribute("dur", `${_i}ms`), N.setAttribute("fill", "freeze"), $.append(A, P, N), t.appendChild($), window.setTimeout(() => {
+        $.isConnected && N.beginElement();
+      }, E), window.setTimeout(() => $.remove(), E + _i + 120);
     }
   }
 };
 It([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], Ve.prototype, "routes", 2);
 It([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], Ve.prototype, "routeNodes", 2);
 It([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], Ve.prototype, "routeGraphEdges", 2);
 Ve = It([
-  z("explorer-animated-canvas")
+  T("explorer-animated-canvas")
 ], Ve);
-var qo = Object.getOwnPropertyDescriptor, Bo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? qo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Bo = Object.getOwnPropertyDescriptor, Ho = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Bo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
 const D = "http://www.w3.org/2000/svg";
-let Ct = class extends Ve {
+let $t = class extends Ve {
   updated(e) {
     super.updated(e), this.syncRoomReactionOverlay();
   }
@@ -1949,17 +1950,17 @@ let Ct = class extends Ve {
     if (t.active) {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
-      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
+      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([d, c], p) => {
         const u = document.createElementNS(D, "circle");
-        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(d + n * d * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
+        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(d * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(c + n * c * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
           const g = document.createElementNS(D, "animate");
-          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
+          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${c + n * 0.07};${c + n * 0.13};${c + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
         }
       });
       const a = document.createElementNS(D, "circle"), l = 24 + n * 24;
       if (a.setAttribute("class", "light-halo"), a.setAttribute("r", String(l)), a.setAttribute("fill", r), a.setAttribute("fill-opacity", String(0.08 + n * 0.18)), a.setAttribute("stroke", r), a.setAttribute("stroke-width", "2"), a.setAttribute("stroke-opacity", String(0.1 + n * 0.18)), a.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(a), !i) {
-        const c = document.createElementNS(D, "animate");
-        c.setAttribute("attributeName", "r"), c.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), c.setAttribute("dur", "4.2s"), c.setAttribute("repeatCount", "indefinite"), a.appendChild(c);
+        const d = document.createElementNS(D, "animate");
+        d.setAttribute("attributeName", "r"), d.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), d.setAttribute("dur", "4.2s"), d.setAttribute("repeatCount", "indefinite"), a.appendChild(d);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 11);
@@ -2000,10 +2001,10 @@ let Ct = class extends Ve {
       e.setAttribute("data-fireplace", "active");
       const l = document.createElementNS(D, "circle");
       l.setAttribute("class", "fireplace-glow fireplace-glow-outer"), l.setAttribute("r", String(s)), l.setAttribute("fill", r), l.setAttribute("fill-opacity", String(0.07 + 0.11 * o)), e.appendChild(l);
-      const c = document.createElementNS(D, "circle");
-      if (c.setAttribute("class", "fireplace-glow fireplace-glow-inner"), c.setAttribute("r", String(s * 0.56)), c.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), c.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(c), !i) {
-        const d = document.createElementNS(D, "animate");
-        d.setAttribute("attributeName", "fill-opacity"), d.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), d.setAttribute("dur", "2.1s"), d.setAttribute("repeatCount", "indefinite"), c.appendChild(d);
+      const d = document.createElementNS(D, "circle");
+      if (d.setAttribute("class", "fireplace-glow fireplace-glow-inner"), d.setAttribute("r", String(s * 0.56)), d.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), d.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(d), !i) {
+        const c = document.createElementNS(D, "animate");
+        c.setAttribute("attributeName", "fill-opacity"), c.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), c.setAttribute("dur", "2.1s"), c.setAttribute("repeatCount", "indefinite"), d.appendChild(c);
         const p = document.createElementNS(D, "animate");
         p.setAttribute("attributeName", "r"), p.setAttribute("values", `${s * 0.93};${s * 1.05};${s * 0.97};${s * 0.93}`), p.setAttribute("dur", "3.6s"), p.setAttribute("repeatCount", "indefinite"), l.appendChild(p);
       }
@@ -2029,7 +2030,7 @@ let Ct = class extends Ve {
     s.setAttribute("text-anchor", "middle"), s.setAttribute("dominant-baseline", "central"), s.setAttribute("font-size", "14"), s.setAttribute("font-weight", "800"), s.setAttribute("fill", i), s.textContent = r, e.appendChild(s);
   }
   appendReactionPoint(e, t, i, r) {
-    const o = Je(t, i.reaction), n = document.createElementNS(D, "g");
+    const o = Xe(t, i.reaction), n = document.createElementNS(D, "g");
     n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * x} ${o.y * x})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
     const s = i.reaction.kind === "temperature" ? this.formatTemperature(i) : i.currentState ?? "ukendt";
     this.appendTitle(n, `${t.name ?? t.id} · ${i.reaction.entity} · ${s}`), e.appendChild(n);
@@ -2038,7 +2039,7 @@ let Ct = class extends Ve {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e) return;
     e.querySelector(":scope > g.room-reactions-scene")?.remove();
-    const t = this.rooms.flatMap((a) => At(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
+    const t = this.rooms.flatMap((a) => Ct(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
     if (!t.length) return;
     const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(D, "g");
     r.setAttribute("class", "room-reactions-scene"), r.setAttribute("aria-label", "Home Assistant entity-punkter"), r.setAttribute("pointer-events", "none"), t.forEach(({ room: a, status: l }) => this.appendReactionPoint(r, a, l, i));
@@ -2046,16 +2047,16 @@ let Ct = class extends Ve {
     e.insertBefore(r, o ?? n ?? s ?? null);
   }
 };
-Ct = Bo([
-  z("explorer-living-canvas")
-], Ct);
-var Ho = Object.getOwnPropertyDescriptor, Fo = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Ho(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+$t = Ho([
+  T("explorer-living-canvas")
+], $t);
+var _o = Object.getOwnPropertyDescriptor, Vo = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? _o(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const R = "http://www.w3.org/2000/svg", Bt = 3e4;
-let nt = class extends Ct {
+const z = "http://www.w3.org/2000/svg", Bt = 3e4;
+let nt = class extends $t {
   constructor() {
     super(...arguments), this.lastOccupiedAt = /* @__PURE__ */ new Map(), this.overcastMaskId = `explorer-overcast-mask-${Math.random().toString(36).slice(2, 10)}`, this.overcastFilterId = `explorer-overcast-soft-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -2070,8 +2071,8 @@ let nt = class extends Ct {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [c, d] = t[s];
-      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [d, c] = t[s];
+      l > r != c > r && i < (d - a) * (r - l) / (c - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -2119,11 +2120,11 @@ let nt = class extends Ct {
     e.querySelector(":scope > g.presence-room-activity-scene")?.remove();
     const t = Date.now(), i = this.activities(t);
     if (this.syncRoomClasses(i), this.scheduleAfterglowRefresh(i, t), !i.length) return;
-    const r = document.createElementNS(R, "g");
-    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: c, intensity: d }) => {
+    const r = document.createElementNS(z, "g");
+    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: d, intensity: c }) => {
       if (l.points.length < 3) return;
-      const p = document.createElementNS(R, "polygon");
-      p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", c ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(c ? 0.1 + d * 0.07 : 0.025 + d * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(c ? 0.28 : 0.08 + d * 0.16)), p.setAttribute("stroke-width", c ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
+      const p = document.createElementNS(z, "polygon");
+      p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", d ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(d ? 0.1 + c * 0.07 : 0.025 + c * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(d ? 0.28 : 0.08 + c * 0.16)), p.setAttribute("stroke-width", d ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
     });
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, o ?? n ?? s ?? a ?? null);
@@ -2149,7 +2150,7 @@ let nt = class extends Ct {
   roomTemperatures() {
     return this.rooms.flatMap((e) => {
       if (e.points.length < 3) return [];
-      const t = At(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
+      const t = Ct(e, (r) => this.atmosphereEntityState(r)).filter((r) => r.reaction.kind === "temperature" && r.active).map((r) => this.temperatureCelsius(r)).filter((r) => r !== void 0);
       if (!t.length) return [];
       const i = t.reduce((r, o) => r + o, 0) / t.length;
       return [{ room: e, celsius: i }];
@@ -2161,28 +2162,28 @@ let nt = class extends Ct {
     e.querySelector(":scope > g.room-temperature-atmosphere-scene")?.remove();
     const t = this.roomTemperatures();
     if (!t.length) return;
-    const i = document.createElementNS(R, "g");
-    i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
-      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(R, "polygon");
-      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(d)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
-      const b = document.createElementNS(R, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
+    const i = document.createElementNS(z, "g");
+    i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: d }) => {
+      const c = this.temperatureOpacity(d), p = this.atmosphereTemperatureColor(d), u = this.temperatureBand(d), g = document.createElementNS(z, "polygon");
+      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(c)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + c * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
+      const b = document.createElementNS(z, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(d);
       b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
   }
   appendFireplaceAtmosphere(e, t, i, r, o) {
-    const n = Je(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, c = document.createElementNS(R, "g");
-    c.setAttribute("class", "fireplace-atmosphere"), c.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), c.setAttribute("data-room-id", t.id);
-    const d = document.createElementNS(R, "circle");
-    d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
-    const p = document.createElementNS(R, "circle");
-    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
-    const u = document.createElementNS(R, "ellipse");
-    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
-      const m = document.createElementNS(R, "animate");
-      m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), d.appendChild(m);
-      const y = document.createElementNS(R, "animate");
+    const n = Xe(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, d = document.createElementNS(z, "g");
+    d.setAttribute("class", "fireplace-atmosphere"), d.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), d.setAttribute("data-room-id", t.id);
+    const c = document.createElementNS(z, "circle");
+    c.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), c.setAttribute("r", String(l * 1.18)), c.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), c.setAttribute("fill-opacity", String(0.045 + s * 0.055)), d.appendChild(c);
+    const p = document.createElementNS(z, "circle");
+    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), d.appendChild(p);
+    const u = document.createElementNS(z, "ellipse");
+    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), d.appendChild(u), !r) {
+      const m = document.createElementNS(z, "animate");
+      m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), c.appendChild(m);
+      const y = document.createElementNS(z, "animate");
       y.setAttribute("attributeName", "fill-opacity"), y.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), y.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), y.setAttribute("repeatCount", "indefinite"), p.appendChild(y);
     }
     [
@@ -2192,30 +2193,30 @@ let nt = class extends Ct {
       [22, -6, 1.5],
       [-26, -22, 1.4],
       [5, -38, 1.25]
-    ].forEach(([m, y, _], $) => {
-      const w = document.createElementNS(R, "circle");
-      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(y)), w.setAttribute("r", String(_)), w.setAttribute("fill", $ % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(w), !r) {
-        const S = document.createElementNS(R, "animate");
-        S.setAttribute("attributeName", "cy"), S.setAttribute("values", `${y};${y - 22 - $ * 2};${y - 38 - $ * 3}`), S.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), S.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), S.setAttribute("repeatCount", "indefinite"), w.appendChild(S);
-        const C = document.createElementNS(R, "animate");
-        C.setAttribute("attributeName", "opacity"), C.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), C.setAttribute("keyTimes", "0;0.18;0.68;1"), C.setAttribute("dur", `${2.4 + $ % 3 * 0.42}s`), C.setAttribute("begin", `${($ * 0.37 + o * 0.11).toFixed(2)}s`), C.setAttribute("repeatCount", "indefinite"), w.appendChild(C);
+    ].forEach(([m, y, S], k) => {
+      const w = document.createElementNS(z, "circle");
+      if (w.setAttribute("class", "fireplace-ember"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(y)), w.setAttribute("r", String(S)), w.setAttribute("fill", k % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), w.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), d.appendChild(w), !r) {
+        const E = document.createElementNS(z, "animate");
+        E.setAttribute("attributeName", "cy"), E.setAttribute("values", `${y};${y - 22 - k * 2};${y - 38 - k * 3}`), E.setAttribute("dur", `${2.4 + k % 3 * 0.42}s`), E.setAttribute("begin", `${(k * 0.37 + o * 0.11).toFixed(2)}s`), E.setAttribute("repeatCount", "indefinite"), w.appendChild(E);
+        const $ = document.createElementNS(z, "animate");
+        $.setAttribute("attributeName", "opacity"), $.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), $.setAttribute("keyTimes", "0;0.18;0.68;1"), $.setAttribute("dur", `${2.4 + k % 3 * 0.42}s`), $.setAttribute("begin", `${(k * 0.37 + o * 0.11).toFixed(2)}s`), $.setAttribute("repeatCount", "indefinite"), w.appendChild($);
       }
     });
-    const b = document.createElementNS(R, "title");
-    b.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, c.appendChild(b), e.appendChild(c);
+    const b = document.createElementNS(z, "title");
+    b.textContent = `${t.name ?? t.id} · levende pejsatmosfære`, d.appendChild(b), e.appendChild(d);
   }
   syncFireplaceAtmosphere() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e) return;
     e.querySelector(":scope > g.fireplace-atmosphere-scene")?.remove();
     const t = this.rooms.flatMap(
-      (l) => At(l, (c) => this.atmosphereEntityState(c)).filter((c) => c.reaction.kind === "fireplace" && c.active).map((c) => ({ room: l, status: c }))
+      (l) => Ct(l, (d) => this.atmosphereEntityState(d)).filter((d) => d.reaction.kind === "fireplace" && d.active).map((d) => ({ room: l, status: d }))
     );
     if (!t.length) return;
-    const i = document.createElementNS(R, "g");
+    const i = document.createElementNS(z, "g");
     i.setAttribute("class", "fireplace-atmosphere-scene"), i.setAttribute("aria-label", "Levende pejsatmosfære"), i.setAttribute("pointer-events", "none");
     const r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
-    t.forEach(({ room: l, status: c }, d) => this.appendFireplaceAtmosphere(i, l, c, r, d));
+    t.forEach(({ room: l, status: d }, c) => this.appendFireplaceAtmosphere(i, l, d, r, c));
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, o ?? n ?? s ?? a ?? null);
   }
@@ -2228,47 +2229,47 @@ let nt = class extends Ct {
     };
   }
   createOvercastMask() {
-    const e = document.createElementNS(R, "mask");
+    const e = document.createElementNS(z, "mask");
     e.setAttribute("id", this.overcastMaskId), e.setAttribute("maskUnits", "userSpaceOnUse"), e.setAttribute("x", "0"), e.setAttribute("y", "0"), e.setAttribute("width", String(x)), e.setAttribute("height", String(x));
-    const t = document.createElementNS(R, "rect");
+    const t = document.createElementNS(z, "rect");
     return t.setAttribute("x", "0"), t.setAttribute("y", "0"), t.setAttribute("width", String(x)), t.setAttribute("height", String(x)), t.setAttribute("fill", "white"), e.appendChild(t), this.rooms.forEach((i) => {
       if (i.points.length < 3) return;
-      const r = document.createElementNS(R, "polygon");
+      const r = document.createElementNS(z, "polygon");
       r.setAttribute("points", this.polygonPoints(i)), r.setAttribute("fill", "black"), r.setAttribute("stroke", "black"), r.setAttribute("stroke-width", "16"), r.setAttribute("stroke-linejoin", "round"), e.appendChild(r);
     }), e;
   }
   createOvercastFilter() {
-    const e = document.createElementNS(R, "filter");
+    const e = document.createElementNS(z, "filter");
     e.setAttribute("id", this.overcastFilterId), e.setAttribute("x", "-55%"), e.setAttribute("y", "-65%"), e.setAttribute("width", "210%"), e.setAttribute("height", "240%");
-    const t = document.createElementNS(R, "feGaussianBlur");
+    const t = document.createElementNS(z, "feGaussianBlur");
     t.setAttribute("in", "SourceGraphic"), t.setAttribute("stdDeviation", "3.1"), t.setAttribute("result", "soft"), e.appendChild(t);
-    const i = document.createElementNS(R, "feTurbulence");
+    const i = document.createElementNS(z, "feTurbulence");
     i.setAttribute("type", "fractalNoise"), i.setAttribute("baseFrequency", "0.016 0.029"), i.setAttribute("numOctaves", "3"), i.setAttribute("seed", "43"), i.setAttribute("result", "noise"), e.appendChild(i);
-    const r = document.createElementNS(R, "feDisplacementMap");
+    const r = document.createElementNS(z, "feDisplacementMap");
     return r.setAttribute("in", "soft"), r.setAttribute("in2", "noise"), r.setAttribute("scale", "16"), r.setAttribute("xChannelSelector", "R"), r.setAttribute("yChannelSelector", "G"), e.appendChild(r), e;
   }
   appendOvercastCloud(e, t, i, r, o, n) {
-    const s = document.createElementNS(R, "g");
+    const s = document.createElementNS(z, "g");
     s.setAttribute("class", "overcast-cloud-position"), s.setAttribute("transform", `translate(${t} ${i}) scale(${r})`), s.setAttribute("opacity", String(n));
-    const a = document.createElementNS(R, "g");
+    const a = document.createElementNS(z, "g");
     a.setAttribute("class", `overcast-cloud overcast-cloud-${o % 3} overcast-depth-${o % 3}`);
-    const l = document.createElementNS(R, "ellipse");
+    const l = document.createElementNS(z, "ellipse");
     l.setAttribute("class", "overcast-cloud-mist"), l.setAttribute("cx", o % 2 === 0 ? "-12" : "14"), l.setAttribute("cy", "18"), l.setAttribute("rx", "145"), l.setAttribute("ry", "43"), a.appendChild(l);
-    const c = document.createElementNS(R, "g");
-    c.setAttribute("class", "overcast-cloud-body"), c.setAttribute("filter", `url(#${this.overcastFilterId})`), c.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
-    const d = document.createElementNS(R, "path");
-    d.setAttribute("class", "overcast-cloud-base"), d.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), c.appendChild(d), [
+    const d = document.createElementNS(z, "g");
+    d.setAttribute("class", "overcast-cloud-body"), d.setAttribute("filter", `url(#${this.overcastFilterId})`), d.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
+    const c = document.createElementNS(z, "path");
+    c.setAttribute("class", "overcast-cloud-base"), c.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), d.appendChild(c), [
       [-86, -6, 50, 30],
       [-47, -37, 57, 34],
       [-3, -51, 65, 38],
       [43, -43, 58, 35],
       [82, -17, 50, 30],
       [14, 23, 92, 27]
-    ].forEach(([g, b, m, y], _) => {
-      const $ = document.createElementNS(R, "ellipse");
-      $.setAttribute("class", "overcast-cloud-puff"), $.setAttribute("cx", String(g)), $.setAttribute("cy", String(b)), $.setAttribute("rx", String(m)), $.setAttribute("ry", String(y)), $.setAttribute("opacity", String(0.34 + _ % 3 * 0.08)), c.appendChild($);
-    }), a.appendChild(c);
-    const u = document.createElementNS(R, "path");
+    ].forEach(([g, b, m, y], S) => {
+      const k = document.createElementNS(z, "ellipse");
+      k.setAttribute("class", "overcast-cloud-puff"), k.setAttribute("cx", String(g)), k.setAttribute("cy", String(b)), k.setAttribute("rx", String(m)), k.setAttribute("ry", String(y)), k.setAttribute("opacity", String(0.34 + S % 3 * 0.08)), d.appendChild(k);
+    }), a.appendChild(d);
+    const u = document.createElementNS(z, "path");
     u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
@@ -2277,9 +2278,9 @@ let nt = class extends Ct {
     e.querySelector(`defs[data-overcast-mask="${this.overcastMaskId}"]`)?.remove(), t.querySelector(":scope > g.overcast-cloud-density-scene")?.remove();
     const i = this.descendantWeather();
     if (i.effect !== "cloudy") return;
-    const r = document.createElementNS(R, "defs");
+    const r = document.createElementNS(z, "defs");
     r.setAttribute("data-overcast-mask", this.overcastMaskId), r.appendChild(this.createOvercastMask()), r.appendChild(this.createOvercastFilter()), e.insertBefore(r, e.firstChild);
-    const o = document.createElementNS(R, "g");
+    const o = document.createElementNS(z, "g");
     o.setAttribute("class", `overcast-cloud-density-scene${i.night ? " is-night" : ""}`), o.setAttribute("mask", `url(#${this.overcastMaskId})`), o.setAttribute("pointer-events", "none"), o.style.setProperty("--overcast-intensity", String(i.intensity)), [
       [195, 58, 0.68, 0, 0.4],
       [515, 90, 0.58, 1, 0.31],
@@ -2293,13 +2294,13 @@ let nt = class extends Ct {
       [265, 1035, 0.63, 9, 0.36],
       [585, 1038, 0.56, 10, 0.31],
       [890, 1028, 0.64, 11, 0.36]
-    ].forEach(([a, l, c, d, p]) => this.appendOvercastCloud(o, a, l, c, d, p));
+    ].forEach(([a, l, d, c, p]) => this.appendOvercastCloud(o, a, l, d, c, p));
     const s = t.querySelector(":scope > g.rooms-scene");
     t.insertBefore(o, s ?? null);
   }
 };
-nt.styles = O`
-    ${Ct.styles}
+nt.styles = j`
+    ${$t.styles}
 
     :host {
       --explorer-presence-room-color: var(--primary-color, #03a9f4);
@@ -2434,13 +2435,13 @@ nt.styles = O`
       }
     }
   `;
-nt = Fo([
-  z("explorer-presence-activity-canvas")
+nt = Vo([
+  T("explorer-presence-activity-canvas")
 ], nt);
-var Vo = Object.defineProperty, Ko = Object.getOwnPropertyDescriptor, ht = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Ko(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Ko = Object.defineProperty, Go = Object.getOwnPropertyDescriptor, ht = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Go(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Vo(t, i, o), o;
+  return r && o && Ko(t, i, o), o;
 };
 const Zo = "http://www.w3.org/2000/svg";
 let be = class extends nt {
@@ -2469,9 +2470,9 @@ let be = class extends nt {
     const r = this.createSvg("feColorMatrix");
     this.setAttributes(r, { in: "noise", type: "matrix", values: "0 0 0 0 0.30  0 0 0 0 0.20  0 0 0 0 0.11  0 0 0 .24 0" }), t.appendChild(r), e.appendChild(t);
     const o = this.createSvg("radialGradient");
-    o.setAttribute("id", `${this.artifactId}-vignette`), [["0%", "#f6e3b7", "0"], ["70%", "#9b6c3d", ".04"], ["100%", "#3f291c", ".30"]].forEach(([a, l, c]) => {
-      const d = this.createSvg("stop");
-      this.setAttributes(d, { offset: a, "stop-color": l, "stop-opacity": c }), o.appendChild(d);
+    o.setAttribute("id", `${this.artifactId}-vignette`), [["0%", "#f6e3b7", "0"], ["70%", "#9b6c3d", ".04"], ["100%", "#3f291c", ".30"]].forEach(([a, l, d]) => {
+      const c = this.createSvg("stop");
+      this.setAttributes(c, { offset: a, "stop-color": l, "stop-opacity": d }), o.appendChild(c);
     }), e.appendChild(o);
     const n = this.createSvg("pattern");
     this.setAttributes(n, { id: `${this.artifactId}-floor`, width: "28", height: "28", patternUnits: "userSpaceOnUse", patternTransform: "rotate(-8)" });
@@ -2499,9 +2500,9 @@ let be = class extends nt {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, u]) => {
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([d, c, p, u]) => {
       const g = this.createSvg("line");
-      this.setAttributes(g, { x1: String(c), y1: String(d), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
+      this.setAttributes(g, { x1: String(d), y1: String(c), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2522,29 +2523,29 @@ let be = class extends nt {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-be.styles = O`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+be.styles = j`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
 ht([
-  A({ attribute: "map-theme", reflect: !0 })
+  C({ attribute: "map-theme", reflect: !0 })
 ], be.prototype, "theme", 2);
 ht([
-  A({ type: Number, attribute: "compass-rotation" })
+  C({ type: Number, attribute: "compass-rotation" })
 ], be.prototype, "compassRotation", 2);
 ht([
-  A({ type: Number, attribute: "compass-size" })
+  C({ type: Number, attribute: "compass-size" })
 ], be.prototype, "compassSize", 2);
 ht([
-  A({ type: Boolean, attribute: "compass-visible" })
+  C({ type: Boolean, attribute: "compass-visible" })
 ], be.prototype, "compassVisible", 2);
 be = ht([
-  z("explorer-themed-canvas")
+  T("explorer-themed-canvas")
 ], be);
-const Go = ["on"], Wo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
-function Uo(e) {
+const Wo = ["on"], Uo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
+function Yo(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
-  return t.length ? [...new Set(t)] : [...Go];
+  return t.length ? [...new Set(t)] : [...Wo];
 }
-function $r(e, t) {
-  const i = e.visible !== !1, r = e.state_binding, o = Uo(r?.active_states);
+function kr(e, t) {
+  const i = e.visible !== !1, r = e.state_binding, o = Yo(r?.active_states);
   if (!i)
     return {
       zone: e,
@@ -2574,7 +2575,7 @@ function $r(e, t) {
       activeStates: o,
       reason: "missing_entity"
     };
-  if (Wo.has(s))
+  if (Uo.has(s))
     return {
       zone: e,
       visible: !0,
@@ -2597,21 +2598,21 @@ function $r(e, t) {
     ...a ? {} : { reason: "state_blocked" }
   };
 }
-function Xo(e, t) {
-  return e.map((i) => $r(i, t));
+function Qo(e, t) {
+  return e.map((i) => kr(i, t));
 }
-var Yo = Object.defineProperty, Qo = Object.getOwnPropertyDescriptor, kr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Qo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Jo = Object.defineProperty, Xo = Object.getOwnPropertyDescriptor, Ar = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Xo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Yo(t, i, o), o;
+  return r && o && Jo(t, i, o), o;
 };
-const he = "http://www.w3.org/2000/svg", Jo = {
+const he = "http://www.w3.org/2000/svg", en = {
   info: "var(--explorer-zone-info, #2d8f74)",
   warning: "var(--explorer-zone-warning, #f59e0b)",
   danger: "var(--explorer-zone-danger, #d64545)",
   cleaning: "var(--explorer-zone-cleaning, #3b82c4)",
   restricted: "var(--explorer-zone-restricted, #8b5a9e)"
-}, en = {
+}, tn = {
   info: "i",
   warning: "!",
   danger: "!",
@@ -2635,7 +2636,7 @@ let Ke = class extends be {
     } : { x: x / 2, y: x / 2 };
   }
   zoneColor(e) {
-    return e.color?.trim() || Jo[e.kind ?? "info"];
+    return e.color?.trim() || en[e.kind ?? "info"];
   }
   appendZoneTitle(e, t) {
     const i = document.createElementNS(he, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
@@ -2653,12 +2654,12 @@ let Ke = class extends be {
     s.setAttribute("class", `dynamic-zone zone-${o} zone-${r.id}${i ? " reduced-motion" : ""}`), s.setAttribute("pointer-events", "none");
     const a = document.createElementNS(he, "polygon");
     a.setAttribute("class", "zone-shape"), a.setAttribute("points", this.zonePolygonPoints(r.points)), a.setAttribute("fill", n), a.setAttribute("fill-opacity", o === "danger" || o === "restricted" ? ".18" : ".13"), a.setAttribute("stroke", n), a.setAttribute("stroke-width", o === "danger" ? "5" : "4"), a.setAttribute("stroke-opacity", ".88"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("vector-effect", "non-scaling-stroke"), o === "warning" && a.setAttribute("stroke-dasharray", "16 9"), o === "restricted" && a.setAttribute("stroke-dasharray", "7 7"), o === "cleaning" && a.setAttribute("stroke-dasharray", "4 8"), s.appendChild(a), this.appendZoneAccent(s, r, o, n);
-    const l = this.zoneCenter(r), c = document.createElementNS(he, "g");
-    c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.setAttribute("class", "zone-marker");
-    const d = document.createElementNS(he, "circle");
-    d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
+    const l = this.zoneCenter(r), d = document.createElementNS(he, "g");
+    d.setAttribute("transform", `translate(${l.x} ${l.y})`), d.setAttribute("class", "zone-marker");
+    const c = document.createElementNS(he, "circle");
+    c.setAttribute("class", "zone-marker-bg"), c.setAttribute("r", "17"), c.setAttribute("fill", "var(--card-background-color, #ffffff)"), c.setAttribute("fill-opacity", ".90"), c.setAttribute("stroke", n), c.setAttribute("stroke-width", "3"), c.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(c);
     const p = document.createElementNS(he, "text");
-    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = en[o], c.appendChild(p), s.appendChild(c), r.name) {
+    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = tn[o], d.appendChild(p), s.appendChild(d), r.name) {
       const u = document.createElementNS(he, "text");
       u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
     }
@@ -2667,17 +2668,17 @@ let Ke = class extends be {
   syncZonesOverlay() {
     const e = this.renderRoot.querySelector("g.scene");
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
-    const i = Xo(this.zones, (c) => this.hass?.states[c]?.state).filter((c) => c.active && c.zone.points.length >= 3);
+    const i = Qo(this.zones, (d) => this.hass?.states[d]?.state).filter((d) => d.active && d.zone.points.length >= 3);
     if (!i.length) return;
     const r = document.createElementNS(he, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
     const o = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
-    i.forEach((c) => this.renderZone(r, c, o));
+    i.forEach((d) => this.renderZone(r, d, o));
     const n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.route-status-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-Ke.styles = O`
+Ke.styles = j`
     ${be.styles}
 
     :host {
@@ -2769,19 +2770,19 @@ Ke.styles = O`
       }
     }
   `;
-kr([
-  A({ attribute: !1 })
+Ar([
+  C({ attribute: !1 })
 ], Ke.prototype, "zones", 2);
-Ke = kr([
-  z("explorer-zones-canvas")
+Ke = Ar([
+  T("explorer-zones-canvas")
 ], Ke);
-var tn = Object.defineProperty, rn = Object.getOwnPropertyDescriptor, fi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? rn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var rn = Object.defineProperty, on = Object.getOwnPropertyDescriptor, fi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? on(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && tn(t, i, o), o;
+  return r && o && rn(t, i, o), o;
 };
-const on = "http://www.w3.org/2000/svg", nn = 4200, sn = 900, an = 54, ln = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ki = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Ht = [58, 64, 54, 61, 56, 66], cn = [8, 6, 10, 7, 9, 5], dn = [7, 4, 10, 6, 8, 3];
-function Zi(e) {
+const nn = "http://www.w3.org/2000/svg", sn = 4200, an = 900, ln = 54, dn = { person: "Person", pet: "Kæledyr", robot: "Robot", vehicle: "Køretøj", object: "Objekt" }, Ki = { person: [202, 344, 42, 158, 274, 18], pet: [28, 112, 326, 52, 178, 286], robot: [188, 218, 264, 164, 204, 238], vehicle: [12, 210, 38, 330, 186, 262], object: [272, 44, 154, 320, 196, 22] }, Ht = [58, 64, 54, 61, 56, 66], cn = [8, 6, 10, 7, 9, 5], pn = [7, 4, 10, 6, 8, 3];
+function Gi(e) {
   let t = 2166136261;
   for (let i = 0; i < e.length; i += 1)
     t ^= e.charCodeAt(i), t = Math.imul(t, 16777619);
@@ -2790,7 +2791,7 @@ function Zi(e) {
 function gt(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-let Ne = class extends Ke {
+let Re = class extends Ke {
   constructor() {
     super(...arguments), this.movementHistory = {}, this.petRobotTrails = {}, this.polishPreviousPositions = /* @__PURE__ */ new Map(), this.polishPreviousRooms = /* @__PURE__ */ new Map(), this.movementHistorySamples = /* @__PURE__ */ new Map();
   }
@@ -2803,7 +2804,7 @@ let Ne = class extends Ke {
   polishPresenceColor(e) {
     const t = e.color?.trim();
     if (t) return t;
-    const i = e.type ?? "person", r = Ki[i][Zi(e.id) % Ki[i].length];
+    const i = e.type ?? "person", r = Ki[i][Gi(e.id) % Ki[i].length];
     return this.theme === "enchanted_antique" ? `hsl(${r} 34% 38%)` : `hsl(${r} 62% 47%)`;
   }
   polishTrailColor(e) {
@@ -2811,13 +2812,13 @@ let Ne = class extends Ke {
   }
   polishTrailDuration(e) {
     const t = e.trail_duration;
-    return Number.isFinite(t) ? Math.round(gt(t, 1, 60) * 1e3) : nn;
+    return Number.isFinite(t) ? Math.round(gt(t, 1, 60) * 1e3) : sn;
   }
   polishBasePosition(e) {
     return { x: (e.x ?? 0.5) * x, y: (e.y ?? 0.5) * x };
   }
   polishPersonTrailVariant(e) {
-    return Zi(e.id) % Ht.length;
+    return Gi(e.id) % Ht.length;
   }
   polishOffsets(e) {
     const t = /* @__PURE__ */ new Map();
@@ -2828,25 +2829,25 @@ let Ne = class extends Ke {
       if (i.delete(o), !n) continue;
       const s = [n], a = [n];
       for (; a.length; ) {
-        const d = a.shift(), p = this.polishBasePosition(d);
+        const c = a.shift(), p = this.polishBasePosition(c);
         for (const u of [...i]) {
           const g = r.get(u);
           if (!g) continue;
           const b = this.polishBasePosition(g);
-          Math.hypot(p.x - b.x, p.y - b.y) <= an && (i.delete(u), s.push(g), a.push(g));
+          Math.hypot(p.x - b.x, p.y - b.y) <= ln && (i.delete(u), s.push(g), a.push(g));
         }
       }
       if (s.length < 2) continue;
-      const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
-      l.forEach((d, p) => {
-        const u = this.polishBasePosition(d), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * c, 38, x - 38), m = gt(u.y + Math.sin(g) * c, 38, x - 64);
-        t.set(d.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
+      const l = [...s].sort((c, p) => c.id.localeCompare(p.id)), d = Math.min(52, 24 + l.length * 4);
+      l.forEach((c, p) => {
+        const u = this.polishBasePosition(c), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * d, 38, x - 38), m = gt(u.y + Math.sin(g) * d, 38, x - 64);
+        t.set(c.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
       });
     }
     return t;
   }
   polishCreateSvg(e) {
-    return document.createElementNS(on, e);
+    return document.createElementNS(nn, e);
   }
   polishSetAttributes(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -2864,8 +2865,8 @@ let Ne = class extends Ke {
     } else if (r === "pet") {
       const s = this.polishCreateSvg("ellipse");
       this.polishSetAttributes(s, { cx: "0", cy: "2", rx: "3.4", ry: "3", fill: i }), o.appendChild(s), [[-4, -2], [-1.5, -4.6], [1.5, -4.6], [4, -2]].forEach(([a, l]) => {
-        const c = this.polishCreateSvg("circle");
-        this.polishSetAttributes(c, { cx: String(a), cy: String(l), r: "1.5", fill: i }), o.appendChild(c);
+        const d = this.polishCreateSvg("circle");
+        this.polishSetAttributes(d, { cx: String(a), cy: String(l), r: "1.5", fill: i }), o.appendChild(d);
       });
     } else if (r === "robot") {
       const s = this.polishCreateSvg("rect");
@@ -2889,10 +2890,10 @@ let Ne = class extends Ke {
       if (!n) return;
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
-      let c = n.querySelector(":scope > g.presence-visual-offset");
-      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
-      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      d.textContent = `${r.name ?? r.id} · ${ln[s]}${u}${p}`, n.appendChild(d);
+      let d = n.querySelector(":scope > g.presence-visual-offset");
+      d || (d = this.polishCreateSvg("g"), d.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => d?.appendChild(g)), n.insertBefore(d, n.firstChild)), d.setAttribute("transform", `translate(${l.x} ${l.y})`), d.querySelector(".presence-marker")?.setAttribute("fill", a), d.querySelector(".presence-avatar-background")?.setAttribute("fill", a), d.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(d, r, a), n.querySelector(":scope > title")?.remove();
+      const c = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      c.textContent = `${r.name ?? r.id} · ${dn[s]}${u}${p}`, n.appendChild(c);
     });
   }
   polishRouteConfig() {
@@ -2914,8 +2915,8 @@ let Ne = class extends Ke {
   }
   polishAppendPersonTrailShape(e, t, i) {
     const r = (n, s, a, l) => {
-      const c = this.polishCreateSvg("ellipse");
-      this.polishSetAttributes(c, { cx: String(n), cy: String(s), rx: String(a), ry: String(l), fill: t }), e.appendChild(c);
+      const d = this.polishCreateSvg("ellipse");
+      this.polishSetAttributes(d, { cx: String(n), cy: String(s), rx: String(a), ry: String(l), fill: t }), e.appendChild(d);
     };
     if (i === 0) {
       r(0, -5, 5.5, 11), r(0, 8, 4, 5);
@@ -2982,25 +2983,25 @@ let Ne = class extends Ke {
     const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, u) => {
       const g = e[u];
       return { start: g, end: p, length: Math.hypot(p.x - g.x, p.y - g.y) };
-    }), l = a.reduce((p, u) => p + u.length, 0), c = this.polishTrailSpacing(r, o);
-    if (l < c) return;
-    const d = Math.min(24, Math.max(3, Math.floor(l / c)));
-    for (let p = 0; p < d; p += 1) {
-      const u = (p + 1) / (d + 1), g = l * u;
+    }), l = a.reduce((p, u) => p + u.length, 0), d = this.polishTrailSpacing(r, o);
+    if (l < d) return;
+    const c = Math.min(24, Math.max(3, Math.floor(l / d)));
+    for (let p = 0; p < c; p += 1) {
+      const u = (p + 1) / (c + 1), g = l * u;
       let b = 0, m = a[a.length - 1];
-      for (const Z of a) {
-        if (b + Z.length >= g) {
-          m = Z;
+      for (const G of a) {
+        if (b + G.length >= g) {
+          m = G;
           break;
         }
-        b += Z.length;
+        b += G.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, _ = m.end.x - m.start.x, $ = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, S = r === "person" ? cn[o] ?? 8 : r === "pet" ? 6 : 0, C = r === "person" ? dn[o] ?? 7 : S ? 7 : 0, k = m.length > 0 ? -$ / m.length : 0, E = m.length > 0 ? _ / m.length : 0, M = m.start.x + _ * y + k * S * w, T = m.start.y + $ * y + E * S * w, Y = Math.atan2($, _) * 180 / Math.PI + 90, U = Math.round(u * sn), N = this.polishCreateSvg("g");
-      N.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), N.setAttribute("data-presence-id", t.id), r === "person" && N.setAttribute("data-trail-style", String(o + 1)), N.setAttribute("transform", `translate(${M} ${T}) rotate(${Y + (S ? w * C : 0)})`), N.setAttribute("opacity", "0"), this.polishAppendTrailShape(N, r, n, o);
+      const y = m.length > 0 ? (g - b) / m.length : 0, S = m.end.x - m.start.x, k = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, E = r === "person" ? cn[o] ?? 8 : r === "pet" ? 6 : 0, $ = r === "person" ? pn[o] ?? 7 : E ? 7 : 0, A = m.length > 0 ? -k / m.length : 0, P = m.length > 0 ? S / m.length : 0, N = m.start.x + S * y + A * E * w, O = m.start.y + k * y + P * E * w, Q = Math.atan2(k, S) * 180 / Math.PI + 90, U = Math.round(u * an), R = this.polishCreateSvg("g");
+      R.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), R.setAttribute("data-presence-id", t.id), r === "person" && R.setAttribute("data-trail-style", String(o + 1)), R.setAttribute("transform", `translate(${N} ${O}) rotate(${Q + (E ? w * $ : 0)})`), R.setAttribute("opacity", "0"), this.polishAppendTrailShape(R, r, n, o);
       const I = this.polishCreateSvg("animate");
-      this.polishSetAttributes(I, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), N.appendChild(I), i.appendChild(N), window.setTimeout(() => {
-        N.isConnected && I.beginElement();
-      }, U), window.setTimeout(() => N.remove(), U + s + 120);
+      this.polishSetAttributes(I, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), R.appendChild(I), i.appendChild(R), window.setTimeout(() => {
+        R.isConnected && I.beginElement();
+      }, U), window.setTimeout(() => R.remove(), U + s + 120);
     }
   }
   polishSyncTrails() {
@@ -3046,7 +3047,7 @@ let Ne = class extends Ke {
         this.movementHistorySamples.delete(o);
         continue;
       }
-      const a = e - this.polishHistoryDurationMs(s), l = n.filter((c) => c.at >= a);
+      const a = e - this.polishHistoryDurationMs(s), l = n.filter((d) => d.at >= a);
       l.length ? this.movementHistorySamples.set(o, l) : this.movementHistorySamples.delete(o);
     }
     for (const o of t) {
@@ -3064,37 +3065,37 @@ let Ne = class extends Ke {
     r.setAttribute("class", "movement-history-rooms-scene"), o.setAttribute("class", "movement-history-scene"), r.setAttribute("pointer-events", "none"), o.setAttribute("pointer-events", "none");
     const n = new Map(e.map((a) => [a.id, a]));
     for (const [a, l] of this.movementHistorySamples) {
-      const c = n.get(a);
-      if (!c) continue;
-      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), u = this.polishTrailColor(c), g = d === "person" ? this.polishPersonTrailVariant(c) : 0;
-      if (d === "person" && this.movementHistory.show_rooms !== !1) {
+      const d = n.get(a);
+      if (!d) continue;
+      const c = d.type ?? "person", p = this.polishHistoryDurationMs(d), u = this.polishTrailColor(d), g = c === "person" ? this.polishPersonTrailVariant(d) : 0;
+      if (c === "person" && this.movementHistory.show_rooms !== !1) {
         const b = /* @__PURE__ */ new Map();
         for (const m of l) m.roomId && b.set(m.roomId, m);
         for (const [m, y] of b) {
-          const _ = this.rooms.find((S) => S.id === m || S.area_id === m);
-          if (!_ || _.points.length < 3) continue;
-          const $ = Math.max(0, 0.16 * (1 - (t - y.at) / p)), w = this.polishCreateSvg("polygon");
-          this.polishSetAttributes(w, { points: _.points.map(([S, C]) => `${S * x},${C * x}`).join(" "), fill: u, "fill-opacity": String($), stroke: u, "stroke-opacity": String($ * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
+          const S = this.rooms.find((E) => E.id === m || E.area_id === m);
+          if (!S || S.points.length < 3) continue;
+          const k = Math.max(0, 0.16 * (1 - (t - y.at) / p)), w = this.polishCreateSvg("polygon");
+          this.polishSetAttributes(w, { points: S.points.map(([E, $]) => `${E * x},${$ * x}`).join(" "), fill: u, "fill-opacity": String(k), stroke: u, "stroke-opacity": String(k * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
         }
       }
       for (let b = 1; b < l.length; b += 1) {
-        const m = l[b - 1], y = l[b], _ = this.polishMovementPath(m, y, m.roomId, y.roomId), $ = Math.max(0, 0.72 * (1 - (t - y.at) / p));
-        for (let w = 1; w < _.length; w += 1) {
-          const S = _[w - 1], C = _[w], k = C.x - S.x, E = C.y - S.y, M = Math.hypot(k, E), T = Math.atan2(E, k) * 180 / Math.PI;
-          if (d === "robot") {
+        const m = l[b - 1], y = l[b], S = this.polishMovementPath(m, y, m.roomId, y.roomId), k = Math.max(0, 0.72 * (1 - (t - y.at) / p));
+        for (let w = 1; w < S.length; w += 1) {
+          const E = S[w - 1], $ = S[w], A = $.x - E.x, P = $.y - E.y, N = Math.hypot(A, P), O = Math.atan2(P, A) * 180 / Math.PI;
+          if (c === "robot") {
             if (this.petRobotTrails.show_robot_route === !1) continue;
             const I = this.polishCreateSvg("line");
-            if (this.polishSetAttributes(I, { x1: String(S.x), y1: String(S.y), x2: String(C.x), y2: String(C.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String($), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), I.setAttribute("class", "robot-history-route"), o.appendChild(I), this.petRobotTrails.robot_direction_arrows !== !1 && M > 45) {
-              const Z = this.polishCreateSvg("path"), ve = (S.x + C.x) / 2, Te = (S.y + C.y) / 2;
-              this.polishSetAttributes(Z, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, $ + 0.12)), transform: `translate(${ve} ${Te}) rotate(${T})`, "data-presence-id": a }), Z.setAttribute("class", "robot-history-arrow"), o.appendChild(Z);
+            if (this.polishSetAttributes(I, { x1: String(E.x), y1: String(E.y), x2: String($.x), y2: String($.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(k), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), I.setAttribute("class", "robot-history-route"), o.appendChild(I), this.petRobotTrails.robot_direction_arrows !== !1 && N > 45) {
+              const G = this.polishCreateSvg("path"), ve = (E.x + $.x) / 2, Oe = (E.y + $.y) / 2;
+              this.polishSetAttributes(G, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, k + 0.12)), transform: `translate(${ve} ${Oe}) rotate(${O})`, "data-presence-id": a }), G.setAttribute("class", "robot-history-arrow"), o.appendChild(G);
             }
             continue;
           }
-          if (d === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
-          const Y = d === "pet" ? 52 : 70, U = Math.min(12, Math.max(1, Math.floor(M / Y))), N = T + 90;
+          if (c === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
+          const Q = c === "pet" ? 52 : 70, U = Math.min(12, Math.max(1, Math.floor(N / Q))), R = O + 90;
           for (let I = 1; I <= U; I += 1) {
-            const Z = I / (U + 1), ve = I % 2 === 0 ? -1 : 1, Te = M > 0 ? -E / M : 0, Ae = M > 0 ? k / M : 0, Xe = d === "pet" ? 7 : 6, X = this.polishCreateSvg("g");
-            X.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${g + 1}` : ""}`), X.setAttribute("data-presence-id", a), X.setAttribute("transform", `translate(${S.x + k * Z + Te * Xe * ve} ${S.y + E * Z + Ae * Xe * ve}) rotate(${N + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), X.setAttribute("opacity", String($)), this.polishAppendTrailShape(X, d, u, g), o.appendChild(X);
+            const G = I / (U + 1), ve = I % 2 === 0 ? -1 : 1, Oe = N > 0 ? -P / N : 0, Ce = N > 0 ? A / N : 0, Ye = c === "pet" ? 7 : 6, Y = this.polishCreateSvg("g");
+            Y.setAttribute("class", `movement-history-mark trail-${c}${c === "person" ? ` trail-person-v${g + 1}` : ""}`), Y.setAttribute("data-presence-id", a), Y.setAttribute("transform", `translate(${E.x + A * G + Oe * Ye * ve} ${E.y + P * G + Ce * Ye * ve}) rotate(${R + ve * 4}) scale(${c === "pet" ? 0.72 : 0.62})`), Y.setAttribute("opacity", String(k)), this.polishAppendTrailShape(Y, c, u, g), o.appendChild(Y);
           }
         }
       }
@@ -3103,23 +3104,23 @@ let Ne = class extends Ke {
     i.insertBefore(r, s ?? null), i.insertBefore(o, s ?? null);
   }
 };
-Ne.styles = O`${Ke.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+Re.styles = j`${Ke.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
 fi([
-  A({ attribute: !1 })
-], Ne.prototype, "movementHistory", 2);
+  C({ attribute: !1 })
+], Re.prototype, "movementHistory", 2);
 fi([
-  A({ attribute: !1 })
-], Ne.prototype, "petRobotTrails", 2);
-Ne = fi([
-  z("explorer-presence-polish-canvas")
-], Ne);
-var pn = Object.getOwnPropertyDescriptor, hn = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? pn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+  C({ attribute: !1 })
+], Re.prototype, "petRobotTrails", 2);
+Re = fi([
+  T("explorer-presence-polish-canvas")
+], Re);
+var hn = Object.getOwnPropertyDescriptor, un = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const mt = "http://www.w3.org/2000/svg", Gi = 3e4, un = 900;
-let st = class extends Ne {
+const mt = "http://www.w3.org/2000/svg", Zi = 3e4, gn = 900;
+let st = class extends Re {
   constructor() {
     super(...arguments), this.magicPreviousOccupiedRooms = /* @__PURE__ */ new Set(), this.magicAfterglowStartedAt = /* @__PURE__ */ new Map();
   }
@@ -3134,8 +3135,8 @@ let st = class extends Ne {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [c, d] = t[s];
-      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [d, c] = t[s];
+      l > r != c > r && i < (d - a) * (r - l) / (c - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -3161,8 +3162,8 @@ let st = class extends Ne {
       i.has(r) || this.magicAfterglowStartedAt.set(r, e);
     for (const r of i) this.magicAfterglowStartedAt.delete(r);
     return this.magicPreviousOccupiedRooms.clear(), i.forEach((r) => this.magicPreviousOccupiedRooms.add(r)), this.rooms.map((r) => {
-      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Gi, c = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Gi) : 0;
-      return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: c };
+      const o = t.get(r.id) ?? 0, n = o > 0, s = this.magicAfterglowStartedAt.get(r.id), a = s === void 0 ? 1 / 0 : e - s, l = !n && a >= 0 && a < Zi, d = n ? Math.min(1, 0.72 + Math.max(0, o - 1) * 0.12) : l ? Math.max(0, 1 - a / Zi) : 0;
+      return !l && s !== void 0 && this.magicAfterglowStartedAt.delete(r.id), { room: r, active: n, afterglow: l, intensity: d };
     }).filter((r) => r.active || r.afterglow);
   }
   magicPolygonPoints(e) {
@@ -3171,7 +3172,7 @@ let st = class extends Ne {
   magicScheduleRefresh(e) {
     this.magicRefreshTimer !== void 0 && window.clearTimeout(this.magicRefreshTimer), e.some((t) => t.afterglow) && (this.magicRefreshTimer = window.setTimeout(() => {
       this.magicRefreshTimer = void 0, this.magicSyncRoomAtmosphere();
-    }, un));
+    }, gn));
   }
   magicAppendRoom(e, t) {
     const { room: i, active: r, intensity: o } = t;
@@ -3190,7 +3191,7 @@ let st = class extends Ne {
     const t = this.magicActivities(Date.now());
     if (this.magicScheduleRefresh(t), !t.length) return;
     const i = document.createElementNS(mt, "g");
-    i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((c) => this.magicAppendRoom(i, c));
+    i.setAttribute("class", "room-magic-scene"), i.setAttribute("aria-label", "Magisk rumaktivitet"), i.setAttribute("pointer-events", "none"), t.forEach((d) => this.magicAppendRoom(i, d));
     const r = e.querySelector(":scope > g.room-temperature-atmosphere-scene"), o = e.querySelector(":scope > g.presence-room-activity-scene"), n = e.querySelector(":scope > g.room-reactions-scene"), s = e.querySelector(":scope > g.presence-trails-scene"), a = e.querySelector(":scope > g.footsteps-scene"), l = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(
       i,
@@ -3198,8 +3199,8 @@ let st = class extends Ne {
     );
   }
 };
-st.styles = O`
-    ${Ne.styles}
+st.styles = j`
+    ${Re.styles}
 
     :host {
       --explorer-room-magic-color: var(--primary-color, #03a9f4);
@@ -3266,16 +3267,16 @@ st.styles = O`
       }
     }
   `;
-st = hn([
-  z("explorer-room-magic-canvas")
+st = un([
+  T("explorer-room-magic-canvas")
 ], st);
-var gn = Object.defineProperty, mn = Object.getOwnPropertyDescriptor, _r = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? mn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var mn = Object.defineProperty, fn = Object.getOwnPropertyDescriptor, Sr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? fn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && gn(t, i, o), o;
+  return r && o && mn(t, i, o), o;
 };
-const Q = "http://www.w3.org/2000/svg", fn = ["on", "open", "opened", "true"], Ft = 600 * 1e3, Vt = 1800 * 1e3, Kt = 3600 * 1e3, Wi = 60 * 1e3, ft = (e) => e * Math.PI / 180;
-let Ze = class extends st {
+const J = "http://www.w3.org/2000/svg", bn = ["on", "open", "opened", "true"], _t = 600 * 1e3, Vt = 1800 * 1e3, Kt = 3600 * 1e3, Wi = 60 * 1e3, ft = (e) => e * Math.PI / 180;
+let Ge = class extends st {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
   }
@@ -3289,7 +3290,7 @@ let Ze = class extends st {
     const t = e.state_binding;
     if (!t) return !1;
     const i = this.hass?.states[t.entity]?.state?.toLowerCase();
-    return i ? (t.open_states ?? fn).map((r) => r.toLowerCase()).includes(i) : !1;
+    return i ? (t.open_states ?? bn).map((r) => r.toLowerCase()).includes(i) : !1;
   }
   openingOpenSince(e, t) {
     if (!t || !e.state_binding) {
@@ -3307,8 +3308,8 @@ let Ze = class extends st {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Kt ? "alert" : o >= Vt ? "warning" : o >= Ft ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, d = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
-    return { minutes: n, level: s, label: d, description: c };
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Kt ? "alert" : o >= Vt ? "warning" : o >= _t ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, d = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, c = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    return { minutes: n, level: s, label: c, description: d };
   }
   scheduleOpeningAgeRefresh(e) {
     this.openingAgeTimer !== void 0 && window.clearTimeout(this.openingAgeTimer);
@@ -3316,7 +3317,7 @@ let Ze = class extends st {
     for (const i of this.openings.filter((r) => r.visible !== !1)) {
       const r = this.isOpen(i), o = this.openingOpenSince(i, r);
       if (o === void 0) continue;
-      const n = Math.max(0, e - o), s = n < Ft ? Ft : n < Vt ? Vt : n < Kt ? Kt : void 0, a = s === void 0 ? Wi : Math.max(1e3, s - n + 50);
+      const n = Math.max(0, e - o), s = n < _t ? _t : n < Vt ? Vt : n < Kt ? Kt : void 0, a = s === void 0 ? Wi : Math.max(1e3, s - n + 50);
       t = Math.min(t, Wi, a);
     }
     Number.isFinite(t) && (this.openingAgeTimer = window.setTimeout(() => {
@@ -3332,7 +3333,7 @@ let Ze = class extends st {
       this.scheduleOpeningAgeRefresh(Date.now());
       return;
     }
-    const i = document.createElementNS(Q, "g");
+    const i = document.createElementNS(J, "g");
     i.setAttribute("class", "dynamic-openings-scene"), i.setAttribute("aria-label", "Dynamiske døre og vinduer"), i.setAttribute("pointer-events", "none");
     const r = Date.now();
     for (const n of t)
@@ -3341,46 +3342,46 @@ let Ze = class extends st {
     e.insertBefore(i, o ?? null), this.scheduleOpeningAgeRefresh(r);
   }
   line(e, t, i, r, o, n) {
-    const s = document.createElementNS(Q, "line");
+    const s = document.createElementNS(J, "line");
     return s.setAttribute("x1", String(t)), s.setAttribute("y1", String(i)), s.setAttribute("x2", String(r)), s.setAttribute("y2", String(o)), s.setAttribute("class", n), e.appendChild(s), s;
   }
   appendAgeIndicator(e, t, i, r) {
     if (!r || r.level === "fresh") return;
-    const o = document.createElementNS(Q, "g");
+    const o = document.createElementNS(J, "g");
     o.setAttribute("class", `opening-age-indicator level-${r.level}`), o.setAttribute("transform", `translate(${t} ${i})`);
-    const n = document.createElementNS(Q, "circle");
+    const n = document.createElementNS(J, "circle");
     n.setAttribute("r", r.level === "alert" ? "12" : "10"), n.setAttribute("class", "opening-age-ring"), o.appendChild(n);
-    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS(Q, "rect");
+    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS(J, "rect");
     a.setAttribute("x", "11"), a.setAttribute("y", "-18"), a.setAttribute("width", String(s)), a.setAttribute("height", "17"), a.setAttribute("rx", "8.5"), a.setAttribute("class", "opening-age-badge"), o.appendChild(a);
-    const l = document.createElementNS(Q, "text");
+    const l = document.createElementNS(J, "text");
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, _ = b, $ = { x: d - b * u, y: p - m * u }, w = { x: d + b * u, y: p + m * u }, S = l === "start" ? $ : w, C = l === "start" ? w : $, k = s + (l === "start" ? 0 : 180), E = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = k + (r ? E * a : 0), T = ft(M), Y = { x: S.x + Math.cos(T) * n, y: S.y + Math.sin(T) * n }, U = o ? ` open-age-${o.level}` : "", N = document.createElementNS(Q, "g");
-    N.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${U}`), N.setAttribute("data-opening-id", t.id), o && N.setAttribute("data-open-minutes", String(o.minutes)), this.line(N, $.x, $.y, w.x, w.y, "opening-gap");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", d = t.swing ?? "left", c = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, S = b, k = { x: c - b * u, y: p - m * u }, w = { x: c + b * u, y: p + m * u }, E = l === "start" ? k : w, $ = l === "start" ? w : k, A = s + (l === "start" ? 0 : 180), P = (d === "left" ? -1 : 1) * (l === "start" ? 1 : -1), N = A + (r ? P * a : 0), O = ft(N), Q = { x: E.x + Math.cos(O) * n, y: E.y + Math.sin(O) * n }, U = o ? ` open-age-${o.level}` : "", R = document.createElementNS(J, "g");
+    R.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${U}`), R.setAttribute("data-opening-id", t.id), o && R.setAttribute("data-open-minutes", String(o.minutes)), this.line(R, k.x, k.y, w.x, w.y, "opening-gap");
     const I = Math.max(7, Math.min(12, n * 0.12));
-    for (const X of [$, w]) this.line(N, X.x - y * I / 2, X.y - _ * I / 2, X.x + y * I / 2, X.y + _ * I / 2, "door-jamb");
-    r && this.line(N, S.x, S.y, C.x, C.y, "door-closed-guide"), this.line(N, S.x, S.y, Y.x, Y.y, "door-leaf");
-    const Z = document.createElementNS(Q, "circle");
-    if (Z.setAttribute("cx", String(S.x)), Z.setAttribute("cy", String(S.y)), Z.setAttribute("r", "4.2"), Z.setAttribute("class", "opening-hinge"), N.appendChild(Z), r) {
-      const X = document.createElementNS(Q, "path"), wi = ft(k), $i = T, zr = S.x + Math.cos(wi) * n, Tr = S.y + Math.sin(wi) * n, Or = S.x + Math.cos($i) * n, Ir = S.y + Math.sin($i) * n, Dr = E > 0 ? 1 : 0, jr = Math.abs(a) > 180 ? 1 : 0;
-      X.setAttribute("d", `M ${zr} ${Tr} A ${n} ${n} 0 ${jr} ${Dr} ${Or} ${Ir}`), X.setAttribute("class", "door-swing"), N.appendChild(X);
+    for (const Y of [k, w]) this.line(R, Y.x - y * I / 2, Y.y - S * I / 2, Y.x + y * I / 2, Y.y + S * I / 2, "door-jamb");
+    r && this.line(R, E.x, E.y, $.x, $.y, "door-closed-guide"), this.line(R, E.x, E.y, Q.x, Q.y, "door-leaf");
+    const G = document.createElementNS(J, "circle");
+    if (G.setAttribute("cx", String(E.x)), G.setAttribute("cy", String(E.y)), G.setAttribute("r", "4.2"), G.setAttribute("class", "opening-hinge"), R.appendChild(G), r) {
+      const Y = document.createElementNS(J, "path"), wi = ft(A), ki = O, Tr = E.x + Math.cos(wi) * n, Or = E.y + Math.sin(wi) * n, jr = E.x + Math.cos(ki) * n, Ir = E.y + Math.sin(ki) * n, Dr = P > 0 ? 1 : 0, qr = Math.abs(a) > 180 ? 1 : 0;
+      Y.setAttribute("d", `M ${Tr} ${Or} A ${n} ${n} 0 ${qr} ${Dr} ${jr} ${Ir}`), Y.setAttribute("class", "door-swing"), R.appendChild(Y);
     }
-    const ve = d + y * 14, Te = p + _ * 14, Ae = document.createElementNS(Q, "circle");
-    Ae.setAttribute("cx", String(ve)), Ae.setAttribute("cy", String(Te)), Ae.setAttribute("r", "5.2"), Ae.setAttribute("class", "opening-status-dot"), N.appendChild(Ae), this.appendAgeIndicator(N, ve, Te, o);
-    const Xe = document.createElementNS(Q, "title");
-    Xe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, N.appendChild(Xe), e.appendChild(N);
+    const ve = c + y * 14, Oe = p + S * 14, Ce = document.createElementNS(J, "circle");
+    Ce.setAttribute("cx", String(ve)), Ce.setAttribute("cy", String(Oe)), Ce.setAttribute("r", "5.2"), Ce.setAttribute("class", "opening-status-dot"), R.appendChild(Ce), this.appendAgeIndicator(R, ve, Oe, o);
+    const Ye = document.createElementNS(J, "title");
+    Ye.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, R.appendChild(Ye), e.appendChild(R);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), u = -p, g = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, _ = { x: a + d * b, y: l + p * b }, $ = o ? ` open-age-${o.level}` : "", w = document.createElementNS(Q, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${$}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, _.x, _.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, _.x + u * m, _.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, _.x - u * m, _.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, _.x + u * m, _.y + g * m, _.x - u * m, _.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, _.x + u * m, _.y + g * m, "window-open-sash"));
-    const S = a + u * 17, C = l + g * 17, k = document.createElementNS(Q, "circle");
-    k.setAttribute("cx", String(S)), k.setAttribute("cy", String(C)), k.setAttribute("r", "5.2"), k.setAttribute("class", "opening-status-dot"), w.appendChild(k), this.appendAgeIndicator(w, S, C, o);
-    const E = document.createElementNS(Q, "title");
-    E.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(E), e.appendChild(w);
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, d = ft(s), c = Math.cos(d), p = Math.sin(d), u = -p, g = c, b = n / 2, m = 5.5, y = { x: a - c * b, y: l - p * b }, S = { x: a + c * b, y: l + p * b }, k = o ? ` open-age-${o.level}` : "", w = document.createElementNS(J, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${k}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, S.x, S.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, S.x + u * m, S.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, S.x - u * m, S.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, S.x + u * m, S.y + g * m, S.x - u * m, S.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + c * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, S.x + u * m, S.y + g * m, "window-open-sash"));
+    const E = a + u * 17, $ = l + g * 17, A = document.createElementNS(J, "circle");
+    A.setAttribute("cx", String(E)), A.setAttribute("cy", String($)), A.setAttribute("r", "5.2"), A.setAttribute("class", "opening-status-dot"), w.appendChild(A), this.appendAgeIndicator(w, E, $, o);
+    const P = document.createElementNS(J, "title");
+    P.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(P), e.appendChild(w);
   }
 };
-Ze.styles = O`${st.styles}
+Ge.styles = j`${st.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3403,19 +3404,19 @@ Ze.styles = O`${st.styles}
     @keyframes explorerOpeningAgePulse{0%,100%{opacity:.5;transform:scale(.92)}50%{opacity:1;transform:scale(1.16)}}
     @media(prefers-reduced-motion:reduce){.dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{transition:none}.dynamic-opening.open-age-alert .opening-age-ring{animation:none}}
   `;
-_r([
-  A({ attribute: !1 })
-], Ze.prototype, "openings", 2);
-Ze = _r([
-  z("explorer-openings-canvas")
-], Ze);
-var bn = Object.defineProperty, yn = Object.getOwnPropertyDescriptor, We = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? yn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+Sr([
+  C({ attribute: !1 })
+], Ge.prototype, "openings", 2);
+Ge = Sr([
+  T("explorer-openings-canvas")
+], Ge);
+var yn = Object.defineProperty, vn = Object.getOwnPropertyDescriptor, We = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && bn(t, i, o), o;
+  return r && o && yn(t, i, o), o;
 };
-const vn = "http://www.w3.org/2000/svg";
-let _e = class extends Ze {
+const xn = "http://www.w3.org/2000/svg";
+let Se = class extends Ge {
   constructor() {
     super(...arguments), this.hideSourceText = !1, this.weatherEffect = "clear", this.weatherState = "clear", this.weatherIntensity = 0.6, this.weatherNight = !1, this.weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`, this.cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
   }
@@ -3429,7 +3430,7 @@ let _e = class extends Ze {
     });
   }
   svg(e) {
-    return document.createElementNS(vn, e);
+    return document.createElementNS(xn, e);
   }
   attrs(e, t) {
     Object.entries(t).forEach(([i, r]) => e.setAttribute(i, r));
@@ -3548,33 +3549,33 @@ let _e = class extends Ze {
       "translate(-8 21) scale(.94 .86)",
       "translate(14 7) scale(1.18 .62)"
     ];
-    for (const [n, s, a, l, c] of t) {
-      const d = l % 4, p = l % 3, u = this.svg("g");
+    for (const [n, s, a, l, d] of t) {
+      const c = l % 4, p = l % 3, u = this.svg("g");
       this.attrs(u, {
         class: "weather-cloud-position",
         transform: `translate(${n} ${s}) scale(${a * 0.64})`,
-        opacity: String(c)
+        opacity: String(d)
       });
       const g = this.svg("g");
       this.attrs(g, {
-        class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${d}`
+        class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${c}`
       });
       const b = this.svg("g");
       this.attrs(b, {
         class: "weather-cloud-mist weather-cloud-mist-back",
-        transform: o[d]
+        transform: o[c]
       }), [
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([M, T, Y, U, N]) => {
+      ].forEach(([N, O, Q, U, R]) => {
         const I = this.svg("ellipse");
         this.attrs(I, {
-          cx: String(M),
-          cy: String(T),
-          rx: String(Y),
+          cx: String(N),
+          cy: String(O),
+          rx: String(Q),
           ry: String(U),
-          opacity: String(N)
+          opacity: String(R)
         }), b.appendChild(I);
       }), g.appendChild(b);
       const m = this.svg("path");
@@ -3588,72 +3589,72 @@ let _e = class extends Ze {
         filter: `url(#${this.cloudFilterId})`,
         transform: r[l % r.length]
       });
-      const _ = this.svg("path");
-      this.attrs(_, {
+      const S = this.svg("path");
+      this.attrs(S, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-base"
-      }), y.appendChild(_);
-      for (const [M, T, Y, U, N] of i) {
+      }), y.appendChild(S);
+      for (const [N, O, Q, U, R] of i) {
         const I = this.svg("ellipse");
         this.attrs(I, {
-          cx: String(M),
-          cy: String(T),
-          rx: String(Y),
+          cx: String(N),
+          cy: String(O),
+          rx: String(Q),
           ry: String(U),
-          opacity: String(N),
+          opacity: String(R),
           class: "weather-cloud-puff"
         }), y.appendChild(I);
       }
-      const $ = this.svg("path");
-      this.attrs($, {
+      const k = this.svg("path");
+      this.attrs(k, {
         d: "M-104 -12 C-76 -34 -47 -40 -20 -30 C8 -19 33 -21 62 -39 C46 -13 22 1 -3 2 C-32 4 -57 -3 -79 3 C-92 4 -101 -2 -104 -12 Z",
         class: "weather-cloud-detail"
-      }), y.appendChild($);
+      }), y.appendChild(k);
       const w = this.svg("path");
       this.attrs(w, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
         class: "weather-cloud-wisp"
       }), y.appendChild(w), g.appendChild(y);
-      const S = this.svg("g");
-      this.attrs(S, {
+      const E = this.svg("g");
+      this.attrs(E, {
         class: "weather-cloud-mist weather-cloud-mist-front",
-        transform: d === 1 ? "translate(8 51) scale(1.28 .40)" : d === 2 ? "translate(-20 43) scale(.88 .62)" : d === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
+        transform: c === 1 ? "translate(8 51) scale(1.28 .40)" : c === 2 ? "translate(-20 43) scale(.88 .62)" : c === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
       }), [
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([M, T, Y, U, N]) => {
+      ].forEach(([N, O, Q, U, R]) => {
         const I = this.svg("ellipse");
         this.attrs(I, {
-          cx: String(M),
-          cy: String(T),
-          rx: String(Y),
+          cx: String(N),
+          cy: String(O),
+          rx: String(Q),
           ry: String(U),
-          opacity: String(N)
-        }), S.appendChild(I);
-      }), g.appendChild(S);
-      const C = this.svg("path");
-      if (this.attrs(C, {
+          opacity: String(R)
+        }), E.appendChild(I);
+      }), g.appendChild(E);
+      const $ = this.svg("path");
+      if (this.attrs($, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), g.appendChild(C), d === 1 || d === 3) {
-        const M = this.svg("path");
-        this.attrs(M, {
-          d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
+      }), g.appendChild($), c === 1 || c === 3) {
+        const N = this.svg("path");
+        this.attrs(N, {
+          d: c === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), g.appendChild(M);
+        }), g.appendChild(N);
       }
-      const k = this.svg("path");
-      this.attrs(k, {
+      const A = this.svg("path");
+      this.attrs(A, {
         d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
         class: "weather-cloud-highlight"
-      }), g.appendChild(k);
-      const E = this.svg("path");
-      this.attrs(E, {
+      }), g.appendChild(A);
+      const P = this.svg("path");
+      this.attrs(P, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
         transform: r[l % r.length]
-      }), g.appendChild(E), u.appendChild(g), e.appendChild(u);
+      }), g.appendChild(P), u.appendChild(g), e.appendChild(u);
     }
   }
   appendFog(e, t = "fog") {
@@ -3681,9 +3682,9 @@ let _e = class extends Ze {
     const i = t ? 62 : 92, r = t ? 48 : 72;
     for (let o = -1; o < (t ? 18 : 13); o += 1)
       for (let n = -1; n < (t ? 24 : 17); n += 1) {
-        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, c = (t ? 15 : 10) + s % (t ? 12 : 8), d = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
+        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, d = (t ? 15 : 10) + s % (t ? 12 : 8), c = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
         this.attrs(u, {
-          d: `M ${a} ${l} C ${a - d * 0.7} ${l + c * 0.32}, ${a - p - d} ${l + c * 0.72}, ${a - p} ${l + c} C ${a - p + d} ${l + c * 0.72}, ${a + d * 0.45} ${l + c * 0.31}, ${a} ${l} Z`,
+          d: `M ${a} ${l} C ${a - c * 0.7} ${l + d * 0.32}, ${a - p - c} ${l + d * 0.72}, ${a - p} ${l + d} C ${a - p + c} ${l + d * 0.72}, ${a + c * 0.45} ${l + d * 0.31}, ${a} ${l} Z`,
           class: `weather-rain-drop${t ? " is-heavy" : ""}`
         }), u.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + s % 7 * 0.06}s`), u.style.setProperty("--rain-delay", `${-(s % 17) * 0.11}s`), e.appendChild(u);
       }
@@ -3692,15 +3693,15 @@ let _e = class extends Ze {
     const i = t ? 9 : 11, r = t ? 11 : 12;
     for (let o = 0; o < i; o += 1)
       for (let n = 0; n < r; n += 1) {
-        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
-        if (d) {
-          const g = c * 0.78;
+        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, d = (t ? 1.7 : 2.1) + s % 4 * 0.72, c = s % (t ? 7 : 5) === 0, p = c ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${c ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        if (c) {
+          const g = d * 0.78;
           this.attrs(p, {
-            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
+            d: `M ${a} ${l - d * 1.8} L ${a} ${l + d * 1.8} M ${a - d * 1.8} ${l} L ${a + d * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
             class: u
           });
         } else
-          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: u });
+          this.attrs(p, { cx: String(a), cy: String(l), r: String(d), class: u });
         p.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + s % 8 * 0.42}s`), p.style.setProperty("--snow-delay", `${-(s % 19) * 0.31}s`), e.appendChild(p);
       }
   }
@@ -3728,13 +3729,13 @@ let _e = class extends Ze {
   appendMagicMotes(e, t) {
     const i = t === "exceptional" ? 30 : t === "cloud" ? 24 : 18;
     for (let r = 0; r < i; r += 1) {
-      const o = r * 47 + r % 5 * 29, n = 22 + (o * 13 + r * r * 7) % 1035, s = 25 + (o * 19 + r * r * 11) % 1015, a = (t === "exceptional" ? 3.1 : 2.1) + o % 4 * 0.65, l = a * 0.24, c = this.svg("g");
-      this.attrs(c, { transform: `translate(${n} ${s})`, class: "weather-magic-mote-position" });
-      const d = this.svg("path");
-      this.attrs(d, {
+      const o = r * 47 + r % 5 * 29, n = 22 + (o * 13 + r * r * 7) % 1035, s = 25 + (o * 19 + r * r * 11) % 1015, a = (t === "exceptional" ? 3.1 : 2.1) + o % 4 * 0.65, l = a * 0.24, d = this.svg("g");
+      this.attrs(d, { transform: `translate(${n} ${s})`, class: "weather-magic-mote-position" });
+      const c = this.svg("path");
+      this.attrs(c, {
         d: `M 0 ${-a} L ${l} ${-l} L ${a} 0 L ${l} ${l} L 0 ${a} L ${-l} ${l} L ${-a} 0 L ${-l} ${-l} Z`,
         class: `weather-magic-mote weather-magic-mote-${t} weather-magic-mote-${r % 3}`
-      }), d.style.setProperty("--mote-duration", `${4.6 + o % 8 * 0.73}s`), d.style.setProperty("--mote-delay", `${-(o % 17) * 0.47}s`), c.appendChild(d), e.appendChild(c);
+      }), c.style.setProperty("--mote-duration", `${4.6 + o % 8 * 0.73}s`), c.style.setProperty("--mote-delay", `${-(o % 17) * 0.47}s`), d.appendChild(c), e.appendChild(d);
     }
   }
   appendExceptionalMagic(e) {
@@ -3767,8 +3768,8 @@ let _e = class extends Ze {
     t.insertBefore(r, s ?? null);
   }
 };
-_e.styles = O`
-    ${Ze.styles}
+Se.styles = j`
+    ${Ge.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
     .weather-outside-rooms-scene.state-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.18)); }
@@ -3989,28 +3990,28 @@ _e.styles = O`
     }
   `;
 We([
-  A({ type: Boolean, attribute: "hide-source-text" })
-], _e.prototype, "hideSourceText", 2);
+  C({ type: Boolean, attribute: "hide-source-text" })
+], Se.prototype, "hideSourceText", 2);
 We([
-  A({ attribute: "weather-effect" })
-], _e.prototype, "weatherEffect", 2);
+  C({ attribute: "weather-effect" })
+], Se.prototype, "weatherEffect", 2);
 We([
-  A({ attribute: "weather-state" })
-], _e.prototype, "weatherState", 2);
+  C({ attribute: "weather-state" })
+], Se.prototype, "weatherState", 2);
 We([
-  A({ type: Number, attribute: "weather-intensity" })
-], _e.prototype, "weatherIntensity", 2);
+  C({ type: Number, attribute: "weather-intensity" })
+], Se.prototype, "weatherIntensity", 2);
 We([
-  A({ type: Boolean, attribute: "weather-night" })
-], _e.prototype, "weatherNight", 2);
-_e = We([
-  z("explorer-source-clean-canvas")
-], _e);
-const xn = (e) => e.strings === void 0, wn = {}, $n = (e, t = wn) => e._$AH = t;
-const Me = fr(class extends br {
+  C({ type: Boolean, attribute: "weather-night" })
+], Se.prototype, "weatherNight", 2);
+Se = We([
+  T("explorer-source-clean-canvas")
+], Se);
+const wn = (e) => e.strings === void 0, kn = {}, An = (e, t = kn) => e._$AH = t;
+const Ne = fr(class extends br {
   constructor(e) {
-    if (super(e), e.type !== Ce.PROPERTY && e.type !== Ce.ATTRIBUTE && e.type !== Ce.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
-    if (!xn(e)) throw Error("`live` bindings can only contain a single expression");
+    if (super(e), e.type !== $e.PROPERTY && e.type !== $e.ATTRIBUTE && e.type !== $e.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
+    if (!wn(e)) throw Error("`live` bindings can only contain a single expression");
   }
   render(e) {
     return e;
@@ -4018,41 +4019,41 @@ const Me = fr(class extends br {
   update(e, [t]) {
     if (t === se || t === f) return t;
     const i = e.element, r = e.name;
-    if (e.type === Ce.PROPERTY) {
+    if (e.type === $e.PROPERTY) {
       if (t === i[r]) return se;
-    } else if (e.type === Ce.BOOLEAN_ATTRIBUTE) {
+    } else if (e.type === $e.BOOLEAN_ATTRIBUTE) {
       if (!!t === i.hasAttribute(r)) return se;
-    } else if (e.type === Ce.ATTRIBUTE && i.getAttribute(r) === t + "") return se;
-    return $n(e), t;
+    } else if (e.type === $e.ATTRIBUTE && i.getAttribute(r) === t + "") return se;
+    return An(e), t;
   }
 });
-var kn = Object.defineProperty, _n = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? _n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Sn = Object.defineProperty, Cn = Object.getOwnPropertyDescriptor, Ue = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Cn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && kn(t, i, o), o;
+  return r && o && Sn(t, i, o), o;
 };
-const An = [
+const En = [
   { value: "person", label: "Person" },
   { value: "pet", label: "Kæledyr" },
   { value: "robot", label: "Robot" },
   { value: "vehicle", label: "Køretøj" },
   { value: "object", label: "Objekt" }
-], Sn = /* @__PURE__ */ new Set(["sensor", "input_select", "select"]);
-function Cn(e) {
+], $n = /* @__PURE__ */ new Set(["sensor", "input_select", "select"]);
+function Pn(e) {
   return e.split(".", 1)[0] ?? "";
 }
-function Zt(e) {
+function Gt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function En(e) {
+function Nn(e) {
   return Math.min(1, Math.max(0, e));
 }
 function Mn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let de = class extends j {
+let ce = class extends q {
   constructor() {
     super(...arguments), this.areas = [], this.areaError = "", this.loadingAreas = !1, this.areasLoaded = !1;
   }
@@ -4107,7 +4108,7 @@ let de = class extends j {
     if (!o) return;
     const n = o.presence_anchor ?? { x: 0.5, y: 0.5 };
     this.updateRoom(e, {
-      presence_anchor: { ...n, [t]: En(r) }
+      presence_anchor: { ...n, [t]: Nn(r) }
     });
   }
   updateRoomAliases(e, t) {
@@ -4147,15 +4148,15 @@ let de = class extends j {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => Zt(e).localeCompare(Zt(t), "da")
+      (e, t) => Gt(e).localeCompare(Gt(t), "da")
     );
   }
   renderEntityDatalist(e, t = !1) {
-    const i = t ? this.entities.filter((r) => Sn.has(Cn(r.entity_id))) : this.entities;
+    const i = t ? this.entities.filter((r) => $n.has(Pn(r.entity_id))) : this.entities;
     return h`
       <datalist id=${e}>
         ${i.map(
-      (r) => h`<option value=${r.entity_id}>${Zt(r)}</option>`
+      (r) => h`<option value=${r.entity_id}>${Gt(r)}</option>`
     )}
       </datalist>
     `;
@@ -4183,7 +4184,7 @@ let de = class extends j {
           <label>
             Home Assistant Area
             <select
-              .value=${Me(e.area_id ?? "")}
+              .value=${Ne(e.area_id ?? "")}
               @change=${(r) => this.updateRoom(t, {
       area_id: r.target.value || void 0
     })}
@@ -4263,12 +4264,12 @@ let de = class extends j {
           <label>
             Type
             <select
-              .value=${Me(e.type ?? "person")}
+              .value=${Ne(e.type ?? "person")}
               @change=${(n) => this.updatePresence(t, {
       type: n.target.value
     })}
             >
-              ${An.map(
+              ${En.map(
       (n) => h`<option value=${n.value}>${n.label}</option>`
     )}
             </select>
@@ -4306,7 +4307,7 @@ let de = class extends j {
         <label>
           Fast rum (fallback)
           <select
-            .value=${Me(e.room_id ?? "")}
+            .value=${Ne(e.room_id ?? "")}
             @change=${(n) => this.updatePresence(t, {
       room_id: n.target.value || void 0
     })}
@@ -4416,7 +4417,7 @@ let de = class extends j {
     `;
   }
 };
-de.styles = O`
+ce.styles = j`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4454,44 +4455,44 @@ de.styles = O`
     }
   `;
 Ue([
-  A({ attribute: !1 })
-], de.prototype, "hass", 2);
+  C({ attribute: !1 })
+], ce.prototype, "hass", 2);
 Ue([
   v()
-], de.prototype, "config", 2);
+], ce.prototype, "config", 2);
 Ue([
   v()
-], de.prototype, "areas", 2);
+], ce.prototype, "areas", 2);
 Ue([
   v()
-], de.prototype, "areaError", 2);
+], ce.prototype, "areaError", 2);
 Ue([
   v()
-], de.prototype, "loadingAreas", 2);
-de = Ue([
-  z("ha-explorer-card-editor")
-], de);
-var Pn = Object.defineProperty, Nn = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Nn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], ce.prototype, "loadingAreas", 2);
+ce = Ue([
+  T("ha-explorer-card-editor")
+], ce);
+var Rn = Object.defineProperty, zn = Object.getOwnPropertyDescriptor, B = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Pn(t, i, o), o;
+  return r && o && Rn(t, i, o), o;
 };
 const re = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
 function Ui(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
-function Rn(e) {
+function Tn(e) {
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
 }
-function zn(e) {
+function On(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "room";
 }
-function Xi(e) {
+function Yi(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
-let L = class extends j {
+let L = class extends q {
   constructor() {
     super(...arguments), this.drawingMode = "idle", this.selectedRoomId = "", this.pendingPoints = [], this.draftRoomName = "", this.draftAreaId = "", this.draftWidth = "", this.draftHeight = "", this.draftFlipX = !1, this.draftFlipY = !1, this.calibrationMessage = "", this.drawingAreas = [], this.drawingAreaError = "";
   }
@@ -4542,10 +4543,10 @@ let L = class extends j {
     if (!t || !i || !r) return;
     const o = i.entity_binding, n = r.states[o.entity];
     if (!n) return;
-    const s = Xi(n.attributes[o.x_attribute ?? "map_x"]), a = Xi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
+    const s = Yi(n.attributes[o.x_attribute ?? "map_x"]), a = Yi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const c = Rn(t), d = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
-    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: d, room_y: p };
+    const d = Tn(t), c = bt((e[0] - d.minX) / (d.maxX - d.minX || 1)), p = bt((e[1] - d.minY) / (d.maxY - d.minY || 1));
+    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: c, room_y: p };
   }
   handleMapClick(e) {
     const t = this.mapPoint(e);
@@ -4568,7 +4569,7 @@ let L = class extends j {
     this.draftWidth = i?.physical_meters?.width?.toString() ?? "", this.draftHeight = i?.physical_meters?.height?.toString() ?? "", this.draftFlipX = i?.physical_meters?.flip_x ?? !1, this.draftFlipY = i?.physical_meters?.flip_y ?? !1, this.calA = i?.physical_meters?.position_calibration?.a, this.calB = i?.physical_meters?.position_calibration?.b, this.calC = i?.physical_meters?.position_calibration?.c, this.calibrationMessage = "";
   }
   uniqueRoomId(e) {
-    const t = zn(e), i = new Set(this.rooms.map((o) => o.id));
+    const t = On(e), i = new Set(this.rooms.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -4632,12 +4633,12 @@ let L = class extends j {
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
     const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Ui(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
-    return P`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * re} y=${r.y * re} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? P`<circle cx=${o.x * re} cy=${o.y * re} r="15" class="anchor"/>` : f}</g>`;
+    return M`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * re} y=${r.y * re} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? M`<circle cx=${o.x * re} cy=${o.y * re} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
     if (!this.pendingPoints.length) return f;
     const e = this.pendingPoints.map(([t, i]) => `${t * re},${i * re}`).join(" ");
-    return P`${this.pendingPoints.length >= 3 ? P`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => P`<circle cx=${t * re} cy=${i * re} r="13" class="pending-point"/><text x=${t * re} y=${i * re - 22} text-anchor="middle">${r + 1}</text>`)}`;
+    return M`${this.pendingPoints.length >= 3 ? M`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => M`<circle cx=${t * re} cy=${i * re} r="13" class="pending-point"/><text x=${t * re} y=${i * re - 22} text-anchor="middle">${r + 1}</text>`)}`;
   }
   dimensionFields() {
     return h`<div class="dimensions"><label>Bredde (m)<input inputmode="decimal" placeholder="4,3" .value=${this.draftWidth} @input=${(e) => this.draftWidth = e.target.value}></label><label>Længde (m)<input inputmode="decimal" placeholder="5,4" .value=${this.draftHeight} @input=${(e) => this.draftHeight = e.target.value}></label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipX} @change=${(e) => this.draftFlipX = e.target.checked}> Vend vandret (X)</label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipY} @change=${(e) => this.draftFlipY = e.target.checked}> Vend lodret (Y)</label>${this.drawingMode === "idle" && this.selectedRoom ? h`<button class="primary" ?disabled=${!this.meters()} @click=${this.saveMeters}>Gem rumkalibrering</button>` : f}</div>`;
@@ -4656,9 +4657,9 @@ let L = class extends j {
     return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-L.styles = O`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+L.styles = j`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 B([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], L.prototype, "hass", 2);
 B([
   v()
@@ -4715,16 +4716,16 @@ B([
   co("ha-explorer-card-editor")
 ], L.prototype, "baseEditor", 2);
 L = B([
-  z("ha-explorer-room-drawing-editor")
+  T("ha-explorer-room-drawing-editor")
 ], L);
 function ue(e) {
   return e?.trim() || void 0;
 }
-function Tn(e) {
+function jn(e) {
   const t = e.entity_binding;
   return !!(ue(t?.room_entity) || e.room_id || Number.isFinite(e.x) && Number.isFinite(e.y));
 }
-function On(e) {
+function In(e) {
   const t = [];
   for (const i of e.presences ?? []) {
     const r = ue(i.entity_binding?.entity), o = ue(i.entity_binding?.room_entity);
@@ -4758,31 +4759,31 @@ function On(e) {
   }
   return t;
 }
-function In(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap(($) => $.reactions ?? []), d = i.flatMap(($) => $.quick_actions ?? []), p = On(e), u = [];
+function Dn(e, t) {
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], d = i.flatMap((k) => k.reactions ?? []), c = i.flatMap((k) => k.quick_actions ?? []), p = In(e), u = [];
   if (t)
-    for (const $ of p) {
-      const w = t.states[$.entity];
+    for (const k of p) {
+      const w = t.states[k.entity];
       if (!w) {
-        u.push({ ...$, unavailable: !1 });
+        u.push({ ...k, unavailable: !1 });
         continue;
       }
-      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...$, unavailable: !0 });
+      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...k, unavailable: !0 });
     }
-  const g = u.filter(($) => !$.unavailable), b = r.filter(($) => !Tn($)), m = i.filter(($) => $.points.length < 3), y = (e.image ?? e.background ?? "").trim(), _ = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: _, entityIssues: u, attentionCount: _.filter(($) => $.state === "attention").length, configuredFeatureCount: _.filter(($) => $.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const g = u.filter((k) => !k.unavailable), b = r.filter((k) => !jn(k)), m = i.filter((k) => k.points.length < 3), y = (e.image ?? e.background ?? "").trim(), S = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: d.length ? `${d.length} rumreaktion${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: d.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: c.length ? `${c.length} scene- eller scripthandling${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: c.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: S, entityIssues: u, attentionCount: S.filter((k) => k.state === "attention").length, configuredFeatureCount: S.filter((k) => k.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: d.length, actionCount: c.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
-var Dn = Object.defineProperty, jn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? jn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var qn = Object.defineProperty, Ln = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Ln(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Dn(t, i, o), o;
+  return r && o && qn(t, i, o), o;
 };
-const Ln = {
+const Fn = {
   ready: "Klar",
   attention: "Tjek",
   optional: "Valgfrit"
 };
-let at = class extends j {
+let at = class extends q {
   navigate(e) {
     this.dispatchEvent(new CustomEvent("explorer-editor-navigate", {
       detail: { target: e },
@@ -4805,14 +4806,14 @@ let at = class extends j {
           <strong>${e.label}</strong>
           <small>${e.detail}</small>
         </span>
-        <span class="state-label">${Ln[e.state]}</span>
+        <span class="state-label">${Fn[e.state]}</span>
         <span class="chevron" aria-hidden="true">›</span>
       </button>
     `;
   }
   render() {
     if (!this.config) return f;
-    const e = In(this.config, this.hass), t = e.attentionCount === 0, i = e.entityIssues.slice(0, 4);
+    const e = Dn(this.config, this.hass), t = e.attentionCount === 0, i = e.entityIssues.slice(0, 4);
     return h`
       <section class="overview">
         <div class="hero">
@@ -4871,7 +4872,7 @@ let at = class extends j {
     `;
   }
 };
-at.styles = O`
+at.styles = j`
     :host { display:block; }
     .overview {
       display:grid;
@@ -4944,27 +4945,27 @@ at.styles = O`
     }
   `;
 bi([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], at.prototype, "config", 2);
 bi([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], at.prototype, "hass", 2);
 at = bi([
-  z("ha-explorer-setup-overview")
+  T("ha-explorer-setup-overview")
 ], at);
-var qn = Object.defineProperty, Bn = Object.getOwnPropertyDescriptor, Ar = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Bn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Bn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, Cr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && qn(t, i, o), o;
+  return r && o && Bn(t, i, o), o;
 };
-const Gt = [
+const Zt = [
   ["classic", "Classic", "Den neutrale Home Assistant Explorer-stil."],
   [
     "enchanted_antique",
     "Enchanted Antique Map",
     "Original magisk kortstil med pergament, sepia-blæk og levende kortdetaljer."
   ]
-], Hn = [
+], _n = [
   ["live", "Følg rigtigt vejr"],
   ["sunny", "☀️ Solrigt"],
   ["partlycloudy", "🌤️ Delvist overskyet"],
@@ -4982,7 +4983,7 @@ const Gt = [
   ["clear-night", "🌙 Klar nat"],
   ["exceptional", "⚠️ Ekstremt / usædvanligt vejr"]
 ];
-let Et = class extends j {
+let Pt = class extends q {
   get theme() {
     return this.config?.appearance?.theme ?? "classic";
   }
@@ -5081,7 +5082,7 @@ let Et = class extends j {
   }
   render() {
     if (!this.config) return f;
-    const e = Gt.find((a) => a[0] === this.theme) ?? Gt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
+    const e = Zt.find((a) => a[0] === this.theme) ?? Zt[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
     return h`
       <section class="theme-editor">
         <div class="heading">
@@ -5103,7 +5104,7 @@ let Et = class extends j {
             .value=${this.theme}
             @change=${(a) => this.updateTheme(a.target.value)}
           >
-            ${Gt.map(
+            ${Zt.map(
       (a) => h`<option value=${a[0]}>${a[1]}</option>`
     )}
           </select>
@@ -5298,7 +5299,7 @@ let Et = class extends j {
       preview_state: a.target.value
     })}
                     >
-                      ${Hn.map(
+                      ${_n.map(
       ([a, l]) => h`<option value=${a}>${l}</option>`
     )}
                     </select>
@@ -5443,7 +5444,7 @@ let Et = class extends j {
     `;
   }
 };
-Et.styles = O`
+Pt.styles = j`
     :host {
       display: block;
     }
@@ -5591,19 +5592,19 @@ Et.styles = O`
       }
     }
   `;
-Ar([
-  A({ attribute: !1 })
-], Et.prototype, "config", 2);
-Et = Ar([
-  z("ha-explorer-theme-editor")
-], Et);
-var Fn = Object.defineProperty, Vn = Object.getOwnPropertyDescriptor, Sr = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+Cr([
+  C({ attribute: !1 })
+], Pt.prototype, "config", 2);
+Pt = Cr([
+  T("ha-explorer-theme-editor")
+], Pt);
+var Vn = Object.defineProperty, Kn = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Kn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Fn(t, i, o), o;
+  return r && o && Vn(t, i, o), o;
 };
-const Yi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
-let Mt = class extends j {
+const Qi = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
+let Nt = class extends q {
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5624,23 +5625,23 @@ let Mt = class extends j {
     const e = this.config?.presences ?? [];
     return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-person & Object Polish · Trail Controls</span><h3>Visuel profil for personer & objekter</h3></div><span class="count">${e.length}</span></div><p class="intro">Personer og objekter på samme position spredes automatisk omkring deres room-anchor. Markør og bevægelsesspor kan nu tilpasses uafhængigt af hinanden.</p>${e.length ? h`<div class="profiles">${e.map((t, i) => {
       const r = t.type ?? "person";
-      return h`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Yi[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Yi[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
+      return h`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Qi[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Qi[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
     })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-Mt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
-Sr([
-  A({ attribute: !1 })
-], Mt.prototype, "config", 2);
-Mt = Sr([
-  z("ha-explorer-presence-polish-editor")
-], Mt);
-var Kn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, Cr = (e, t, i, r) => {
+Nt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+Er([
+  C({ attribute: !1 })
+], Nt.prototype, "config", 2);
+Nt = Er([
+  T("ha-explorer-presence-polish-editor")
+], Nt);
+var Gn = Object.defineProperty, Zn = Object.getOwnPropertyDescriptor, $r = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Zn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Kn(t, i, o), o;
+  return r && o && Gn(t, i, o), o;
 };
-let Pt = class extends j {
+let Mt = class extends q {
   updateHistory(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config.movement_history ?? {}, ...e };
@@ -5657,19 +5658,19 @@ let Pt = class extends j {
     </section>`;
   }
 };
-Pt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
-Cr([
-  A({ attribute: !1 })
-], Pt.prototype, "config", 2);
-Pt = Cr([
-  z("ha-explorer-movement-history-editor")
-], Pt);
-var Gn = Object.defineProperty, Wn = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Wn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+Mt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+$r([
+  C({ attribute: !1 })
+], Mt.prototype, "config", 2);
+Mt = $r([
+  T("ha-explorer-movement-history-editor")
+], Mt);
+var Wn = Object.defineProperty, Un = Object.getOwnPropertyDescriptor, Pr = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Gn(t, i, o), o;
+  return r && o && Wn(t, i, o), o;
 };
-let Nt = class extends j {
+let Rt = class extends q {
   updateTrails(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_pet_paws: !0, show_robot_route: !0, robot_direction_arrows: !0, ...this.config.pet_robot_trails ?? {}, ...e };
@@ -5687,26 +5688,26 @@ let Nt = class extends j {
     </section>`;
   }
 };
-Nt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
-Er([
-  A({ attribute: !1 })
-], Nt.prototype, "config", 2);
-Nt = Er([
-  z("ha-explorer-pet-robot-trails-editor")
-], Nt);
-var Un = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+Rt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+Pr([
+  C({ attribute: !1 })
+], Rt.prototype, "config", 2);
+Rt = Pr([
+  T("ha-explorer-pet-robot-trails-editor")
+], Rt);
+var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Un(t, i, o), o;
+  return r && o && Yn(t, i, o), o;
 };
 function Wt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Qi(e) {
+function Ji(e) {
   return Object.fromEntries(Object.entries(e).filter(([, t]) => t !== void 0 && t !== ""));
 }
-let lt = class extends j {
+let lt = class extends q {
   emit(e) {
     this.config && this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: { ...this.config, presences: e } }, bubbles: !0, composed: !0 }));
   }
@@ -5716,11 +5717,11 @@ let lt = class extends j {
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: Qi({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: Ji({ ...i.entity_binding, ...t }) });
   }
   updateDetection(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { shelly_pet_detection: Qi({ enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2, ...i.shelly_pet_detection, ...t }) });
+    i && this.updatePresence(e, { shelly_pet_detection: Ji({ enabled: !0, height_attribute: "maxz", target_id_attribute: "target_id", timestamp_attribute: "timestamp", max_height_m: 0.75, release_height_m: 0.95, confirmation_updates: 3, release_updates: 2, ...i.shelly_pet_detection, ...t }) });
   }
   addRabbit() {
     const e = [...this.config?.presences ?? []], t = new Set(e.map((o) => o.id));
@@ -5740,8 +5741,8 @@ let lt = class extends j {
       const o = i.entity_binding ?? {}, n = i.shelly_pet_detection ?? {};
       return h`<article class="pet-card"><div class="pet-heading"><strong>🐇 ${i.name ?? i.id}</strong><span>${n.enabled ? "Aktiv" : "Deaktiveret"}</span></div>
         <label class="toggle"><input type="checkbox" .checked=${n.enabled === !0} @change=${(s) => this.updateDetection(r, { enabled: s.target.checked })}/><span><strong>Automatisk kæledyrsregistrering</strong><small>Påvirker kun denne kæledyrsprofil.</small></span></label>
-        <label>LiveTrack-entitet<input list="shelly-pet-entities" .value=${Me(o.position_entity ?? o.entity ?? "")} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(r, { position_entity: s.target.value.trim() || void 0 })}/><small>Entiteten skal have attributterne x, y, maxz og helst target_id.</small></label>
-        <div class="grid three"><label>Rum<select .value=${Me(i.room_id ?? "")} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${Me(o.x_attribute ?? "x")} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${Me(o.y_attribute ?? "y")} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
+        <label>LiveTrack-entitet<input list="shelly-pet-entities" .value=${Ne(o.position_entity ?? o.entity ?? "")} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(r, { position_entity: s.target.value.trim() || void 0 })}/><small>Entiteten skal have attributterne x, y, maxz og helst target_id.</small></label>
+        <div class="grid three"><label>Rum<select .value=${Ne(i.room_id ?? "")} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${Ne(o.x_attribute ?? "x")} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${Ne(o.y_attribute ?? "y")} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
         <div class="grid three"><label>Højde-attribut<input .value=${n.height_attribute ?? "maxz"} @change=${(s) => this.updateDetection(r, { height_attribute: s.target.value.trim() || "maxz" })}/></label><label>Target-ID-attribut<input .value=${n.target_id_attribute ?? "target_id"} @change=${(s) => this.updateDetection(r, { target_id_attribute: s.target.value.trim() || "target_id" })}/></label><label>Tidsstempel-attribut<input .value=${n.timestamp_attribute ?? "timestamp"} @change=${(s) => this.updateDetection(r, { timestamp_attribute: s.target.value.trim() || "timestamp" })}/></label></div>
         <div class="grid two"><label>Maks. kaninhøjde: <strong>${n.max_height_m ?? 0.75} m</strong><input type="range" min="0.15" max="1.2" step="0.05" .value=${String(n.max_height_m ?? 0.75)} @input=${(s) => this.updateDetection(r, { max_height_m: Number(s.target.value) })}/></label><label>Skjul igen over: <strong>${n.release_height_m ?? 0.95} m</strong><input type="range" min="0.25" max="1.6" step="0.05" .value=${String(n.release_height_m ?? 0.95)} @input=${(s) => this.updateDetection(r, { release_height_m: Number(s.target.value) })}/></label></div>
         <div class="grid two"><label>Bekræft efter målinger<input type="number" min="1" max="12" .value=${String(n.confirmation_updates ?? 3)} @change=${(s) => this.updateDetection(r, { confirmation_updates: Number(s.target.value) })}/><small>Flere målinger giver færre falske kaniner.</small></label><label>Skjul efter høje målinger<input type="number" min="1" max="12" .value=${String(n.release_updates ?? 2)} @change=${(s) => this.updateDetection(r, { release_updates: Number(s.target.value) })}/></label></div>
@@ -5752,30 +5753,30 @@ let lt = class extends j {
     </section>`;
   }
 };
-lt.styles = O`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
+lt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
 yi([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], lt.prototype, "hass", 2);
 yi([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], lt.prototype, "config", 2);
 lt = yi([
-  z("ha-explorer-shelly-pet-editor")
+  T("ha-explorer-shelly-pet-editor")
 ], lt);
-var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, vi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Jn = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, vi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Yn(t, i, o), o;
+  return r && o && Jn(t, i, o), o;
 };
 function Ut(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function Jn(e) {
+function es(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let ct = class extends j {
+let dt = class extends q {
   emit(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5789,7 +5790,7 @@ let ct = class extends j {
   }
   updateBinding(e, t) {
     const i = this.config?.presences?.[e];
-    i && this.updatePresence(e, { entity_binding: Jn({ ...i.entity_binding, ...t }) });
+    i && this.updatePresence(e, { entity_binding: es({ ...i.entity_binding, ...t }) });
   }
   addPerson() {
     if (!this.config) return;
@@ -5815,22 +5816,22 @@ let ct = class extends j {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-ct.styles = O`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+dt.styles = j`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 vi([
-  A({ attribute: !1 })
-], ct.prototype, "hass", 2);
+  C({ attribute: !1 })
+], dt.prototype, "hass", 2);
 vi([
-  A({ attribute: !1 })
-], ct.prototype, "config", 2);
-ct = vi([
-  z("ha-explorer-identity-editor")
-], ct);
-var es = Object.defineProperty, ts = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ts(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+  C({ attribute: !1 })
+], dt.prototype, "config", 2);
+dt = vi([
+  T("ha-explorer-identity-editor")
+], dt);
+var ts = Object.defineProperty, is = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? is(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && es(t, i, o), o;
+  return r && o && ts(t, i, o), o;
 };
-const xe = 1e3, Ji = [
+const xe = 1e3, Xi = [
   { value: "info", label: "Info" },
   { value: "warning", label: "Advarsel" },
   { value: "danger", label: "Fare / alarm" },
@@ -5840,18 +5841,18 @@ const xe = 1e3, Ji = [
 function er(e) {
   return Math.min(1, Math.max(0, e));
 }
-function is(e) {
+function rs(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "zone";
 }
-function Xt(e) {
+function Yt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function rs(e) {
+function os(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
-let ie = class extends j {
+let ie = class extends q {
   constructor() {
     super(...arguments), this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.draftName = "Ny zone", this.draftKind = "info", this.draftEntity = "", this.draftStates = "on", this.draftVisible = !0;
   }
@@ -5863,7 +5864,7 @@ let ie = class extends j {
   }
   get entities() {
     return Object.values(this.hass?.states ?? {}).sort(
-      (e, t) => Xt(e).localeCompare(Xt(t), "da")
+      (e, t) => Yt(e).localeCompare(Yt(t), "da")
     );
   }
   updated(e) {
@@ -5887,7 +5888,7 @@ let ie = class extends j {
     this.drawing && (this.pendingPoints = [...this.pendingPoints, this.mapPoint(e)]);
   }
   uniqueZoneId(e) {
-    const t = is(e), i = new Set(this.zones.map((o) => o.id));
+    const t = rs(e), i = new Set(this.zones.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r += 1;
@@ -5919,7 +5920,7 @@ let ie = class extends j {
       ...i ? {
         state_binding: {
           entity: i,
-          active_states: rs(this.draftStates)
+          active_states: os(this.draftStates)
         }
       } : {}
     };
@@ -5940,27 +5941,27 @@ let ie = class extends j {
     this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.emitConfig({ ...this.config, zones: t });
   }
   statusText(e) {
-    const t = $r(e, (i) => this.hass?.states[i]?.state);
+    const t = kr(e, (i) => this.hass?.states[i]?.state);
     return e.visible === !1 ? "Skjult manuelt" : t.conditional ? t.active ? `Aktiv · ${t.currentState ?? "ukendt"}` : t.reason === "missing_entity" ? "Entity mangler" : t.reason === "entity_unavailable" ? `Utilgængelig · ${t.currentState}` : `Inaktiv · ${t.currentState ?? "ukendt"}` : "Altid aktiv";
   }
   renderZonePolygon(e) {
     const t = e.points.map(([r, o]) => `${r * xe},${o * xe}`).join(" "), i = e.id === this.selectedZoneId;
-    return P`
+    return M`
       <g class=${i ? "zone selected" : "zone"} @click=${(r) => {
       this.drawing || (r.stopPropagation(), this.selectZone(e));
     }}>
         <polygon points=${t}></polygon>
-        ${e.name ? P`<text x=${e.points.reduce((r, o) => r + o[0], 0) / e.points.length * xe} y=${e.points.reduce((r, o) => r + o[1], 0) / e.points.length * xe} text-anchor="middle">${e.name}</text>` : f}
+        ${e.name ? M`<text x=${e.points.reduce((r, o) => r + o[0], 0) / e.points.length * xe} y=${e.points.reduce((r, o) => r + o[1], 0) / e.points.length * xe} text-anchor="middle">${e.name}</text>` : f}
       </g>
     `;
   }
   renderPending() {
     if (!this.pendingPoints.length) return f;
     const e = this.pendingPoints.map(([t, i]) => `${t * xe},${i * xe}`).join(" ");
-    return P`
-      ${this.pendingPoints.length >= 3 ? P`<polygon class="pending-fill" points=${e}></polygon>` : f}
+    return M`
+      ${this.pendingPoints.length >= 3 ? M`<polygon class="pending-fill" points=${e}></polygon>` : f}
       <polyline class="pending-line" points=${e}></polyline>
-      ${this.pendingPoints.map(([t, i], r) => P`
+      ${this.pendingPoints.map(([t, i], r) => M`
         <g transform=${`translate(${t * xe} ${i * xe})`}>
           <circle class="pending-point" r="12"></circle>
           <text class="point-number" y="-20" text-anchor="middle">${r + 1}</text>
@@ -5980,14 +5981,14 @@ let ie = class extends j {
         <label>
           Zonetype
           <select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}>
-            ${Ji.map((t) => h`<option value=${t.value}>${t.label}</option>`)}
+            ${Xi.map((t) => h`<option value=${t.value}>${t.label}</option>`)}
           </select>
         </label>
         <label class="wide">
           Home Assistant entity · valgfri
           <input list=${e} .value=${this.draftEntity} placeholder="input_boolean.alarm_zone" @change=${(t) => this.draftEntity = t.target.value} />
           <datalist id=${e}>
-            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Xt(t)}</option>`)}
+            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Yt(t)}</option>`)}
           </datalist>
           <small>Tom = zonen er altid aktiv. Med entity vises zonen kun i de valgte states.</small>
         </label>
@@ -6021,7 +6022,7 @@ let ie = class extends j {
           <div class="map-wrap">
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}>
               <rect width="1000" height="1000" class="backdrop"></rect>
-              ${e ? P`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}
+              ${e ? M`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}
               ${this.zones.map((r) => this.renderZonePolygon(r))}
               ${this.renderPending()}
             </svg>
@@ -6034,7 +6035,7 @@ let ie = class extends j {
               <div class="zone-list">
                 ${this.zones.map((r) => h`
                   <button class=${r.id === this.selectedZoneId ? "zone-row selected" : "zone-row"} @click=${() => this.selectZone(r)}>
-                    <span><strong>${r.name ?? r.id}</strong><small>${Ji.find((o) => o.value === (r.kind ?? "info"))?.label}</small></span>
+                    <span><strong>${r.name ?? r.id}</strong><small>${Xi.find((o) => o.value === (r.kind ?? "info"))?.label}</small></span>
                     <em>${this.statusText(r)}</em>
                   </button>
                 `)}
@@ -6064,7 +6065,7 @@ let ie = class extends j {
     `;
   }
 };
-ie.styles = O`
+ie.styles = j`
     :host { display:block; margin-top:16px; color:var(--primary-text-color); }
     .panel { border:1px solid var(--divider-color,#d7dbe0); border-radius:14px; padding:16px; background:var(--card-background-color,#fff); }
     .heading { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
@@ -6110,10 +6111,10 @@ ie.styles = O`
     @media (max-width:700px) { .workspace { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } label.wide { grid-column:auto; } }
   `;
 le([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ie.prototype, "hass", 2);
 le([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ie.prototype, "config", 2);
 le([
   v()
@@ -6140,29 +6141,29 @@ le([
   v()
 ], ie.prototype, "draftVisible", 2);
 ie = le([
-  z("ha-explorer-zones-editor")
+  T("ha-explorer-zones-editor")
 ], ie);
-var os = Object.defineProperty, ns = Object.getOwnPropertyDescriptor, W = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ns(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ns = Object.defineProperty, ss = Object.getOwnPropertyDescriptor, W = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ss(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && os(t, i, o), o;
+  return r && o && ns(t, i, o), o;
 };
 const Ie = 1e3, tr = ["on", "open", "opened", "true"];
 function ir(e, t, i) {
   return Math.min(i, Math.max(t, e));
 }
-function ss(e) {
+function as(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "opening";
 }
-function Yt(e) {
+function Qt(e) {
   const t = e.attributes.friendly_name;
   return typeof t == "string" && t.trim() ? t : e.entity_id;
 }
-function as(e) {
+function ls(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
-let V = class extends j {
+let V = class extends q {
   constructor() {
     super(...arguments), this.selectedId = "", this.placing = !1, this.draftName = "Ny dør", this.draftKind = "door", this.draftPoint = [0.5, 0.5], this.draftAngle = 0, this.draftLength = 0.055, this.draftHinge = "start", this.draftSwing = "left", this.draftOpenAngle = 82, this.draftEntity = "", this.draftStates = "on, open", this.draftVisible = !0;
   }
@@ -6173,13 +6174,13 @@ let V = class extends j {
     return this.openings.find((e) => e.id === this.selectedId);
   }
   get entities() {
-    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Yt(e).localeCompare(Yt(t), "da"));
+    return Object.values(this.hass?.states ?? {}).filter((e) => e.entity_id.startsWith("binary_sensor.") || e.entity_id.startsWith("cover.") || e.entity_id.startsWith("input_boolean.") || e.entity_id.startsWith("sensor.")).sort((e, t) => Qt(e).localeCompare(Qt(t), "da"));
   }
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
   uniqueId(e) {
-    const t = ss(e), i = new Set(this.openings.map((o) => o.id));
+    const t = as(e), i = new Set(this.openings.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -6200,7 +6201,7 @@ let V = class extends j {
   }
   openingFromDraft(e) {
     const t = this.draftEntity.trim();
-    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: as(this.draftStates) } } : {} };
+    return { id: e, name: this.draftName.trim() || e, kind: this.draftKind, point: this.draftPoint, angle: this.draftAngle, length: this.draftLength, hinge: this.draftHinge, swing: this.draftSwing, open_angle: this.draftOpenAngle, visible: this.draftVisible, ...t ? { state_binding: { entity: t, open_states: ls(this.draftStates) } } : {} };
   }
   save() {
     if (!this.config) return;
@@ -6225,31 +6226,31 @@ let V = class extends j {
   }
   renderOpening(e) {
     const t = e.id === this.selectedId, i = e.point[0] * Ie, r = e.point[1] * Ie, o = (e.length ?? 0.055) * Ie, n = (e.angle ?? 0) * Math.PI / 180, s = Math.cos(n) * o / 2, a = Math.sin(n) * o / 2;
-    return P`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
+    return M`<g class=${t ? "opening selected" : "opening"} @click=${(l) => {
       this.placing || (l.stopPropagation(), this.select(e));
-    }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? P`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
+    }}><line x1=${i - s} y1=${r - a} x2=${i + s} y2=${r + a}></line><circle cx=${i} cy=${r} r=${t ? 11 : 8}></circle>${e.name ? M`<text x=${i} y=${r - 18} text-anchor="middle">${e.name}</text>` : f}</g>`;
   }
   renderDraft() {
     if (this.selected || !this.placing && this.draftName === "Ny dør") return f;
     const e = this.draftPoint[0] * Ie, t = this.draftPoint[1] * Ie, i = this.draftLength * Ie, r = this.draftAngle * Math.PI / 180, o = Math.cos(r) * i / 2, n = Math.sin(r) * i / 2;
-    return P`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
+    return M`<g class="opening draft"><line x1=${e - o} y1=${t - n} x2=${e + o} y2=${t + n}></line><circle cx=${e} cy=${t} r="11"></circle></g>`;
   }
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = !!this.selected || this.placing || this.draftName !== "Ny dør";
-    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? P`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? h`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => h`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : h`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
+    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? M`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? h`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => h`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : h`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
   }
   renderForm() {
     const e = "explorer-opening-entities";
-    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Yt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
+    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Qt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
-V.styles = O`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
+V.styles = j`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
 W([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], V.prototype, "hass", 2);
 W([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], V.prototype, "config", 2);
 W([
   v()
@@ -6291,15 +6292,15 @@ W([
   v()
 ], V.prototype, "draftVisible", 2);
 V = W([
-  z("ha-explorer-openings-editor")
+  T("ha-explorer-openings-editor")
 ], V);
-var ls = Object.defineProperty, cs = Object.getOwnPropertyDescriptor, ce = (e, t, i, r) => {
+var ds = Object.defineProperty, cs = Object.getOwnPropertyDescriptor, de = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? cs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && ls(t, i, o), o;
+  return r && o && ds(t, i, o), o;
 };
-const Qt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Jt = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, ei = (e) => Math.min(1, Math.max(0, e));
-let ee = class extends j {
+const Jt = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, Xt = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, ei = (e) => Math.min(1, Math.max(0, e));
+let ee = class extends q {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.draftKind = "light", this.draftEntity = "", this.draftStates = "on", this.draftIntensity = 0.75, this.draftRadius = 90;
   }
@@ -6337,7 +6338,7 @@ let ee = class extends j {
   }
   beginEdit(e) {
     const t = this.selectedRoom, i = t?.reactions?.[e];
-    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : wt(i.kind)).join(", "), this.draftPosition = Je(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
+    !t || !i || (this.editingIndex = e, this.draftKind = i.kind, this.draftEntity = i.entity, this.draftStates = i.kind === "temperature" ? "" : (i.active_states?.length ? i.active_states : wt(i.kind)).join(", "), this.draftPosition = Xe(t, i), this.draftIntensity = i.intensity ?? 0.75, this.draftRadius = i.radius ?? 90);
   }
   cancelEdit() {
     this.editingIndex = void 0, this.draftKind = "light", this.draftEntity = "", this.draftStates = wt("light").join(", "), this.draftPosition = void 0, this.draftIntensity = 0.75, this.draftRadius = 90;
@@ -6363,11 +6364,11 @@ let ee = class extends j {
     !i.width || !i.height || (this.draftPosition = { x: ei((e.clientX - i.left) / i.width), y: ei((e.clientY - i.top) / i.height) });
   }
   preview(e) {
-    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? Je(e);
+    const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? Xe(e);
     return h`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? h`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${x} ${x}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * x},${o * x}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
-      const o = Je(e, r);
-      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${Jt[r.kind]}</text></g>`;
-    })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Jt[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
+      const o = Xe(e, r);
+      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${Xt[r.kind]}</text></g>`;
+    })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${Xt[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
   }
   statusLabel(e, t) {
     const i = vr(e, t, (r) => this.state(r));
@@ -6378,45 +6379,45 @@ let ee = class extends j {
     const e = this.selectedRoom, t = e?.reactions ?? [], i = this.options(), r = i.some((o) => o.id === this.draftEntity);
     return h`<section class="editor"><div class="heading"><div><span>Living Entity Points · Fireplace</span><h3>Rumreaktioner</h3></div><b>${this.rooms.reduce((o, n) => o + (n.reactions?.length ?? 0), 0)} punkter</b></div><p class="intro">Placér lys, sensorer, medier og nu også pejs/ildsted direkte på kortet.</p>${this.rooms.length ? h`<label>Rum<select .value=${this.selectedRoomId} @change=${(o) => {
       this.selectedRoomId = o.target.value, this.cancelEdit();
-    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Qt).map((o) => h`<option value=${o}>${Qt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Jt[o.kind]}</span><div><strong>${Qt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
+    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys(Jt).map((o) => h`<option value=${o}>${Jt[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${Xt[o.kind]}</span><div><strong>${Jt[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
-ee.styles = O`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
-ce([
-  A({ attribute: !1 })
+ee.styles = j`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
+de([
+  C({ attribute: !1 })
 ], ee.prototype, "config", 2);
-ce([
-  A({ attribute: !1 })
+de([
+  C({ attribute: !1 })
 ], ee.prototype, "hass", 2);
-ce([
+de([
   v()
 ], ee.prototype, "selectedRoomId", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftKind", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftEntity", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftStates", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftPosition", 2);
-ce([
+de([
   v()
 ], ee.prototype, "editingIndex", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftIntensity", 2);
-ce([
+de([
   v()
 ], ee.prototype, "draftRadius", 2);
-ee = ce([
-  z("ha-explorer-room-reactions-editor")
+ee = de([
+  T("ha-explorer-room-reactions-editor")
 ], ee);
-var ds = Object.getOwnPropertyDescriptor, ps = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ds(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ps = Object.getOwnPropertyDescriptor, hs = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ps(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
@@ -6437,15 +6438,15 @@ let rr = class extends ee {
     t && t.textContent?.includes("dør/vindue") && (t.innerHTML = "Hele rummet bliver ikke længere farvet af en enkelt entity. Hver lampe, bevægelsessensor, TV/media player og temperatursensor får sit eget punkt på plantegningen. Lamper bruger stadig <code>brightness</code>, og temperatur vises med den aktuelle værdi. Døre og vinduer konfigureres nu under <strong>Dynamic Doors & Windows</strong>.");
   }
 };
-rr = ps([
-  z("ha-explorer-room-reactions-editor-clean")
+rr = hs([
+  T("ha-explorer-room-reactions-editor-clean")
 ], rr);
-var hs = Object.defineProperty, us = Object.getOwnPropertyDescriptor, ye = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? us(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var us = Object.defineProperty, gs = Object.getOwnPropertyDescriptor, ye = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? gs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && hs(t, i, o), o;
+  return r && o && us(t, i, o), o;
 };
-let ae = class extends j {
+let ae = class extends q {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.kind = "scene", this.entity = "", this.name = "", this.icon = "", this.editingId = "";
   }
@@ -6582,7 +6583,7 @@ let ae = class extends j {
     ` : h`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
   }
 };
-ae.styles = O`
+ae.styles = j`
     :host { display:block; color:var(--primary-text-color); }
     section { display:grid; gap:12px; }
     .notice { display:grid; gap:3px; padding:10px 12px; border-radius:10px; background:color-mix(in srgb,var(--primary-color,#03a9f4) 8%,transparent); font-size:.78rem; line-height:1.4; }
@@ -6611,10 +6612,10 @@ ae.styles = O`
     }
   `;
 ye([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ae.prototype, "config", 2);
 ye([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ae.prototype, "hass", 2);
 ye([
   v()
@@ -6635,15 +6636,15 @@ ye([
   v()
 ], ae.prototype, "editingId", 2);
 ae = ye([
-  z("ha-explorer-room-actions-editor")
+  T("ha-explorer-room-actions-editor")
 ], ae);
-var gs = Object.defineProperty, ms = Object.getOwnPropertyDescriptor, K = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ms(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var ms = Object.defineProperty, fs = Object.getOwnPropertyDescriptor, K = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? fs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && gs(t, i, o), o;
+  return r && o && ms(t, i, o), o;
 };
-const J = 1e3;
-let F = class extends j {
+const X = 1e3;
+let _ = class extends q {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "", this.drawing = !1, this.pending = [], this.placingNode = !1, this.draftNodeName = "", this.draftNodeKind = "door", this.draftNodeEntity = "", this.draftNodeOpenStates = "on", this.editingNodeName = "", this.editingNodeKind = "door", this.editingNodeEntity = "", this.editingNodeOpenStates = "on";
   }
@@ -6671,7 +6672,7 @@ let F = class extends j {
     return t.length ? [...new Set(t)] : ["on"];
   }
   nodeState(e) {
-    return Fe(e, (t) => this.entityState(t));
+    return _e(e, (t) => this.entityState(t));
   }
   nodeStateLabel(e) {
     if (e.kind !== "door") return "";
@@ -6834,15 +6835,15 @@ let F = class extends j {
         this.drawing ? "selectable" : "",
         o.conditional && !o.active ? "blocked" : ""
       ].filter(Boolean).join(" ");
-      return P`
+      return M`
         <g
           class=${n}
-          transform=${`translate(${i * J} ${r * J})`}
+          transform=${`translate(${i * X} ${r * X})`}
           @click=${(s) => this.useSharedNode(s, e)}
         >
           <circle r="15"></circle>
           <text y="-24" text-anchor="middle">${this.routeNodeLabel(e)}</text>
-          ${t > 0 ? P`<text class="usage" y="7" text-anchor="middle">${t}</text>` : f}
+          ${t > 0 ? M`<text class="usage" y="7" text-anchor="middle">${t}</text>` : f}
         </g>
       `;
     });
@@ -6852,8 +6853,8 @@ let F = class extends j {
       if (this.routeMatchesSelection(e)) return f;
       const i = this.routePoints(e);
       if (!i) return f;
-      const r = i.map(([o, n]) => `${o * J},${n * J}`).join(" ");
-      return P`
+      const r = i.map(([o, n]) => `${o * X},${n * X}`).join(" ");
+      return M`
         <polyline
           points=${r}
           class="network-route"
@@ -6867,8 +6868,8 @@ let F = class extends j {
         ></polyline>
         <text
           class="network-number"
-          x=${i[Math.floor(i.length / 2)][0] * J}
-          y=${i[Math.floor(i.length / 2)][1] * J - 18}
+          x=${i[Math.floor(i.length / 2)][0] * X}
+          y=${i[Math.floor(i.length / 2)][1] * X - 18}
           text-anchor="middle"
         >${t + 1}</text>
       `;
@@ -6886,17 +6887,17 @@ let F = class extends j {
         i = s.from === this.fromRoom ? a : [...a].reverse();
       }
     }
-    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * J},${a * J}`).join(" ");
-    return P`
+    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * X},${a * X}`).join(" ");
+    return M`
       <polyline points=${n} class="route-line" fill="none" vector-effect="non-scaling-stroke"></polyline>
-      <g transform=${`translate(${e[0] * J} ${e[1] * J})`}><circle class="endpoint" r="14"></circle></g>
-      ${r.map(({ step: s, point: a }, l) => P`
-        <g transform=${`translate(${a[0] * J} ${a[1] * J})`}>
+      <g transform=${`translate(${e[0] * X} ${e[1] * X})`}><circle class="endpoint" r="14"></circle></g>
+      ${r.map(({ step: s, point: a }, l) => M`
+        <g transform=${`translate(${a[0] * X} ${a[1] * X})`}>
           <circle class=${s.node_id ? "waypoint shared-waypoint" : "waypoint"} r="11"></circle>
           <text y="-20" text-anchor="middle">${l + 1}</text>
         </g>
       `)}
-      <g transform=${`translate(${t[0] * J} ${t[1] * J})`}><circle class="endpoint" r="14"></circle></g>
+      <g transform=${`translate(${t[0] * X} ${t[1] * X})`}><circle class="endpoint" r="14"></circle></g>
     `;
   }
   renderRouteList() {
@@ -7046,67 +7047,67 @@ let F = class extends j {
     `;
   }
 };
-F.styles = O`
+_.styles = j`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
 K([
-  A({ attribute: !1 })
-], F.prototype, "config", 2);
+  C({ attribute: !1 })
+], _.prototype, "config", 2);
 K([
-  A({ attribute: !1 })
-], F.prototype, "hass", 2);
-K([
-  v()
-], F.prototype, "fromRoom", 2);
+  C({ attribute: !1 })
+], _.prototype, "hass", 2);
 K([
   v()
-], F.prototype, "toRoom", 2);
+], _.prototype, "fromRoom", 2);
 K([
   v()
-], F.prototype, "drawing", 2);
+], _.prototype, "toRoom", 2);
 K([
   v()
-], F.prototype, "pending", 2);
+], _.prototype, "drawing", 2);
 K([
   v()
-], F.prototype, "placingNode", 2);
+], _.prototype, "pending", 2);
 K([
   v()
-], F.prototype, "draftNodeName", 2);
+], _.prototype, "placingNode", 2);
 K([
   v()
-], F.prototype, "draftNodeKind", 2);
+], _.prototype, "draftNodeName", 2);
 K([
   v()
-], F.prototype, "draftNodeEntity", 2);
+], _.prototype, "draftNodeKind", 2);
 K([
   v()
-], F.prototype, "draftNodeOpenStates", 2);
+], _.prototype, "draftNodeEntity", 2);
 K([
   v()
-], F.prototype, "editingNodeId", 2);
+], _.prototype, "draftNodeOpenStates", 2);
 K([
   v()
-], F.prototype, "editingNodeName", 2);
+], _.prototype, "editingNodeId", 2);
 K([
   v()
-], F.prototype, "editingNodeKind", 2);
+], _.prototype, "editingNodeName", 2);
 K([
   v()
-], F.prototype, "editingNodeEntity", 2);
+], _.prototype, "editingNodeKind", 2);
 K([
   v()
-], F.prototype, "editingNodeOpenStates", 2);
-F = K([
-  z("ha-explorer-route-editor")
-], F);
-var fs = Object.defineProperty, bs = Object.getOwnPropertyDescriptor, pe = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? bs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], _.prototype, "editingNodeEntity", 2);
+K([
+  v()
+], _.prototype, "editingNodeOpenStates", 2);
+_ = K([
+  T("ha-explorer-route-editor")
+], _);
+var bs = Object.defineProperty, ys = Object.getOwnPropertyDescriptor, pe = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ys(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && fs(t, i, o), o;
+  return r && o && bs(t, i, o), o;
 };
 const De = 1e3;
-let ne = class extends j {
+let ne = class extends q {
   constructor() {
     super(...arguments), this.fromKey = "", this.toKey = "", this.conditionEntity = "", this.conditionStates = "on", this.editingEntity = "", this.editingStates = "on";
   }
@@ -7272,7 +7273,7 @@ let ne = class extends j {
       const n = this.endpointPoint(r.from), s = this.endpointPoint(r.to);
       if (!n || !s) return f;
       const a = e[o] ?? this.edgeStatus(o), l = ["graph-edge", a.conditional ? "conditional" : "", a.active ? "" : "blocked"].filter(Boolean).join(" ");
-      return P`<line
+      return M`<line
         x1=${n[0] * De}
         y1=${n[1] * De}
         x2=${s[0] * De}
@@ -7281,14 +7282,14 @@ let ne = class extends j {
         vector-effect="non-scaling-stroke"
       ></line>`;
     }), i = this.endpointOptions().filter((r) => r.point).map((r) => {
-      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((c) => c.id === r.id) : void 0, a = s ? Fe(s, (c) => this.entityState(c)) : void 0, l = !!(a?.conditional && !a.active);
-      return P`
+      const [o, n] = r.point, s = r.kind === "node" ? this.routeNodes.find((d) => d.id === r.id) : void 0, a = s ? _e(s, (d) => this.entityState(d)) : void 0, l = !!(a?.conditional && !a.active);
+      return M`
           <g transform=${`translate(${o * De} ${n * De})`}>
             <circle class=${r.kind === "room" ? "graph-room" : l ? "graph-node blocked" : "graph-node"} r=${r.kind === "room" ? "11" : "13"}></circle>
           </g>
         `;
     });
-    return P`${t}${i}`;
+    return M`${t}${i}`;
   }
   render() {
     if (!this.config) return f;
@@ -7363,8 +7364,8 @@ let ne = class extends j {
                 </div>
                 ${l ? h`
                   <div class="condition-edit">
-                    <label>Entity<input .value=${this.editingEntity} @input=${(c) => this.editingEntity = c.target.value}></label>
-                    <label>Tilladte states<input .value=${this.editingStates} @input=${(c) => this.editingStates = c.target.value}></label>
+                    <label>Entity<input .value=${this.editingEntity} @input=${(d) => this.editingEntity = d.target.value}></label>
+                    <label>Tilladte states<input .value=${this.editingStates} @input=${(d) => this.editingStates = d.target.value}></label>
                     <div class="condition-actions">
                       <button class="primary mini" @click=${() => this.saveCondition(s)}>Gem route-condition</button>
                       ${n.condition ? h`<button class="secondary mini" @click=${() => this.removeCondition(s)}>Fjern route-condition</button>` : f}
@@ -7390,14 +7391,14 @@ let ne = class extends j {
     `;
   }
 };
-ne.styles = O`
+ne.styles = j`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
 pe([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ne.prototype, "config", 2);
 pe([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], ne.prototype, "hass", 2);
 pe([
   v()
@@ -7421,15 +7422,15 @@ pe([
   v()
 ], ne.prototype, "editingStates", 2);
 ne = pe([
-  z("ha-explorer-route-graph-editor")
+  T("ha-explorer-route-graph-editor")
 ], ne);
-var ys = Object.defineProperty, vs = Object.getOwnPropertyDescriptor, ut = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? vs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var vs = Object.defineProperty, xs = Object.getOwnPropertyDescriptor, ut = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? xs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && ys(t, i, o), o;
+  return r && o && vs(t, i, o), o;
 };
 const oe = 1e3;
-let Re = class extends j {
+let ze = class extends q {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "";
   }
@@ -7453,7 +7454,7 @@ let Re = class extends j {
   }
   endpointPoint(e) {
     if (this.config)
-      return e.kind === "room" ? ke(this.config, e.id) : this.routeNodes.find((t) => t.id === e.id)?.point;
+      return e.kind === "room" ? Ae(this.config, e.id) : this.routeNodes.find((t) => t.id === e.id)?.point;
   }
   entityState(e) {
     return this.hass?.states[e]?.state;
@@ -7509,7 +7510,7 @@ let Re = class extends j {
         n.conditional ? "conditional" : "",
         n.active ? "" : "blocked"
       ].filter(Boolean).join(" ");
-      return P`
+      return M`
         <line
           x1=${r[0] * oe}
           y1=${r[1] * oe}
@@ -7524,14 +7525,14 @@ let Re = class extends j {
   renderPreviewOverlay(e) {
     if (!e || e.hops.length < 2) return f;
     const t = e.hops.map((i) => `${i.point[0] * oe},${i.point[1] * oe}`).join(" ");
-    return P`
+    return M`
       <polyline
         points=${t}
         class=${`preview-line ${e.source}`}
         fill="none"
         vector-effect="non-scaling-stroke"
       ></polyline>
-      ${e.hops.map((i, r) => P`
+      ${e.hops.map((i, r) => M`
         <g transform=${`translate(${i.point[0] * oe} ${i.point[1] * oe})`}>
           <circle
             class=${i.kind === "room" ? "preview-room" : i.kind === "node" ? "preview-node" : "preview-point"}
@@ -7548,8 +7549,8 @@ let Re = class extends j {
       this.config,
       (r) => this.entityState(r)
     ), t = e.disconnectedRoomIds.map((r) => {
-      const o = ke(this.config, r);
-      return o ? P`
+      const o = Ae(this.config, r);
+      return o ? M`
         <g transform=${`translate(${o[0] * oe} ${o[1] * oe})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
@@ -7557,14 +7558,14 @@ let Re = class extends j {
       ` : f;
     }), i = e.disconnectedNodeIds.map((r) => {
       const o = this.routeNodes.find((n) => n.id === r);
-      return o ? P`
+      return o ? M`
         <g transform=${`translate(${o.point[0] * oe} ${o.point[1] * oe})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
         </g>
       ` : f;
     });
-    return P`${t}${i}`;
+    return M`${t}${i}`;
   }
   renderBlockedEdges(e) {
     return e.length ? h`
@@ -7700,30 +7701,30 @@ let Re = class extends j {
     `;
   }
 };
-Re.styles = O`
+ze.styles = j`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 ut([
-  A({ attribute: !1 })
-], Re.prototype, "config", 2);
+  C({ attribute: !1 })
+], ze.prototype, "config", 2);
 ut([
-  A({ attribute: !1 })
-], Re.prototype, "hass", 2);
-ut([
-  v()
-], Re.prototype, "fromRoom", 2);
+  C({ attribute: !1 })
+], ze.prototype, "hass", 2);
 ut([
   v()
-], Re.prototype, "toRoom", 2);
-Re = ut([
-  z("ha-explorer-route-diagnostics")
-], Re);
-var xs = Object.defineProperty, ws = Object.getOwnPropertyDescriptor, xi = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? ws(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+], ze.prototype, "fromRoom", 2);
+ut([
+  v()
+], ze.prototype, "toRoom", 2);
+ze = ut([
+  T("ha-explorer-route-diagnostics")
+], ze);
+var ws = Object.defineProperty, ks = Object.getOwnPropertyDescriptor, xi = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? ks(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && xs(t, i, o), o;
+  return r && o && ws(t, i, o), o;
 };
-const $s = { basic: 0, rooms: 1, presences: 2 };
+const As = { basic: 0, rooms: 1, presences: 2 };
 let oi = class extends L {
   updated(e) {
     super.updated(e), e.has("config") && this.config && this.setConfig(this.config);
@@ -7733,12 +7734,12 @@ let oi = class extends L {
   }
 };
 xi([
-  A({ attribute: !1 })
+  C({ attribute: !1 })
 ], oi.prototype, "config", 2);
 oi = xi([
-  z("ha-explorer-room-tools")
+  T("ha-explorer-room-tools")
 ], oi);
-let ni = class extends de {
+let ni = class extends ce {
   constructor() {
     super(...arguments), this.handleNativeControlChange = (e) => {
       e.stopPropagation(), queueMicrotask(() => {
@@ -7777,7 +7778,7 @@ let ni = class extends de {
     const t = e.detail?.target;
     if (!t) return;
     e.stopPropagation();
-    const i = $s[t];
+    const i = As[t];
     let r;
     if (i !== void 0) {
       const o = this.baseSections[i];
@@ -7820,14 +7821,14 @@ let ni = class extends de {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-ni.styles = O`${de.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+ni.styles = j`${ce.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
 ni = xi([
-  z("ha-explorer-ha-editor")
+  T("ha-explorer-ha-editor")
 ], ni);
 function or(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Mr(e) {
+function Nr(e) {
   return e.trim().toLocaleLowerCase().replace(/[\s_-]+/g, " ");
 }
 function ti(e, t) {
@@ -7835,12 +7836,12 @@ function ti(e, t) {
   let i = !1;
   const [r, o] = e;
   for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-    const [a, l] = t[n], [c, d] = t[s];
-    l > o != d > o && r < (c - a) * (o - l) / (d - l || Number.EPSILON) + a && (i = !i);
+    const [a, l] = t[n], [d, c] = t[s];
+    l > o != c > o && r < (d - a) * (o - l) / (c - l || Number.EPSILON) + a && (i = !i);
   }
   return i;
 }
-function ks(e) {
+function Ss(e) {
   if (!e.length) return [0.5, 0.5];
   const [t, i] = e.reduce(
     ([r, o], [n, s]) => [r + n, o + s],
@@ -7848,78 +7849,78 @@ function ks(e) {
   );
   return [t / e.length, i / e.length];
 }
-function _s(e) {
+function Cs(e) {
   if (e.length < 3) return;
   let t = 0, i = 0, r = 0;
   for (let o = 0; o < e.length; o += 1) {
-    const [n, s] = e[o], [a, l] = e[(o + 1) % e.length], c = n * l - a * s;
-    t += c, i += (n + a) * c, r += (s + l) * c;
+    const [n, s] = e[o], [a, l] = e[(o + 1) % e.length], d = n * l - a * s;
+    t += d, i += (n + a) * d, r += (s + l) * d;
   }
   if (!(Math.abs(t) < Number.EPSILON))
     return [i / (3 * t), r / (3 * t)];
 }
-function je(e) {
+function qe(e) {
   return { x: or(e.x), y: or(e.y) };
 }
-function As(e) {
-  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(Mr);
+function Es(e) {
+  return [e.id, e.area_id, e.name, ...e.aliases ?? []].filter((t) => typeof t == "string" && t.trim().length > 0).map(Nr);
 }
-function Pr(e, t) {
+function Mr(e, t) {
   if (!t?.trim()) return;
-  const i = Mr(t);
-  return e.find((r) => As(r).includes(i));
+  const i = Nr(t);
+  return e.find((r) => Es(r).includes(i));
 }
-function Ss(e) {
-  if (e.presence_anchor) return je(e.presence_anchor);
-  if (e.label) return je(e.label);
-  const t = _s(e.points);
+function $s(e) {
+  if (e.presence_anchor) return qe(e.presence_anchor);
+  if (e.label) return qe(e.label);
+  const t = Cs(e.points);
   if (t && ti(t, e.points))
-    return je({ x: t[0], y: t[1] });
-  const i = ks(e.points);
+    return qe({ x: t[0], y: t[1] });
+  const i = Ss(e.points);
   if (ti(i, e.points))
-    return je({ x: i[0], y: i[1] });
+    return qe({ x: i[0], y: i[1] });
   if (e.points.length) {
     const r = e.points.map(([s]) => s), o = e.points.map(([, s]) => s), n = [
       (Math.min(...r) + Math.max(...r)) / 2,
       (Math.min(...o) + Math.max(...o)) / 2
     ];
-    return ti(n, e.points) ? je({ x: n[0], y: n[1] }) : je({ x: e.points[0][0], y: e.points[0][1] });
+    return ti(n, e.points) ? qe({ x: n[0], y: n[1] }) : qe({ x: e.points[0][0], y: e.points[0][1] });
   }
   return { x: 0.5, y: 0.5 };
 }
 const si = /* @__PURE__ */ new Map();
-function Rt(e) {
+function zt(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
 function nr(e, t) {
-  return Math.max(1, Math.round(Rt(e) ?? t));
+  return Math.max(1, Math.round(zt(e) ?? t));
 }
-function Cs(e) {
-  const t = Math.max(0.05, Rt(e.max_height_m) ?? 0.75);
+function Ps(e) {
+  const t = Math.max(0.05, zt(e.max_height_m) ?? 0.75);
   return {
     heightAttribute: e.height_attribute?.trim() || "maxz",
     targetIdAttribute: e.target_id_attribute?.trim() || "target_id",
     timestampAttribute: e.timestamp_attribute?.trim() || "timestamp",
     maxHeight: t,
-    releaseHeight: Math.max(t + 0.05, Rt(e.release_height_m) ?? t + 0.2),
+    releaseHeight: Math.max(t + 0.05, zt(e.release_height_m) ?? t + 0.2),
     confirmationUpdates: nr(e.confirmation_updates, 3),
     releaseUpdates: nr(e.release_updates, 2)
   };
 }
-function Es() {
+function Ns() {
   si.clear();
 }
 function Ms(e, t) {
   const i = e.shelly_pet_detection;
   if (!i?.enabled || !t) return e;
-  const r = Cs(i), o = Rt(t.attributes[r.heightAttribute]);
+  const r = Ps(i), o = zt(t.attributes[r.heightAttribute]);
   if (o === void 0) return { ...e, visible: !1 };
   const n = t.attributes[r.targetIdAttribute], s = n === void 0 ? t.entity_id : String(n), a = t.attributes[r.timestampAttribute], l = a === void 0 ? `${s}:${o}:${t.attributes.x ?? ""}:${t.attributes.y ?? ""}` : `${s}:${String(a)}`;
-  let c = si.get(e.id);
-  return (!c || c.targetId !== s) && (c = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, c)), c.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed } : (c.lastSample = l, o <= r.maxHeight ? (c.low += 1, c.high = 0, c.low >= r.confirmationUpdates && (c.confirmed = !0)) : o >= r.releaseHeight ? (c.high += 1, c.low = 0, c.high >= r.releaseUpdates && (c.confirmed = !1)) : (c.low = 0, c.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed });
+  let d = si.get(e.id);
+  return (!d || d.targetId !== s) && (d = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, d)), d.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed } : (d.lastSample = l, o <= r.maxHeight ? (d.low += 1, d.high = 0, d.low >= r.confirmationUpdates && (d.confirmed = !0)) : o >= r.releaseHeight ? (d.high += 1, d.low = 0, d.high >= r.releaseUpdates && (d.confirmed = !1)) : (d.low = 0, d.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && d.confirmed });
 }
-const Ps = ["unknown", "unavailable", "not_detected"], Ns = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
+const Rs = ["unknown", "unavailable", "not_detected"], zs = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
 function te(e, t) {
   return e && t ? e.attributes[t] : void 0;
 }
@@ -7931,7 +7932,7 @@ function we(e, t) {
   const i = ge(e);
   return i === void 0 ? t : Math.min(1, Math.max(0, i));
 }
-function Rs(e, t) {
+function Ts(e, t) {
   if (typeof e == "boolean") return e;
   if (typeof e == "number") return e !== 0;
   if (typeof e == "string") {
@@ -7947,9 +7948,9 @@ function yt(e, t) {
 function sr(e) {
   if (typeof e != "string") return;
   const t = e.trim();
-  return Ns.has(t.toLowerCase()) ? void 0 : t;
+  return zs.has(t.toLowerCase()) ? void 0 : t;
 }
-function zs(e, t, i) {
+function Os(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
     return r ? sr(e.room_attribute ? te(r, e.room_attribute) : r.state) : void 0;
@@ -7957,7 +7958,7 @@ function zs(e, t, i) {
   if (t)
     return sr(te(t, e.room_attribute ?? "explorer_room"));
 }
-function Ts(e) {
+function js(e) {
   if (!e.points.length) return;
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
@@ -7969,114 +7970,114 @@ function ar(e, t, i, r, o, n) {
 function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  const l = i[n], d = r[n], c = o[n], p = (l * (r.sensor_y - o.sensor_y) + d * (o.sensor_y - i.sensor_y) + c * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + d * (i.sensor_x - o.sensor_x) + c * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + d * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + c * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
   return p * e + u * t + g;
 }
-function Os(e, t, i) {
-  const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = Ts(e);
+function Is(e, t, i) {
+  const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = js(e);
   if (!o || !n || o <= 0 || n <= 0 || !s) return {};
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
-  let c = Math.min(1, Math.max(0, a / o)), d = Math.min(1, Math.max(0, l / n));
+  let d = Math.min(1, Math.max(0, a / o)), c = Math.min(1, Math.max(0, l / n));
   const p = r?.position_calibration;
-  return p?.c ? (c = lr(a, l, p.a, p.b, p.c, "room_x", c), d = lr(a, l, p.a, p.b, p.c, "room_y", d)) : p && (c = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, c), d = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, d)), c = Math.min(1, Math.max(0, c)), d = Math.min(1, Math.max(0, d)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + d * (s.maxY - s.minY) };
+  return p?.c ? (d = lr(a, l, p.a, p.b, p.c, "room_x", d), c = lr(a, l, p.a, p.b, p.c, "room_y", c)) : p && (d = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, d), c = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, c)), d = Math.min(1, Math.max(0, d)), c = Math.min(1, Math.max(0, c)), { x: s.minX + d * (s.maxX - s.minX), y: s.minY + c * (s.maxY - s.minY) };
 }
 function vt(e, t, i) {
-  const r = Pr(t, i ?? e.room_id);
+  const r = Mr(t, i ?? e.room_id);
   if (r) {
-    const s = Ss(r);
+    const s = $s(r);
     return { ...e, x: s.x, y: s.y, room_id: r.id };
   }
   const o = we(e.x), n = we(e.y);
   return o === void 0 || n === void 0 ? { ...e, x: o, y: n, visible: !1 } : { ...e, x: o, y: n };
 }
-function Is(e, t, i, r, o, n) {
+function Ds(e, t, i, r, o, n) {
   if (!i) return { x: we(e.x), y: we(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
-    const c = ge(te(i, a)), d = ge(te(i, l)), p = Pr(r, o ?? e.room_id);
-    return c === void 0 || d === void 0 || !p ? {} : { ...Os(p, c, d), roomId: p.id };
+    const d = ge(te(i, a)), c = ge(te(i, l)), p = Mr(r, o ?? e.room_id);
+    return d === void 0 || c === void 0 || !p ? {} : { ...Is(p, d, c), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
-    return c === void 0 || d === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(c / p), y: we(d / u) };
+    const d = ge(te(i, a)), c = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
+    return d === void 0 || c === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(d / p), y: we(c / u) };
   }
   return { x: we(te(i, a), e.x), y: we(te(i, l), e.y) };
 }
-function Ds(e, t, i = [], r) {
+function qs(e, t, i = [], r) {
   const o = e.entity_binding;
   if (!o || !t) return vt(e, i);
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...vt(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ps, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = c || d ? !1 : Rs(p, e.visible ?? !0), g = zs(o, n, t) ?? e.room_id, b = Is(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
+  const l = o.hidden_states ?? Rs, d = n ? l.includes(n.state) : !1, c = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = d || c ? !1 : Ts(p, e.visible ?? !0), g = Os(o, n, t) ?? e.room_id, b = Ds(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
   return Ms(y, a);
 }
-function js(e, t, i = [], r) {
-  return e.map((o) => Ds(o, t, i, r));
+function Ls(e, t, i = [], r) {
+  return e.map((o) => qs(o, t, i, r));
 }
-const Be = /* @__PURE__ */ new Map(), Ls = 0.22, qs = 0.16, Bs = 3e4, Hs = 0.025, Fs = 0.018;
-function zt(e) {
+const Be = /* @__PURE__ */ new Map(), Fs = 0.22, Bs = 0.16, Hs = 3e4, _s = 0.025, Vs = 0.018;
+function Tt(e) {
   return Number.isFinite(e.x) && Number.isFinite(e.y) ? { x: e.x, y: e.y } : void 0;
 }
 function ai(e, t) {
   return Math.hypot(e.x - t.x, e.y - t.y);
 }
-function qe(e) {
+function Fe(e) {
   return e.entity_binding?.entity ?? e.id;
 }
 function et(e) {
   return e.entity_binding?.position_entity;
 }
-function Nr(e) {
+function Rr(e) {
   return e.previous ? { x: e.point.x + (e.point.x - e.previous.x), y: e.point.y + (e.point.y - e.previous.y) } : e.point;
 }
-function Vs(e, t) {
-  const i = zt(t), r = ai(e.point, i), o = ai(Nr(e), i), n = e.target && e.target === et(t) ? Hs : 0;
+function Ks(e, t) {
+  const i = Tt(t), r = ai(e.point, i), o = ai(Rr(e), i), n = e.target && e.target === et(t) ? _s : 0;
   return { candidate: t, distance: r, score: Math.min(r, o * 0.82) - n };
 }
-function cr(e, t, i) {
-  const r = qe(e), o = zt(t);
+function dr(e, t, i) {
+  const r = Fe(e), o = Tt(t);
   if (!o) return;
   const n = Be.get(r);
   Be.set(r, { point: o, previous: n?.point, target: et(t), seenAt: i });
 }
-function Ks(e, t = Date.now()) {
-  for (const [a, l] of Be) t - l.seenAt > Bs && Be.delete(a);
-  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && zt(a) && et(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
+function Gs(e, t = Date.now()) {
+  for (const [a, l] of Be) t - l.seenAt > Hs && Be.delete(a);
+  const i = e.filter((a) => (a.type ?? "person") === "person" && a.visible !== !1 && Tt(a) && et(a)), r = new Set(i), o = e.filter((a) => !r.has(a)), n = /* @__PURE__ */ new Map();
   for (const a of i) {
-    const l = a.room_id ?? "__no_room__", c = n.get(l) ?? [];
-    c.push(a), n.set(l, c);
+    const l = a.room_id ?? "__no_room__", d = n.get(l) ?? [];
+    d.push(a), n.set(l, d);
   }
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
       for (const g of a)
-        s.push(g), cr(g, g, t);
+        s.push(g), dr(g, g, t);
       continue;
     }
-    const l = [...a], c = [...a].sort((g, b) => qe(g).localeCompare(qe(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = c.map((g) => {
-      const b = Be.get(qe(g));
+    const l = [...a], d = [...a].sort((g, b) => Fe(g).localeCompare(Fe(b))), c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = d.map((g) => {
+      const b = Be.get(Fe(g));
       if (!b) return { identity: g, track: void 0, scores: [] };
-      const m = l.map((y) => Vs(b, y)).sort((y, _) => y.score - _.score);
+      const m = l.map((y) => Ks(b, y)).sort((y, S) => y.score - S.score);
       return { identity: g, track: b, scores: m };
     }).sort((g, b) => (g.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
     for (const g of u) {
       const { identity: b, track: m } = g;
       if (!m) continue;
-      const y = g.scores.filter((C) => !p.has(C.candidate));
+      const y = g.scores.filter(($) => !p.has($.candidate));
       if (!y.length) continue;
-      const _ = y[0], $ = y[1], w = _.distance <= Ls || ai(Nr(m), zt(_.candidate)) <= qs, S = !!$ && $.score - _.score < Fs;
-      w && !S && (d.set(qe(b), _.candidate), p.add(_.candidate));
+      const S = y[0], k = y[1], w = S.distance <= Fs || ai(Rr(m), Tt(S.candidate)) <= Bs, E = !!k && k.score - S.score < Vs;
+      w && !E && (c.set(Fe(b), S.candidate), p.add(S.candidate));
     }
-    for (const g of c) {
-      const b = qe(g);
-      let m = d.get(b);
-      if (m || (m = l.find((_) => !p.has(_) && et(_) === et(g)), m && p.add(m)), m || (m = l.find((_) => !p.has(_)), m && p.add(m)), !m) {
+    for (const g of d) {
+      const b = Fe(g);
+      let m = c.get(b);
+      if (m || (m = l.find((S) => !p.has(S) && et(S) === et(g)), m && p.add(m)), m || (m = l.find((S) => !p.has(S)), m && p.add(m)), !m) {
         s.push(g);
         continue;
       }
       const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), cr(g, m, t);
+      s.push(y), dr(g, m, t);
     }
   }
   return [...s, ...o];
@@ -8084,13 +8085,13 @@ function Ks(e, t = Date.now()) {
 function Zs() {
   Be.clear();
 }
-var Gs = Object.defineProperty, Ws = Object.getOwnPropertyDescriptor, Dt = (e, t, i, r) => {
-  for (var o = r > 1 ? void 0 : r ? Ws(t, i) : t, n = e.length - 1, s; n >= 0; n--)
+var Ws = Object.defineProperty, Us = Object.getOwnPropertyDescriptor, Dt = (e, t, i, r) => {
+  for (var o = r > 1 ? void 0 : r ? Us(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
-  return r && o && Gs(t, i, o), o;
+  return r && o && Ws(t, i, o), o;
 };
-const Rr = "0.44.5";
-let Ge = class extends j {
+const zr = "0.44.6";
+let Ze = class extends q {
   constructor() {
     super(...arguments), this.preview = !1;
   }
@@ -8170,7 +8171,7 @@ let Ge = class extends j {
   }
   setConfig(e) {
     if (!e) throw new Error("Configuration is required");
-    Zs(), Es(), this.config = {
+    Zs(), Ns(), this.config = {
       title: "Home Assistant Explorer",
       min_zoom: 1,
       max_zoom: 6,
@@ -8343,132 +8344,35 @@ let Ge = class extends j {
     return h`<div class="celestial-cloud" aria-hidden="true"></div>`;
   }
   renderCastleSurround() {
-    const e = (t) => h`<svg
-      class=${`enchanted-castle-side enchanted-castle-${t}`}
-      viewBox="0 0 560 900"
-      preserveAspectRatio="xMidYMax slice"
-      aria-hidden="true"
-    >
-      <defs>
-        <filter id=${`castle-soft-mist-${t}`} x="-30%" y="-250%" width="160%" height="600%">
-          <feGaussianBlur stdDeviation="14"></feGaussianBlur>
-        </filter>
-      </defs>
-      <g class="castle-cloud-bank">
-        <path d="M-80 232C21 163 102 209 158 174s143-45 215 5 135 11 240-24"></path>
-        <path d="M-92 310C12 262 83 290 151 254s151-24 222 18 136 17 235-13"></path>
-      </g>
-      ${t === "left" ? P`
-            <circle class="castle-moon-glow" cx="432" cy="302" r="86"></circle>
-            <circle class="castle-moon-solid" cx="432" cy="302" r="39"></circle>
-            <path class="castle-far-hills" d="M-20 900V696C62 631 121 651 184 673c73 25 119-36 193-29 66 6 112 55 203-16v272Z"></path>
-            <path class="castle-distant" d="M-20 900V670l61-50 44 19 40-61 46 29 53-92 54 57 49-104 61 61 55-86 48 63 69-72v466Z"></path>
-            <path class="castle-cliff" d="M-20 900V738l52-17 35-42 58 10 40-31 62 13 48-42 57 7 50-37 72 20 43-39 83 27v293Z"></path>
-            <g class="castle-main-cluster">
-              <path class="castle-complex" d="M22 705V617l23-20 96-8 35 28v88H22Zm38-110v-43l15-15h49l18 15v39Zm103 110V539h19v-32h58v32h18v166h-95Zm18-199 14-46 11-42 12 42 16 46h-53Zm77 199V574l22-18h96l23 18v131H258Zm28-149v-32l18-17h51l17 17v32Zm89 149V445h22v-42h91v42h23v260H375Zm24-303 12-54 9-73 12 73 14 54h-47Zm15-1v-67h15v67Zm43 0v-67h14v67Zm39 304V552h14v-30h42v30h18v153h-74Zm13-184 13-42 10-48 10 48 13 42h-46Z"></path>
-              <path class="castle-complex castle-annex" d="M111 706v-70l25-18h56l22 18v70H111Zm111-1v-77h29v-26h77v26h29v77H222Zm217 0v-70h20v-26h69v26h20v70H439Z"></path>
-              <path class="castle-bridge" d="M124 649C181 626 223 630 272 650s89 17 137-8 81-22 126 6"></path>
-            </g>
-            <g class="castle-roof-detail">
-              <path d="M22 617l23-20 96-8 35 28M163 539h95M258 574l22-18h96l23 18M375 445h136M496 552h74"></path>
-              <path d="M67 588v-31m35 31v-43m97-42v-28m19 28v-28m201-74v-70m52 70v-70m-46 13h40m51 177v-35"></path>
-              <path d="M391 478h104M276 605h108M36 648h118M450 660h105"></path>
-            </g>
-            <g class="castle-buttresses">
-              <path d="M39 623 20 715m142-164-18 160m111-126-16 125m136-252-23 253m160-153 20 149M96 604 82 706m211-140-17 143"></path>
-            </g>
-            <g class="castle-windows castle-window-grid">
-              <rect class="castle-window castle-window-0" x="61" y="622" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="91" y="615" width="4" height="8" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="119" y="627" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="190" y="553" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="220" y="557" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="194" y="593" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="224" y="600" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="301" y="593" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="335" y="582" width="4" height="8" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="405" y="471" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="438" y="459" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="470" y="477" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="405" y="524" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="438" y="515" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="475" y="537" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="522" y="574" width="5" height="10" rx="2"></rect>
-            </g>
-          ` : P`
-            <circle class="castle-moon-glow castle-moon-dim" cx="95" cy="305" r="76"></circle>
-            <path class="castle-far-hills" d="M-20 900V675c87-53 151-9 212-10 68-1 97-56 170-49 68 7 117 58 218 5v279Z"></path>
-            <path class="castle-distant" d="M-20 900V511l63 52 51-86 44 53 55-113 56 85 48-66 58 75 56-101 51 76 48-49 70 79v384Z"></path>
-            <path class="castle-cliff" d="M-20 900V622l58-26 43 37 63-18 49 31 57-24 56 47 70-21 43 39 67-8 94 51v170Z"></path>
-            <g class="castle-main-cluster">
-              <path class="castle-complex" d="M-18 704V503h21v-38h82v38h23v201H-18Zm20-240 13-50 10-72 12 72 16 50H2Zm89 240V568h18v-35h61v35h18v136H91Zm20-172 14-49 13-61 13 61 16 49h-54Zm76 172V456h22v-44h92v44h23v248H187Zm22-293 14-54 11-79 12 79 16 54h-53Zm20 0v-75h15v75Zm44 0v-75h14v75Zm49 293V546h19v-35h65v35h19v158H322Zm20-194 15-45 12-61 13 61 17 45h-57Zm81 194V605l20-19h73l24 19v99H423Zm31-119v-34l14-14h37l14 14v34Z"></path>
-              <path class="castle-complex castle-annex" d="M48 704v-76h24v-25h75v25h26v76H48Zm234 0v-81h26v-28h78v28h28v81H282Zm193 0v-65h16v-26h57v26h22v65h-95Z"></path>
-              <path class="castle-bridge" d="M-14 655c50-27 96-24 143 3s90 27 137-4 91-29 137 0 86 30 145-4"></path>
-            </g>
-            <g class="castle-roof-detail">
-              <path d="M-18 503H108M91 568h97M187 456h137M322 546h101M423 605l20-19h73l24 19"></path>
-              <path d="M17 462v-54m25 54v-54m190 2v-76m54 76v-76m-43-9h31m80 184v-38m35 38v-38m76 113v-32"></path>
-              <path d="M4 542h89m109-42h107m35 91h64m33 42h88"></path>
-            </g>
-            <g class="castle-buttresses">
-              <path d="M-2 525-22 712m128-128 17 125m65-238-22 238m157-148-19 148m117-93-17 94m126-94 21 90M73 614 55 705m227-81-17 84"></path>
-            </g>
-            <g class="castle-windows castle-window-grid">
-              <rect class="castle-window castle-window-1" x="14" y="519" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="45" y="507" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="74" y="528" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="16" y="575" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="49" y="567" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="123" y="587" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="151" y="599" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="213" y="481" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="245" y="469" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="278" y="488" width="5" height="11" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="214" y="540" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="248" y="530" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="279" y="551" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="350" y="570" width="5" height="10" rx="2"></rect>
-              <rect class="castle-window castle-window-2" x="386" y="581" width="4" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-1" x="465" y="618" width="5" height="9" rx="2"></rect>
-              <rect class="castle-window castle-window-0" x="498" y="628" width="4" height="8" rx="2"></rect>
-            </g>
-          `}
-      <rect class="castle-water" x="-10" y="792" width="590" height="128" fill="#120c08"></rect>
-      <path class="castle-ridge" d="M-20 798C70 752 135 816 218 782s143 23 218-6 108-18 144 9"></path>
-      <g class="castle-reflections">
-        <path d="M112 805v72M192 798v89M276 800v78M371 790v103M468 802v72"></path>
-        <path class="moon-reflection" d=${t === "left" ? "M112 798c-17 23-25 50-12 96m31-96c11 31 5 61-4 96" : "M455 802c-12 27-17 57-6 91m24-91c8 32 2 60-8 91"}></path>
-      </g>
-      <g class="castle-water-ripples">
-        <path d="M8 824h126m-74 22h154m-99 25h176m35-46h153m-112 25h185m-80 26h112"></path>
-      </g>
-      <path class="castle-mist castle-mist-back" d="M-45 690C77 655 163 711 267 682s196-6 338-15" filter=${`url(#castle-soft-mist-${t})`}></path>
-      <path class="castle-mist" d="M-45 754C73 715 170 776 279 742s205-9 329-24" filter=${`url(#castle-soft-mist-${t})`}></path>
-    </svg>`;
     return h`<div class="enchanted-castle-surround" aria-hidden="true">
-      ${e("left")}${e("right")}
+      <div
+        class="castle-cinematic-backdrop"
+        style=${`background-image: url("${po}")`}
+      ></div>
+      <div class="castle-cinematic-parchment"></div>
+      <div class="castle-cinematic-vignette"></div>
     </div>`;
   }
   render() {
     if (!this.config) return f;
-    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = js(
+    const e = this.config.image ?? this.config.background ?? "", t = this.defaultRoom(), i = Ls(
       this.config.presences ?? [],
       this.hass,
       t,
       this.config.floorplan_meters
-    ), r = Ks(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
+    ), r = Gs(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)
-    ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
+    ), l = this.config.appearance?.compass ?? {}, d = this.config.appearance?.hide_source_text ?? !1, c = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
     ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)
-    ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), _ = s || y === "clear-night", $ = this.weatherEffect(y), w = Math.min(
+    ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), S = s || y === "clear-night", k = this.weatherEffect(y), w = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.weather?.intensity ?? 0.6)
-    ), S = m && [
+    ), E = m && [
       "partlycloudy",
       "cloudy",
       "rainy",
@@ -8480,18 +8384,18 @@ let Ge = class extends j {
       "hail",
       "windy-variant",
       "exceptional"
-    ].includes(y), C = m && !_ && ["sunny", "clear", "partlycloudy"].includes(y), k = y === "partlycloudy";
+    ].includes(y), $ = m && !S && ["sunny", "clear", "partlycloudy"].includes(y), A = y === "partlycloudy";
     return h`${this.renderCastleSurround()}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${_ ? " moonlight" : ""}${C ? " sunlight" : ""}${k ? " partly-cloudy" : ""}${S ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && $ !== "clear" ? ` weather-${$}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      class=${`${n ? "enchanted" : "classic"}${S ? " moonlight" : ""}${$ ? " sunlight" : ""}${A ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && k !== "clear" ? ` weather-${k}` : ""}${m ? ` state-${y}` : ""}${c === "armed" ? " alarm-armed" : ""}${c === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${w}`}
       ><header>
         <div>
           <span
-            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? _ ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : $ === "exceptional" ? "⚠ Exceptional Weather" : $ === "wind" ? "➳ Wind over the Map" : $ === "storm" ? "⛈ Storm over the Map" : $ === "rain" ? "☂ Rain over the Map" : $ === "snow" ? "❄ Snow over the Map" : $ === "fog" ? "◇ Mist over the Map" : $ === "cloudy" ? "☁ Clouded Map" : C ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : _ ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${c === "triggered" ? "⚠ Alarm Triggered" : c === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? S ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : k === "exceptional" ? "⚠ Exceptional Weather" : k === "wind" ? "➳ Wind over the Map" : k === "storm" ? "⛈ Storm over the Map" : k === "rain" ? "☂ Rain over the Map" : k === "snow" ? "❄ Snow over the Map" : k === "fog" ? "◇ Mist over the Map" : k === "cloudy" ? "☁ Clouded Map" : $ ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : S ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
-        <small>Enchanted Atmosphere · v${Rr}</small>
+        <small>Enchanted Atmosphere · v${zr}</small>
       </header>
       <div class="map-stage">
         <div class="weather-flash"></div>
@@ -8499,11 +8403,11 @@ let Ge = class extends j {
         <div class="sun-disc"></div>
         <explorer-source-clean-canvas
           .theme=${o}
-          .hideSourceText=${c}
-          .weatherEffect=${m ? $ : "clear"}
+          .hideSourceText=${d}
+          .weatherEffect=${m ? k : "clear"}
           .weatherState=${y}
           .weatherIntensity=${w}
-          .weatherNight=${_}
+          .weatherNight=${S}
           .compassVisible=${l.visible ?? !0}
           .compassRotation=${l.rotation ?? -7}
           .compassSize=${l.size ?? 1}
@@ -8526,14 +8430,14 @@ let Ge = class extends j {
         <div class="occupancy-overlay"></div>
         <div class="moon-overlay"></div>
         <div class="moon-disc"><span></span></div>
-        ${k ? this.renderCelestialCloud() : f}
+        ${A ? this.renderCelestialCloud() : f}
         <div class="night-vignette"></div>
         <div class="alarm-overlay"></div>
         <div class="alarm-vignette"></div></div
     ></ha-card>`;
   }
 };
-Ge.styles = O`
+Ze.styles = j`
     :host {
       display: block;
       width: 100%;
@@ -8610,170 +8514,64 @@ Ge.styles = O`
         overflow: hidden;
         pointer-events: none;
       }
-      .enchanted-castle-side {
+      .castle-cinematic-backdrop,
+      .castle-cinematic-parchment,
+      .castle-cinematic-vignette {
         position: absolute;
-        bottom: 0;
-        width: 42%;
-        max-width: 720px;
-        height: 100%;
-        overflow: visible;
+        inset: 0;
+        pointer-events: none;
+      }
+      .castle-cinematic-backdrop {
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
         opacity: 0.98;
         filter:
-          drop-shadow(0 -12px 30px rgba(187, 134, 69, 0.2))
-          drop-shadow(0 12px 25px rgba(0, 0, 0, 0.48));
+          sepia(0.16)
+          saturate(0.76)
+          brightness(0.72)
+          contrast(1.18);
+        transform: scale(1.012);
+        transform-origin: center bottom;
       }
-      .enchanted-castle-left {
-        left: -4%;
+      .castle-cinematic-parchment {
+        background:
+          radial-gradient(
+            ellipse at 50% 35%,
+            rgba(206, 166, 99, 0.12),
+            transparent 57%
+          ),
+          repeating-linear-gradient(
+            112deg,
+            transparent 0 61px,
+            rgba(229, 196, 133, 0.025) 62px 63px,
+            transparent 64px 124px
+          ),
+          linear-gradient(
+            180deg,
+            rgba(111, 73, 35, 0.08),
+            rgba(39, 24, 14, 0.2) 68%,
+            rgba(5, 5, 6, 0.38)
+          );
+        mix-blend-mode: soft-light;
       }
-      .enchanted-castle-right {
-        right: -4%;
-      }
-      .castle-moon-glow {
-        fill: rgba(218, 211, 181, 0.2);
-        filter: blur(27px);
-      }
-      .castle-moon-solid {
-        fill: #d9d1b7;
-        stroke: rgba(241, 226, 187, 0.65);
-        stroke-width: 1.2;
-        opacity: 0.9;
-        filter: drop-shadow(0 0 12px rgba(219, 208, 171, 0.36));
-      }
-      .castle-moon-dim {
-        opacity: 0.48;
-      }
-      .castle-far-hills {
-        fill: rgba(21, 23, 23, 0.78);
-      }
-      .enchanted-castle-left .castle-distant {
-        fill: rgba(31, 34, 34, 0.84);
-      }
-      .enchanted-castle-right .castle-distant {
-        fill: rgba(27, 31, 32, 0.86);
-      }
-      .castle-distant {
-        opacity: 0.42;
-        filter: blur(0.45px);
-      }
-      .castle-cliff {
-        fill: rgba(5, 7, 8, 0.97);
-        filter: drop-shadow(0 -5px 11px rgba(0, 0, 0, 0.42));
-      }
-      .castle-main-cluster {
-        filter:
-          drop-shadow(0 -3px 0 rgba(116, 101, 78, 0.12))
-          drop-shadow(0 12px 17px rgba(0, 0, 0, 0.76));
-      }
-      .castle-complex {
-        fill: #080a0a;
-        stroke: rgba(172, 143, 98, 0.2);
-        stroke-width: 0.85;
-        stroke-linejoin: round;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-annex {
-        fill: #060808;
-        opacity: 0.98;
-      }
-      .castle-silhouette {
-        fill: #0a0604;
-        stroke: #6f4b2d;
-        stroke-width: 1.25;
-        stroke-linejoin: round;
-        opacity: 1;
-        visibility: visible;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-roof-detail,
-      .castle-buttresses {
-        fill: none;
-        stroke: rgba(198, 171, 126, 0.14);
-        stroke-width: 1.25;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        vector-effect: non-scaling-stroke;
-      }
-      .castle-buttresses {
-        stroke: rgba(160, 137, 101, 0.1);
-        stroke-width: 2.2;
-      }
-      .castle-bridge {
-        fill: none;
-        stroke: rgba(5, 7, 7, 0.97);
-        stroke-width: 12;
-        stroke-linecap: round;
-        filter:
-          drop-shadow(0 -2px 0 rgba(208, 165, 94, 0.16))
-          drop-shadow(0 7px 5px rgba(0, 0, 0, 0.42));
-      }
-      .castle-ridge {
-        fill: none;
-        stroke: rgba(2, 3, 3, 0.96);
-        stroke-width: 128;
-        stroke-linecap: round;
-        filter: drop-shadow(0 -2px 0 rgba(181, 141, 83, 0.11));
-      }
-      .castle-window {
-        fill: rgba(240, 179, 78, 0.84);
-        stroke: rgba(255, 225, 157, 0.18);
-        stroke-width: 0.45;
-        filter:
-          drop-shadow(0 0 2px rgba(239, 164, 55, 0.78))
-          drop-shadow(0 0 5px rgba(219, 133, 35, 0.3));
-        animation: explorerCastleWindow 5.8s ease-in-out infinite alternate;
-      }
-      .castle-window-grid {
-        opacity: 0.92;
-      }
-      .castle-window-1 {
-        animation-delay: -2.2s;
-        animation-duration: 7.1s;
-      }
-      .castle-window-2 {
-        animation-delay: -4.1s;
-        animation-duration: 4.9s;
-      }
-      .castle-mist {
-        fill: none;
-        stroke: rgba(224, 199, 151, 0.15);
-        stroke-width: 34;
-        stroke-linecap: round;
-        animation: explorerCastleMist 14s ease-in-out infinite alternate;
-      }
-      .castle-mist-back {
-        stroke: rgba(198, 174, 133, 0.1);
-        stroke-width: 45;
-        animation-direction: alternate-reverse;
-        animation-duration: 19s;
-      }
-      .castle-cloud-bank {
-        fill: none;
-        stroke: rgba(206, 166, 105, 0.13);
-        stroke-width: 72;
-        stroke-linecap: round;
-        filter: blur(24px);
-      }
-      .castle-water {
-        fill: #120c08;
-        opacity: 0.96;
-      }
-      .castle-reflections {
-        fill: none;
-        stroke: rgba(235, 178, 76, 0.24);
-        stroke-width: 12;
-        stroke-linecap: round;
-        filter: blur(7px);
-        animation: explorerWaterShimmer 6.5s ease-in-out infinite alternate;
-      }
-      .castle-reflections .moon-reflection {
-        stroke: rgba(236, 201, 137, 0.32);
-        stroke-width: 18;
-      }
-      .castle-water-ripples {
-        fill: none;
-        stroke: rgba(208, 167, 105, 0.16);
-        stroke-width: 2;
-        stroke-linecap: round;
+      .castle-cinematic-vignette {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(4, 5, 7, 0.26),
+            transparent 20% 80%,
+            rgba(4, 5, 7, 0.26)
+          ),
+          radial-gradient(
+            ellipse at center,
+            transparent 36%,
+            rgba(4, 5, 7, 0.08) 65%,
+            rgba(2, 3, 4, 0.52) 100%
+          );
+        box-shadow:
+          inset 0 0 120px rgba(1, 2, 3, 0.58),
+          inset 0 0 2px rgba(222, 191, 135, 0.24);
       }
       ha-card:not(.preview) {
         position: relative;
@@ -9965,17 +9763,17 @@ Ge.styles = O`
     }
   `;
 Dt([
-  A({ attribute: !1 })
-], Ge.prototype, "hass", 2);
+  C({ attribute: !1 })
+], Ze.prototype, "hass", 2);
 Dt([
-  A({ type: Boolean, attribute: !1 })
-], Ge.prototype, "preview", 2);
+  C({ type: Boolean, attribute: !1 })
+], Ze.prototype, "preview", 2);
 Dt([
   v()
-], Ge.prototype, "config", 2);
-Ge = Dt([
-  z("ha-explorer-card")
-], Ge);
+], Ze.prototype, "config", 2);
+Ze = Dt([
+  T("ha-explorer-card")
+], Ze);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "ha-explorer-card",
@@ -9984,11 +9782,11 @@ window.customCards.push({
   preview: !0
 });
 console.info(
-  `%c HOME ASSISTANT EXPLORER %c v${Rr} `,
+  `%c HOME ASSISTANT EXPLORER %c v${zr} `,
   "color:white;background:#594431;font-weight:700;",
   "color:#594431;background:#d8c39b;font-weight:700;"
 );
 export {
-  Ge as HaExplorerCard
+  Ze as HaExplorerCard
 };
 //# sourceMappingURL=ha-explorer-card.js.map
