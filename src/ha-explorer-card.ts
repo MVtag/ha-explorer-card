@@ -1,6 +1,7 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import castleSurroundImage from "./assets/castle-surround-v2.webp";
+import castleSurroundDayImage from "./assets/castle-surround-day.webp";
 import "./components/explorer-source-clean-canvas";
 import "./components/explorer-ha-editor";
 import type {
@@ -16,7 +17,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.44.7";
+const CARD_VERSION = "0.44.9";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -313,10 +314,17 @@ export class HaExplorerCard extends LitElement {
   private renderCelestialCloud() {
     return html`<div class="celestial-cloud" aria-hidden="true"></div>`;
   }
-  private renderCastleSurround() {
-    return html`<div class="enchanted-castle-surround" aria-hidden="true">
+  private renderCastleSurround(isNight: boolean) {
+    return html`<div
+      class=${`enchanted-castle-surround ${isNight ? "castle-night" : "castle-day"}`}
+      aria-hidden="true"
+    >
       <div
-        class="castle-cinematic-backdrop"
+        class="castle-cinematic-backdrop castle-cinematic-day"
+        style=${`background-image: url("${castleSurroundDayImage}")`}
+      ></div>
+      <div
+        class="castle-cinematic-backdrop castle-cinematic-night"
         style=${`background-image: url("${castleSurroundImage}")`}
       ></div>
       <div class="castle-window-lights castle-window-lights-a"></div>
@@ -384,7 +392,7 @@ export class HaExplorerCard extends LitElement {
         !night &&
         ["sunny", "clear", "partlycloudy"].includes(weatherState),
       partly = weatherState === "partlycloudy";
-    return html`${this.renderCastleSurround()}<ha-card
+    return html`${this.renderCastleSurround(baseNight)}<ha-card
       class=${`${enchanted ? "enchanted" : "classic"}${night ? " moonlight" : ""}${sunlit ? " sunlight" : ""}${partly ? " partly-cloudy" : ""}${hasClouds ? " has-clouds" : ""}${occupancyEnabled ? (someoneHome ? " occupied" : " empty-house") : ""}${weatherEnabled && weatherEffect !== "clear" ? ` weather-${weatherEffect}` : ""}${weatherEnabled ? ` state-${weatherState}` : ""}${alarmState === "armed" ? " alarm-armed" : ""}${alarmState === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${intensity};--alarm-intensity:${alarmIntensity};--occupancy-intensity:${occupancyIntensity};--weather-intensity:${weatherIntensity}`}
       ><header>
@@ -558,14 +566,32 @@ export class HaExplorerCard extends LitElement {
         background-position: center bottom;
         background-repeat: no-repeat;
         background-size: cover;
-        opacity: 0.98;
-        filter:
-          sepia(0.16)
-          saturate(0.76)
-          brightness(0.72)
-          contrast(1.18);
+        opacity: 0;
+        transition: opacity 1.8s ease, filter 1.8s ease;
+        will-change: opacity;
         transform: scale(1.012);
         transform-origin: center bottom;
+      }
+      .castle-cinematic-day {
+        filter:
+          sepia(0.08)
+          saturate(0.9)
+          brightness(0.94)
+          contrast(1.06);
+      }
+      .castle-cinematic-night {
+        filter:
+          sepia(0.13)
+          saturate(0.84)
+          brightness(0.86)
+          contrast(1.12);
+      }
+      .castle-day .castle-cinematic-day,
+      .castle-night .castle-cinematic-night {
+        opacity: 0.98;
+      }
+      .castle-day .castle-window-lights {
+        display: none;
       }
       .castle-window-lights {
         z-index: 1;
@@ -635,11 +661,11 @@ export class HaExplorerCard extends LitElement {
           radial-gradient(
             ellipse at center,
             transparent 36%,
-            rgba(4, 5, 7, 0.08) 65%,
-            rgba(2, 3, 4, 0.52) 100%
+            rgba(4, 5, 7, 0.06) 65%,
+            rgba(2, 3, 4, 0.36) 100%
           );
         box-shadow:
-          inset 0 0 120px rgba(1, 2, 3, 0.58),
+          inset 0 0 120px rgba(1, 2, 3, 0.42),
           inset 0 0 2px rgba(222, 191, 135, 0.24);
       }
       ha-card:not(.preview) {
