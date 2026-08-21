@@ -17,7 +17,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.44.9";
+const CARD_VERSION = "0.45.0";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -1238,16 +1238,9 @@ export class HaExplorerCard extends LitElement {
     }
     .weather-rain .weather-particles,
     .weather-storm .weather-particles {
-      opacity: calc(0.54 * var(--weather-intensity));
-      inset: -15% -10%;
-      background: repeating-linear-gradient(
-        105deg,
-        transparent 0 18px,
-        rgba(55, 65, 68, 0.34) 18px 19px,
-        transparent 19px 37px
-      );
-      background-size: 48px 96px;
-      animation: weatherRain 1.1s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .state-pouring .weather-overlay {
       opacity: calc(0.58 * var(--weather-intensity));
@@ -1311,27 +1304,7 @@ export class HaExplorerCard extends LitElement {
       animation: weatherHail 0.88s linear infinite;
     }
     .weather-storm .weather-flash {
-      opacity: 0;
-      background:
-        radial-gradient(
-          circle at 72% 18%,
-          rgba(255, 246, 214, 0.55),
-          transparent 28%
-        ),
-        rgba(255, 242, 203, 0.18);
-      mix-blend-mode: screen;
-      animation: weatherLightning 6.5s steps(1, end) infinite;
-    }
-    .weather-storm .weather-flash::before,
-    .weather-storm .weather-flash::after {
-      content: "";
-      position: absolute;
-      width: 9%;
-      height: 48%;
-      top: 5%;
-      background: rgba(255, 241, 190, 0.92);
-      filter: drop-shadow(0 0 8px rgba(255, 232, 158, 0.88));
-      clip-path: polygon(48% 0, 100% 0, 66% 34%, 96% 34%, 25% 100%, 43% 53%, 6% 53%);
+      display: none;
     }
     .weather-storm .weather-flash::before { left: 69%; transform: rotate(7deg); }
     .weather-storm .weather-flash::after { left: 25%; top: 21%; height: 34%; transform: rotate(-8deg) scale(0.72); opacity: 0.72; }
