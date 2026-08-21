@@ -16,6 +16,15 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private readonly weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`;
   private readonly cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
+  private weatherTransitionSequence = 0;
+  private readonly weatherTransitionTimers = new Set<number>();
+
+  public override disconnectedCallback(): void {
+    this.weatherTransitionTimers.forEach((timer) => window.clearTimeout(timer));
+    this.weatherTransitionTimers.clear();
+    this.renderRoot.querySelectorAll("g.weather-transition-shell, defs[data-weather-owner]").forEach((element) => element.remove());
+    super.disconnectedCallback();
+  }
 
   protected override updated(changed: Map<PropertyKey, unknown>): void {
     super.updated(changed);
@@ -59,10 +68,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
   }
 
-  private createWeatherMask(): SVGMaskElement {
+  private createWeatherMask(id = this.weatherMaskId): SVGMaskElement {
     const mask = this.svg("mask");
     this.attrs(mask, {
-      id: this.weatherMaskId,
+      id,
       maskUnits: "userSpaceOnUse",
       x: "0",
       y: "0",
@@ -90,10 +99,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     return mask;
   }
 
-  private createCloudFilter(): SVGFilterElement {
+  private createCloudFilter(id = this.cloudFilterId): SVGFilterElement {
     const filter = this.svg("filter");
     this.attrs(filter, {
-      id: this.cloudFilterId,
+      id,
       x: "-55%",
       y: "-65%",
       width: "210%",
@@ -133,7 +142,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     return filter;
   }
 
-  private appendClouds(layer: SVGGElement): void {
+  private appendClouds(layer: SVGGElement, filterId = this.cloudFilterId): void {
     const clouds: Array<[number, number, number, number, number]> = [
       [42, 95, .92, 0, .78],
       [350, 42, .76, 1, .58],
@@ -241,7 +250,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       const body = this.svg("g");
       this.attrs(body, {
         class: "weather-cloud-body",
-        filter: `url(#${this.cloudFilterId})`,
+        filter: `url(#${filterId})`,
         transform: shapeTransforms[index % shapeTransforms.length],
       });
 
@@ -576,27 +585,57 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     const scene = this.renderRoot.querySelector<SVGGElement>("g.scene");
     if (!svgRoot || !scene) return;
 
-    svgRoot.querySelector<SVGDefsElement>(`defs[data-weather-mask="${this.weatherMaskId}"]`)?.remove();
-    scene.querySelector<SVGGElement>(":scope > g.weather-outside-rooms-scene")?.remove();
+    const safeState = this.weatherState.replace(/[^a-z0-9_-]/g, "");
+    const roomKey = this.rooms
+      .map((room) => room.points.map(([x, y]) => `${x.toFixed(4)},${y.toFixed(4)}`).join(";"))
+      .join("|");
+    const weatherKey = `${this.weatherEffect}:${safeState}:${this.weatherNight ? "night" : "day"}:${roomKey}`;
+    const currentShell = scene.querySelector<SVGGElement>(":scope > g.weather-transition-shell:not(.is-weather-leaving)");
+    if (currentShell?.dataset.weatherKey === weatherKey) {
+      const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
+      currentShell.querySelector<SVGGElement>(":scope > g.weather-outside-rooms-scene")
+        ?.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, intensity))));
+      return;
+    }
+
+    scene.querySelectorAll<SVGGElement>(":scope > g.weather-transition-shell").forEach((shell) => {
+      if (shell.classList.contains("is-weather-leaving")) return;
+      shell.classList.remove("is-weather-visible");
+      shell.classList.add("is-weather-leaving");
+      const owner = shell.dataset.weatherOwner;
+      const timer = window.setTimeout(() => {
+        shell.remove();
+        if (owner) svgRoot.querySelector<SVGDefsElement>(`defs[data-weather-owner="${owner}"]`)?.remove();
+        this.weatherTransitionTimers.delete(timer);
+      }, 1050);
+      this.weatherTransitionTimers.add(timer);
+    });
     if (this.weatherEffect === "clear") return;
 
+    const transitionId = String(++this.weatherTransitionSequence);
+    const maskId = `${this.weatherMaskId}-${transitionId}`;
+    const filterId = `${this.cloudFilterId}-${transitionId}`;
     const defs = this.svg("defs");
-    defs.setAttribute("data-weather-mask", this.weatherMaskId);
-    defs.appendChild(this.createWeatherMask());
-    defs.appendChild(this.createCloudFilter());
+    defs.setAttribute("data-weather-owner", transitionId);
+    defs.appendChild(this.createWeatherMask(maskId));
+    defs.appendChild(this.createCloudFilter(filterId));
     svgRoot.insertBefore(defs, svgRoot.firstChild);
 
+    const transitionShell = this.svg("g");
+    transitionShell.setAttribute("class", "weather-transition-shell is-weather-entering");
+    transitionShell.setAttribute("data-weather-owner", transitionId);
+    transitionShell.setAttribute("data-weather-key", weatherKey);
+    transitionShell.setAttribute("mask", `url(#${maskId})`);
+    transitionShell.setAttribute("pointer-events", "none");
+
     const layer = this.svg("g");
-    const safeState = this.weatherState.replace(/[^a-z0-9_-]/g, "");
     layer.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${safeState}${this.weatherNight ? " is-night" : ""}`);
-    layer.setAttribute("mask", `url(#${this.weatherMaskId})`);
-    layer.setAttribute("pointer-events", "none");
     const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
     layer.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, intensity))));
 
     const hasCloudLayer = ["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant";
     if (hasCloudLayer) {
-      this.appendClouds(layer);
+      this.appendClouds(layer, filterId);
       this.appendMagicMotes(layer, "cloud");
     }
     if (this.weatherEffect === "fog") this.appendFog(layer);
@@ -615,7 +654,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       this.appendMagicMotes(layer, "wind");
     }
     if (this.weatherEffect === "exceptional") {
-      this.appendClouds(layer);
+      this.appendClouds(layer, filterId);
       this.appendWind(layer);
       this.appendMagicMotes(layer, "cloud");
       this.appendExceptionalMagic(layer);
@@ -630,12 +669,25 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       layer.appendChild(glow);
     }
 
+    transitionShell.appendChild(layer);
     const roomsLayer = scene.querySelector<SVGGElement>(":scope > g.rooms-scene");
-    scene.insertBefore(layer, roomsLayer ?? null);
+    scene.insertBefore(transitionShell, roomsLayer ?? null);
+    window.requestAnimationFrame(() => {
+      if (!transitionShell.isConnected) return;
+      transitionShell.classList.remove("is-weather-entering");
+      transitionShell.classList.add("is-weather-visible");
+    });
   }
 
   static override styles = css`
     ${ExplorerOpeningsCanvas.styles}
+    .weather-transition-shell {
+      opacity: 0;
+      transition: opacity 900ms cubic-bezier(.22,.61,.36,1);
+      will-change: opacity;
+    }
+    .weather-transition-shell.is-weather-visible { opacity: 1; }
+    .weather-transition-shell.is-weather-leaving { opacity: 0; }
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
     .weather-outside-rooms-scene.state-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.18)); }
@@ -895,6 +947,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     @keyframes explorerStormFlashNight { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .18; } 9.35% { opacity: .04; } 10.4% { opacity: .28; } 58.7% { opacity: .13; } }
     @keyframes explorerStormGlow { 0%,7.8%,12%,58%,61%,100% { opacity: 0; transform: scale(.82); } 8.8% { opacity: .50; transform: scale(1.05); } 10.5% { opacity: .72; transform: scale(1.14); } 59% { opacity: .34; transform: scale(1); } }
     @media(prefers-reduced-motion:reduce) {
+      .weather-transition-shell { transition: none; }
       .weather-outside-rooms-scene .weather-cloud,
       .weather-outside-rooms-scene .weather-cloud-fine-strand,
       .weather-outside-rooms-scene .weather-cloud-rim,
