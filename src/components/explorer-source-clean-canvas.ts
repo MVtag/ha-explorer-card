@@ -363,14 +363,29 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         ? fogBanks.filter((_, index) => [2, 5, 8].includes(index))
         : fogBanks;
 
-    visibleBanks.forEach(([y, wobble, variant]) => {
-      const path = this.svg("path");
-      this.attrs(path, {
-        d: `M -120 ${y} C 180 ${y + wobble}, 390 ${y - wobble}, 620 ${y} S 980 ${y + wobble}, 1120 ${y}`,
-        class: `weather-fog-band weather-fog-band-${variant}${mode === "fog" ? "" : ` is-cloud-mist is-${mode}-mist`}`,
+    const fogField = this.svg("g");
+    fogField.setAttribute("class", `weather-fog-field is-${mode}`);
+    visibleBanks.forEach(([y, wobble, variant], index) => {
+      const bank = this.svg("g");
+      bank.setAttribute("class", `weather-fog-bank weather-fog-depth-${variant % 3}`);
+      bank.style.setProperty("--fog-duration", `${17 + (variant % 5) * 2.7}s`);
+      bank.style.setProperty("--fog-delay", `${-(variant * 2.1 + index)}s`);
+      const className = `weather-fog-band weather-fog-band-${variant}${mode === "fog" ? "" : ` is-cloud-mist is-${mode}-mist`}`;
+      const haze = this.svg("path");
+      this.attrs(haze, {
+        d: `M -180 ${y} C 100 ${y + wobble * .65}, 345 ${y - wobble}, 590 ${y + 3} S 930 ${y + wobble * .7}, 1190 ${y - 2}`,
+        class: `${className} weather-fog-haze`,
       });
-      layer.appendChild(path);
+      bank.appendChild(haze);
+      const wisp = this.svg("path");
+      this.attrs(wisp, {
+        d: `M -110 ${y + 8} C 130 ${y - wobble * .45}, 365 ${y + wobble * .7}, 575 ${y + 5} S 890 ${y - wobble * .55}, 1130 ${y + 9}`,
+        class: `${className} weather-fog-wisp`,
+      });
+      bank.appendChild(wisp);
+      fogField.appendChild(bank);
     });
+    layer.appendChild(fogField);
   }
 
   private appendRain(layer: SVGGElement, heavy = false): void {
@@ -485,6 +500,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendWind(layer: SVGGElement): void {
+    const windField = this.svg("g");
+    windField.setAttribute("class", "weather-wind-field");
     [105, 225, 350, 490, 640, 790, 925].forEach((y, index) => {
       const lift = index % 2 === 0 ? -34 : 39;
       const curl = index % 3 === 0 ? 44 : 32;
@@ -495,15 +512,20 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         d,
         class: `weather-wind-line weather-wind-line-glow weather-wind-line-${index % 3}`,
       });
-      layer.appendChild(glow);
+      glow.style.setProperty("--wind-duration", `${3.4 + (index % 4) * .75}s`);
+      glow.style.setProperty("--wind-delay", `${-(index * .83)}s`);
+      windField.appendChild(glow);
 
       const core = this.svg("path");
       this.attrs(core, {
         d,
         class: `weather-wind-line weather-wind-line-core weather-wind-line-${index % 3}`,
       });
-      layer.appendChild(core);
+      core.style.setProperty("--wind-duration", `${3.4 + (index % 4) * .75}s`);
+      core.style.setProperty("--wind-delay", `${-(index * .83)}s`);
+      windField.appendChild(core);
     });
+    layer.appendChild(windField);
   }
 
   private appendMagicMotes(layer: SVGGElement, mode: "cloud" | "snow" | "wind" | "exceptional"): void {
@@ -683,29 +705,22 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-cloud-strand { fill: rgba(125, 138, 148, .12); }
     .weather-outside-rooms-scene.is-night .weather-cloud-fine-strand { fill: rgba(164, 174, 181, .09); }
     .weather-outside-rooms-scene.is-night .weather-cloud-highlight { fill: rgba(218, 225, 225, .13); }
-    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke: #e4dac1; stroke-width: 34; stroke-linecap: round; opacity: .56; filter: blur(11px); animation: explorerFogDrift 16s ease-in-out infinite alternate; }
-    .weather-outside-rooms-scene .weather-fog-band:nth-child(2n) { stroke: #a9a193; opacity: .30; animation-direction: alternate-reverse; }
-    .weather-outside-rooms-scene .weather-fog-band-1,
-    .weather-outside-rooms-scene .weather-fog-band-6 { stroke-width: 48; opacity: .42; animation-duration: 21s; }
-    .weather-outside-rooms-scene .weather-fog-band-2,
-    .weather-outside-rooms-scene .weather-fog-band-8 { stroke-width: 26; opacity: .48; animation-duration: 12s; }
-    .weather-outside-rooms-scene .weather-fog-band-3,
-    .weather-outside-rooms-scene .weather-fog-band-7 { stroke-width: 40; opacity: .34; animation-duration: 19s; }
-    .weather-outside-rooms-scene .weather-fog-band-4,
-    .weather-outside-rooms-scene .weather-fog-band-9 { stroke-width: 30; opacity: .52; animation-duration: 14s; }
+    .weather-outside-rooms-scene .weather-fog-bank { animation: explorerFogBank var(--fog-duration,22s) ease-in-out infinite alternate; animation-delay: var(--fog-delay,0s); }
+    .weather-outside-rooms-scene .weather-fog-band { fill: none; stroke-linecap: round; }
+    .weather-outside-rooms-scene .weather-fog-haze { stroke: #d4cdbc; stroke-width: 62; opacity: .22; filter: blur(20px); }
+    .weather-outside-rooms-scene .weather-fog-wisp { stroke: #eee7d5; stroke-width: 19; opacity: .48; filter: blur(7px); animation: explorerFogWisp 15s ease-in-out infinite alternate-reverse; animation-delay: var(--fog-delay,0s); }
+    .weather-outside-rooms-scene .weather-fog-depth-0 .weather-fog-haze { stroke-width: 74; opacity: .27; filter: blur(24px); }
+    .weather-outside-rooms-scene .weather-fog-depth-0 .weather-fog-wisp { stroke-width: 23; opacity: .54; }
+    .weather-outside-rooms-scene .weather-fog-depth-1 { opacity: .78; }
+    .weather-outside-rooms-scene .weather-fog-depth-2 { opacity: .58; }
+    .weather-outside-rooms-scene .weather-fog-depth-2 .weather-fog-haze { filter: blur(27px); }
     .weather-outside-rooms-scene .weather-fog-band.is-cloudy-mist {
       stroke: #d9d3c6;
-      stroke-width: 25;
-      opacity: .28;
-      filter: blur(15px);
-      animation-duration: 24s;
+      opacity: .58;
     }
     .weather-outside-rooms-scene .weather-fog-band.is-partlycloudy-mist {
       stroke: #e2dac9;
-      stroke-width: 20;
-      opacity: .18;
-      filter: blur(17px);
-      animation-duration: 28s;
+      opacity: .36;
     }
     .weather-outside-rooms-scene .weather-rain-field { filter: drop-shadow(0 2px 2px rgba(24,35,42,.20)); }
     .weather-outside-rooms-scene .weather-rain-drop {
@@ -776,11 +791,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       animation: explorerHailImpact var(--hail-duration,.92s) ease-out infinite;
       animation-delay: var(--hail-delay,0s);
     }
-    .weather-outside-rooms-scene .weather-wind-line { fill: none; stroke-linecap: round; stroke-linejoin: round; animation: explorerWindSweep 4.4s linear infinite; }
+    .weather-outside-rooms-scene .weather-wind-line { fill: none; stroke-linecap: round; stroke-linejoin: round; animation: explorerWindSweep var(--wind-duration,4.4s) cubic-bezier(.3,.02,.65,1) infinite; animation-delay: var(--wind-delay,0s); }
     .weather-outside-rooms-scene .weather-wind-line-core { stroke: rgba(151, 126, 78, .72); stroke-width: 2.6; stroke-dasharray: 168 76 48 112; opacity: .72; filter: drop-shadow(0 0 3px rgba(238, 205, 132, .38)); }
     .weather-outside-rooms-scene .weather-wind-line-glow { stroke: rgba(239, 215, 163, .34); stroke-width: 11; stroke-dasharray: 182 63 39 120; opacity: .18; filter: blur(6px); }
-    .weather-outside-rooms-scene .weather-wind-line-1 { stroke-dasharray: 78 94 170 66; animation-duration: 5.8s; }
-    .weather-outside-rooms-scene .weather-wind-line-2 { stroke-dasharray: 218 88 55 128; animation-duration: 3.6s; }
+    .weather-outside-rooms-scene .weather-wind-line-1 { stroke-dasharray: 78 94 170 66; }
+    .weather-outside-rooms-scene .weather-wind-line-2 { stroke-dasharray: 218 88 55 128; }
+    .weather-outside-rooms-scene.state-windy-variant .weather-cloud-depth-0 .weather-cloud { animation-duration: 13s; }
+    .weather-outside-rooms-scene.state-windy-variant .weather-cloud-depth-1 .weather-cloud { animation-duration: 20s; }
+    .weather-outside-rooms-scene.state-windy-variant .weather-cloud-depth-2 .weather-cloud { animation-duration: 29s; }
     .weather-outside-rooms-scene .weather-wind-line-core.weather-wind-line-1 { opacity: .54; }
     .weather-outside-rooms-scene .weather-wind-line-core.weather-wind-line-2 { opacity: .62; }
     .weather-outside-rooms-scene .weather-wind-line-glow.weather-wind-line-1 { opacity: .13; }
@@ -863,13 +881,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       48% { opacity: .58; }
       100% { stroke-dashoffset: -82; opacity: .34; }
     }
-    @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
+    @keyframes explorerFogBank { from { transform: translate(-48px,-5px) scaleX(.98); opacity: .72; } 54% { opacity: 1; } to { transform: translate(58px,7px) scaleX(1.025); opacity: .82; } }
+    @keyframes explorerFogWisp { from { transform: translateX(-18px); } to { transform: translateX(27px); } }
     @keyframes explorerRainDrop { from { transform: translate(7px,-42px) scale(.72); opacity: 0; } 10% { opacity: .82; } 76% { opacity: .72; } to { transform: translate(-13px,92px) scale(1.05); opacity: 0; } }
     @keyframes explorerRainSplash { 0%,72% { transform: scale(.18); opacity: 0; } 78% { opacity: .68; } 100% { transform: scale(1.65); opacity: 0; } }
     @keyframes explorerSnowFall { 0% { transform: translate(0,-38px) rotate(0deg) scale(.72); opacity: 0; } 12% { opacity: .88; } 46% { transform: translate(var(--snow-drift-mid,-10px),18px) rotate(96deg) scale(.94); } 78% { opacity: .74; } 100% { transform: translate(var(--snow-drift,28px),88px) rotate(var(--snow-turn,210deg)) scale(1.08); opacity: 0; } }
     @keyframes explorerHailFall { 0% { transform: translate(8px,-52px) scale(.76); opacity: 0; } 12% { opacity: .94; } 72% { transform: translate(-11px,78px) scale(1); } 79% { transform: translate(-12px,66px) scale(.94); } 88% { transform: translate(-14px,83px) scale(1); opacity: .9; } 100% { transform: translate(-16px,91px) scale(.82); opacity: 0; } }
     @keyframes explorerHailImpact { 0%,68% { transform: scale(.2); opacity: 0; } 76% { opacity: .72; } 100% { transform: scale(1.6); opacity: 0; } }
-    @keyframes explorerWindSweep { from { stroke-dashoffset: 620; transform: translateX(-74px); } to { stroke-dashoffset: 0; transform: translateX(92px); } }
+    @keyframes explorerWindSweep { 0% { stroke-dashoffset: 620; transform: translate(-92px,5px); } 48% { transform: translate(5px,-7px); } 100% { stroke-dashoffset: 0; transform: translate(112px,4px); } }
     @keyframes explorerMagicMote { 0%,100% { transform: translate(0,8px) scale(.30) rotate(0deg); opacity: .08; } 28% { opacity: .74; } 52% { transform: translate(8px,-7px) scale(1.18) rotate(45deg); opacity: 1; } 76% { opacity: .46; } }
     @keyframes explorerExceptionalOrbit { from { transform: rotate(0deg) scale(.98); stroke-dashoffset: 0; } 50% { transform: rotate(180deg) scale(1.025); } to { transform: rotate(360deg) scale(.98); stroke-dashoffset: -240; } }
     @keyframes explorerStormFlash { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .24; } 9.35% { opacity: .06; } 10.4% { opacity: .38; } 58.7% { opacity: .18; } }

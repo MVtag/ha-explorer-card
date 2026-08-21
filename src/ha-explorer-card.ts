@@ -17,7 +17,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.45.1";
+const CARD_VERSION = "0.45.2";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -1216,15 +1216,9 @@ export class HaExplorerCard extends LitElement {
       animation: none;
     }
     .weather-fog .weather-overlay {
-      opacity: calc(0.66 * var(--weather-intensity));
-      inset: -12%;
-      background:
-        radial-gradient(ellipse at 18% 21%, rgba(241, 234, 216, 0.42) 0 12%, transparent 31%),
-        radial-gradient(ellipse at 76% 48%, rgba(225, 218, 202, 0.38) 0 15%, transparent 37%),
-        radial-gradient(ellipse at 32% 76%, rgba(238, 231, 213, 0.34) 0 17%, transparent 42%),
-        repeating-linear-gradient(0deg, rgba(232, 225, 208, 0.17) 0 34px, rgba(115, 112, 105, 0.08) 34px 58px, transparent 58px 104px);
-      filter: blur(11px);
-      animation: weatherDrift 18s ease-in-out infinite alternate;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .weather-rain .weather-overlay,
     .weather-storm .weather-overlay {
@@ -1284,17 +1278,14 @@ export class HaExplorerCard extends LitElement {
     .weather-storm .weather-flash::before { left: 69%; transform: rotate(7deg); }
     .weather-storm .weather-flash::after { left: 25%; top: 21%; height: 34%; transform: rotate(-8deg) scale(0.72); opacity: 0.72; }
     .weather-wind .weather-overlay {
-      opacity: calc(0.22 * var(--weather-intensity));
-      background: linear-gradient(96deg, transparent 0 20%, rgba(79, 72, 61, 0.15) 46%, transparent 72%);
-      animation: weatherWindShade 5.5s ease-in-out infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .weather-wind .weather-particles {
-      opacity: calc(0.68 * var(--weather-intensity));
-      inset: -10% -24%;
-      background: repeating-linear-gradient(176deg, transparent 0 23px, rgba(77, 70, 60, 0.42) 23px 25px, transparent 25px 57px);
-      background-size: 180px 76px;
-      mask-image: repeating-linear-gradient(90deg, #000 0 82px, transparent 82px 132px);
-      animation: weatherWind 2.8s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .weather-exceptional .weather-overlay {
       opacity: calc(0.48 * var(--weather-intensity));

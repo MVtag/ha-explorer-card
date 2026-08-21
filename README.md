@@ -256,7 +256,7 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-1. **Weather polish** — rain/thunder and winter precipitation are polished in v0.45.x; smoother transitions plus final fog and wind tuning remain.
+1. **Weather polish** — rain/thunder, winter precipitation, fog and wind are polished in v0.45.x; smoother cross-weather transitions remain.
 
 ## License
 
