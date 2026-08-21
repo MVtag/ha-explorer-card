@@ -256,7 +256,7 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-1. **Weather polish** — smoother transitions between weather states and further tuning of effect intensity and atmosphere.
+1. **Weather polish** — rain and thunder are polished in v0.45.0; smoother transitions plus final snow, fog and wind tuning remain.
 
 ## License
 

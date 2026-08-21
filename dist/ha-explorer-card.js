@@ -17,7 +17,7 @@ let dr = class {
     return this.cssText;
   }
 };
-const Br = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), I = (e, ...t) => {
+const Br = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), j = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
@@ -35,7 +35,7 @@ const Br = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), I = (e,
   for (const r of t.cssRules) i += r.cssText;
   return Br(i);
 })(e) : e;
-const { is: Fr, defineProperty: Zr, getOwnPropertyDescriptor: Vr, getOwnPropertyNames: Kr, getOwnPropertySymbols: Wr, getPrototypeOf: Gr } = Object, jt = globalThis, Ci = jt.trustedTypes, Ur = Ci ? Ci.emptyScript : "", Xr = jt.reactiveElementPolyfillSupport, $e = (e, t) => e, At = { toAttribute(e, t) {
+const { is: Fr, defineProperty: Zr, getOwnPropertyDescriptor: Vr, getOwnPropertyNames: Kr, getOwnPropertySymbols: Wr, getPrototypeOf: Gr } = Object, It = globalThis, Ci = It.trustedTypes, Ur = Ci ? Ci.emptyScript : "", Xr = It.reactiveElementPolyfillSupport, $e = (e, t) => e, At = { toAttribute(e, t) {
   switch (t) {
     case Boolean:
       e = e ? Ur : null;
@@ -64,7 +64,7 @@ const { is: Fr, defineProperty: Zr, getOwnPropertyDescriptor: Vr, getOwnProperty
   }
   return i;
 } }, di = (e, t) => !Fr(e, t), Ei = { attribute: !0, type: String, converter: At, reflect: !1, useDefault: !1, hasChanged: di };
-Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), jt.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+Symbol.metadata ??= /* @__PURE__ */ Symbol("metadata"), It.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let Be = class extends HTMLElement {
   static addInitializer(t) {
     this._$Ei(), (this.l ??= []).push(t);
@@ -246,7 +246,7 @@ let Be = class extends HTMLElement {
   firstUpdated(t) {
   }
 };
-Be.elementStyles = [], Be.shadowRootOptions = { mode: "open" }, Be[$e("elementProperties")] = /* @__PURE__ */ new Map(), Be[$e("finalized")] = /* @__PURE__ */ new Map(), Xr?.({ ReactiveElement: Be }), (jt.reactiveElementVersions ??= []).push("2.1.2");
+Be.elementStyles = [], Be.shadowRootOptions = { mode: "open" }, Be[$e("elementProperties")] = /* @__PURE__ */ new Map(), Be[$e("finalized")] = /* @__PURE__ */ new Map(), Xr?.({ ReactiveElement: Be }), (It.reactiveElementVersions ??= []).push("2.1.2");
 const pi = globalThis, Ni = (e) => e, St = pi.trustedTypes, Pi = St ? St.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", ke = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + ke, Yr = `<${hr}>`, Me = document, tt = () => Me.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Qr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", Lt = `[ 	
 \f\r]`, Je = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ri = /-->/g, Mi = />/g, Ee = RegExp(`>|${Lt}(?:([^\\s"'>=/]+)(${Lt}*=${Lt}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), zi = /'/g, Ti = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), M = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Di = /* @__PURE__ */ new WeakMap(), Pe = Me.createTreeWalker(Me, 129);
@@ -259,10 +259,10 @@ const Jr = (e, t) => {
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Je;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let c, d, p = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, d = s.exec(l), d !== null); ) u = s.lastIndex, s === Je ? d[1] === "!--" ? s = Ri : d[1] !== void 0 ? s = Mi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ee) : d[3] !== void 0 && (s = Ee) : s === Ee ? d[0] === ">" ? (s = o ?? Je, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ee : d[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
-    const g = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Je ? l + Yr : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + ke + g) : l + ke + (p === -2 ? a : g);
+    let c, d, p = -1, g = 0;
+    for (; g < l.length && (s.lastIndex = g, d = s.exec(l), d !== null); ) g = s.lastIndex, s === Je ? d[1] === "!--" ? s = Ri : d[1] !== void 0 ? s = Mi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ee) : d[3] !== void 0 && (s = Ee) : s === Ee ? d[0] === ">" ? (s = o ?? Je, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ee : d[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
+    const u = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
+    n += s === Je ? l + Yr : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + ke + u) : l + ke + (p === -2 ? a : u);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -279,15 +279,15 @@ class rt {
     for (; (o = Pe.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
         if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
-          const u = d[s++], g = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : It }), o.removeAttribute(p);
+          const g = d[s++], u = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(g);
+          l.push({ type: 1, index: n, name: b[2], strings: u, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(p);
         } else p.startsWith(ke) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (ur.test(o.tagName)) {
-          const p = o.textContent.split(ke), u = p.length - 1;
-          if (u > 0) {
+          const p = o.textContent.split(ke), g = p.length - 1;
+          if (g > 0) {
             o.textContent = St ? St.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(p[g], tt()), Pe.nextNode(), l.push({ type: 2, index: ++n });
-            o.append(p[u], tt());
+            for (let u = 0; u < g; u++) o.append(p[u], tt()), Pe.nextNode(), l.push({ type: 2, index: ++n });
+            o.append(p[g], tt());
           }
         }
       } else if (o.nodeType === 8) if (o.data === hr) l.push({ type: 2, index: n });
@@ -396,7 +396,7 @@ class dt {
     this._$AM === void 0 && (this._$Cv = t, this._$AP?.(t));
   }
 }
-class It {
+class jt {
   get tagName() {
     return this.element.tagName;
   }
@@ -421,7 +421,7 @@ class It {
     t === f ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
   }
 }
-class _r extends It {
+class _r extends jt {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -429,7 +429,7 @@ class _r extends It {
     this.element[this.name] = t === f ? void 0 : t;
   }
 }
-class eo extends It {
+class eo extends jt {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -437,7 +437,7 @@ class eo extends It {
     this.element.toggleAttribute(this.name, !!t && t !== f);
   }
 }
-class to extends It {
+class to extends jt {
   constructor(t, i, r, o, n) {
     super(t, i, r, o, n), this.type = 5;
   }
@@ -590,7 +590,7 @@ const uo = fr(ri), go = {
 function yr(e) {
   return Math.min(1, Math.max(0, e));
 }
-function Ie(e) {
+function je(e) {
   return Math.min(1, Math.max(0, e));
 }
 function wt(e) {
@@ -603,23 +603,23 @@ function fo(e) {
 }
 function _e(e, t) {
   const i = t?.position;
-  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: Ie(i.x), y: Ie(i.y) } : e.presence_anchor ? {
-    x: Ie(e.presence_anchor.x),
-    y: Ie(e.presence_anchor.y)
+  return i && Number.isFinite(i.x) && Number.isFinite(i.y) ? { x: je(i.x), y: je(i.y) } : e.presence_anchor ? {
+    x: je(e.presence_anchor.x),
+    y: je(e.presence_anchor.y)
   } : e.points.length ? {
-    x: Ie(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
-    y: Ie(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
+    x: je(e.points.reduce((r, o) => r + o[0], 0) / e.points.length),
+    y: je(e.points.reduce((r, o) => r + o[1], 0) / e.points.length)
   } : { x: 0.5, y: 0.5 };
 }
 function bo(e) {
   const t = e?.brightness;
   return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t / 255);
 }
-function ji(e) {
+function Ii(e) {
   const t = e.intensity;
   return typeof t != "number" || !Number.isFinite(t) ? 1 : yr(t);
 }
-function Ii(e) {
+function ji(e) {
   const t = e?.unit_of_measurement;
   return typeof t == "string" && t.trim() ? t.trim() : void 0;
 }
@@ -632,11 +632,11 @@ function vr(e, t, i) {
     return { index: t, reaction: e, active: !1, currentState: n?.state, activeStates: o, intensity: 0, reason: "entity_unavailable" };
   if (e.kind === "temperature") {
     const c = Number(n.state);
-    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: Ii(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: Ii(n.attributes), reason: "state_inactive" };
+    return Number.isFinite(c) ? { index: t, reaction: e, active: !0, currentState: n.state, activeStates: o, intensity: 1, numericValue: c, unit: ji(n.attributes) } : { index: t, reaction: e, active: !1, currentState: n.state, activeStates: o, intensity: 0, unit: ji(n.attributes), reason: "state_inactive" };
   }
   const s = n.state.trim().toLowerCase(), a = o.map((c) => c.toLowerCase()).includes(s);
   let l = 0;
-  return a && (e.kind === "light" ? l = bo(n.attributes) * ji(e) : l = ji(e)), {
+  return a && (e.kind === "light" ? l = bo(n.attributes) * Ii(e) : l = Ii(e)), {
     index: t,
     reaction: e,
     active: a,
@@ -849,7 +849,7 @@ let fe = class extends L {
     `;
   }
 };
-fe.styles = I`
+fe.styles = j`
     :host {
       position: absolute;
       z-index: 8;
@@ -1227,8 +1227,8 @@ let Z = class extends L {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * x, g = (c.y - l.y) / r.height * x, b = qi(this.viewport, p, d.x, d.y);
-        this.viewport = kt({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), g = (c.x - l.x) / r.width * x, u = (c.y - l.y) / r.height * x, b = qi(this.viewport, p, d.x, d.y);
+        this.viewport = kt({ ...b, x: b.x + g, y: b.y + u }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
       const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
@@ -1254,8 +1254,8 @@ let Z = class extends L {
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
-      return M`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? M`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : M`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, g = r ? 58 : 52;
+      return M`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(u) => u.stopPropagation()} @click=${(u) => this.selectPresence(u, e)}>${a ? M`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : M`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${g} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
@@ -1267,7 +1267,7 @@ let Z = class extends L {
     }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
 };
-Z.styles = I`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
+Z.styles = j`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
 U([
   C({ attribute: !1 })
 ], Z.prototype, "hass", 2);
@@ -1360,7 +1360,7 @@ function xr(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
   return t.length ? [...new Set(t)] : ["on"];
 }
-function jo(e) {
+function Io(e) {
   return xr(e.condition?.allowed_states);
 }
 function Ve(e, t) {
@@ -1401,7 +1401,7 @@ function Ve(e, t) {
     ...n ? {} : { reason: "state_blocked" }
   };
 }
-function Io(e, t, i) {
+function jo(e, t, i) {
   if (!e.condition)
     return {
       index: t,
@@ -1410,7 +1410,7 @@ function Io(e, t, i) {
       active: !0,
       allowedStates: []
     };
-  const r = e.condition.entity?.trim(), o = jo(e);
+  const r = e.condition.entity?.trim(), o = Io(e);
   if (!r)
     return {
       index: t,
@@ -1449,7 +1449,7 @@ function Io(e, t, i) {
 function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = Io(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Ve(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
+    const n = jo(r, o, t), a = [r.from, r.to].filter((g) => g.kind === "node").map((g) => i.get(g.id)).filter((g) => !!g).map((g) => Ve(g, t)).filter((g) => g.conditional), c = a.find((g) => !g.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((g) => g.active), p = n.conditional || a.length > 0;
     return c ? {
       ...n,
       conditional: p,
@@ -1503,7 +1503,7 @@ function gi(e) {
 function Fi(e, t, i, r, o, n) {
   const s = Ae(e, i), a = Ae(e, r);
   if (!s || !a) return;
-  const l = wr(t), d = (o ? [...l].reverse() : l).map((u, g) => qo(e, u, g)).filter((u) => !!u), p = [
+  const l = wr(t), d = (o ? [...l].reverse() : l).map((g, u) => qo(e, g, u)).filter((g) => !!g), p = [
     {
       kind: "room",
       id: i,
@@ -1545,10 +1545,10 @@ function Oo(e, t) {
     if (!a.active) return;
     const l = a.edge, c = n(l.from), d = n(l.to);
     if (!c || !d) return;
-    const p = me(l.from), u = me(l.to);
-    if (p === u) return;
-    const g = Math.hypot(d[0] - c[0], d[1] - c[1]);
-    s(p, u, g), s(u, p, g);
+    const p = me(l.from), g = me(l.to);
+    if (p === g) return;
+    const u = Math.hypot(d[0] - c[0], d[1] - c[1]);
+    s(p, g, u), s(g, p, u);
   }), { adjacency: i, positions: r, endpoints: o };
 }
 function Lo(e, t, i, r, o) {
@@ -1570,15 +1570,15 @@ function Lo(e, t, i, r, o) {
     }
   }
   if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
-  const u = [s];
-  let g = s;
-  for (; g !== n; ) {
-    const m = d.get(g);
+  const g = [s];
+  let u = s;
+  for (; u !== n; ) {
+    const m = d.get(u);
     if (!m) return;
-    u.push(m), g = m;
+    g.push(m), u = m;
   }
-  u.reverse();
-  const b = u.map((m) => l.get(m)).map((m) => m ? Do(e, m) : void 0).filter((m) => !!m);
+  g.reverse();
+  const b = g.map((m) => l.get(m)).map((m) => m ? Do(e, m) : void 0).filter((m) => !!m);
   if (!(b.length < 2))
     return {
       source: "graph",
@@ -1589,12 +1589,12 @@ function Lo(e, t, i, r, o) {
 }
 function mi(e, t, i, r) {
   if (!t || !i || t === i) return;
-  const o = pt(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
-    (u) => u.from === t && u.to === i
+  const o = pt(e, r), n = o.filter((g) => !g.active), s = (e.routes ?? []).find(
+    (g) => g.from === t && g.to === i
   );
   if (s) return Fi(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
-    (u) => u.from === i && u.to === t
+    (g) => g.from === i && g.to === t
   );
   if (a) return Fi(e, a, t, i, !0, n);
   const l = Lo(e, t, i, o, n);
@@ -1635,12 +1635,12 @@ function Zi(e, t) {
   }, d = (A, P) => {
     const R = l.get(A) ?? /* @__PURE__ */ new Set();
     R.add(P), l.set(A, R);
-    const j = l.get(P) ?? /* @__PURE__ */ new Set();
-    j.add(A), l.set(P, j);
+    const I = l.get(P) ?? /* @__PURE__ */ new Set();
+    I.add(A), l.set(P, I);
   };
   i.forEach((A) => {
-    const P = me(A.from), R = me(A.to), j = Bo(A);
-    P === R && (n += 1), s.has(j) && (o += 1), s.add(j);
+    const P = me(A.from), R = me(A.to), I = Bo(A);
+    P === R && (n += 1), s.has(I) && (o += 1), s.add(I);
     const J = Et(e, A.from), Y = Et(e, A.to);
     if (!J || !Y || P === R) {
       r += 1;
@@ -1648,18 +1648,18 @@ function Zi(e, t) {
     }
     c(P), c(R), d(P, R);
   });
-  const p = i.length ? (e.rooms ?? []).filter((A) => Ae(e, A.id) && !a.has(`room:${A.id}`)).map((A) => A.id) : [], u = i.length ? (e.route_nodes ?? []).filter((A) => !a.has(`node:${A.id}`)).map((A) => A.id) : [];
-  let g = 0;
+  const p = i.length ? (e.rooms ?? []).filter((A) => Ae(e, A.id) && !a.has(`room:${A.id}`)).map((A) => A.id) : [], g = i.length ? (e.route_nodes ?? []).filter((A) => !a.has(`node:${A.id}`)).map((A) => A.id) : [];
+  let u = 0;
   const b = new Set(l.keys());
   for (; b.size; ) {
-    g += 1;
+    u += 1;
     const A = b.values().next().value;
     if (!A) break;
     const P = [A];
     for (b.delete(A); P.length; ) {
       const R = P.pop();
-      for (const j of l.get(R) ?? [])
-        b.has(j) && (b.delete(j), P.push(j));
+      for (const I of l.get(R) ?? [])
+        b.has(I) && (b.delete(I), P.push(I));
     }
   }
   const m = [], y = new Set((e.route_nodes ?? []).map((A) => A.id));
@@ -1677,9 +1677,9 @@ function Zi(e, t) {
     invalidEdges: r,
     duplicateEdges: o,
     selfEdges: n,
-    components: g,
+    components: u,
     disconnectedRoomIds: p,
-    disconnectedNodeIds: u,
+    disconnectedNodeIds: g,
     brokenRouteNodeReferences: m,
     conditionalEdges: S.filter((A) => A.conditional).length,
     blockedEdges: k,
@@ -1711,11 +1711,11 @@ let Ke = class extends Z {
         y: (n.y ?? 0.5) * x
       }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
       if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
-        const u = this.resolveMovementPath(c, l, d, p);
-        this.createFootsteps(u);
-        const g = document.createElementNS(H, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Ht}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
-          this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
+        const g = this.resolveMovementPath(c, l, d, p);
+        this.createFootsteps(g);
+        const u = document.createElementNS(H, "animateTransform");
+        u.setAttribute("attributeName", "transform"), u.setAttribute("attributeType", "XML"), u.setAttribute("type", "translate"), u.setAttribute("values", g.map((b) => `${b.x} ${b.y}`).join(";")), u.setAttribute("keyTimes", this.buildKeyTimes(g).join(";")), u.setAttribute("dur", `${Ht}ms`), u.setAttribute("begin", "indefinite"), u.setAttribute("fill", "freeze"), u.setAttribute("calcMode", "linear"), a.appendChild(u), this.activeAnimations.set(n.id, u), u.beginElement(), window.setTimeout(() => {
+          this.activeAnimations.get(n.id) === u && (u.remove(), this.activeAnimations.delete(n.id));
         }, Ht + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
@@ -1799,23 +1799,23 @@ let Ke = class extends Z {
       if (!a || !l) return;
       const c = this.edgeStatusColor(s), d = document.createElementNS(H, "line");
       if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
-      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(H, "g");
-      g.setAttribute("transform", `translate(${p} ${u})`);
+      const p = (a.x + l.x) / 2, g = (a.y + l.y) / 2, u = document.createElementNS(H, "g");
+      u.setAttribute("transform", `translate(${p} ${g})`);
       const b = document.createElementNS(H, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), u.appendChild(b);
       const m = document.createElementNS(H, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
+      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", u.appendChild(m), !s.active && !r) {
         const y = document.createElementNS(H, "animate");
-        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), g.appendChild(y);
+        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), u.appendChild(y);
       }
-      this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
+      this.appendSvgTitle(u, this.statusDescription(s)), o.appendChild(u);
     }), t.forEach((s) => {
       const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(H, "g");
       p.setAttribute("transform", `translate(${c} ${d})`);
-      const u = document.createElementNS(H, "circle");
-      u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
-      const g = document.createElementNS(H, "rect");
-      g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
+      const g = document.createElementNS(H, "circle");
+      g.setAttribute("r", "22"), g.setAttribute("fill", "var(--card-background-color, #ffffff)"), g.setAttribute("fill-opacity", ".9"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "4"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
+      const u = document.createElementNS(H, "rect");
+      u.setAttribute("x", "-9"), u.setAttribute("y", "-13"), u.setAttribute("width", "15"), u.setAttribute("height", "26"), u.setAttribute("rx", "1.5"), u.setAttribute("fill", "none"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "3"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
       const b = document.createElementNS(H, "circle");
       if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), p.appendChild(b), a === "blocked") {
         const w = document.createElementNS(H, "line");
@@ -1887,15 +1887,15 @@ let Ke = class extends Z {
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
       let l = 0, c = i[i.length - 1];
-      for (const j of i) {
-        if (l + j.length >= a) {
-          c = j;
+      for (const I of i) {
+        if (l + I.length >= a) {
+          c = I;
           break;
         }
-        l += j.length;
+        l += I.length;
       }
-      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * g, S = c.start.x + p * d + b * y, k = c.start.y + u * d + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, E = Math.round(s * Ht), N = document.createElementNS(H, "g");
-      N.setAttribute("transform", `translate(${S} ${k}) rotate(${w + g * 8})`), N.setAttribute("opacity", "0");
+      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, g = c.end.y - c.start.y, u = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -g / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * u, S = c.start.x + p * d + b * y, k = c.start.y + g * d + m * y, w = Math.atan2(g, p) * 180 / Math.PI + 90, E = Math.round(s * Ht), N = document.createElementNS(H, "g");
+      N.setAttribute("transform", `translate(${S} ${k}) rotate(${w + u * 8})`), N.setAttribute("opacity", "0");
       const A = document.createElementNS(H, "ellipse");
       A.setAttribute("cx", "0"), A.setAttribute("cy", "-5"), A.setAttribute("rx", "6"), A.setAttribute("ry", "12"), A.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
       const P = document.createElementNS(H, "ellipse");
@@ -1951,10 +1951,10 @@ let Nt = class extends Ke {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
       [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
-        const u = document.createElementNS(O, "circle");
-        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(d + n * d * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
-          const g = document.createElementNS(O, "animate");
-          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
+        const g = document.createElementNS(O, "circle");
+        if (g.setAttribute("class", `magical-light-glow glow-${p + 1}`), g.setAttribute("r", String(c * (0.82 + n * 0.34))), g.setAttribute("fill", r), g.setAttribute("fill-opacity", String(d + n * d * 1.8)), g.setAttribute("stroke", "none"), e.appendChild(g), !i && p === 1) {
+          const u = document.createElementNS(O, "animate");
+          u.setAttribute("attributeName", "fill-opacity"), u.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), u.setAttribute("dur", "4.8s"), u.setAttribute("repeatCount", "indefinite"), g.appendChild(u);
         }
       });
       const a = document.createElementNS(O, "circle"), l = 24 + n * 24;
@@ -2164,10 +2164,10 @@ let nt = class extends Nt {
     if (!t.length) return;
     const i = document.createElementNS(T, "g");
     i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
-      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(T, "polygon");
-      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(d)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
+      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), g = this.temperatureBand(c), u = document.createElementNS(T, "polygon");
+      u.setAttribute("points", this.polygonPoints(l)), u.setAttribute("class", `room-temperature-atmosphere temperature-${g}`), u.setAttribute("data-temperature-band", g), u.setAttribute("fill", p), u.setAttribute("fill-opacity", String(d)), u.setAttribute("stroke", p), u.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), u.setAttribute("stroke-width", "2"), u.setAttribute("stroke-linejoin", "round"), u.setAttribute("vector-effect", "non-scaling-stroke");
       const b = document.createElementNS(T, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
-      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
+      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, u.appendChild(b), i.appendChild(u);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
@@ -2179,8 +2179,8 @@ let nt = class extends Nt {
     d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
     const p = document.createElementNS(T, "circle");
     p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
-    const u = document.createElementNS(T, "ellipse");
-    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
+    const g = document.createElementNS(T, "ellipse");
+    if (g.setAttribute("class", "fireplace-atmosphere-core"), g.setAttribute("cx", "0"), g.setAttribute("cy", String(-l * 0.05)), g.setAttribute("rx", String(l * 0.39)), g.setAttribute("ry", String(l * 0.31)), g.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), g.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(g), !r) {
       const m = document.createElementNS(T, "animate");
       m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), d.appendChild(m);
       const y = document.createElementNS(T, "animate");
@@ -2265,12 +2265,12 @@ let nt = class extends Nt {
       [43, -43, 58, 35],
       [82, -17, 50, 30],
       [14, 23, 92, 27]
-    ].forEach(([g, b, m, y], S) => {
+    ].forEach(([u, b, m, y], S) => {
       const k = document.createElementNS(T, "ellipse");
-      k.setAttribute("class", "overcast-cloud-puff"), k.setAttribute("cx", String(g)), k.setAttribute("cy", String(b)), k.setAttribute("rx", String(m)), k.setAttribute("ry", String(y)), k.setAttribute("opacity", String(0.34 + S % 3 * 0.08)), c.appendChild(k);
+      k.setAttribute("class", "overcast-cloud-puff"), k.setAttribute("cx", String(u)), k.setAttribute("cy", String(b)), k.setAttribute("rx", String(m)), k.setAttribute("ry", String(y)), k.setAttribute("opacity", String(0.34 + S % 3 * 0.08)), c.appendChild(k);
     }), a.appendChild(c);
-    const u = document.createElementNS(T, "path");
-    u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
+    const g = document.createElementNS(T, "path");
+    g.setAttribute("class", "overcast-cloud-strand"), g.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(g), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
     const e = this.renderRoot.querySelector("svg.floorplan"), t = this.renderRoot.querySelector("g.scene");
@@ -2299,7 +2299,7 @@ let nt = class extends Nt {
     t.insertBefore(o, s ?? null);
   }
 };
-nt.styles = I`
+nt.styles = j`
     ${Nt.styles}
 
     :host {
@@ -2500,9 +2500,9 @@ let be = class extends nt {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, u]) => {
-      const g = this.createSvg("line");
-      this.setAttributes(g, { x1: String(c), y1: String(d), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, g]) => {
+      const u = this.createSvg("line");
+      this.setAttributes(u, { x1: String(c), y1: String(d), x2: String(p), y2: String(g), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(u);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2523,7 +2523,7 @@ let be = class extends nt {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-be.styles = I`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+be.styles = j`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
 ht([
   C({ attribute: "map-theme", reflect: !0 })
 ], be.prototype, "theme", 2);
@@ -2660,8 +2660,8 @@ let We = class extends be {
     d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
     const p = document.createElementNS(he, "text");
     if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = rn[o], c.appendChild(p), s.appendChild(c), r.name) {
-      const u = document.createElementNS(he, "text");
-      u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
+      const g = document.createElementNS(he, "text");
+      g.setAttribute("x", String(l.x)), g.setAttribute("y", String(l.y + 36)), g.setAttribute("text-anchor", "middle"), g.setAttribute("class", "zone-label"), g.setAttribute("fill", n), g.setAttribute("font-size", "22"), g.setAttribute("font-weight", "800"), g.setAttribute("font-family", "system-ui, sans-serif"), g.setAttribute("paint-order", "stroke"), g.setAttribute("stroke", "var(--card-background-color, #ffffff)"), g.setAttribute("stroke-width", "5"), g.setAttribute("stroke-linejoin", "round"), g.textContent = r.name, s.appendChild(g);
     }
     this.appendZoneTitle(s, t), e.appendChild(s);
   }
@@ -2678,7 +2678,7 @@ let We = class extends be {
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-We.styles = I`
+We.styles = j`
     ${be.styles}
 
     :host {
@@ -2830,18 +2830,18 @@ let ze = class extends We {
       const s = [n], a = [n];
       for (; a.length; ) {
         const d = a.shift(), p = this.polishBasePosition(d);
-        for (const u of [...i]) {
-          const g = r.get(u);
-          if (!g) continue;
-          const b = this.polishBasePosition(g);
-          Math.hypot(p.x - b.x, p.y - b.y) <= cn && (i.delete(u), s.push(g), a.push(g));
+        for (const g of [...i]) {
+          const u = r.get(g);
+          if (!u) continue;
+          const b = this.polishBasePosition(u);
+          Math.hypot(p.x - b.x, p.y - b.y) <= cn && (i.delete(g), s.push(u), a.push(u));
         }
       }
       if (s.length < 2) continue;
       const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
       l.forEach((d, p) => {
-        const u = this.polishBasePosition(d), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * c, 38, x - 38), m = gt(u.y + Math.sin(g) * c, 38, x - 64);
-        t.set(d.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
+        const g = this.polishBasePosition(d), u = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(g.x + Math.cos(u) * c, 38, x - 38), m = gt(g.y + Math.sin(u) * c, 38, x - 64);
+        t.set(d.id, { x: b - g.x, y: m - g.y, groupSize: l.length });
       });
     }
     return t;
@@ -2891,9 +2891,9 @@ let ze = class extends We {
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
       let c = n.querySelector(":scope > g.presence-visual-offset");
-      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
-      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      d.textContent = `${r.name ?? r.id} · ${dn[s]}${u}${p}`, n.appendChild(d);
+      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((u) => u.localName.toLowerCase() !== "animatetransform").forEach((u) => c?.appendChild(u)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
+      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", g = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      d.textContent = `${r.name ?? r.id} · ${dn[s]}${g}${p}`, n.appendChild(d);
     });
   }
   polishRouteConfig() {
@@ -2980,24 +2980,24 @@ let ze = class extends We {
     if (t.trail_visible === !1) return;
     const i = this.polishEnsureTrailLayer();
     if (!i || e.length < 2) return;
-    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, u) => {
-      const g = e[u];
-      return { start: g, end: p, length: Math.hypot(p.x - g.x, p.y - g.y) };
-    }), l = a.reduce((p, u) => p + u.length, 0), c = this.polishTrailSpacing(r, o);
+    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, g) => {
+      const u = e[g];
+      return { start: u, end: p, length: Math.hypot(p.x - u.x, p.y - u.y) };
+    }), l = a.reduce((p, g) => p + g.length, 0), c = this.polishTrailSpacing(r, o);
     if (l < c) return;
     const d = Math.min(24, Math.max(3, Math.floor(l / c)));
     for (let p = 0; p < d; p += 1) {
-      const u = (p + 1) / (d + 1), g = l * u;
+      const g = (p + 1) / (d + 1), u = l * g;
       let b = 0, m = a[a.length - 1];
       for (const G of a) {
-        if (b + G.length >= g) {
+        if (b + G.length >= u) {
           m = G;
           break;
         }
         b += G.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, S = m.end.x - m.start.x, k = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, A = m.length > 0 ? -k / m.length : 0, P = m.length > 0 ? S / m.length : 0, R = m.start.x + S * y + A * E * w, j = m.start.y + k * y + P * E * w, J = Math.atan2(k, S) * 180 / Math.PI + 90, Y = Math.round(u * ln), z = this.polishCreateSvg("g");
-      z.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), z.setAttribute("data-presence-id", t.id), r === "person" && z.setAttribute("data-trail-style", String(o + 1)), z.setAttribute("transform", `translate(${R} ${j}) rotate(${J + (E ? w * N : 0)})`), z.setAttribute("opacity", "0"), this.polishAppendTrailShape(z, r, n, o);
+      const y = m.length > 0 ? (u - b) / m.length : 0, S = m.end.x - m.start.x, k = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, A = m.length > 0 ? -k / m.length : 0, P = m.length > 0 ? S / m.length : 0, R = m.start.x + S * y + A * E * w, I = m.start.y + k * y + P * E * w, J = Math.atan2(k, S) * 180 / Math.PI + 90, Y = Math.round(g * ln), z = this.polishCreateSvg("g");
+      z.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), z.setAttribute("data-presence-id", t.id), r === "person" && z.setAttribute("data-trail-style", String(o + 1)), z.setAttribute("transform", `translate(${R} ${I}) rotate(${J + (E ? w * N : 0)})`), z.setAttribute("opacity", "0"), this.polishAppendTrailShape(z, r, n, o);
       const q = this.polishCreateSvg("animate");
       this.polishSetAttributes(q, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), z.appendChild(q), i.appendChild(z), window.setTimeout(() => {
         z.isConnected && q.beginElement();
@@ -3067,7 +3067,7 @@ let ze = class extends We {
     for (const [a, l] of this.movementHistorySamples) {
       const c = n.get(a);
       if (!c) continue;
-      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), u = this.polishTrailColor(c), g = d === "person" ? this.polishPersonTrailVariant(c) : 0;
+      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), g = this.polishTrailColor(c), u = d === "person" ? this.polishPersonTrailVariant(c) : 0;
       if (d === "person" && this.movementHistory.show_rooms !== !1) {
         const b = /* @__PURE__ */ new Map();
         for (const m of l) m.roomId && b.set(m.roomId, m);
@@ -3075,27 +3075,27 @@ let ze = class extends We {
           const S = this.rooms.find((E) => E.id === m || E.area_id === m);
           if (!S || S.points.length < 3) continue;
           const k = Math.max(0, 0.16 * (1 - (t - y.at) / p)), w = this.polishCreateSvg("polygon");
-          this.polishSetAttributes(w, { points: S.points.map(([E, N]) => `${E * x},${N * x}`).join(" "), fill: u, "fill-opacity": String(k), stroke: u, "stroke-opacity": String(k * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
+          this.polishSetAttributes(w, { points: S.points.map(([E, N]) => `${E * x},${N * x}`).join(" "), fill: g, "fill-opacity": String(k), stroke: g, "stroke-opacity": String(k * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
         }
       }
       for (let b = 1; b < l.length; b += 1) {
         const m = l[b - 1], y = l[b], S = this.polishMovementPath(m, y, m.roomId, y.roomId), k = Math.max(0, 0.72 * (1 - (t - y.at) / p));
         for (let w = 1; w < S.length; w += 1) {
-          const E = S[w - 1], N = S[w], A = N.x - E.x, P = N.y - E.y, R = Math.hypot(A, P), j = Math.atan2(P, A) * 180 / Math.PI;
+          const E = S[w - 1], N = S[w], A = N.x - E.x, P = N.y - E.y, R = Math.hypot(A, P), I = Math.atan2(P, A) * 180 / Math.PI;
           if (d === "robot") {
             if (this.petRobotTrails.show_robot_route === !1) continue;
             const q = this.polishCreateSvg("line");
-            if (this.polishSetAttributes(q, { x1: String(E.x), y1: String(E.y), x2: String(N.x), y2: String(N.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(k), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), q.setAttribute("class", "robot-history-route"), o.appendChild(q), this.petRobotTrails.robot_direction_arrows !== !1 && R > 45) {
-              const G = this.polishCreateSvg("path"), ve = (E.x + N.x) / 2, je = (E.y + N.y) / 2;
-              this.polishSetAttributes(G, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, k + 0.12)), transform: `translate(${ve} ${je}) rotate(${j})`, "data-presence-id": a }), G.setAttribute("class", "robot-history-arrow"), o.appendChild(G);
+            if (this.polishSetAttributes(q, { x1: String(E.x), y1: String(E.y), x2: String(N.x), y2: String(N.y), stroke: g, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(k), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), q.setAttribute("class", "robot-history-route"), o.appendChild(q), this.petRobotTrails.robot_direction_arrows !== !1 && R > 45) {
+              const G = this.polishCreateSvg("path"), ve = (E.x + N.x) / 2, Ie = (E.y + N.y) / 2;
+              this.polishSetAttributes(G, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: g, "fill-opacity": String(Math.min(1, k + 0.12)), transform: `translate(${ve} ${Ie}) rotate(${I})`, "data-presence-id": a }), G.setAttribute("class", "robot-history-arrow"), o.appendChild(G);
             }
             continue;
           }
           if (d === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
-          const J = d === "pet" ? 52 : 70, Y = Math.min(12, Math.max(1, Math.floor(R / J))), z = j + 90;
+          const J = d === "pet" ? 52 : 70, Y = Math.min(12, Math.max(1, Math.floor(R / J))), z = I + 90;
           for (let q = 1; q <= Y; q += 1) {
-            const G = q / (Y + 1), ve = q % 2 === 0 ? -1 : 1, je = R > 0 ? -P / R : 0, Ce = R > 0 ? A / R : 0, Qe = d === "pet" ? 7 : 6, Q = this.polishCreateSvg("g");
-            Q.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${g + 1}` : ""}`), Q.setAttribute("data-presence-id", a), Q.setAttribute("transform", `translate(${E.x + A * G + je * Qe * ve} ${E.y + P * G + Ce * Qe * ve}) rotate(${z + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), Q.setAttribute("opacity", String(k)), this.polishAppendTrailShape(Q, d, u, g), o.appendChild(Q);
+            const G = q / (Y + 1), ve = q % 2 === 0 ? -1 : 1, Ie = R > 0 ? -P / R : 0, Ce = R > 0 ? A / R : 0, Qe = d === "pet" ? 7 : 6, Q = this.polishCreateSvg("g");
+            Q.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${u + 1}` : ""}`), Q.setAttribute("data-presence-id", a), Q.setAttribute("transform", `translate(${E.x + A * G + Ie * Qe * ve} ${E.y + P * G + Ce * Qe * ve}) rotate(${z + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), Q.setAttribute("opacity", String(k)), this.polishAppendTrailShape(Q, d, g, u), o.appendChild(Q);
           }
         }
       }
@@ -3104,7 +3104,7 @@ let ze = class extends We {
     i.insertBefore(r, s ?? null), i.insertBefore(o, s ?? null);
   }
 };
-ze.styles = I`${We.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+ze.styles = j`${We.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
 fi([
   C({ attribute: !1 })
 ], ze.prototype, "movementHistory", 2);
@@ -3199,7 +3199,7 @@ let st = class extends ze {
     );
   }
 };
-st.styles = I`
+st.styles = j`
     ${ze.styles}
 
     :host {
@@ -3357,31 +3357,31 @@ let Ge = class extends st {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, S = b, k = { x: d - b * u, y: p - m * u }, w = { x: d + b * u, y: p + m * u }, E = l === "start" ? k : w, N = l === "start" ? w : k, A = s + (l === "start" ? 0 : 180), P = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), R = A + (r ? P * a : 0), j = ft(R), J = { x: E.x + Math.cos(j) * n, y: E.y + Math.sin(j) * n }, Y = o ? ` open-age-${o.level}` : "", z = document.createElementNS($, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, g = n / 2, u = ft(s), b = Math.cos(u), m = Math.sin(u), y = -m, S = b, k = { x: d - b * g, y: p - m * g }, w = { x: d + b * g, y: p + m * g }, E = l === "start" ? k : w, N = l === "start" ? w : k, A = s + (l === "start" ? 0 : 180), P = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), R = A + (r ? P * a : 0), I = ft(R), J = { x: E.x + Math.cos(I) * n, y: E.y + Math.sin(I) * n }, Y = o ? ` open-age-${o.level}` : "", z = document.createElementNS($, "g");
     z.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${Y}`), z.setAttribute("data-opening-id", t.id), o && z.setAttribute("data-open-minutes", String(o.minutes)), this.line(z, k.x, k.y, w.x, w.y, "opening-gap");
     const q = Math.max(7, Math.min(12, n * 0.12));
     for (const Q of [k, w]) this.line(z, Q.x - y * q / 2, Q.y - S * q / 2, Q.x + y * q / 2, Q.y + S * q / 2, "door-jamb");
     r && this.line(z, E.x, E.y, N.x, N.y, "door-closed-guide"), this.line(z, E.x, E.y, J.x, J.y, "door-leaf");
     const G = document.createElementNS($, "circle");
     if (G.setAttribute("cx", String(E.x)), G.setAttribute("cy", String(E.y)), G.setAttribute("r", "4.2"), G.setAttribute("class", "opening-hinge"), z.appendChild(G), r) {
-      const Q = document.createElementNS($, "path"), wi = ft(A), ki = j, Dr = E.x + Math.cos(wi) * n, jr = E.y + Math.sin(wi) * n, Ir = E.x + Math.cos(ki) * n, qr = E.y + Math.sin(ki) * n, Or = P > 0 ? 1 : 0, Lr = Math.abs(a) > 180 ? 1 : 0;
-      Q.setAttribute("d", `M ${Dr} ${jr} A ${n} ${n} 0 ${Lr} ${Or} ${Ir} ${qr}`), Q.setAttribute("class", "door-swing"), z.appendChild(Q);
+      const Q = document.createElementNS($, "path"), wi = ft(A), ki = I, Dr = E.x + Math.cos(wi) * n, Ir = E.y + Math.sin(wi) * n, jr = E.x + Math.cos(ki) * n, qr = E.y + Math.sin(ki) * n, Or = P > 0 ? 1 : 0, Lr = Math.abs(a) > 180 ? 1 : 0;
+      Q.setAttribute("d", `M ${Dr} ${Ir} A ${n} ${n} 0 ${Lr} ${Or} ${jr} ${qr}`), Q.setAttribute("class", "door-swing"), z.appendChild(Q);
     }
-    const ve = d + y * 14, je = p + S * 14, Ce = document.createElementNS($, "circle");
-    Ce.setAttribute("cx", String(ve)), Ce.setAttribute("cy", String(je)), Ce.setAttribute("r", "5.2"), Ce.setAttribute("class", "opening-status-dot"), z.appendChild(Ce), this.appendAgeIndicator(z, ve, je, o);
+    const ve = d + y * 14, Ie = p + S * 14, Ce = document.createElementNS($, "circle");
+    Ce.setAttribute("cx", String(ve)), Ce.setAttribute("cy", String(Ie)), Ce.setAttribute("r", "5.2"), Ce.setAttribute("class", "opening-status-dot"), z.appendChild(Ce), this.appendAgeIndicator(z, ve, Ie, o);
     const Qe = document.createElementNS($, "title");
     Qe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, z.appendChild(Qe), e.appendChild(z);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), u = -p, g = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, S = { x: a + d * b, y: l + p * b }, k = o ? ` open-age-${o.level}` : "", w = document.createElementNS($, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${k}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, S.x, S.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, S.x + u * m, S.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, S.x - u * m, S.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, S.x + u * m, S.y + g * m, S.x - u * m, S.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, S.x + u * m, S.y + g * m, "window-open-sash"));
-    const E = a + u * 17, N = l + g * 17, A = document.createElementNS($, "circle");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), g = -p, u = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, S = { x: a + d * b, y: l + p * b }, k = o ? ` open-age-${o.level}` : "", w = document.createElementNS($, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${k}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, S.x, S.y, "window-gap"), this.line(w, y.x + g * m, y.y + u * m, S.x + g * m, S.y + u * m, "window-pane"), this.line(w, y.x - g * m, y.y - u * m, S.x - g * m, S.y - u * m, "window-pane"), this.line(w, y.x + g * m, y.y + u * m, y.x - g * m, y.y - u * m, "window-frame-end"), this.line(w, S.x + g * m, S.y + u * m, S.x - g * m, S.y - u * m, "window-frame-end"), r && (this.line(w, y.x + g * m, y.y + u * m, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, S.x + g * m, S.y + u * m, "window-open-sash"));
+    const E = a + g * 17, N = l + u * 17, A = document.createElementNS($, "circle");
     A.setAttribute("cx", String(E)), A.setAttribute("cy", String(N)), A.setAttribute("r", "5.2"), A.setAttribute("class", "opening-status-dot"), w.appendChild(A), this.appendAgeIndicator(w, E, N, o);
     const P = document.createElementNS($, "title");
     P.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(P), e.appendChild(w);
   }
 };
-Ge.styles = I`${st.styles}
+Ge.styles = j`${st.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3550,14 +3550,14 @@ let Se = class extends Ge {
       "translate(14 7) scale(1.18 .62)"
     ];
     for (const [n, s, a, l, c] of t) {
-      const d = l % 4, p = l % 3, u = this.svg("g");
-      this.attrs(u, {
+      const d = l % 4, p = l % 3, g = this.svg("g");
+      this.attrs(g, {
         class: "weather-cloud-position",
         transform: `translate(${n} ${s}) scale(${a * 0.64})`,
         opacity: String(c)
       });
-      const g = this.svg("g");
-      this.attrs(g, {
+      const u = this.svg("g");
+      this.attrs(u, {
         class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${d}`
       });
       const b = this.svg("g");
@@ -3568,21 +3568,21 @@ let Se = class extends Ge {
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([R, j, J, Y, z]) => {
+      ].forEach(([R, I, J, Y, z]) => {
         const q = this.svg("ellipse");
         this.attrs(q, {
           cx: String(R),
-          cy: String(j),
+          cy: String(I),
           rx: String(J),
           ry: String(Y),
           opacity: String(z)
         }), b.appendChild(q);
-      }), g.appendChild(b);
+      }), u.appendChild(b);
       const m = this.svg("path");
       this.attrs(m, {
         d: "M-145 40 C-112 12 -84 2 -55 10 C-30 20 -9 20 15 10 C43 -3 77 1 104 18 C128 32 135 51 121 64 C92 84 48 84 10 79 C-33 78 -82 88 -119 72 C-138 64 -151 51 -145 40 Z",
         class: "weather-cloud-shadow"
-      }), g.appendChild(m);
+      }), u.appendChild(m);
       const y = this.svg("g");
       this.attrs(y, {
         class: "weather-cloud-body",
@@ -3594,11 +3594,11 @@ let Se = class extends Ge {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-base"
       }), y.appendChild(S);
-      for (const [R, j, J, Y, z] of i) {
+      for (const [R, I, J, Y, z] of i) {
         const q = this.svg("ellipse");
         this.attrs(q, {
           cx: String(R),
-          cy: String(j),
+          cy: String(I),
           rx: String(J),
           ry: String(Y),
           opacity: String(z),
@@ -3614,7 +3614,7 @@ let Se = class extends Ge {
       this.attrs(w, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
         class: "weather-cloud-wisp"
-      }), y.appendChild(w), g.appendChild(y);
+      }), y.appendChild(w), u.appendChild(y);
       const E = this.svg("g");
       this.attrs(E, {
         class: "weather-cloud-mist weather-cloud-mist-front",
@@ -3623,38 +3623,38 @@ let Se = class extends Ge {
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([R, j, J, Y, z]) => {
+      ].forEach(([R, I, J, Y, z]) => {
         const q = this.svg("ellipse");
         this.attrs(q, {
           cx: String(R),
-          cy: String(j),
+          cy: String(I),
           rx: String(J),
           ry: String(Y),
           opacity: String(z)
         }), E.appendChild(q);
-      }), g.appendChild(E);
+      }), u.appendChild(E);
       const N = this.svg("path");
       if (this.attrs(N, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), g.appendChild(N), d === 1 || d === 3) {
+      }), u.appendChild(N), d === 1 || d === 3) {
         const R = this.svg("path");
         this.attrs(R, {
           d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), g.appendChild(R);
+        }), u.appendChild(R);
       }
       const A = this.svg("path");
       this.attrs(A, {
         d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
         class: "weather-cloud-highlight"
-      }), g.appendChild(A);
+      }), u.appendChild(A);
       const P = this.svg("path");
       this.attrs(P, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
         transform: r[l % r.length]
-      }), g.appendChild(P), u.appendChild(g), e.appendChild(u);
+      }), u.appendChild(P), g.appendChild(u), e.appendChild(g);
     }
   }
   appendFog(e, t = "fog") {
@@ -3679,29 +3679,43 @@ let Se = class extends Ge {
     });
   }
   appendRain(e, t = !1) {
-    const i = t ? 62 : 92, r = t ? 48 : 72;
-    for (let o = -1; o < (t ? 18 : 13); o += 1)
-      for (let n = -1; n < (t ? 24 : 17); n += 1) {
-        const s = Math.abs(o * 37 + n * 19), a = n * r + o % 2 * (t ? 17 : 25) + s % 13, l = o * i, c = (t ? 15 : 10) + s % (t ? 12 : 8), d = (t ? 2.4 : 1.6) + s % 3 * 0.35, p = (t ? 5 : 3) + s % 4, u = this.svg("path");
-        this.attrs(u, {
-          d: `M ${a} ${l} C ${a - d * 0.7} ${l + c * 0.32}, ${a - p - d} ${l + c * 0.72}, ${a - p} ${l + c} C ${a - p + d} ${l + c * 0.72}, ${a + d * 0.45} ${l + c * 0.31}, ${a} ${l} Z`,
-          class: `weather-rain-drop${t ? " is-heavy" : ""}`
-        }), u.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + s % 7 * 0.06}s`), u.style.setProperty("--rain-delay", `${-(s % 17) * 0.11}s`), e.appendChild(u);
+    const i = this.svg("g");
+    i.setAttribute("class", `weather-rain-field${t ? " is-heavy" : ""}`);
+    const r = t ? 62 : 92, o = t ? 48 : 72;
+    for (let s = -1; s < (t ? 18 : 13); s += 1)
+      for (let a = -1; a < (t ? 24 : 17); a += 1) {
+        const l = Math.abs(s * 37 + a * 19), c = a * o + s % 2 * (t ? 17 : 25) + l % 13, d = s * r, p = (t ? 15 : 10) + l % (t ? 12 : 8), g = (t ? 2.4 : 1.6) + l % 3 * 0.35, u = (t ? 5 : 3) + l % 4, b = this.svg("path");
+        this.attrs(b, {
+          d: `M ${c} ${d} C ${c - g * 0.7} ${d + p * 0.32}, ${c - u - g} ${d + p * 0.72}, ${c - u} ${d + p} C ${c - u + g} ${d + p * 0.72}, ${c + g * 0.45} ${d + p * 0.31}, ${c} ${d} Z`,
+          class: `weather-rain-drop weather-rain-depth-${l % 3}${t ? " is-heavy" : ""}`
+        }), b.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + l % 7 * 0.06}s`), b.style.setProperty("--rain-delay", `${-(l % 17) * 0.11}s`), i.appendChild(b);
       }
+    const n = t ? 18 : 11;
+    for (let s = 0; s < n; s += 1) {
+      const a = s * 43 + 17, l = this.svg("ellipse");
+      this.attrs(l, {
+        cx: String(28 + a * 67 % 950),
+        cy: String(735 + a * 29 % 245),
+        rx: String(t ? 7 + a % 7 : 5 + a % 5),
+        ry: String(t ? 2.2 : 1.6),
+        class: `weather-rain-splash weather-rain-depth-${a % 3}${t ? " is-heavy" : ""}`
+      }), l.style.setProperty("--rain-duration", `${(t ? 0.55 : 0.92) + a % 5 * 0.09}s`), l.style.setProperty("--rain-delay", `${-(a % 19) * 0.13}s`), i.appendChild(l);
+    }
+    e.appendChild(i);
   }
   appendSnow(e, t = !1) {
     const i = t ? 9 : 11, r = t ? 11 : 12;
     for (let o = 0; o < i; o += 1)
       for (let n = 0; n < r; n += 1) {
-        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), u = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), g = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
         if (d) {
-          const g = c * 0.78;
+          const u = c * 0.78;
           this.attrs(p, {
-            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - g} ${l - g} L ${a + g} ${l + g} M ${a + g} ${l - g} L ${a - g} ${l + g}`,
-            class: u
+            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - u} ${l - u} L ${a + u} ${l + u} M ${a + u} ${l - u} L ${a - u} ${l + u}`,
+            class: g
           });
         } else
-          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: u });
+          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: g });
         p.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + s % 8 * 0.42}s`), p.style.setProperty("--snow-delay", `${-(s % 19) * 0.31}s`), e.appendChild(p);
       }
   }
@@ -3760,15 +3774,19 @@ let Se = class extends Ge {
     const i = this.svg("defs");
     i.setAttribute("data-weather-mask", this.weatherMaskId), i.appendChild(this.createWeatherMask()), i.appendChild(this.createCloudFilter()), e.insertBefore(i, e.firstChild);
     const r = this.svg("g"), o = this.weatherState.replace(/[^a-z0-9_-]/g, "");
-    if (r.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${o}${this.weatherNight ? " is-night" : ""}`), r.setAttribute("mask", `url(#${this.weatherMaskId})`), r.setAttribute("pointer-events", "none"), r.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0.25, this.weatherIntensity || 0.6)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && (this.appendClouds(r), this.appendMagicMotes(r, "cloud")), this.weatherEffect === "fog" && this.appendFog(r), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(r, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(r, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(r, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(r, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && (this.appendSnow(r, this.weatherState === "snowy-rainy"), this.appendMagicMotes(r, "snow")), this.weatherState === "snowy-rainy" && this.appendRain(r), this.weatherState === "hail" && this.appendHail(r), this.weatherEffect === "wind" && (this.appendWind(r), this.appendMagicMotes(r, "wind")), this.weatherEffect === "exceptional" && (this.appendClouds(r), this.appendWind(r), this.appendMagicMotes(r, "cloud"), this.appendExceptionalMagic(r)), this.weatherEffect === "storm") {
-      const a = this.svg("rect");
-      this.attrs(a, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), r.appendChild(a);
+    r.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${o}${this.weatherNight ? " is-night" : ""}`), r.setAttribute("mask", `url(#${this.weatherMaskId})`), r.setAttribute("pointer-events", "none");
+    const n = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : 0.6;
+    if (r.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, n)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && (this.appendClouds(r), this.appendMagicMotes(r, "cloud")), this.weatherEffect === "fog" && this.appendFog(r), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(r, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(r, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(r, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(r, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && (this.appendSnow(r, this.weatherState === "snowy-rainy"), this.appendMagicMotes(r, "snow")), this.weatherState === "snowy-rainy" && this.appendRain(r), this.weatherState === "hail" && this.appendHail(r), this.weatherEffect === "wind" && (this.appendWind(r), this.appendMagicMotes(r, "wind")), this.weatherEffect === "exceptional" && (this.appendClouds(r), this.appendWind(r), this.appendMagicMotes(r, "cloud"), this.appendExceptionalMagic(r)), this.weatherEffect === "storm") {
+      const l = this.svg("rect");
+      this.attrs(l, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), r.appendChild(l);
+      const c = this.svg("ellipse");
+      this.attrs(c, { cx: "720", cy: "150", rx: "290", ry: "220", class: "weather-storm-glow" }), r.appendChild(c);
     }
-    const s = t.querySelector(":scope > g.rooms-scene");
-    t.insertBefore(r, s ?? null);
+    const a = t.querySelector(":scope > g.rooms-scene");
+    t.insertBefore(r, a ?? null);
   }
 };
-Se.styles = I`
+Se.styles = j`
     ${Ge.styles}
     .weather-outside-rooms-scene { opacity: var(--weather-svg-intensity, .6); }
     .weather-outside-rooms-scene.weather-cloudy { opacity: min(1, calc(var(--weather-svg-intensity, .6) * 1.03)); }
@@ -3863,8 +3881,32 @@ Se.styles = I`
       filter: blur(17px);
       animation-duration: 28s;
     }
-    .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
-    .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
+    .weather-outside-rooms-scene .weather-rain-field { filter: drop-shadow(0 2px 2px rgba(24,35,42,.20)); }
+    .weather-outside-rooms-scene .weather-rain-drop {
+      fill: rgba(78, 105, 118, .58);
+      stroke: rgba(226, 235, 232, .34);
+      stroke-width: .5;
+      opacity: .76;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerRainDrop var(--rain-duration,1.1s) cubic-bezier(.42,0,.72,.58) infinite;
+      animation-delay: var(--rain-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(51,77,89,.74); stroke-width: .7; opacity: .92; }
+    .weather-outside-rooms-scene .weather-rain-depth-0 { opacity: .42; filter: blur(.45px); }
+    .weather-outside-rooms-scene .weather-rain-depth-1 { opacity: .68; }
+    .weather-outside-rooms-scene .weather-rain-depth-2 { opacity: .90; filter: drop-shadow(0 0 2px rgba(220,235,238,.30)); }
+    .weather-outside-rooms-scene .weather-rain-splash {
+      fill: none;
+      stroke: rgba(190, 211, 215, .55);
+      stroke-width: 1.4;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerRainSplash var(--rain-duration,1.1s) ease-out infinite;
+      animation-delay: var(--rain-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-rain-splash.is-heavy { stroke-width: 1.9; }
     .weather-outside-rooms-scene .weather-snow-flake {
       fill: #fff8df;
       stroke: rgba(172, 155, 121, .72);
@@ -3919,7 +3961,8 @@ Se.styles = I`
     .weather-outside-rooms-scene .weather-exceptional-orbit-2 { stroke: rgba(111, 74, 98, .42); stroke-width: 7; opacity: .34; animation-duration: 17s; }
     .weather-outside-rooms-scene.weather-exceptional .weather-wind-line-core { stroke: rgba(129, 66, 54, .72); }
     .weather-outside-rooms-scene.weather-exceptional .weather-wind-line-glow { stroke: rgba(222, 143, 93, .38); }
-    .weather-outside-rooms-scene .weather-storm-flash { fill: #fff0bd; opacity: 0; mix-blend-mode: screen; animation: explorerStormFlash 6.5s steps(1,end) infinite; }
+    .weather-outside-rooms-scene .weather-storm-flash { fill: #e8f2f4; opacity: 0; mix-blend-mode: screen; animation: explorerStormFlash 7.8s ease-out infinite; }
+    .weather-outside-rooms-scene .weather-storm-glow { fill: rgba(221,235,239,.68); opacity: 0; filter: blur(70px); mix-blend-mode: screen; animation: explorerStormGlow 7.8s ease-out infinite; }
     .weather-outside-rooms-scene.is-night .weather-rain-drop { fill: rgba(132,150,158,.64); stroke: rgba(224,227,218,.18); opacity: .72; }
     .weather-outside-rooms-scene.is-night .weather-cloud-rim { stroke: rgba(188, 207, 219, .40); filter: drop-shadow(0 0 6px rgba(158, 190, 211, .46)); }
     .weather-outside-rooms-scene.is-night .weather-wind-line-core { stroke: rgba(165, 190, 204, .64); filter: drop-shadow(0 0 4px rgba(149, 183, 202, .46)); }
@@ -3928,6 +3971,7 @@ Se.styles = I`
     .weather-outside-rooms-scene.is-night .weather-magic-mote-wind { fill: rgba(211, 228, 236, .74); filter: drop-shadow(0 0 6px rgba(165, 203, 223, .70)); }
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
+    .weather-outside-rooms-scene.is-night .weather-storm-glow { fill: rgba(177,205,222,.62); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.08) saturate(.68) contrast(.97); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(235, 226, 210, .18); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist-front { fill: rgba(246, 238, 223, .17); }
@@ -3967,26 +4011,30 @@ Se.styles = I`
       100% { stroke-dashoffset: -82; opacity: .34; }
     }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
-    @keyframes explorerRainDrop { from { transform: translate(7px,-42px); opacity: 0; } 12% { opacity: .82; } 82% { opacity: .68; } to { transform: translate(-13px,78px); opacity: 0; } }
+    @keyframes explorerRainDrop { from { transform: translate(7px,-42px) scale(.72); opacity: 0; } 10% { opacity: .82; } 76% { opacity: .72; } to { transform: translate(-13px,92px) scale(1.05); opacity: 0; } }
+    @keyframes explorerRainSplash { 0%,72% { transform: scale(.18); opacity: 0; } 78% { opacity: .68; } 100% { transform: scale(1.65); opacity: 0; } }
     @keyframes explorerSnowFall { 0% { transform: translate(0,-34px) rotate(0deg); opacity: 0; } 12% { opacity: .88; } 82% { opacity: .72; } 100% { transform: translate(28px,72px) rotate(210deg); opacity: 0; } }
     @keyframes explorerHailFall { from { transform: translate(9px,-48px); } to { transform: translate(-15px,82px); } }
     @keyframes explorerWindSweep { from { stroke-dashoffset: 620; transform: translateX(-74px); } to { stroke-dashoffset: 0; transform: translateX(92px); } }
     @keyframes explorerMagicMote { 0%,100% { transform: translate(0,8px) scale(.30) rotate(0deg); opacity: .08; } 28% { opacity: .74; } 52% { transform: translate(8px,-7px) scale(1.18) rotate(45deg); opacity: 1; } 76% { opacity: .46; } }
     @keyframes explorerExceptionalOrbit { from { transform: rotate(0deg) scale(.98); stroke-dashoffset: 0; } 50% { transform: rotate(180deg) scale(1.025); } to { transform: rotate(360deg) scale(.98); stroke-dashoffset: -240; } }
-    @keyframes explorerStormFlash { 0%,6%,8%,46%,48%,100% { opacity: 0; } 7%,47% { opacity: .52; } }
-    @keyframes explorerStormFlashNight { 0%,6%,8%,46%,48%,100% { opacity: 0; } 7%,47% { opacity: .28; } }
+    @keyframes explorerStormFlash { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .24; } 9.35% { opacity: .06; } 10.4% { opacity: .38; } 58.7% { opacity: .18; } }
+    @keyframes explorerStormFlashNight { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .18; } 9.35% { opacity: .04; } 10.4% { opacity: .28; } 58.7% { opacity: .13; } }
+    @keyframes explorerStormGlow { 0%,7.8%,12%,58%,61%,100% { opacity: 0; transform: scale(.82); } 8.8% { opacity: .50; transform: scale(1.05); } 10.5% { opacity: .72; transform: scale(1.14); } 59% { opacity: .34; transform: scale(1); } }
     @media(prefers-reduced-motion:reduce) {
       .weather-outside-rooms-scene .weather-cloud,
       .weather-outside-rooms-scene .weather-cloud-fine-strand,
       .weather-outside-rooms-scene .weather-cloud-rim,
       .weather-outside-rooms-scene .weather-fog-band,
       .weather-outside-rooms-scene .weather-rain-drop,
+      .weather-outside-rooms-scene .weather-rain-splash,
       .weather-outside-rooms-scene .weather-snow-flake,
       .weather-outside-rooms-scene .weather-hail-stone,
       .weather-outside-rooms-scene .weather-wind-line,
       .weather-outside-rooms-scene .weather-magic-mote,
       .weather-outside-rooms-scene .weather-exceptional-orbit,
-      .weather-outside-rooms-scene .weather-storm-flash { animation: none; }
+      .weather-outside-rooms-scene .weather-storm-flash,
+      .weather-outside-rooms-scene .weather-storm-glow { animation: none; }
     }
   `;
 Xe([
@@ -4417,7 +4465,7 @@ let de = class extends L {
     `;
   }
 };
-de.styles = I`
+de.styles = j`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4481,11 +4529,11 @@ const re = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
 function Yi(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
-function jn(e) {
+function In(e) {
   const t = e.points.map((r) => r[0]), i = e.points.map((r) => r[1]);
   return { minX: Math.min(...t), minY: Math.min(...i), maxX: Math.max(...t), maxY: Math.max(...i) };
 }
-function In(e) {
+function jn(e) {
   return e.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "room";
 }
 function Qi(e) {
@@ -4545,7 +4593,7 @@ let B = class extends L {
     if (!n) return;
     const s = Qi(n.attributes[o.x_attribute ?? "map_x"]), a = Qi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const c = jn(t), d = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
+    const c = In(t), d = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
     return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: d, room_y: p };
   }
   handleMapClick(e) {
@@ -4569,7 +4617,7 @@ let B = class extends L {
     this.draftWidth = i?.physical_meters?.width?.toString() ?? "", this.draftHeight = i?.physical_meters?.height?.toString() ?? "", this.draftFlipX = i?.physical_meters?.flip_x ?? !1, this.draftFlipY = i?.physical_meters?.flip_y ?? !1, this.calA = i?.physical_meters?.position_calibration?.a, this.calB = i?.physical_meters?.position_calibration?.b, this.calC = i?.physical_meters?.position_calibration?.c, this.calibrationMessage = "";
   }
   uniqueRoomId(e) {
-    const t = In(e), i = new Set(this.rooms.map((o) => o.id));
+    const t = jn(e), i = new Set(this.rooms.map((o) => o.id));
     if (!i.has(t)) return t;
     let r = 2;
     for (; i.has(`${t}_${r}`); ) r++;
@@ -4657,7 +4705,7 @@ let B = class extends L {
     return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-B.styles = I`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+B.styles = j`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 F([
   C({ attribute: !1 })
 ], B.prototype, "hass", 2);
@@ -4760,18 +4808,18 @@ function On(e) {
   return t;
 }
 function Ln(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((k) => k.reactions ?? []), d = i.flatMap((k) => k.quick_actions ?? []), p = On(e), u = [];
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((k) => k.reactions ?? []), d = i.flatMap((k) => k.quick_actions ?? []), p = On(e), g = [];
   if (t)
     for (const k of p) {
       const w = t.states[k.entity];
       if (!w) {
-        u.push({ ...k, unavailable: !1 });
+        g.push({ ...k, unavailable: !1 });
         continue;
       }
-      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...k, unavailable: !0 });
+      (w.state === "unavailable" || w.state === "unknown") && g.push({ ...k, unavailable: !0 });
     }
-  const g = u.filter((k) => !k.unavailable), b = r.filter((k) => !qn(k)), m = i.filter((k) => k.points.length < 3), y = (e.image ?? e.background ?? "").trim(), S = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: S, entityIssues: u, attentionCount: S.filter((k) => k.state === "attention").length, configuredFeatureCount: S.filter((k) => k.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const u = g.filter((k) => !k.unavailable), b = r.filter((k) => !qn(k)), m = i.filter((k) => k.points.length < 3), y = (e.image ?? e.background ?? "").trim(), S = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? u.length ? `${u.length} binding${u.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : g.length ? `${p.length} bindings fundet · ${g.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: u.length ? "attention" : p.length ? "ready" : "optional", target: u[0]?.target ?? g[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: S, entityIssues: g, attentionCount: S.filter((k) => k.state === "attention").length, configuredFeatureCount: S.filter((k) => k.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
 var Bn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -4872,7 +4920,7 @@ let at = class extends L {
     `;
   }
 };
-at.styles = I`
+at.styles = j`
     :host { display:block; }
     .overview {
       display:grid;
@@ -5444,7 +5492,7 @@ let Pt = class extends L {
     `;
   }
 };
-Pt.styles = I`
+Pt.styles = j`
     :host {
       display: block;
     }
@@ -5629,7 +5677,7 @@ let Rt = class extends L {
     })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-Rt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+Rt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
 Er([
   C({ attribute: !1 })
 ], Rt.prototype, "config", 2);
@@ -5658,7 +5706,7 @@ let Mt = class extends L {
     </section>`;
   }
 };
-Mt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+Mt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
 Nr([
   C({ attribute: !1 })
 ], Mt.prototype, "config", 2);
@@ -5688,7 +5736,7 @@ let zt = class extends L {
     </section>`;
   }
 };
-zt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+zt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
 Pr([
   C({ attribute: !1 })
 ], zt.prototype, "config", 2);
@@ -5753,7 +5801,7 @@ let lt = class extends L {
     </section>`;
   }
 };
-lt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
+lt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
 yi([
   C({ attribute: !1 })
 ], lt.prototype, "hass", 2);
@@ -5816,7 +5864,7 @@ let ct = class extends L {
     }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-ct.styles = I`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+ct.styles = j`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 vi([
   C({ attribute: !1 })
 ], ct.prototype, "hass", 2);
@@ -6065,7 +6113,7 @@ let ie = class extends L {
     `;
   }
 };
-ie.styles = I`
+ie.styles = j`
     :host { display:block; margin-top:16px; color:var(--primary-text-color); }
     .panel { border:1px solid var(--divider-color,#d7dbe0); border-radius:14px; padding:16px; background:var(--card-background-color,#fff); }
     .heading { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
@@ -6245,7 +6293,7 @@ let K = class extends L {
     return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Jt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
-K.styles = I`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
+K.styles = j`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
 X([
   C({ attribute: !1 })
 ], K.prototype, "hass", 2);
@@ -6382,7 +6430,7 @@ let ee = class extends L {
     }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys($t).map((o) => h`<option value=${o}>${$t[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${_t[o.kind]}</span><div><strong>${$t[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
-ee.styles = I`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
+ee.styles = j`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
 ce([
   C({ attribute: !1 })
 ], ee.prototype, "config", 2);
@@ -6583,7 +6631,7 @@ let ae = class extends L {
     ` : h`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
   }
 };
-ae.styles = I`
+ae.styles = j`
     :host { display:block; color:var(--primary-text-color); }
     section { display:grid; gap:12px; }
     .notice { display:grid; gap:3px; padding:10px 12px; border-radius:10px; background:color-mix(in srgb,var(--primary-color,#03a9f4) 8%,transparent); font-size:.78rem; line-height:1.4; }
@@ -7047,7 +7095,7 @@ let V = class extends L {
     `;
   }
 };
-V.styles = I`
+V.styles = j`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
 W([
@@ -7391,7 +7439,7 @@ let ne = class extends L {
     `;
   }
 };
-ne.styles = I`
+ne.styles = j`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
 pe([
@@ -7701,7 +7749,7 @@ let Te = class extends L {
     `;
   }
 };
-Te.styles = I`
+Te.styles = j`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 ut([
@@ -7821,7 +7869,7 @@ let ni = class extends de {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-ni.styles = I`${de.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+ni.styles = j`${de.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
 ni = xi([
   D("ha-explorer-ha-editor")
 ], ni);
@@ -7932,7 +7980,7 @@ function we(e, t) {
   const i = ge(e);
   return i === void 0 ? t : Math.min(1, Math.max(0, i));
 }
-function js(e, t) {
+function Is(e, t) {
   if (typeof e == "boolean") return e;
   if (typeof e == "number") return e !== 0;
   if (typeof e == "string") {
@@ -7950,7 +7998,7 @@ function sr(e) {
   const t = e.trim();
   return Ds.has(t.toLowerCase()) ? void 0 : t;
 }
-function Is(e, t, i) {
+function js(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
     return r ? sr(e.room_attribute ? te(r, e.room_attribute) : r.state) : void 0;
@@ -7970,8 +8018,8 @@ function ar(e, t, i, r, o, n) {
 function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
-  return p * e + u * t + g;
+  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, g = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, u = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  return p * e + g * t + u;
 }
 function Os(e, t, i) {
   const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = qs(e);
@@ -7998,8 +8046,8 @@ function Ls(e, t, i, r, o, n) {
     return c === void 0 || d === void 0 || !p ? {} : { ...Os(p, c, d), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
-    return c === void 0 || d === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(c / p), y: we(d / u) };
+    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), g = ge(n?.height);
+    return c === void 0 || d === void 0 || !p || !g || p <= 0 || g <= 0 ? {} : { x: we(c / p), y: we(d / g) };
   }
   return { x: we(te(i, a), e.x), y: we(te(i, l), e.y) };
 }
@@ -8009,7 +8057,7 @@ function Bs(e, t, i = [], r) {
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...vt(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = c || d ? !1 : js(p, e.visible ?? !0), g = Is(o, n, t) ?? e.room_id, b = Ls(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
+  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), g = c || d ? !1 : Is(p, e.visible ?? !0), u = js(o, n, t) ?? e.room_id, b = Ls(e, o, a, i, u, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: g }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, u);
   return zs(y, a);
 }
 function Hs(e, t, i = [], r) {
@@ -8051,33 +8099,33 @@ function Us(e, t = Date.now()) {
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
-      for (const g of a)
-        s.push(g), cr(g, g, t);
+      for (const u of a)
+        s.push(u), cr(u, u, t);
       continue;
     }
-    const l = [...a], c = [...a].sort((g, b) => He(g).localeCompare(He(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = c.map((g) => {
-      const b = Fe.get(He(g));
-      if (!b) return { identity: g, track: void 0, scores: [] };
+    const l = [...a], c = [...a].sort((u, b) => He(u).localeCompare(He(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), g = c.map((u) => {
+      const b = Fe.get(He(u));
+      if (!b) return { identity: u, track: void 0, scores: [] };
       const m = l.map((y) => Gs(b, y)).sort((y, S) => y.score - S.score);
-      return { identity: g, track: b, scores: m };
-    }).sort((g, b) => (g.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
-    for (const g of u) {
-      const { identity: b, track: m } = g;
+      return { identity: u, track: b, scores: m };
+    }).sort((u, b) => (u.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
+    for (const u of g) {
+      const { identity: b, track: m } = u;
       if (!m) continue;
-      const y = g.scores.filter((N) => !p.has(N.candidate));
+      const y = u.scores.filter((N) => !p.has(N.candidate));
       if (!y.length) continue;
       const S = y[0], k = y[1], w = S.distance <= Fs || ai(zr(m), Dt(S.candidate)) <= Zs, E = !!k && k.score - S.score < Ws;
       w && !E && (d.set(He(b), S.candidate), p.add(S.candidate));
     }
-    for (const g of c) {
-      const b = He(g);
+    for (const u of c) {
+      const b = He(u);
       let m = d.get(b);
-      if (m || (m = l.find((S) => !p.has(S) && et(S) === et(g)), m && p.add(m)), m || (m = l.find((S) => !p.has(S)), m && p.add(m)), !m) {
-        s.push(g);
+      if (m || (m = l.find((S) => !p.has(S) && et(S) === et(u)), m && p.add(m)), m || (m = l.find((S) => !p.has(S)), m && p.add(m)), !m) {
+        s.push(u);
         continue;
       }
-      const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), cr(g, m, t);
+      const y = { ...u, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
+      s.push(y), cr(u, m, t);
     }
   }
   return [...s, ...o];
@@ -8090,7 +8138,7 @@ var Ys = Object.defineProperty, Qs = Object.getOwnPropertyDescriptor, Ot = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ys(t, i, o), o;
 };
-const Tr = "0.44.9";
+const Tr = "0.45.0";
 let Ue = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8375,7 +8423,7 @@ let Ue = class extends L {
     ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
-    ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
+    ), g = this.config.appearance?.occupancy?.enabled ?? !1, u = this.someoneHome(r), b = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)
     ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), S = s || y === "clear-night", k = this.weatherEffect(y), w = Math.min(
@@ -8395,12 +8443,12 @@ let Ue = class extends L {
       "exceptional"
     ].includes(y), N = m && !S && ["sunny", "clear", "partlycloudy"].includes(y), A = y === "partlycloudy";
     return h`${this.renderCastleSurround(s)}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${S ? " moonlight" : ""}${N ? " sunlight" : ""}${A ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && k !== "clear" ? ` weather-${k}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      class=${`${n ? "enchanted" : "classic"}${S ? " moonlight" : ""}${N ? " sunlight" : ""}${A ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${g ? u ? " occupied" : " empty-house" : ""}${m && k !== "clear" ? ` weather-${k}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${w}`}
       ><header>
         <div>
           <span
-            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? S ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : k === "exceptional" ? "⚠ Exceptional Weather" : k === "wind" ? "➳ Wind over the Map" : k === "storm" ? "⛈ Storm over the Map" : k === "rain" ? "☂ Rain over the Map" : k === "snow" ? "❄ Snow over the Map" : k === "fog" ? "◇ Mist over the Map" : k === "cloudy" ? "☁ Clouded Map" : N ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : S ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? S ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : k === "exceptional" ? "⚠ Exceptional Weather" : k === "wind" ? "➳ Wind over the Map" : k === "storm" ? "⛈ Storm over the Map" : k === "rain" ? "☂ Rain over the Map" : k === "snow" ? "❄ Snow over the Map" : k === "fog" ? "◇ Mist over the Map" : k === "cloudy" ? "☁ Clouded Map" : N ? "☀ Sunlit Map" : g && u ? "✦ Someone is Home" : g ? "◇ Empty House" : S ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
@@ -8446,7 +8494,7 @@ let Ue = class extends L {
     ></ha-card>`;
   }
 };
-Ue.styles = I`
+Ue.styles = j`
     :host {
       display: block;
       width: 100%;
@@ -9207,16 +9255,9 @@ Ue.styles = I`
     }
     .weather-rain .weather-particles,
     .weather-storm .weather-particles {
-      opacity: calc(0.54 * var(--weather-intensity));
-      inset: -15% -10%;
-      background: repeating-linear-gradient(
-        105deg,
-        transparent 0 18px,
-        rgba(55, 65, 68, 0.34) 18px 19px,
-        transparent 19px 37px
-      );
-      background-size: 48px 96px;
-      animation: weatherRain 1.1s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .state-pouring .weather-overlay {
       opacity: calc(0.58 * var(--weather-intensity));
@@ -9280,27 +9321,7 @@ Ue.styles = I`
       animation: weatherHail 0.88s linear infinite;
     }
     .weather-storm .weather-flash {
-      opacity: 0;
-      background:
-        radial-gradient(
-          circle at 72% 18%,
-          rgba(255, 246, 214, 0.55),
-          transparent 28%
-        ),
-        rgba(255, 242, 203, 0.18);
-      mix-blend-mode: screen;
-      animation: weatherLightning 6.5s steps(1, end) infinite;
-    }
-    .weather-storm .weather-flash::before,
-    .weather-storm .weather-flash::after {
-      content: "";
-      position: absolute;
-      width: 9%;
-      height: 48%;
-      top: 5%;
-      background: rgba(255, 241, 190, 0.92);
-      filter: drop-shadow(0 0 8px rgba(255, 232, 158, 0.88));
-      clip-path: polygon(48% 0, 100% 0, 66% 34%, 96% 34%, 25% 100%, 43% 53%, 6% 53%);
+      display: none;
     }
     .weather-storm .weather-flash::before { left: 69%; transform: rotate(7deg); }
     .weather-storm .weather-flash::after { left: 25%; top: 21%; height: 34%; transform: rotate(-8deg) scale(0.72); opacity: 0.72; }

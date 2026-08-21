@@ -374,6 +374,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendRain(layer: SVGGElement, heavy = false): void {
+    const rainLayer = this.svg("g");
+    rainLayer.setAttribute("class", `weather-rain-field${heavy ? " is-heavy" : ""}`);
     const rowStep = heavy ? 62 : 92;
     const colStep = heavy ? 48 : 72;
     for (let row = -1; row < (heavy ? 18 : 13); row += 1) {
@@ -387,13 +389,29 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         const drop = this.svg("path");
         this.attrs(drop, {
           d: `M ${x} ${y} C ${x - width * .7} ${y + length * .32}, ${x - slant - width} ${y + length * .72}, ${x - slant} ${y + length} C ${x - slant + width} ${y + length * .72}, ${x + width * .45} ${y + length * .31}, ${x} ${y} Z`,
-          class: `weather-rain-drop${heavy ? " is-heavy" : ""}`,
+          class: `weather-rain-drop weather-rain-depth-${seed % 3}${heavy ? " is-heavy" : ""}`,
         });
         drop.style.setProperty("--rain-duration", `${(heavy ? .48 : .9) + (seed % 7) * .06}s`);
         drop.style.setProperty("--rain-delay", `${-(seed % 17) * .11}s`);
-        layer.appendChild(drop);
+        rainLayer.appendChild(drop);
       }
     }
+    const impactCount = heavy ? 18 : 11;
+    for (let index = 0; index < impactCount; index += 1) {
+      const seed = index * 43 + 17;
+      const splash = this.svg("ellipse");
+      this.attrs(splash, {
+        cx: String(28 + (seed * 67) % 950),
+        cy: String(735 + (seed * 29) % 245),
+        rx: String(heavy ? 7 + seed % 7 : 5 + seed % 5),
+        ry: String(heavy ? 2.2 : 1.6),
+        class: `weather-rain-splash weather-rain-depth-${seed % 3}${heavy ? " is-heavy" : ""}`,
+      });
+      splash.style.setProperty("--rain-duration", `${(heavy ? .55 : .92) + (seed % 5) * .09}s`);
+      splash.style.setProperty("--rain-delay", `${-(seed % 19) * .13}s`);
+      rainLayer.appendChild(splash);
+    }
+    layer.appendChild(rainLayer);
   }
 
   private appendSnow(layer: SVGGElement, sleet = false): void {
@@ -524,7 +542,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     layer.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${safeState}${this.weatherNight ? " is-night" : ""}`);
     layer.setAttribute("mask", `url(#${this.weatherMaskId})`);
     layer.setAttribute("pointer-events", "none");
-    layer.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(.25, this.weatherIntensity || .6))));
+    const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
+    layer.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, intensity))));
 
     const hasCloudLayer = ["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant";
     if (hasCloudLayer) {
@@ -557,6 +576,9 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       const flash = this.svg("rect");
       this.attrs(flash, { x: "0", y: "0", width: String(VIEWBOX_SIZE), height: String(VIEWBOX_SIZE), class: "weather-storm-flash" });
       layer.appendChild(flash);
+      const glow = this.svg("ellipse");
+      this.attrs(glow, { cx: "720", cy: "150", rx: "290", ry: "220", class: "weather-storm-glow" });
+      layer.appendChild(glow);
     }
 
     const roomsLayer = scene.querySelector<SVGGElement>(":scope > g.rooms-scene");
@@ -658,8 +680,32 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       filter: blur(17px);
       animation-duration: 28s;
     }
-    .weather-outside-rooms-scene .weather-rain-drop { fill: rgba(54,70,76,.58); stroke: rgba(219,219,204,.22); stroke-width: .45; opacity: .72; animation: explorerRainDrop var(--rain-duration,1.1s) linear infinite; animation-delay: var(--rain-delay,0s); }
-    .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(43,59,65,.72); stroke-width: .55; opacity: .86; }
+    .weather-outside-rooms-scene .weather-rain-field { filter: drop-shadow(0 2px 2px rgba(24,35,42,.20)); }
+    .weather-outside-rooms-scene .weather-rain-drop {
+      fill: rgba(78, 105, 118, .58);
+      stroke: rgba(226, 235, 232, .34);
+      stroke-width: .5;
+      opacity: .76;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerRainDrop var(--rain-duration,1.1s) cubic-bezier(.42,0,.72,.58) infinite;
+      animation-delay: var(--rain-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-rain-drop.is-heavy { fill: rgba(51,77,89,.74); stroke-width: .7; opacity: .92; }
+    .weather-outside-rooms-scene .weather-rain-depth-0 { opacity: .42; filter: blur(.45px); }
+    .weather-outside-rooms-scene .weather-rain-depth-1 { opacity: .68; }
+    .weather-outside-rooms-scene .weather-rain-depth-2 { opacity: .90; filter: drop-shadow(0 0 2px rgba(220,235,238,.30)); }
+    .weather-outside-rooms-scene .weather-rain-splash {
+      fill: none;
+      stroke: rgba(190, 211, 215, .55);
+      stroke-width: 1.4;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerRainSplash var(--rain-duration,1.1s) ease-out infinite;
+      animation-delay: var(--rain-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-rain-splash.is-heavy { stroke-width: 1.9; }
     .weather-outside-rooms-scene .weather-snow-flake {
       fill: #fff8df;
       stroke: rgba(172, 155, 121, .72);
@@ -714,7 +760,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene .weather-exceptional-orbit-2 { stroke: rgba(111, 74, 98, .42); stroke-width: 7; opacity: .34; animation-duration: 17s; }
     .weather-outside-rooms-scene.weather-exceptional .weather-wind-line-core { stroke: rgba(129, 66, 54, .72); }
     .weather-outside-rooms-scene.weather-exceptional .weather-wind-line-glow { stroke: rgba(222, 143, 93, .38); }
-    .weather-outside-rooms-scene .weather-storm-flash { fill: #fff0bd; opacity: 0; mix-blend-mode: screen; animation: explorerStormFlash 6.5s steps(1,end) infinite; }
+    .weather-outside-rooms-scene .weather-storm-flash { fill: #e8f2f4; opacity: 0; mix-blend-mode: screen; animation: explorerStormFlash 7.8s ease-out infinite; }
+    .weather-outside-rooms-scene .weather-storm-glow { fill: rgba(221,235,239,.68); opacity: 0; filter: blur(70px); mix-blend-mode: screen; animation: explorerStormGlow 7.8s ease-out infinite; }
     .weather-outside-rooms-scene.is-night .weather-rain-drop { fill: rgba(132,150,158,.64); stroke: rgba(224,227,218,.18); opacity: .72; }
     .weather-outside-rooms-scene.is-night .weather-cloud-rim { stroke: rgba(188, 207, 219, .40); filter: drop-shadow(0 0 6px rgba(158, 190, 211, .46)); }
     .weather-outside-rooms-scene.is-night .weather-wind-line-core { stroke: rgba(165, 190, 204, .64); filter: drop-shadow(0 0 4px rgba(149, 183, 202, .46)); }
@@ -723,6 +770,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-magic-mote-wind { fill: rgba(211, 228, 236, .74); filter: drop-shadow(0 0 6px rgba(165, 203, 223, .70)); }
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
+    .weather-outside-rooms-scene.is-night .weather-storm-glow { fill: rgba(177,205,222,.62); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.08) saturate(.68) contrast(.97); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(235, 226, 210, .18); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist-front { fill: rgba(246, 238, 223, .17); }
@@ -762,26 +810,30 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       100% { stroke-dashoffset: -82; opacity: .34; }
     }
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
-    @keyframes explorerRainDrop { from { transform: translate(7px,-42px); opacity: 0; } 12% { opacity: .82; } 82% { opacity: .68; } to { transform: translate(-13px,78px); opacity: 0; } }
+    @keyframes explorerRainDrop { from { transform: translate(7px,-42px) scale(.72); opacity: 0; } 10% { opacity: .82; } 76% { opacity: .72; } to { transform: translate(-13px,92px) scale(1.05); opacity: 0; } }
+    @keyframes explorerRainSplash { 0%,72% { transform: scale(.18); opacity: 0; } 78% { opacity: .68; } 100% { transform: scale(1.65); opacity: 0; } }
     @keyframes explorerSnowFall { 0% { transform: translate(0,-34px) rotate(0deg); opacity: 0; } 12% { opacity: .88; } 82% { opacity: .72; } 100% { transform: translate(28px,72px) rotate(210deg); opacity: 0; } }
     @keyframes explorerHailFall { from { transform: translate(9px,-48px); } to { transform: translate(-15px,82px); } }
     @keyframes explorerWindSweep { from { stroke-dashoffset: 620; transform: translateX(-74px); } to { stroke-dashoffset: 0; transform: translateX(92px); } }
     @keyframes explorerMagicMote { 0%,100% { transform: translate(0,8px) scale(.30) rotate(0deg); opacity: .08; } 28% { opacity: .74; } 52% { transform: translate(8px,-7px) scale(1.18) rotate(45deg); opacity: 1; } 76% { opacity: .46; } }
     @keyframes explorerExceptionalOrbit { from { transform: rotate(0deg) scale(.98); stroke-dashoffset: 0; } 50% { transform: rotate(180deg) scale(1.025); } to { transform: rotate(360deg) scale(.98); stroke-dashoffset: -240; } }
-    @keyframes explorerStormFlash { 0%,6%,8%,46%,48%,100% { opacity: 0; } 7%,47% { opacity: .52; } }
-    @keyframes explorerStormFlashNight { 0%,6%,8%,46%,48%,100% { opacity: 0; } 7%,47% { opacity: .28; } }
+    @keyframes explorerStormFlash { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .24; } 9.35% { opacity: .06; } 10.4% { opacity: .38; } 58.7% { opacity: .18; } }
+    @keyframes explorerStormFlashNight { 0%,8%,10%,12%,58%,60%,100% { opacity: 0; } 8.6% { opacity: .18; } 9.35% { opacity: .04; } 10.4% { opacity: .28; } 58.7% { opacity: .13; } }
+    @keyframes explorerStormGlow { 0%,7.8%,12%,58%,61%,100% { opacity: 0; transform: scale(.82); } 8.8% { opacity: .50; transform: scale(1.05); } 10.5% { opacity: .72; transform: scale(1.14); } 59% { opacity: .34; transform: scale(1); } }
     @media(prefers-reduced-motion:reduce) {
       .weather-outside-rooms-scene .weather-cloud,
       .weather-outside-rooms-scene .weather-cloud-fine-strand,
       .weather-outside-rooms-scene .weather-cloud-rim,
       .weather-outside-rooms-scene .weather-fog-band,
       .weather-outside-rooms-scene .weather-rain-drop,
+      .weather-outside-rooms-scene .weather-rain-splash,
       .weather-outside-rooms-scene .weather-snow-flake,
       .weather-outside-rooms-scene .weather-hail-stone,
       .weather-outside-rooms-scene .weather-wind-line,
       .weather-outside-rooms-scene .weather-magic-mote,
       .weather-outside-rooms-scene .weather-exceptional-orbit,
-      .weather-outside-rooms-scene .weather-storm-flash { animation: none; }
+      .weather-outside-rooms-scene .weather-storm-flash,
+      .weather-outside-rooms-scene .weather-storm-glow { animation: none; }
     }
   `;
 }
