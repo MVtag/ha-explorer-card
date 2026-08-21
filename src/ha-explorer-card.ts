@@ -17,7 +17,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.45.0";
+const CARD_VERSION = "0.45.1";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -1266,42 +1266,17 @@ export class HaExplorerCard extends LitElement {
       background: rgba(225, 224, 214, 0.22);
     }
     .weather-snow .weather-particles {
-      opacity: calc(0.64 * var(--weather-intensity));
-      inset: -10%;
-      background-image:
-        radial-gradient(
-          circle,
-          rgba(248, 244, 226, 0.9) 0 2px,
-          transparent 2.5px
-        ),
-        radial-gradient(
-          circle,
-          rgba(236, 232, 216, 0.75) 0 1.5px,
-          transparent 2px
-        );
-      background-size:
-        46px 52px,
-        71px 78px;
-      background-position:
-        0 0,
-        22px 19px;
-      animation: weatherSnow 8s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .state-snowy-rainy .weather-particles::after {
-      content: "";
-      position: absolute;
-      inset: -12%;
-      background: repeating-linear-gradient(105deg, transparent 0 19px, rgba(57, 67, 70, 0.34) 19px 20px, transparent 20px 39px);
-      background-size: 52px 96px;
-      animation: weatherRain 1.15s linear infinite;
+      content: none;
     }
     .state-hail .weather-particles {
-      opacity: calc(0.86 * var(--weather-intensity));
-      background-image:
-        radial-gradient(circle, rgba(250, 247, 232, 0.96) 0 3.4px, rgba(100, 111, 118, 0.52) 3.7px 4.5px, transparent 4.9px),
-        radial-gradient(circle, rgba(239, 239, 228, 0.9) 0 2.6px, rgba(92, 103, 110, 0.44) 2.9px 3.7px, transparent 4px);
-      background-size: 48px 58px, 71px 76px;
-      animation: weatherHail 0.88s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .weather-storm .weather-flash {
       display: none;

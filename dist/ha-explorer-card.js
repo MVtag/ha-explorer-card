@@ -259,10 +259,10 @@ const Jr = (e, t) => {
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Je;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let c, d, p = -1, g = 0;
-    for (; g < l.length && (s.lastIndex = g, d = s.exec(l), d !== null); ) g = s.lastIndex, s === Je ? d[1] === "!--" ? s = Ri : d[1] !== void 0 ? s = Mi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ee) : d[3] !== void 0 && (s = Ee) : s === Ee ? d[0] === ">" ? (s = o ?? Je, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ee : d[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
-    const u = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Je ? l + Yr : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + ke + u) : l + ke + (p === -2 ? a : u);
+    let c, d, p = -1, u = 0;
+    for (; u < l.length && (s.lastIndex = u, d = s.exec(l), d !== null); ) u = s.lastIndex, s === Je ? d[1] === "!--" ? s = Ri : d[1] !== void 0 ? s = Mi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ee) : d[3] !== void 0 && (s = Ee) : s === Ee ? d[0] === ">" ? (s = o ?? Je, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ee : d[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
+    const g = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
+    n += s === Je ? l + Yr : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + ke + g) : l + ke + (p === -2 ? a : g);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -279,15 +279,15 @@ class rt {
     for (; (o = Pe.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
         if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
-          const g = d[s++], u = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(g);
-          l.push({ type: 1, index: n, name: b[2], strings: u, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(p);
+          const u = d[s++], g = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(u);
+          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(p);
         } else p.startsWith(ke) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (ur.test(o.tagName)) {
-          const p = o.textContent.split(ke), g = p.length - 1;
-          if (g > 0) {
+          const p = o.textContent.split(ke), u = p.length - 1;
+          if (u > 0) {
             o.textContent = St ? St.emptyScript : "";
-            for (let u = 0; u < g; u++) o.append(p[u], tt()), Pe.nextNode(), l.push({ type: 2, index: ++n });
-            o.append(p[g], tt());
+            for (let g = 0; g < u; g++) o.append(p[g], tt()), Pe.nextNode(), l.push({ type: 2, index: ++n });
+            o.append(p[u], tt());
           }
         }
       } else if (o.nodeType === 8) if (o.data === hr) l.push({ type: 2, index: n });
@@ -1227,8 +1227,8 @@ let Z = class extends L {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), g = (c.x - l.x) / r.width * x, u = (c.y - l.y) / r.height * x, b = qi(this.viewport, p, d.x, d.y);
-        this.viewport = kt({ ...b, x: b.x + g, y: b.y + u }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * x, g = (c.y - l.y) / r.height * x, b = qi(this.viewport, p, d.x, d.y);
+        this.viewport = kt({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
       const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
@@ -1254,8 +1254,8 @@ let Z = class extends L {
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, g = r ? 58 : 52;
-      return M`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(u) => u.stopPropagation()} @click=${(u) => this.selectPresence(u, e)}>${a ? M`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : M`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${g} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, u = r ? 58 : 52;
+      return M`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? M`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : M`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
@@ -1449,7 +1449,7 @@ function jo(e, t, i) {
 function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = jo(r, o, t), a = [r.from, r.to].filter((g) => g.kind === "node").map((g) => i.get(g.id)).filter((g) => !!g).map((g) => Ve(g, t)).filter((g) => g.conditional), c = a.find((g) => !g.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((g) => g.active), p = n.conditional || a.length > 0;
+    const n = jo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Ve(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((u) => u.active), p = n.conditional || a.length > 0;
     return c ? {
       ...n,
       conditional: p,
@@ -1503,7 +1503,7 @@ function gi(e) {
 function Fi(e, t, i, r, o, n) {
   const s = Ae(e, i), a = Ae(e, r);
   if (!s || !a) return;
-  const l = wr(t), d = (o ? [...l].reverse() : l).map((g, u) => qo(e, g, u)).filter((g) => !!g), p = [
+  const l = wr(t), d = (o ? [...l].reverse() : l).map((u, g) => qo(e, u, g)).filter((u) => !!u), p = [
     {
       kind: "room",
       id: i,
@@ -1545,10 +1545,10 @@ function Oo(e, t) {
     if (!a.active) return;
     const l = a.edge, c = n(l.from), d = n(l.to);
     if (!c || !d) return;
-    const p = me(l.from), g = me(l.to);
-    if (p === g) return;
-    const u = Math.hypot(d[0] - c[0], d[1] - c[1]);
-    s(p, g, u), s(g, p, u);
+    const p = me(l.from), u = me(l.to);
+    if (p === u) return;
+    const g = Math.hypot(d[0] - c[0], d[1] - c[1]);
+    s(p, u, g), s(u, p, g);
   }), { adjacency: i, positions: r, endpoints: o };
 }
 function Lo(e, t, i, r, o) {
@@ -1570,15 +1570,15 @@ function Lo(e, t, i, r, o) {
     }
   }
   if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
-  const g = [s];
-  let u = s;
-  for (; u !== n; ) {
-    const m = d.get(u);
+  const u = [s];
+  let g = s;
+  for (; g !== n; ) {
+    const m = d.get(g);
     if (!m) return;
-    g.push(m), u = m;
+    u.push(m), g = m;
   }
-  g.reverse();
-  const b = g.map((m) => l.get(m)).map((m) => m ? Do(e, m) : void 0).filter((m) => !!m);
+  u.reverse();
+  const b = u.map((m) => l.get(m)).map((m) => m ? Do(e, m) : void 0).filter((m) => !!m);
   if (!(b.length < 2))
     return {
       source: "graph",
@@ -1589,12 +1589,12 @@ function Lo(e, t, i, r, o) {
 }
 function mi(e, t, i, r) {
   if (!t || !i || t === i) return;
-  const o = pt(e, r), n = o.filter((g) => !g.active), s = (e.routes ?? []).find(
-    (g) => g.from === t && g.to === i
+  const o = pt(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
+    (u) => u.from === t && u.to === i
   );
   if (s) return Fi(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
-    (g) => g.from === i && g.to === t
+    (u) => u.from === i && u.to === t
   );
   if (a) return Fi(e, a, t, i, !0, n);
   const l = Lo(e, t, i, o, n);
@@ -1648,11 +1648,11 @@ function Zi(e, t) {
     }
     c(P), c(R), d(P, R);
   });
-  const p = i.length ? (e.rooms ?? []).filter((A) => Ae(e, A.id) && !a.has(`room:${A.id}`)).map((A) => A.id) : [], g = i.length ? (e.route_nodes ?? []).filter((A) => !a.has(`node:${A.id}`)).map((A) => A.id) : [];
-  let u = 0;
+  const p = i.length ? (e.rooms ?? []).filter((A) => Ae(e, A.id) && !a.has(`room:${A.id}`)).map((A) => A.id) : [], u = i.length ? (e.route_nodes ?? []).filter((A) => !a.has(`node:${A.id}`)).map((A) => A.id) : [];
+  let g = 0;
   const b = new Set(l.keys());
   for (; b.size; ) {
-    u += 1;
+    g += 1;
     const A = b.values().next().value;
     if (!A) break;
     const P = [A];
@@ -1677,9 +1677,9 @@ function Zi(e, t) {
     invalidEdges: r,
     duplicateEdges: o,
     selfEdges: n,
-    components: u,
+    components: g,
     disconnectedRoomIds: p,
-    disconnectedNodeIds: g,
+    disconnectedNodeIds: u,
     brokenRouteNodeReferences: m,
     conditionalEdges: S.filter((A) => A.conditional).length,
     blockedEdges: k,
@@ -1711,11 +1711,11 @@ let Ke = class extends Z {
         y: (n.y ?? 0.5) * x
       }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
       if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
-        const g = this.resolveMovementPath(c, l, d, p);
-        this.createFootsteps(g);
-        const u = document.createElementNS(H, "animateTransform");
-        u.setAttribute("attributeName", "transform"), u.setAttribute("attributeType", "XML"), u.setAttribute("type", "translate"), u.setAttribute("values", g.map((b) => `${b.x} ${b.y}`).join(";")), u.setAttribute("keyTimes", this.buildKeyTimes(g).join(";")), u.setAttribute("dur", `${Ht}ms`), u.setAttribute("begin", "indefinite"), u.setAttribute("fill", "freeze"), u.setAttribute("calcMode", "linear"), a.appendChild(u), this.activeAnimations.set(n.id, u), u.beginElement(), window.setTimeout(() => {
-          this.activeAnimations.get(n.id) === u && (u.remove(), this.activeAnimations.delete(n.id));
+        const u = this.resolveMovementPath(c, l, d, p);
+        this.createFootsteps(u);
+        const g = document.createElementNS(H, "animateTransform");
+        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Ht}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
+          this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
         }, Ht + 80);
       }
       this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
@@ -1799,23 +1799,23 @@ let Ke = class extends Z {
       if (!a || !l) return;
       const c = this.edgeStatusColor(s), d = document.createElementNS(H, "line");
       if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
-      const p = (a.x + l.x) / 2, g = (a.y + l.y) / 2, u = document.createElementNS(H, "g");
-      u.setAttribute("transform", `translate(${p} ${g})`);
+      const p = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(H, "g");
+      g.setAttribute("transform", `translate(${p} ${u})`);
       const b = document.createElementNS(H, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), u.appendChild(b);
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
       const m = document.createElementNS(H, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", u.appendChild(m), !s.active && !r) {
+      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
         const y = document.createElementNS(H, "animate");
-        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), u.appendChild(y);
+        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), g.appendChild(y);
       }
-      this.appendSvgTitle(u, this.statusDescription(s)), o.appendChild(u);
+      this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
     }), t.forEach((s) => {
       const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(H, "g");
       p.setAttribute("transform", `translate(${c} ${d})`);
-      const g = document.createElementNS(H, "circle");
-      g.setAttribute("r", "22"), g.setAttribute("fill", "var(--card-background-color, #ffffff)"), g.setAttribute("fill-opacity", ".9"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "4"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
-      const u = document.createElementNS(H, "rect");
-      u.setAttribute("x", "-9"), u.setAttribute("y", "-13"), u.setAttribute("width", "15"), u.setAttribute("height", "26"), u.setAttribute("rx", "1.5"), u.setAttribute("fill", "none"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "3"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
+      const u = document.createElementNS(H, "circle");
+      u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(u);
+      const g = document.createElementNS(H, "rect");
+      g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g);
       const b = document.createElementNS(H, "circle");
       if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), p.appendChild(b), a === "blocked") {
         const w = document.createElementNS(H, "line");
@@ -1894,8 +1894,8 @@ let Ke = class extends Z {
         }
         l += I.length;
       }
-      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, g = c.end.y - c.start.y, u = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -g / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * u, S = c.start.x + p * d + b * y, k = c.start.y + g * d + m * y, w = Math.atan2(g, p) * 180 / Math.PI + 90, E = Math.round(s * Ht), N = document.createElementNS(H, "g");
-      N.setAttribute("transform", `translate(${S} ${k}) rotate(${w + u * 8})`), N.setAttribute("opacity", "0");
+      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? p / c.length : 0, y = 9 * g, S = c.start.x + p * d + b * y, k = c.start.y + u * d + m * y, w = Math.atan2(u, p) * 180 / Math.PI + 90, E = Math.round(s * Ht), N = document.createElementNS(H, "g");
+      N.setAttribute("transform", `translate(${S} ${k}) rotate(${w + g * 8})`), N.setAttribute("opacity", "0");
       const A = document.createElementNS(H, "ellipse");
       A.setAttribute("cx", "0"), A.setAttribute("cy", "-5"), A.setAttribute("rx", "6"), A.setAttribute("ry", "12"), A.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
       const P = document.createElementNS(H, "ellipse");
@@ -1951,10 +1951,10 @@ let Nt = class extends Ke {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
       [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
-        const g = document.createElementNS(O, "circle");
-        if (g.setAttribute("class", `magical-light-glow glow-${p + 1}`), g.setAttribute("r", String(c * (0.82 + n * 0.34))), g.setAttribute("fill", r), g.setAttribute("fill-opacity", String(d + n * d * 1.8)), g.setAttribute("stroke", "none"), e.appendChild(g), !i && p === 1) {
-          const u = document.createElementNS(O, "animate");
-          u.setAttribute("attributeName", "fill-opacity"), u.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), u.setAttribute("dur", "4.8s"), u.setAttribute("repeatCount", "indefinite"), g.appendChild(u);
+        const u = document.createElementNS(O, "circle");
+        if (u.setAttribute("class", `magical-light-glow glow-${p + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(d + n * d * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && p === 1) {
+          const g = document.createElementNS(O, "animate");
+          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
         }
       });
       const a = document.createElementNS(O, "circle"), l = 24 + n * 24;
@@ -2164,10 +2164,10 @@ let nt = class extends Nt {
     if (!t.length) return;
     const i = document.createElementNS(T, "g");
     i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
-      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), g = this.temperatureBand(c), u = document.createElementNS(T, "polygon");
-      u.setAttribute("points", this.polygonPoints(l)), u.setAttribute("class", `room-temperature-atmosphere temperature-${g}`), u.setAttribute("data-temperature-band", g), u.setAttribute("fill", p), u.setAttribute("fill-opacity", String(d)), u.setAttribute("stroke", p), u.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), u.setAttribute("stroke-width", "2"), u.setAttribute("stroke-linejoin", "round"), u.setAttribute("vector-effect", "non-scaling-stroke");
+      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(T, "polygon");
+      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", p), g.setAttribute("fill-opacity", String(d)), g.setAttribute("stroke", p), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
       const b = document.createElementNS(T, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
-      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, u.appendChild(b), i.appendChild(u);
+      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
@@ -2179,8 +2179,8 @@ let nt = class extends Nt {
     d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
     const p = document.createElementNS(T, "circle");
     p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
-    const g = document.createElementNS(T, "ellipse");
-    if (g.setAttribute("class", "fireplace-atmosphere-core"), g.setAttribute("cx", "0"), g.setAttribute("cy", String(-l * 0.05)), g.setAttribute("rx", String(l * 0.39)), g.setAttribute("ry", String(l * 0.31)), g.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), g.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(g), !r) {
+    const u = document.createElementNS(T, "ellipse");
+    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
       const m = document.createElementNS(T, "animate");
       m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), d.appendChild(m);
       const y = document.createElementNS(T, "animate");
@@ -2265,12 +2265,12 @@ let nt = class extends Nt {
       [43, -43, 58, 35],
       [82, -17, 50, 30],
       [14, 23, 92, 27]
-    ].forEach(([u, b, m, y], S) => {
+    ].forEach(([g, b, m, y], S) => {
       const k = document.createElementNS(T, "ellipse");
-      k.setAttribute("class", "overcast-cloud-puff"), k.setAttribute("cx", String(u)), k.setAttribute("cy", String(b)), k.setAttribute("rx", String(m)), k.setAttribute("ry", String(y)), k.setAttribute("opacity", String(0.34 + S % 3 * 0.08)), c.appendChild(k);
+      k.setAttribute("class", "overcast-cloud-puff"), k.setAttribute("cx", String(g)), k.setAttribute("cy", String(b)), k.setAttribute("rx", String(m)), k.setAttribute("ry", String(y)), k.setAttribute("opacity", String(0.34 + S % 3 * 0.08)), c.appendChild(k);
     }), a.appendChild(c);
-    const g = document.createElementNS(T, "path");
-    g.setAttribute("class", "overcast-cloud-strand"), g.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(g), s.appendChild(a), e.appendChild(s);
+    const u = document.createElementNS(T, "path");
+    u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
     const e = this.renderRoot.querySelector("svg.floorplan"), t = this.renderRoot.querySelector("g.scene");
@@ -2500,9 +2500,9 @@ let be = class extends nt {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, g]) => {
-      const u = this.createSvg("line");
-      this.setAttributes(u, { x1: String(c), y1: String(d), x2: String(p), y2: String(g), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(u);
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, u]) => {
+      const g = this.createSvg("line");
+      this.setAttributes(g, { x1: String(c), y1: String(d), x2: String(p), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2660,8 +2660,8 @@ let We = class extends be {
     d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
     const p = document.createElementNS(he, "text");
     if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = rn[o], c.appendChild(p), s.appendChild(c), r.name) {
-      const g = document.createElementNS(he, "text");
-      g.setAttribute("x", String(l.x)), g.setAttribute("y", String(l.y + 36)), g.setAttribute("text-anchor", "middle"), g.setAttribute("class", "zone-label"), g.setAttribute("fill", n), g.setAttribute("font-size", "22"), g.setAttribute("font-weight", "800"), g.setAttribute("font-family", "system-ui, sans-serif"), g.setAttribute("paint-order", "stroke"), g.setAttribute("stroke", "var(--card-background-color, #ffffff)"), g.setAttribute("stroke-width", "5"), g.setAttribute("stroke-linejoin", "round"), g.textContent = r.name, s.appendChild(g);
+      const u = document.createElementNS(he, "text");
+      u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
     }
     this.appendZoneTitle(s, t), e.appendChild(s);
   }
@@ -2830,18 +2830,18 @@ let ze = class extends We {
       const s = [n], a = [n];
       for (; a.length; ) {
         const d = a.shift(), p = this.polishBasePosition(d);
-        for (const g of [...i]) {
-          const u = r.get(g);
-          if (!u) continue;
-          const b = this.polishBasePosition(u);
-          Math.hypot(p.x - b.x, p.y - b.y) <= cn && (i.delete(g), s.push(u), a.push(u));
+        for (const u of [...i]) {
+          const g = r.get(u);
+          if (!g) continue;
+          const b = this.polishBasePosition(g);
+          Math.hypot(p.x - b.x, p.y - b.y) <= cn && (i.delete(u), s.push(g), a.push(g));
         }
       }
       if (s.length < 2) continue;
       const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
       l.forEach((d, p) => {
-        const g = this.polishBasePosition(d), u = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(g.x + Math.cos(u) * c, 38, x - 38), m = gt(g.y + Math.sin(u) * c, 38, x - 64);
-        t.set(d.id, { x: b - g.x, y: m - g.y, groupSize: l.length });
+        const u = this.polishBasePosition(d), g = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(u.x + Math.cos(g) * c, 38, x - 38), m = gt(u.y + Math.sin(g) * c, 38, x - 64);
+        t.set(d.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
       });
     }
     return t;
@@ -2891,9 +2891,9 @@ let ze = class extends We {
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
       let c = n.querySelector(":scope > g.presence-visual-offset");
-      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((u) => u.localName.toLowerCase() !== "animatetransform").forEach((u) => c?.appendChild(u)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
-      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", g = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      d.textContent = `${r.name ?? r.id} · ${dn[s]}${g}${p}`, n.appendChild(d);
+      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
+      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      d.textContent = `${r.name ?? r.id} · ${dn[s]}${u}${p}`, n.appendChild(d);
     });
   }
   polishRouteConfig() {
@@ -2980,23 +2980,23 @@ let ze = class extends We {
     if (t.trail_visible === !1) return;
     const i = this.polishEnsureTrailLayer();
     if (!i || e.length < 2) return;
-    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, g) => {
-      const u = e[g];
-      return { start: u, end: p, length: Math.hypot(p.x - u.x, p.y - u.y) };
-    }), l = a.reduce((p, g) => p + g.length, 0), c = this.polishTrailSpacing(r, o);
+    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, u) => {
+      const g = e[u];
+      return { start: g, end: p, length: Math.hypot(p.x - g.x, p.y - g.y) };
+    }), l = a.reduce((p, u) => p + u.length, 0), c = this.polishTrailSpacing(r, o);
     if (l < c) return;
     const d = Math.min(24, Math.max(3, Math.floor(l / c)));
     for (let p = 0; p < d; p += 1) {
-      const g = (p + 1) / (d + 1), u = l * g;
+      const u = (p + 1) / (d + 1), g = l * u;
       let b = 0, m = a[a.length - 1];
       for (const G of a) {
-        if (b + G.length >= u) {
+        if (b + G.length >= g) {
           m = G;
           break;
         }
         b += G.length;
       }
-      const y = m.length > 0 ? (u - b) / m.length : 0, S = m.end.x - m.start.x, k = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, A = m.length > 0 ? -k / m.length : 0, P = m.length > 0 ? S / m.length : 0, R = m.start.x + S * y + A * E * w, I = m.start.y + k * y + P * E * w, J = Math.atan2(k, S) * 180 / Math.PI + 90, Y = Math.round(g * ln), z = this.polishCreateSvg("g");
+      const y = m.length > 0 ? (g - b) / m.length : 0, S = m.end.x - m.start.x, k = m.end.y - m.start.y, w = p % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, N = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, A = m.length > 0 ? -k / m.length : 0, P = m.length > 0 ? S / m.length : 0, R = m.start.x + S * y + A * E * w, I = m.start.y + k * y + P * E * w, J = Math.atan2(k, S) * 180 / Math.PI + 90, Y = Math.round(u * ln), z = this.polishCreateSvg("g");
       z.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), z.setAttribute("data-presence-id", t.id), r === "person" && z.setAttribute("data-trail-style", String(o + 1)), z.setAttribute("transform", `translate(${R} ${I}) rotate(${J + (E ? w * N : 0)})`), z.setAttribute("opacity", "0"), this.polishAppendTrailShape(z, r, n, o);
       const q = this.polishCreateSvg("animate");
       this.polishSetAttributes(q, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), z.appendChild(q), i.appendChild(z), window.setTimeout(() => {
@@ -3067,7 +3067,7 @@ let ze = class extends We {
     for (const [a, l] of this.movementHistorySamples) {
       const c = n.get(a);
       if (!c) continue;
-      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), g = this.polishTrailColor(c), u = d === "person" ? this.polishPersonTrailVariant(c) : 0;
+      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), u = this.polishTrailColor(c), g = d === "person" ? this.polishPersonTrailVariant(c) : 0;
       if (d === "person" && this.movementHistory.show_rooms !== !1) {
         const b = /* @__PURE__ */ new Map();
         for (const m of l) m.roomId && b.set(m.roomId, m);
@@ -3075,7 +3075,7 @@ let ze = class extends We {
           const S = this.rooms.find((E) => E.id === m || E.area_id === m);
           if (!S || S.points.length < 3) continue;
           const k = Math.max(0, 0.16 * (1 - (t - y.at) / p)), w = this.polishCreateSvg("polygon");
-          this.polishSetAttributes(w, { points: S.points.map(([E, N]) => `${E * x},${N * x}`).join(" "), fill: g, "fill-opacity": String(k), stroke: g, "stroke-opacity": String(k * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
+          this.polishSetAttributes(w, { points: S.points.map(([E, N]) => `${E * x},${N * x}`).join(" "), fill: u, "fill-opacity": String(k), stroke: u, "stroke-opacity": String(k * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(w);
         }
       }
       for (let b = 1; b < l.length; b += 1) {
@@ -3085,9 +3085,9 @@ let ze = class extends We {
           if (d === "robot") {
             if (this.petRobotTrails.show_robot_route === !1) continue;
             const q = this.polishCreateSvg("line");
-            if (this.polishSetAttributes(q, { x1: String(E.x), y1: String(E.y), x2: String(N.x), y2: String(N.y), stroke: g, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(k), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), q.setAttribute("class", "robot-history-route"), o.appendChild(q), this.petRobotTrails.robot_direction_arrows !== !1 && R > 45) {
+            if (this.polishSetAttributes(q, { x1: String(E.x), y1: String(E.y), x2: String(N.x), y2: String(N.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(k), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), q.setAttribute("class", "robot-history-route"), o.appendChild(q), this.petRobotTrails.robot_direction_arrows !== !1 && R > 45) {
               const G = this.polishCreateSvg("path"), ve = (E.x + N.x) / 2, Ie = (E.y + N.y) / 2;
-              this.polishSetAttributes(G, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: g, "fill-opacity": String(Math.min(1, k + 0.12)), transform: `translate(${ve} ${Ie}) rotate(${I})`, "data-presence-id": a }), G.setAttribute("class", "robot-history-arrow"), o.appendChild(G);
+              this.polishSetAttributes(G, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, k + 0.12)), transform: `translate(${ve} ${Ie}) rotate(${I})`, "data-presence-id": a }), G.setAttribute("class", "robot-history-arrow"), o.appendChild(G);
             }
             continue;
           }
@@ -3095,7 +3095,7 @@ let ze = class extends We {
           const J = d === "pet" ? 52 : 70, Y = Math.min(12, Math.max(1, Math.floor(R / J))), z = I + 90;
           for (let q = 1; q <= Y; q += 1) {
             const G = q / (Y + 1), ve = q % 2 === 0 ? -1 : 1, Ie = R > 0 ? -P / R : 0, Ce = R > 0 ? A / R : 0, Qe = d === "pet" ? 7 : 6, Q = this.polishCreateSvg("g");
-            Q.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${u + 1}` : ""}`), Q.setAttribute("data-presence-id", a), Q.setAttribute("transform", `translate(${E.x + A * G + Ie * Qe * ve} ${E.y + P * G + Ce * Qe * ve}) rotate(${z + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), Q.setAttribute("opacity", String(k)), this.polishAppendTrailShape(Q, d, g, u), o.appendChild(Q);
+            Q.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${g + 1}` : ""}`), Q.setAttribute("data-presence-id", a), Q.setAttribute("transform", `translate(${E.x + A * G + Ie * Qe * ve} ${E.y + P * G + Ce * Qe * ve}) rotate(${z + ve * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), Q.setAttribute("opacity", String(k)), this.polishAppendTrailShape(Q, d, u, g), o.appendChild(Q);
           }
         }
       }
@@ -3357,7 +3357,7 @@ let Ge = class extends st {
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, g = n / 2, u = ft(s), b = Math.cos(u), m = Math.sin(u), y = -m, S = b, k = { x: d - b * g, y: p - m * g }, w = { x: d + b * g, y: p + m * g }, E = l === "start" ? k : w, N = l === "start" ? w : k, A = s + (l === "start" ? 0 : 180), P = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), R = A + (r ? P * a : 0), I = ft(R), J = { x: E.x + Math.cos(I) * n, y: E.y + Math.sin(I) * n }, Y = o ? ` open-age-${o.level}` : "", z = document.createElementNS($, "g");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, S = b, k = { x: d - b * u, y: p - m * u }, w = { x: d + b * u, y: p + m * u }, E = l === "start" ? k : w, N = l === "start" ? w : k, A = s + (l === "start" ? 0 : 180), P = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), R = A + (r ? P * a : 0), I = ft(R), J = { x: E.x + Math.cos(I) * n, y: E.y + Math.sin(I) * n }, Y = o ? ` open-age-${o.level}` : "", z = document.createElementNS($, "g");
     z.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${Y}`), z.setAttribute("data-opening-id", t.id), o && z.setAttribute("data-open-minutes", String(o.minutes)), this.line(z, k.x, k.y, w.x, w.y, "opening-gap");
     const q = Math.max(7, Math.min(12, n * 0.12));
     for (const Q of [k, w]) this.line(z, Q.x - y * q / 2, Q.y - S * q / 2, Q.x + y * q / 2, Q.y + S * q / 2, "door-jamb");
@@ -3373,9 +3373,9 @@ let Ge = class extends st {
     Qe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, z.appendChild(Qe), e.appendChild(z);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), g = -p, u = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, S = { x: a + d * b, y: l + p * b }, k = o ? ` open-age-${o.level}` : "", w = document.createElementNS($, "g");
-    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${k}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, S.x, S.y, "window-gap"), this.line(w, y.x + g * m, y.y + u * m, S.x + g * m, S.y + u * m, "window-pane"), this.line(w, y.x - g * m, y.y - u * m, S.x - g * m, S.y - u * m, "window-pane"), this.line(w, y.x + g * m, y.y + u * m, y.x - g * m, y.y - u * m, "window-frame-end"), this.line(w, S.x + g * m, S.y + u * m, S.x - g * m, S.y - u * m, "window-frame-end"), r && (this.line(w, y.x + g * m, y.y + u * m, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + g * 18, l + p * b * 0.12 + u * 18, S.x + g * m, S.y + u * m, "window-open-sash"));
-    const E = a + g * 17, N = l + u * 17, A = document.createElementNS($, "circle");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), u = -p, g = d, b = n / 2, m = 5.5, y = { x: a - d * b, y: l - p * b }, S = { x: a + d * b, y: l + p * b }, k = o ? ` open-age-${o.level}` : "", w = document.createElementNS($, "g");
+    w.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${k}`), w.setAttribute("data-opening-id", t.id), o && w.setAttribute("data-open-minutes", String(o.minutes)), this.line(w, y.x, y.y, S.x, S.y, "window-gap"), this.line(w, y.x + u * m, y.y + g * m, S.x + u * m, S.y + g * m, "window-pane"), this.line(w, y.x - u * m, y.y - g * m, S.x - u * m, S.y - g * m, "window-pane"), this.line(w, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(w, S.x + u * m, S.y + g * m, S.x - u * m, S.y - g * m, "window-frame-end"), r && (this.line(w, y.x + u * m, y.y + g * m, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, "window-open-sash"), this.line(w, a + d * b * 0.12 + u * 18, l + p * b * 0.12 + g * 18, S.x + u * m, S.y + g * m, "window-open-sash"));
+    const E = a + u * 17, N = l + g * 17, A = document.createElementNS($, "circle");
     A.setAttribute("cx", String(E)), A.setAttribute("cy", String(N)), A.setAttribute("r", "5.2"), A.setAttribute("class", "opening-status-dot"), w.appendChild(A), this.appendAgeIndicator(w, E, N, o);
     const P = document.createElementNS($, "title");
     P.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, w.appendChild(P), e.appendChild(w);
@@ -3550,14 +3550,14 @@ let Se = class extends Ge {
       "translate(14 7) scale(1.18 .62)"
     ];
     for (const [n, s, a, l, c] of t) {
-      const d = l % 4, p = l % 3, g = this.svg("g");
-      this.attrs(g, {
+      const d = l % 4, p = l % 3, u = this.svg("g");
+      this.attrs(u, {
         class: "weather-cloud-position",
         transform: `translate(${n} ${s}) scale(${a * 0.64})`,
         opacity: String(c)
       });
-      const u = this.svg("g");
-      this.attrs(u, {
+      const g = this.svg("g");
+      this.attrs(g, {
         class: `weather-cloud weather-cloud-${l % 3} weather-cloud-depth-${p} weather-cloud-form-${d}`
       });
       const b = this.svg("g");
@@ -3577,12 +3577,12 @@ let Se = class extends Ge {
           ry: String(Y),
           opacity: String(z)
         }), b.appendChild(q);
-      }), u.appendChild(b);
+      }), g.appendChild(b);
       const m = this.svg("path");
       this.attrs(m, {
         d: "M-145 40 C-112 12 -84 2 -55 10 C-30 20 -9 20 15 10 C43 -3 77 1 104 18 C128 32 135 51 121 64 C92 84 48 84 10 79 C-33 78 -82 88 -119 72 C-138 64 -151 51 -145 40 Z",
         class: "weather-cloud-shadow"
-      }), u.appendChild(m);
+      }), g.appendChild(m);
       const y = this.svg("g");
       this.attrs(y, {
         class: "weather-cloud-body",
@@ -3614,7 +3614,7 @@ let Se = class extends Ge {
       this.attrs(w, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
         class: "weather-cloud-wisp"
-      }), y.appendChild(w), u.appendChild(y);
+      }), y.appendChild(w), g.appendChild(y);
       const E = this.svg("g");
       this.attrs(E, {
         class: "weather-cloud-mist weather-cloud-mist-front",
@@ -3632,29 +3632,29 @@ let Se = class extends Ge {
           ry: String(Y),
           opacity: String(z)
         }), E.appendChild(q);
-      }), u.appendChild(E);
+      }), g.appendChild(E);
       const N = this.svg("path");
       if (this.attrs(N, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), u.appendChild(N), d === 1 || d === 3) {
+      }), g.appendChild(N), d === 1 || d === 3) {
         const R = this.svg("path");
         this.attrs(R, {
           d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), u.appendChild(R);
+        }), g.appendChild(R);
       }
       const A = this.svg("path");
       this.attrs(A, {
         d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
         class: "weather-cloud-highlight"
-      }), u.appendChild(A);
+      }), g.appendChild(A);
       const P = this.svg("path");
       this.attrs(P, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
         transform: r[l % r.length]
-      }), u.appendChild(P), g.appendChild(u), e.appendChild(g);
+      }), g.appendChild(P), u.appendChild(g), e.appendChild(u);
     }
   }
   appendFog(e, t = "fog") {
@@ -3684,9 +3684,9 @@ let Se = class extends Ge {
     const r = t ? 62 : 92, o = t ? 48 : 72;
     for (let s = -1; s < (t ? 18 : 13); s += 1)
       for (let a = -1; a < (t ? 24 : 17); a += 1) {
-        const l = Math.abs(s * 37 + a * 19), c = a * o + s % 2 * (t ? 17 : 25) + l % 13, d = s * r, p = (t ? 15 : 10) + l % (t ? 12 : 8), g = (t ? 2.4 : 1.6) + l % 3 * 0.35, u = (t ? 5 : 3) + l % 4, b = this.svg("path");
+        const l = Math.abs(s * 37 + a * 19), c = a * o + s % 2 * (t ? 17 : 25) + l % 13, d = s * r, p = (t ? 15 : 10) + l % (t ? 12 : 8), u = (t ? 2.4 : 1.6) + l % 3 * 0.35, g = (t ? 5 : 3) + l % 4, b = this.svg("path");
         this.attrs(b, {
-          d: `M ${c} ${d} C ${c - g * 0.7} ${d + p * 0.32}, ${c - u - g} ${d + p * 0.72}, ${c - u} ${d + p} C ${c - u + g} ${d + p * 0.72}, ${c + g * 0.45} ${d + p * 0.31}, ${c} ${d} Z`,
+          d: `M ${c} ${d} C ${c - u * 0.7} ${d + p * 0.32}, ${c - g - u} ${d + p * 0.72}, ${c - g} ${d + p} C ${c - g + u} ${d + p * 0.72}, ${c + u * 0.45} ${d + p * 0.31}, ${c} ${d} Z`,
           class: `weather-rain-drop weather-rain-depth-${l % 3}${t ? " is-heavy" : ""}`
         }), b.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + l % 7 * 0.06}s`), b.style.setProperty("--rain-delay", `${-(l % 17) * 0.11}s`), i.appendChild(b);
       }
@@ -3704,27 +3704,45 @@ let Se = class extends Ge {
     e.appendChild(i);
   }
   appendSnow(e, t = !1) {
-    const i = t ? 9 : 11, r = t ? 11 : 12;
-    for (let o = 0; o < i; o += 1)
-      for (let n = 0; n < r; n += 1) {
-        const s = o * 31 + n * 17, a = 30 + n * (t ? 96 : 88) + o % 2 * 31 + s % 9, l = 20 + o * (t ? 119 : 99) + s % 13, c = (t ? 1.7 : 2.1) + s % 4 * 0.72, d = s % (t ? 7 : 5) === 0, p = d ? this.svg("path") : this.svg("circle"), g = `weather-snow-flake weather-snow-size-${s % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
-        if (d) {
-          const u = c * 0.78;
-          this.attrs(p, {
-            d: `M ${a} ${l - c * 1.8} L ${a} ${l + c * 1.8} M ${a - c * 1.8} ${l} L ${a + c * 1.8} ${l} M ${a - u} ${l - u} L ${a + u} ${l + u} M ${a + u} ${l - u} L ${a - u} ${l + u}`,
+    const i = this.svg("g");
+    i.setAttribute("class", `weather-snow-field${t ? " is-sleet" : ""}`);
+    const r = t ? 9 : 11, o = t ? 11 : 12;
+    for (let n = 0; n < r; n += 1)
+      for (let s = 0; s < o; s += 1) {
+        const a = n * 31 + s * 17, l = 30 + s * (t ? 96 : 88) + n % 2 * 31 + a % 9, c = 20 + n * (t ? 119 : 99) + a % 13, d = (t ? 1.7 : 2.1) + a % 4 * 0.72, p = a % (t ? 7 : 5) === 0, u = p ? this.svg("path") : this.svg("circle"), g = `weather-snow-flake weather-snow-size-${a % 3} weather-snow-depth-${a % 3}${p ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        if (p) {
+          const m = d * 0.78;
+          this.attrs(u, {
+            d: `M ${l} ${c - d * 1.8} L ${l} ${c + d * 1.8} M ${l - d * 1.8} ${c} L ${l + d * 1.8} ${c} M ${l - m} ${c - m} L ${l + m} ${c + m} M ${l + m} ${c - m} L ${l - m} ${c + m}`,
             class: g
           });
         } else
-          this.attrs(p, { cx: String(a), cy: String(l), r: String(c), class: g });
-        p.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + s % 8 * 0.42}s`), p.style.setProperty("--snow-delay", `${-(s % 19) * 0.31}s`), e.appendChild(p);
+          this.attrs(u, { cx: String(l), cy: String(c), r: String(d), class: g });
+        u.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + a % 8 * 0.42}s`), u.style.setProperty("--snow-delay", `${-(a % 19) * 0.31}s`);
+        const b = t ? 8 + a % 11 : 18 + a % 31;
+        u.style.setProperty("--snow-drift", `${b}px`), u.style.setProperty("--snow-drift-mid", `${b * -0.35}px`), u.style.setProperty("--snow-turn", `${140 + a % 220}deg`), i.appendChild(u);
       }
+    e.appendChild(i);
   }
   appendHail(e) {
-    for (let t = -1; t < 15; t += 1)
-      for (let i = 0; i < 15; i += 1) {
-        const r = this.svg("circle"), o = 18 + i * 73 + t % 2 * 27, n = t * 76, s = 4.2 + (t + i) % 3 * 1.4;
-        this.attrs(r, { cx: String(o), cy: String(n), r: String(s), class: "weather-hail-stone" }), e.appendChild(r);
+    const t = this.svg("g");
+    t.setAttribute("class", "weather-hail-field");
+    for (let i = -1; i < 15; i += 1)
+      for (let r = 0; r < 15; r += 1) {
+        const o = Math.abs(i * 41 + r * 23), n = this.svg("circle"), s = 18 + r * 73 + i % 2 * 27 + o % 11, a = i * 76 + o % 17, l = 2.8 + o % 4 * 1.05;
+        this.attrs(n, { cx: String(s), cy: String(a), r: String(l), class: `weather-hail-stone weather-hail-depth-${o % 3}` }), n.style.setProperty("--hail-duration", `${0.72 + o % 6 * 0.09}s`), n.style.setProperty("--hail-delay", `${-(o % 17) * 0.08}s`), t.appendChild(n);
       }
+    for (let i = 0; i < 16; i += 1) {
+      const r = i * 53 + 11, o = this.svg("ellipse");
+      this.attrs(o, {
+        cx: String(24 + r * 71 % 950),
+        cy: String(760 + r * 31 % 210),
+        rx: String(4 + r % 5),
+        ry: "1.8",
+        class: `weather-hail-impact weather-hail-depth-${r % 3}`
+      }), o.style.setProperty("--hail-duration", `${0.76 + r % 5 * 0.1}s`), o.style.setProperty("--hail-delay", `${-(r % 19) * 0.09}s`), t.appendChild(o);
+    }
+    e.appendChild(t);
   }
   appendWind(e) {
     [105, 225, 350, 490, 640, 790, 925].forEach((t, i) => {
@@ -3915,14 +3933,41 @@ Se.styles = j`
       transform-box: fill-box;
       transform-origin: center;
       filter: drop-shadow(0 0 3px rgba(255, 239, 189, .48));
-      animation: explorerSnowFall var(--snow-duration,7s) linear infinite;
+      animation: explorerSnowFall var(--snow-duration,7s) ease-in-out infinite;
       animation-delay: var(--snow-delay,0s);
     }
-    .weather-outside-rooms-scene .weather-snow-size-0 { opacity: .62; }
-    .weather-outside-rooms-scene .weather-snow-size-2 { opacity: .96; }
+    .weather-outside-rooms-scene .weather-snow-size-0 { opacity: .48; }
+    .weather-outside-rooms-scene .weather-snow-size-1 { opacity: .76; }
+    .weather-outside-rooms-scene .weather-snow-size-2 { opacity: .98; }
+    .weather-outside-rooms-scene .weather-snow-depth-0 { filter: blur(.65px); }
+    .weather-outside-rooms-scene .weather-snow-depth-1 { filter: drop-shadow(0 0 2px rgba(255,239,189,.32)); }
+    .weather-outside-rooms-scene .weather-snow-depth-2 { filter: drop-shadow(0 0 5px rgba(255,239,189,.58)); }
     .weather-outside-rooms-scene .weather-snow-crystal { fill: none; stroke: rgba(255, 247, 218, .92); stroke-width: 1.4; filter: drop-shadow(0 0 5px rgba(242, 220, 159, .72)); }
-    .weather-outside-rooms-scene .weather-snow-flake.is-sleet { opacity: .62; filter: drop-shadow(0 0 2px rgba(211, 224, 226, .38)); }
-    .weather-outside-rooms-scene .weather-hail-stone { fill: #f7f2df; stroke: #7f8990; stroke-width: 1.7; opacity: .96; animation: explorerHailFall .92s linear infinite; }
+    .weather-outside-rooms-scene .weather-snow-flake.is-sleet { fill: rgba(223,235,235,.84); opacity: .58; filter: drop-shadow(0 1px 2px rgba(91,112,121,.32)); }
+    .weather-outside-rooms-scene .weather-hail-stone {
+      fill: #f8f4e8;
+      stroke: rgba(101,120,130,.82);
+      stroke-width: 1.25;
+      opacity: .92;
+      transform-box: fill-box;
+      transform-origin: center;
+      filter: drop-shadow(1px 2px 2px rgba(39,54,62,.38));
+      animation: explorerHailFall var(--hail-duration,.92s) cubic-bezier(.38,0,.72,.55) infinite;
+      animation-delay: var(--hail-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-hail-depth-0 { opacity: .48; filter: blur(.35px); }
+    .weather-outside-rooms-scene .weather-hail-depth-1 { opacity: .72; }
+    .weather-outside-rooms-scene .weather-hail-depth-2 { opacity: .96; }
+    .weather-outside-rooms-scene .weather-hail-impact {
+      fill: none;
+      stroke: rgba(215,229,229,.66);
+      stroke-width: 1.3;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerHailImpact var(--hail-duration,.92s) ease-out infinite;
+      animation-delay: var(--hail-delay,0s);
+    }
     .weather-outside-rooms-scene .weather-wind-line { fill: none; stroke-linecap: round; stroke-linejoin: round; animation: explorerWindSweep 4.4s linear infinite; }
     .weather-outside-rooms-scene .weather-wind-line-core { stroke: rgba(151, 126, 78, .72); stroke-width: 2.6; stroke-dasharray: 168 76 48 112; opacity: .72; filter: drop-shadow(0 0 3px rgba(238, 205, 132, .38)); }
     .weather-outside-rooms-scene .weather-wind-line-glow { stroke: rgba(239, 215, 163, .34); stroke-width: 11; stroke-dasharray: 182 63 39 120; opacity: .18; filter: blur(6px); }
@@ -4013,8 +4058,9 @@ Se.styles = j`
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
     @keyframes explorerRainDrop { from { transform: translate(7px,-42px) scale(.72); opacity: 0; } 10% { opacity: .82; } 76% { opacity: .72; } to { transform: translate(-13px,92px) scale(1.05); opacity: 0; } }
     @keyframes explorerRainSplash { 0%,72% { transform: scale(.18); opacity: 0; } 78% { opacity: .68; } 100% { transform: scale(1.65); opacity: 0; } }
-    @keyframes explorerSnowFall { 0% { transform: translate(0,-34px) rotate(0deg); opacity: 0; } 12% { opacity: .88; } 82% { opacity: .72; } 100% { transform: translate(28px,72px) rotate(210deg); opacity: 0; } }
-    @keyframes explorerHailFall { from { transform: translate(9px,-48px); } to { transform: translate(-15px,82px); } }
+    @keyframes explorerSnowFall { 0% { transform: translate(0,-38px) rotate(0deg) scale(.72); opacity: 0; } 12% { opacity: .88; } 46% { transform: translate(var(--snow-drift-mid,-10px),18px) rotate(96deg) scale(.94); } 78% { opacity: .74; } 100% { transform: translate(var(--snow-drift,28px),88px) rotate(var(--snow-turn,210deg)) scale(1.08); opacity: 0; } }
+    @keyframes explorerHailFall { 0% { transform: translate(8px,-52px) scale(.76); opacity: 0; } 12% { opacity: .94; } 72% { transform: translate(-11px,78px) scale(1); } 79% { transform: translate(-12px,66px) scale(.94); } 88% { transform: translate(-14px,83px) scale(1); opacity: .9; } 100% { transform: translate(-16px,91px) scale(.82); opacity: 0; } }
+    @keyframes explorerHailImpact { 0%,68% { transform: scale(.2); opacity: 0; } 76% { opacity: .72; } 100% { transform: scale(1.6); opacity: 0; } }
     @keyframes explorerWindSweep { from { stroke-dashoffset: 620; transform: translateX(-74px); } to { stroke-dashoffset: 0; transform: translateX(92px); } }
     @keyframes explorerMagicMote { 0%,100% { transform: translate(0,8px) scale(.30) rotate(0deg); opacity: .08; } 28% { opacity: .74; } 52% { transform: translate(8px,-7px) scale(1.18) rotate(45deg); opacity: 1; } 76% { opacity: .46; } }
     @keyframes explorerExceptionalOrbit { from { transform: rotate(0deg) scale(.98); stroke-dashoffset: 0; } 50% { transform: rotate(180deg) scale(1.025); } to { transform: rotate(360deg) scale(.98); stroke-dashoffset: -240; } }
@@ -4030,6 +4076,7 @@ Se.styles = j`
       .weather-outside-rooms-scene .weather-rain-splash,
       .weather-outside-rooms-scene .weather-snow-flake,
       .weather-outside-rooms-scene .weather-hail-stone,
+      .weather-outside-rooms-scene .weather-hail-impact,
       .weather-outside-rooms-scene .weather-wind-line,
       .weather-outside-rooms-scene .weather-magic-mote,
       .weather-outside-rooms-scene .weather-exceptional-orbit,
@@ -4808,18 +4855,18 @@ function On(e) {
   return t;
 }
 function Ln(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((k) => k.reactions ?? []), d = i.flatMap((k) => k.quick_actions ?? []), p = On(e), g = [];
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((k) => k.reactions ?? []), d = i.flatMap((k) => k.quick_actions ?? []), p = On(e), u = [];
   if (t)
     for (const k of p) {
       const w = t.states[k.entity];
       if (!w) {
-        g.push({ ...k, unavailable: !1 });
+        u.push({ ...k, unavailable: !1 });
         continue;
       }
-      (w.state === "unavailable" || w.state === "unknown") && g.push({ ...k, unavailable: !0 });
+      (w.state === "unavailable" || w.state === "unknown") && u.push({ ...k, unavailable: !0 });
     }
-  const u = g.filter((k) => !k.unavailable), b = r.filter((k) => !qn(k)), m = i.filter((k) => k.points.length < 3), y = (e.image ?? e.background ?? "").trim(), S = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? u.length ? `${u.length} binding${u.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : g.length ? `${p.length} bindings fundet · ${g.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: u.length ? "attention" : p.length ? "ready" : "optional", target: u[0]?.target ?? g[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: S, entityIssues: g, attentionCount: S.filter((k) => k.state === "attention").length, configuredFeatureCount: S.filter((k) => k.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const g = u.filter((k) => !k.unavailable), b = r.filter((k) => !qn(k)), m = i.filter((k) => k.points.length < 3), y = (e.image ?? e.background ?? "").trim(), S = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${p.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : p.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: S, entityIssues: u, attentionCount: S.filter((k) => k.state === "attention").length, configuredFeatureCount: S.filter((k) => k.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
 var Bn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -8018,8 +8065,8 @@ function ar(e, t, i, r, o, n) {
 function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, g = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, u = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
-  return p * e + g * t + u;
+  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  return p * e + u * t + g;
 }
 function Os(e, t, i) {
   const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = qs(e);
@@ -8046,8 +8093,8 @@ function Ls(e, t, i, r, o, n) {
     return c === void 0 || d === void 0 || !p ? {} : { ...Os(p, c, d), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), g = ge(n?.height);
-    return c === void 0 || d === void 0 || !p || !g || p <= 0 || g <= 0 ? {} : { x: we(c / p), y: we(d / g) };
+    const c = ge(te(i, a)), d = ge(te(i, l)), p = ge(n?.width), u = ge(n?.height);
+    return c === void 0 || d === void 0 || !p || !u || p <= 0 || u <= 0 ? {} : { x: we(c / p), y: we(d / u) };
   }
   return { x: we(te(i, a), e.x), y: we(te(i, l), e.y) };
 }
@@ -8057,7 +8104,7 @@ function Bs(e, t, i = [], r) {
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...vt(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), g = c || d ? !1 : Is(p, e.visible ?? !0), u = js(o, n, t) ?? e.room_id, b = Ls(e, o, a, i, u, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: g }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, u);
+  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = te(n, o.visible_attribute), u = c || d ? !1 : Is(p, e.visible ?? !0), g = js(o, n, t) ?? e.room_id, b = Ls(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
   return zs(y, a);
 }
 function Hs(e, t, i = [], r) {
@@ -8099,33 +8146,33 @@ function Us(e, t = Date.now()) {
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
-      for (const u of a)
-        s.push(u), cr(u, u, t);
+      for (const g of a)
+        s.push(g), cr(g, g, t);
       continue;
     }
-    const l = [...a], c = [...a].sort((u, b) => He(u).localeCompare(He(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), g = c.map((u) => {
-      const b = Fe.get(He(u));
-      if (!b) return { identity: u, track: void 0, scores: [] };
+    const l = [...a], c = [...a].sort((g, b) => He(g).localeCompare(He(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), u = c.map((g) => {
+      const b = Fe.get(He(g));
+      if (!b) return { identity: g, track: void 0, scores: [] };
       const m = l.map((y) => Gs(b, y)).sort((y, S) => y.score - S.score);
-      return { identity: u, track: b, scores: m };
-    }).sort((u, b) => (u.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
-    for (const u of g) {
-      const { identity: b, track: m } = u;
+      return { identity: g, track: b, scores: m };
+    }).sort((g, b) => (g.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
+    for (const g of u) {
+      const { identity: b, track: m } = g;
       if (!m) continue;
-      const y = u.scores.filter((N) => !p.has(N.candidate));
+      const y = g.scores.filter((N) => !p.has(N.candidate));
       if (!y.length) continue;
       const S = y[0], k = y[1], w = S.distance <= Fs || ai(zr(m), Dt(S.candidate)) <= Zs, E = !!k && k.score - S.score < Ws;
       w && !E && (d.set(He(b), S.candidate), p.add(S.candidate));
     }
-    for (const u of c) {
-      const b = He(u);
+    for (const g of c) {
+      const b = He(g);
       let m = d.get(b);
-      if (m || (m = l.find((S) => !p.has(S) && et(S) === et(u)), m && p.add(m)), m || (m = l.find((S) => !p.has(S)), m && p.add(m)), !m) {
-        s.push(u);
+      if (m || (m = l.find((S) => !p.has(S) && et(S) === et(g)), m && p.add(m)), m || (m = l.find((S) => !p.has(S)), m && p.add(m)), !m) {
+        s.push(g);
         continue;
       }
-      const y = { ...u, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), cr(u, m, t);
+      const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
+      s.push(y), cr(g, m, t);
     }
   }
   return [...s, ...o];
@@ -8138,7 +8185,7 @@ var Ys = Object.defineProperty, Qs = Object.getOwnPropertyDescriptor, Ot = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ys(t, i, o), o;
 };
-const Tr = "0.45.0";
+const Tr = "0.45.1";
 let Ue = class extends L {
   constructor() {
     super(...arguments), this.preview = !1;
@@ -8423,7 +8470,7 @@ let Ue = class extends L {
     ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
-    ), g = this.config.appearance?.occupancy?.enabled ?? !1, u = this.someoneHome(r), b = Math.min(
+    ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)
     ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), S = s || y === "clear-night", k = this.weatherEffect(y), w = Math.min(
@@ -8443,12 +8490,12 @@ let Ue = class extends L {
       "exceptional"
     ].includes(y), N = m && !S && ["sunny", "clear", "partlycloudy"].includes(y), A = y === "partlycloudy";
     return h`${this.renderCastleSurround(s)}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${S ? " moonlight" : ""}${N ? " sunlight" : ""}${A ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${g ? u ? " occupied" : " empty-house" : ""}${m && k !== "clear" ? ` weather-${k}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      class=${`${n ? "enchanted" : "classic"}${S ? " moonlight" : ""}${N ? " sunlight" : ""}${A ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && k !== "clear" ? ` weather-${k}` : ""}${m ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
       style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${w}`}
       ><header>
         <div>
           <span
-            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? S ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : k === "exceptional" ? "⚠ Exceptional Weather" : k === "wind" ? "➳ Wind over the Map" : k === "storm" ? "⛈ Storm over the Map" : k === "rain" ? "☂ Rain over the Map" : k === "snow" ? "❄ Snow over the Map" : k === "fog" ? "◇ Mist over the Map" : k === "cloudy" ? "☁ Clouded Map" : N ? "☀ Sunlit Map" : g && u ? "✦ Someone is Home" : g ? "◇ Empty House" : S ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? S ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : k === "exceptional" ? "⚠ Exceptional Weather" : k === "wind" ? "➳ Wind over the Map" : k === "storm" ? "⛈ Storm over the Map" : k === "rain" ? "☂ Rain over the Map" : k === "snow" ? "❄ Snow over the Map" : k === "fog" ? "◇ Mist over the Map" : k === "cloudy" ? "☁ Clouded Map" : N ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : S ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
@@ -9283,42 +9330,17 @@ Ue.styles = j`
       background: rgba(225, 224, 214, 0.22);
     }
     .weather-snow .weather-particles {
-      opacity: calc(0.64 * var(--weather-intensity));
-      inset: -10%;
-      background-image:
-        radial-gradient(
-          circle,
-          rgba(248, 244, 226, 0.9) 0 2px,
-          transparent 2.5px
-        ),
-        radial-gradient(
-          circle,
-          rgba(236, 232, 216, 0.75) 0 1.5px,
-          transparent 2px
-        );
-      background-size:
-        46px 52px,
-        71px 78px;
-      background-position:
-        0 0,
-        22px 19px;
-      animation: weatherSnow 8s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .state-snowy-rainy .weather-particles::after {
-      content: "";
-      position: absolute;
-      inset: -12%;
-      background: repeating-linear-gradient(105deg, transparent 0 19px, rgba(57, 67, 70, 0.34) 19px 20px, transparent 20px 39px);
-      background-size: 52px 96px;
-      animation: weatherRain 1.15s linear infinite;
+      content: none;
     }
     .state-hail .weather-particles {
-      opacity: calc(0.86 * var(--weather-intensity));
-      background-image:
-        radial-gradient(circle, rgba(250, 247, 232, 0.96) 0 3.4px, rgba(100, 111, 118, 0.52) 3.7px 4.5px, transparent 4.9px),
-        radial-gradient(circle, rgba(239, 239, 228, 0.9) 0 2.6px, rgba(92, 103, 110, 0.44) 2.9px 3.7px, transparent 4px);
-      background-size: 48px 58px, 71px 76px;
-      animation: weatherHail 0.88s linear infinite;
+      opacity: 0;
+      background: none;
+      animation: none;
     }
     .weather-storm .weather-flash {
       display: none;

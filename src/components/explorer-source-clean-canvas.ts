@@ -415,6 +415,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendSnow(layer: SVGGElement, sleet = false): void {
+    const snowLayer = this.svg("g");
+    snowLayer.setAttribute("class", `weather-snow-field${sleet ? " is-sleet" : ""}`);
     const rows = sleet ? 9 : 11;
     const columns = sleet ? 11 : 12;
     for (let row = 0; row < rows; row += 1) {
@@ -425,7 +427,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         const radius = (sleet ? 1.7 : 2.1) + (seed % 4) * .72;
         const isCrystal = seed % (sleet ? 7 : 5) === 0;
         const flake = isCrystal ? this.svg("path") : this.svg("circle");
-        const classes = `weather-snow-flake weather-snow-size-${seed % 3}${isCrystal ? " weather-snow-crystal" : ""}${sleet ? " is-sleet" : ""}`;
+        const classes = `weather-snow-flake weather-snow-size-${seed % 3} weather-snow-depth-${seed % 3}${isCrystal ? " weather-snow-crystal" : ""}${sleet ? " is-sleet" : ""}`;
 
         if (isCrystal) {
           const diagonal = radius * .78;
@@ -439,22 +441,47 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
         flake.style.setProperty("--snow-duration", `${(sleet ? 3.8 : 6.2) + (seed % 8) * .42}s`);
         flake.style.setProperty("--snow-delay", `${-(seed % 19) * .31}s`);
-        layer.appendChild(flake);
+        const drift = sleet ? 8 + seed % 11 : 18 + seed % 31;
+        flake.style.setProperty("--snow-drift", `${drift}px`);
+        flake.style.setProperty("--snow-drift-mid", `${drift * -.35}px`);
+        flake.style.setProperty("--snow-turn", `${140 + seed % 220}deg`);
+        snowLayer.appendChild(flake);
       }
     }
+    layer.appendChild(snowLayer);
   }
 
   private appendHail(layer: SVGGElement): void {
+    const hailLayer = this.svg("g");
+    hailLayer.setAttribute("class", "weather-hail-field");
     for (let row = -1; row < 15; row += 1) {
       for (let col = 0; col < 15; col += 1) {
+        const seed = Math.abs(row * 41 + col * 23);
         const hail = this.svg("circle");
-        const x = 18 + col * 73 + (row % 2) * 27;
-        const y = row * 76;
-        const radius = 4.2 + ((row + col) % 3) * 1.4;
-        this.attrs(hail, { cx: String(x), cy: String(y), r: String(radius), class: "weather-hail-stone" });
-        layer.appendChild(hail);
+        const x = 18 + col * 73 + (row % 2) * 27 + seed % 11;
+        const y = row * 76 + seed % 17;
+        const radius = 2.8 + (seed % 4) * 1.05;
+        this.attrs(hail, { cx: String(x), cy: String(y), r: String(radius), class: `weather-hail-stone weather-hail-depth-${seed % 3}` });
+        hail.style.setProperty("--hail-duration", `${.72 + (seed % 6) * .09}s`);
+        hail.style.setProperty("--hail-delay", `${-(seed % 17) * .08}s`);
+        hailLayer.appendChild(hail);
       }
     }
+    for (let index = 0; index < 16; index += 1) {
+      const seed = index * 53 + 11;
+      const impact = this.svg("ellipse");
+      this.attrs(impact, {
+        cx: String(24 + (seed * 71) % 950),
+        cy: String(760 + (seed * 31) % 210),
+        rx: String(4 + seed % 5),
+        ry: "1.8",
+        class: `weather-hail-impact weather-hail-depth-${seed % 3}`,
+      });
+      impact.style.setProperty("--hail-duration", `${.76 + (seed % 5) * .1}s`);
+      impact.style.setProperty("--hail-delay", `${-(seed % 19) * .09}s`);
+      hailLayer.appendChild(impact);
+    }
+    layer.appendChild(hailLayer);
   }
 
   private appendWind(layer: SVGGElement): void {
@@ -714,14 +741,41 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       transform-box: fill-box;
       transform-origin: center;
       filter: drop-shadow(0 0 3px rgba(255, 239, 189, .48));
-      animation: explorerSnowFall var(--snow-duration,7s) linear infinite;
+      animation: explorerSnowFall var(--snow-duration,7s) ease-in-out infinite;
       animation-delay: var(--snow-delay,0s);
     }
-    .weather-outside-rooms-scene .weather-snow-size-0 { opacity: .62; }
-    .weather-outside-rooms-scene .weather-snow-size-2 { opacity: .96; }
+    .weather-outside-rooms-scene .weather-snow-size-0 { opacity: .48; }
+    .weather-outside-rooms-scene .weather-snow-size-1 { opacity: .76; }
+    .weather-outside-rooms-scene .weather-snow-size-2 { opacity: .98; }
+    .weather-outside-rooms-scene .weather-snow-depth-0 { filter: blur(.65px); }
+    .weather-outside-rooms-scene .weather-snow-depth-1 { filter: drop-shadow(0 0 2px rgba(255,239,189,.32)); }
+    .weather-outside-rooms-scene .weather-snow-depth-2 { filter: drop-shadow(0 0 5px rgba(255,239,189,.58)); }
     .weather-outside-rooms-scene .weather-snow-crystal { fill: none; stroke: rgba(255, 247, 218, .92); stroke-width: 1.4; filter: drop-shadow(0 0 5px rgba(242, 220, 159, .72)); }
-    .weather-outside-rooms-scene .weather-snow-flake.is-sleet { opacity: .62; filter: drop-shadow(0 0 2px rgba(211, 224, 226, .38)); }
-    .weather-outside-rooms-scene .weather-hail-stone { fill: #f7f2df; stroke: #7f8990; stroke-width: 1.7; opacity: .96; animation: explorerHailFall .92s linear infinite; }
+    .weather-outside-rooms-scene .weather-snow-flake.is-sleet { fill: rgba(223,235,235,.84); opacity: .58; filter: drop-shadow(0 1px 2px rgba(91,112,121,.32)); }
+    .weather-outside-rooms-scene .weather-hail-stone {
+      fill: #f8f4e8;
+      stroke: rgba(101,120,130,.82);
+      stroke-width: 1.25;
+      opacity: .92;
+      transform-box: fill-box;
+      transform-origin: center;
+      filter: drop-shadow(1px 2px 2px rgba(39,54,62,.38));
+      animation: explorerHailFall var(--hail-duration,.92s) cubic-bezier(.38,0,.72,.55) infinite;
+      animation-delay: var(--hail-delay,0s);
+    }
+    .weather-outside-rooms-scene .weather-hail-depth-0 { opacity: .48; filter: blur(.35px); }
+    .weather-outside-rooms-scene .weather-hail-depth-1 { opacity: .72; }
+    .weather-outside-rooms-scene .weather-hail-depth-2 { opacity: .96; }
+    .weather-outside-rooms-scene .weather-hail-impact {
+      fill: none;
+      stroke: rgba(215,229,229,.66);
+      stroke-width: 1.3;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: explorerHailImpact var(--hail-duration,.92s) ease-out infinite;
+      animation-delay: var(--hail-delay,0s);
+    }
     .weather-outside-rooms-scene .weather-wind-line { fill: none; stroke-linecap: round; stroke-linejoin: round; animation: explorerWindSweep 4.4s linear infinite; }
     .weather-outside-rooms-scene .weather-wind-line-core { stroke: rgba(151, 126, 78, .72); stroke-width: 2.6; stroke-dasharray: 168 76 48 112; opacity: .72; filter: drop-shadow(0 0 3px rgba(238, 205, 132, .38)); }
     .weather-outside-rooms-scene .weather-wind-line-glow { stroke: rgba(239, 215, 163, .34); stroke-width: 11; stroke-dasharray: 182 63 39 120; opacity: .18; filter: blur(6px); }
@@ -812,8 +866,9 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     @keyframes explorerFogDrift { from { transform: translateX(-42px); } to { transform: translateX(54px); } }
     @keyframes explorerRainDrop { from { transform: translate(7px,-42px) scale(.72); opacity: 0; } 10% { opacity: .82; } 76% { opacity: .72; } to { transform: translate(-13px,92px) scale(1.05); opacity: 0; } }
     @keyframes explorerRainSplash { 0%,72% { transform: scale(.18); opacity: 0; } 78% { opacity: .68; } 100% { transform: scale(1.65); opacity: 0; } }
-    @keyframes explorerSnowFall { 0% { transform: translate(0,-34px) rotate(0deg); opacity: 0; } 12% { opacity: .88; } 82% { opacity: .72; } 100% { transform: translate(28px,72px) rotate(210deg); opacity: 0; } }
-    @keyframes explorerHailFall { from { transform: translate(9px,-48px); } to { transform: translate(-15px,82px); } }
+    @keyframes explorerSnowFall { 0% { transform: translate(0,-38px) rotate(0deg) scale(.72); opacity: 0; } 12% { opacity: .88; } 46% { transform: translate(var(--snow-drift-mid,-10px),18px) rotate(96deg) scale(.94); } 78% { opacity: .74; } 100% { transform: translate(var(--snow-drift,28px),88px) rotate(var(--snow-turn,210deg)) scale(1.08); opacity: 0; } }
+    @keyframes explorerHailFall { 0% { transform: translate(8px,-52px) scale(.76); opacity: 0; } 12% { opacity: .94; } 72% { transform: translate(-11px,78px) scale(1); } 79% { transform: translate(-12px,66px) scale(.94); } 88% { transform: translate(-14px,83px) scale(1); opacity: .9; } 100% { transform: translate(-16px,91px) scale(.82); opacity: 0; } }
+    @keyframes explorerHailImpact { 0%,68% { transform: scale(.2); opacity: 0; } 76% { opacity: .72; } 100% { transform: scale(1.6); opacity: 0; } }
     @keyframes explorerWindSweep { from { stroke-dashoffset: 620; transform: translateX(-74px); } to { stroke-dashoffset: 0; transform: translateX(92px); } }
     @keyframes explorerMagicMote { 0%,100% { transform: translate(0,8px) scale(.30) rotate(0deg); opacity: .08; } 28% { opacity: .74; } 52% { transform: translate(8px,-7px) scale(1.18) rotate(45deg); opacity: 1; } 76% { opacity: .46; } }
     @keyframes explorerExceptionalOrbit { from { transform: rotate(0deg) scale(.98); stroke-dashoffset: 0; } 50% { transform: rotate(180deg) scale(1.025); } to { transform: rotate(360deg) scale(.98); stroke-dashoffset: -240; } }
@@ -829,6 +884,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       .weather-outside-rooms-scene .weather-rain-splash,
       .weather-outside-rooms-scene .weather-snow-flake,
       .weather-outside-rooms-scene .weather-hail-stone,
+      .weather-outside-rooms-scene .weather-hail-impact,
       .weather-outside-rooms-scene .weather-wind-line,
       .weather-outside-rooms-scene .weather-magic-mote,
       .weather-outside-rooms-scene .weather-exceptional-orbit,
