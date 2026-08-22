@@ -18,8 +18,24 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   private readonly cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
   private weatherTransitionSequence = 0;
   private readonly weatherTransitionTimers = new Set<number>();
+  private compactWeatherQuery?: MediaQueryList;
+  private compactWeatherMode = false;
+  private readonly handleCompactWeatherChange = (event: MediaQueryListEvent): void => {
+    if (event.matches === this.compactWeatherMode) return;
+    this.compactWeatherMode = event.matches;
+    this.syncWeatherOutsideRooms();
+  };
+
+  public override connectedCallback(): void {
+    super.connectedCallback();
+    this.compactWeatherQuery = window.matchMedia("(max-width: 820px), (hover: none) and (pointer: coarse)");
+    this.compactWeatherMode = this.compactWeatherQuery.matches;
+    this.compactWeatherQuery.addEventListener("change", this.handleCompactWeatherChange);
+  }
 
   public override disconnectedCallback(): void {
+    this.compactWeatherQuery?.removeEventListener("change", this.handleCompactWeatherChange);
+    this.compactWeatherQuery = undefined;
     this.weatherTransitionTimers.forEach((timer) => window.clearTimeout(timer));
     this.weatherTransitionTimers.clear();
     this.renderRoot.querySelectorAll("g.weather-transition-shell, defs[data-weather-owner]").forEach((element) => element.remove());
@@ -111,8 +127,14 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     });
 
     const blur = this.svg("feGaussianBlur");
-    this.attrs(blur, { in: "SourceGraphic", stdDeviation: "2.6", result: "soft" });
+    this.attrs(blur, {
+      in: "SourceGraphic",
+      stdDeviation: this.compactWeatherMode ? "1.15" : "2.6",
+      result: "soft",
+    });
     filter.appendChild(blur);
+
+    if (this.compactWeatherMode) return filter;
 
     const turbulence = this.svg("feTurbulence");
     this.attrs(turbulence, {
@@ -207,7 +229,11 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       "translate(14 7) scale(1.18 .62)",
     ];
 
-    for (const [x, y, scale, index, opacity] of clouds) {
+    const renderedClouds = this.compactWeatherMode
+      ? clouds.filter((_, index) => index < 10 || (index >= 21 && index % 2 === 1))
+      : clouds;
+
+    for (const [x, y, scale, index, opacity] of renderedClouds) {
       const form = index % 4;
       const depth = index % 3;
       const positionGroup = this.svg("g");
@@ -371,10 +397,13 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       : mode === "partlycloudy"
         ? fogBanks.filter((_, index) => [2, 5, 8].includes(index))
         : fogBanks;
+    const renderedBanks = this.compactWeatherMode && mode === "fog"
+      ? visibleBanks.filter((_, index) => index % 3 !== 1)
+      : visibleBanks;
 
     const fogField = this.svg("g");
     fogField.setAttribute("class", `weather-fog-field is-${mode}`);
-    visibleBanks.forEach(([y, wobble, variant], index) => {
+    renderedBanks.forEach(([y, wobble, variant], index) => {
       const bank = this.svg("g");
       bank.setAttribute("class", `weather-fog-bank weather-fog-depth-${variant % 3}`);
       bank.style.setProperty("--fog-duration", `${17 + (variant % 5) * 2.7}s`);
@@ -402,8 +431,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     rainLayer.setAttribute("class", `weather-rain-field${heavy ? " is-heavy" : ""}`);
     const rowStep = heavy ? 62 : 92;
     const colStep = heavy ? 48 : 72;
-    for (let row = -1; row < (heavy ? 18 : 13); row += 1) {
-      for (let col = -1; col < (heavy ? 24 : 17); col += 1) {
+    const rowCount = this.compactWeatherMode ? (heavy ? 13 : 10) : (heavy ? 18 : 13);
+    const columnCount = this.compactWeatherMode ? (heavy ? 17 : 13) : (heavy ? 24 : 17);
+    for (let row = -1; row < rowCount; row += 1) {
+      for (let col = -1; col < columnCount; col += 1) {
         const seed = Math.abs(row * 37 + col * 19);
         const x = col * colStep + (row % 2) * (heavy ? 17 : 25) + (seed % 13);
         const y = row * rowStep;
@@ -420,7 +451,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         rainLayer.appendChild(drop);
       }
     }
-    const impactCount = heavy ? 18 : 11;
+    const impactCount = this.compactWeatherMode ? (heavy ? 10 : 7) : (heavy ? 18 : 11);
     for (let index = 0; index < impactCount; index += 1) {
       const seed = index * 43 + 17;
       const splash = this.svg("ellipse");
@@ -441,8 +472,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   private appendSnow(layer: SVGGElement, sleet = false): void {
     const snowLayer = this.svg("g");
     snowLayer.setAttribute("class", `weather-snow-field${sleet ? " is-sleet" : ""}`);
-    const rows = sleet ? 9 : 11;
-    const columns = sleet ? 11 : 12;
+    const rows = this.compactWeatherMode ? (sleet ? 7 : 8) : (sleet ? 9 : 11);
+    const columns = this.compactWeatherMode ? 9 : (sleet ? 11 : 12);
     for (let row = 0; row < rows; row += 1) {
       for (let col = 0; col < columns; col += 1) {
         const seed = row * 31 + col * 17;
@@ -478,8 +509,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   private appendHail(layer: SVGGElement): void {
     const hailLayer = this.svg("g");
     hailLayer.setAttribute("class", "weather-hail-field");
-    for (let row = -1; row < 15; row += 1) {
-      for (let col = 0; col < 15; col += 1) {
+    const rowCount = this.compactWeatherMode ? 10 : 15;
+    const columnCount = this.compactWeatherMode ? 11 : 15;
+    for (let row = -1; row < rowCount; row += 1) {
+      for (let col = 0; col < columnCount; col += 1) {
         const seed = Math.abs(row * 41 + col * 23);
         const hail = this.svg("circle");
         const x = 18 + col * 73 + (row % 2) * 27 + seed % 11;
@@ -491,7 +524,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
         hailLayer.appendChild(hail);
       }
     }
-    for (let index = 0; index < 16; index += 1) {
+    const impactCount = this.compactWeatherMode ? 9 : 16;
+    for (let index = 0; index < impactCount; index += 1) {
       const seed = index * 53 + 11;
       const impact = this.svg("ellipse");
       this.attrs(impact, {
@@ -511,7 +545,11 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   private appendWind(layer: SVGGElement): void {
     const windField = this.svg("g");
     windField.setAttribute("class", "weather-wind-field");
-    [105, 225, 350, 490, 640, 790, 925].forEach((y, index) => {
+    const windRows = [105, 225, 350, 490, 640, 790, 925];
+    const renderedRows = this.compactWeatherMode
+      ? windRows.filter((_, index) => ![2, 4].includes(index))
+      : windRows;
+    renderedRows.forEach((y, index) => {
       const lift = index % 2 === 0 ? -34 : 39;
       const curl = index % 3 === 0 ? 44 : 32;
       const d = `M -180 ${y} C 10 ${y + lift}, 190 ${y - lift}, 355 ${y} C 438 ${y + lift}, 510 ${y + lift}, 565 ${y + 2} C 610 ${y - curl}, 675 ${y - curl}, 700 ${y - 2} C 720 ${y + curl}, 660 ${y + curl + 12}, 635 ${y + 14} C 790 ${y - lift}, 960 ${y + lift}, 1190 ${y - 8}`;
@@ -538,7 +576,10 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendMagicMotes(layer: SVGGElement, mode: "cloud" | "snow" | "wind" | "exceptional"): void {
-    const count = mode === "exceptional" ? 30 : mode === "cloud" ? 24 : 18;
+    const fullCount = mode === "exceptional" ? 30 : mode === "cloud" ? 24 : 18;
+    const count = this.compactWeatherMode
+      ? mode === "exceptional" ? 18 : mode === "cloud" ? 14 : 12
+      : fullCount;
     for (let index = 0; index < count; index += 1) {
       const seed = index * 47 + (index % 5) * 29;
       const x = 22 + ((seed * 13 + index * index * 7) % 1035);
@@ -562,11 +603,12 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   }
 
   private appendExceptionalMagic(layer: SVGGElement): void {
-    [
+    const orbits = [
       [360, 176, 0],
       [285, 255, 1],
       [430, 118, 2],
-    ].forEach(([rx, ry, index]) => {
+    ];
+    (this.compactWeatherMode ? orbits.slice(0, 2) : orbits).forEach(([rx, ry, index]) => {
       const orbit = this.svg("ellipse");
       this.attrs(orbit, {
         cx: "520",
@@ -589,7 +631,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     const roomKey = this.rooms
       .map((room) => room.points.map(([x, y]) => `${x.toFixed(4)},${y.toFixed(4)}`).join(";"))
       .join("|");
-    const weatherKey = `${this.weatherEffect}:${safeState}:${this.weatherNight ? "night" : "day"}:${roomKey}`;
+    const weatherKey = `${this.weatherEffect}:${safeState}:${this.weatherNight ? "night" : "day"}:${this.compactWeatherMode ? "compact" : "full"}:${roomKey}`;
     const currentShell = scene.querySelector<SVGGElement>(":scope > g.weather-transition-shell:not(.is-weather-leaving)");
     if (currentShell?.dataset.weatherKey === weatherKey) {
       const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
@@ -629,7 +671,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     transitionShell.setAttribute("pointer-events", "none");
 
     const layer = this.svg("g");
-    layer.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${safeState}${this.weatherNight ? " is-night" : ""}`);
+    layer.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${safeState}${this.weatherNight ? " is-night" : ""}${this.compactWeatherMode ? " is-compact-weather" : ""}`);
     const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
     layer.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, intensity))));
 
@@ -895,6 +937,27 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
     .weather-outside-rooms-scene.is-night .weather-storm-glow { fill: rgba(177,205,222,.62); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud {
+      will-change: auto;
+    }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-mist { filter: blur(12px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-mist-front { filter: blur(9px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-shadow { filter: blur(11px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-strand { filter: blur(7px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-fine-strand { display: none; }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-highlight { filter: blur(4px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-rim {
+      filter: drop-shadow(0 0 3px rgba(242, 208, 126, .28));
+      animation-duration: 11s;
+    }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-haze { filter: blur(13px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-wisp { filter: blur(4px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-depth-0 .weather-fog-haze { filter: blur(16px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-depth-2 .weather-fog-haze { filter: blur(18px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-wind-line-glow { filter: blur(3px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-storm-glow { filter: blur(42px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-snow-depth-2,
+    .weather-outside-rooms-scene.is-compact-weather .weather-snow-crystal { filter: drop-shadow(0 0 3px rgba(242, 220, 159, .48)); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.08) saturate(.68) contrast(.97); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(235, 226, 210, .18); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist-front { fill: rgba(246, 238, 223, .17); }
