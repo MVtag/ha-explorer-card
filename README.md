@@ -256,9 +256,9 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-The v0.46.2 editor performance pass is complete. Advanced tools are activated only when first opened, closed tools keep their local draft state without receiving live Home Assistant updates, and large entity datalists are reused until the entity catalogue actually changes.
+The v0.46.3 final stability pass is complete. Pending image loads, animation timers, editor timers, gesture state, transient trails, and movement history are cleaned up when the card disconnects. At normal zoom, a vertical touch gesture can scroll the Home Assistant dashboard; after zooming, the map keeps full pan control. Drag and pinch gestures no longer trigger room or presence selection.
 
-1. **Final stability pass** — verify lifecycle cleanup, mobile interactions, and long-running dashboards.
+The current performance and stability roadmap is complete.
 
 ## License
 
