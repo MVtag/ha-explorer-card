@@ -17,7 +17,7 @@ let dr = class {
     return this.cssText;
   }
 };
-const Br = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), j = (e, ...t) => {
+const Br = (e) => new dr(typeof e == "string" ? e : e + "", void 0, ci), I = (e, ...t) => {
   const i = e.length === 1 ? e[0] : t.reduce((r, o, n) => r + ((s) => {
     if (s._$cssResult$ === !0) return s.cssText;
     if (typeof s == "number") return s;
@@ -249,7 +249,7 @@ let Be = class extends HTMLElement {
 Be.elementStyles = [], Be.shadowRootOptions = { mode: "open" }, Be[$e("elementProperties")] = /* @__PURE__ */ new Map(), Be[$e("finalized")] = /* @__PURE__ */ new Map(), Xr?.({ ReactiveElement: Be }), (It.reactiveElementVersions ??= []).push("2.1.2");
 const pi = globalThis, Pi = (e) => e, St = pi.trustedTypes, Ni = St ? St.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, pr = "$lit$", ke = `lit$${Math.random().toFixed(9).slice(2)}$`, hr = "?" + ke, Yr = `<${hr}>`, Me = document, tt = () => Me.createComment(""), it = (e) => e === null || typeof e != "object" && typeof e != "function", hi = Array.isArray, Qr = (e) => hi(e) || typeof e?.[Symbol.iterator] == "function", Ot = `[ 	
 \f\r]`, Je = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ri = /-->/g, Mi = />/g, Ee = RegExp(`>|${Ot}(?:([^\\s"'>=/]+)(${Ot}*=${Ot}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), zi = /'/g, Ti = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), h = gr(1), R = gr(2), se = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Di = /* @__PURE__ */ new WeakMap(), Ne = Me.createTreeWalker(Me, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), zi = /'/g, Ti = /"/g, ur = /^(?:script|style|textarea|title)$/i, gr = (e) => (t, ...i) => ({ _$litType$: e, strings: t, values: i }), u = gr(1), R = gr(2), ae = /* @__PURE__ */ Symbol.for("lit-noChange"), f = /* @__PURE__ */ Symbol.for("lit-nothing"), Di = /* @__PURE__ */ new WeakMap(), Ne = Me.createTreeWalker(Me, 129);
 function mr(e, t) {
   if (!hi(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return Ni !== void 0 ? Ni.createHTML(t) : t;
@@ -259,10 +259,10 @@ const Jr = (e, t) => {
   let o, n = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", s = Je;
   for (let a = 0; a < i; a++) {
     const l = e[a];
-    let c, p, d = -1, u = 0;
-    for (; u < l.length && (s.lastIndex = u, p = s.exec(l), p !== null); ) u = s.lastIndex, s === Je ? p[1] === "!--" ? s = Ri : p[1] !== void 0 ? s = Mi : p[2] !== void 0 ? (ur.test(p[2]) && (o = RegExp("</" + p[2], "g")), s = Ee) : p[3] !== void 0 && (s = Ee) : s === Ee ? p[0] === ">" ? (s = o ?? Je, d = -1) : p[1] === void 0 ? d = -2 : (d = s.lastIndex - p[2].length, c = p[1], s = p[3] === void 0 ? Ee : p[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
-    const g = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
-    n += s === Je ? l + Yr : d >= 0 ? (r.push(c), l.slice(0, d) + pr + l.slice(d) + ke + g) : l + ke + (d === -2 ? a : g);
+    let c, d, p = -1, h = 0;
+    for (; h < l.length && (s.lastIndex = h, d = s.exec(l), d !== null); ) h = s.lastIndex, s === Je ? d[1] === "!--" ? s = Ri : d[1] !== void 0 ? s = Mi : d[2] !== void 0 ? (ur.test(d[2]) && (o = RegExp("</" + d[2], "g")), s = Ee) : d[3] !== void 0 && (s = Ee) : s === Ee ? d[0] === ">" ? (s = o ?? Je, p = -1) : d[1] === void 0 ? p = -2 : (p = s.lastIndex - d[2].length, c = d[1], s = d[3] === void 0 ? Ee : d[3] === '"' ? Ti : zi) : s === Ti || s === zi ? s = Ee : s === Ri || s === Mi ? s = Je : (s = Ee, o = void 0);
+    const m = s === Ee && e[a + 1].startsWith("/>") ? " " : "";
+    n += s === Je ? l + Yr : p >= 0 ? (r.push(c), l.slice(0, p) + pr + l.slice(p) + ke + m) : l + ke + (p === -2 ? a : m);
   }
   return [mr(e, n + (e[i] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 };
@@ -271,29 +271,29 @@ class rt {
     let o;
     this.parts = [];
     let n = 0, s = 0;
-    const a = t.length - 1, l = this.parts, [c, p] = Jr(t, i);
+    const a = t.length - 1, l = this.parts, [c, d] = Jr(t, i);
     if (this.el = rt.createElement(c, r), Ne.currentNode = this.el.content, i === 2 || i === 3) {
-      const d = this.el.content.firstChild;
-      d.replaceWith(...d.childNodes);
+      const p = this.el.content.firstChild;
+      p.replaceWith(...p.childNodes);
     }
     for (; (o = Ne.nextNode()) !== null && l.length < a; ) {
       if (o.nodeType === 1) {
-        if (o.hasAttributes()) for (const d of o.getAttributeNames()) if (d.endsWith(pr)) {
-          const u = p[s++], g = o.getAttribute(d).split(ke), b = /([.?@])?(.*)/.exec(u);
-          l.push({ type: 1, index: n, name: b[2], strings: g, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(d);
-        } else d.startsWith(ke) && (l.push({ type: 6, index: n }), o.removeAttribute(d));
+        if (o.hasAttributes()) for (const p of o.getAttributeNames()) if (p.endsWith(pr)) {
+          const h = d[s++], m = o.getAttribute(p).split(ke), b = /([.?@])?(.*)/.exec(h);
+          l.push({ type: 1, index: n, name: b[2], strings: m, ctor: b[1] === "." ? _r : b[1] === "?" ? eo : b[1] === "@" ? to : jt }), o.removeAttribute(p);
+        } else p.startsWith(ke) && (l.push({ type: 6, index: n }), o.removeAttribute(p));
         if (ur.test(o.tagName)) {
-          const d = o.textContent.split(ke), u = d.length - 1;
-          if (u > 0) {
+          const p = o.textContent.split(ke), h = p.length - 1;
+          if (h > 0) {
             o.textContent = St ? St.emptyScript : "";
-            for (let g = 0; g < u; g++) o.append(d[g], tt()), Ne.nextNode(), l.push({ type: 2, index: ++n });
-            o.append(d[u], tt());
+            for (let m = 0; m < h; m++) o.append(p[m], tt()), Ne.nextNode(), l.push({ type: 2, index: ++n });
+            o.append(p[h], tt());
           }
         }
       } else if (o.nodeType === 8) if (o.data === hr) l.push({ type: 2, index: n });
       else {
-        let d = -1;
-        for (; (d = o.data.indexOf(ke, d + 1)) !== -1; ) l.push({ type: 7, index: n }), d += ke.length - 1;
+        let p = -1;
+        for (; (p = o.data.indexOf(ke, p + 1)) !== -1; ) l.push({ type: 7, index: n }), p += ke.length - 1;
       }
       n++;
     }
@@ -304,7 +304,7 @@ class rt {
   }
 }
 function Ze(e, t, i = e, r) {
-  if (t === se) return t;
+  if (t === ae) return t;
   let o = r !== void 0 ? i._$Co?.[r] : i._$Cl;
   const n = it(t) ? void 0 : t._$litDirective$;
   return o?.constructor !== n && (o?._$AO?.(!1), n === void 0 ? o = void 0 : (o = new n(e), o._$AT(e, i, r)), r !== void 0 ? (i._$Co ??= [])[r] = o : i._$Cl = o), o !== void 0 && (t = Ze(e, o._$AS(e, t.values), o, r)), t;
@@ -356,7 +356,7 @@ class dt {
     return this._$AB;
   }
   _$AI(t, i = this) {
-    t = Ze(this, t, i), it(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== se && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Qr(t) ? this.k(t) : this._(t);
+    t = Ze(this, t, i), it(t) ? t === f || t == null || t === "" ? (this._$AH !== f && this._$AR(), this._$AH = f) : t !== this._$AH && t !== ae && this._(t) : t._$litType$ !== void 0 ? this.$(t) : t.nodeType !== void 0 ? this.T(t) : Qr(t) ? this.k(t) : this._(t);
   }
   O(t) {
     return this._$AA.parentNode.insertBefore(t, this._$AB);
@@ -409,11 +409,11 @@ class jt {
   _$AI(t, i = this, r, o) {
     const n = this.strings;
     let s = !1;
-    if (n === void 0) t = Ze(this, t, i, 0), s = !it(t) || t !== this._$AH && t !== se, s && (this._$AH = t);
+    if (n === void 0) t = Ze(this, t, i, 0), s = !it(t) || t !== this._$AH && t !== ae, s && (this._$AH = t);
     else {
       const a = t;
       let l, c;
-      for (t = n[0], l = 0; l < n.length - 1; l++) c = Ze(this, a[r + l], i, l), c === se && (c = this._$AH[l]), s ||= !it(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
+      for (t = n[0], l = 0; l < n.length - 1; l++) c = Ze(this, a[r + l], i, l), c === ae && (c = this._$AH[l]), s ||= !it(c) || c !== this._$AH[l], c === f ? t = f : t !== f && (t += (c ?? "") + n[l + 1]), this._$AH[l] = c;
     }
     s && !o && this.j(t);
   }
@@ -442,7 +442,7 @@ class to extends jt {
     super(t, i, r, o, n), this.type = 5;
   }
   _$AI(t, i = this) {
-    if ((t = Ze(this, t, i, 0) ?? f) === se) return;
+    if ((t = Ze(this, t, i, 0) ?? f) === ae) return;
     const r = this._$AH, o = t === f && r !== f || t.capture !== r.capture || t.once !== r.once || t.passive !== r.passive, n = t !== f && (r === f || o);
     o && this.element.removeEventListener(this.name, this, r), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
   }
@@ -473,7 +473,7 @@ const oo = (e, t, i) => {
   return o._$AI(e), o;
 };
 const ui = globalThis;
-let B = class extends Be {
+let O = class extends Be {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -492,14 +492,14 @@ let B = class extends Be {
     super.disconnectedCallback(), this._$Do?.setConnected(!1);
   }
   render() {
-    return se;
+    return ae;
   }
 };
-B._$litElement$ = !0, B.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: B });
+O._$litElement$ = !0, O.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: O });
 const no = ui.litElementPolyfillSupport;
-no?.({ LitElement: B });
+no?.({ LitElement: O });
 (ui.litElementVersions ??= []).push("4.2.2");
-const I = (e) => (t, i) => {
+const D = (e) => (t, i) => {
   i !== void 0 ? i.addInitializer(() => {
     customElements.define(e, t);
   }) : customElements.define(e, t);
@@ -567,7 +567,7 @@ class ii extends br {
   }
   render(t) {
     if (t === f || t == null) return this._t = void 0, this.it = t;
-    if (t === se) return t;
+    if (t === ae) return t;
     if (typeof t != "string") throw Error(this.constructor.directiveName + "() called with a non-string value");
     if (t === this.it) return this._t;
     this.it = t;
@@ -680,7 +680,7 @@ const wo = {
   opening: "Dør / vindue",
   temperature: "Temperatur"
 };
-let fe = class extends B {
+let be = class extends O {
   constructor() {
     super(...arguments), this.presences = [], this.pendingLights = /* @__PURE__ */ new Set(), this.pendingRoomAction = "", this.actionError = "";
   }
@@ -765,7 +765,7 @@ let fe = class extends B {
   render() {
     if (!this.room) return f;
     const e = this.statuses, t = this.occupants, i = this.roomLightIds, r = this.room.quick_actions ?? [];
-    return h`
+    return u`
       <section class="panel" role="dialog" aria-label=${`Rumdetaljer for ${this.room.name ?? this.room.id}`}>
         <header>
           <div>
@@ -780,20 +780,20 @@ let fe = class extends B {
           <span>${t.length} ${t.length === 1, "til stede"}</span>
         </div>
 
-        ${t.length ? h`<div class="occupants" aria-label="Personer og objekter i rummet">
+        ${t.length ? u`<div class="occupants" aria-label="Personer og objekter i rummet">
               ${t.map((o) => {
       const n = xo(o.avatar);
-      return h`<span class="occupant">
-                  ${n ? h`<img src=${n} alt="" />` : h`<span class="occupant-dot"></span>`}
+      return u`<span class="occupant">
+                  ${n ? u`<img src=${n} alt="" />` : u`<span class="occupant-dot"></span>`}
                   ${o.name ?? o.id}
                 </span>`;
     })}
             </div>` : f}
 
-        ${i.length || r.length ? h`<div class="quick-actions" aria-label="Hurtighandlinger">
+        ${i.length || r.length ? u`<div class="quick-actions" aria-label="Hurtighandlinger">
               <h3>Hurtighandlinger</h3>
               <div class="quick-grid">
-                ${i.length ? h`
+                ${i.length ? u`
                       <button
                         @click=${() => {
       this.runRoomService("lights:on", "light", "turn_on", i, "alle lys");
@@ -807,7 +807,7 @@ let fe = class extends B {
                         ?disabled=${!!this.pendingRoomAction || !this.hass?.callService}
                       ><span>◌</span>${this.pendingRoomAction === "lights:off" ? "Vent…" : "Sluk alt"}</button>
                     ` : f}
-                ${r.map((o) => h`
+                ${r.map((o) => u`
                   <button
                     @click=${() => this.runQuickAction(o)}
                     ?disabled=${!!this.pendingRoomAction || !this.hass?.callService}
@@ -819,19 +819,19 @@ let fe = class extends B {
               </div>
             </div>` : f}
 
-        ${e.length ? h`<div class="entities">
+        ${e.length ? u`<div class="entities">
               ${e.map((o) => this.renderStatus(o))}
-            </div>` : h`<p class="empty">
+            </div>` : u`<p class="empty">
               Der er endnu ikke knyttet lys, temperatur, bevægelse eller andre enheder til rummet.
             </p>`}
 
-        ${this.actionError ? h`<p class="error" role="alert">${this.actionError}</p>` : f}
+        ${this.actionError ? u`<p class="error" role="alert">${this.actionError}</p>` : f}
       </section>
     `;
   }
   renderStatus(e) {
     const t = e.reaction.entity, i = e.reaction.kind, r = this.pendingLights.has(t);
-    return h`
+    return u`
       <article class=${`entity ${e.active ? "active" : "inactive"}`}>
         <button class="entity-main" @click=${() => this.openMoreInfo(t)}>
           <span class=${`entity-icon ${i}`}>${wo[i]}</span>
@@ -840,7 +840,7 @@ let fe = class extends B {
             <small>${ko[i]} · ${this.statusText(e)}</small>
           </span>
         </button>
-        ${i === "light" ? h`<button
+        ${i === "light" ? u`<button
               class="action"
               @click=${(o) => this.toggleLight(o, t)}
               ?disabled=${r || !this.hass?.callService}
@@ -849,7 +849,7 @@ let fe = class extends B {
     `;
   }
 };
-fe.styles = j`
+be.styles = I`
     :host {
       position: absolute;
       z-index: 8;
@@ -1044,25 +1044,25 @@ fe.styles = j`
   `;
 De([
   C({ attribute: !1 })
-], fe.prototype, "room", 2);
+], be.prototype, "room", 2);
 De([
   C({ attribute: !1 })
-], fe.prototype, "presences", 2);
+], be.prototype, "presences", 2);
 De([
   C({ attribute: !1 })
-], fe.prototype, "hass", 2);
+], be.prototype, "hass", 2);
 De([
   v()
-], fe.prototype, "pendingLights", 2);
+], be.prototype, "pendingLights", 2);
 De([
   v()
-], fe.prototype, "pendingRoomAction", 2);
+], be.prototype, "pendingRoomAction", 2);
 De([
   v()
-], fe.prototype, "actionError", 2);
-fe = De([
-  I("explorer-room-panel")
-], fe);
+], be.prototype, "actionError", 2);
+be = De([
+  D("explorer-room-panel")
+], be);
 const x = 1e3;
 function Bt(e, t, i) {
   return Math.min(i, Math.max(t, e));
@@ -1088,7 +1088,7 @@ function qi(e, t, i, r) {
     y: r - (r - e.y) * o
   });
 }
-var So = Object.defineProperty, Co = Object.getOwnPropertyDescriptor, U = (e, t, i, r) => {
+var So = Object.defineProperty, Co = Object.getOwnPropertyDescriptor, Y = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Co(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && So(t, i, o), o;
@@ -1160,7 +1160,7 @@ function zo(e) {
     n ? o.textContent = n : o.remove();
   }), i.hasAttribute("xmlns") || i.setAttribute("xmlns", "http://www.w3.org/2000/svg"), i;
 }
-let V = class extends B {
+let V = class extends O {
   constructor() {
     super(...arguments), this.image = "", this.rooms = [], this.presences = [], this.minZoom = 1, this.maxZoom = 6, this.initialZoom = 1, this.fitMode = "contain", this.viewport = { zoom: 1, x: 0, y: 0 }, this.metadata = { ...Li }, this.imageSource = "", this.svgMarkup = "", this.loadError = "", this.activePointers = /* @__PURE__ */ new Map(), this.imageRequest = 0;
   }
@@ -1227,8 +1227,8 @@ let V = class extends B {
     if (n) {
       const s = Math.hypot(t.x - n.x, t.y - n.y), a = Math.hypot(o.x - n.x, o.y - n.y);
       if (s > 0) {
-        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, p = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, d = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), u = (c.x - l.x) / r.width * x, g = (c.y - l.y) / r.height * x, b = qi(this.viewport, d, p.x, p.y);
-        this.viewport = kt({ ...b, x: b.x + u, y: b.y + g }, this.minZoom);
+        const l = { x: (t.x + n.x) / 2, y: (t.y + n.y) / 2 }, c = { x: (o.x + n.x) / 2, y: (o.y + n.y) / 2 }, d = { x: (l.x - r.left) / r.width * x, y: (l.y - r.top) / r.height * x }, p = Bt(this.viewport.zoom * (a / s), this.minZoom, this.maxZoom), h = (c.x - l.x) / r.width * x, m = (c.y - l.y) / r.height * x, b = qi(this.viewport, p, d.x, d.y);
+        this.viewport = kt({ ...b, x: b.x + h, y: b.y + m }, this.minZoom);
       }
     } else if (this.viewport.zoom > this.minZoom + 1e-4) {
       const s = (o.x - t.x) / r.width * x, a = (o.y - t.y) / r.height * x;
@@ -1248,73 +1248,73 @@ let V = class extends B {
   renderRooms() {
     return this.rooms.map((e) => {
       if (!e.points.length) return f;
-      const t = e.points.map(([c, p]) => `${c * x},${p * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, p) => c + p[0], 0) / e.points.length, o = e.points.reduce((c, p) => c + p[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
+      const t = e.points.map(([c, d]) => `${c * x},${d * x}`).join(" "), i = e.id === this.selectedRoom?.id, r = e.points.reduce((c, d) => c + d[0], 0) / e.points.length, o = e.points.reduce((c, d) => c + d[1], 0) / e.points.length, n = (e.label?.x ?? r) * x, s = (e.label?.y ?? o) * x, a = e.color ?? "#03a9f4", l = Math.max(76, Math.min(190, (e.name?.length ?? 0) * 15 + 28));
       return R`<g class=${i ? "room selected" : "room"} @pointerdown=${(c) => c.stopPropagation()} @click=${(c) => this.selectRoom(c, e)}><polygon points=${t} fill=${a} fill-opacity=${i ? "0.34" : "0.18"} stroke=${a} stroke-opacity="0.9" stroke-width=${i ? "5" : "3"} vector-effect="non-scaling-stroke"></polygon>${e.name ? R`<rect class="room-label-mask" x=${n - l / 2} y=${s - 18} width=${l} height="36" rx="10"></rect><text class="room-label" x=${n} y=${s} text-anchor="middle" dominant-baseline="middle">${e.name}</text>` : f}</g>`;
     });
   }
   renderPresences() {
     return this.presences.filter((e) => e.visible !== !1).map((e, t) => {
-      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, p = c * 2, d = `presence-avatar-${t}`, u = r ? 58 : 52;
-      return R`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(g) => g.stopPropagation()} @click=${(g) => this.selectPresence(g, e)}>${a ? R`<defs><clipPath id=${d}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${p - 6} height=${p - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${d})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : R`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${u} text-anchor="middle">${e.name ?? e.id}</text></g>`;
+      const i = e.type ?? "person", r = e.id === this.selectedPresence?.id, o = (e.x ?? 0.5) * x, n = (e.y ?? 0.5) * x, s = e.icon ?? Eo[i], a = Mo(e.avatar), l = e.color ?? "#03a9f4", c = r ? 31 : 25, d = c * 2, p = `presence-avatar-${t}`, h = r ? 58 : 52;
+      return R`<g class=${r ? "presence selected" : "presence"} transform=${`translate(${o} ${n})`} @pointerdown=${(m) => m.stopPropagation()} @click=${(m) => this.selectPresence(m, e)}>${a ? R`<defs><clipPath id=${p}><circle r=${c - 3}></circle></clipPath></defs><circle class="presence-avatar-background" r=${c} fill=${l}></circle><image href=${a} x=${-c + 3} y=${-c + 3} width=${d - 6} height=${d - 6} preserveAspectRatio="xMidYMid slice" clip-path=${`url(#${p})`}></image><circle class="presence-border" r=${c} fill="none" stroke=${l} stroke-width=${r ? "5" : "3"} vector-effect="non-scaling-stroke"></circle>` : R`<circle class="presence-marker" r=${c} fill=${l} fill-opacity=${r ? "1" : ".88"}></circle><text class="presence-icon" text-anchor="middle" dominant-baseline="middle">${s}</text>`}<text class="presence-label" y=${h} text-anchor="middle">${e.name ?? e.id}</text></g>`;
     });
   }
   render() {
     const e = Ao(this.viewport);
-    return h`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${x} ${x}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
+    return u`<div class="viewport"><svg class="floorplan" viewBox="0 0 ${x} ${x}" @wheel=${this.handleWheel} @pointerdown=${this.handlePointerDown} @pointermove=${this.handlePointerMove} @pointerup=${this.handlePointerUp} @pointercancel=${this.handlePointerUp} @click=${() => {
       this.selectedRoom = void 0, this.selectedPresence = void 0;
-    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? R`<g class="floorplan-source inline-source">${uo(this.svgMarkup)}</g>` : this.imageSource ? R`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? h`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
+    }}><rect class="backdrop" width=${x} height=${x}></rect><g class="scene" transform=${e}>${this.svgMarkup ? R`<g class="floorplan-source inline-source">${uo(this.svgMarkup)}</g>` : this.imageSource ? R`<image class="floorplan-source" href=${this.imageSource} x="0" y="0" width=${x} height=${x} preserveAspectRatio=${this.fitMode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>` : f}<g class="rooms-scene">${this.renderRooms()}</g><g class="presences-scene">${this.renderPresences()}</g></g></svg>${this.loadError ? u`<div class="load-error">${this.loadError}</div>` : f}<button class="zoom-badge" type="button" title="Nulstil zoom og placering" aria-label="Nulstil zoom og placering" @click=${(t) => {
       t.stopPropagation(), this.resetViewport();
-    }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? h`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
+    }}>⌂ &nbsp; ${Math.round(this.viewport.zoom * 100)}%</button></div>${this.selectedRoom ? u`<explorer-room-panel .hass=${this.hass} .room=${this.selectedRoom} @close=${() => this.selectedRoom = void 0}></explorer-room-panel>` : f}`;
   }
 };
-V.styles = j`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
-U([
+V.styles = I`:host{display:block;position:relative}.viewport{position:relative;overflow:hidden;background:var(--secondary-background-color);touch-action:none;max-height:var(--explorer-viewport-max-height,none)}svg.floorplan{display:block;width:100%;height:auto;aspect-ratio:1/1;user-select:none}.backdrop{fill:var(--card-background-color,#fff)}.floorplan-source{pointer-events:none}.inline-source{pointer-events:none}.room{cursor:pointer}.room polygon{transition:fill-opacity .18s ease,stroke-width .18s ease}.room-label-mask{fill:transparent;pointer-events:none}.room-label{font-size:18px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.presence{cursor:pointer}.presence-icon{font-size:24px;fill:#fff;pointer-events:none}.presence-label{font-size:16px;font-weight:700;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color,#fff);stroke-width:4px;stroke-linejoin:round;pointer-events:none}.zoom-badge{position:absolute;right:14px;bottom:14px;padding:8px 12px;border:0;border-radius:999px;background:rgba(0,0,0,.66);color:#fff;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;touch-action:manipulation}.zoom-badge:focus-visible{outline:2px solid var(--primary-color,#03a9f4);outline-offset:2px}.load-error{position:absolute;left:14px;right:14px;top:14px;padding:10px 12px;border-radius:10px;background:var(--error-color,#db4437);color:#fff;font-size:.85rem;font-weight:700}@media(max-width:600px){.room-label{font-size:16px}.presence-label{font-size:14px}.zoom-badge{right:10px;bottom:10px}}`;
+Y([
   C({ attribute: !1 })
 ], V.prototype, "hass", 2);
-U([
+Y([
   C()
 ], V.prototype, "image", 2);
-U([
+Y([
   C({ attribute: !1 })
 ], V.prototype, "rooms", 2);
-U([
+Y([
   C({ attribute: !1 })
 ], V.prototype, "presences", 2);
-U([
+Y([
   C({ type: Number, attribute: "min-zoom" })
 ], V.prototype, "minZoom", 2);
-U([
+Y([
   C({ type: Number, attribute: "max-zoom" })
 ], V.prototype, "maxZoom", 2);
-U([
+Y([
   C({ type: Number, attribute: "initial-zoom" })
 ], V.prototype, "initialZoom", 2);
-U([
+Y([
   C({ attribute: "fit-mode" })
 ], V.prototype, "fitMode", 2);
-U([
+Y([
   v()
 ], V.prototype, "viewport", 2);
-U([
+Y([
   v()
 ], V.prototype, "selectedRoom", 2);
-U([
+Y([
   v()
 ], V.prototype, "selectedPresence", 2);
-U([
+Y([
   v()
 ], V.prototype, "metadata", 2);
-U([
+Y([
   v()
 ], V.prototype, "imageSource", 2);
-U([
+Y([
   v()
 ], V.prototype, "svgMarkup", 2);
-U([
+Y([
   v()
 ], V.prototype, "loadError", 2);
-V = U([
-  I("explorer-canvas")
+V = Y([
+  D("explorer-canvas")
 ], V);
 function Ae(e, t) {
   const i = (e.rooms ?? []).find((r) => r.id === t);
@@ -1333,7 +1333,7 @@ function ot(e, t) {
 function To(e, t) {
   return (e.route_nodes ?? []).find((i) => i.id === t)?.name ?? t;
 }
-function me(e) {
+function fe(e) {
   return `${e.kind}:${e.id}`;
 }
 function Et(e, t) {
@@ -1345,13 +1345,13 @@ function Do(e, t) {
     return t.kind === "room" ? {
       kind: "room",
       id: t.id,
-      key: me(t),
+      key: fe(t),
       label: ot(e, t.id),
       point: i
     } : {
       kind: "node",
       id: t.id,
-      key: me(t),
+      key: fe(t),
       label: To(e, t.id),
       point: i
     };
@@ -1449,22 +1449,22 @@ function jo(e, t, i) {
 function pt(e, t) {
   const i = new Map((e.route_nodes ?? []).map((r) => [r.id, r]));
   return (e.route_graph_edges ?? []).map((r, o) => {
-    const n = jo(r, o, t), a = [r.from, r.to].filter((u) => u.kind === "node").map((u) => i.get(u.id)).filter((u) => !!u).map((u) => Ve(u, t)).filter((u) => u.conditional), c = a.find((u) => !u.active) ?? (n.conditional ? void 0 : a[0]), p = n.active && a.every((u) => u.active), d = n.conditional || a.length > 0;
+    const n = jo(r, o, t), a = [r.from, r.to].filter((h) => h.kind === "node").map((h) => i.get(h.id)).filter((h) => !!h).map((h) => Ve(h, t)).filter((h) => h.conditional), c = a.find((h) => !h.active) ?? (n.conditional ? void 0 : a[0]), d = n.active && a.every((h) => h.active), p = n.conditional || a.length > 0;
     return c ? {
       ...n,
-      conditional: d,
-      active: p,
+      conditional: p,
+      active: d,
       entity: c.entity,
       currentState: c.currentState,
       allowedStates: c.allowedStates,
-      reason: p ? void 0 : c.reason,
+      reason: d ? void 0 : c.reason,
       conditionSource: "node",
       nodeId: c.nodeId,
       nodeStatuses: a
     } : {
       ...n,
-      conditional: d,
-      active: p,
+      conditional: p,
+      active: d,
       nodeStatuses: a
     };
   });
@@ -1503,7 +1503,7 @@ function gi(e) {
 function Fi(e, t, i, r, o, n) {
   const s = Ae(e, i), a = Ae(e, r);
   if (!s || !a) return;
-  const l = wr(t), p = (o ? [...l].reverse() : l).map((u, g) => qo(e, u, g)).filter((u) => !!u), d = [
+  const l = wr(t), d = (o ? [...l].reverse() : l).map((h, m) => qo(e, h, m)).filter((h) => !!h), p = [
     {
       kind: "room",
       id: i,
@@ -1511,7 +1511,7 @@ function Fi(e, t, i, r, o, n) {
       label: ot(e, i),
       point: s
     },
-    ...p,
+    ...d,
     {
       kind: "room",
       id: r,
@@ -1522,8 +1522,8 @@ function Fi(e, t, i, r, o, n) {
   ];
   return {
     source: "manual",
-    hops: d,
-    distance: gi(d),
+    hops: p,
+    distance: gi(p),
     manualRoute: t,
     reversedManualRoute: o,
     blockedEdges: n
@@ -1531,54 +1531,54 @@ function Fi(e, t, i, r, o, n) {
 }
 function Lo(e, t) {
   const i = /* @__PURE__ */ new Map(), r = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map(), n = (a) => {
-    const l = me(a);
+    const l = fe(a);
     o.set(l, a);
     const c = r.get(l);
     if (c) return c;
-    const p = Et(e, a);
-    return p && r.set(l, p), p;
+    const d = Et(e, a);
+    return d && r.set(l, d), d;
   }, s = (a, l, c) => {
-    const p = i.get(a) ?? [];
-    p.push({ key: l, weight: c }), i.set(a, p);
+    const d = i.get(a) ?? [];
+    d.push({ key: l, weight: c }), i.set(a, d);
   };
   return t.forEach((a) => {
     if (!a.active) return;
-    const l = a.edge, c = n(l.from), p = n(l.to);
-    if (!c || !p) return;
-    const d = me(l.from), u = me(l.to);
-    if (d === u) return;
-    const g = Math.hypot(p[0] - c[0], p[1] - c[1]);
-    s(d, u, g), s(u, d, g);
+    const l = a.edge, c = n(l.from), d = n(l.to);
+    if (!c || !d) return;
+    const p = fe(l.from), h = fe(l.to);
+    if (p === h) return;
+    const m = Math.hypot(d[0] - c[0], d[1] - c[1]);
+    s(p, h, m), s(h, p, m);
   }), { adjacency: i, positions: r, endpoints: o };
 }
 function Oo(e, t, i, r, o) {
   if (!(e.route_graph_edges ?? []).length) return;
   const n = `room:${t}`, s = `room:${i}`, { adjacency: a, endpoints: l } = Lo(e, r);
   if (!a.has(n) || !a.has(s)) return;
-  const c = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Map(), d = new Set(a.keys());
-  for (a.forEach((m) => m.forEach((y) => d.add(y.key))), d.forEach((m) => c.set(m, Number.POSITIVE_INFINITY)), c.set(n, 0); d.size; ) {
-    let m, y = Number.POSITIVE_INFINITY;
-    for (const w of d) {
-      const A = c.get(w) ?? Number.POSITIVE_INFINITY;
-      A < y && (m = w, y = A);
+  const c = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Map(), p = new Set(a.keys());
+  for (a.forEach((g) => g.forEach((y) => p.add(y.key))), p.forEach((g) => c.set(g, Number.POSITIVE_INFINITY)), c.set(n, 0); p.size; ) {
+    let g, y = Number.POSITIVE_INFINITY;
+    for (const A of p) {
+      const w = c.get(A) ?? Number.POSITIVE_INFINITY;
+      w < y && (g = A, y = w);
     }
-    if (!m || !Number.isFinite(y) || (d.delete(m), m === s)) break;
-    for (const w of a.get(m) ?? []) {
-      if (!d.has(w.key)) continue;
-      const A = y + w.weight;
-      A < (c.get(w.key) ?? Number.POSITIVE_INFINITY) && (c.set(w.key, A), p.set(w.key, m));
+    if (!g || !Number.isFinite(y) || (p.delete(g), g === s)) break;
+    for (const A of a.get(g) ?? []) {
+      if (!p.has(A.key)) continue;
+      const w = y + A.weight;
+      w < (c.get(A.key) ?? Number.POSITIVE_INFINITY) && (c.set(A.key, w), d.set(A.key, g));
     }
   }
   if (!Number.isFinite(c.get(s) ?? Number.POSITIVE_INFINITY)) return;
-  const u = [s];
-  let g = s;
-  for (; g !== n; ) {
-    const m = p.get(g);
-    if (!m) return;
-    u.push(m), g = m;
+  const h = [s];
+  let m = s;
+  for (; m !== n; ) {
+    const g = d.get(m);
+    if (!g) return;
+    h.push(g), m = g;
   }
-  u.reverse();
-  const b = u.map((m) => l.get(m)).map((m) => m ? Do(e, m) : void 0).filter((m) => !!m);
+  h.reverse();
+  const b = h.map((g) => l.get(g)).map((g) => g ? Do(e, g) : void 0).filter((g) => !!g);
   if (!(b.length < 2))
     return {
       source: "graph",
@@ -1589,19 +1589,19 @@ function Oo(e, t, i, r, o) {
 }
 function mi(e, t, i, r) {
   if (!t || !i || t === i) return;
-  const o = pt(e, r), n = o.filter((u) => !u.active), s = (e.routes ?? []).find(
-    (u) => u.from === t && u.to === i
+  const o = pt(e, r), n = o.filter((h) => !h.active), s = (e.routes ?? []).find(
+    (h) => h.from === t && h.to === i
   );
   if (s) return Fi(e, s, t, i, !1, n);
   const a = (e.routes ?? []).find(
-    (u) => u.from === i && u.to === t
+    (h) => h.from === i && h.to === t
   );
   if (a) return Fi(e, a, t, i, !0, n);
   const l = Oo(e, t, i, o, n);
   if (l) return l;
-  const c = Ae(e, t), p = Ae(e, i);
-  if (!c || !p) return;
-  const d = [
+  const c = Ae(e, t), d = Ae(e, i);
+  if (!c || !d) return;
+  const p = [
     {
       kind: "room",
       id: t,
@@ -1614,62 +1614,62 @@ function mi(e, t, i, r) {
       id: i,
       key: `room:${i}`,
       label: ot(e, i),
-      point: p
+      point: d
     }
   ];
   return {
     source: "fallback",
-    hops: d,
-    distance: gi(d),
+    hops: p,
+    distance: gi(p),
     blockedEdges: n
   };
 }
 function Bo(e) {
-  return [me(e.from), me(e.to)].sort().join("|");
+  return [fe(e.from), fe(e.to)].sort().join("|");
 }
 function Zi(e, t) {
   const i = e.route_graph_edges ?? [];
   let r = 0, o = 0, n = 0;
   const s = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Map(), l = /* @__PURE__ */ new Map(), c = (S) => {
     a.set(S, (a.get(S) ?? 0) + 1);
-  }, p = (S, N) => {
+  }, d = (S, N) => {
     const M = l.get(S) ?? /* @__PURE__ */ new Set();
     M.add(N), l.set(S, M);
-    const D = l.get(N) ?? /* @__PURE__ */ new Set();
-    D.add(S), l.set(N, D);
+    const j = l.get(N) ?? /* @__PURE__ */ new Set();
+    j.add(S), l.set(N, j);
   };
   i.forEach((S) => {
-    const N = me(S.from), M = me(S.to), D = Bo(S);
-    N === M && (n += 1), s.has(D) && (o += 1), s.add(D);
-    const J = Et(e, S.from), Y = Et(e, S.to);
-    if (!J || !Y || N === M) {
+    const N = fe(S.from), M = fe(S.to), j = Bo(S);
+    N === M && (n += 1), s.has(j) && (o += 1), s.add(j);
+    const G = Et(e, S.from), J = Et(e, S.to);
+    if (!G || !J || N === M) {
       r += 1;
       return;
     }
-    c(N), c(M), p(N, M);
+    c(N), c(M), d(N, M);
   });
-  const d = i.length ? (e.rooms ?? []).filter((S) => Ae(e, S.id) && !a.has(`room:${S.id}`)).map((S) => S.id) : [], u = i.length ? (e.route_nodes ?? []).filter((S) => !a.has(`node:${S.id}`)).map((S) => S.id) : [];
-  let g = 0;
+  const p = i.length ? (e.rooms ?? []).filter((S) => Ae(e, S.id) && !a.has(`room:${S.id}`)).map((S) => S.id) : [], h = i.length ? (e.route_nodes ?? []).filter((S) => !a.has(`node:${S.id}`)).map((S) => S.id) : [];
+  let m = 0;
   const b = new Set(l.keys());
   for (; b.size; ) {
-    g += 1;
+    m += 1;
     const S = b.values().next().value;
     if (!S) break;
     const N = [S];
     for (b.delete(S); N.length; ) {
       const M = N.pop();
-      for (const D of l.get(M) ?? [])
-        b.has(D) && (b.delete(D), N.push(D));
+      for (const j of l.get(M) ?? [])
+        b.has(j) && (b.delete(j), N.push(j));
     }
   }
-  const m = [], y = new Set((e.route_nodes ?? []).map((S) => S.id));
+  const g = [], y = new Set((e.route_nodes ?? []).map((S) => S.id));
   (e.routes ?? []).forEach((S) => {
     wr(S).forEach((N) => {
-      N.node_id && !y.has(N.node_id) && m.push({ from: S.from, to: S.to, nodeId: N.node_id });
+      N.node_id && !y.has(N.node_id) && g.push({ from: S.from, to: S.to, nodeId: N.node_id });
     });
   });
-  const w = pt(e, t), A = w.filter((S) => !S.active), k = (e.route_nodes ?? []).map((S) => Ve(S, t)).filter((S) => S.conditional), E = k.filter((S) => !S.active), P = /* @__PURE__ */ new Set();
-  return w.forEach((S) => {
+  const A = pt(e, t), w = A.filter((S) => !S.active), k = (e.route_nodes ?? []).map((S) => Ve(S, t)).filter((S) => S.conditional), E = k.filter((S) => !S.active), P = /* @__PURE__ */ new Set();
+  return A.forEach((S) => {
     S.conditionSource === "edge" && (S.reason === "missing_entity" || S.reason === "entity_unavailable") && P.add(S.entity ?? "(mangler entity)");
   }), k.forEach((S) => {
     (S.reason === "missing_entity" || S.reason === "entity_unavailable") && P.add(S.entity ?? "(mangler entity)");
@@ -1677,12 +1677,12 @@ function Zi(e, t) {
     invalidEdges: r,
     duplicateEdges: o,
     selfEdges: n,
-    components: g,
-    disconnectedRoomIds: d,
-    disconnectedNodeIds: u,
-    brokenRouteNodeReferences: m,
-    conditionalEdges: w.filter((S) => S.conditional).length,
-    blockedEdges: A,
+    components: m,
+    disconnectedRoomIds: p,
+    disconnectedNodeIds: h,
+    brokenRouteNodeReferences: g,
+    conditionalEdges: A.filter((S) => S.conditional).length,
+    blockedEdges: w,
     conditionalNodes: k.length,
     blockedNodes: E,
     unresolvedConditionEntities: [...P]
@@ -1709,16 +1709,16 @@ let Ke = class extends V {
       const l = {
         x: (n.x ?? 0.5) * x,
         y: (n.y ?? 0.5) * x
-      }, c = this.previousPresencePositions.get(n.id), p = this.previousPresenceRooms.get(n.id), d = n.room_id;
+      }, c = this.previousPresencePositions.get(n.id), d = this.previousPresenceRooms.get(n.id), p = n.room_id;
       if (o.add(n.id), this.activeAnimations.get(n.id)?.remove(), this.activeAnimations.delete(n.id), !r && c && (Math.abs(c.x - l.x) > 0.01 || Math.abs(c.y - l.y) > 0.01)) {
-        const u = this.resolveMovementPath(c, l, p, d);
-        this.createFootsteps(u);
-        const g = document.createElementNS(F, "animateTransform");
-        g.setAttribute("attributeName", "transform"), g.setAttribute("attributeType", "XML"), g.setAttribute("type", "translate"), g.setAttribute("values", u.map((b) => `${b.x} ${b.y}`).join(";")), g.setAttribute("keyTimes", this.buildKeyTimes(u).join(";")), g.setAttribute("dur", `${Ht}ms`), g.setAttribute("begin", "indefinite"), g.setAttribute("fill", "freeze"), g.setAttribute("calcMode", "linear"), a.appendChild(g), this.activeAnimations.set(n.id, g), g.beginElement(), window.setTimeout(() => {
-          this.activeAnimations.get(n.id) === g && (g.remove(), this.activeAnimations.delete(n.id));
+        const h = this.resolveMovementPath(c, l, d, p);
+        this.createFootsteps(h);
+        const m = document.createElementNS(F, "animateTransform");
+        m.setAttribute("attributeName", "transform"), m.setAttribute("attributeType", "XML"), m.setAttribute("type", "translate"), m.setAttribute("values", h.map((b) => `${b.x} ${b.y}`).join(";")), m.setAttribute("keyTimes", this.buildKeyTimes(h).join(";")), m.setAttribute("dur", `${Ht}ms`), m.setAttribute("begin", "indefinite"), m.setAttribute("fill", "freeze"), m.setAttribute("calcMode", "linear"), a.appendChild(m), this.activeAnimations.set(n.id, m), m.beginElement(), window.setTimeout(() => {
+          this.activeAnimations.get(n.id) === m && (m.remove(), this.activeAnimations.delete(n.id));
         }, Ht + 80);
       }
-      this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, d);
+      this.previousPresencePositions.set(n.id, l), this.previousPresenceRooms.set(n.id, p);
     });
     for (const n of this.previousPresencePositions.keys())
       o.has(n) || (this.previousPresencePositions.delete(n), this.previousPresenceRooms.delete(n));
@@ -1797,37 +1797,37 @@ let Ke = class extends V {
     o.setAttribute("class", "route-status-scene"), o.setAttribute("aria-label", "Live rutestatus og døre"), o.setAttribute("pointer-events", "none"), i.forEach((s) => {
       const a = this.endpointPoint(s.edge.from), l = this.endpointPoint(s.edge.to);
       if (!a || !l) return;
-      const c = this.edgeStatusColor(s), p = document.createElementNS(F, "line");
-      if (p.setAttribute("x1", String(a.x)), p.setAttribute("y1", String(a.y)), p.setAttribute("x2", String(l.x)), p.setAttribute("y2", String(l.y)), p.setAttribute("stroke", c), p.setAttribute("stroke-linecap", "round"), p.setAttribute("vector-effect", "non-scaling-stroke"), p.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), p.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || p.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && p.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(p, this.statusDescription(s)), o.appendChild(p), !s.conditional) return;
-      const d = (a.x + l.x) / 2, u = (a.y + l.y) / 2, g = document.createElementNS(F, "g");
-      g.setAttribute("transform", `translate(${d} ${u})`);
+      const c = this.edgeStatusColor(s), d = document.createElementNS(F, "line");
+      if (d.setAttribute("x1", String(a.x)), d.setAttribute("y1", String(a.y)), d.setAttribute("x2", String(l.x)), d.setAttribute("y2", String(l.y)), d.setAttribute("stroke", c), d.setAttribute("stroke-linecap", "round"), d.setAttribute("vector-effect", "non-scaling-stroke"), d.setAttribute("stroke-width", s.conditional ? s.active ? "4.5" : "5.5" : "2.5"), d.setAttribute("stroke-opacity", s.conditional ? s.active ? ".72" : ".82" : ".2"), s.conditional || d.setAttribute("stroke-dasharray", "4 10"), s.conditional && !s.active && d.setAttribute("stroke-dasharray", "13 9"), this.appendSvgTitle(d, this.statusDescription(s)), o.appendChild(d), !s.conditional) return;
+      const p = (a.x + l.x) / 2, h = (a.y + l.y) / 2, m = document.createElementNS(F, "g");
+      m.setAttribute("transform", `translate(${p} ${h})`);
       const b = document.createElementNS(F, "circle");
-      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), g.appendChild(b);
-      const m = document.createElementNS(F, "text");
-      if (m.setAttribute("text-anchor", "middle"), m.setAttribute("dominant-baseline", "central"), m.setAttribute("fill", c), m.setAttribute("font-size", "16"), m.setAttribute("font-weight", "900"), m.setAttribute("font-family", "system-ui, sans-serif"), m.textContent = s.active ? "✓" : "×", g.appendChild(m), !s.active && !r) {
+      b.setAttribute("r", "12"), b.setAttribute("fill", "var(--card-background-color, #ffffff)"), b.setAttribute("fill-opacity", ".9"), b.setAttribute("stroke", c), b.setAttribute("stroke-width", "3"), b.setAttribute("vector-effect", "non-scaling-stroke"), m.appendChild(b);
+      const g = document.createElementNS(F, "text");
+      if (g.setAttribute("text-anchor", "middle"), g.setAttribute("dominant-baseline", "central"), g.setAttribute("fill", c), g.setAttribute("font-size", "16"), g.setAttribute("font-weight", "900"), g.setAttribute("font-family", "system-ui, sans-serif"), g.textContent = s.active ? "✓" : "×", m.appendChild(g), !s.active && !r) {
         const y = document.createElementNS(F, "animate");
-        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), g.appendChild(y);
+        y.setAttribute("attributeName", "opacity"), y.setAttribute("values", "1;.45;1"), y.setAttribute("dur", "1.8s"), y.setAttribute("repeatCount", "indefinite"), m.appendChild(y);
       }
-      this.appendSvgTitle(g, this.statusDescription(s)), o.appendChild(g);
+      this.appendSvgTitle(m, this.statusDescription(s)), o.appendChild(m);
     }), t.forEach((s) => {
-      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, p = s.point[1] * x, d = document.createElementNS(F, "g");
-      d.setAttribute("transform", `translate(${c} ${p})`);
-      const u = document.createElementNS(F, "circle");
-      u.setAttribute("r", "22"), u.setAttribute("fill", "var(--card-background-color, #ffffff)"), u.setAttribute("fill-opacity", ".9"), u.setAttribute("stroke", l), u.setAttribute("stroke-width", "4"), u.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(u);
-      const g = document.createElementNS(F, "rect");
-      g.setAttribute("x", "-9"), g.setAttribute("y", "-13"), g.setAttribute("width", "15"), g.setAttribute("height", "26"), g.setAttribute("rx", "1.5"), g.setAttribute("fill", "none"), g.setAttribute("stroke", l), g.setAttribute("stroke-width", "3"), g.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(g);
+      const a = this.doorVisualStatus(s, i), l = this.doorStatusColor(a), c = s.point[0] * x, d = s.point[1] * x, p = document.createElementNS(F, "g");
+      p.setAttribute("transform", `translate(${c} ${d})`);
+      const h = document.createElementNS(F, "circle");
+      h.setAttribute("r", "22"), h.setAttribute("fill", "var(--card-background-color, #ffffff)"), h.setAttribute("fill-opacity", ".9"), h.setAttribute("stroke", l), h.setAttribute("stroke-width", "4"), h.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(h);
+      const m = document.createElementNS(F, "rect");
+      m.setAttribute("x", "-9"), m.setAttribute("y", "-13"), m.setAttribute("width", "15"), m.setAttribute("height", "26"), m.setAttribute("rx", "1.5"), m.setAttribute("fill", "none"), m.setAttribute("stroke", l), m.setAttribute("stroke-width", "3"), m.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(m);
       const b = document.createElementNS(F, "circle");
-      if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), d.appendChild(b), a === "blocked") {
+      if (b.setAttribute("cx", "2"), b.setAttribute("cy", "0"), b.setAttribute("r", "2"), b.setAttribute("fill", l), p.appendChild(b), a === "blocked") {
         const k = document.createElementNS(F, "line");
-        k.setAttribute("x1", "-12"), k.setAttribute("y1", "-15"), k.setAttribute("x2", "12"), k.setAttribute("y2", "15"), k.setAttribute("stroke", l), k.setAttribute("stroke-width", "4"), k.setAttribute("stroke-linecap", "round"), k.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(k);
+        k.setAttribute("x1", "-12"), k.setAttribute("y1", "-15"), k.setAttribute("x2", "12"), k.setAttribute("y2", "15"), k.setAttribute("stroke", l), k.setAttribute("stroke-width", "4"), k.setAttribute("stroke-linecap", "round"), k.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(k);
       }
-      const m = document.createElementNS(F, "circle");
-      if (m.setAttribute("cx", "16"), m.setAttribute("cy", "-16"), m.setAttribute("r", "6"), m.setAttribute("fill", l), m.setAttribute("stroke", "var(--card-background-color, #ffffff)"), m.setAttribute("stroke-width", "2"), m.setAttribute("vector-effect", "non-scaling-stroke"), d.appendChild(m), s.name) {
+      const g = document.createElementNS(F, "circle");
+      if (g.setAttribute("cx", "16"), g.setAttribute("cy", "-16"), g.setAttribute("r", "6"), g.setAttribute("fill", l), g.setAttribute("stroke", "var(--card-background-color, #ffffff)"), g.setAttribute("stroke-width", "2"), g.setAttribute("vector-effect", "non-scaling-stroke"), p.appendChild(g), s.name) {
         const k = document.createElementNS(F, "text");
-        k.setAttribute("y", "39"), k.setAttribute("text-anchor", "middle"), k.setAttribute("fill", "var(--primary-text-color, #1f2937)"), k.setAttribute("font-size", "20"), k.setAttribute("font-weight", "700"), k.setAttribute("font-family", "system-ui, sans-serif"), k.setAttribute("paint-order", "stroke"), k.setAttribute("stroke", "var(--card-background-color, #ffffff)"), k.setAttribute("stroke-width", "5"), k.setAttribute("stroke-linejoin", "round"), k.textContent = s.name, d.appendChild(k);
+        k.setAttribute("y", "39"), k.setAttribute("text-anchor", "middle"), k.setAttribute("fill", "var(--primary-text-color, #1f2937)"), k.setAttribute("font-size", "20"), k.setAttribute("font-weight", "700"), k.setAttribute("font-family", "system-ui, sans-serif"), k.setAttribute("paint-order", "stroke"), k.setAttribute("stroke", "var(--card-background-color, #ffffff)"), k.setAttribute("stroke-width", "5"), k.setAttribute("stroke-linejoin", "round"), k.textContent = s.name, p.appendChild(k);
       }
-      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", w = s.state_binding ? Ve(s, (k) => this.hass?.states[k]?.state) : void 0, A = w?.entity ? ` · ${w.entity}: ${w.currentState ?? "ukendt"} · åben: ${w.allowedStates.join(", ")}` : "";
-      this.appendSvgTitle(d, `${s.name ?? s.id} · ${y}${A}`), o.appendChild(d);
+      const y = a === "always" ? "altid aktiv" : a === "active" ? "åben" : a === "blocked" ? "lukket / blokeret" : "blandet status", A = s.state_binding ? Ve(s, (k) => this.hass?.states[k]?.state) : void 0, w = A?.entity ? ` · ${A.entity}: ${A.currentState ?? "ukendt"} · åben: ${A.allowedStates.join(", ")}` : "";
+      this.appendSvgTitle(p, `${s.name ?? s.id} · ${y}${w}`), o.appendChild(p);
     });
     const n = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(o, n ?? null);
@@ -1887,15 +1887,15 @@ let Ke = class extends V {
     for (let n = 0; n < o; n += 1) {
       const s = (n + 1) / (o + 1), a = r * s;
       let l = 0, c = i[i.length - 1];
-      for (const D of i) {
-        if (l + D.length >= a) {
-          c = D;
+      for (const j of i) {
+        if (l + j.length >= a) {
+          c = j;
           break;
         }
-        l += D.length;
+        l += j.length;
       }
-      const p = c.length > 0 ? (a - l) / c.length : 0, d = c.end.x - c.start.x, u = c.end.y - c.start.y, g = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -u / c.length : 0, m = c.length > 0 ? d / c.length : 0, y = 9 * g, w = c.start.x + d * p + b * y, A = c.start.y + u * p + m * y, k = Math.atan2(u, d) * 180 / Math.PI + 90, E = Math.round(s * Ht), P = document.createElementNS(F, "g");
-      P.setAttribute("transform", `translate(${w} ${A}) rotate(${k + g * 8})`), P.setAttribute("opacity", "0");
+      const d = c.length > 0 ? (a - l) / c.length : 0, p = c.end.x - c.start.x, h = c.end.y - c.start.y, m = n % 2 === 0 ? -1 : 1, b = c.length > 0 ? -h / c.length : 0, g = c.length > 0 ? p / c.length : 0, y = 9 * m, A = c.start.x + p * d + b * y, w = c.start.y + h * d + g * y, k = Math.atan2(h, p) * 180 / Math.PI + 90, E = Math.round(s * Ht), P = document.createElementNS(F, "g");
+      P.setAttribute("transform", `translate(${A} ${w}) rotate(${k + m * 8})`), P.setAttribute("opacity", "0");
       const S = document.createElementNS(F, "ellipse");
       S.setAttribute("cx", "0"), S.setAttribute("cy", "-5"), S.setAttribute("rx", "6"), S.setAttribute("ry", "12"), S.setAttribute("fill", "rgba(67, 48, 31, 0.72)");
       const N = document.createElementNS(F, "ellipse");
@@ -1917,14 +1917,14 @@ qt([
   C({ attribute: !1 })
 ], Ke.prototype, "routeGraphEdges", 2);
 Ke = qt([
-  I("explorer-animated-canvas")
+  D("explorer-animated-canvas")
 ], Ke);
 var Zo = Object.getOwnPropertyDescriptor, Vo = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Zo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-const O = "http://www.w3.org/2000/svg";
+const L = "http://www.w3.org/2000/svg";
 let Pt = class extends Ke {
   updated(e) {
     super.updated(e), this.syncRoomReactionOverlay();
@@ -1935,14 +1935,14 @@ let Pt = class extends Ke {
       return { state: t.state, attributes: t.attributes };
   }
   appendTitle(e, t) {
-    const i = document.createElementNS(O, "title");
+    const i = document.createElementNS(L, "title");
     i.textContent = t, e.appendChild(i);
   }
   pointColor(e) {
     return e === "light" ? "var(--explorer-room-light-color, #f6bd60)" : e === "motion" ? "var(--explorer-room-motion-color, var(--primary-color, #03a9f4))" : e === "media" ? "var(--explorer-room-media-color, var(--accent-color, #7e57c2))" : e === "opening" ? "var(--explorer-room-opening-color, var(--warning-color, #ff9800))" : e === "fireplace" ? "var(--explorer-room-fireplace-color, #c46b2d)" : "var(--explorer-room-temperature-neutral, #4f9b78)";
   }
   appendPointBackdrop(e, t, i, r = 11) {
-    const o = document.createElementNS(O, "circle");
+    const o = document.createElementNS(L, "circle");
     return o.setAttribute("r", String(r)), o.setAttribute("fill", "var(--card-background-color, #ffffff)"), o.setAttribute("fill-opacity", i ? ".94" : ".78"), o.setAttribute("stroke", t), o.setAttribute("stroke-width", i ? "3" : "2"), o.setAttribute("stroke-opacity", i ? ".95" : ".42"), o.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(o), o;
   }
   appendLightPoint(e, t, i) {
@@ -1950,67 +1950,67 @@ let Pt = class extends Ke {
     if (t.active) {
       e.setAttribute("data-magical-light", "active");
       const n = Math.max(0.18, Math.min(1, t.intensity));
-      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, p], d) => {
-        const u = document.createElementNS(O, "circle");
-        if (u.setAttribute("class", `magical-light-glow glow-${d + 1}`), u.setAttribute("r", String(c * (0.82 + n * 0.34))), u.setAttribute("fill", r), u.setAttribute("fill-opacity", String(p + n * p * 1.8)), u.setAttribute("stroke", "none"), e.appendChild(u), !i && d === 1) {
-          const g = document.createElementNS(O, "animate");
-          g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${p + n * 0.07};${p + n * 0.13};${p + n * 0.07}`), g.setAttribute("dur", "4.8s"), g.setAttribute("repeatCount", "indefinite"), u.appendChild(g);
+      [[74, 0.025], [52, 0.055], [34, 0.12]].forEach(([c, d], p) => {
+        const h = document.createElementNS(L, "circle");
+        if (h.setAttribute("class", `magical-light-glow glow-${p + 1}`), h.setAttribute("r", String(c * (0.82 + n * 0.34))), h.setAttribute("fill", r), h.setAttribute("fill-opacity", String(d + n * d * 1.8)), h.setAttribute("stroke", "none"), e.appendChild(h), !i && p === 1) {
+          const m = document.createElementNS(L, "animate");
+          m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${d + n * 0.07};${d + n * 0.13};${d + n * 0.07}`), m.setAttribute("dur", "4.8s"), m.setAttribute("repeatCount", "indefinite"), h.appendChild(m);
         }
       });
-      const a = document.createElementNS(O, "circle"), l = 24 + n * 24;
+      const a = document.createElementNS(L, "circle"), l = 24 + n * 24;
       if (a.setAttribute("class", "light-halo"), a.setAttribute("r", String(l)), a.setAttribute("fill", r), a.setAttribute("fill-opacity", String(0.08 + n * 0.18)), a.setAttribute("stroke", r), a.setAttribute("stroke-width", "2"), a.setAttribute("stroke-opacity", String(0.1 + n * 0.18)), a.setAttribute("vector-effect", "non-scaling-stroke"), e.appendChild(a), !i) {
-        const c = document.createElementNS(O, "animate");
+        const c = document.createElementNS(L, "animate");
         c.setAttribute("attributeName", "r"), c.setAttribute("values", `${l * 0.94};${l * 1.06};${l * 0.94}`), c.setAttribute("dur", "4.2s"), c.setAttribute("repeatCount", "indefinite"), a.appendChild(c);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 11);
-    const o = document.createElementNS(O, "text");
+    const o = document.createElementNS(L, "text");
     o.setAttribute("class", "light-glyph"), o.setAttribute("text-anchor", "middle"), o.setAttribute("dominant-baseline", "central"), o.setAttribute("font-size", "15"), o.setAttribute("font-weight", "900"), o.setAttribute("fill", r), o.setAttribute("opacity", t.active ? "1" : ".48"), o.textContent = "✦", e.appendChild(o);
   }
   appendMotionPoint(e, t, i) {
     const r = this.pointColor("motion");
     this.appendPointBackdrop(e, r, t.active, 10);
-    const o = document.createElementNS(O, "circle");
+    const o = document.createElementNS(L, "circle");
     if (o.setAttribute("r", t.active ? "4.5" : "3.5"), o.setAttribute("fill", r), o.setAttribute("opacity", t.active ? "1" : ".42"), e.appendChild(o), !t.active) return;
-    const n = document.createElementNS(O, "circle");
+    const n = document.createElementNS(L, "circle");
     if (n.setAttribute("r", "15"), n.setAttribute("fill", "none"), n.setAttribute("stroke", r), n.setAttribute("stroke-width", "3"), n.setAttribute("stroke-opacity", ".78"), n.setAttribute("vector-effect", "non-scaling-stroke"), e.insertBefore(n, e.firstChild), !i) {
-      const s = document.createElementNS(O, "animate");
+      const s = document.createElementNS(L, "animate");
       s.setAttribute("attributeName", "r"), s.setAttribute("values", "13;31;13"), s.setAttribute("dur", "1.8s"), s.setAttribute("repeatCount", "indefinite"), n.appendChild(s);
     }
   }
   appendMediaPoint(e, t) {
     const i = this.pointColor("media");
     if (t.active) {
-      const n = document.createElementNS(O, "circle");
+      const n = document.createElementNS(L, "circle");
       n.setAttribute("r", "25"), n.setAttribute("fill", i), n.setAttribute("fill-opacity", ".12"), e.appendChild(n);
     }
-    const r = document.createElementNS(O, "rect");
+    const r = document.createElementNS(L, "rect");
     r.setAttribute("x", "-16"), r.setAttribute("y", "-11"), r.setAttribute("width", "32"), r.setAttribute("height", "22"), r.setAttribute("rx", "4"), r.setAttribute("fill", "var(--card-background-color, #ffffff)"), r.setAttribute("fill-opacity", t.active ? ".94" : ".78"), r.setAttribute("stroke", i), r.setAttribute("stroke-width", t.active ? "3" : "2"), r.setAttribute("stroke-opacity", t.active ? ".95" : ".42"), e.appendChild(r);
-    const o = document.createElementNS(O, "path");
+    const o = document.createElementNS(L, "path");
     o.setAttribute("d", "M -4 -6 L 7 0 L -4 6 Z"), o.setAttribute("fill", i), o.setAttribute("opacity", t.active ? "1" : ".40"), e.appendChild(o);
   }
   appendOpeningPoint(e, t) {
     const i = this.pointColor("opening");
     this.appendPointBackdrop(e, i, t.active, 11);
-    const r = document.createElementNS(O, "text");
+    const r = document.createElementNS(L, "text");
     r.setAttribute("text-anchor", "middle"), r.setAttribute("dominant-baseline", "central"), r.setAttribute("font-size", t.active ? "18" : "15"), r.setAttribute("font-weight", "900"), r.setAttribute("fill", i), r.setAttribute("opacity", t.active ? "1" : ".42"), r.textContent = t.active ? "↗" : "━", e.appendChild(r);
   }
   appendFireplacePoint(e, t, i) {
     const r = this.pointColor("fireplace"), o = Math.max(0.2, Math.min(1, t.intensity || 1)), n = t.reaction.radius, s = Number.isFinite(n) ? Math.max(26, Math.min(160, n * x)) : 72;
     if (t.active) {
       e.setAttribute("data-fireplace", "active");
-      const l = document.createElementNS(O, "circle");
+      const l = document.createElementNS(L, "circle");
       l.setAttribute("class", "fireplace-glow fireplace-glow-outer"), l.setAttribute("r", String(s)), l.setAttribute("fill", r), l.setAttribute("fill-opacity", String(0.07 + 0.11 * o)), e.appendChild(l);
-      const c = document.createElementNS(O, "circle");
+      const c = document.createElementNS(L, "circle");
       if (c.setAttribute("class", "fireplace-glow fireplace-glow-inner"), c.setAttribute("r", String(s * 0.56)), c.setAttribute("fill", "var(--explorer-room-fireplace-hot, #e7a253)"), c.setAttribute("fill-opacity", String(0.12 + 0.17 * o)), e.appendChild(c), !i) {
-        const p = document.createElementNS(O, "animate");
-        p.setAttribute("attributeName", "fill-opacity"), p.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), p.setAttribute("dur", "2.1s"), p.setAttribute("repeatCount", "indefinite"), c.appendChild(p);
-        const d = document.createElementNS(O, "animate");
-        d.setAttribute("attributeName", "r"), d.setAttribute("values", `${s * 0.93};${s * 1.05};${s * 0.97};${s * 0.93}`), d.setAttribute("dur", "3.6s"), d.setAttribute("repeatCount", "indefinite"), l.appendChild(d);
+        const d = document.createElementNS(L, "animate");
+        d.setAttribute("attributeName", "fill-opacity"), d.setAttribute("values", `${0.1 + 0.12 * o};${0.2 + 0.18 * o};${0.12 + 0.1 * o};${0.24 + 0.16 * o};${0.1 + 0.12 * o}`), d.setAttribute("dur", "2.1s"), d.setAttribute("repeatCount", "indefinite"), c.appendChild(d);
+        const p = document.createElementNS(L, "animate");
+        p.setAttribute("attributeName", "r"), p.setAttribute("values", `${s * 0.93};${s * 1.05};${s * 0.97};${s * 0.93}`), p.setAttribute("dur", "3.6s"), p.setAttribute("repeatCount", "indefinite"), l.appendChild(p);
       }
     }
     this.appendPointBackdrop(e, r, t.active, 12);
-    const a = document.createElementNS(O, "path");
+    const a = document.createElementNS(L, "path");
     a.setAttribute("d", "M 0 9 C -8 4 -7 -4 -1 -10 C -1 -5 3 -4 4 -10 C 11 -2 10 5 4 9 C 3 5 1 2 0 -1 C -3 3 -3 6 0 9 Z"), a.setAttribute("fill", r), a.setAttribute("opacity", t.active ? "1" : ".42"), e.appendChild(a);
   }
   temperatureColor(e) {
@@ -2024,13 +2024,13 @@ let Pt = class extends Ke {
     return e.unit ? `${t} ${e.unit}` : `${t}°`;
   }
   appendTemperaturePoint(e, t) {
-    const i = this.temperatureColor(t), r = this.formatTemperature(t), o = Math.max(58, 24 + r.length * 8.2), n = document.createElementNS(O, "rect");
+    const i = this.temperatureColor(t), r = this.formatTemperature(t), o = Math.max(58, 24 + r.length * 8.2), n = document.createElementNS(L, "rect");
     n.setAttribute("x", String(-o / 2)), n.setAttribute("y", "-15"), n.setAttribute("width", String(o)), n.setAttribute("height", "30"), n.setAttribute("rx", "15"), n.setAttribute("fill", "var(--card-background-color, #ffffff)"), n.setAttribute("fill-opacity", t.active ? ".94" : ".78"), n.setAttribute("stroke", i), n.setAttribute("stroke-width", "2.5"), e.appendChild(n);
-    const s = document.createElementNS(O, "text");
+    const s = document.createElementNS(L, "text");
     s.setAttribute("text-anchor", "middle"), s.setAttribute("dominant-baseline", "central"), s.setAttribute("font-size", "14"), s.setAttribute("font-weight", "800"), s.setAttribute("fill", i), s.textContent = r, e.appendChild(s);
   }
   appendReactionPoint(e, t, i, r) {
-    const o = _e(t, i.reaction), n = document.createElementNS(O, "g");
+    const o = _e(t, i.reaction), n = document.createElementNS(L, "g");
     n.setAttribute("class", `room-reaction-point ${i.reaction.kind} ${i.active ? "active" : "inactive"}`), n.setAttribute("data-reaction-kind", i.reaction.kind), n.setAttribute("transform", `translate(${o.x * x} ${o.y * x})`), i.reaction.kind === "light" ? this.appendLightPoint(n, i, r) : i.reaction.kind === "motion" ? this.appendMotionPoint(n, i, r) : i.reaction.kind === "media" ? this.appendMediaPoint(n, i) : i.reaction.kind === "opening" ? this.appendOpeningPoint(n, i) : i.reaction.kind === "fireplace" ? this.appendFireplacePoint(n, i, r) : this.appendTemperaturePoint(n, i);
     const s = i.reaction.kind === "temperature" ? this.formatTemperature(i) : i.currentState ?? "ukendt";
     this.appendTitle(n, `${t.name ?? t.id} · ${i.reaction.entity} · ${s}`), e.appendChild(n);
@@ -2041,14 +2041,14 @@ let Pt = class extends Ke {
     e.querySelector(":scope > g.room-reactions-scene")?.remove();
     const t = this.rooms.flatMap((a) => Ct(a, (l) => this.entityState(l)).map((l) => ({ room: a, status: l })));
     if (!t.length) return;
-    const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(O, "g");
+    const i = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1, r = document.createElementNS(L, "g");
     r.setAttribute("class", "room-reactions-scene"), r.setAttribute("aria-label", "Home Assistant entity-punkter"), r.setAttribute("pointer-events", "none"), t.forEach(({ room: a, status: l }) => this.appendReactionPoint(r, a, l, i));
     const o = e.querySelector(":scope > g.route-status-scene"), n = e.querySelector(":scope > g.footsteps-scene"), s = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, o ?? n ?? s ?? null);
   }
 };
 Pt = Vo([
-  I("explorer-living-canvas")
+  D("explorer-living-canvas")
 ], Pt);
 var Ko = Object.getOwnPropertyDescriptor, Wo = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Ko(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -2071,8 +2071,8 @@ let nt = class extends Pt {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [c, p] = t[s];
-      l > r != p > r && i < (c - a) * (r - l) / (p - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [c, d] = t[s];
+      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -2121,10 +2121,10 @@ let nt = class extends Pt {
     const t = Date.now(), i = this.activities(t);
     if (this.syncRoomClasses(i), this.scheduleAfterglowRefresh(i, t), !i.length) return;
     const r = document.createElementNS(T, "g");
-    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: c, intensity: p }) => {
+    r.setAttribute("class", "presence-room-activity-scene"), r.setAttribute("aria-label", "Tilstedeværelsesbaseret rumaktivitet"), r.setAttribute("pointer-events", "none"), i.forEach(({ room: l, active: c, intensity: d }) => {
       if (l.points.length < 3) return;
-      const d = document.createElementNS(T, "polygon");
-      d.setAttribute("points", this.polygonPoints(l)), d.setAttribute("class", c ? "presence-room-active" : "presence-room-afterglow"), d.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), d.setAttribute("fill-opacity", String(c ? 0.1 + p * 0.07 : 0.025 + p * 0.07)), d.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), d.setAttribute("stroke-opacity", String(c ? 0.28 : 0.08 + p * 0.16)), d.setAttribute("stroke-width", c ? "3" : "2"), d.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(d);
+      const p = document.createElementNS(T, "polygon");
+      p.setAttribute("points", this.polygonPoints(l)), p.setAttribute("class", c ? "presence-room-active" : "presence-room-afterglow"), p.setAttribute("fill", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("fill-opacity", String(c ? 0.1 + d * 0.07 : 0.025 + d * 0.07)), p.setAttribute("stroke", "var(--explorer-presence-room-color, var(--primary-color, #03a9f4))"), p.setAttribute("stroke-opacity", String(c ? 0.28 : 0.08 + d * 0.16)), p.setAttribute("stroke-width", c ? "3" : "2"), p.setAttribute("vector-effect", "non-scaling-stroke"), r.appendChild(p);
     });
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(r, o ?? n ?? s ?? a ?? null);
@@ -2164,10 +2164,10 @@ let nt = class extends Pt {
     if (!t.length) return;
     const i = document.createElementNS(T, "g");
     i.setAttribute("class", "room-temperature-atmosphere-scene"), i.setAttribute("aria-label", "Temperaturatmosfære i rum"), i.setAttribute("pointer-events", "none"), t.forEach(({ room: l, celsius: c }) => {
-      const p = this.temperatureOpacity(c), d = this.atmosphereTemperatureColor(c), u = this.temperatureBand(c), g = document.createElementNS(T, "polygon");
-      g.setAttribute("points", this.polygonPoints(l)), g.setAttribute("class", `room-temperature-atmosphere temperature-${u}`), g.setAttribute("data-temperature-band", u), g.setAttribute("fill", d), g.setAttribute("fill-opacity", String(p)), g.setAttribute("stroke", d), g.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + p * 0.9))), g.setAttribute("stroke-width", "2"), g.setAttribute("stroke-linejoin", "round"), g.setAttribute("vector-effect", "non-scaling-stroke");
-      const b = document.createElementNS(T, "title"), m = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
-      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${m} °C`, g.appendChild(b), i.appendChild(g);
+      const d = this.temperatureOpacity(c), p = this.atmosphereTemperatureColor(c), h = this.temperatureBand(c), m = document.createElementNS(T, "polygon");
+      m.setAttribute("points", this.polygonPoints(l)), m.setAttribute("class", `room-temperature-atmosphere temperature-${h}`), m.setAttribute("data-temperature-band", h), m.setAttribute("fill", p), m.setAttribute("fill-opacity", String(d)), m.setAttribute("stroke", p), m.setAttribute("stroke-opacity", String(Math.min(0.18, 0.045 + d * 0.9))), m.setAttribute("stroke-width", "2"), m.setAttribute("stroke-linejoin", "round"), m.setAttribute("vector-effect", "non-scaling-stroke");
+      const b = document.createElementNS(T, "title"), g = new Intl.NumberFormat("da-DK", { maximumFractionDigits: 1 }).format(c);
+      b.textContent = `${l.name ?? l.id} · temperaturatmosfære · ${g} °C`, m.appendChild(b), i.appendChild(m);
     });
     const r = e.querySelector(":scope > g.presence-room-activity-scene"), o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, r ?? o ?? n ?? s ?? a ?? null);
@@ -2175,16 +2175,16 @@ let nt = class extends Pt {
   appendFireplaceAtmosphere(e, t, i, r, o) {
     const n = _e(t, i.reaction), s = Math.max(0.2, Math.min(1, i.intensity || 1)), a = i.reaction.radius, l = Number.isFinite(a) ? Math.max(42, Math.min(180, a * x)) : 82, c = document.createElementNS(T, "g");
     c.setAttribute("class", "fireplace-atmosphere"), c.setAttribute("transform", `translate(${n.x * x} ${n.y * x})`), c.setAttribute("data-room-id", t.id);
-    const p = document.createElementNS(T, "circle");
-    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), p.setAttribute("r", String(l * 1.18)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), p.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(p);
     const d = document.createElementNS(T, "circle");
-    d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), d.setAttribute("r", String(l * 0.72)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), d.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(d);
-    const u = document.createElementNS(T, "ellipse");
-    if (u.setAttribute("class", "fireplace-atmosphere-core"), u.setAttribute("cx", "0"), u.setAttribute("cy", String(-l * 0.05)), u.setAttribute("rx", String(l * 0.39)), u.setAttribute("ry", String(l * 0.31)), u.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), u.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(u), !r) {
-      const m = document.createElementNS(T, "animate");
-      m.setAttribute("attributeName", "fill-opacity"), m.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), m.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), m.setAttribute("repeatCount", "indefinite"), p.appendChild(m);
+    d.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-outer"), d.setAttribute("r", String(l * 1.18)), d.setAttribute("fill", "var(--explorer-fireplace-atmosphere, #c97935)"), d.setAttribute("fill-opacity", String(0.045 + s * 0.055)), c.appendChild(d);
+    const p = document.createElementNS(T, "circle");
+    p.setAttribute("class", "fireplace-atmosphere-glow fireplace-atmosphere-middle"), p.setAttribute("r", String(l * 0.72)), p.setAttribute("fill", "var(--explorer-fireplace-atmosphere-hot, #e6a34b)"), p.setAttribute("fill-opacity", String(0.065 + s * 0.085)), c.appendChild(p);
+    const h = document.createElementNS(T, "ellipse");
+    if (h.setAttribute("class", "fireplace-atmosphere-core"), h.setAttribute("cx", "0"), h.setAttribute("cy", String(-l * 0.05)), h.setAttribute("rx", String(l * 0.39)), h.setAttribute("ry", String(l * 0.31)), h.setAttribute("fill", "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), h.setAttribute("fill-opacity", String(0.07 + s * 0.09)), c.appendChild(h), !r) {
+      const g = document.createElementNS(T, "animate");
+      g.setAttribute("attributeName", "fill-opacity"), g.setAttribute("values", `${0.04 + s * 0.045};${0.065 + s * 0.07};${0.048 + s * 0.052};${0.04 + s * 0.045}`), g.setAttribute("dur", `${3.2 + o % 3 * 0.35}s`), g.setAttribute("repeatCount", "indefinite"), d.appendChild(g);
       const y = document.createElementNS(T, "animate");
-      y.setAttribute("attributeName", "fill-opacity"), y.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), y.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), y.setAttribute("repeatCount", "indefinite"), d.appendChild(y);
+      y.setAttribute("attributeName", "fill-opacity"), y.setAttribute("values", `${0.075 + s * 0.07};${0.13 + s * 0.11};${0.09 + s * 0.08};${0.145 + s * 0.105};${0.075 + s * 0.07}`), y.setAttribute("dur", `${1.65 + o % 2 * 0.22}s`), y.setAttribute("repeatCount", "indefinite"), p.appendChild(y);
     }
     [
       [-18, -10, 2.4],
@@ -2193,13 +2193,13 @@ let nt = class extends Pt {
       [22, -6, 1.5],
       [-26, -22, 1.4],
       [5, -38, 1.25]
-    ].forEach(([m, y, w], A) => {
+    ].forEach(([g, y, A], w) => {
       const k = document.createElementNS(T, "circle");
-      if (k.setAttribute("class", "fireplace-ember"), k.setAttribute("cx", String(m)), k.setAttribute("cy", String(y)), k.setAttribute("r", String(w)), k.setAttribute("fill", A % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), k.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(k), !r) {
+      if (k.setAttribute("class", "fireplace-ember"), k.setAttribute("cx", String(g)), k.setAttribute("cy", String(y)), k.setAttribute("r", String(A)), k.setAttribute("fill", w % 2 === 0 ? "var(--explorer-fireplace-ember, #d96532)" : "var(--explorer-fireplace-atmosphere-core, #f0b65c)"), k.setAttribute("opacity", r ? String(0.28 + s * 0.22) : "0"), c.appendChild(k), !r) {
         const E = document.createElementNS(T, "animate");
-        E.setAttribute("attributeName", "cy"), E.setAttribute("values", `${y};${y - 22 - A * 2};${y - 38 - A * 3}`), E.setAttribute("dur", `${2.4 + A % 3 * 0.42}s`), E.setAttribute("begin", `${(A * 0.37 + o * 0.11).toFixed(2)}s`), E.setAttribute("repeatCount", "indefinite"), k.appendChild(E);
+        E.setAttribute("attributeName", "cy"), E.setAttribute("values", `${y};${y - 22 - w * 2};${y - 38 - w * 3}`), E.setAttribute("dur", `${2.4 + w % 3 * 0.42}s`), E.setAttribute("begin", `${(w * 0.37 + o * 0.11).toFixed(2)}s`), E.setAttribute("repeatCount", "indefinite"), k.appendChild(E);
         const P = document.createElementNS(T, "animate");
-        P.setAttribute("attributeName", "opacity"), P.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), P.setAttribute("keyTimes", "0;0.18;0.68;1"), P.setAttribute("dur", `${2.4 + A % 3 * 0.42}s`), P.setAttribute("begin", `${(A * 0.37 + o * 0.11).toFixed(2)}s`), P.setAttribute("repeatCount", "indefinite"), k.appendChild(P);
+        P.setAttribute("attributeName", "opacity"), P.setAttribute("values", `0;${0.32 + s * 0.45};${0.16 + s * 0.22};0`), P.setAttribute("keyTimes", "0;0.18;0.68;1"), P.setAttribute("dur", `${2.4 + w % 3 * 0.42}s`), P.setAttribute("begin", `${(w * 0.37 + o * 0.11).toFixed(2)}s`), P.setAttribute("repeatCount", "indefinite"), k.appendChild(P);
       }
     });
     const b = document.createElementNS(T, "title");
@@ -2216,7 +2216,7 @@ let nt = class extends Pt {
     const i = document.createElementNS(T, "g");
     i.setAttribute("class", "fireplace-atmosphere-scene"), i.setAttribute("aria-label", "Levende pejsatmosfære"), i.setAttribute("pointer-events", "none");
     const r = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
-    t.forEach(({ room: l, status: c }, p) => this.appendFireplaceAtmosphere(i, l, c, r, p));
+    t.forEach(({ room: l, status: c }, d) => this.appendFireplaceAtmosphere(i, l, c, r, d));
     const o = e.querySelector(":scope > g.room-reactions-scene"), n = e.querySelector(":scope > g.route-status-scene"), s = e.querySelector(":scope > g.footsteps-scene"), a = e.querySelector(":scope > g.presences-scene");
     e.insertBefore(i, o ?? n ?? s ?? a ?? null);
   }
@@ -2257,20 +2257,20 @@ let nt = class extends Pt {
     l.setAttribute("class", "overcast-cloud-mist"), l.setAttribute("cx", o % 2 === 0 ? "-12" : "14"), l.setAttribute("cy", "18"), l.setAttribute("rx", "145"), l.setAttribute("ry", "43"), a.appendChild(l);
     const c = document.createElementNS(T, "g");
     c.setAttribute("class", "overcast-cloud-body"), c.setAttribute("filter", `url(#${this.overcastFilterId})`), c.setAttribute("transform", o % 2 === 0 ? "scale(1.12 .74) skewX(-4)" : "scale(.98 .88) skewX(5)");
-    const p = document.createElementNS(T, "path");
-    p.setAttribute("class", "overcast-cloud-base"), p.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), c.appendChild(p), [
+    const d = document.createElementNS(T, "path");
+    d.setAttribute("class", "overcast-cloud-base"), d.setAttribute("d", "M-150 31 C-133 1 -108 -17 -80 -18 C-66 -47 -41 -62 -13 -57 C5 -78 34 -82 58 -62 C84 -62 107 -48 120 -27 C146 -18 158 5 145 29 C128 53 99 63 66 61 C34 75 -4 74 -37 68 C-76 75 -116 64 -140 48 C-151 41 -155 35 -150 31 Z"), c.appendChild(d), [
       [-86, -6, 50, 30],
       [-47, -37, 57, 34],
       [-3, -51, 65, 38],
       [43, -43, 58, 35],
       [82, -17, 50, 30],
       [14, 23, 92, 27]
-    ].forEach(([g, b, m, y], w) => {
-      const A = document.createElementNS(T, "ellipse");
-      A.setAttribute("class", "overcast-cloud-puff"), A.setAttribute("cx", String(g)), A.setAttribute("cy", String(b)), A.setAttribute("rx", String(m)), A.setAttribute("ry", String(y)), A.setAttribute("opacity", String(0.34 + w % 3 * 0.08)), c.appendChild(A);
+    ].forEach(([m, b, g, y], A) => {
+      const w = document.createElementNS(T, "ellipse");
+      w.setAttribute("class", "overcast-cloud-puff"), w.setAttribute("cx", String(m)), w.setAttribute("cy", String(b)), w.setAttribute("rx", String(g)), w.setAttribute("ry", String(y)), w.setAttribute("opacity", String(0.34 + A % 3 * 0.08)), c.appendChild(w);
     }), a.appendChild(c);
-    const u = document.createElementNS(T, "path");
-    u.setAttribute("class", "overcast-cloud-strand"), u.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(u), s.appendChild(a), e.appendChild(s);
+    const h = document.createElementNS(T, "path");
+    h.setAttribute("class", "overcast-cloud-strand"), h.setAttribute("d", "M-184 70 C-130 58 -80 63 -32 68 C18 73 70 65 135 48 C89 79 27 88 -33 82 C-88 78 -139 89 -184 70 Z"), a.appendChild(h), s.appendChild(a), e.appendChild(s);
   }
   syncOvercastCloudDensity() {
     const e = this.renderRoot.querySelector("svg.floorplan"), t = this.renderRoot.querySelector("g.scene");
@@ -2294,12 +2294,12 @@ let nt = class extends Pt {
       [265, 1035, 0.63, 9, 0.36],
       [585, 1038, 0.56, 10, 0.31],
       [890, 1028, 0.64, 11, 0.36]
-    ].forEach(([a, l, c, p, d]) => this.appendOvercastCloud(o, a, l, c, p, d));
+    ].forEach(([a, l, c, d, p]) => this.appendOvercastCloud(o, a, l, c, d, p));
     const s = t.querySelector(":scope > g.rooms-scene");
     t.insertBefore(o, s ?? null);
   }
 };
-nt.styles = j`
+nt.styles = I`
     ${Pt.styles}
 
     :host {
@@ -2436,7 +2436,7 @@ nt.styles = j`
     }
   `;
 nt = Wo([
-  I("explorer-presence-activity-canvas")
+  D("explorer-presence-activity-canvas")
 ], nt);
 var Go = Object.defineProperty, Uo = Object.getOwnPropertyDescriptor, ht = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Uo(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -2444,7 +2444,7 @@ var Go = Object.defineProperty, Uo = Object.getOwnPropertyDescriptor, ht = (e, t
   return r && o && Go(t, i, o), o;
 };
 const Xo = "http://www.w3.org/2000/svg";
-let be = class extends nt {
+let ye = class extends nt {
   constructor() {
     super(...arguments), this.theme = "classic", this.compassRotation = -7, this.compassSize = 1, this.compassVisible = !0, this.artifactId = `explorer-antique-${Math.random().toString(36).slice(2, 10)}`, this.hasRevealedEnchanted = !1;
   }
@@ -2471,8 +2471,8 @@ let be = class extends nt {
     this.setAttributes(r, { in: "noise", type: "matrix", values: "0 0 0 0 0.30  0 0 0 0 0.20  0 0 0 0 0.11  0 0 0 .24 0" }), t.appendChild(r), e.appendChild(t);
     const o = this.createSvg("radialGradient");
     o.setAttribute("id", `${this.artifactId}-vignette`), [["0%", "#f6e3b7", "0"], ["70%", "#9b6c3d", ".04"], ["100%", "#3f291c", ".30"]].forEach(([a, l, c]) => {
-      const p = this.createSvg("stop");
-      this.setAttributes(p, { offset: a, "stop-color": l, "stop-opacity": c }), o.appendChild(p);
+      const d = this.createSvg("stop");
+      this.setAttributes(d, { offset: a, "stop-color": l, "stop-opacity": c }), o.appendChild(d);
     }), e.appendChild(o);
     const n = this.createSvg("pattern");
     this.setAttributes(n, { id: `${this.artifactId}-floor`, width: "28", height: "28", patternUnits: "userSpaceOnUse", patternTransform: "rotate(-8)" });
@@ -2500,9 +2500,9 @@ let be = class extends nt {
     const r = this.createSvg("circle");
     this.setAttributes(r, { r: "48", fill: "none", stroke: "#5b3c28", "stroke-width": "2.2", "stroke-opacity": ".62" }), e.appendChild(r);
     const o = this.createSvg("circle");
-    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, p, d, u]) => {
-      const g = this.createSvg("line");
-      this.setAttributes(g, { x1: String(c), y1: String(p), x2: String(d), y2: String(u), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(g);
+    this.setAttributes(o, { r: "34", fill: "none", stroke: "#5b3c28", "stroke-width": "1", "stroke-opacity": ".38" }), e.appendChild(o), [[0, -42, 0, 42], [-42, 0, 42, 0]].forEach(([c, d, p, h]) => {
+      const m = this.createSvg("line");
+      this.setAttributes(m, { x1: String(c), y1: String(d), x2: String(p), y2: String(h), stroke: "#5b3c28", "stroke-width": "1.5", "stroke-opacity": ".54" }), e.appendChild(m);
     });
     const n = this.createSvg("path");
     this.setAttributes(n, { d: "M 0 -42 L 8 -8 L 0 -15 L -8 -8 Z", fill: "#5a3924", "fill-opacity": ".76" }), e.appendChild(n);
@@ -2523,22 +2523,22 @@ let be = class extends nt {
     e.appendChild(o), !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1) && !this.hasRevealedEnchanted && (this.hasRevealedEnchanted = !0, t.animate([{ opacity: 0.28 }, { opacity: 1 }], { duration: 850, easing: "cubic-bezier(.2,.8,.2,1)" }), o.animate([{ opacity: 0 }, { opacity: 0.62 }], { duration: 1100, delay: 180, fill: "both", easing: "ease-out" }));
   }
 };
-be.styles = j`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
+ye.styles = I`${nt.styles}:host([map-theme="enchanted_antique"]){--primary-color:#68472f;--primary-text-color:#4c321f;--secondary-text-color:#6f5239;--success-color:#6f6d3c;--error-color:#8b4639;--warning-color:#9a6731;--accent-color:#74513b;--card-background-color:#d9c294;--explorer-room-light-color:#e3a33d;--explorer-room-motion-color:#75573a;--explorer-room-media-color:#71503e;--explorer-room-opening-color:#936031;--explorer-room-panel-background:rgba(218,192,143,.96);--explorer-room-panel-text:#4b311f;--explorer-room-panel-border:rgba(82,50,30,.34);--explorer-room-panel-control:rgba(91,57,34,.12);--explorer-room-panel-row:rgba(255,239,199,.22)}:host([map-theme="enchanted_antique"]) .viewport{background:radial-gradient(circle at 22% 18%,rgba(255,240,195,.42),transparent 28%),radial-gradient(circle at 78% 76%,rgba(91,55,29,.16),transparent 42%),#c4a26e;box-shadow:inset 0 0 34px rgba(64,40,25,.22),inset 0 0 110px rgba(82,50,26,.12)}:host([map-theme="enchanted_antique"]) .viewport::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle at 18% 24%,rgba(255,226,151,.13),transparent 22%),radial-gradient(circle at 76% 68%,rgba(255,210,112,.08),transparent 28%);mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 0 44px rgba(60,38,24,.21)}:host([map-theme="enchanted_antique"]) .backdrop{fill:#caa970}:host([map-theme="enchanted_antique"]) .floorplan-source{filter:sepia(.92) saturate(.58) contrast(1.13) brightness(.92) drop-shadow(0 2px 1px rgba(58,35,20,.18)) drop-shadow(2px 3px 3px rgba(56,34,20,.10));opacity:.89;mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .rooms-scene{filter:drop-shadow(2px 3px 2px rgba(58,36,22,.16))}:host([map-theme="enchanted_antique"]) .room polygon{fill:#795132!important;fill-opacity:.085!important;stroke:#4f321f!important;stroke-opacity:.88!important;stroke-width:2.8px!important;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(2px 3px 1.5px rgba(67,41,24,.13));transition:fill-opacity .24s ease,stroke-width .24s ease,filter .24s ease}:host([map-theme="enchanted_antique"]) .room:hover polygon{fill-opacity:.14!important;filter:drop-shadow(0 1px .5px rgba(69,42,24,.34)) drop-shadow(3px 4px 2px rgba(67,41,24,.17))}:host([map-theme="enchanted_antique"]) .room.selected polygon{fill-opacity:.19!important;stroke-width:4px!important;filter:drop-shadow(0 1px .6px rgba(69,42,24,.38)) drop-shadow(4px 5px 3px rgba(67,41,24,.18))}:host([map-theme="enchanted_antique"]) .room-label,:host([map-theme="enchanted_antique"]) .presence-label,:host([map-theme="enchanted_antique"]) .route-status-scene text{fill:#4e321e!important;stroke:rgba(222,199,151,.82)!important;stroke-width:3.5px!important;font-family:Georgia,Cambria,"Times New Roman",serif!important;letter-spacing:.045em}:host([map-theme="enchanted_antique"]) .room-label{font-style:italic;font-weight:700;filter:drop-shadow(1px 1px .35px rgba(73,44,25,.18))}:host([map-theme="enchanted_antique"]) .presence-label{font-weight:700;font-variant:small-caps}:host([map-theme="enchanted_antique"]) .presence-border{stroke:#ead8aa!important;filter:drop-shadow(0 2px 3px rgba(54,34,21,.35))}:host([map-theme="enchanted_antique"]) .presence-avatar-background,:host([map-theme="enchanted_antique"]) .presence-marker{fill:#76543a!important}:host([map-theme="enchanted_antique"]) .footsteps-scene ellipse{fill:#4b301d!important;filter:drop-shadow(0 0 1.3px rgba(66,38,20,.38))}:host([map-theme="enchanted_antique"]) .route-status-scene line{filter:drop-shadow(0 .6px .6px rgba(65,39,23,.28))}:host([map-theme="enchanted_antique"]) .room-reactions-scene polygon{mix-blend-mode:multiply}:host([map-theme="enchanted_antique"]) .room-reactions-scene [data-reaction-kind="light"],:host([map-theme="enchanted_antique"]) .room-reactions-scene .light{filter:drop-shadow(0 0 5px rgba(238,177,63,.72)) drop-shadow(0 0 14px rgba(238,158,42,.34));mix-blend-mode:screen}:host([map-theme="enchanted_antique"]) .antique-paper-scene,:host([map-theme="enchanted_antique"]) .antique-compass{pointer-events:none}@media(prefers-reduced-motion:reduce){:host([map-theme="enchanted_antique"]) .room polygon,:host([map-theme="enchanted_antique"]) .floorplan-source{transition:none!important}}`;
 ht([
   C({ attribute: "map-theme", reflect: !0 })
-], be.prototype, "theme", 2);
+], ye.prototype, "theme", 2);
 ht([
   C({ type: Number, attribute: "compass-rotation" })
-], be.prototype, "compassRotation", 2);
+], ye.prototype, "compassRotation", 2);
 ht([
   C({ type: Number, attribute: "compass-size" })
-], be.prototype, "compassSize", 2);
+], ye.prototype, "compassSize", 2);
 ht([
   C({ type: Boolean, attribute: "compass-visible" })
-], be.prototype, "compassVisible", 2);
-be = ht([
-  I("explorer-themed-canvas")
-], be);
+], ye.prototype, "compassVisible", 2);
+ye = ht([
+  D("explorer-themed-canvas")
+], ye);
 const Yo = ["on"], Qo = /* @__PURE__ */ new Set(["unknown", "unavailable"]);
 function Jo(e) {
   const t = (e ?? []).map((i) => i.trim()).filter(Boolean);
@@ -2606,7 +2606,7 @@ var _o = Object.defineProperty, en = Object.getOwnPropertyDescriptor, Ar = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && _o(t, i, o), o;
 };
-const he = "http://www.w3.org/2000/svg", tn = {
+const ue = "http://www.w3.org/2000/svg", tn = {
   info: "var(--explorer-zone-info, #2d8f74)",
   warning: "var(--explorer-zone-warning, #f59e0b)",
   danger: "var(--explorer-zone-danger, #d64545)",
@@ -2619,7 +2619,7 @@ const he = "http://www.w3.org/2000/svg", tn = {
   cleaning: "✦",
   restricted: "×"
 };
-let We = class extends be {
+let We = class extends ye {
   constructor() {
     super(...arguments), this.zones = [];
   }
@@ -2639,29 +2639,29 @@ let We = class extends be {
     return e.color?.trim() || tn[e.kind ?? "info"];
   }
   appendZoneTitle(e, t) {
-    const i = document.createElementNS(he, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
+    const i = document.createElementNS(ue, "title"), r = t.zone, o = t.entity ? ` · ${t.entity}: ${t.currentState ?? "ukendt"} · aktiv: ${t.activeStates.join(", ")}` : " · altid aktiv";
     i.textContent = `${r.name ?? r.id}${o}`, e.appendChild(i);
   }
   appendZoneAccent(e, t, i, r) {
     if (i !== "cleaning" && i !== "restricted") return;
-    const o = document.createElementNS(he, "polygon");
+    const o = document.createElementNS(ue, "polygon");
     o.setAttribute("points", this.zonePolygonPoints(t.points)), o.setAttribute("class", `zone-accent zone-accent-${i}`), o.setAttribute("fill", "none"), o.setAttribute("stroke", r), o.setAttribute("vector-effect", "non-scaling-stroke"), o.setAttribute("stroke-linejoin", "round"), o.setAttribute("pointer-events", "none"), i === "cleaning" ? (o.setAttribute("stroke-width", "8"), o.setAttribute("stroke-opacity", ".30"), o.setAttribute("stroke-dasharray", "3 15")) : (o.setAttribute("stroke-width", "9"), o.setAttribute("stroke-opacity", ".20"), o.setAttribute("stroke-dasharray", "2 11")), e.appendChild(o);
   }
   renderZone(e, t, i) {
     const r = t.zone;
     if (!t.active || r.points.length < 3) return;
-    const o = r.kind ?? "info", n = this.zoneColor(r), s = document.createElementNS(he, "g");
+    const o = r.kind ?? "info", n = this.zoneColor(r), s = document.createElementNS(ue, "g");
     s.setAttribute("class", `dynamic-zone zone-${o} zone-${r.id}${i ? " reduced-motion" : ""}`), s.setAttribute("pointer-events", "none");
-    const a = document.createElementNS(he, "polygon");
+    const a = document.createElementNS(ue, "polygon");
     a.setAttribute("class", "zone-shape"), a.setAttribute("points", this.zonePolygonPoints(r.points)), a.setAttribute("fill", n), a.setAttribute("fill-opacity", o === "danger" || o === "restricted" ? ".18" : ".13"), a.setAttribute("stroke", n), a.setAttribute("stroke-width", o === "danger" ? "5" : "4"), a.setAttribute("stroke-opacity", ".88"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("vector-effect", "non-scaling-stroke"), o === "warning" && a.setAttribute("stroke-dasharray", "16 9"), o === "restricted" && a.setAttribute("stroke-dasharray", "7 7"), o === "cleaning" && a.setAttribute("stroke-dasharray", "4 8"), s.appendChild(a), this.appendZoneAccent(s, r, o, n);
-    const l = this.zoneCenter(r), c = document.createElementNS(he, "g");
+    const l = this.zoneCenter(r), c = document.createElementNS(ue, "g");
     c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.setAttribute("class", "zone-marker");
-    const p = document.createElementNS(he, "circle");
-    p.setAttribute("class", "zone-marker-bg"), p.setAttribute("r", "17"), p.setAttribute("fill", "var(--card-background-color, #ffffff)"), p.setAttribute("fill-opacity", ".90"), p.setAttribute("stroke", n), p.setAttribute("stroke-width", "3"), p.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(p);
-    const d = document.createElementNS(he, "text");
-    if (d.setAttribute("text-anchor", "middle"), d.setAttribute("dominant-baseline", "central"), d.setAttribute("fill", n), d.setAttribute("font-size", "18"), d.setAttribute("font-weight", "900"), d.setAttribute("font-family", "system-ui, sans-serif"), d.textContent = rn[o], c.appendChild(d), s.appendChild(c), r.name) {
-      const u = document.createElementNS(he, "text");
-      u.setAttribute("x", String(l.x)), u.setAttribute("y", String(l.y + 36)), u.setAttribute("text-anchor", "middle"), u.setAttribute("class", "zone-label"), u.setAttribute("fill", n), u.setAttribute("font-size", "22"), u.setAttribute("font-weight", "800"), u.setAttribute("font-family", "system-ui, sans-serif"), u.setAttribute("paint-order", "stroke"), u.setAttribute("stroke", "var(--card-background-color, #ffffff)"), u.setAttribute("stroke-width", "5"), u.setAttribute("stroke-linejoin", "round"), u.textContent = r.name, s.appendChild(u);
+    const d = document.createElementNS(ue, "circle");
+    d.setAttribute("class", "zone-marker-bg"), d.setAttribute("r", "17"), d.setAttribute("fill", "var(--card-background-color, #ffffff)"), d.setAttribute("fill-opacity", ".90"), d.setAttribute("stroke", n), d.setAttribute("stroke-width", "3"), d.setAttribute("vector-effect", "non-scaling-stroke"), c.appendChild(d);
+    const p = document.createElementNS(ue, "text");
+    if (p.setAttribute("text-anchor", "middle"), p.setAttribute("dominant-baseline", "central"), p.setAttribute("fill", n), p.setAttribute("font-size", "18"), p.setAttribute("font-weight", "900"), p.setAttribute("font-family", "system-ui, sans-serif"), p.textContent = rn[o], c.appendChild(p), s.appendChild(c), r.name) {
+      const h = document.createElementNS(ue, "text");
+      h.setAttribute("x", String(l.x)), h.setAttribute("y", String(l.y + 36)), h.setAttribute("text-anchor", "middle"), h.setAttribute("class", "zone-label"), h.setAttribute("fill", n), h.setAttribute("font-size", "22"), h.setAttribute("font-weight", "800"), h.setAttribute("font-family", "system-ui, sans-serif"), h.setAttribute("paint-order", "stroke"), h.setAttribute("stroke", "var(--card-background-color, #ffffff)"), h.setAttribute("stroke-width", "5"), h.setAttribute("stroke-linejoin", "round"), h.textContent = r.name, s.appendChild(h);
     }
     this.appendZoneTitle(s, t), e.appendChild(s);
   }
@@ -2670,7 +2670,7 @@ let We = class extends be {
     if (!e || (e.querySelector(":scope > g.zones-scene")?.remove(), !this.zones.length)) return;
     const i = $o(this.zones, (c) => this.hass?.states[c]?.state).filter((c) => c.active && c.zone.points.length >= 3);
     if (!i.length) return;
-    const r = document.createElementNS(he, "g");
+    const r = document.createElementNS(ue, "g");
     r.setAttribute("class", "zones-scene"), r.setAttribute("aria-label", "Dynamiske zoner"), r.setAttribute("pointer-events", "none");
     const o = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? !1;
     i.forEach((c) => this.renderZone(r, c, o));
@@ -2678,8 +2678,8 @@ let We = class extends be {
     e.insertBefore(r, n ?? s ?? a ?? l ?? null);
   }
 };
-We.styles = j`
-    ${be.styles}
+We.styles = I`
+    ${ye.styles}
 
     :host {
       --explorer-zone-info: #2d8f74;
@@ -2774,7 +2774,7 @@ Ar([
   C({ attribute: !1 })
 ], We.prototype, "zones", 2);
 We = Ar([
-  I("explorer-zones-canvas")
+  D("explorer-zones-canvas")
 ], We);
 var on = Object.defineProperty, nn = Object.getOwnPropertyDescriptor, fi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? nn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -2829,19 +2829,19 @@ let ze = class extends We {
       if (i.delete(o), !n) continue;
       const s = [n], a = [n];
       for (; a.length; ) {
-        const p = a.shift(), d = this.polishBasePosition(p);
-        for (const u of [...i]) {
-          const g = r.get(u);
-          if (!g) continue;
-          const b = this.polishBasePosition(g);
-          Math.hypot(d.x - b.x, d.y - b.y) <= cn && (i.delete(u), s.push(g), a.push(g));
+        const d = a.shift(), p = this.polishBasePosition(d);
+        for (const h of [...i]) {
+          const m = r.get(h);
+          if (!m) continue;
+          const b = this.polishBasePosition(m);
+          Math.hypot(p.x - b.x, p.y - b.y) <= cn && (i.delete(h), s.push(m), a.push(m));
         }
       }
       if (s.length < 2) continue;
-      const l = [...s].sort((p, d) => p.id.localeCompare(d.id)), c = Math.min(52, 24 + l.length * 4);
-      l.forEach((p, d) => {
-        const u = this.polishBasePosition(p), g = l.length === 2 ? d === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * d / l.length, b = gt(u.x + Math.cos(g) * c, 38, x - 38), m = gt(u.y + Math.sin(g) * c, 38, x - 64);
-        t.set(p.id, { x: b - u.x, y: m - u.y, groupSize: l.length });
+      const l = [...s].sort((d, p) => d.id.localeCompare(p.id)), c = Math.min(52, 24 + l.length * 4);
+      l.forEach((d, p) => {
+        const h = this.polishBasePosition(d), m = l.length === 2 ? p === 0 ? Math.PI : 0 : -Math.PI / 2 + Math.PI * 2 * p / l.length, b = gt(h.x + Math.cos(m) * c, 38, x - 38), g = gt(h.y + Math.sin(m) * c, 38, x - 64);
+        t.set(d.id, { x: b - h.x, y: g - h.y, groupSize: l.length });
       });
     }
     return t;
@@ -2891,9 +2891,9 @@ let ze = class extends We {
       const s = r.type ?? "person", a = this.polishPresenceColor(r), l = i.get(r.id) ?? { x: 0, y: 0, groupSize: 1 };
       n.setAttribute("data-presence-id", r.id), n.setAttribute("data-presence-type", s), s === "person" && n.setAttribute("data-trail-style", String(this.polishPersonTrailVariant(r) + 1)), n.classList.add("presence-polished", `presence-${s}`);
       let c = n.querySelector(":scope > g.presence-visual-offset");
-      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((g) => g.localName.toLowerCase() !== "animatetransform").forEach((g) => c?.appendChild(g)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
-      const p = this.polishCreateSvg("title"), d = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", u = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
-      p.textContent = `${r.name ?? r.id} · ${dn[s]}${u}${d}`, n.appendChild(p);
+      c || (c = this.polishCreateSvg("g"), c.setAttribute("class", "presence-visual-offset"), Array.from(n.children).filter((m) => m.localName.toLowerCase() !== "animatetransform").forEach((m) => c?.appendChild(m)), n.insertBefore(c, n.firstChild)), c.setAttribute("transform", `translate(${l.x} ${l.y})`), c.querySelector(".presence-marker")?.setAttribute("fill", a), c.querySelector(".presence-avatar-background")?.setAttribute("fill", a), c.querySelector(".presence-border")?.setAttribute("stroke", a), this.polishAppendTypeBadge(c, r, a), n.querySelector(":scope > title")?.remove();
+      const d = this.polishCreateSvg("title"), p = l.groupSize > 1 ? ` · ${l.groupSize} markører overlapper` : "", h = s === "person" ? ` · fodspor ${this.polishPersonTrailVariant(r) + 1}` : "";
+      d.textContent = `${r.name ?? r.id} · ${dn[s]}${h}${p}`, n.appendChild(d);
     });
   }
   polishRouteConfig() {
@@ -2980,28 +2980,28 @@ let ze = class extends We {
     if (t.trail_visible === !1) return;
     const i = this.polishEnsureTrailLayer();
     if (!i || e.length < 2) return;
-    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((d, u) => {
-      const g = e[u];
-      return { start: g, end: d, length: Math.hypot(d.x - g.x, d.y - g.y) };
-    }), l = a.reduce((d, u) => d + u.length, 0), c = this.polishTrailSpacing(r, o);
+    const r = t.type ?? "person", o = r === "person" ? this.polishPersonTrailVariant(t) : 0, n = this.polishTrailColor(t), s = this.polishTrailDuration(t), a = e.slice(1).map((p, h) => {
+      const m = e[h];
+      return { start: m, end: p, length: Math.hypot(p.x - m.x, p.y - m.y) };
+    }), l = a.reduce((p, h) => p + h.length, 0), c = this.polishTrailSpacing(r, o);
     if (l < c) return;
-    const p = Math.min(24, Math.max(3, Math.floor(l / c)));
-    for (let d = 0; d < p; d += 1) {
-      const u = (d + 1) / (p + 1), g = l * u;
-      let b = 0, m = a[a.length - 1];
-      for (const q of a) {
-        if (b + q.length >= g) {
-          m = q;
+    const d = Math.min(24, Math.max(3, Math.floor(l / c)));
+    for (let p = 0; p < d; p += 1) {
+      const h = (p + 1) / (d + 1), m = l * h;
+      let b = 0, g = a[a.length - 1];
+      for (const H of a) {
+        if (b + H.length >= m) {
+          g = H;
           break;
         }
-        b += q.length;
+        b += H.length;
       }
-      const y = m.length > 0 ? (g - b) / m.length : 0, w = m.end.x - m.start.x, A = m.end.y - m.start.y, k = d % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, P = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, S = m.length > 0 ? -A / m.length : 0, N = m.length > 0 ? w / m.length : 0, M = m.start.x + w * y + S * E * k, D = m.start.y + A * y + N * E * k, J = Math.atan2(A, w) * 180 / Math.PI + 90, Y = Math.round(u * ln), z = this.polishCreateSvg("g");
-      z.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), z.setAttribute("data-presence-id", t.id), r === "person" && z.setAttribute("data-trail-style", String(o + 1)), z.setAttribute("transform", `translate(${M} ${D}) rotate(${J + (E ? k * P : 0)})`), z.setAttribute("opacity", "0"), this.polishAppendTrailShape(z, r, n, o);
-      const L = this.polishCreateSvg("animate");
-      this.polishSetAttributes(L, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), z.appendChild(L), i.appendChild(z), window.setTimeout(() => {
-        z.isConnected && L.beginElement();
-      }, Y), window.setTimeout(() => z.remove(), Y + s + 120);
+      const y = g.length > 0 ? (m - b) / g.length : 0, A = g.end.x - g.start.x, w = g.end.y - g.start.y, k = p % 2 === 0 ? -1 : 1, E = r === "person" ? pn[o] ?? 8 : r === "pet" ? 6 : 0, P = r === "person" ? hn[o] ?? 7 : E ? 7 : 0, S = g.length > 0 ? -w / g.length : 0, N = g.length > 0 ? A / g.length : 0, M = g.start.x + A * y + S * E * k, j = g.start.y + w * y + N * E * k, G = Math.atan2(w, A) * 180 / Math.PI + 90, J = Math.round(h * ln), z = this.polishCreateSvg("g");
+      z.setAttribute("class", `trail-mark trail-${r}${r === "person" ? ` trail-person-v${o + 1}` : ""}`), z.setAttribute("data-presence-id", t.id), r === "person" && z.setAttribute("data-trail-style", String(o + 1)), z.setAttribute("transform", `translate(${M} ${j}) rotate(${G + (E ? k * P : 0)})`), z.setAttribute("opacity", "0"), this.polishAppendTrailShape(z, r, n, o);
+      const q = this.polishCreateSvg("animate");
+      this.polishSetAttributes(q, { attributeName: "opacity", values: "0;0.78;0.54;0", keyTimes: "0;0.08;0.58;1", begin: "indefinite", dur: `${s}ms`, fill: "freeze" }), z.appendChild(q), i.appendChild(z), window.setTimeout(() => {
+        z.isConnected && q.beginElement();
+      }, J), window.setTimeout(() => z.remove(), J + s + 120);
     }
   }
   polishSyncTrails() {
@@ -3067,35 +3067,35 @@ let ze = class extends We {
     for (const [a, l] of this.movementHistorySamples) {
       const c = n.get(a);
       if (!c) continue;
-      const p = c.type ?? "person", d = this.polishHistoryDurationMs(c), u = this.polishTrailColor(c), g = p === "person" ? this.polishPersonTrailVariant(c) : 0;
-      if (p === "person" && this.movementHistory.show_rooms !== !1) {
+      const d = c.type ?? "person", p = this.polishHistoryDurationMs(c), h = this.polishTrailColor(c), m = d === "person" ? this.polishPersonTrailVariant(c) : 0;
+      if (d === "person" && this.movementHistory.show_rooms !== !1) {
         const b = /* @__PURE__ */ new Map();
-        for (const m of l) m.roomId && b.set(m.roomId, m);
-        for (const [m, y] of b) {
-          const w = this.rooms.find((E) => E.id === m || E.area_id === m);
-          if (!w || w.points.length < 3) continue;
-          const A = Math.max(0, 0.16 * (1 - (t - y.at) / d)), k = this.polishCreateSvg("polygon");
-          this.polishSetAttributes(k, { points: w.points.map(([E, P]) => `${E * x},${P * x}`).join(" "), fill: u, "fill-opacity": String(A), stroke: u, "stroke-opacity": String(A * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(k);
+        for (const g of l) g.roomId && b.set(g.roomId, g);
+        for (const [g, y] of b) {
+          const A = this.rooms.find((E) => E.id === g || E.area_id === g);
+          if (!A || A.points.length < 3) continue;
+          const w = Math.max(0, 0.16 * (1 - (t - y.at) / p)), k = this.polishCreateSvg("polygon");
+          this.polishSetAttributes(k, { points: A.points.map(([E, P]) => `${E * x},${P * x}`).join(" "), fill: h, "fill-opacity": String(w), stroke: h, "stroke-opacity": String(w * 0.9), "stroke-width": "2", "vector-effect": "non-scaling-stroke", "data-presence-id": a }), r.appendChild(k);
         }
       }
       for (let b = 1; b < l.length; b += 1) {
-        const m = l[b - 1], y = l[b], w = this.polishMovementPath(m, y, m.roomId, y.roomId), A = Math.max(0, 0.72 * (1 - (t - y.at) / d));
-        for (let k = 1; k < w.length; k += 1) {
-          const E = w[k - 1], P = w[k], S = P.x - E.x, N = P.y - E.y, M = Math.hypot(S, N), D = Math.atan2(N, S) * 180 / Math.PI;
-          if (p === "robot") {
+        const g = l[b - 1], y = l[b], A = this.polishMovementPath(g, y, g.roomId, y.roomId), w = Math.max(0, 0.72 * (1 - (t - y.at) / p));
+        for (let k = 1; k < A.length; k += 1) {
+          const E = A[k - 1], P = A[k], S = P.x - E.x, N = P.y - E.y, M = Math.hypot(S, N), j = Math.atan2(N, S) * 180 / Math.PI;
+          if (d === "robot") {
             if (this.petRobotTrails.show_robot_route === !1) continue;
-            const L = this.polishCreateSvg("line");
-            if (this.polishSetAttributes(L, { x1: String(E.x), y1: String(E.y), x2: String(P.x), y2: String(P.y), stroke: u, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(A), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), L.setAttribute("class", "robot-history-route"), o.appendChild(L), this.petRobotTrails.robot_direction_arrows !== !1 && M > 45) {
-              const q = this.polishCreateSvg("path"), ve = (E.x + P.x) / 2, Ie = (E.y + P.y) / 2;
-              this.polishSetAttributes(q, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: u, "fill-opacity": String(Math.min(1, A + 0.12)), transform: `translate(${ve} ${Ie}) rotate(${D})`, "data-presence-id": a }), q.setAttribute("class", "robot-history-arrow"), o.appendChild(q);
+            const q = this.polishCreateSvg("line");
+            if (this.polishSetAttributes(q, { x1: String(E.x), y1: String(E.y), x2: String(P.x), y2: String(P.y), stroke: h, "stroke-width": "7", "stroke-linecap": "round", "stroke-opacity": String(w), "vector-effect": "non-scaling-stroke", "data-presence-id": a }), q.setAttribute("class", "robot-history-route"), o.appendChild(q), this.petRobotTrails.robot_direction_arrows !== !1 && M > 45) {
+              const H = this.polishCreateSvg("path"), U = (E.x + P.x) / 2, Ie = (E.y + P.y) / 2;
+              this.polishSetAttributes(H, { d: "M -10 -7 L 10 0 L -10 7 Z", fill: h, "fill-opacity": String(Math.min(1, w + 0.12)), transform: `translate(${U} ${Ie}) rotate(${j})`, "data-presence-id": a }), H.setAttribute("class", "robot-history-arrow"), o.appendChild(H);
             }
             continue;
           }
-          if (p === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
-          const J = p === "pet" ? 52 : 70, Y = Math.min(12, Math.max(1, Math.floor(M / J))), z = D + 90;
-          for (let L = 1; L <= Y; L += 1) {
-            const q = L / (Y + 1), ve = L % 2 === 0 ? -1 : 1, Ie = M > 0 ? -N / M : 0, Ce = M > 0 ? S / M : 0, Qe = p === "pet" ? 7 : 6, Q = this.polishCreateSvg("g");
-            Q.setAttribute("class", `movement-history-mark trail-${p}${p === "person" ? ` trail-person-v${g + 1}` : ""}`), Q.setAttribute("data-presence-id", a), Q.setAttribute("transform", `translate(${E.x + S * q + Ie * Qe * ve} ${E.y + N * q + Ce * Qe * ve}) rotate(${z + ve * 4}) scale(${p === "pet" ? 0.72 : 0.62})`), Q.setAttribute("opacity", String(A)), this.polishAppendTrailShape(Q, p, u, g), o.appendChild(Q);
+          if (d === "pet" && this.petRobotTrails.show_pet_paws === !1) continue;
+          const G = d === "pet" ? 52 : 70, J = Math.min(12, Math.max(1, Math.floor(M / G))), z = j + 90;
+          for (let q = 1; q <= J; q += 1) {
+            const H = q / (J + 1), U = q % 2 === 0 ? -1 : 1, Ie = M > 0 ? -N / M : 0, Ce = M > 0 ? S / M : 0, Qe = d === "pet" ? 7 : 6, $ = this.polishCreateSvg("g");
+            $.setAttribute("class", `movement-history-mark trail-${d}${d === "person" ? ` trail-person-v${m + 1}` : ""}`), $.setAttribute("data-presence-id", a), $.setAttribute("transform", `translate(${E.x + S * H + Ie * Qe * U} ${E.y + N * H + Ce * Qe * U}) rotate(${z + U * 4}) scale(${d === "pet" ? 0.72 : 0.62})`), $.setAttribute("opacity", String(w)), this.polishAppendTrailShape($, d, h, m), o.appendChild($);
           }
         }
       }
@@ -3104,7 +3104,7 @@ let ze = class extends We {
     i.insertBefore(r, s ?? null), i.insertBefore(o, s ?? null);
   }
 };
-ze.styles = j`${We.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
+ze.styles = I`${We.styles}.footsteps-scene{display:none}.presence-visual-offset{transition:transform 220ms ease}.presence-type-badge{filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}.presence-trails-scene .trail-mark,.movement-history-scene .movement-history-mark{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.20))}.movement-history-scene .trail-pet{filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-route{fill:none;filter:drop-shadow(0 0 2px rgba(0,0,0,.24))}.movement-history-scene .robot-history-arrow{filter:drop-shadow(0 1px 1px rgba(0,0,0,.28))}.movement-history-rooms-scene polygon{mix-blend-mode:multiply}.presence-trails-scene .trail-person-v2{opacity:.96}.presence-trails-scene .trail-person-v3{filter:drop-shadow(0 0 1.6px rgba(0,0,0,.24))}.presence-trails-scene .trail-person-v5{filter:drop-shadow(0 0 .8px rgba(0,0,0,.18))}:host([map-theme="enchanted_antique"]) .presence-type-badge{filter:sepia(.35) drop-shadow(0 1px 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-trails-scene .trail-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .movement-history-mark,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-route,:host([map-theme="enchanted_antique"]) .movement-history-scene .robot-history-arrow{mix-blend-mode:multiply;filter:sepia(.28) saturate(.78) drop-shadow(0 0 1px rgba(67,40,22,.28))}:host([map-theme="enchanted_antique"]) .presence-border{stroke-width:4.5px!important}@media(prefers-reduced-motion:reduce){.presence-visual-offset{transition:none}}`;
 fi([
   C({ attribute: !1 })
 ], ze.prototype, "movementHistory", 2);
@@ -3112,7 +3112,7 @@ fi([
   C({ attribute: !1 })
 ], ze.prototype, "petRobotTrails", 2);
 ze = fi([
-  I("explorer-presence-polish-canvas")
+  D("explorer-presence-polish-canvas")
 ], ze);
 var un = Object.getOwnPropertyDescriptor, gn = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? un(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -3135,8 +3135,8 @@ let st = class extends ze {
     const [i, r] = e;
     let o = !1;
     for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-      const [a, l] = t[n], [c, p] = t[s];
-      l > r != p > r && i < (c - a) * (r - l) / (p - l || Number.EPSILON) + a && (o = !o);
+      const [a, l] = t[n], [c, d] = t[s];
+      l > r != d > r && i < (c - a) * (r - l) / (d - l || Number.EPSILON) + a && (o = !o);
     }
     return o;
   }
@@ -3199,7 +3199,7 @@ let st = class extends ze {
     );
   }
 };
-st.styles = j`
+st.styles = I`
     ${ze.styles}
 
     :host {
@@ -3268,14 +3268,14 @@ st.styles = j`
     }
   `;
 st = gn([
-  I("explorer-room-magic-canvas")
+  D("explorer-room-magic-canvas")
 ], st);
 var fn = Object.defineProperty, bn = Object.getOwnPropertyDescriptor, Sr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? bn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && fn(t, i, o), o;
 };
-const $ = "http://www.w3.org/2000/svg", yn = ["on", "open", "opened", "true"], Vt = 600 * 1e3, Kt = 1800 * 1e3, Wt = 3600 * 1e3, Xi = 60 * 1e3, ft = (e) => e * Math.PI / 180;
+const _ = "http://www.w3.org/2000/svg", yn = ["on", "open", "opened", "true"], Vt = 600 * 1e3, Kt = 1800 * 1e3, Wt = 3600 * 1e3, Xi = 60 * 1e3, ft = (e) => e * Math.PI / 180;
 let Ge = class extends st {
   constructor() {
     super(...arguments), this.openings = [], this.openingFirstSeenOpenAt = /* @__PURE__ */ new Map();
@@ -3308,8 +3308,8 @@ let Ge = class extends st {
   openingAgeInfo(e, t, i = Date.now()) {
     const r = this.openingOpenSince(e, t);
     if (r === void 0) return;
-    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Wt ? "alert" : o >= Kt ? "warning" : o >= Vt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, p = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
-    return { minutes: n, level: s, label: p, description: c };
+    const o = Math.max(0, i - r), n = Math.floor(o / 6e4), s = o >= Wt ? "alert" : o >= Kt ? "warning" : o >= Vt ? "watch" : "fresh", a = Math.floor(n / 60), l = n % 60, c = a > 0 ? `åben i ${a} t${l ? ` ${l} min` : ""}` : `åben i ${n} min`, d = s === "fresh" ? "" : a > 0 ? l ? `${a}t ${l}m` : `${a}t` : `${n}m`;
+    return { minutes: n, level: s, label: d, description: c };
   }
   scheduleOpeningAgeRefresh(e) {
     this.openingAgeTimer !== void 0 && window.clearTimeout(this.openingAgeTimer);
@@ -3333,7 +3333,7 @@ let Ge = class extends st {
       this.scheduleOpeningAgeRefresh(Date.now());
       return;
     }
-    const i = document.createElementNS($, "g");
+    const i = document.createElementNS(_, "g");
     i.setAttribute("class", "dynamic-openings-scene"), i.setAttribute("aria-label", "Dynamiske døre og vinduer"), i.setAttribute("pointer-events", "none");
     const r = Date.now();
     for (const n of t)
@@ -3342,46 +3342,46 @@ let Ge = class extends st {
     e.insertBefore(i, o ?? null), this.scheduleOpeningAgeRefresh(r);
   }
   line(e, t, i, r, o, n) {
-    const s = document.createElementNS($, "line");
+    const s = document.createElementNS(_, "line");
     return s.setAttribute("x1", String(t)), s.setAttribute("y1", String(i)), s.setAttribute("x2", String(r)), s.setAttribute("y2", String(o)), s.setAttribute("class", n), e.appendChild(s), s;
   }
   appendAgeIndicator(e, t, i, r) {
     if (!r || r.level === "fresh") return;
-    const o = document.createElementNS($, "g");
+    const o = document.createElementNS(_, "g");
     o.setAttribute("class", `opening-age-indicator level-${r.level}`), o.setAttribute("transform", `translate(${t} ${i})`);
-    const n = document.createElementNS($, "circle");
+    const n = document.createElementNS(_, "circle");
     n.setAttribute("r", r.level === "alert" ? "12" : "10"), n.setAttribute("class", "opening-age-ring"), o.appendChild(n);
-    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS($, "rect");
+    const s = Math.max(28, r.label.length * 7 + 10), a = document.createElementNS(_, "rect");
     a.setAttribute("x", "11"), a.setAttribute("y", "-18"), a.setAttribute("width", String(s)), a.setAttribute("height", "17"), a.setAttribute("rx", "8.5"), a.setAttribute("class", "opening-age-badge"), o.appendChild(a);
-    const l = document.createElementNS($, "text");
+    const l = document.createElementNS(_, "text");
     l.setAttribute("x", String(11 + s / 2)), l.setAttribute("y", "-9.3"), l.setAttribute("text-anchor", "middle"), l.setAttribute("dominant-baseline", "central"), l.setAttribute("class", "opening-age-label"), l.textContent = r.label, o.appendChild(l), e.appendChild(o);
   }
   drawDoor(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", p = t.point[0] * x, d = t.point[1] * x, u = n / 2, g = ft(s), b = Math.cos(g), m = Math.sin(g), y = -m, w = b, A = { x: p - b * u, y: d - m * u }, k = { x: p + b * u, y: d + m * u }, E = l === "start" ? A : k, P = l === "start" ? k : A, S = s + (l === "start" ? 0 : 180), N = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = S + (r ? N * a : 0), D = ft(M), J = { x: E.x + Math.cos(D) * n, y: E.y + Math.sin(D) * n }, Y = o ? ` open-age-${o.level}` : "", z = document.createElementNS($, "g");
-    z.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${Y}`), z.setAttribute("data-opening-id", t.id), o && z.setAttribute("data-open-minutes", String(o.minutes)), this.line(z, A.x, A.y, k.x, k.y, "opening-gap");
-    const L = Math.max(7, Math.min(12, n * 0.12));
-    for (const Q of [A, k]) this.line(z, Q.x - y * L / 2, Q.y - w * L / 2, Q.x + y * L / 2, Q.y + w * L / 2, "door-jamb");
-    r && this.line(z, E.x, E.y, P.x, P.y, "door-closed-guide"), this.line(z, E.x, E.y, J.x, J.y, "door-leaf");
-    const q = document.createElementNS($, "circle");
-    if (q.setAttribute("cx", String(E.x)), q.setAttribute("cy", String(E.y)), q.setAttribute("r", "4.2"), q.setAttribute("class", "opening-hinge"), z.appendChild(q), r) {
-      const Q = document.createElementNS($, "path"), wi = ft(S), ki = D, Dr = E.x + Math.cos(wi) * n, Ir = E.y + Math.sin(wi) * n, jr = E.x + Math.cos(ki) * n, qr = E.y + Math.sin(ki) * n, Lr = N > 0 ? 1 : 0, Or = Math.abs(a) > 180 ? 1 : 0;
-      Q.setAttribute("d", `M ${Dr} ${Ir} A ${n} ${n} 0 ${Or} ${Lr} ${jr} ${qr}`), Q.setAttribute("class", "door-swing"), z.appendChild(Q);
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(28, (t.length ?? 0.055) * x), s = t.angle ?? 0, a = t.open_angle ?? 82, l = t.hinge ?? "start", c = t.swing ?? "left", d = t.point[0] * x, p = t.point[1] * x, h = n / 2, m = ft(s), b = Math.cos(m), g = Math.sin(m), y = -g, A = b, w = { x: d - b * h, y: p - g * h }, k = { x: d + b * h, y: p + g * h }, E = l === "start" ? w : k, P = l === "start" ? k : w, S = s + (l === "start" ? 0 : 180), N = (c === "left" ? -1 : 1) * (l === "start" ? 1 : -1), M = S + (r ? N * a : 0), j = ft(M), G = { x: E.x + Math.cos(j) * n, y: E.y + Math.sin(j) * n }, J = o ? ` open-age-${o.level}` : "", z = document.createElementNS(_, "g");
+    z.setAttribute("class", `dynamic-opening door ${r ? "is-open" : "is-closed"}${J}`), z.setAttribute("data-opening-id", t.id), o && z.setAttribute("data-open-minutes", String(o.minutes)), this.line(z, w.x, w.y, k.x, k.y, "opening-gap");
+    const q = Math.max(7, Math.min(12, n * 0.12));
+    for (const $ of [w, k]) this.line(z, $.x - y * q / 2, $.y - A * q / 2, $.x + y * q / 2, $.y + A * q / 2, "door-jamb");
+    r && this.line(z, E.x, E.y, P.x, P.y, "door-closed-guide"), this.line(z, E.x, E.y, G.x, G.y, "door-leaf");
+    const H = document.createElementNS(_, "circle");
+    if (H.setAttribute("cx", String(E.x)), H.setAttribute("cy", String(E.y)), H.setAttribute("r", "4.2"), H.setAttribute("class", "opening-hinge"), z.appendChild(H), r) {
+      const $ = document.createElementNS(_, "path"), wi = ft(S), ki = j, Dr = E.x + Math.cos(wi) * n, Ir = E.y + Math.sin(wi) * n, jr = E.x + Math.cos(ki) * n, qr = E.y + Math.sin(ki) * n, Lr = N > 0 ? 1 : 0, Or = Math.abs(a) > 180 ? 1 : 0;
+      $.setAttribute("d", `M ${Dr} ${Ir} A ${n} ${n} 0 ${Or} ${Lr} ${jr} ${qr}`), $.setAttribute("class", "door-swing"), z.appendChild($);
     }
-    const ve = p + y * 14, Ie = d + w * 14, Ce = document.createElementNS($, "circle");
-    Ce.setAttribute("cx", String(ve)), Ce.setAttribute("cy", String(Ie)), Ce.setAttribute("r", "5.2"), Ce.setAttribute("class", "opening-status-dot"), z.appendChild(Ce), this.appendAgeIndicator(z, ve, Ie, o);
-    const Qe = document.createElementNS($, "title");
+    const U = d + y * 14, Ie = p + A * 14, Ce = document.createElementNS(_, "circle");
+    Ce.setAttribute("cx", String(U)), Ce.setAttribute("cy", String(Ie)), Ce.setAttribute("r", "5.2"), Ce.setAttribute("class", "opening-status-dot"), z.appendChild(Ce), this.appendAgeIndicator(z, U, Ie, o);
+    const Qe = document.createElementNS(_, "title");
     Qe.textContent = `${t.name ?? t.id} · ${r ? "åben" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, z.appendChild(Qe), e.appendChild(z);
   }
   drawWindow(e, t, i) {
-    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), p = Math.cos(c), d = Math.sin(c), u = -d, g = p, b = n / 2, m = 5.5, y = { x: a - p * b, y: l - d * b }, w = { x: a + p * b, y: l + d * b }, A = o ? ` open-age-${o.level}` : "", k = document.createElementNS($, "g");
-    k.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${A}`), k.setAttribute("data-opening-id", t.id), o && k.setAttribute("data-open-minutes", String(o.minutes)), this.line(k, y.x, y.y, w.x, w.y, "window-gap"), this.line(k, y.x + u * m, y.y + g * m, w.x + u * m, w.y + g * m, "window-pane"), this.line(k, y.x - u * m, y.y - g * m, w.x - u * m, w.y - g * m, "window-pane"), this.line(k, y.x + u * m, y.y + g * m, y.x - u * m, y.y - g * m, "window-frame-end"), this.line(k, w.x + u * m, w.y + g * m, w.x - u * m, w.y - g * m, "window-frame-end"), r && (this.line(k, y.x + u * m, y.y + g * m, a + p * b * 0.12 + u * 18, l + d * b * 0.12 + g * 18, "window-open-sash"), this.line(k, a + p * b * 0.12 + u * 18, l + d * b * 0.12 + g * 18, w.x + u * m, w.y + g * m, "window-open-sash"));
-    const E = a + u * 17, P = l + g * 17, S = document.createElementNS($, "circle");
+    const r = this.isOpen(t), o = this.openingAgeInfo(t, r, i), n = Math.max(26, (t.length ?? 0.05) * x), s = t.angle ?? 0, a = t.point[0] * x, l = t.point[1] * x, c = ft(s), d = Math.cos(c), p = Math.sin(c), h = -p, m = d, b = n / 2, g = 5.5, y = { x: a - d * b, y: l - p * b }, A = { x: a + d * b, y: l + p * b }, w = o ? ` open-age-${o.level}` : "", k = document.createElementNS(_, "g");
+    k.setAttribute("class", `dynamic-opening window ${r ? "is-open" : "is-closed"}${w}`), k.setAttribute("data-opening-id", t.id), o && k.setAttribute("data-open-minutes", String(o.minutes)), this.line(k, y.x, y.y, A.x, A.y, "window-gap"), this.line(k, y.x + h * g, y.y + m * g, A.x + h * g, A.y + m * g, "window-pane"), this.line(k, y.x - h * g, y.y - m * g, A.x - h * g, A.y - m * g, "window-pane"), this.line(k, y.x + h * g, y.y + m * g, y.x - h * g, y.y - m * g, "window-frame-end"), this.line(k, A.x + h * g, A.y + m * g, A.x - h * g, A.y - m * g, "window-frame-end"), r && (this.line(k, y.x + h * g, y.y + m * g, a + d * b * 0.12 + h * 18, l + p * b * 0.12 + m * 18, "window-open-sash"), this.line(k, a + d * b * 0.12 + h * 18, l + p * b * 0.12 + m * 18, A.x + h * g, A.y + m * g, "window-open-sash"));
+    const E = a + h * 17, P = l + m * 17, S = document.createElementNS(_, "circle");
     S.setAttribute("cx", String(E)), S.setAttribute("cy", String(P)), S.setAttribute("r", "5.2"), S.setAttribute("class", "opening-status-dot"), k.appendChild(S), this.appendAgeIndicator(k, E, P, o);
-    const N = document.createElementNS($, "title");
+    const N = document.createElementNS(_, "title");
     N.textContent = `${t.name ?? t.id} · vindue ${r ? "åbent" : "lukket"}${o ? ` · ${o.description}` : ""}${t.state_binding ? ` · ${t.state_binding.entity}` : " · ingen entity"}`, k.appendChild(N), e.appendChild(k);
   }
 };
-Ge.styles = j`${st.styles}
+Ge.styles = I`${st.styles}
     .dynamic-openings-scene .opening-gap,.dynamic-openings-scene .window-gap{stroke:var(--secondary-text-color,#667085);stroke-width:8;stroke-opacity:.16;vector-effect:non-scaling-stroke;stroke-linecap:butt}
     .dynamic-openings-scene .door-jamb,.dynamic-openings-scene .window-frame-end{stroke:var(--primary-text-color,#1f2937);stroke-width:3.4;vector-effect:non-scaling-stroke;stroke-linecap:round}
     .dynamic-openings-scene .door-leaf,.dynamic-openings-scene .window-pane,.dynamic-openings-scene .window-open-sash{stroke:var(--primary-text-color,#1f2937);stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;transition:stroke 220ms ease,opacity 220ms ease,filter 320ms ease}
@@ -3408,7 +3408,7 @@ Sr([
   C({ attribute: !1 })
 ], Ge.prototype, "openings", 2);
 Ge = Sr([
-  I("explorer-openings-canvas")
+  D("explorer-openings-canvas")
 ], Ge);
 var vn = Object.defineProperty, xn = Object.getOwnPropertyDescriptor, Xe = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -3418,10 +3418,15 @@ var vn = Object.defineProperty, xn = Object.getOwnPropertyDescriptor, Xe = (e, t
 const wn = "http://www.w3.org/2000/svg";
 let Se = class extends Ge {
   constructor() {
-    super(...arguments), this.hideSourceText = !1, this.weatherEffect = "clear", this.weatherState = "clear", this.weatherIntensity = 0.6, this.weatherNight = !1, this.weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`, this.cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`, this.weatherTransitionSequence = 0, this.weatherTransitionTimers = /* @__PURE__ */ new Set();
+    super(...arguments), this.hideSourceText = !1, this.weatherEffect = "clear", this.weatherState = "clear", this.weatherIntensity = 0.6, this.weatherNight = !1, this.weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`, this.cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`, this.weatherTransitionSequence = 0, this.weatherTransitionTimers = /* @__PURE__ */ new Set(), this.compactWeatherMode = !1, this.handleCompactWeatherChange = (e) => {
+      e.matches !== this.compactWeatherMode && (this.compactWeatherMode = e.matches, this.syncWeatherOutsideRooms());
+    };
+  }
+  connectedCallback() {
+    super.connectedCallback(), this.compactWeatherQuery = window.matchMedia("(max-width: 820px), (hover: none) and (pointer: coarse)"), this.compactWeatherMode = this.compactWeatherQuery.matches, this.compactWeatherQuery.addEventListener("change", this.handleCompactWeatherChange);
   }
   disconnectedCallback() {
-    this.weatherTransitionTimers.forEach((e) => window.clearTimeout(e)), this.weatherTransitionTimers.clear(), this.renderRoot.querySelectorAll("g.weather-transition-shell, defs[data-weather-owner]").forEach((e) => e.remove()), super.disconnectedCallback();
+    this.compactWeatherQuery?.removeEventListener("change", this.handleCompactWeatherChange), this.compactWeatherQuery = void 0, this.weatherTransitionTimers.forEach((e) => window.clearTimeout(e)), this.weatherTransitionTimers.clear(), this.renderRoot.querySelectorAll("g.weather-transition-shell, defs[data-weather-owner]").forEach((e) => e.remove()), super.disconnectedCallback();
   }
   updated(e) {
     super.updated(e), this.syncSourceTextVisibility(), (e.has("weatherEffect") || e.has("weatherState") || e.has("weatherIntensity") || e.has("weatherNight") || e.has("rooms") || e.has("theme") || e.has("image") || e.has("metadata") || e.has("svgMarkup") || e.has("imageSource")) && this.syncWeatherOutsideRooms();
@@ -3474,7 +3479,11 @@ let Se = class extends Ge {
       colorInterpolationFilters: "sRGB"
     });
     const i = this.svg("feGaussianBlur");
-    this.attrs(i, { in: "SourceGraphic", stdDeviation: "2.6", result: "soft" }), t.appendChild(i);
+    if (this.attrs(i, {
+      in: "SourceGraphic",
+      stdDeviation: this.compactWeatherMode ? "1.15" : "2.6",
+      result: "soft"
+    }), t.appendChild(i), this.compactWeatherMode) return t;
     const r = this.svg("feTurbulence");
     this.attrs(r, {
       type: "fractalNoise",
@@ -3551,113 +3560,113 @@ let Se = class extends Ge {
       "translate(20 12) scale(1.30 .56)",
       "translate(-8 21) scale(.94 .86)",
       "translate(14 7) scale(1.18 .62)"
-    ];
-    for (const [s, a, l, c, p] of i) {
-      const d = c % 4, u = c % 3, g = this.svg("g");
-      this.attrs(g, {
+    ], s = this.compactWeatherMode ? i.filter((a, l) => l < 10 || l >= 21 && l % 2 === 1) : i;
+    for (const [a, l, c, d, p] of s) {
+      const h = d % 4, m = d % 3, b = this.svg("g");
+      this.attrs(b, {
         class: "weather-cloud-position",
-        transform: `translate(${s} ${a}) scale(${l * 0.64})`,
+        transform: `translate(${a} ${l}) scale(${c * 0.64})`,
         opacity: String(p)
       });
-      const b = this.svg("g");
-      this.attrs(b, {
-        class: `weather-cloud weather-cloud-${c % 3} weather-cloud-depth-${u} weather-cloud-form-${d}`
+      const g = this.svg("g");
+      this.attrs(g, {
+        class: `weather-cloud weather-cloud-${d % 3} weather-cloud-depth-${m} weather-cloud-form-${h}`
       });
-      const m = this.svg("g");
-      this.attrs(m, {
+      const y = this.svg("g");
+      this.attrs(y, {
         class: "weather-cloud-mist weather-cloud-mist-back",
-        transform: n[d]
+        transform: n[h]
       }), [
         [-72, 30, 102, 24, 0.52],
         [24, 24, 132, 27, 0.42],
         [112, 8, 78, 20, 0.32]
-      ].forEach(([D, J, Y, z, L]) => {
-        const q = this.svg("ellipse");
-        this.attrs(q, {
-          cx: String(D),
+      ].forEach(([G, J, z, q, H]) => {
+        const U = this.svg("ellipse");
+        this.attrs(U, {
+          cx: String(G),
           cy: String(J),
-          rx: String(Y),
-          ry: String(z),
-          opacity: String(L)
-        }), m.appendChild(q);
-      }), b.appendChild(m);
-      const y = this.svg("path");
-      this.attrs(y, {
+          rx: String(z),
+          ry: String(q),
+          opacity: String(H)
+        }), y.appendChild(U);
+      }), g.appendChild(y);
+      const A = this.svg("path");
+      this.attrs(A, {
         d: "M-145 40 C-112 12 -84 2 -55 10 C-30 20 -9 20 15 10 C43 -3 77 1 104 18 C128 32 135 51 121 64 C92 84 48 84 10 79 C-33 78 -82 88 -119 72 C-138 64 -151 51 -145 40 Z",
         class: "weather-cloud-shadow"
-      }), b.appendChild(y);
+      }), g.appendChild(A);
       const w = this.svg("g");
       this.attrs(w, {
         class: "weather-cloud-body",
         filter: `url(#${t})`,
-        transform: o[c % o.length]
+        transform: o[d % o.length]
       });
-      const A = this.svg("path");
-      this.attrs(A, {
-        d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
-        class: "weather-cloud-base"
-      }), w.appendChild(A);
-      for (const [D, J, Y, z, L] of r) {
-        const q = this.svg("ellipse");
-        this.attrs(q, {
-          cx: String(D),
-          cy: String(J),
-          rx: String(Y),
-          ry: String(z),
-          opacity: String(L),
-          class: "weather-cloud-puff"
-        }), w.appendChild(q);
-      }
       const k = this.svg("path");
       this.attrs(k, {
-        d: "M-104 -12 C-76 -34 -47 -40 -20 -30 C8 -19 33 -21 62 -39 C46 -13 22 1 -3 2 C-32 4 -57 -3 -79 3 C-92 4 -101 -2 -104 -12 Z",
-        class: "weather-cloud-detail"
+        d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
+        class: "weather-cloud-base"
       }), w.appendChild(k);
+      for (const [G, J, z, q, H] of r) {
+        const U = this.svg("ellipse");
+        this.attrs(U, {
+          cx: String(G),
+          cy: String(J),
+          rx: String(z),
+          ry: String(q),
+          opacity: String(H),
+          class: "weather-cloud-puff"
+        }), w.appendChild(U);
+      }
       const E = this.svg("path");
       this.attrs(E, {
+        d: "M-104 -12 C-76 -34 -47 -40 -20 -30 C8 -19 33 -21 62 -39 C46 -13 22 1 -3 2 C-32 4 -57 -3 -79 3 C-92 4 -101 -2 -104 -12 Z",
+        class: "weather-cloud-detail"
+      }), w.appendChild(E);
+      const P = this.svg("path");
+      this.attrs(P, {
         d: "M-151 43 C-111 60 -75 56 -45 48 C-15 41 9 51 35 56 C66 61 100 53 132 39 C106 65 69 77 28 74 C-8 69 -48 70 -81 75 C-111 73 -140 61 -151 43 Z",
         class: "weather-cloud-wisp"
-      }), w.appendChild(E), b.appendChild(w);
-      const P = this.svg("g");
-      this.attrs(P, {
+      }), w.appendChild(P), g.appendChild(w);
+      const S = this.svg("g");
+      this.attrs(S, {
         class: "weather-cloud-mist weather-cloud-mist-front",
-        transform: d === 1 ? "translate(8 51) scale(1.28 .40)" : d === 2 ? "translate(-20 43) scale(.88 .62)" : d === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
+        transform: h === 1 ? "translate(8 51) scale(1.28 .40)" : h === 2 ? "translate(-20 43) scale(.88 .62)" : h === 3 ? "translate(18 47) scale(1.16 .46)" : "translate(8 49) scale(.95 .55)"
       }), [
         [-78, 0, 88, 18, 0.38],
         [18, 2, 116, 20, 0.42],
         [108, -2, 64, 15, 0.3]
-      ].forEach(([D, J, Y, z, L]) => {
-        const q = this.svg("ellipse");
-        this.attrs(q, {
-          cx: String(D),
+      ].forEach(([G, J, z, q, H]) => {
+        const U = this.svg("ellipse");
+        this.attrs(U, {
+          cx: String(G),
           cy: String(J),
-          rx: String(Y),
-          ry: String(z),
-          opacity: String(L)
-        }), P.appendChild(q);
-      }), b.appendChild(P);
-      const S = this.svg("path");
-      if (this.attrs(S, {
+          rx: String(z),
+          ry: String(q),
+          opacity: String(H)
+        }), S.appendChild(U);
+      }), g.appendChild(S);
+      const N = this.svg("path");
+      if (this.attrs(N, {
         d: "M-182 73 C-126 59 -76 66 -31 69 C13 72 59 66 123 51 C80 82 24 89 -29 84 C-78 80 -126 91 -182 73 Z",
         class: "weather-cloud-strand"
-      }), b.appendChild(S), d === 1 || d === 3) {
-        const D = this.svg("path");
-        this.attrs(D, {
-          d: d === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
+      }), g.appendChild(N), h === 1 || h === 3) {
+        const G = this.svg("path");
+        this.attrs(G, {
+          d: h === 1 ? "M-205 89 C-151 74 -94 78 -40 82 C21 87 76 79 152 61 C97 91 31 99 -35 94 C-94 90 -151 101 -205 89 Z" : "M-176 2 C-124 -7 -82 -3 -41 8 C2 19 49 17 112 0 C67 24 16 30 -35 24 C-84 18 -127 24 -176 2 Z",
           class: "weather-cloud-fine-strand"
-        }), b.appendChild(D);
+        }), g.appendChild(G);
       }
-      const N = this.svg("path");
-      this.attrs(N, {
-        d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
-        class: "weather-cloud-highlight"
-      }), b.appendChild(N);
       const M = this.svg("path");
       this.attrs(M, {
+        d: "M-57 -40 C-39 -61 -12 -71 11 -65 C31 -60 45 -50 52 -36 C30 -43 9 -40 -10 -33 C-29 -25 -46 -29 -57 -40 Z",
+        class: "weather-cloud-highlight"
+      }), g.appendChild(M);
+      const j = this.svg("path");
+      this.attrs(j, {
         d: "M-145 28 C-132 -4 -106 -22 -76 -20 C-65 -48 -40 -67 -12 -64 C4 -87 38 -91 61 -67 C88 -66 111 -50 122 -29 C148 -18 158 4 147 25 C134 49 103 62 71 62 C42 76 5 76 -27 69 C-67 76 -111 64 -136 47 C-147 40 -151 34 -145 28 Z",
         class: "weather-cloud-rim",
-        transform: o[c % o.length]
-      }), b.appendChild(M), g.appendChild(b), e.appendChild(g);
+        transform: o[d % o.length]
+      }), g.appendChild(j), b.appendChild(g), e.appendChild(b);
     }
   }
   appendFog(e, t = "fog") {
@@ -3672,169 +3681,174 @@ let Se = class extends Ge {
       [785, -21, 7],
       [895, 19, 8],
       [985, -15, 9]
-    ], r = t === "cloudy" ? i.filter((n, s) => s % 2 === 0) : t === "partlycloudy" ? i.filter((n, s) => [2, 5, 8].includes(s)) : i, o = this.svg("g");
-    o.setAttribute("class", `weather-fog-field is-${t}`), r.forEach(([n, s, a], l) => {
-      const c = this.svg("g");
-      c.setAttribute("class", `weather-fog-bank weather-fog-depth-${a % 3}`), c.style.setProperty("--fog-duration", `${17 + a % 5 * 2.7}s`), c.style.setProperty("--fog-delay", `${-(a * 2.1 + l)}s`);
-      const p = `weather-fog-band weather-fog-band-${a}${t === "fog" ? "" : ` is-cloud-mist is-${t}-mist`}`, d = this.svg("path");
-      this.attrs(d, {
-        d: `M -180 ${n} C 100 ${n + s * 0.65}, 345 ${n - s}, 590 ${n + 3} S 930 ${n + s * 0.7}, 1190 ${n - 2}`,
+    ], r = t === "cloudy" ? i.filter((s, a) => a % 2 === 0) : t === "partlycloudy" ? i.filter((s, a) => [2, 5, 8].includes(a)) : i, o = this.compactWeatherMode && t === "fog" ? r.filter((s, a) => a % 3 !== 1) : r, n = this.svg("g");
+    n.setAttribute("class", `weather-fog-field is-${t}`), o.forEach(([s, a, l], c) => {
+      const d = this.svg("g");
+      d.setAttribute("class", `weather-fog-bank weather-fog-depth-${l % 3}`), d.style.setProperty("--fog-duration", `${17 + l % 5 * 2.7}s`), d.style.setProperty("--fog-delay", `${-(l * 2.1 + c)}s`);
+      const p = `weather-fog-band weather-fog-band-${l}${t === "fog" ? "" : ` is-cloud-mist is-${t}-mist`}`, h = this.svg("path");
+      this.attrs(h, {
+        d: `M -180 ${s} C 100 ${s + a * 0.65}, 345 ${s - a}, 590 ${s + 3} S 930 ${s + a * 0.7}, 1190 ${s - 2}`,
         class: `${p} weather-fog-haze`
-      }), c.appendChild(d);
-      const u = this.svg("path");
-      this.attrs(u, {
-        d: `M -110 ${n + 8} C 130 ${n - s * 0.45}, 365 ${n + s * 0.7}, 575 ${n + 5} S 890 ${n - s * 0.55}, 1130 ${n + 9}`,
+      }), d.appendChild(h);
+      const m = this.svg("path");
+      this.attrs(m, {
+        d: `M -110 ${s + 8} C 130 ${s - a * 0.45}, 365 ${s + a * 0.7}, 575 ${s + 5} S 890 ${s - a * 0.55}, 1130 ${s + 9}`,
         class: `${p} weather-fog-wisp`
-      }), c.appendChild(u), o.appendChild(c);
-    }), e.appendChild(o);
+      }), d.appendChild(m), n.appendChild(d);
+    }), e.appendChild(n);
   }
   appendRain(e, t = !1) {
     const i = this.svg("g");
     i.setAttribute("class", `weather-rain-field${t ? " is-heavy" : ""}`);
-    const r = t ? 62 : 92, o = t ? 48 : 72;
-    for (let s = -1; s < (t ? 18 : 13); s += 1)
-      for (let a = -1; a < (t ? 24 : 17); a += 1) {
-        const l = Math.abs(s * 37 + a * 19), c = a * o + s % 2 * (t ? 17 : 25) + l % 13, p = s * r, d = (t ? 15 : 10) + l % (t ? 12 : 8), u = (t ? 2.4 : 1.6) + l % 3 * 0.35, g = (t ? 5 : 3) + l % 4, b = this.svg("path");
-        this.attrs(b, {
-          d: `M ${c} ${p} C ${c - u * 0.7} ${p + d * 0.32}, ${c - g - u} ${p + d * 0.72}, ${c - g} ${p + d} C ${c - g + u} ${p + d * 0.72}, ${c + u * 0.45} ${p + d * 0.31}, ${c} ${p} Z`,
-          class: `weather-rain-drop weather-rain-depth-${l % 3}${t ? " is-heavy" : ""}`
-        }), b.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + l % 7 * 0.06}s`), b.style.setProperty("--rain-delay", `${-(l % 17) * 0.11}s`), i.appendChild(b);
+    const r = t ? 62 : 92, o = t ? 48 : 72, n = this.compactWeatherMode ? t ? 13 : 10 : t ? 18 : 13, s = this.compactWeatherMode ? t ? 17 : 13 : t ? 24 : 17;
+    for (let l = -1; l < n; l += 1)
+      for (let c = -1; c < s; c += 1) {
+        const d = Math.abs(l * 37 + c * 19), p = c * o + l % 2 * (t ? 17 : 25) + d % 13, h = l * r, m = (t ? 15 : 10) + d % (t ? 12 : 8), b = (t ? 2.4 : 1.6) + d % 3 * 0.35, g = (t ? 5 : 3) + d % 4, y = this.svg("path");
+        this.attrs(y, {
+          d: `M ${p} ${h} C ${p - b * 0.7} ${h + m * 0.32}, ${p - g - b} ${h + m * 0.72}, ${p - g} ${h + m} C ${p - g + b} ${h + m * 0.72}, ${p + b * 0.45} ${h + m * 0.31}, ${p} ${h} Z`,
+          class: `weather-rain-drop weather-rain-depth-${d % 3}${t ? " is-heavy" : ""}`
+        }), y.style.setProperty("--rain-duration", `${(t ? 0.48 : 0.9) + d % 7 * 0.06}s`), y.style.setProperty("--rain-delay", `${-(d % 17) * 0.11}s`), i.appendChild(y);
       }
-    const n = t ? 18 : 11;
-    for (let s = 0; s < n; s += 1) {
-      const a = s * 43 + 17, l = this.svg("ellipse");
-      this.attrs(l, {
-        cx: String(28 + a * 67 % 950),
-        cy: String(735 + a * 29 % 245),
-        rx: String(t ? 7 + a % 7 : 5 + a % 5),
+    const a = this.compactWeatherMode ? t ? 10 : 7 : t ? 18 : 11;
+    for (let l = 0; l < a; l += 1) {
+      const c = l * 43 + 17, d = this.svg("ellipse");
+      this.attrs(d, {
+        cx: String(28 + c * 67 % 950),
+        cy: String(735 + c * 29 % 245),
+        rx: String(t ? 7 + c % 7 : 5 + c % 5),
         ry: String(t ? 2.2 : 1.6),
-        class: `weather-rain-splash weather-rain-depth-${a % 3}${t ? " is-heavy" : ""}`
-      }), l.style.setProperty("--rain-duration", `${(t ? 0.55 : 0.92) + a % 5 * 0.09}s`), l.style.setProperty("--rain-delay", `${-(a % 19) * 0.13}s`), i.appendChild(l);
+        class: `weather-rain-splash weather-rain-depth-${c % 3}${t ? " is-heavy" : ""}`
+      }), d.style.setProperty("--rain-duration", `${(t ? 0.55 : 0.92) + c % 5 * 0.09}s`), d.style.setProperty("--rain-delay", `${-(c % 19) * 0.13}s`), i.appendChild(d);
     }
     e.appendChild(i);
   }
   appendSnow(e, t = !1) {
     const i = this.svg("g");
     i.setAttribute("class", `weather-snow-field${t ? " is-sleet" : ""}`);
-    const r = t ? 9 : 11, o = t ? 11 : 12;
+    const r = this.compactWeatherMode ? t ? 7 : 8 : t ? 9 : 11, o = this.compactWeatherMode ? 9 : t ? 11 : 12;
     for (let n = 0; n < r; n += 1)
       for (let s = 0; s < o; s += 1) {
-        const a = n * 31 + s * 17, l = 30 + s * (t ? 96 : 88) + n % 2 * 31 + a % 9, c = 20 + n * (t ? 119 : 99) + a % 13, p = (t ? 1.7 : 2.1) + a % 4 * 0.72, d = a % (t ? 7 : 5) === 0, u = d ? this.svg("path") : this.svg("circle"), g = `weather-snow-flake weather-snow-size-${a % 3} weather-snow-depth-${a % 3}${d ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
-        if (d) {
-          const m = p * 0.78;
-          this.attrs(u, {
-            d: `M ${l} ${c - p * 1.8} L ${l} ${c + p * 1.8} M ${l - p * 1.8} ${c} L ${l + p * 1.8} ${c} M ${l - m} ${c - m} L ${l + m} ${c + m} M ${l + m} ${c - m} L ${l - m} ${c + m}`,
-            class: g
+        const a = n * 31 + s * 17, l = 30 + s * (t ? 96 : 88) + n % 2 * 31 + a % 9, c = 20 + n * (t ? 119 : 99) + a % 13, d = (t ? 1.7 : 2.1) + a % 4 * 0.72, p = a % (t ? 7 : 5) === 0, h = p ? this.svg("path") : this.svg("circle"), m = `weather-snow-flake weather-snow-size-${a % 3} weather-snow-depth-${a % 3}${p ? " weather-snow-crystal" : ""}${t ? " is-sleet" : ""}`;
+        if (p) {
+          const g = d * 0.78;
+          this.attrs(h, {
+            d: `M ${l} ${c - d * 1.8} L ${l} ${c + d * 1.8} M ${l - d * 1.8} ${c} L ${l + d * 1.8} ${c} M ${l - g} ${c - g} L ${l + g} ${c + g} M ${l + g} ${c - g} L ${l - g} ${c + g}`,
+            class: m
           });
         } else
-          this.attrs(u, { cx: String(l), cy: String(c), r: String(p), class: g });
-        u.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + a % 8 * 0.42}s`), u.style.setProperty("--snow-delay", `${-(a % 19) * 0.31}s`);
+          this.attrs(h, { cx: String(l), cy: String(c), r: String(d), class: m });
+        h.style.setProperty("--snow-duration", `${(t ? 3.8 : 6.2) + a % 8 * 0.42}s`), h.style.setProperty("--snow-delay", `${-(a % 19) * 0.31}s`);
         const b = t ? 8 + a % 11 : 18 + a % 31;
-        u.style.setProperty("--snow-drift", `${b}px`), u.style.setProperty("--snow-drift-mid", `${b * -0.35}px`), u.style.setProperty("--snow-turn", `${140 + a % 220}deg`), i.appendChild(u);
+        h.style.setProperty("--snow-drift", `${b}px`), h.style.setProperty("--snow-drift-mid", `${b * -0.35}px`), h.style.setProperty("--snow-turn", `${140 + a % 220}deg`), i.appendChild(h);
       }
     e.appendChild(i);
   }
   appendHail(e) {
     const t = this.svg("g");
     t.setAttribute("class", "weather-hail-field");
-    for (let i = -1; i < 15; i += 1)
-      for (let r = 0; r < 15; r += 1) {
-        const o = Math.abs(i * 41 + r * 23), n = this.svg("circle"), s = 18 + r * 73 + i % 2 * 27 + o % 11, a = i * 76 + o % 17, l = 2.8 + o % 4 * 1.05;
-        this.attrs(n, { cx: String(s), cy: String(a), r: String(l), class: `weather-hail-stone weather-hail-depth-${o % 3}` }), n.style.setProperty("--hail-duration", `${0.72 + o % 6 * 0.09}s`), n.style.setProperty("--hail-delay", `${-(o % 17) * 0.08}s`), t.appendChild(n);
+    const i = this.compactWeatherMode ? 10 : 15, r = this.compactWeatherMode ? 11 : 15;
+    for (let n = -1; n < i; n += 1)
+      for (let s = 0; s < r; s += 1) {
+        const a = Math.abs(n * 41 + s * 23), l = this.svg("circle"), c = 18 + s * 73 + n % 2 * 27 + a % 11, d = n * 76 + a % 17, p = 2.8 + a % 4 * 1.05;
+        this.attrs(l, { cx: String(c), cy: String(d), r: String(p), class: `weather-hail-stone weather-hail-depth-${a % 3}` }), l.style.setProperty("--hail-duration", `${0.72 + a % 6 * 0.09}s`), l.style.setProperty("--hail-delay", `${-(a % 17) * 0.08}s`), t.appendChild(l);
       }
-    for (let i = 0; i < 16; i += 1) {
-      const r = i * 53 + 11, o = this.svg("ellipse");
-      this.attrs(o, {
-        cx: String(24 + r * 71 % 950),
-        cy: String(760 + r * 31 % 210),
-        rx: String(4 + r % 5),
+    const o = this.compactWeatherMode ? 9 : 16;
+    for (let n = 0; n < o; n += 1) {
+      const s = n * 53 + 11, a = this.svg("ellipse");
+      this.attrs(a, {
+        cx: String(24 + s * 71 % 950),
+        cy: String(760 + s * 31 % 210),
+        rx: String(4 + s % 5),
         ry: "1.8",
-        class: `weather-hail-impact weather-hail-depth-${r % 3}`
-      }), o.style.setProperty("--hail-duration", `${0.76 + r % 5 * 0.1}s`), o.style.setProperty("--hail-delay", `${-(r % 19) * 0.09}s`), t.appendChild(o);
+        class: `weather-hail-impact weather-hail-depth-${s % 3}`
+      }), a.style.setProperty("--hail-duration", `${0.76 + s % 5 * 0.1}s`), a.style.setProperty("--hail-delay", `${-(s % 19) * 0.09}s`), t.appendChild(a);
     }
     e.appendChild(t);
   }
   appendWind(e) {
     const t = this.svg("g");
-    t.setAttribute("class", "weather-wind-field"), [105, 225, 350, 490, 640, 790, 925].forEach((i, r) => {
-      const o = r % 2 === 0 ? -34 : 39, n = r % 3 === 0 ? 44 : 32, s = `M -180 ${i} C 10 ${i + o}, 190 ${i - o}, 355 ${i} C 438 ${i + o}, 510 ${i + o}, 565 ${i + 2} C 610 ${i - n}, 675 ${i - n}, 700 ${i - 2} C 720 ${i + n}, 660 ${i + n + 12}, 635 ${i + 14} C 790 ${i - o}, 960 ${i + o}, 1190 ${i - 8}`, a = this.svg("path");
-      this.attrs(a, {
-        d: s,
-        class: `weather-wind-line weather-wind-line-glow weather-wind-line-${r % 3}`
-      }), a.style.setProperty("--wind-duration", `${3.4 + r % 4 * 0.75}s`), a.style.setProperty("--wind-delay", `${-(r * 0.83)}s`), t.appendChild(a);
-      const l = this.svg("path");
-      this.attrs(l, {
-        d: s,
-        class: `weather-wind-line weather-wind-line-core weather-wind-line-${r % 3}`
-      }), l.style.setProperty("--wind-duration", `${3.4 + r % 4 * 0.75}s`), l.style.setProperty("--wind-delay", `${-(r * 0.83)}s`), t.appendChild(l);
+    t.setAttribute("class", "weather-wind-field");
+    const i = [105, 225, 350, 490, 640, 790, 925];
+    (this.compactWeatherMode ? i.filter((o, n) => ![2, 4].includes(n)) : i).forEach((o, n) => {
+      const s = n % 2 === 0 ? -34 : 39, a = n % 3 === 0 ? 44 : 32, l = `M -180 ${o} C 10 ${o + s}, 190 ${o - s}, 355 ${o} C 438 ${o + s}, 510 ${o + s}, 565 ${o + 2} C 610 ${o - a}, 675 ${o - a}, 700 ${o - 2} C 720 ${o + a}, 660 ${o + a + 12}, 635 ${o + 14} C 790 ${o - s}, 960 ${o + s}, 1190 ${o - 8}`, c = this.svg("path");
+      this.attrs(c, {
+        d: l,
+        class: `weather-wind-line weather-wind-line-glow weather-wind-line-${n % 3}`
+      }), c.style.setProperty("--wind-duration", `${3.4 + n % 4 * 0.75}s`), c.style.setProperty("--wind-delay", `${-(n * 0.83)}s`), t.appendChild(c);
+      const d = this.svg("path");
+      this.attrs(d, {
+        d: l,
+        class: `weather-wind-line weather-wind-line-core weather-wind-line-${n % 3}`
+      }), d.style.setProperty("--wind-duration", `${3.4 + n % 4 * 0.75}s`), d.style.setProperty("--wind-delay", `${-(n * 0.83)}s`), t.appendChild(d);
     }), e.appendChild(t);
   }
   appendMagicMotes(e, t) {
-    const i = t === "exceptional" ? 30 : t === "cloud" ? 24 : 18;
-    for (let r = 0; r < i; r += 1) {
-      const o = r * 47 + r % 5 * 29, n = 22 + (o * 13 + r * r * 7) % 1035, s = 25 + (o * 19 + r * r * 11) % 1015, a = (t === "exceptional" ? 3.1 : 2.1) + o % 4 * 0.65, l = a * 0.24, c = this.svg("g");
-      this.attrs(c, { transform: `translate(${n} ${s})`, class: "weather-magic-mote-position" });
+    const i = t === "exceptional" ? 30 : t === "cloud" ? 24 : 18, r = this.compactWeatherMode ? t === "exceptional" ? 18 : t === "cloud" ? 14 : 12 : i;
+    for (let o = 0; o < r; o += 1) {
+      const n = o * 47 + o % 5 * 29, s = 22 + (n * 13 + o * o * 7) % 1035, a = 25 + (n * 19 + o * o * 11) % 1015, l = (t === "exceptional" ? 3.1 : 2.1) + n % 4 * 0.65, c = l * 0.24, d = this.svg("g");
+      this.attrs(d, { transform: `translate(${s} ${a})`, class: "weather-magic-mote-position" });
       const p = this.svg("path");
       this.attrs(p, {
-        d: `M 0 ${-a} L ${l} ${-l} L ${a} 0 L ${l} ${l} L 0 ${a} L ${-l} ${l} L ${-a} 0 L ${-l} ${-l} Z`,
-        class: `weather-magic-mote weather-magic-mote-${t} weather-magic-mote-${r % 3}`
-      }), p.style.setProperty("--mote-duration", `${4.6 + o % 8 * 0.73}s`), p.style.setProperty("--mote-delay", `${-(o % 17) * 0.47}s`), c.appendChild(p), e.appendChild(c);
+        d: `M 0 ${-l} L ${c} ${-c} L ${l} 0 L ${c} ${c} L 0 ${l} L ${-c} ${c} L ${-l} 0 L ${-c} ${-c} Z`,
+        class: `weather-magic-mote weather-magic-mote-${t} weather-magic-mote-${o % 3}`
+      }), p.style.setProperty("--mote-duration", `${4.6 + n % 8 * 0.73}s`), p.style.setProperty("--mote-delay", `${-(n % 17) * 0.47}s`), d.appendChild(p), e.appendChild(d);
     }
   }
   appendExceptionalMagic(e) {
-    [
+    const t = [
       [360, 176, 0],
       [285, 255, 1],
       [430, 118, 2]
-    ].forEach(([t, i, r]) => {
-      const o = this.svg("ellipse");
-      this.attrs(o, {
+    ];
+    (this.compactWeatherMode ? t.slice(0, 2) : t).forEach(([i, r, o]) => {
+      const n = this.svg("ellipse");
+      this.attrs(n, {
         cx: "520",
         cy: "520",
-        rx: String(t),
-        ry: String(i),
-        class: `weather-exceptional-orbit weather-exceptional-orbit-${r}`
-      }), e.appendChild(o);
+        rx: String(i),
+        ry: String(r),
+        class: `weather-exceptional-orbit weather-exceptional-orbit-${o}`
+      }), e.appendChild(n);
     }), this.appendMagicMotes(e, "exceptional");
   }
   syncWeatherOutsideRooms() {
     const e = this.renderRoot.querySelector("svg.floorplan"), t = this.renderRoot.querySelector("g.scene");
     if (!e || !t) return;
-    const i = this.weatherState.replace(/[^a-z0-9_-]/g, ""), r = this.rooms.map((m) => m.points.map(([y, w]) => `${y.toFixed(4)},${w.toFixed(4)}`).join(";")).join("|"), o = `${this.weatherEffect}:${i}:${this.weatherNight ? "night" : "day"}:${r}`, n = t.querySelector(":scope > g.weather-transition-shell:not(.is-weather-leaving)");
+    const i = this.weatherState.replace(/[^a-z0-9_-]/g, ""), r = this.rooms.map((g) => g.points.map(([y, A]) => `${y.toFixed(4)},${A.toFixed(4)}`).join(";")).join("|"), o = `${this.weatherEffect}:${i}:${this.weatherNight ? "night" : "day"}:${this.compactWeatherMode ? "compact" : "full"}:${r}`, n = t.querySelector(":scope > g.weather-transition-shell:not(.is-weather-leaving)");
     if (n?.dataset.weatherKey === o) {
-      const m = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : 0.6;
-      n.querySelector(":scope > g.weather-outside-rooms-scene")?.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, m))));
+      const g = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : 0.6;
+      n.querySelector(":scope > g.weather-outside-rooms-scene")?.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, g))));
       return;
     }
-    if (t.querySelectorAll(":scope > g.weather-transition-shell").forEach((m) => {
-      if (m.classList.contains("is-weather-leaving")) return;
-      m.classList.remove("is-weather-visible"), m.classList.add("is-weather-leaving");
-      const y = m.dataset.weatherOwner, w = window.setTimeout(() => {
-        m.remove(), y && e.querySelector(`defs[data-weather-owner="${y}"]`)?.remove(), this.weatherTransitionTimers.delete(w);
+    if (t.querySelectorAll(":scope > g.weather-transition-shell").forEach((g) => {
+      if (g.classList.contains("is-weather-leaving")) return;
+      g.classList.remove("is-weather-visible"), g.classList.add("is-weather-leaving");
+      const y = g.dataset.weatherOwner, A = window.setTimeout(() => {
+        g.remove(), y && e.querySelector(`defs[data-weather-owner="${y}"]`)?.remove(), this.weatherTransitionTimers.delete(A);
       }, 1050);
-      this.weatherTransitionTimers.add(w);
+      this.weatherTransitionTimers.add(A);
     }), this.weatherEffect === "clear") return;
     const s = String(++this.weatherTransitionSequence), a = `${this.weatherMaskId}-${s}`, l = `${this.cloudFilterId}-${s}`, c = this.svg("defs");
     c.setAttribute("data-weather-owner", s), c.appendChild(this.createWeatherMask(a)), c.appendChild(this.createCloudFilter(l)), e.insertBefore(c, e.firstChild);
-    const p = this.svg("g");
-    p.setAttribute("class", "weather-transition-shell is-weather-entering"), p.setAttribute("data-weather-owner", s), p.setAttribute("data-weather-key", o), p.setAttribute("mask", `url(#${a})`), p.setAttribute("pointer-events", "none");
     const d = this.svg("g");
-    d.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${i}${this.weatherNight ? " is-night" : ""}`);
-    const u = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : 0.6;
-    if (d.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, u)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && (this.appendClouds(d, l), this.appendMagicMotes(d, "cloud")), this.weatherEffect === "fog" && this.appendFog(d), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(d, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(d, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(d, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(d, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && (this.appendSnow(d, this.weatherState === "snowy-rainy"), this.appendMagicMotes(d, "snow")), this.weatherState === "snowy-rainy" && this.appendRain(d), this.weatherState === "hail" && this.appendHail(d), this.weatherEffect === "wind" && (this.appendWind(d), this.appendMagicMotes(d, "wind")), this.weatherEffect === "exceptional" && (this.appendClouds(d, l), this.appendWind(d), this.appendMagicMotes(d, "cloud"), this.appendExceptionalMagic(d)), this.weatherEffect === "storm") {
-      const m = this.svg("rect");
-      this.attrs(m, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), d.appendChild(m);
+    d.setAttribute("class", "weather-transition-shell is-weather-entering"), d.setAttribute("data-weather-owner", s), d.setAttribute("data-weather-key", o), d.setAttribute("mask", `url(#${a})`), d.setAttribute("pointer-events", "none");
+    const p = this.svg("g");
+    p.setAttribute("class", `weather-outside-rooms-scene weather-${this.weatherEffect} state-${i}${this.weatherNight ? " is-night" : ""}${this.compactWeatherMode ? " is-compact-weather" : ""}`);
+    const h = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : 0.6;
+    if (p.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, h)))), (["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant") && (this.appendClouds(p, l), this.appendMagicMotes(p, "cloud")), this.weatherEffect === "fog" && this.appendFog(p), this.weatherEffect === "cloudy" && this.weatherState === "cloudy" && this.appendFog(p, "cloudy"), this.weatherEffect === "cloudy" && this.weatherState === "partlycloudy" && this.appendFog(p, "partlycloudy"), this.weatherEffect === "rain" && this.appendRain(p, this.weatherState === "pouring"), this.weatherEffect === "storm" && this.weatherState !== "lightning" && this.appendRain(p, this.weatherState === "lightning-rainy"), this.weatherEffect === "snow" && this.weatherState !== "hail" && (this.appendSnow(p, this.weatherState === "snowy-rainy"), this.appendMagicMotes(p, "snow")), this.weatherState === "snowy-rainy" && this.appendRain(p), this.weatherState === "hail" && this.appendHail(p), this.weatherEffect === "wind" && (this.appendWind(p), this.appendMagicMotes(p, "wind")), this.weatherEffect === "exceptional" && (this.appendClouds(p, l), this.appendWind(p), this.appendMagicMotes(p, "cloud"), this.appendExceptionalMagic(p)), this.weatherEffect === "storm") {
+      const g = this.svg("rect");
+      this.attrs(g, { x: "0", y: "0", width: String(x), height: String(x), class: "weather-storm-flash" }), p.appendChild(g);
       const y = this.svg("ellipse");
-      this.attrs(y, { cx: "720", cy: "150", rx: "290", ry: "220", class: "weather-storm-glow" }), d.appendChild(y);
+      this.attrs(y, { cx: "720", cy: "150", rx: "290", ry: "220", class: "weather-storm-glow" }), p.appendChild(y);
     }
-    p.appendChild(d);
+    d.appendChild(p);
     const b = t.querySelector(":scope > g.rooms-scene");
-    t.insertBefore(p, b ?? null), window.requestAnimationFrame(() => {
-      p.isConnected && (p.classList.remove("is-weather-entering"), p.classList.add("is-weather-visible"));
+    t.insertBefore(d, b ?? null), window.requestAnimationFrame(() => {
+      d.isConnected && (d.classList.remove("is-weather-entering"), d.classList.add("is-weather-visible"));
     });
   }
 };
-Se.styles = j`
+Se.styles = I`
     ${Ge.styles}
     .weather-transition-shell {
       opacity: 0;
@@ -4050,6 +4064,27 @@ Se.styles = j`
     .weather-outside-rooms-scene.is-night .weather-fog-band { opacity: .46; }
     .weather-outside-rooms-scene.is-night .weather-storm-flash { animation-name: explorerStormFlashNight; }
     .weather-outside-rooms-scene.is-night .weather-storm-glow { fill: rgba(177,205,222,.62); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud {
+      will-change: auto;
+    }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-mist { filter: blur(12px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-mist-front { filter: blur(9px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-shadow { filter: blur(11px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-strand { filter: blur(7px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-fine-strand { display: none; }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-highlight { filter: blur(4px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-cloud-rim {
+      filter: drop-shadow(0 0 3px rgba(242, 208, 126, .28));
+      animation-duration: 11s;
+    }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-haze { filter: blur(13px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-wisp { filter: blur(4px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-depth-0 .weather-fog-haze { filter: blur(16px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-fog-depth-2 .weather-fog-haze { filter: blur(18px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-wind-line-glow { filter: blur(3px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-storm-glow { filter: blur(42px); }
+    .weather-outside-rooms-scene.is-compact-weather .weather-snow-depth-2,
+    .weather-outside-rooms-scene.is-compact-weather .weather-snow-crystal { filter: drop-shadow(0 0 3px rgba(242, 220, 159, .48)); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene { mix-blend-mode: normal; filter: sepia(.08) saturate(.68) contrast(.97); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist { fill: rgba(235, 226, 210, .18); }
     :host([map-theme="enchanted_antique"]) .weather-outside-rooms-scene .weather-cloud-mist-front { fill: rgba(246, 238, 223, .17); }
@@ -4135,7 +4170,7 @@ Xe([
   C({ type: Boolean, attribute: "weather-night" })
 ], Se.prototype, "weatherNight", 2);
 Se = Xe([
-  I("explorer-source-clean-canvas")
+  D("explorer-source-clean-canvas")
 ], Se);
 const kn = (e) => e.strings === void 0, An = {}, Sn = (e, t = An) => e._$AH = t;
 const Re = fr(class extends br {
@@ -4147,13 +4182,13 @@ const Re = fr(class extends br {
     return e;
   }
   update(e, [t]) {
-    if (t === se || t === f) return t;
+    if (t === ae || t === f) return t;
     const i = e.element, r = e.name;
     if (e.type === Pe.PROPERTY) {
-      if (t === i[r]) return se;
+      if (t === i[r]) return ae;
     } else if (e.type === Pe.BOOLEAN_ATTRIBUTE) {
-      if (!!t === i.hasAttribute(r)) return se;
-    } else if (e.type === Pe.ATTRIBUTE && i.getAttribute(r) === t + "") return se;
+      if (!!t === i.hasAttribute(r)) return ae;
+    } else if (e.type === Pe.ATTRIBUTE && i.getAttribute(r) === t + "") return ae;
     return Sn(e), t;
   }
 });
@@ -4183,7 +4218,7 @@ function zn(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let de = class extends B {
+let pe = class extends O {
   constructor() {
     super(...arguments), this.areas = [], this.areaError = "", this.loadingAreas = !1, this.areasLoaded = !1;
   }
@@ -4283,17 +4318,17 @@ let de = class extends B {
   }
   renderEntityDatalist(e, t = !1) {
     const i = t ? this.entities.filter((r) => Nn.has(Rn(r.entity_id))) : this.entities;
-    return h`
+    return u`
       <datalist id=${e}>
         ${i.map(
-      (r) => h`<option value=${r.entity_id}>${Gt(r)}</option>`
+      (r) => u`<option value=${r.entity_id}>${Gt(r)}</option>`
     )}
       </datalist>
     `;
   }
   renderRoom(e, t) {
     const i = this.areas.some((r) => r.area_id === e.area_id);
-    return h`
+    return u`
       <article class="item-card">
         <div class="item-heading">
           <div>
@@ -4320,9 +4355,9 @@ let de = class extends B {
     })}
             >
               <option value="">Ikke bundet</option>
-              ${e.area_id && !i ? h`<option value=${e.area_id}>${e.area_id} (eksisterende)</option>` : f}
+              ${e.area_id && !i ? u`<option value=${e.area_id}>${e.area_id} (eksisterende)</option>` : f}
               ${this.areas.map(
-      (r) => h`<option value=${r.area_id}>${r.name}</option>`
+      (r) => u`<option value=${r.area_id}>${r.name}</option>`
     )}
             </select>
           </label>
@@ -4373,7 +4408,7 @@ let de = class extends B {
   }
   renderPresence(e, t) {
     const i = `explorer-primary-entity-${t}`, r = `explorer-room-entity-${t}`, o = e.entity_binding ?? {};
-    return h`
+    return u`
       <article class="item-card presence-card">
         <div class="item-heading">
           <div>
@@ -4400,7 +4435,7 @@ let de = class extends B {
     })}
             >
               ${Pn.map(
-      (n) => h`<option value=${n.value}>${n.label}</option>`
+      (n) => u`<option value=${n.value}>${n.label}</option>`
     )}
             </select>
           </label>
@@ -4444,7 +4479,7 @@ let de = class extends B {
           >
             <option value="">Ingen</option>
             ${(this.config?.rooms ?? []).map(
-      (n) => h`<option value=${n.id}>${n.name ?? n.id}</option>`
+      (n) => u`<option value=${n.id}>${n.name ?? n.id}</option>`
     )}
           </select>
           <small>Bruges hvis der ikke er en gyldig room-sensor.</small>
@@ -4455,7 +4490,7 @@ let de = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.rooms ?? [], t = this.config.presences ?? [];
-    return h`
+    return u`
       <div class="editor">
         <details open>
           <summary>
@@ -4523,9 +4558,9 @@ let de = class extends B {
               Bind de eksisterende Explorer-rum til Home Assistant Areas og justér deres
               presence-anchor her. Tegning af nye rumgrænser kommer i den visuelle plantegningseditor.
             </div>
-            ${this.loadingAreas ? h`<div class="subtle">Henter Home Assistant Areas…</div>` : f}
-            ${this.areaError ? h`<div class="warning">${this.areaError}</div>` : f}
-            ${e.length ? e.map((i, r) => this.renderRoom(i, r)) : h`<div class="empty">Der er endnu ingen rum i kortets konfiguration.</div>`}
+            ${this.loadingAreas ? u`<div class="subtle">Henter Home Assistant Areas…</div>` : f}
+            ${this.areaError ? u`<div class="warning">${this.areaError}</div>` : f}
+            ${e.length ? e.map((i, r) => this.renderRoom(i, r)) : u`<div class="empty">Der er endnu ingen rum i kortets konfiguration.</div>`}
           </div>
         </details>
 
@@ -4547,7 +4582,7 @@ let de = class extends B {
     `;
   }
 };
-de.styles = j`
+pe.styles = I`
     :host { display: block; }
     .editor { display: grid; gap: 12px; padding: 4px 0 8px; }
     details { border: 1px solid var(--divider-color); border-radius: 12px; overflow: hidden; background: var(--card-background-color); }
@@ -4586,28 +4621,28 @@ de.styles = j`
   `;
 Ye([
   C({ attribute: !1 })
-], de.prototype, "hass", 2);
+], pe.prototype, "hass", 2);
 Ye([
   v()
-], de.prototype, "config", 2);
+], pe.prototype, "config", 2);
 Ye([
   v()
-], de.prototype, "areas", 2);
+], pe.prototype, "areas", 2);
 Ye([
   v()
-], de.prototype, "areaError", 2);
+], pe.prototype, "areaError", 2);
 Ye([
   v()
-], de.prototype, "loadingAreas", 2);
-de = Ye([
-  I("ha-explorer-card-editor")
-], de);
+], pe.prototype, "loadingAreas", 2);
+pe = Ye([
+  D("ha-explorer-card-editor")
+], pe);
 var Tn = Object.defineProperty, Dn = Object.getOwnPropertyDescriptor, Z = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Dn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Tn(t, i, o), o;
 };
-const re = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
+const oe = 1e3, bt = (e) => Math.min(1, Math.max(0, e));
 function Yi(e) {
   return e.length ? { x: e.reduce((t, i) => t + i[0], 0) / e.length, y: e.reduce((t, i) => t + i[1], 0) / e.length } : { x: 0.5, y: 0.5 };
 }
@@ -4622,7 +4657,7 @@ function Qi(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
-let H = class extends B {
+let B = class extends O {
   constructor() {
     super(...arguments), this.drawingMode = "idle", this.selectedRoomId = "", this.pendingPoints = [], this.draftRoomName = "", this.draftAreaId = "", this.draftWidth = "", this.draftHeight = "", this.draftFlipX = !1, this.draftFlipY = !1, this.calibrationMessage = "", this.drawingAreas = [], this.drawingAreaError = "";
   }
@@ -4675,8 +4710,8 @@ let H = class extends B {
     if (!n) return;
     const s = Qi(n.attributes[o.x_attribute ?? "map_x"]), a = Qi(n.attributes[o.y_attribute ?? "map_y"]), l = t.physical_meters;
     if (s === void 0 || a === void 0 || !l) return;
-    const c = In(t), p = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), d = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
-    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: p, room_y: d };
+    const c = In(t), d = bt((e[0] - c.minX) / (c.maxX - c.minX || 1)), p = bt((e[1] - c.minY) / (c.maxY - c.minY || 1));
+    return { sensor_x: l.flip_x ? l.width - s : s, sensor_y: l.flip_y ? l.height - a : a, room_x: d, room_y: p };
   }
   handleMapClick(e) {
     const t = this.mapPoint(e);
@@ -4762,146 +4797,146 @@ let H = class extends B {
   }
   renderRoomPolygon(e) {
     if (!e.points.length) return f;
-    const t = e.points.map(([n, s]) => `${n * re},${s * re}`).join(" "), i = e.id === this.selectedRoomId, r = Yi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
-    return R`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * re} y=${r.y * re} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? R`<circle cx=${o.x * re} cy=${o.y * re} r="15" class="anchor"/>` : f}</g>`;
+    const t = e.points.map(([n, s]) => `${n * oe},${s * oe}`).join(" "), i = e.id === this.selectedRoomId, r = Yi(e.points), o = i && this.drawingMode === "anchor" && this.pendingAnchor ? this.pendingAnchor : e.presence_anchor ?? r;
+    return R`<g style=${this.drawingMode === "idle" ? "pointer-events:auto" : "pointer-events:none"} @click=${(n) => this.selectRoom(n, e.id)}><polygon points=${t} fill="var(--primary-color,#03a9f4)" fill-opacity=${i ? ".30" : ".14"} stroke="var(--primary-color,#03a9f4)" stroke-width=${i ? 7 : 4}/><text x=${r.x * oe} y=${r.y * oe} text-anchor="middle" dominant-baseline="middle">${e.name ?? e.id}</text>${i ? R`<circle cx=${o.x * oe} cy=${o.y * oe} r="15" class="anchor"/>` : f}</g>`;
   }
   renderPending() {
     if (!this.pendingPoints.length) return f;
-    const e = this.pendingPoints.map(([t, i]) => `${t * re},${i * re}`).join(" ");
-    return R`${this.pendingPoints.length >= 3 ? R`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => R`<circle cx=${t * re} cy=${i * re} r="13" class="pending-point"/><text x=${t * re} y=${i * re - 22} text-anchor="middle">${r + 1}</text>`)}`;
+    const e = this.pendingPoints.map(([t, i]) => `${t * oe},${i * oe}`).join(" ");
+    return R`${this.pendingPoints.length >= 3 ? R`<polygon points=${e} class="pending-fill"/>` : f}<polyline points=${e} class="pending-line" fill="none"/>${this.pendingPoints.map(([t, i], r) => R`<circle cx=${t * oe} cy=${i * oe} r="13" class="pending-point"/><text x=${t * oe} y=${i * oe - 22} text-anchor="middle">${r + 1}</text>`)}`;
   }
   dimensionFields() {
-    return h`<div class="dimensions"><label>Bredde (m)<input inputmode="decimal" placeholder="4,3" .value=${this.draftWidth} @input=${(e) => this.draftWidth = e.target.value}></label><label>Længde (m)<input inputmode="decimal" placeholder="5,4" .value=${this.draftHeight} @input=${(e) => this.draftHeight = e.target.value}></label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipX} @change=${(e) => this.draftFlipX = e.target.checked}> Vend vandret (X)</label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipY} @change=${(e) => this.draftFlipY = e.target.checked}> Vend lodret (Y)</label>${this.drawingMode === "idle" && this.selectedRoom ? h`<button class="primary" ?disabled=${!this.meters()} @click=${this.saveMeters}>Gem rumkalibrering</button>` : f}</div>`;
+    return u`<div class="dimensions"><label>Bredde (m)<input inputmode="decimal" placeholder="4,3" .value=${this.draftWidth} @input=${(e) => this.draftWidth = e.target.value}></label><label>Længde (m)<input inputmode="decimal" placeholder="5,4" .value=${this.draftHeight} @input=${(e) => this.draftHeight = e.target.value}></label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipX} @change=${(e) => this.draftFlipX = e.target.checked}> Vend vandret (X)</label><label class="toggle"><input type="checkbox" .checked=${this.draftFlipY} @change=${(e) => this.draftFlipY = e.target.checked}> Vend lodret (Y)</label>${this.drawingMode === "idle" && this.selectedRoom ? u`<button class="primary" ?disabled=${!this.meters()} @click=${this.saveMeters}>Gem rumkalibrering</button>` : f}</div>`;
   }
   positionCalibration() {
     if (!this.selectedRoom || this.drawingMode !== "idle") return f;
     const e = this.selectedPresence();
-    return h`<div class="position-cal"><strong>3-punkts spatial kalibrering</strong><span>${e ? `Live target: ${e.name ?? e.id}` : "Bind først et room_meters-target til rummet."}</span><div class="cal-status"><span>Punkt A: ${this.calA ? "✓ gemt" : "ikke gemt"}</span><span>Punkt B: ${this.calB ? "✓ gemt" : "ikke gemt"}</span><span>Punkt C: ${this.calC ? "✓ gemt" : "ikke gemt"}</span></div><div class="buttons"><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-a"}>Gem punkt A</button><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-b"}>Gem punkt B</button><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-c"}>Gem punkt C</button><button class="primary" ?disabled=${!this.calA || !this.calB || !this.calC} @click=${this.savePositionCalibration}>Gem 3-punktskalibrering</button><button ?disabled=${!this.selectedRoom.physical_meters?.position_calibration && !this.calA && !this.calB && !this.calC} @click=${this.resetPositionCalibration}>Nulstil positionskalibrering</button></div>${this.calibrationMessage ? h`<small>${this.calibrationMessage}</small>` : f}<small>Brug tre punkter der danner en stor trekant. Tryk A/B/C, stå på referencepunktet, og klik derefter samme sted på plantegningen.</small></div>`;
+    return u`<div class="position-cal"><strong>3-punkts spatial kalibrering</strong><span>${e ? `Live target: ${e.name ?? e.id}` : "Bind først et room_meters-target til rummet."}</span><div class="cal-status"><span>Punkt A: ${this.calA ? "✓ gemt" : "ikke gemt"}</span><span>Punkt B: ${this.calB ? "✓ gemt" : "ikke gemt"}</span><span>Punkt C: ${this.calC ? "✓ gemt" : "ikke gemt"}</span></div><div class="buttons"><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-a"}>Gem punkt A</button><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-b"}>Gem punkt B</button><button ?disabled=${!e} @click=${() => this.drawingMode = "cal-c"}>Gem punkt C</button><button class="primary" ?disabled=${!this.calA || !this.calB || !this.calC} @click=${this.savePositionCalibration}>Gem 3-punktskalibrering</button><button ?disabled=${!this.selectedRoom.physical_meters?.position_calibration && !this.calA && !this.calB && !this.calC} @click=${this.resetPositionCalibration}>Nulstil positionskalibrering</button></div>${this.calibrationMessage ? u`<small>${this.calibrationMessage}</small>` : f}<small>Brug tre punkter der danner en stor trekant. Tryk A/B/C, stå på referencepunktet, og klik derefter samme sted på plantegningen.</small></div>`;
   }
   renderRoomDrawingEditor() {
-    if (!this.roomConfig) return h``;
+    if (!this.roomConfig) return u``;
     const e = this.roomConfig.image ?? this.roomConfig.background ?? "", t = this.roomConfig.fit_mode === "cover" ? "xMidYMid slice" : "xMidYMid meet", i = this.drawingMode === "cal-a" || this.drawingMode === "cal-b" || this.drawingMode === "cal-c", r = this.drawingMode === "cal-a" ? "A" : this.drawingMode === "cal-b" ? "B" : "C", o = i ? `Stå på referencepunkt ${r} og klik det samme sted på plantegningen.` : this.drawingMode === "idle" ? "Vælg et rum. Kalibrér mål/orientering og derefter tre fysiske referencepunkter." : this.drawingMode === "anchor" ? "Klik hvor personpunktet skal være." : "Klik rundt langs rummets kant. Mindst 3 punkter.";
-    return h`<section class="drawing-editor"><div class="heading"><div><small>VISUAL POSITION CALIBRATION · v0.34.0</small><h3>Tegn, mål, orientér og finjustér live-positioner</h3></div><b>${this.rooms.length} rum</b></div><div class="instruction">${o}</div>${this.drawingMode === "draw-new" ? h`<div class="grid"><label>Rumnavn<input .value=${this.draftRoomName} @input=${(n) => this.draftRoomName = n.target.value}></label><label>Home Assistant Area<select .value=${this.draftAreaId} @change=${(n) => this.draftAreaId = n.target.value}><option value="">Ikke bundet</option>${this.drawingAreas.map((n) => h`<option value=${n.area_id}>${n.name}</option>`)}</select></label></div>${this.dimensionFields()}` : this.selectedRoom && this.drawingMode === "idle" ? h`<div class="selected"><strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong><span>${this.selectedRoom.points.length} punkter · ${this.selectedRoom.physical_meters?.width ?? "?"} × ${this.selectedRoom.physical_meters?.height ?? "?"} m</span></div>${this.dimensionFields()}${this.positionCalibration()}` : f}${this.drawingAreaError ? h`<div class="warning">${this.drawingAreaError}</div>` : f}${e ? h`<div class="map-frame"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><image href=${e} width="1000" height="1000" preserveAspectRatio=${t}/>${this.rooms.map((n) => this.renderRoomPolygon(n))}${this.renderPending()}</svg></div>` : h`<div class="instruction">Vælg først en plantegning under Kort.</div>`}<div class="buttons">${this.drawingMode === "draw-new" || this.drawingMode === "redraw" ? h`<button @click=${this.undoPoint}>Fortryd punkt</button><button class="primary" ?disabled=${this.pendingPoints.length < 3 || this.drawingMode === "draw-new" && !this.meters()} @click=${this.finishPolygon}>Gem rum</button><button @click=${this.cancelDrawing}>Annuller</button>` : this.drawingMode === "anchor" || i ? h`<button @click=${this.cancelDrawing}>Annuller</button>` : h`<button class="primary" @click=${this.beginNewRoom}>+ Nyt rum</button><button ?disabled=${!this.selectedRoom} @click=${this.beginRedraw}>Tegn rumkant igen</button><button ?disabled=${!this.selectedRoom} @click=${this.beginAnchor}>Placér personpunkt</button><button class="danger" ?disabled=${!this.selectedRoom} @click=${this.removeSelectedRoom}>Slet valgt rum</button>`}</div></section>`;
+    return u`<section class="drawing-editor"><div class="heading"><div><small>VISUAL POSITION CALIBRATION · v0.34.0</small><h3>Tegn, mål, orientér og finjustér live-positioner</h3></div><b>${this.rooms.length} rum</b></div><div class="instruction">${o}</div>${this.drawingMode === "draw-new" ? u`<div class="grid"><label>Rumnavn<input .value=${this.draftRoomName} @input=${(n) => this.draftRoomName = n.target.value}></label><label>Home Assistant Area<select .value=${this.draftAreaId} @change=${(n) => this.draftAreaId = n.target.value}><option value="">Ikke bundet</option>${this.drawingAreas.map((n) => u`<option value=${n.area_id}>${n.name}</option>`)}</select></label></div>${this.dimensionFields()}` : this.selectedRoom && this.drawingMode === "idle" ? u`<div class="selected"><strong>${this.selectedRoom.name ?? this.selectedRoom.id}</strong><span>${this.selectedRoom.points.length} punkter · ${this.selectedRoom.physical_meters?.width ?? "?"} × ${this.selectedRoom.physical_meters?.height ?? "?"} m</span></div>${this.dimensionFields()}${this.positionCalibration()}` : f}${this.drawingAreaError ? u`<div class="warning">${this.drawingAreaError}</div>` : f}${e ? u`<div class="map-frame"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><image href=${e} width="1000" height="1000" preserveAspectRatio=${t}/>${this.rooms.map((n) => this.renderRoomPolygon(n))}${this.renderPending()}</svg></div>` : u`<div class="instruction">Vælg først en plantegning under Kort.</div>`}<div class="buttons">${this.drawingMode === "draw-new" || this.drawingMode === "redraw" ? u`<button @click=${this.undoPoint}>Fortryd punkt</button><button class="primary" ?disabled=${this.pendingPoints.length < 3 || this.drawingMode === "draw-new" && !this.meters()} @click=${this.finishPolygon}>Gem rum</button><button @click=${this.cancelDrawing}>Annuller</button>` : this.drawingMode === "anchor" || i ? u`<button @click=${this.cancelDrawing}>Annuller</button>` : u`<button class="primary" @click=${this.beginNewRoom}>+ Nyt rum</button><button ?disabled=${!this.selectedRoom} @click=${this.beginRedraw}>Tegn rumkant igen</button><button ?disabled=${!this.selectedRoom} @click=${this.beginAnchor}>Placér personpunkt</button><button class="danger" ?disabled=${!this.selectedRoom} @click=${this.removeSelectedRoom}>Slet valgt rum</button>`}</div></section>`;
   }
   render() {
-    return h`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
+    return u`<ha-explorer-card-editor .hass=${this.hass} @config-changed=${this.handleBaseConfigChanged}></ha-explorer-card-editor>${this.renderRoomDrawingEditor()}`;
   }
 };
-H.styles = j`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
+B.styles = I`:host{display:block}.drawing-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading h3{margin:3px 0}.heading small{color:var(--secondary-text-color);font-weight:700;letter-spacing:.08em}.instruction,.selected,.warning,.position-cal{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color)}.position-cal{display:grid;gap:9px}.position-cal strong{color:var(--primary-text-color)}.grid,.dimensions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}.cal-status{display:flex;gap:18px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:.8rem;color:var(--secondary-text-color)}label.toggle{display:flex;align-items:center;gap:8px;min-height:38px;font-size:.9rem;color:var(--primary-text-color)}label.toggle input{width:auto}input,select{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;height:min(58vh,620px);cursor:crosshair}text{fill:var(--primary-text-color);font-size:24px;font-weight:700}.pending-fill{fill:var(--primary-color);fill-opacity:.18;stroke:var(--primary-color);stroke-width:5}.pending-line{stroke:var(--primary-color);stroke-width:6}.pending-point,.anchor{fill:var(--primary-color);stroke:white;stroke-width:4}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{padding:9px 13px;border:1px solid var(--divider-color);border-radius:9px;background:var(--secondary-background-color);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color);color:var(--text-primary-color,#fff);border-color:var(--primary-color)}button.danger{background:var(--error-color,#db4437);color:#fff;border-color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}.selected{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}`;
 Z([
   C({ attribute: !1 })
-], H.prototype, "hass", 2);
+], B.prototype, "hass", 2);
 Z([
   v()
-], H.prototype, "roomConfig", 2);
+], B.prototype, "roomConfig", 2);
 Z([
   v()
-], H.prototype, "drawingMode", 2);
+], B.prototype, "drawingMode", 2);
 Z([
   v()
-], H.prototype, "selectedRoomId", 2);
+], B.prototype, "selectedRoomId", 2);
 Z([
   v()
-], H.prototype, "pendingPoints", 2);
+], B.prototype, "pendingPoints", 2);
 Z([
   v()
-], H.prototype, "pendingAnchor", 2);
+], B.prototype, "pendingAnchor", 2);
 Z([
   v()
-], H.prototype, "draftRoomName", 2);
+], B.prototype, "draftRoomName", 2);
 Z([
   v()
-], H.prototype, "draftAreaId", 2);
+], B.prototype, "draftAreaId", 2);
 Z([
   v()
-], H.prototype, "draftWidth", 2);
+], B.prototype, "draftWidth", 2);
 Z([
   v()
-], H.prototype, "draftHeight", 2);
+], B.prototype, "draftHeight", 2);
 Z([
   v()
-], H.prototype, "draftFlipX", 2);
+], B.prototype, "draftFlipX", 2);
 Z([
   v()
-], H.prototype, "draftFlipY", 2);
+], B.prototype, "draftFlipY", 2);
 Z([
   v()
-], H.prototype, "calA", 2);
+], B.prototype, "calA", 2);
 Z([
   v()
-], H.prototype, "calB", 2);
+], B.prototype, "calB", 2);
 Z([
   v()
-], H.prototype, "calC", 2);
+], B.prototype, "calC", 2);
 Z([
   v()
-], H.prototype, "calibrationMessage", 2);
+], B.prototype, "calibrationMessage", 2);
 Z([
   v()
-], H.prototype, "drawingAreas", 2);
+], B.prototype, "drawingAreas", 2);
 Z([
   v()
-], H.prototype, "drawingAreaError", 2);
+], B.prototype, "drawingAreaError", 2);
 Z([
   co("ha-explorer-card-editor")
-], H.prototype, "baseEditor", 2);
-H = Z([
-  I("ha-explorer-room-drawing-editor")
-], H);
-function ue(e) {
+], B.prototype, "baseEditor", 2);
+B = Z([
+  D("ha-explorer-room-drawing-editor")
+], B);
+function ge(e) {
   return e?.trim() || void 0;
 }
 function qn(e) {
   const t = e.entity_binding;
-  return !!(ue(t?.room_entity) || e.room_id || Number.isFinite(e.x) && Number.isFinite(e.y));
+  return !!(ge(t?.room_entity) || e.room_id || Number.isFinite(e.x) && Number.isFinite(e.y));
 }
 function Ln(e) {
   const t = [];
   for (const i of e.presences ?? []) {
-    const r = ue(i.entity_binding?.entity), o = ue(i.entity_binding?.room_entity);
+    const r = ge(i.entity_binding?.entity), o = ge(i.entity_binding?.room_entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "presences" }), o && t.push({ entity: o, source: `${i.name ?? i.id} · rum-tracking`, target: "presences" });
   }
   for (const i of e.rooms ?? []) {
     for (const r of i.reactions ?? []) {
-      const o = ue(r.entity);
+      const o = ge(r.entity);
       o && t.push({ entity: o, source: `${i.name ?? i.id} · ${r.kind}`, target: "room-reactions" });
     }
     for (const r of i.quick_actions ?? []) {
-      const o = ue(r.entity);
+      const o = ge(r.entity);
       o && t.push({ entity: o, source: `${i.name ?? i.id} · ${r.name}`, target: "room-actions" });
     }
   }
   for (const i of e.zones ?? []) {
-    const r = ue(i.state_binding?.entity);
+    const r = ge(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "zones" });
   }
   for (const i of e.openings ?? []) {
-    const r = ue(i.state_binding?.entity);
+    const r = ge(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "openings" });
   }
   for (const i of e.route_nodes ?? []) {
-    const r = ue(i.state_binding?.entity);
+    const r = ge(i.state_binding?.entity);
     r && t.push({ entity: r, source: i.name ?? i.id, target: "route-graph" });
   }
   for (const i of e.route_graph_edges ?? []) {
-    const r = ue(i.condition?.entity);
+    const r = ge(i.condition?.entity);
     r && t.push({ entity: r, source: "Betinget route edge", target: "route-graph" });
   }
   return t;
 }
 function On(e, t) {
-  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((A) => A.reactions ?? []), p = i.flatMap((A) => A.quick_actions ?? []), d = Ln(e), u = [];
+  const i = e.rooms ?? [], r = e.presences ?? [], o = e.zones ?? [], n = e.openings ?? [], s = e.route_nodes ?? [], a = e.route_graph_edges ?? [], l = e.routes ?? [], c = i.flatMap((w) => w.reactions ?? []), d = i.flatMap((w) => w.quick_actions ?? []), p = Ln(e), h = [];
   if (t)
-    for (const A of d) {
-      const k = t.states[A.entity];
+    for (const w of p) {
+      const k = t.states[w.entity];
       if (!k) {
-        u.push({ ...A, unavailable: !1 });
+        h.push({ ...w, unavailable: !1 });
         continue;
       }
-      (k.state === "unavailable" || k.state === "unknown") && u.push({ ...A, unavailable: !0 });
+      (k.state === "unavailable" || k.state === "unknown") && h.push({ ...w, unavailable: !0 });
     }
-  const g = u.filter((A) => !A.unavailable), b = r.filter((A) => !qn(A)), m = i.filter((A) => A.points.length < 3), y = (e.image ?? e.background ?? "").trim(), w = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? m.length ? `${i.length} rum · ${m.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !m.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: d.length ? t ? g.length ? `${g.length} binding${g.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : u.length ? `${d.length} bindings fundet · ${u.length} er midlertidigt unavailable/unknown.` : `${d.length} live binding${d.length === 1 ? "" : "er"} fundet.` : `${d.length} binding${d.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: g.length ? "attention" : d.length ? "ready" : "optional", target: g[0]?.target ?? u[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: p.length ? `${p.length} scene- eller scripthandling${p.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: p.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
-  return { items: w, entityIssues: u, attentionCount: w.filter((A) => A.state === "attention").length, configuredFeatureCount: w.filter((A) => A.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: p.length, routeCount: a.length + l.length, nodeCount: s.length };
+  const m = h.filter((w) => !w.unavailable), b = r.filter((w) => !qn(w)), g = i.filter((w) => w.points.length < 3), y = (e.image ?? e.background ?? "").trim(), A = [{ id: "floorplan", label: "Plantegning", detail: y ? "Plantegning er valgt." : "Vælg en SVG-, PNG- eller JPG-plantegning.", state: y ? "ready" : "attention", target: "basic" }, { id: "rooms", label: "Rum", detail: i.length ? g.length ? `${i.length} rum · ${g.length} mangler en gyldig polygon.` : `${i.length} rum klar.` : "Tegn mindst ét rum for room-aware tracking og Living Rooms.", state: i.length && !g.length ? "ready" : "attention", target: i.length ? "rooms" : "room-tools" }, { id: "presences", label: "Personer & objekter", detail: r.length ? b.length ? `${r.length} tilføjet · ${b.length} mangler rum/position.` : `${r.length} tracking-profil${r.length === 1 ? "" : "er"} klar.` : "Valgfrit · tilføj personer, kæledyr, robotter eller objekter.", state: r.length ? b.length ? "attention" : "ready" : "optional", target: "presences" }, { id: "entities", label: "Home Assistant-entities", detail: p.length ? t ? m.length ? `${m.length} binding${m.length === 1 ? "" : "er"} findes ikke i Home Assistant.` : h.length ? `${p.length} bindings fundet · ${h.length} er midlertidigt unavailable/unknown.` : `${p.length} live binding${p.length === 1 ? "" : "er"} fundet.` : `${p.length} binding${p.length === 1 ? "" : "er"} · afventer Home Assistant.` : "Ingen live entity-bindings endnu.", state: m.length ? "attention" : p.length ? "ready" : "optional", target: m[0]?.target ?? h[0]?.target ?? "diagnostics" }, { id: "openings", label: "Døre & vinduer", detail: n.length ? `${n.length} dynamisk${n.length === 1 ? " åbning" : "e åbninger"} konfigureret.` : "Valgfrit · placér døre og vinduer og bind dem til kontaktsensorer.", state: n.length ? "ready" : "optional", target: "openings" }, { id: "routing", label: "Routing", detail: a.length || l.length ? `${a.length} graph edges · ${l.length} manuelle routes · ${s.length} nodes.` : "Valgfrit · kortet kan bruges uden route graph.", state: a.length || l.length ? "ready" : "optional", target: a.length ? "route-graph" : "routes" }, { id: "living", label: "Living Rooms", detail: c.length ? `${c.length} rumreaktion${c.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · lys, motion, media og åbninger kan gøre rummene levende.", state: c.length ? "ready" : "optional", target: "room-reactions" }, { id: "quick-actions", label: "Rumhandlinger", detail: d.length ? `${d.length} scene- eller scripthandling${d.length === 1 ? "" : "er"} konfigureret.` : "Valgfrit · tilføj scenes og scripts direkte til rummets panel.", state: d.length ? "ready" : "optional", target: "room-actions" }, { id: "zones", label: "Dynamic Areas", detail: o.length ? `${o.length} zone${o.length === 1 ? "" : "r"} konfigureret.` : "Valgfrit · tilføj alarm-, rengørings- eller informationszoner.", state: o.length ? "ready" : "optional", target: "zones" }];
+  return { items: A, entityIssues: h, attentionCount: A.filter((w) => w.state === "attention").length, configuredFeatureCount: A.filter((w) => w.state === "ready").length, roomCount: i.length, presenceCount: r.length, zoneCount: o.length, reactionCount: c.length, actionCount: d.length, routeCount: a.length + l.length, nodeCount: s.length };
 }
 var Bn = Object.defineProperty, Hn = Object.getOwnPropertyDescriptor, bi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Hn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -4913,7 +4948,7 @@ const Fn = {
   attention: "Tjek",
   optional: "Valgfrit"
 };
-let at = class extends B {
+let at = class extends O {
   navigate(e) {
     this.dispatchEvent(new CustomEvent("explorer-editor-navigate", {
       detail: { target: e },
@@ -4922,7 +4957,7 @@ let at = class extends B {
     }));
   }
   renderItem(e) {
-    return h`
+    return u`
       <button
         class="check ${e.state}"
         type="button"
@@ -4944,7 +4979,7 @@ let at = class extends B {
   render() {
     if (!this.config) return f;
     const e = On(this.config, this.hass), t = e.attentionCount === 0, i = e.entityIssues.slice(0, 4);
-    return h`
+    return u`
       <section class="overview">
         <div class="hero">
           <div>
@@ -4974,13 +5009,13 @@ let at = class extends B {
           ${e.items.map((r) => this.renderItem(r))}
         </div>
 
-        ${i.length ? h`
+        ${i.length ? u`
               <div class="entity-issues">
                 <div class="issue-heading">
                   <strong>Live entity-status</strong>
                   <small>${e.entityIssues.length} med opmærksomhed</small>
                 </div>
-                ${i.map((r) => h`
+                ${i.map((r) => u`
                   <button type="button" @click=${() => this.navigate(r.target)}>
                     <span class=${r.unavailable ? "temporary" : "missing"}>
                       ${r.unavailable ? "Midlertidig" : "Mangler"}
@@ -4990,7 +5025,7 @@ let at = class extends B {
                     <span aria-hidden="true">›</span>
                   </button>
                 `)}
-                ${e.entityIssues.length > i.length ? h`<small class="more">+ ${e.entityIssues.length - i.length} flere</small>` : f}
+                ${e.entityIssues.length > i.length ? u`<small class="more">+ ${e.entityIssues.length - i.length} flere</small>` : f}
               </div>
             ` : f}
 
@@ -5002,7 +5037,7 @@ let at = class extends B {
     `;
   }
 };
-at.styles = j`
+at.styles = I`
     :host { display:block; }
     .overview {
       display:grid;
@@ -5081,7 +5116,7 @@ bi([
   C({ attribute: !1 })
 ], at.prototype, "hass", 2);
 at = bi([
-  I("ha-explorer-setup-overview")
+  D("ha-explorer-setup-overview")
 ], at);
 var Zn = Object.defineProperty, Vn = Object.getOwnPropertyDescriptor, Cr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Vn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -5113,7 +5148,7 @@ const Ut = [
   ["clear-night", "🌙 Klar nat"],
   ["exceptional", "⚠️ Ekstremt / usædvanligt vejr"]
 ];
-let Nt = class extends B {
+let Nt = class extends O {
   get theme() {
     return this.config?.appearance?.theme ?? "classic";
   }
@@ -5213,7 +5248,7 @@ let Nt = class extends B {
   render() {
     if (!this.config) return f;
     const e = Ut.find((a) => a[0] === this.theme) ?? Ut[0], t = this.dayNight, i = this.compass, r = this.alarm, o = this.occupancy, n = this.weather, s = this.config.appearance?.hide_source_text ?? !1;
-    return h`
+    return u`
       <section class="theme-editor">
         <div class="heading">
           <div>
@@ -5235,7 +5270,7 @@ let Nt = class extends B {
             @change=${(a) => this.updateTheme(a.target.value)}
           >
             ${Ut.map(
-      (a) => h`<option value=${a[0]}>${a[1]}</option>`
+      (a) => u`<option value=${a[0]}>${a[1]}</option>`
     )}
           </select>
           <small>${e[2]}</small>
@@ -5261,7 +5296,7 @@ let Nt = class extends B {
           </div>
         </div>
 
-        ${this.theme === "enchanted_antique" ? h`
+        ${this.theme === "enchanted_antique" ? u`
               <div class="compass-panel">
                 <div class="panel-head">
                   <div>
@@ -5281,7 +5316,7 @@ let Nt = class extends B {
                     Vis
                   </label>
                 </div>
-                ${i.visible ? h`
+                ${i.visible ? u`
                       <div class="grid">
                         <label class="wide">
                           Rotation · ${Math.round(i.rotation)}°
@@ -5349,7 +5384,7 @@ let Nt = class extends B {
               Aktiv
             </label>
           </div>
-          ${t.enabled ? h`
+          ${t.enabled ? u`
                 <div class="grid">
                   <label>
                     Tilstand
@@ -5364,7 +5399,7 @@ let Nt = class extends B {
                       <option value="night">Tving nat</option>
                     </select>
                   </label>
-                  ${t.mode === "auto" ? h`
+                  ${t.mode === "auto" ? u`
                         <label>
                           Sol-entity
                           <input
@@ -5407,7 +5442,7 @@ let Nt = class extends B {
               Aktiv
             </label>
           </div>
-          ${n.enabled ? h`
+          ${n.enabled ? u`
                 <div class="grid">
                   <label class="wide">
                     Weather-entity
@@ -5430,7 +5465,7 @@ let Nt = class extends B {
     })}
                     >
                       ${Kn.map(
-      ([a, l]) => h`<option value=${a}>${l}</option>`
+      ([a, l]) => u`<option value=${a}>${l}</option>`
     )}
                     </select>
                     <small>
@@ -5493,7 +5528,7 @@ let Nt = class extends B {
               Aktiv
             </label>
           </div>
-          ${o.enabled ? h`
+          ${o.enabled ? u`
                 <div class="grid">
                   <label class="wide">
                     Hjemme-intensitet · ${Math.round(o.intensity * 100)}%
@@ -5535,7 +5570,7 @@ let Nt = class extends B {
               Aktiv
             </label>
           </div>
-          ${r.enabled ? h`
+          ${r.enabled ? u`
                 <div class="grid">
                   <label class="wide">
                     Alarm-entity
@@ -5574,7 +5609,7 @@ let Nt = class extends B {
     `;
   }
 };
-Nt.styles = j`
+Nt.styles = I`
     :host {
       display: block;
     }
@@ -5726,7 +5761,7 @@ Cr([
   C({ attribute: !1 })
 ], Nt.prototype, "config", 2);
 Nt = Cr([
-  I("ha-explorer-theme-editor")
+  D("ha-explorer-theme-editor")
 ], Nt);
 var Wn = Object.defineProperty, Gn = Object.getOwnPropertyDescriptor, Er = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Gn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -5734,7 +5769,7 @@ var Wn = Object.defineProperty, Gn = Object.getOwnPropertyDescriptor, Er = (e, t
   return r && o && Wn(t, i, o), o;
 };
 const Ji = { person: "Person · skoaftryk", pet: "Kæledyr · poteaftryk", robot: "Robot · hjulspor", vehicle: "Køretøj · dobbelte hjulspor", object: "Objekt · magisk spor" };
-let Rt = class extends B {
+let Rt = class extends O {
   emitConfig(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5753,25 +5788,25 @@ let Rt = class extends B {
   }
   render() {
     const e = this.config?.presences ?? [];
-    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-person & Object Polish · Trail Controls</span><h3>Visuel profil for personer & objekter</h3></div><span class="count">${e.length}</span></div><p class="intro">Personer og objekter på samme position spredes automatisk omkring deres room-anchor. Markør og bevægelsesspor kan nu tilpasses uafhængigt af hinanden.</p>${e.length ? h`<div class="profiles">${e.map((t, i) => {
+    return u`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-person & Object Polish · Trail Controls</span><h3>Visuel profil for personer & objekter</h3></div><span class="count">${e.length}</span></div><p class="intro">Personer og objekter på samme position spredes automatisk omkring deres room-anchor. Markør og bevægelsesspor kan nu tilpasses uafhængigt af hinanden.</p>${e.length ? u`<div class="profiles">${e.map((t, i) => {
       const r = t.type ?? "person";
-      return h`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Ji[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Ji[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
-    })}</div>` : h`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? h`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
+      return u`<article class="profile"><div class="profile-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><span class="type-badge">${Ji[r]}</span></div><div class="grid two"><label>Farve (valgfri)<input .value=${t.color ?? ""} placeholder="Automatisk stabil farve" @change=${(o) => this.updateOptionalText(i, "color", o.target.value)}/><small>Farven på selve markøren. Tom = automatisk.</small></label><label>Ikon (valgfri)<input .value=${t.icon ?? ""} placeholder="Automatisk type-ikon" maxlength="8" @change=${(o) => this.updateOptionalText(i, "icon", o.target.value)}/><small>Bruges i den store markør; type-badget vises stadig.</small></label></div><label class="toggle"><input type="checkbox" .checked=${t.visible !== !1} @change=${(o) => this.updatePresence(i, { visible: o.target.checked })}/><span><strong>Vis på kortet</strong><small>Skjuler markøren manuelt; tracking-konfigurationen bevares.</small></span></label><div class="trail-box"><div class="trail-heading"><strong>👣 Bevægelsesspor</strong><small>${Ji[r]}</small></div><label class="toggle"><input type="checkbox" .checked=${t.trail_visible !== !1} @change=${(o) => this.updatePresence(i, { trail_visible: o.target.checked })}/><span><strong>Vis spor</strong><small>Kan slås fra uden at skjule personen eller objektet.</small></span></label><div class="grid two"><label>Sporfarve (valgfri)<input .value=${t.trail_color ?? ""} placeholder="Samme som markør" @change=${(o) => this.updateOptionalText(i, "trail_color", o.target.value)}/><small>Fx #4b301d. Tom = markørens farve.</small></label><label>Varighed (sekunder)<input type="number" min="1" max="60" step="1" .value=${String(t.trail_duration ?? 4.2)} @change=${(o) => this.updateTrailDuration(i, o.target.value)}/><small>Hvor længe sporene falmer på kortet. 1–60 sek.</small></label></div></div></article>`;
+    })}</div>` : u`<div class="empty">Tilføj først en person eller et objekt i sektionen ovenfor.</div>`}${e.length ? u`<div class="note">Sportypen vælges automatisk efter type. Reduced Motion deaktiverer bevægelsesspor, men markørerne forbliver synlige.</div>` : f}</section>`;
   }
 };
-Rt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
+Rt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.profile-heading,.trail-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.heading>div,.profile-heading>div{display:grid;gap:3px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:0;font-size:1rem}.count,.type-badge{border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);white-space:nowrap}.count{padding:5px 9px;font-size:.78rem}.type-badge{padding:4px 8px;font-size:.72rem}.intro,.note{margin:0;color:var(--secondary-text-color);font-size:.86rem;line-height:1.45}.profiles{display:grid;gap:10px}.profile{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.profile-heading small,label small,.toggle small,.trail-heading small{color:var(--secondary-text-color);font-size:.76rem;font-weight:400;line-height:1.35}.grid{display:grid;gap:10px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:grid;gap:6px;font-weight:600}input[type="text"],input:not([type]),input[type="number"]{box-sizing:border-box;width:100%;min-width:0;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:9px;padding-top:2px}.toggle input{margin-top:3px}.toggle span{display:grid;gap:2px}.trail-box{display:grid;gap:11px;padding:12px;border:1px dashed var(--divider-color);border-radius:9px;background:var(--card-background-color)}.trail-heading{align-items:center}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}.empty{color:var(--secondary-text-color);text-align:center;font-size:.84rem}@media(max-width:600px){.grid.two{grid-template-columns:1fr}.heading,.profile-heading{align-items:flex-start}.type-badge{white-space:normal;text-align:right}}`;
 Er([
   C({ attribute: !1 })
 ], Rt.prototype, "config", 2);
 Rt = Er([
-  I("ha-explorer-presence-polish-editor")
+  D("ha-explorer-presence-polish-editor")
 ], Rt);
 var Un = Object.defineProperty, Xn = Object.getOwnPropertyDescriptor, Pr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Xn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Un(t, i, o), o;
 };
-let Mt = class extends B {
+let Mt = class extends O {
   updateHistory(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config.movement_history ?? {}, ...e };
@@ -5779,7 +5814,7 @@ let Mt = class extends B {
   }
   render() {
     const e = { enabled: !1, duration_minutes: 3, show_rooms: !0, ...this.config?.movement_history ?? {} };
-    return h`<section class="panel">
+    return u`<section class="panel">
       <div><span class="eyebrow">Movement History 2.0</span><h3>Magisk bevægelseshistorik</h3></div>
       <p>Gemmer kun historikken lokalt i kortet i 1–5 minutter. Home Assistant-databasen ændres ikke, og den normale plantegning fungerer uafhængigt.</p>
       <label class="toggle"><input type="checkbox" .checked=${e.enabled} @change=${(t) => this.updateHistory({ enabled: t.target.checked })}/><span><strong>Vis bevægelseshistorik</strong><small>Gælder personer. Kæledyr og robotter kommer i næste roadmap-del.</small></span></label>
@@ -5788,19 +5823,19 @@ let Mt = class extends B {
     </section>`;
   }
 };
-Mt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+Mt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
 Pr([
   C({ attribute: !1 })
 ], Mt.prototype, "config", 2);
 Mt = Pr([
-  I("ha-explorer-movement-history-editor")
+  D("ha-explorer-movement-history-editor")
 ], Mt);
 var Yn = Object.defineProperty, Qn = Object.getOwnPropertyDescriptor, Nr = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? Qn(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Yn(t, i, o), o;
 };
-let zt = class extends B {
+let zt = class extends O {
   updateTrails(e) {
     if (!this.config) return;
     const t = { enabled: !1, duration_minutes: 3, show_pet_paws: !0, show_robot_route: !0, robot_direction_arrows: !0, ...this.config.pet_robot_trails ?? {}, ...e };
@@ -5808,7 +5843,7 @@ let zt = class extends B {
   }
   render() {
     const e = { enabled: !1, duration_minutes: 3, show_pet_paws: !0, show_robot_route: !0, robot_direction_arrows: !0, ...this.config?.pet_robot_trails ?? {} };
-    return h`<section class="panel"><div><span class="eyebrow">Pet & Robot Trails 2.0</span><h3>Poter og robotruter</h3></div>
+    return u`<section class="panel"><div><span class="eyebrow">Pet & Robot Trails 2.0</span><h3>Poter og robotruter</h3></div>
       <p>Viser separate, udtonende spor for kæledyr og robotstøvsugere. Historikken gemmes kun midlertidigt i kortet.</p>
       <label class="toggle"><input type="checkbox" .checked=${e.enabled} @change=${(t) => this.updateTrails({ enabled: t.target.checked })}/><span><strong>Aktivér Pet & Robot Trails</strong><small>Påvirker kun profiler med typen Kæledyr eller Robot.</small></span></label>
       <label>Historiklængde: <strong>${e.duration_minutes} min.</strong><input type="range" min="1" max="5" step="1" .value=${String(e.duration_minutes)} @input=${(t) => this.updateTrails({ duration_minutes: Number(t.target.value) })}/><small>Gamle spor toner gradvist ud.</small></label>
@@ -5818,12 +5853,12 @@ let zt = class extends B {
     </section>`;
   }
 };
-zt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
+zt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}label{display:grid;gap:7px;font-weight:600}.grid{display:grid;gap:9px}.toggle{grid-template-columns:auto 1fr;align-items:start;gap:10px;padding:11px;border-radius:10px;background:var(--secondary-background-color)}.toggle input{margin-top:3px}.toggle span{display:grid;gap:3px}input[type="range"]{width:100%}`;
 Nr([
   C({ attribute: !1 })
 ], zt.prototype, "config", 2);
 zt = Nr([
-  I("ha-explorer-pet-robot-trails-editor")
+  D("ha-explorer-pet-robot-trails-editor")
 ], zt);
 var Jn = Object.defineProperty, $n = Object.getOwnPropertyDescriptor, yi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? $n(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -5837,7 +5872,7 @@ function Xt(e) {
 function $i(e) {
   return Object.fromEntries(Object.entries(e).filter(([, t]) => t !== void 0 && t !== ""));
 }
-let lt = class extends B {
+let lt = class extends O {
   emit(e) {
     this.config && this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: { ...this.config, presences: e } }, bubbles: !0, composed: !0 }));
   }
@@ -5865,25 +5900,25 @@ let lt = class extends B {
   }
   render() {
     const e = this.config?.presences ?? [], t = e.map((i, r) => ({ presence: i, index: r })).filter(({ presence: i }) => (i.type ?? "person") === "pet");
-    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Shelly Presence Gen4 · Pet Detection</span><h3>Find kaninen med radar</h3></div><button @click=${this.addRabbit}>+ Tilføj kanin</button></div>
+    return u`<section class="panel"><div class="heading"><div><span class="eyebrow">Shelly Presence Gen4 · Pet Detection</span><h3>Find kaninen med radar</h3></div><button @click=${this.addRabbit}>+ Tilføj kanin</button></div>
       <p class="intro">Bruger Shelly LiveTrack-koordinaterne og <code>maxz</code>. Et mål skal være lavt flere opdateringer i træk, før det vises som kæledyr. Høje mål skjules i stedet for at blive vist som kanin.</p>
       ${t.length ? t.map(({ presence: i, index: r }) => {
       const o = i.entity_binding ?? {}, n = i.shelly_pet_detection ?? {};
-      return h`<article class="pet-card"><div class="pet-heading"><strong>🐇 ${i.name ?? i.id}</strong><span>${n.enabled ? "Aktiv" : "Deaktiveret"}</span></div>
+      return u`<article class="pet-card"><div class="pet-heading"><strong>🐇 ${i.name ?? i.id}</strong><span>${n.enabled ? "Aktiv" : "Deaktiveret"}</span></div>
         <label class="toggle"><input type="checkbox" .checked=${n.enabled === !0} @change=${(s) => this.updateDetection(r, { enabled: s.target.checked })}/><span><strong>Automatisk kæledyrsregistrering</strong><small>Påvirker kun denne kæledyrsprofil.</small></span></label>
         <label>LiveTrack-entitet<input list="shelly-pet-entities" .value=${Re(o.position_entity ?? o.entity ?? "")} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(r, { position_entity: s.target.value.trim() || void 0 })}/><small>Entiteten skal have attributterne x, y, maxz og helst target_id.</small></label>
-        <div class="grid three"><label>Rum<select .value=${Re(i.room_id ?? "")} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${Re(o.x_attribute ?? "x")} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${Re(o.y_attribute ?? "y")} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
+        <div class="grid three"><label>Rum<select .value=${Re(i.room_id ?? "")} @change=${(s) => this.updatePresence(r, { room_id: s.target.value || void 0 })}><option value="">Vælg rum</option>${(this.config?.rooms ?? []).map((s) => u`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select></label><label>X-attribut<input .value=${Re(o.x_attribute ?? "x")} @change=${(s) => this.updateBinding(r, { x_attribute: s.target.value.trim() || "x", coordinate_space: "room_meters" })}/></label><label>Y-attribut<input .value=${Re(o.y_attribute ?? "y")} @change=${(s) => this.updateBinding(r, { y_attribute: s.target.value.trim() || "y", coordinate_space: "room_meters" })}/></label></div>
         <div class="grid three"><label>Højde-attribut<input .value=${n.height_attribute ?? "maxz"} @change=${(s) => this.updateDetection(r, { height_attribute: s.target.value.trim() || "maxz" })}/></label><label>Target-ID-attribut<input .value=${n.target_id_attribute ?? "target_id"} @change=${(s) => this.updateDetection(r, { target_id_attribute: s.target.value.trim() || "target_id" })}/></label><label>Tidsstempel-attribut<input .value=${n.timestamp_attribute ?? "timestamp"} @change=${(s) => this.updateDetection(r, { timestamp_attribute: s.target.value.trim() || "timestamp" })}/></label></div>
         <div class="grid two"><label>Maks. kaninhøjde: <strong>${n.max_height_m ?? 0.75} m</strong><input type="range" min="0.15" max="1.2" step="0.05" .value=${String(n.max_height_m ?? 0.75)} @input=${(s) => this.updateDetection(r, { max_height_m: Number(s.target.value) })}/></label><label>Skjul igen over: <strong>${n.release_height_m ?? 0.95} m</strong><input type="range" min="0.25" max="1.6" step="0.05" .value=${String(n.release_height_m ?? 0.95)} @input=${(s) => this.updateDetection(r, { release_height_m: Number(s.target.value) })}/></label></div>
         <div class="grid two"><label>Bekræft efter målinger<input type="number" min="1" max="12" .value=${String(n.confirmation_updates ?? 3)} @change=${(s) => this.updateDetection(r, { confirmation_updates: Number(s.target.value) })}/><small>Flere målinger giver færre falske kaniner.</small></label><label>Skjul efter høje målinger<input type="number" min="1" max="12" .value=${String(n.release_updates ?? 2)} @change=${(s) => this.updateDetection(r, { release_updates: Number(s.target.value) })}/></label></div>
       </article>`;
-    }) : h`<div class="empty">Ingen kæledyrsprofil endnu. Tryk “Tilføj kanin”.</div>`}
-      <datalist id="shelly-pet-entities">${this.entities().map((i) => h`<option value=${i.entity_id}>${Xt(i)}</option>`)}</datalist>
-      ${t.length ? h`<div class="note">Start med 0,75 m. Test derefter i Shellys target-visning og sænk grænsen, hvis et menneske på gulvet bliver registreret som kanin.</div>` : f}
+    }) : u`<div class="empty">Ingen kæledyrsprofil endnu. Tryk “Tilføj kanin”.</div>`}
+      <datalist id="shelly-pet-entities">${this.entities().map((i) => u`<option value=${i.entity_id}>${Xt(i)}</option>`)}</datalist>
+      ${t.length ? u`<div class="note">Start med 0,75 m. Test derefter i Shellys target-visning og sænk grænsen, hvis et menneske på gulvet bliver registreret som kanin.</div>` : f}
     </section>`;
   }
 };
-lt.styles = j`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
+lt.styles = I`:host{display:block}.panel{display:grid;gap:14px;margin-top:12px;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color)}.heading,.pet-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.eyebrow{color:var(--secondary-text-color);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}h3{margin:3px 0 0;font-size:1rem}button{border:0;border-radius:10px;padding:10px 13px;background:var(--primary-color,#03a9f4);color:var(--text-primary-color,#fff);font-weight:700}.intro,p,small{margin:0;color:var(--secondary-text-color);font-size:.8rem;line-height:1.45}.pet-card{display:grid;gap:13px;padding:14px;border:1px solid var(--divider-color);border-radius:11px}.pet-heading span{font-size:.72rem;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-weight:600}.grid{display:grid;gap:10px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}input,select{box-sizing:border-box;width:100%;min-height:40px;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}input[type="range"]{padding:0}.toggle{grid-template-columns:auto 1fr;align-items:start;padding:10px;background:var(--secondary-background-color);border-radius:9px}.toggle input{width:auto;min-height:0;margin-top:3px}.toggle span{display:grid;gap:2px}.note,.empty{padding:11px;border-radius:9px;background:var(--secondary-background-color);font-size:.8rem}@media(max-width:600px){.heading{align-items:flex-start;flex-direction:column}.two,.three{grid-template-columns:1fr}}`;
 yi([
   C({ attribute: !1 })
 ], lt.prototype, "hass", 2);
@@ -5891,7 +5926,7 @@ yi([
   C({ attribute: !1 })
 ], lt.prototype, "config", 2);
 lt = yi([
-  I("ha-explorer-shelly-pet-editor")
+  D("ha-explorer-shelly-pet-editor")
 ], lt);
 var _n = Object.defineProperty, es = Object.getOwnPropertyDescriptor, vi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? es(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -5906,7 +5941,7 @@ function ts(e) {
   const t = Object.entries(e).filter(([, i]) => i !== void 0 && i !== "");
   return t.length ? Object.fromEntries(t) : void 0;
 }
-let ct = class extends B {
+let ct = class extends O {
   emit(e) {
     this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: e }, bubbles: !0, composed: !0 }));
   }
@@ -5936,17 +5971,17 @@ let ct = class extends B {
     t.splice(e, 1), this.emit({ ...this.config, presences: t });
   }
   datalist(e) {
-    return h`<datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Yt(t)}</option>`)}</datalist>`;
+    return u`<datalist id=${e}>${this.entities.map((t) => u`<option value=${t.entity_id}>${Yt(t)}</option>`)}</datalist>`;
   }
   render() {
     const e = (this.config?.presences ?? []).filter((t) => (t.type ?? "person") === "person");
-    return this.config ? h`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-Person & Identity · v0.36.1</span><h3>Hvem er hvor?</h3></div><button class="primary" @click=${this.addPerson}>+ Tilføj person</button></div><p class="intro">Identity Fusion adskiller personens identitet fra positionssensoren. Bind fx <code>person.marc</code> som profil og et Shelly/mmWave-target som live position. Flere personer kan være synlige og bevæge sig samtidig.</p>${e.length ? e.map((t) => {
+    return this.config ? u`<section class="panel"><div class="heading"><div><span class="eyebrow">Multi-Person & Identity · v0.36.1</span><h3>Hvem er hvor?</h3></div><button class="primary" @click=${this.addPerson}>+ Tilføj person</button></div><p class="intro">Identity Fusion adskiller personens identitet fra positionssensoren. Bind fx <code>person.marc</code> som profil og et Shelly/mmWave-target som live position. Flere personer kan være synlige og bevæge sig samtidig.</p>${e.length ? e.map((t) => {
       const i = (this.config?.presences ?? []).indexOf(t), r = t.entity_binding ?? {}, o = `identity-${i}`, n = `position-${i}`;
-      return h`<article class="person-card"><div class="person-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><button class="danger" @click=${() => this.removePerson(i)}>Fjern</button></div><label>Navn på kortet<input .value=${t.name ?? ""} placeholder="Marc" @change=${(s) => this.updatePresence(i, { name: s.target.value.trim() || void 0 })}/></label><div class="grid two"><label>Identitets-entitet<input list=${o} .value=${r.entity ?? ""} placeholder="person.marc" @change=${(s) => this.updateBinding(i, { entity: s.target.value.trim() || void 0 })}/>${this.datalist(o)}<small>Leverer navn/avatar/status. Typisk en <code>person.*</code>-entity.</small></label><label>Live positions-entitet<input list=${n} .value=${r.position_entity ?? ""} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(i, { position_entity: s.target.value.trim() || void 0 })}/>${this.datalist(n)}<small>Leverer X/Y. Hvis tom bruges identitets-entiteten som før.</small></label></div><div class="grid three"><label>Koordinatsystem<select .value=${r.coordinate_space ?? "normalized"} @change=${(s) => this.updateBinding(i, { coordinate_space: s.target.value })}><option value="normalized">Normalized 0–1</option><option value="meters">Hele kortet i meter</option><option value="room_meters">Rum i meter</option></select></label><label>X-attribut<input .value=${r.x_attribute ?? (r.coordinate_space === "room_meters" ? "map_x" : "")} placeholder="map_x" @change=${(s) => this.updateBinding(i, { x_attribute: s.target.value.trim() || void 0 })}/></label><label>Y-attribut<input .value=${r.y_attribute ?? (r.coordinate_space === "room_meters" ? "map_y" : "")} placeholder="map_y" @change=${(s) => this.updateBinding(i, { y_attribute: s.target.value.trim() || void 0 })}/></label></div><label>Rum til room_meters<select .value=${t.room_id ?? ""} @change=${(s) => this.updatePresence(i, { room_id: s.target.value || void 0 })}><option value="">Ingen</option>${(this.config?.rooms ?? []).map((s) => h`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select><small>Alle targets i samme rum genbruger rummets 3-punktskalibrering.</small></label></article>`;
-    }) : h`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
+      return u`<article class="person-card"><div class="person-heading"><div><strong>${t.name ?? t.id}</strong><small>${t.id}</small></div><button class="danger" @click=${() => this.removePerson(i)}>Fjern</button></div><label>Navn på kortet<input .value=${t.name ?? ""} placeholder="Marc" @change=${(s) => this.updatePresence(i, { name: s.target.value.trim() || void 0 })}/></label><div class="grid two"><label>Identitets-entitet<input list=${o} .value=${r.entity ?? ""} placeholder="person.marc" @change=${(s) => this.updateBinding(i, { entity: s.target.value.trim() || void 0 })}/>${this.datalist(o)}<small>Leverer navn/avatar/status. Typisk en <code>person.*</code>-entity.</small></label><label>Live positions-entitet<input list=${n} .value=${r.position_entity ?? ""} placeholder="sensor.stue_presence_stuen_target_1" @change=${(s) => this.updateBinding(i, { position_entity: s.target.value.trim() || void 0 })}/>${this.datalist(n)}<small>Leverer X/Y. Hvis tom bruges identitets-entiteten som før.</small></label></div><div class="grid three"><label>Koordinatsystem<select .value=${r.coordinate_space ?? "normalized"} @change=${(s) => this.updateBinding(i, { coordinate_space: s.target.value })}><option value="normalized">Normalized 0–1</option><option value="meters">Hele kortet i meter</option><option value="room_meters">Rum i meter</option></select></label><label>X-attribut<input .value=${r.x_attribute ?? (r.coordinate_space === "room_meters" ? "map_x" : "")} placeholder="map_x" @change=${(s) => this.updateBinding(i, { x_attribute: s.target.value.trim() || void 0 })}/></label><label>Y-attribut<input .value=${r.y_attribute ?? (r.coordinate_space === "room_meters" ? "map_y" : "")} placeholder="map_y" @change=${(s) => this.updateBinding(i, { y_attribute: s.target.value.trim() || void 0 })}/></label></div><label>Rum til room_meters<select .value=${t.room_id ?? ""} @change=${(s) => this.updatePresence(i, { room_id: s.target.value || void 0 })}><option value="">Ingen</option>${(this.config?.rooms ?? []).map((s) => u`<option value=${s.id}>${s.name ?? s.id}</option>`)}</select><small>Alle targets i samme rum genbruger rummets 3-punktskalibrering.</small></label></article>`;
+    }) : u`<div class="empty">Ingen personer er tilføjet endnu.</div>`}<div class="note">Første version binder identitet til et valgt target. En senere Identity Matching-del kan bevare navnet automatisk, hvis en mmWave-sensor bytter target-numre.</div></section>` : f;
   }
 };
-ct.styles = j`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
+ct.styles = I`:host{display:block;min-width:0;max-width:100%;container-type:inline-size}.panel,.person-card,.grid,label,.heading>div,.person-heading>div{min-width:0}.panel{display:grid;gap:14px;width:100%;max-width:100%;box-sizing:border-box;padding:16px;border:1px solid var(--divider-color);border-radius:12px;background:var(--card-background-color);overflow:hidden}.heading,.person-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}.heading>div,.person-heading>div{display:grid;gap:3px}.eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:0;font-size:1rem}.intro,.note,small{color:var(--secondary-text-color);line-height:1.4;overflow-wrap:anywhere}.intro,.note{margin:0;font-size:.86rem}.person-card{display:grid;gap:12px;width:100%;max-width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--divider-color);border-radius:11px;background:var(--secondary-background-color);overflow:hidden}label{display:grid;gap:6px;font-weight:600;max-width:100%}.grid{display:grid;gap:10px;width:100%;max-width:100%}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) minmax(0,.85fr)}input,select,button{box-sizing:border-box;max-width:100%;padding:9px 11px;border:1px solid var(--divider-color);border-radius:8px;color:var(--primary-text-color);background:var(--card-background-color);font:inherit}input,select{width:100%;min-width:0}input{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}button{cursor:pointer}.primary{border-color:var(--primary-color);color:var(--primary-color);font-weight:700}.danger{color:var(--error-color,#db4437);flex:0 0 auto}.empty,.note{padding:10px 12px;border-radius:9px;background:var(--secondary-background-color)}code{font-size:.9em;overflow-wrap:anywhere}@container (max-width:560px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}.person-heading{align-items:center}}@container (max-width:390px){.panel{padding:12px}.person-card{padding:11px}.person-heading{flex-wrap:wrap}.person-heading .danger{margin-left:auto}}@media(max-width:700px){.two,.three{grid-template-columns:1fr}.heading{flex-direction:column}.heading button{width:100%}}`;
 vi([
   C({ attribute: !1 })
 ], ct.prototype, "hass", 2);
@@ -5954,9 +5989,9 @@ vi([
   C({ attribute: !1 })
 ], ct.prototype, "config", 2);
 ct = vi([
-  I("ha-explorer-identity-editor")
+  D("ha-explorer-identity-editor")
 ], ct);
-var is = Object.defineProperty, rs = Object.getOwnPropertyDescriptor, le = (e, t, i, r) => {
+var is = Object.defineProperty, rs = Object.getOwnPropertyDescriptor, ce = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? rs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && is(t, i, o), o;
@@ -5982,7 +6017,7 @@ function ns(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
-let ie = class extends B {
+let re = class extends O {
   constructor() {
     super(...arguments), this.selectedZoneId = "", this.drawing = !1, this.pendingPoints = [], this.draftName = "Ny zone", this.draftKind = "info", this.draftEntity = "", this.draftStates = "on", this.draftVisible = !0;
   }
@@ -6102,7 +6137,7 @@ let ie = class extends B {
   renderForm() {
     if (!this.drawing && !this.selectedZone) return f;
     const e = "explorer-zone-entities";
-    return h`
+    return u`
       <div class="form-grid">
         <label>
           Navn
@@ -6111,14 +6146,14 @@ let ie = class extends B {
         <label>
           Zonetype
           <select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}>
-            ${_i.map((t) => h`<option value=${t.value}>${t.label}</option>`)}
+            ${_i.map((t) => u`<option value=${t.value}>${t.label}</option>`)}
           </select>
         </label>
         <label class="wide">
           Home Assistant entity · valgfri
           <input list=${e} .value=${this.draftEntity} placeholder="input_boolean.alarm_zone" @change=${(t) => this.draftEntity = t.target.value} />
           <datalist id=${e}>
-            ${this.entities.map((t) => h`<option value=${t.entity_id}>${Qt(t)}</option>`)}
+            ${this.entities.map((t) => u`<option value=${t.entity_id}>${Qt(t)}</option>`)}
           </datalist>
           <small>Tom = zonen er altid aktiv. Med entity vises zonen kun i de valgte states.</small>
         </label>
@@ -6137,7 +6172,7 @@ let ie = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = this.drawing && !this.selectedZone, i = this.drawing && !!this.selectedZone;
-    return h`
+    return u`
       <section class="panel">
         <div class="heading">
           <div>
@@ -6156,35 +6191,35 @@ let ie = class extends B {
               ${this.zones.map((r) => this.renderZonePolygon(r))}
               ${this.renderPending()}
             </svg>
-            ${this.drawing ? h`<div class="map-help">Klik rundt langs zonens kant · ${this.pendingPoints.length} punkter</div>` : f}
+            ${this.drawing ? u`<div class="map-help">Klik rundt langs zonens kant · ${this.pendingPoints.length} punkter</div>` : f}
           </div>
 
           <div class="sidebar">
             <button class="primary" @click=${this.beginNew} ?disabled=${t}>+ Ny zone</button>
-            ${this.zones.length ? h`
+            ${this.zones.length ? u`
               <div class="zone-list">
-                ${this.zones.map((r) => h`
+                ${this.zones.map((r) => u`
                   <button class=${r.id === this.selectedZoneId ? "zone-row selected" : "zone-row"} @click=${() => this.selectZone(r)}>
                     <span><strong>${r.name ?? r.id}</strong><small>${_i.find((o) => o.value === (r.kind ?? "info"))?.label}</small></span>
                     <em>${this.statusText(r)}</em>
                   </button>
                 `)}
               </div>
-            ` : h`<div class="empty">Ingen zoner endnu.</div>`}
+            ` : u`<div class="empty">Ingen zoner endnu.</div>`}
           </div>
         </div>
 
         ${this.renderForm()}
 
-        ${t ? h`
+        ${t ? u`
           <div class="actions">
             <button @click=${this.undoPoint} ?disabled=${!this.pendingPoints.length}>Fortryd punkt</button>
             <button @click=${this.cancelDrawing}>Annuller</button>
             <button class="primary" @click=${this.saveNew} ?disabled=${this.pendingPoints.length < 3}>Gem zone</button>
           </div>
-        ` : this.selectedZone ? h`
+        ` : this.selectedZone ? u`
           <div class="actions">
-            ${i ? h`<button @click=${this.undoPoint} ?disabled=${!this.pendingPoints.length}>Fortryd punkt</button><button @click=${this.cancelDrawing}>Annuller ny geometri</button>` : h`<button @click=${this.beginRedraw}>Tegn zone om</button>`}
+            ${i ? u`<button @click=${this.undoPoint} ?disabled=${!this.pendingPoints.length}>Fortryd punkt</button><button @click=${this.cancelDrawing}>Annuller ny geometri</button>` : u`<button @click=${this.beginRedraw}>Tegn zone om</button>`}
             <button class="danger" @click=${this.deleteSelected}>Slet zone</button>
             <button class="primary" @click=${this.saveExisting} ?disabled=${i && this.pendingPoints.length < 3}>Gem zone</button>
           </div>
@@ -6195,7 +6230,7 @@ let ie = class extends B {
     `;
   }
 };
-ie.styles = j`
+re.styles = I`
     :host { display:block; margin-top:16px; color:var(--primary-text-color); }
     .panel { border:1px solid var(--divider-color,#d7dbe0); border-radius:14px; padding:16px; background:var(--card-background-color,#fff); }
     .heading { display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
@@ -6240,40 +6275,40 @@ ie.styles = j`
     .note { margin-top:12px; padding:9px 11px; border-radius:9px; background:var(--secondary-background-color,#f3f5f7); color:var(--secondary-text-color); font-size:.75rem; }
     @media (max-width:700px) { .workspace { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } label.wide { grid-column:auto; } }
   `;
-le([
+ce([
   C({ attribute: !1 })
-], ie.prototype, "hass", 2);
-le([
+], re.prototype, "hass", 2);
+ce([
   C({ attribute: !1 })
-], ie.prototype, "config", 2);
-le([
+], re.prototype, "config", 2);
+ce([
   v()
-], ie.prototype, "selectedZoneId", 2);
-le([
+], re.prototype, "selectedZoneId", 2);
+ce([
   v()
-], ie.prototype, "drawing", 2);
-le([
+], re.prototype, "drawing", 2);
+ce([
   v()
-], ie.prototype, "pendingPoints", 2);
-le([
+], re.prototype, "pendingPoints", 2);
+ce([
   v()
-], ie.prototype, "draftName", 2);
-le([
+], re.prototype, "draftName", 2);
+ce([
   v()
-], ie.prototype, "draftKind", 2);
-le([
+], re.prototype, "draftKind", 2);
+ce([
   v()
-], ie.prototype, "draftEntity", 2);
-le([
+], re.prototype, "draftEntity", 2);
+ce([
   v()
-], ie.prototype, "draftStates", 2);
-le([
+], re.prototype, "draftStates", 2);
+ce([
   v()
-], ie.prototype, "draftVisible", 2);
-ie = le([
-  I("ha-explorer-zones-editor")
-], ie);
-var ss = Object.defineProperty, as = Object.getOwnPropertyDescriptor, X = (e, t, i, r) => {
+], re.prototype, "draftVisible", 2);
+re = ce([
+  D("ha-explorer-zones-editor")
+], re);
+var ss = Object.defineProperty, as = Object.getOwnPropertyDescriptor, Q = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? as(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ss(t, i, o), o;
@@ -6293,7 +6328,7 @@ function cs(e) {
   const t = [...new Set(e.split(",").map((i) => i.trim()).filter(Boolean))];
   return t.length ? t : void 0;
 }
-let W = class extends B {
+let W = class extends O {
   constructor() {
     super(...arguments), this.selectedId = "", this.placing = !1, this.draftName = "Ny dør", this.draftKind = "door", this.draftPoint = [0.5, 0.5], this.draftAngle = 0, this.draftLength = 0.055, this.draftHinge = "start", this.draftSwing = "left", this.draftOpenAngle = 82, this.draftEntity = "", this.draftStates = "on, open", this.draftVisible = !0;
   }
@@ -6368,69 +6403,69 @@ let W = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = !!this.selected || this.placing || this.draftName !== "Ny dør";
-    return h`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? R`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? h`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => h`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : h`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
+    return u`<section class="panel"><div class="heading"><div><span class="eyebrow">Dynamic Doors & Windows · v0.38</span><h3>Døre og vinduer</h3><p>Placér åbninger direkte på plantegningen og bind dem til Home Assistant.</p></div><span class="count">${this.openings.length} åbninger</span></div><div class="toolbar"><button class="primary" @click=${() => this.beginNew("door")}>+ Ny dør</button><button @click=${() => this.beginNew("window")}>+ Nyt vindue</button></div><div class="workspace"><div class="map-wrap"><svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}><rect width="1000" height="1000" class="backdrop"></rect>${e ? R`<image href=${e} width="1000" height="1000" preserveAspectRatio="none" opacity=".72"></image>` : f}${this.openings.map((i) => this.renderOpening(i))}${this.renderDraft()}</svg>${this.placing ? u`<div class="map-help">Klik på kortet hvor ${this.draftKind === "door" ? "døren" : "vinduet"} skal sidde</div>` : f}</div><div class="sidebar">${this.openings.length ? this.openings.map((i) => u`<button class=${i.id === this.selectedId ? "row selected" : "row"} @click=${() => this.select(i)}><span><strong>${i.name ?? i.id}</strong><small>${i.kind === "door" ? "Dør" : "Vindue"}</small></span><em>${this.stateText(i)}</em></button>`) : u`<div class="empty">Ingen døre eller vinduer endnu.</div>`}</div></div>${t ? this.renderForm() : f}</section>`;
   }
   renderForm() {
     const e = "explorer-opening-entities";
-    return h`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? h`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => h`<option value=${t.entity_id}>${Jt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? h`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
+    return u`<div class="form-grid"><label>Navn<input .value=${this.draftName} @input=${(t) => this.draftName = t.target.value}></label><label>Type<select .value=${this.draftKind} @change=${(t) => this.draftKind = t.target.value}><option value="door">Dør</option><option value="window">Vindue</option></select></label><label>Vinkel · ${Math.round(this.draftAngle)}°<input type="range" min="0" max="359" step="1" .value=${String(this.draftAngle)} @input=${(t) => this.draftAngle = Number(t.target.value)}></label><label>Længde · ${Math.round(this.draftLength * 1e3) / 10}%<input type="range" min="0.025" max="0.14" step="0.0025" .value=${String(this.draftLength)} @input=${(t) => this.draftLength = Number(t.target.value)}></label>${this.draftKind === "door" ? u`<label>Hængsel<select .value=${this.draftHinge} @change=${(t) => this.draftHinge = t.target.value}><option value="start">Start</option><option value="end">Slut</option></select></label><label>Svingretning<select .value=${this.draftSwing} @change=${(t) => this.draftSwing = t.target.value}><option value="left">Venstre</option><option value="right">Højre</option></select></label><label>Åbningsvinkel · ${Math.round(this.draftOpenAngle)}°<input type="range" min="30" max="150" step="1" .value=${String(this.draftOpenAngle)} @input=${(t) => this.draftOpenAngle = Number(t.target.value)}></label>` : f}<label class="wide">Home Assistant entity · valgfri<input list=${e} .value=${this.draftEntity} placeholder="binary_sensor.stuedor" @change=${(t) => this.draftEntity = t.target.value}><datalist id=${e}>${this.entities.map((t) => u`<option value=${t.entity_id}>${Jt(t)}</option>`)}</datalist><small>Vælg fx en dør-/vindueskontakt eller cover-entity.</small></label><label>Åben state(s)<input .value=${this.draftStates} placeholder="on, open" @change=${(t) => this.draftStates = t.target.value}><small>Kommasepareret.</small></label><label class="toggle"><input type="checkbox" .checked=${this.draftVisible} @change=${(t) => this.draftVisible = t.target.checked}>Vis på kortet</label><div class="actions wide"><button @click=${() => this.placing = !0}>Placér igen</button>${this.selected ? u`<button class="danger" @click=${this.deleteSelected}>Slet</button>` : f}<button class="primary" @click=${this.save} ?disabled=${this.placing}>Gem</button></div></div>`;
   }
 };
-W.styles = j`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
-X([
+W.styles = I`:host{display:block;margin-top:16px;color:var(--primary-text-color)}.panel{border:1px solid var(--divider-color,#d7dbe0);border-radius:14px;padding:16px;background:var(--card-background-color,#fff)}.heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary-text-color)}h3{margin:4px 0;font-size:1.05rem}p{margin:0;color:var(--secondary-text-color);font-size:.86rem}.count{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color,#f2f4f7);font-size:.75rem;white-space:nowrap}.toolbar{display:flex;gap:8px;margin-top:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(190px,.8fr);gap:14px;margin-top:12px}.map-wrap{position:relative;min-height:300px;border-radius:12px;overflow:hidden;border:1px solid var(--divider-color,#d7dbe0);background:#d8c9a7}svg{width:100%;height:100%;min-height:300px;display:block;cursor:crosshair}.backdrop{fill:#d8c9a7}.opening{cursor:pointer;pointer-events:all}.opening line{stroke:var(--primary-text-color,#1f2937);stroke-width:7;stroke-linecap:round;vector-effect:non-scaling-stroke}.opening circle{fill:var(--card-background-color,#fff);stroke:var(--primary-color,#03a9f4);stroke-width:4;vector-effect:non-scaling-stroke}.opening.selected line{stroke:var(--primary-color,#03a9f4);stroke-width:10}.opening.draft line{stroke-dasharray:12 8}.opening text{fill:var(--primary-text-color,#1f2937);stroke:white;stroke-width:5;paint-order:stroke;font-size:20px;font-weight:700;pointer-events:none}.map-help{position:absolute;left:10px;bottom:10px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#344054;font-size:.75rem;pointer-events:none}.sidebar{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.row{display:flex;justify-content:space-between;gap:8px;align-items:center;width:100%}.row.selected{border-color:var(--primary-color);box-shadow:0 0 0 1px var(--primary-color)}.row span{display:flex;flex-direction:column}.row small,.row em{font-size:.68rem;color:var(--secondary-text-color);font-style:normal}.row em{text-align:right}.empty{padding:12px;border:1px dashed var(--divider-color);border-radius:10px;color:var(--secondary-text-color);font-size:.8rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider-color)}label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:650}.wide{grid-column:1/-1}.toggle{flex-direction:row;align-items:center;align-self:end;padding-bottom:8px}input,select{box-sizing:border-box;width:100%;border:1px solid var(--divider-color,#cfd4da);border-radius:8px;padding:8px 9px;background:var(--card-background-color,#fff);color:var(--primary-text-color)}input[type=range]{padding:4px 0}label small{color:var(--secondary-text-color);font-weight:400}.actions{display:flex;justify-content:flex-end;gap:8px}button{border:1px solid var(--divider-color,#cfd4da);border-radius:9px;padding:9px 11px;background:var(--card-background-color,#fff);color:var(--primary-text-color);cursor:pointer}button.primary{background:var(--primary-color,#03a9f4);color:white;border-color:transparent;font-weight:700}button.danger{color:var(--error-color,#db4437)}button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:700px){.workspace,.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}`;
+Q([
   C({ attribute: !1 })
 ], W.prototype, "hass", 2);
-X([
+Q([
   C({ attribute: !1 })
 ], W.prototype, "config", 2);
-X([
+Q([
   v()
 ], W.prototype, "selectedId", 2);
-X([
+Q([
   v()
 ], W.prototype, "placing", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftName", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftKind", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftPoint", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftAngle", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftLength", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftHinge", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftSwing", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftOpenAngle", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftEntity", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftStates", 2);
-X([
+Q([
   v()
 ], W.prototype, "draftVisible", 2);
-W = X([
-  I("ha-explorer-openings-editor")
+W = Q([
+  D("ha-explorer-openings-editor")
 ], W);
-var ds = Object.defineProperty, ps = Object.getOwnPropertyDescriptor, ce = (e, t, i, r) => {
+var ds = Object.defineProperty, ps = Object.getOwnPropertyDescriptor, de = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ps(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ds(t, i, o), o;
 };
 const $t = { light: "Lampe / lys", motion: "Bevægelsessensor", media: "TV / media", opening: "Dør / vindue", temperature: "Temperatur", fireplace: "Pejs / ildsted" }, _t = { light: "✦", motion: "◉", media: "▶", opening: "↗", temperature: "°", fireplace: "🔥" }, ei = (e) => Math.min(1, Math.max(0, e));
-let ee = class extends B {
+let te = class extends O {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.draftKind = "light", this.draftEntity = "", this.draftStates = "on", this.draftIntensity = 0.75, this.draftRadius = 90;
   }
@@ -6495,9 +6530,9 @@ let ee = class extends B {
   }
   preview(e) {
     const t = this.config?.image ?? this.config?.background ?? "", i = this.draftPosition ?? _e(e);
-    return h`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? h`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${x} ${x}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * x},${o * x}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
+    return u`<div class="placement"><div><strong>Fysisk placering</strong><small>Klik på plantegningen dér hvor entity'en sidder.</small></div><div class="preview" @click=${this.handlePreviewClick}>${t ? u`<img src=${t} alt="">` : f}<svg viewBox="0 0 ${x} ${x}" preserveAspectRatio="none"><polygon points=${e.points.map(([r, o]) => `${r * x},${o * x}`).join(" ")}></polygon>${(e.reactions ?? []).map((r) => {
       const o = _e(e, r);
-      return h`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${_t[r.kind]}</text></g>`;
+      return u`<g class="existing" transform=${`translate(${o.x * x} ${o.y * x})`}><circle r="13"></circle><text>${_t[r.kind]}</text></g>`;
     })}<g class="draft-point" transform=${`translate(${i.x * x} ${i.y * x})`}><circle r=${this.draftKind === "fireplace" ? "18" : "14"}></circle><text>${_t[this.draftKind]}</text></g></svg></div><small>${(i.x * 100).toFixed(1)} % / ${(i.y * 100).toFixed(1)} %</small></div>`;
   }
   statusLabel(e, t) {
@@ -6507,51 +6542,51 @@ let ee = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.selectedRoom, t = e?.reactions ?? [], i = this.options(), r = i.some((o) => o.id === this.draftEntity);
-    return h`<section class="editor"><div class="heading"><div><span>Living Entity Points · Fireplace</span><h3>Rumreaktioner</h3></div><b>${this.rooms.reduce((o, n) => o + (n.reactions?.length ?? 0), 0)} punkter</b></div><p class="intro">Placér lys, sensorer, medier og nu også pejs/ildsted direkte på kortet.</p>${this.rooms.length ? h`<label>Rum<select .value=${this.selectedRoomId} @change=${(o) => {
+    return u`<section class="editor"><div class="heading"><div><span>Living Entity Points · Fireplace</span><h3>Rumreaktioner</h3></div><b>${this.rooms.reduce((o, n) => o + (n.reactions?.length ?? 0), 0)} punkter</b></div><p class="intro">Placér lys, sensorer, medier og nu også pejs/ildsted direkte på kortet.</p>${this.rooms.length ? u`<label>Rum<select .value=${this.selectedRoomId} @change=${(o) => {
       this.selectedRoomId = o.target.value, this.cancelEdit();
-    }}>${this.rooms.map((o) => h`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys($t).map((o) => h`<option value=${o}>${$t[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? h`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => h`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? h`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : h`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? h`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? h`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => h`<article><span class="glyph">${_t[o.kind]}</span><div><strong>${$t[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : h`<div class="empty">Tilføj først et rum.</div>`}</section>`;
+    }}>${this.rooms.map((o) => u`<option value=${o.id}>${o.name ?? o.id}</option>`)}</select></label><div class="draft"><strong>${this.editingIndex === void 0 ? "Nyt entity-punkt" : "Redigér entity-punkt"}</strong><div class="grid"><label>Type<select .value=${this.draftKind} @change=${(o) => this.changeKind(o.target.value)}>${Object.keys($t).map((o) => u`<option value=${o}>${$t[o]}</option>`)}</select></label><label>Home Assistant entity<select .value=${this.draftEntity} @change=${(o) => this.draftEntity = o.target.value}><option value="">Vælg entity…</option>${this.draftEntity && !r ? u`<option value=${this.draftEntity}>${this.draftEntity} · eksisterende</option>` : f}${i.map((o) => u`<option value=${o.id}>${o.label === o.id ? o.id : `${o.label} · ${o.id}`}</option>`)}</select></label>${this.draftKind === "temperature" ? u`<div class="note">Temperaturen læses automatisk fra sensoren.</div>` : u`<label>Aktiv state(s)<input .value=${this.draftStates} @input=${(o) => this.draftStates = o.target.value}><small>Flere states adskilles med komma.</small></label>`}${this.draftKind === "fireplace" ? u`<label>🔥 Intensitet · ${Math.round(this.draftIntensity * 100)}%<input type="range" min="0.2" max="1" step="0.05" .value=${String(this.draftIntensity)} @input=${(o) => this.draftIntensity = Number(o.target.value)}></label><label>Glød-radius · ${Math.round(this.draftRadius)}<input type="range" min="30" max="220" step="5" .value=${String(this.draftRadius)} @input=${(o) => this.draftRadius = Number(o.target.value)}><small>Hvor langt den varme ildglød breder sig omkring pejsen.</small></label>` : f}</div>${e ? this.preview(e) : f}<div class="actions"><button @click=${this.save} ?disabled=${!this.draftEntity.trim() || this.isDuplicate()}>${this.editingIndex === void 0 ? "Tilføj punkt" : "Gem ændring"}</button>${this.editingIndex !== void 0 ? u`<button class="secondary" @click=${this.cancelEdit}>Annuller</button>` : f}</div></div><div class="list">${t.map((o, n) => u`<article><span class="glyph">${_t[o.kind]}</span><div><strong>${$t[o.kind]}</strong><small>${o.entity}</small><small>${this.statusLabel(o, n)}${o.kind === "fireplace" ? ` · ${Math.round((o.intensity ?? 0.75) * 100)}% · radius ${o.radius ?? 90}` : ""}</small></div><div class="row-actions"><button class="secondary" @click=${() => this.beginEdit(n)}>Redigér</button><button class="danger" @click=${() => this.removeReaction(n)}>Fjern</button></div></article>`)}</div>` : u`<div class="empty">Tilføj først et rum.</div>`}</section>`;
   }
 };
-ee.styles = j`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
-ce([
+te.styles = I`:host{display:block}.editor{display:grid;gap:14px;margin-top:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--card-background-color)}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{font-size:.7rem;color:var(--secondary-text-color);text-transform:uppercase;letter-spacing:.1em}.heading h3{margin:3px 0 0}.heading b{height:max-content;padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);font-size:.75rem}.intro{margin:0;color:var(--secondary-text-color)}label{display:grid;gap:6px;font-size:.86rem}.draft{display:grid;gap:12px;padding:13px;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}select,input{box-sizing:border-box;width:100%;padding:9px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}small{color:var(--secondary-text-color)}.placement{display:grid;gap:7px}.placement>div:first-child{display:grid}.preview{position:relative;aspect-ratio:1;max-height:360px;overflow:hidden;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);cursor:crosshair}.preview img,.preview svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.preview polygon{fill:rgba(120,90,50,.08);stroke:rgba(120,90,50,.5);stroke-width:3}.preview circle{fill:var(--card-background-color);stroke:var(--primary-color);stroke-width:4}.preview text{font-size:18px;text-anchor:middle;dominant-baseline:central}.draft-point text{font-size:22px}.actions,.row-actions{display:flex;gap:8px;flex-wrap:wrap}button{padding:8px 11px;border:0;border-radius:8px;background:var(--primary-color);color:var(--text-primary-color,#fff);font:inherit;cursor:pointer}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437)}button:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:8px}.list article{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--divider-color);border-radius:10px}.list article>div:nth-child(2){display:grid;gap:2px}.glyph{font-size:1.3rem}.note,.empty{padding:10px;border-radius:8px;background:var(--card-background-color);color:var(--secondary-text-color)}@media(max-width:620px){.grid{grid-template-columns:1fr}.list article{grid-template-columns:auto 1fr}.row-actions{grid-column:1/-1}}`;
+de([
   C({ attribute: !1 })
-], ee.prototype, "config", 2);
-ce([
+], te.prototype, "config", 2);
+de([
   C({ attribute: !1 })
-], ee.prototype, "hass", 2);
-ce([
+], te.prototype, "hass", 2);
+de([
   v()
-], ee.prototype, "selectedRoomId", 2);
-ce([
+], te.prototype, "selectedRoomId", 2);
+de([
   v()
-], ee.prototype, "draftKind", 2);
-ce([
+], te.prototype, "draftKind", 2);
+de([
   v()
-], ee.prototype, "draftEntity", 2);
-ce([
+], te.prototype, "draftEntity", 2);
+de([
   v()
-], ee.prototype, "draftStates", 2);
-ce([
+], te.prototype, "draftStates", 2);
+de([
   v()
-], ee.prototype, "draftPosition", 2);
-ce([
+], te.prototype, "draftPosition", 2);
+de([
   v()
-], ee.prototype, "editingIndex", 2);
-ce([
+], te.prototype, "editingIndex", 2);
+de([
   v()
-], ee.prototype, "draftIntensity", 2);
-ce([
+], te.prototype, "draftIntensity", 2);
+de([
   v()
-], ee.prototype, "draftRadius", 2);
-ee = ce([
-  I("ha-explorer-room-reactions-editor")
-], ee);
+], te.prototype, "draftRadius", 2);
+te = de([
+  D("ha-explorer-room-reactions-editor")
+], te);
 var hs = Object.getOwnPropertyDescriptor, us = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? hs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = s(o) || o);
   return o;
 };
-let rr = class extends ee {
+let rr = class extends te {
   updated(e) {
     super.updated(e), queueMicrotask(() => this.cleanOpeningControls());
   }
@@ -6569,14 +6604,14 @@ let rr = class extends ee {
   }
 };
 rr = us([
-  I("ha-explorer-room-reactions-editor-clean")
+  D("ha-explorer-room-reactions-editor-clean")
 ], rr);
-var gs = Object.defineProperty, ms = Object.getOwnPropertyDescriptor, ye = (e, t, i, r) => {
+var gs = Object.defineProperty, ms = Object.getOwnPropertyDescriptor, ve = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ms(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && gs(t, i, o), o;
 };
-let ae = class extends B {
+let le = class extends O {
   constructor() {
     super(...arguments), this.selectedRoomId = "", this.kind = "scene", this.entity = "", this.name = "", this.icon = "", this.editingId = "";
   }
@@ -6650,7 +6685,7 @@ let ae = class extends B {
   }
   render() {
     const e = this.config?.rooms ?? [], t = this.selectedRoom;
-    return e.length ? h`
+    return e.length ? u`
       <section>
         <div class="notice">
           <strong>Automatisk lysstyring</strong>
@@ -6662,7 +6697,7 @@ let ae = class extends B {
           <select .value=${this.selectedRoomId} @change=${(i) => {
       this.selectedRoomId = i.target.value, this.resetDraft();
     }}>
-            ${e.map((i) => h`<option value=${i.id}>${i.name ?? i.id}</option>`)}
+            ${e.map((i) => u`<option value=${i.id}>${i.name ?? i.id}</option>`)}
           </select>
         </label>
 
@@ -6678,7 +6713,7 @@ let ae = class extends B {
             Entity
             <select .value=${this.entity} @change=${(i) => this.selectEntity(i.target.value)}>
               <option value="">Vælg ${this.kind === "scene" ? "scene" : "script"}…</option>
-              ${this.entityOptions.map((i) => h`<option value=${i.id}>${i.name} · ${i.id}</option>`)}
+              ${this.entityOptions.map((i) => u`<option value=${i.id}>${i.name} · ${i.id}</option>`)}
             </select>
           </label>
           <label>
@@ -6695,11 +6730,11 @@ let ae = class extends B {
           <button class="primary" @click=${this.save} ?disabled=${!this.entity || !this.name.trim()}>
             ${this.editingId ? "Gem ændring" : "Tilføj handling"}
           </button>
-          ${this.editingId ? h`<button @click=${this.resetDraft}>Annuller</button>` : f}
+          ${this.editingId ? u`<button @click=${this.resetDraft}>Annuller</button>` : f}
         </div>
 
         <div class="actions">
-          ${(t?.quick_actions ?? []).map((i) => h`
+          ${(t?.quick_actions ?? []).map((i) => u`
             <article>
               <span class="glyph">${i.icon ?? (i.kind === "scene" ? "✦" : "▶")}</span>
               <span><strong>${i.name}</strong><small>${i.entity}</small></span>
@@ -6707,13 +6742,13 @@ let ae = class extends B {
               <button class="danger" @click=${() => this.removeAction(i.id)}>Slet</button>
             </article>
           `)}
-          ${t?.quick_actions?.length ? f : h`<p class="empty">Ingen scene- eller scripthandlinger i dette rum endnu.</p>`}
+          ${t?.quick_actions?.length ? f : u`<p class="empty">Ingen scene- eller scripthandlinger i dette rum endnu.</p>`}
         </div>
       </section>
-    ` : h`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
+    ` : u`<p class="empty">Opret først et rum, før du tilføjer hurtighandlinger.</p>`;
   }
 };
-ae.styles = j`
+le.styles = I`
     :host { display:block; color:var(--primary-text-color); }
     section { display:grid; gap:12px; }
     .notice { display:grid; gap:3px; padding:10px 12px; border-radius:10px; background:color-mix(in srgb,var(--primary-color,#03a9f4) 8%,transparent); font-size:.78rem; line-height:1.4; }
@@ -6741,40 +6776,40 @@ ae.styles = j`
       article .danger { grid-column:3; }
     }
   `;
-ye([
+ve([
   C({ attribute: !1 })
-], ae.prototype, "config", 2);
-ye([
+], le.prototype, "config", 2);
+ve([
   C({ attribute: !1 })
-], ae.prototype, "hass", 2);
-ye([
+], le.prototype, "hass", 2);
+ve([
   v()
-], ae.prototype, "selectedRoomId", 2);
-ye([
+], le.prototype, "selectedRoomId", 2);
+ve([
   v()
-], ae.prototype, "kind", 2);
-ye([
+], le.prototype, "kind", 2);
+ve([
   v()
-], ae.prototype, "entity", 2);
-ye([
+], le.prototype, "entity", 2);
+ve([
   v()
-], ae.prototype, "name", 2);
-ye([
+], le.prototype, "name", 2);
+ve([
   v()
-], ae.prototype, "icon", 2);
-ye([
+], le.prototype, "icon", 2);
+ve([
   v()
-], ae.prototype, "editingId", 2);
-ae = ye([
-  I("ha-explorer-room-actions-editor")
-], ae);
-var fs = Object.defineProperty, bs = Object.getOwnPropertyDescriptor, G = (e, t, i, r) => {
+], le.prototype, "editingId", 2);
+le = ve([
+  D("ha-explorer-room-actions-editor")
+], le);
+var fs = Object.defineProperty, bs = Object.getOwnPropertyDescriptor, X = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? bs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && fs(t, i, o), o;
 };
-const _ = 1e3;
-let K = class extends B {
+const ee = 1e3;
+let K = class extends O {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "", this.drawing = !1, this.pending = [], this.placingNode = !1, this.draftNodeName = "", this.draftNodeKind = "door", this.draftNodeEntity = "", this.draftNodeOpenStates = "on", this.editingNodeName = "", this.editingNodeKind = "door", this.editingNodeEntity = "", this.editingNodeOpenStates = "on";
   }
@@ -6968,7 +7003,7 @@ let K = class extends B {
       return R`
         <g
           class=${n}
-          transform=${`translate(${i * _} ${r * _})`}
+          transform=${`translate(${i * ee} ${r * ee})`}
           @click=${(s) => this.useSharedNode(s, e)}
         >
           <circle r="15"></circle>
@@ -6983,7 +7018,7 @@ let K = class extends B {
       if (this.routeMatchesSelection(e)) return f;
       const i = this.routePoints(e);
       if (!i) return f;
-      const r = i.map(([o, n]) => `${o * _},${n * _}`).join(" ");
+      const r = i.map(([o, n]) => `${o * ee},${n * ee}`).join(" ");
       return R`
         <polyline
           points=${r}
@@ -6998,8 +7033,8 @@ let K = class extends B {
         ></polyline>
         <text
           class="network-number"
-          x=${i[Math.floor(i.length / 2)][0] * _}
-          y=${i[Math.floor(i.length / 2)][1] * _ - 18}
+          x=${i[Math.floor(i.length / 2)][0] * ee}
+          y=${i[Math.floor(i.length / 2)][1] * ee - 18}
           text-anchor="middle"
         >${t + 1}</text>
       `;
@@ -7017,25 +7052,25 @@ let K = class extends B {
         i = s.from === this.fromRoom ? a : [...a].reverse();
       }
     }
-    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * _},${a * _}`).join(" ");
+    const r = i.map((s) => ({ step: s, point: this.resolveStep(s) })).filter((s) => !!s.point), n = [e, ...r.map((s) => s.point), t].map(([s, a]) => `${s * ee},${a * ee}`).join(" ");
     return R`
       <polyline points=${n} class="route-line" fill="none" vector-effect="non-scaling-stroke"></polyline>
-      <g transform=${`translate(${e[0] * _} ${e[1] * _})`}><circle class="endpoint" r="14"></circle></g>
+      <g transform=${`translate(${e[0] * ee} ${e[1] * ee})`}><circle class="endpoint" r="14"></circle></g>
       ${r.map(({ step: s, point: a }, l) => R`
-        <g transform=${`translate(${a[0] * _} ${a[1] * _})`}>
+        <g transform=${`translate(${a[0] * ee} ${a[1] * ee})`}>
           <circle class=${s.node_id ? "waypoint shared-waypoint" : "waypoint"} r="11"></circle>
           <text y="-20" text-anchor="middle">${l + 1}</text>
         </g>
       `)}
-      <g transform=${`translate(${t[0] * _} ${t[1] * _})`}><circle class="endpoint" r="14"></circle></g>
+      <g transform=${`translate(${t[0] * ee} ${t[1] * ee})`}><circle class="endpoint" r="14"></circle></g>
     `;
   }
   renderRouteList() {
-    return this.routes.length ? h`
+    return this.routes.length ? u`
       <div class="route-list">
         ${this.routes.map((e, t) => {
       const i = this.routeMatchesSelection(e), r = this.routeSteps(e), o = r.filter((s) => !!s.node_id).length, n = r.filter((s) => !!s.point).length;
-      return h`
+      return u`
             <button
               type="button"
               class=${i ? "route-item selected" : "route-item"}
@@ -7050,29 +7085,29 @@ let K = class extends B {
           `;
     })}
       </div>
-    ` : h`<div class="route-empty">Der er endnu ingen gemte ruter.</div>`;
+    ` : u`<div class="route-empty">Der er endnu ingen gemte ruter.</div>`;
   }
   renderNodeManager() {
-    return h`
+    return u`
       <div class="node-manager">
         <div class="node-heading">
           <div><strong>Fælles dør- og gangpunkter</strong><small>Dørsensoren bindes nu direkte på dørpunktet og arves af graph-forbindelserne.</small></div>
           <span>${this.routeNodes.length} punkter</span>
         </div>
 
-        ${this.routeNodes.length ? h`
+        ${this.routeNodes.length ? u`
           <div class="node-list">
             ${this.routeNodes.map((e) => {
       const t = this.nodeUsageCount(e.id), i = this.nodeState(e), r = this.editingNodeId === e.id;
-      return h`
+      return u`
                 <div class=${i.conditional && !i.active ? "node-item blocked" : "node-item"}>
                   <span class=${`node-dot ${e.kind ?? "waypoint"}`}></span>
                   <span class="node-copy">
                     <strong>${this.routeNodeLabel(e)}</strong>
                     <small>${e.kind ?? "waypoint"} · bruges ${t} ${t === 1 ? "gang" : "gange"}</small>
-                    ${e.kind === "door" ? h`
+                    ${e.kind === "door" ? u`
                       <em class=${i.active ? "node-status open" : "node-status blocked"}>${this.nodeStateLabel(e)}</em>
-                      ${e.state_binding ? h`<small>${e.state_binding.entity} · åben: ${(e.state_binding.open_states?.length ? e.state_binding.open_states : ["on"]).join(", ")}</small>` : f}
+                      ${e.state_binding ? u`<small>${e.state_binding.entity} · åben: ${(e.state_binding.open_states?.length ? e.state_binding.open_states : ["on"]).join(", ")}</small>` : f}
                     ` : f}
                   </span>
                   <div class="node-actions">
@@ -7080,11 +7115,11 @@ let K = class extends B {
                     <button class="mini danger" ?disabled=${t > 0} title=${t > 0 ? "Punktet bruges af en rute" : "Slet punkt"} @click=${() => this.deleteNode(e)}>Slet</button>
                   </div>
                 </div>
-                ${r ? h`
+                ${r ? u`
                   <div class="node-edit">
                     <label>Navn<input .value=${this.editingNodeName} @input=${(o) => this.editingNodeName = o.target.value}></label>
                     <label>Type<select .value=${this.editingNodeKind} @change=${(o) => this.editingNodeKind = o.target.value}><option value="door">Dør</option><option value="junction">Kryds/gang</option><option value="waypoint">Waypoint</option></select></label>
-                    ${this.editingNodeKind === "door" ? h`
+                    ${this.editingNodeKind === "door" ? u`
                       <label>Home Assistant entity<input placeholder="binary_sensor.kokkendor" .value=${this.editingNodeEntity} @input=${(o) => this.editingNodeEntity = o.target.value}></label>
                       <label>Åben state(s)<input placeholder="on" .value=${this.editingNodeOpenStates} @input=${(o) => this.editingNodeOpenStates = o.target.value}><small>Fx <code>on</code> for en normal binary_sensor med device_class door.</small></label>
                     ` : f}
@@ -7097,20 +7132,20 @@ let K = class extends B {
               `;
     })}
           </div>
-        ` : h`<div class="route-empty">Ingen fælles punkter endnu.</div>`}
+        ` : u`<div class="route-empty">Ingen fælles punkter endnu.</div>`}
 
-        ${this.placingNode ? h`
+        ${this.placingNode ? u`
           <div class="node-draft">
             <label>Navn<input .value=${this.draftNodeName} @input=${(e) => this.draftNodeName = e.target.value}></label>
             <label>Type<select .value=${this.draftNodeKind} @change=${(e) => this.draftNodeKind = e.target.value}><option value="door">Dør</option><option value="junction">Kryds/gang</option><option value="waypoint">Waypoint</option></select></label>
-            ${this.draftNodeKind === "door" ? h`
+            ${this.draftNodeKind === "door" ? u`
               <label>Home Assistant entity<input placeholder="binary_sensor.kokkendor" .value=${this.draftNodeEntity} @input=${(e) => this.draftNodeEntity = e.target.value}></label>
               <label>Åben state(s)<input placeholder="on" .value=${this.draftNodeOpenStates} @input=${(e) => this.draftNodeOpenStates = e.target.value}><small>Tom entity betyder at døren altid er passabel.</small></label>
             ` : f}
             <button class="secondary" @click=${this.cancelPlaceNode}>Annuller</button>
           </div>
           <div class="instruction">Tryk nu på plantegningen dér, hvor det fælles punkt skal ligge. Dørsensoren gemmes sammen med punktet.</div>
-        ` : h`
+        ` : u`
           <button class="secondary node-add" ?disabled=${this.drawing} @click=${this.beginPlaceNode}>+ Placér fælles punkt</button>
         `}
       </div>
@@ -7119,7 +7154,7 @@ let K = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = this.routes.some((i) => this.routeMatchesSelection(i));
-    return h`
+    return u`
       <section class="route-editor">
         <div class="heading">
           <div><span>Door Entity Binding</span><h3>Administrér ruter og fælles dørpunkter</h3></div>
@@ -7135,7 +7170,7 @@ let K = class extends B {
       this.fromRoom = i.target.value, this.drawing = !1, this.pending = [];
     }}>
               <option value="">Vælg rum</option>
-              ${this.rooms.map((i) => h`<option value=${i.id}>${i.name ?? i.id}</option>`)}
+              ${this.rooms.map((i) => u`<option value=${i.id}>${i.name ?? i.id}</option>`)}
             </select>
           </label>
           <label>Til rum
@@ -7143,16 +7178,16 @@ let K = class extends B {
       this.toRoom = i.target.value, this.drawing = !1, this.pending = [];
     }}>
               <option value="">Vælg rum</option>
-              ${this.rooms.map((i) => h`<option value=${i.id}>${i.name ?? i.id}</option>`)}
+              ${this.rooms.map((i) => u`<option value=${i.id}>${i.name ?? i.id}</option>`)}
             </select>
           </label>
         </div>
 
         <div class="instruction">
-          ${this.drawing ? h`Tryk på et <strong>fælles punkt</strong> for at genbruge det i ruten, eller tryk et andet sted på plantegningen for at lave et lokalt waypoint.` : this.placingNode ? h`Placér det nye fælles punkt direkte på plantegningen.` : h`Et dørpunkt kan nu selv kende sin Home Assistant-sensor. Automatiske graph-forbindelser gennem døren arver dens åbne/lukkede status.`}
+          ${this.drawing ? u`Tryk på et <strong>fælles punkt</strong> for at genbruge det i ruten, eller tryk et andet sted på plantegningen for at lave et lokalt waypoint.` : this.placingNode ? u`Placér det nye fælles punkt direkte på plantegningen.` : u`Et dørpunkt kan nu selv kende sin Home Assistant-sensor. Automatiske graph-forbindelser gennem døren arver dens åbne/lukkede status.`}
         </div>
 
-        ${e ? h`
+        ${e ? u`
           <div class=${this.drawing || this.placingNode ? "map-frame drawing" : "map-frame"}>
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" @click=${this.handleMapClick}>
               <image href=${e} x="0" y="0" width="1000" height="1000" preserveAspectRatio=${this.config.fit_mode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>
@@ -7161,14 +7196,14 @@ let K = class extends B {
               ${this.renderSharedNodes()}
             </svg>
           </div>
-        ` : h`<div class="empty">Vælg først en plantegning under Kort.</div>`}
+        ` : u`<div class="empty">Vælg først en plantegning under Kort.</div>`}
 
         <div class="buttons">
-          ${this.drawing ? h`
+          ${this.drawing ? u`
             <button class="secondary" ?disabled=${!this.pending.length} @click=${this.undo}>Fortryd waypoint</button>
             <button class="primary" @click=${this.save}>Gem rute</button>
             <button class="secondary" @click=${this.cancel}>Annuller</button>
-          ` : h`
+          ` : u`
             <button class="primary" ?disabled=${this.placingNode || !this.fromRoom || !this.toRoom || this.fromRoom === this.toRoom} @click=${this.startDrawing}>${t ? "Redigér valgt rute" : "Tegn ny rute"}</button>
             <button class="danger" ?disabled=${this.placingNode || !t} @click=${this.deleteRoute}>Slet valgt rute</button>
           `}
@@ -7177,67 +7212,67 @@ let K = class extends B {
     `;
   }
 };
-K.styles = j`
+K.styles = I`
     :host{display:block}.route-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading,.node-heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b,.node-heading>span{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.node-manager{display:grid;gap:9px;padding:12px;border:1px solid var(--divider-color);border-radius:12px}.node-heading>div,.node-copy{display:grid;gap:2px}.node-heading small,.node-copy small{color:var(--secondary-text-color);font-weight:500}.node-list{display:grid;gap:6px}.node-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;background:var(--secondary-background-color);border:1px solid transparent}.node-item.blocked{border-color:var(--error-color,#db4437)}.node-copy{flex:1}.node-actions,.node-edit-actions{display:flex;gap:6px;flex-wrap:wrap}.node-dot{width:13px;height:13px;border-radius:50%;background:var(--primary-color,#03a9f4)}.node-dot.junction{border-radius:3px}.node-dot.waypoint{background:var(--secondary-text-color)}.node-status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.node-status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.node-status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.node-draft,.node-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end;padding:10px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.node-draft label,.node-edit label{display:grid;gap:5px;font-size:.82rem}.node-draft label small,.node-edit label small{color:var(--secondary-text-color);font-size:.74rem}.node-draft input,.node-draft select,.node-edit input,.node-edit select{width:100%;box-sizing:border-box;padding:8px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.node-edit-actions{grid-column:1/-1}.node-add{justify-self:start}.route-list{display:grid;gap:7px}.route-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid transparent}.route-item.selected{border-color:var(--primary-color,#03a9f4);box-shadow:0 0 0 1px var(--primary-color,#03a9f4) inset}.route-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem}.route-copy{display:grid;gap:2px}.route-copy small{color:var(--secondary-text-color);font-weight:500}.route-empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1;cursor:default}.map-frame.drawing svg{cursor:crosshair}.network-route{stroke:var(--secondary-text-color);stroke-opacity:.36;stroke-width:4;stroke-dasharray:10 10;pointer-events:stroke;cursor:pointer}.network-route:hover{stroke:var(--primary-color,#03a9f4);stroke-opacity:.8;stroke-width:7}.network-number{font-size:22px;font-weight:800;fill:var(--secondary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:7;stroke-linejoin:round;pointer-events:none}.route-line{stroke:var(--primary-color,#03a9f4);stroke-width:6;stroke-dasharray:14 9}.endpoint{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.waypoint{fill:#fff;stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-waypoint{fill:var(--primary-color,#03a9f4);stroke:white}.shared-node circle{fill:var(--card-background-color);stroke:var(--primary-color,#03a9f4);stroke-width:5}.shared-node.blocked circle{stroke:var(--error-color,#db4437)}.shared-node.selectable{cursor:pointer}.shared-node.selectable:hover circle{fill:var(--primary-color,#03a9f4)}.shared-node text{font-size:20px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6;stroke-linejoin:round;pointer-events:none}.shared-node .usage{font-size:16px;stroke:none;fill:var(--primary-text-color)}text{font-size:24px;font-weight:700;fill:var(--primary-text-color)}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.mini{padding:6px 8px;font-size:.76rem}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.danger{background:var(--error-color,#db4437);color:white}@media(max-width:600px){.selectors,.node-draft,.node-edit{grid-template-columns:1fr}.node-edit-actions{grid-column:auto}.node-draft button{justify-self:start}.node-actions{flex-direction:column}}
   `;
-G([
+X([
   C({ attribute: !1 })
 ], K.prototype, "config", 2);
-G([
+X([
   C({ attribute: !1 })
 ], K.prototype, "hass", 2);
-G([
+X([
   v()
 ], K.prototype, "fromRoom", 2);
-G([
+X([
   v()
 ], K.prototype, "toRoom", 2);
-G([
+X([
   v()
 ], K.prototype, "drawing", 2);
-G([
+X([
   v()
 ], K.prototype, "pending", 2);
-G([
+X([
   v()
 ], K.prototype, "placingNode", 2);
-G([
+X([
   v()
 ], K.prototype, "draftNodeName", 2);
-G([
+X([
   v()
 ], K.prototype, "draftNodeKind", 2);
-G([
+X([
   v()
 ], K.prototype, "draftNodeEntity", 2);
-G([
+X([
   v()
 ], K.prototype, "draftNodeOpenStates", 2);
-G([
+X([
   v()
 ], K.prototype, "editingNodeId", 2);
-G([
+X([
   v()
 ], K.prototype, "editingNodeName", 2);
-G([
+X([
   v()
 ], K.prototype, "editingNodeKind", 2);
-G([
+X([
   v()
 ], K.prototype, "editingNodeEntity", 2);
-G([
+X([
   v()
 ], K.prototype, "editingNodeOpenStates", 2);
-K = G([
-  I("ha-explorer-route-editor")
+K = X([
+  D("ha-explorer-route-editor")
 ], K);
-var ys = Object.defineProperty, vs = Object.getOwnPropertyDescriptor, pe = (e, t, i, r) => {
+var ys = Object.defineProperty, vs = Object.getOwnPropertyDescriptor, he = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? vs(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && ys(t, i, o), o;
 };
 const Le = 1e3;
-let ne = class extends B {
+let se = class extends O {
   constructor() {
     super(...arguments), this.fromKey = "", this.toKey = "", this.conditionEntity = "", this.conditionStates = "on", this.editingEntity = "", this.editingStates = "on";
   }
@@ -7424,7 +7459,7 @@ let ne = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = this.endpointOptions(), i = this.edgeStatuses(), r = i.filter((n) => n.conditional).length, o = this.routeNodes.filter((n) => n.kind === "door" && n.state_binding).length;
-    return h`
+    return u`
       <section class="graph-editor">
         <div class="heading">
           <div><span>Smart / Conditional Routes</span><h3>Forbind rum, døre og gangpunkter</h3></div>
@@ -7439,13 +7474,13 @@ let ne = class extends B {
           <label>Fra
             <select .value=${this.fromKey} @change=${(n) => this.fromKey = n.target.value}>
               <option value="">Vælg rum eller punkt</option>
-              ${t.map((n) => h`<option value=${n.key}>${n.label}</option>`)}
+              ${t.map((n) => u`<option value=${n.key}>${n.label}</option>`)}
             </select>
           </label>
           <label>Til
             <select .value=${this.toKey} @change=${(n) => this.toKey = n.target.value}>
               <option value="">Vælg rum eller punkt</option>
-              ${t.map((n) => h`<option value=${n.key}>${n.label}</option>`)}
+              ${t.map((n) => u`<option value=${n.key}>${n.label}</option>`)}
             </select>
           </label>
         </div>
@@ -7473,32 +7508,32 @@ let ne = class extends B {
 
         <button class="primary add" ?disabled=${!this.canAdd()} @click=${this.addEdge}>+ Tilføj forbindelse</button>
 
-        ${this.graphEdges.length ? h`
+        ${this.graphEdges.length ? u`
           <div class="edge-list">
             ${this.graphEdges.map((n, s) => {
       const a = i[s] ?? this.edgeStatus(s), l = this.editingConditionIndex === s;
-      return h`
+      return u`
                 <div class=${a.active ? "edge-item" : "edge-item blocked"}>
                   <span class="edge-index">${s + 1}</span>
                   <span class="edge-copy">
                     <strong>${this.endpointLabel(n.from)}</strong>
                     <small>↔ ${this.endpointLabel(n.to)}</small>
                     <em class=${a.active ? "status open" : "status blocked"}>${this.statusLabel(s)}</em>
-                    ${a.conditionSource === "node" && a.entity ? h`<small>Arvet fra dørpunkt: ${a.entity} · åben: ${a.allowedStates.join(", ")}</small>` : f}
-                    ${n.condition ? h`<small>Ekstra route-condition: ${n.condition.entity} · tilladt: ${(n.condition.allowed_states?.length ? n.condition.allowed_states : ["on"]).join(", ")}</small>` : f}
+                    ${a.conditionSource === "node" && a.entity ? u`<small>Arvet fra dørpunkt: ${a.entity} · åben: ${a.allowedStates.join(", ")}</small>` : f}
+                    ${n.condition ? u`<small>Ekstra route-condition: ${n.condition.entity} · tilladt: ${(n.condition.allowed_states?.length ? n.condition.allowed_states : ["on"]).join(", ")}</small>` : f}
                   </span>
                   <div class="edge-actions">
                     <button class="secondary mini" @click=${() => this.beginEditCondition(s)}>Route-condition</button>
                     <button class="danger mini" @click=${() => this.deleteEdge(s)}>Slet</button>
                   </div>
                 </div>
-                ${l ? h`
+                ${l ? u`
                   <div class="condition-edit">
                     <label>Entity<input .value=${this.editingEntity} @input=${(c) => this.editingEntity = c.target.value}></label>
                     <label>Tilladte states<input .value=${this.editingStates} @input=${(c) => this.editingStates = c.target.value}></label>
                     <div class="condition-actions">
                       <button class="primary mini" @click=${() => this.saveCondition(s)}>Gem route-condition</button>
-                      ${n.condition ? h`<button class="secondary mini" @click=${() => this.removeCondition(s)}>Fjern route-condition</button>` : f}
+                      ${n.condition ? u`<button class="secondary mini" @click=${() => this.removeCondition(s)}>Fjern route-condition</button>` : f}
                       <button class="secondary mini" @click=${this.cancelEditCondition}>Annuller</button>
                     </div>
                   </div>
@@ -7506,9 +7541,9 @@ let ne = class extends B {
               `;
     })}
           </div>
-        ` : h`<div class="empty">Ingen graph-forbindelser endnu. Start typisk med at forbinde et rum til dets dørpunkt.</div>`}
+        ` : u`<div class="empty">Ingen graph-forbindelser endnu. Start typisk med at forbinde et rum til dets dørpunkt.</div>`}
 
-        ${e ? h`
+        ${e ? u`
           <div class="map-frame">
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
               <image href=${e} x="0" y="0" width="1000" height="1000" preserveAspectRatio=${this.config.fit_mode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>
@@ -7521,46 +7556,46 @@ let ne = class extends B {
     `;
   }
 };
-ne.styles = j`
+se.styles = I`
     :host{display:block}.graph-editor{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction,.empty{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors,.condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label,.condition-fields label,.condition-edit label{display:grid;gap:6px;font-size:.85rem}.selectors select,input{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.condition-draft,.condition-edit{display:grid;gap:10px;padding:12px;border:1px solid var(--divider-color);border-radius:10px;background:var(--secondary-background-color)}.condition-title{display:grid;gap:2px}.condition-title span,.condition-fields small{color:var(--secondary-text-color);font-size:.8rem}.condition-edit{grid-template-columns:1fr 1fr auto;align-items:end}.condition-actions,.edge-actions{display:flex;gap:6px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;cursor:pointer}button:disabled{opacity:.45;cursor:default}.primary{background:var(--primary-color,#03a9f4);color:white}.secondary{background:var(--secondary-background-color);color:var(--primary-text-color);border:1px solid var(--divider-color)}.add{justify-self:start}.danger{background:var(--error-color,#db4437);color:white}.mini{padding:7px 9px;font-size:.78rem}.edge-list{display:grid;gap:7px}.edge-item{display:flex;align-items:center;gap:10px;padding:9px;border-radius:10px;background:var(--secondary-background-color);border:1px solid transparent}.edge-item.blocked{border-color:var(--error-color,#db4437)}.edge-index{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--card-background-color);font-size:.75rem;flex:none}.edge-copy{display:grid;gap:2px;min-width:0;flex:1}.edge-copy small{color:var(--secondary-text-color)}.status{font-style:normal;font-size:.75rem;font-weight:800;width:max-content;padding:3px 7px;border-radius:999px}.status.open{background:rgba(76,175,80,.14);color:var(--success-color,#4caf50)}.status.blocked{background:rgba(219,68,55,.14);color:var(--error-color,#db4437)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-edge{stroke:var(--primary-color,#03a9f4);stroke-width:4;stroke-opacity:.72}.graph-edge.conditional{stroke-dasharray:9 7}.graph-edge.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.graph-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.graph-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.graph-node.blocked{stroke:var(--error-color,#db4437)}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;gap:6px;align-items:center}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--primary-color,#03a9f4)}.legend .line.conditional{border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:600px){.selectors,.condition-fields,.condition-edit{grid-template-columns:1fr}.edge-item{align-items:flex-start}.edge-actions{flex-direction:column}}
   `;
-pe([
+he([
   C({ attribute: !1 })
-], ne.prototype, "config", 2);
-pe([
+], se.prototype, "config", 2);
+he([
   C({ attribute: !1 })
-], ne.prototype, "hass", 2);
-pe([
+], se.prototype, "hass", 2);
+he([
   v()
-], ne.prototype, "fromKey", 2);
-pe([
+], se.prototype, "fromKey", 2);
+he([
   v()
-], ne.prototype, "toKey", 2);
-pe([
+], se.prototype, "toKey", 2);
+he([
   v()
-], ne.prototype, "conditionEntity", 2);
-pe([
+], se.prototype, "conditionEntity", 2);
+he([
   v()
-], ne.prototype, "conditionStates", 2);
-pe([
+], se.prototype, "conditionStates", 2);
+he([
   v()
-], ne.prototype, "editingConditionIndex", 2);
-pe([
+], se.prototype, "editingConditionIndex", 2);
+he([
   v()
-], ne.prototype, "editingEntity", 2);
-pe([
+], se.prototype, "editingEntity", 2);
+he([
   v()
-], ne.prototype, "editingStates", 2);
-ne = pe([
-  I("ha-explorer-route-graph-editor")
-], ne);
+], se.prototype, "editingStates", 2);
+se = he([
+  D("ha-explorer-route-graph-editor")
+], se);
 var xs = Object.defineProperty, ws = Object.getOwnPropertyDescriptor, ut = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? ws(t, i) : t, n = e.length - 1, s; n >= 0; n--)
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && xs(t, i, o), o;
 };
-const oe = 1e3;
-let Te = class extends B {
+const ne = 1e3;
+let Te = class extends O {
   constructor() {
     super(...arguments), this.fromRoom = "", this.toRoom = "";
   }
@@ -7642,10 +7677,10 @@ let Te = class extends B {
       ].filter(Boolean).join(" ");
       return R`
         <line
-          x1=${r[0] * oe}
-          y1=${r[1] * oe}
-          x2=${o[0] * oe}
-          y2=${o[1] * oe}
+          x1=${r[0] * ne}
+          y1=${r[1] * ne}
+          x2=${o[0] * ne}
+          y2=${o[1] * ne}
           class=${s}
           vector-effect="non-scaling-stroke"
         ></line>
@@ -7654,7 +7689,7 @@ let Te = class extends B {
   }
   renderPreviewOverlay(e) {
     if (!e || e.hops.length < 2) return f;
-    const t = e.hops.map((i) => `${i.point[0] * oe},${i.point[1] * oe}`).join(" ");
+    const t = e.hops.map((i) => `${i.point[0] * ne},${i.point[1] * ne}`).join(" ");
     return R`
       <polyline
         points=${t}
@@ -7663,7 +7698,7 @@ let Te = class extends B {
         vector-effect="non-scaling-stroke"
       ></polyline>
       ${e.hops.map((i, r) => R`
-        <g transform=${`translate(${i.point[0] * oe} ${i.point[1] * oe})`}>
+        <g transform=${`translate(${i.point[0] * ne} ${i.point[1] * ne})`}>
           <circle
             class=${i.kind === "room" ? "preview-room" : i.kind === "node" ? "preview-node" : "preview-point"}
             r=${i.kind === "room" ? "14" : "11"}
@@ -7681,7 +7716,7 @@ let Te = class extends B {
     ), t = e.disconnectedRoomIds.map((r) => {
       const o = Ae(this.config, r);
       return o ? R`
-        <g transform=${`translate(${o[0] * oe} ${o[1] * oe})`}>
+        <g transform=${`translate(${o[0] * ne} ${o[1] * ne})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
         </g>
@@ -7689,7 +7724,7 @@ let Te = class extends B {
     }), i = e.disconnectedNodeIds.map((r) => {
       const o = this.routeNodes.find((n) => n.id === r);
       return o ? R`
-        <g transform=${`translate(${o.point[0] * oe} ${o.point[1] * oe})`}>
+        <g transform=${`translate(${o.point[0] * ne} ${o.point[1] * ne})`}>
           <circle class="disconnected" r="20"></circle>
           <text class="warning-mark" text-anchor="middle" dominant-baseline="middle">!</text>
         </g>
@@ -7698,13 +7733,13 @@ let Te = class extends B {
     return R`${t}${i}`;
   }
   renderBlockedEdges(e) {
-    return e.length ? h`
+    return e.length ? u`
       <div class="live-summary blocked">
         <strong>${e.length} forbindelse${e.length === 1 ? "" : "r"} blokeret lige nu</strong>
         <span>De bliver automatisk udeladt fra shortest-path beregningen.</span>
       </div>
       <div class="blocked-list">
-        ${e.map((t) => h`
+        ${e.map((t) => u`
           <div class="blocked-item">
             <strong>${this.endpointLabel(t.edge.from)} ↔ ${this.endpointLabel(t.edge.to)}</strong>
             <span>${t.conditionSource === "node" ? `Arvet fra dørpunkt · ${t.entity ?? "Ingen entity"}` : t.entity ?? "Ingen entity"}</span>
@@ -7712,7 +7747,7 @@ let Te = class extends B {
           </div>
         `)}
       </div>
-    ` : h`<div class="live-summary ok"><strong>Alle live-styrede forbindelser er aktive</strong><span>Ingen dørpunkter eller route-conditions blokerer graph'et lige nu.</span></div>`;
+    ` : u`<div class="live-summary ok"><strong>Alle live-styrede forbindelser er aktive</strong><span>Ingen dørpunkter eller route-conditions blokerer graph'et lige nu.</span></div>`;
   }
   renderDiagnostics() {
     if (!this.config) return f;
@@ -7720,7 +7755,7 @@ let Te = class extends B {
       this.config,
       (r) => this.entityState(r)
     ), t = this.graphEdges.length > 0, i = e.invalidEdges + e.duplicateEdges + e.disconnectedRoomIds.length + e.disconnectedNodeIds.length + e.brokenRouteNodeReferences.length + e.unresolvedConditionEntities.length + Math.max(0, e.components - 1);
-    return t ? h`
+    return t ? u`
       ${this.renderBlockedEdges(e.blockedEdges)}
 
       <div class=${i ? "diagnostic-summary warning" : "diagnostic-summary ok"}>
@@ -7739,28 +7774,28 @@ let Te = class extends B {
         <div><strong>${e.disconnectedNodeIds.length}</strong><span>frakoblede punkter</span></div>
       </div>
 
-      ${e.components > 1 ? h`
+      ${e.components > 1 ? u`
         <div class="issue"><strong>Graph er opdelt</strong><span>${e.components} separate netværk kan ikke finde vej til hinanden strukturelt.</span></div>
       ` : f}
-      ${e.disconnectedRoomIds.length ? h`
+      ${e.disconnectedRoomIds.length ? u`
         <div class="issue"><strong>Frakoblede rum</strong><span>${e.disconnectedRoomIds.map((r) => this.roomName(r)).join(", ")}</span></div>
       ` : f}
-      ${e.disconnectedNodeIds.length ? h`
+      ${e.disconnectedNodeIds.length ? u`
         <div class="issue"><strong>Frakoblede punkter</strong><span>${e.disconnectedNodeIds.map((r) => this.routeNodeName(r)).join(", ")}</span></div>
       ` : f}
-      ${e.invalidEdges ? h`
+      ${e.invalidEdges ? u`
         <div class="issue"><strong>Ugyldige forbindelser</strong><span>${e.invalidEdges} forbindelse${e.invalidEdges === 1 ? "" : "r"} peger på et manglende punkt, manglende rum eller sig selv.</span></div>
       ` : f}
-      ${e.duplicateEdges ? h`
+      ${e.duplicateEdges ? u`
         <div class="issue"><strong>Duplikerede forbindelser</strong><span>${e.duplicateEdges} ekstra forbindelse${e.duplicateEdges === 1 ? "" : "r"} forbinder de samme endpoints.</span></div>
       ` : f}
-      ${e.unresolvedConditionEntities.length ? h`
+      ${e.unresolvedConditionEntities.length ? u`
         <div class="issue"><strong>Live bindinger med manglende entity</strong><span>${e.unresolvedConditionEntities.join(", ")}</span></div>
       ` : f}
-      ${e.brokenRouteNodeReferences.length ? h`
+      ${e.brokenRouteNodeReferences.length ? u`
         <div class="issue"><strong>Manuelle ruter med manglende shared node</strong><span>${e.brokenRouteNodeReferences.map((r) => `${this.roomName(r.from)} ↔ ${this.roomName(r.to)}: ${r.nodeId}`).join(" · ")}</span></div>
       ` : f}
-    ` : h`
+    ` : u`
         <div class="diagnostic-summary neutral">
           <strong>Graph endnu ikke opbygget</strong>
           <span>Der er ingen graph-forbindelser at diagnosticere endnu.</span>
@@ -7770,7 +7805,7 @@ let Te = class extends B {
   render() {
     if (!this.config) return f;
     const e = this.config.image ?? this.config.background ?? "", t = this.selectedResolution();
-    return h`
+    return u`
       <section class="diagnostics">
         <div class="heading">
           <div><span>Route Preview & Diagnostics</span><h3>Se præcis hvilken vej Explorer vælger</h3></div>
@@ -7785,20 +7820,20 @@ let Te = class extends B {
           <label>Fra rum
             <select .value=${this.fromRoom} @change=${(i) => this.fromRoom = i.target.value}>
               <option value="">Vælg rum</option>
-              ${this.rooms.map((i) => h`<option value=${i.id}>${i.name ?? i.id}</option>`)}
+              ${this.rooms.map((i) => u`<option value=${i.id}>${i.name ?? i.id}</option>`)}
             </select>
           </label>
           <label>Til rum
             <select .value=${this.toRoom} @change=${(i) => this.toRoom = i.target.value}>
               <option value="">Vælg rum</option>
-              ${this.rooms.map((i) => h`<option value=${i.id}>${i.name ?? i.id}</option>`)}
+              ${this.rooms.map((i) => u`<option value=${i.id}>${i.name ?? i.id}</option>`)}
             </select>
           </label>
         </div>
 
-        ${this.fromRoom && this.toRoom && this.fromRoom === this.toRoom ? h`
+        ${this.fromRoom && this.toRoom && this.fromRoom === this.toRoom ? u`
           <div class="diagnostic-summary neutral"><strong>Vælg to forskellige rum</strong><span>Start og destination kan ikke være det samme rum.</span></div>
-        ` : t ? h`
+        ` : t ? u`
           <div class=${`route-result ${t.source}`}>
             <div class="route-result-top">
               <strong>${this.sourceLabel(t)}</strong>
@@ -7806,14 +7841,14 @@ let Te = class extends B {
             </div>
             <p>${this.sourceDescription(t)}</p>
             <div class="hop-list">
-              ${t.hops.map((i, r) => h`
-                <span>${r ? h`<i>→</i>` : f}<b>${i.label}</b></span>
+              ${t.hops.map((i, r) => u`
+                <span>${r ? u`<i>→</i>` : f}<b>${i.label}</b></span>
               `)}
             </div>
           </div>
         ` : f}
 
-        ${e ? h`
+        ${e ? u`
           <div class="map-frame">
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
               <image href=${e} x="0" y="0" width="1000" height="1000" preserveAspectRatio=${this.config.fit_mode === "cover" ? "xMidYMid slice" : "xMidYMid meet"}></image>
@@ -7831,7 +7866,7 @@ let Te = class extends B {
     `;
   }
 };
-Te.styles = j`
+Te.styles = I`
     :host{display:block}.diagnostics{margin-top:18px;display:grid;gap:14px;padding:16px;border:1px solid var(--divider-color);border-radius:14px;background:var(--ha-card-background,var(--card-background-color))}.heading{display:flex;justify-content:space-between;gap:12px}.heading span{display:block;color:var(--secondary-text-color);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.heading h3{margin:3px 0 0;font-size:1.08rem}.heading b{padding:5px 9px;border-radius:999px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.75rem;height:max-content}.instruction{padding:10px 12px;border-radius:10px;background:var(--secondary-background-color);color:var(--secondary-text-color);font-size:.9rem;line-height:1.45}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{display:grid;gap:6px;font-size:.85rem}.selectors select{width:100%;padding:9px 10px;border:1px solid var(--divider-color);border-radius:8px;background:var(--card-background-color);color:var(--primary-text-color)}.route-result{display:grid;gap:8px;padding:12px;border:1px solid var(--divider-color);border-radius:11px}.route-result.manual{border-left:5px solid var(--warning-color,#ff9800)}.route-result.graph{border-left:5px solid var(--primary-color,#03a9f4)}.route-result.fallback{border-left:5px solid var(--secondary-text-color)}.route-result-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.route-result-top span{color:var(--secondary-text-color);font-size:.82rem}.route-result p{margin:0;color:var(--secondary-text-color);font-size:.88rem;line-height:1.4}.hop-list{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}.hop-list span{display:flex;gap:6px;align-items:center}.hop-list b{padding:4px 7px;border-radius:999px;background:var(--secondary-background-color)}.hop-list i{font-style:normal;color:var(--secondary-text-color)}.map-frame{overflow:hidden;border:1px solid var(--divider-color);border-radius:12px;background:var(--secondary-background-color)}svg{display:block;width:100%;aspect-ratio:1/1}.graph-context{stroke:var(--secondary-text-color);stroke-width:3;stroke-opacity:.28}.graph-context.conditional{stroke-dasharray:8 8;stroke:var(--primary-color,#03a9f4);stroke-opacity:.5}.graph-context.blocked{stroke:var(--error-color,#db4437);stroke-opacity:.8;stroke-dasharray:4 8}.preview-line{stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.preview-line.manual{stroke:var(--warning-color,#ff9800)}.preview-line.graph{stroke:var(--primary-color,#03a9f4)}.preview-line.fallback{stroke:var(--secondary-text-color);stroke-dasharray:16 10}.preview-room{fill:var(--primary-color,#03a9f4);stroke:white;stroke-width:4}.preview-node{fill:white;stroke:var(--primary-color,#03a9f4);stroke-width:5}.preview-point{fill:white;stroke:var(--warning-color,#ff9800);stroke-width:5}.preview-number{font-size:22px;font-weight:800;fill:var(--primary-text-color);paint-order:stroke;stroke:var(--card-background-color);stroke-width:6}.disconnected{fill:var(--error-color,#db4437);fill-opacity:.18;stroke:var(--error-color,#db4437);stroke-width:4;stroke-dasharray:5 4}.warning-mark{font-size:24px;font-weight:900;fill:var(--error-color,#db4437)}.diagnostic-heading{display:grid;gap:2px}.diagnostic-heading span{color:var(--secondary-text-color);font-size:.8rem}.diagnostic-summary,.live-summary{display:grid;gap:3px;padding:11px 12px;border-radius:10px;border:1px solid var(--divider-color)}.diagnostic-summary span,.live-summary span{color:var(--secondary-text-color);font-size:.84rem}.diagnostic-summary.ok,.live-summary.ok{border-left:5px solid var(--success-color,#4caf50)}.diagnostic-summary.warning{border-left:5px solid var(--warning-color,#ff9800)}.diagnostic-summary.neutral{border-left:5px solid var(--secondary-text-color)}.live-summary.blocked{border-left:5px solid var(--error-color,#db4437)}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric-grid div{display:grid;gap:2px;padding:10px;border-radius:9px;background:var(--secondary-background-color)}.metric-grid strong{font-size:1.15rem}.metric-grid span{color:var(--secondary-text-color);font-size:.75rem}.issue{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(255,152,0,.1);border:1px solid rgba(255,152,0,.3)}.issue span{color:var(--secondary-text-color);font-size:.82rem;line-height:1.4}.blocked-list{display:grid;gap:7px}.blocked-item{display:grid;gap:2px;padding:10px 12px;border-radius:9px;background:rgba(219,68,55,.08);border:1px solid rgba(219,68,55,.25)}.blocked-item span,.blocked-item small{color:var(--secondary-text-color);font-size:.8rem}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--secondary-text-color);font-size:.78rem}.legend span{display:flex;align-items:center;gap:6px}.legend .line{display:block;width:28px;height:0;border-top:3px solid var(--secondary-text-color)}.legend .line.conditional{border-top-color:var(--primary-color,#03a9f4);border-top-style:dashed}.legend .line.blocked{border-top-color:var(--error-color,#db4437);border-top-style:dashed}@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.selectors{grid-template-columns:1fr}.route-result-top{align-items:flex-start;flex-direction:column}}
   `;
 ut([
@@ -7847,7 +7882,7 @@ ut([
   v()
 ], Te.prototype, "toRoom", 2);
 Te = ut([
-  I("ha-explorer-route-diagnostics")
+  D("ha-explorer-route-diagnostics")
 ], Te);
 var ks = Object.defineProperty, As = Object.getOwnPropertyDescriptor, xi = (e, t, i, r) => {
   for (var o = r > 1 ? void 0 : r ? As(t, i) : t, n = e.length - 1, s; n >= 0; n--)
@@ -7855,7 +7890,7 @@ var ks = Object.defineProperty, As = Object.getOwnPropertyDescriptor, xi = (e, t
   return r && o && ks(t, i, o), o;
 };
 const Ss = { basic: 0, rooms: 1, presences: 2 };
-let oi = class extends H {
+let oi = class extends B {
   updated(e) {
     super.updated(e), e.has("config") && this.config && this.setConfig(this.config);
   }
@@ -7867,9 +7902,9 @@ xi([
   C({ attribute: !1 })
 ], oi.prototype, "config", 2);
 oi = xi([
-  I("ha-explorer-room-tools")
+  D("ha-explorer-room-tools")
 ], oi);
-let ni = class extends de {
+let ni = class extends pe {
   constructor() {
     super(...arguments), this.handleNativeControlChange = (e) => {
       e.stopPropagation(), queueMicrotask(() => {
@@ -7920,29 +7955,29 @@ let ni = class extends de {
     r && (r.classList.add("ux-focus"), r.scrollIntoView({ behavior: "smooth", block: "start" }), window.setTimeout(() => r?.classList.remove("ux-focus"), 1300));
   }
   renderAdvancedSection(e, t, i, r) {
-    return h`<details class="advanced-section" data-editor-section=${e}><summary><span>${t}</span><span class="advanced-hint">${i}</span></summary><div class="advanced-content">${r}</div></details>`;
+    return u`<details class="advanced-section" data-editor-section=${e}><summary><span>${t}</span><span class="advanced-hint">${i}</span></summary><div class="advanced-content">${r}</div></details>`;
   }
   render() {
     const e = this.currentConfig;
-    return h`
+    return u`
     <details class="setup-section"><summary><span>Opsætningsoversigt</span><span class="advanced-hint">Status & genveje</span></summary><div class="setup-content"><ha-explorer-setup-overview .hass=${this.hass} .config=${e} @explorer-editor-navigate=${this.handleEditorNavigate}></ha-explorer-setup-overview></div></details>
     ${super.render()}
     <div class="advanced-heading"><div><span>Avancerede værktøjer</span><strong>Åbn kun det du arbejder med</strong></div><small>Routing, udseende, åbninger, zoner og live-effekter</small></div>
     <div class="advanced-tools">
-      ${this.renderAdvancedSection("appearance", "Appearance", "Classic / Enchanted Antique", h`<ha-explorer-theme-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-theme-editor>`)}
-      ${this.renderAdvancedSection("room-tools", "Visuel rum-editor", "Tegn rum og presence-anchors", h`<ha-explorer-room-tools .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-tools>`)}
-      ${this.renderAdvancedSection("presences", "Multi-Person & Identity", "Navne, profiler og separate mmWave-targets", h`<ha-explorer-identity-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-identity-editor>`)}
-      ${this.renderAdvancedSection("presences", "Visuel profil", "Farver, ikoner og synlighed", h`<ha-explorer-presence-polish-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-presence-polish-editor>`)}
-      ${this.renderAdvancedSection("presences", "Movement History 2.0", "1–5 min. historik og udtoning", h`<ha-explorer-movement-history-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-movement-history-editor>`)}
-      ${this.renderAdvancedSection("presences", "Pet & Robot Trails 2.0", "Poter, ruter og retning", h`<ha-explorer-pet-robot-trails-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-pet-robot-trails-editor>`)}
-      ${this.renderAdvancedSection("presences", "Shelly Pet Detection", "Kanin via Presence Gen4", h`<ha-explorer-shelly-pet-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-shelly-pet-editor>`)}
-      ${this.renderAdvancedSection("openings", "Dynamic Doors & Windows", "Placér døre/vinduer, hængsel, sving og entity", h`<ha-explorer-openings-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-openings-editor>`)}
-      ${this.renderAdvancedSection("zones", "Zones / Dynamic Areas", "Alarm, rengøring og dynamiske områder", h`<ha-explorer-zones-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-zones-editor>`)}
-      ${this.renderAdvancedSection("room-reactions", "Living Entity Points", "Lamper, TV, sensorer og temperatur", h`<ha-explorer-room-reactions-editor-clean .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-reactions-editor-clean>`)}
-      ${this.renderAdvancedSection("room-actions", "Rumscener og hurtighandlinger", "Tænd/sluk alt, scenes og scripts", h`<ha-explorer-room-actions-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-actions-editor>`)}
-      ${this.renderAdvancedSection("routes", "Route Network", "Manuelle routes og shared nodes", h`<ha-explorer-route-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-route-editor>`)}
-      ${this.renderAdvancedSection("route-graph", "Automatic Route Graph", "Graph edges, døre og live conditions", h`<ha-explorer-route-graph-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-route-graph-editor>`)}
-      ${this.renderAdvancedSection("diagnostics", "Route Preview & Diagnostics", "Kontrollér graph og resolved routes", h`<ha-explorer-route-diagnostics .hass=${this.hass} .config=${e}></ha-explorer-route-diagnostics>`)}
+      ${this.renderAdvancedSection("appearance", "Appearance", "Classic / Enchanted Antique", u`<ha-explorer-theme-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-theme-editor>`)}
+      ${this.renderAdvancedSection("room-tools", "Visuel rum-editor", "Tegn rum og presence-anchors", u`<ha-explorer-room-tools .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-tools>`)}
+      ${this.renderAdvancedSection("presences", "Multi-Person & Identity", "Navne, profiler og separate mmWave-targets", u`<ha-explorer-identity-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-identity-editor>`)}
+      ${this.renderAdvancedSection("presences", "Visuel profil", "Farver, ikoner og synlighed", u`<ha-explorer-presence-polish-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-presence-polish-editor>`)}
+      ${this.renderAdvancedSection("presences", "Movement History 2.0", "1–5 min. historik og udtoning", u`<ha-explorer-movement-history-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-movement-history-editor>`)}
+      ${this.renderAdvancedSection("presences", "Pet & Robot Trails 2.0", "Poter, ruter og retning", u`<ha-explorer-pet-robot-trails-editor .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-pet-robot-trails-editor>`)}
+      ${this.renderAdvancedSection("presences", "Shelly Pet Detection", "Kanin via Presence Gen4", u`<ha-explorer-shelly-pet-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-shelly-pet-editor>`)}
+      ${this.renderAdvancedSection("openings", "Dynamic Doors & Windows", "Placér døre/vinduer, hængsel, sving og entity", u`<ha-explorer-openings-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-openings-editor>`)}
+      ${this.renderAdvancedSection("zones", "Zones / Dynamic Areas", "Alarm, rengøring og dynamiske områder", u`<ha-explorer-zones-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-zones-editor>`)}
+      ${this.renderAdvancedSection("room-reactions", "Living Entity Points", "Lamper, TV, sensorer og temperatur", u`<ha-explorer-room-reactions-editor-clean .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-reactions-editor-clean>`)}
+      ${this.renderAdvancedSection("room-actions", "Rumscener og hurtighandlinger", "Tænd/sluk alt, scenes og scripts", u`<ha-explorer-room-actions-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-room-actions-editor>`)}
+      ${this.renderAdvancedSection("routes", "Route Network", "Manuelle routes og shared nodes", u`<ha-explorer-route-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-route-editor>`)}
+      ${this.renderAdvancedSection("route-graph", "Automatic Route Graph", "Graph edges, døre og live conditions", u`<ha-explorer-route-graph-editor .hass=${this.hass} .config=${e} @config-changed=${this.handleToolConfigChanged}></ha-explorer-route-graph-editor>`)}
+      ${this.renderAdvancedSection("diagnostics", "Route Preview & Diagnostics", "Kontrollér graph og resolved routes", u`<ha-explorer-route-diagnostics .hass=${this.hass} .config=${e}></ha-explorer-route-diagnostics>`)}
     </div>`;
   }
   dispatchEvent(e) {
@@ -7951,9 +7986,9 @@ let ni = class extends de {
     return t ? this.emitHomeAssistantConfig(t) : super.dispatchEvent(e);
   }
 };
-ni.styles = j`${de.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
+ni.styles = I`${pe.styles}:host{overflow-anchor:none}.setup-section,.advanced-section{scroll-margin-top:16px;border:1px solid var(--divider-color);border-radius:12px;overflow:hidden;background:var(--card-background-color);transition:border-color 180ms ease,box-shadow 180ms ease}.setup-section{margin-bottom:12px}.setup-section>summary,.advanced-section>summary{box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;padding:12px 14px;cursor:pointer;font-weight:700}.setup-section>summary::-webkit-details-marker,.advanced-section>summary::-webkit-details-marker{display:none}.setup-section>summary::after,.advanced-section>summary::after{content:"⌄";margin-left:4px;color:var(--secondary-text-color);transition:transform 160ms ease}.setup-section[open]>summary::after,.advanced-section[open]>summary::after{transform:rotate(180deg)}.setup-content{padding:0 10px 10px;overflow-anchor:none}.setup-content>*{margin-top:0}.item-card:not(.item-open)>:not(.item-heading){display:none!important}.item-heading{cursor:pointer;user-select:none}.item-heading::after{content:"⌄";flex:none;color:var(--secondary-text-color);transition:transform 160ms ease}.item-card.item-open .item-heading::after{transform:rotate(180deg)}.advanced-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:16px 2px 8px;color:var(--secondary-text-color)}.advanced-heading>div{display:grid;gap:2px}.advanced-heading span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.advanced-heading strong{color:var(--primary-text-color);font-size:.92rem}.advanced-heading small{font-size:.75rem}.advanced-tools{display:grid;gap:9px;padding-bottom:8px}.advanced-hint{margin-left:auto;color:var(--secondary-text-color);font-size:.75rem;font-weight:500;text-align:right}.advanced-content{padding:0 10px 10px;overflow-anchor:none}.advanced-content>*{margin-top:0}.ux-focus{border-color:var(--primary-color,#03a9f4)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--primary-color,#03a9f4) 18%,transparent)}@media(max-width:600px){.advanced-heading{align-items:flex-start;flex-direction:column}.setup-section>summary,.advanced-section>summary{align-items:center;min-height:74px}.advanced-section>summary>span:first-child{flex:1;min-width:0}.advanced-hint{flex:0 0 48%;max-width:48%}}`;
 ni = xi([
-  I("ha-explorer-ha-editor")
+  D("ha-explorer-ha-editor")
 ], ni);
 function or(e) {
   return Math.min(1, Math.max(0, e));
@@ -7966,8 +8001,8 @@ function ti(e, t) {
   let i = !1;
   const [r, o] = e;
   for (let n = 0, s = t.length - 1; n < t.length; s = n++) {
-    const [a, l] = t[n], [c, p] = t[s];
-    l > o != p > o && r < (c - a) * (o - l) / (p - l || Number.EPSILON) + a && (i = !i);
+    const [a, l] = t[n], [c, d] = t[s];
+    l > o != d > o && r < (c - a) * (o - l) / (d - l || Number.EPSILON) + a && (i = !i);
   }
   return i;
 }
@@ -8051,15 +8086,15 @@ function zs(e, t) {
   return (!c || c.targetId !== s) && (c = { targetId: s, low: 0, high: 0, confirmed: !1 }, si.set(e.id, c)), c.lastSample === l ? { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed } : (c.lastSample = l, o <= r.maxHeight ? (c.low += 1, c.high = 0, c.low >= r.confirmationUpdates && (c.confirmed = !0)) : o >= r.releaseHeight ? (c.high += 1, c.low = 0, c.high >= r.releaseUpdates && (c.confirmed = !1)) : (c.low = 0, c.high = 0), { ...e, type: "pet", visible: e.visible !== !1 && c.confirmed });
 }
 const Ts = ["unknown", "unavailable", "not_detected"], Ds = /* @__PURE__ */ new Set(["", "unknown", "unavailable", "none", "null"]);
-function te(e, t) {
+function ie(e, t) {
   return e && t ? e.attributes[t] : void 0;
 }
-function ge(e) {
+function me(e) {
   const t = typeof e == "number" ? e : Number(e);
   return Number.isFinite(t) ? t : void 0;
 }
 function we(e, t) {
-  const i = ge(e);
+  const i = me(e);
   return i === void 0 ? t : Math.min(1, Math.max(0, i));
 }
 function Is(e, t) {
@@ -8083,10 +8118,10 @@ function sr(e) {
 function js(e, t, i) {
   if (e.room_entity) {
     const r = i.states[e.room_entity];
-    return r ? sr(e.room_attribute ? te(r, e.room_attribute) : r.state) : void 0;
+    return r ? sr(e.room_attribute ? ie(r, e.room_attribute) : r.state) : void 0;
   }
   if (t)
-    return sr(te(t, e.room_attribute ?? "explorer_room"));
+    return sr(ie(t, e.room_attribute ?? "explorer_room"));
 }
 function qs(e) {
   if (!e.points.length) return;
@@ -8100,16 +8135,16 @@ function ar(e, t, i, r, o, n) {
 function lr(e, t, i, r, o, n, s) {
   const a = i.sensor_x * (r.sensor_y - o.sensor_y) + r.sensor_x * (o.sensor_y - i.sensor_y) + o.sensor_x * (i.sensor_y - r.sensor_y);
   if (Math.abs(a) < 1e-6) return s;
-  const l = i[n], c = r[n], p = o[n], d = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + p * (i.sensor_y - r.sensor_y)) / a, u = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + p * (r.sensor_x - i.sensor_x)) / a, g = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + p * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
-  return d * e + u * t + g;
+  const l = i[n], c = r[n], d = o[n], p = (l * (r.sensor_y - o.sensor_y) + c * (o.sensor_y - i.sensor_y) + d * (i.sensor_y - r.sensor_y)) / a, h = (l * (o.sensor_x - r.sensor_x) + c * (i.sensor_x - o.sensor_x) + d * (r.sensor_x - i.sensor_x)) / a, m = (l * (r.sensor_x * o.sensor_y - o.sensor_x * r.sensor_y) + c * (o.sensor_x * i.sensor_y - i.sensor_x * o.sensor_y) + d * (i.sensor_x * r.sensor_y - r.sensor_x * i.sensor_y)) / a;
+  return p * e + h * t + m;
 }
 function Ls(e, t, i) {
-  const r = e.physical_meters, o = ge(r?.width), n = ge(r?.height), s = qs(e);
+  const r = e.physical_meters, o = me(r?.width), n = me(r?.height), s = qs(e);
   if (!o || !n || o <= 0 || n <= 0 || !s) return {};
   const a = r?.flip_x ? o - t : t, l = r?.flip_y ? n - i : i;
-  let c = Math.min(1, Math.max(0, a / o)), p = Math.min(1, Math.max(0, l / n));
-  const d = r?.position_calibration;
-  return d?.c ? (c = lr(a, l, d.a, d.b, d.c, "room_x", c), p = lr(a, l, d.a, d.b, d.c, "room_y", p)) : d && (c = ar(a, d.a.sensor_x, d.b.sensor_x, d.a.room_x, d.b.room_x, c), p = ar(l, d.a.sensor_y, d.b.sensor_y, d.a.room_y, d.b.room_y, p)), c = Math.min(1, Math.max(0, c)), p = Math.min(1, Math.max(0, p)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + p * (s.maxY - s.minY) };
+  let c = Math.min(1, Math.max(0, a / o)), d = Math.min(1, Math.max(0, l / n));
+  const p = r?.position_calibration;
+  return p?.c ? (c = lr(a, l, p.a, p.b, p.c, "room_x", c), d = lr(a, l, p.a, p.b, p.c, "room_y", d)) : p && (c = ar(a, p.a.sensor_x, p.b.sensor_x, p.a.room_x, p.b.room_x, c), d = ar(l, p.a.sensor_y, p.b.sensor_y, p.a.room_y, p.b.room_y, d)), c = Math.min(1, Math.max(0, c)), d = Math.min(1, Math.max(0, d)), { x: s.minX + c * (s.maxX - s.minX), y: s.minY + d * (s.maxY - s.minY) };
 }
 function vt(e, t, i) {
   const r = Mr(t, i ?? e.room_id);
@@ -8124,14 +8159,14 @@ function Os(e, t, i, r, o, n) {
   if (!i) return { x: we(e.x), y: we(e.y) };
   const s = t.coordinate_space === "meters" || t.coordinate_space === "room_meters", a = t.x_attribute ?? (s ? "map_x" : "explorer_x"), l = t.y_attribute ?? (s ? "map_y" : "explorer_y");
   if (t.coordinate_space === "room_meters") {
-    const c = ge(te(i, a)), p = ge(te(i, l)), d = Mr(r, o ?? e.room_id);
-    return c === void 0 || p === void 0 || !d ? {} : { ...Ls(d, c, p), roomId: d.id };
+    const c = me(ie(i, a)), d = me(ie(i, l)), p = Mr(r, o ?? e.room_id);
+    return c === void 0 || d === void 0 || !p ? {} : { ...Ls(p, c, d), roomId: p.id };
   }
   if (t.coordinate_space === "meters") {
-    const c = ge(te(i, a)), p = ge(te(i, l)), d = ge(n?.width), u = ge(n?.height);
-    return c === void 0 || p === void 0 || !d || !u || d <= 0 || u <= 0 ? {} : { x: we(c / d), y: we(p / u) };
+    const c = me(ie(i, a)), d = me(ie(i, l)), p = me(n?.width), h = me(n?.height);
+    return c === void 0 || d === void 0 || !p || !h || p <= 0 || h <= 0 ? {} : { x: we(c / p), y: we(d / h) };
   }
-  return { x: we(te(i, a), e.x), y: we(te(i, l), e.y) };
+  return { x: we(ie(i, a), e.x), y: we(ie(i, l), e.y) };
 }
 function Bs(e, t, i = [], r) {
   const o = e.entity_binding;
@@ -8139,7 +8174,7 @@ function Bs(e, t, i = [], r) {
   const n = o.entity ? t.states[o.entity] : void 0, s = o.position_entity ?? o.entity, a = s ? t.states[s] : void 0;
   if (o.entity && !n) return { ...vt(e, i), visible: !1 };
   if (o.position_entity && !a) return { ...vt(e, i), visible: !1 };
-  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, p = a && a !== n ? l.includes(a.state) : !1, d = te(n, o.visible_attribute), u = c || p ? !1 : Is(d, e.visible ?? !0), g = js(o, n, t) ?? e.room_id, b = Os(e, o, a, i, g, r), m = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(te(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(te(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(te(n, o.icon_attribute)) : void 0), color: e.color ?? yt(te(n, o.color_attribute ?? "explorer_color")), visible: u }, y = o.coordinate_space === "room_meters" ? m.x === void 0 || m.y === void 0 ? { ...m, visible: !1 } : m : vt(m, i, g);
+  const l = o.hidden_states ?? Ts, c = n ? l.includes(n.state) : !1, d = a && a !== n ? l.includes(a.state) : !1, p = ie(n, o.visible_attribute), h = c || d ? !1 : Is(p, e.visible ?? !0), m = js(o, n, t) ?? e.room_id, b = Os(e, o, a, i, m, r), g = { ...e, x: b.x, y: b.y, room_id: b.roomId ?? e.room_id, name: e.name ?? yt(ie(n, o.name_attribute ?? "friendly_name")), avatar: e.avatar ?? yt(ie(n, o.avatar_attribute ?? "entity_picture")), icon: e.icon ?? (o.icon_attribute ? yt(ie(n, o.icon_attribute)) : void 0), color: e.color ?? yt(ie(n, o.color_attribute ?? "explorer_color")), visible: h }, y = o.coordinate_space === "room_meters" ? g.x === void 0 || g.y === void 0 ? { ...g, visible: !1 } : g : vt(g, i, m);
   return zs(y, a);
 }
 function Hs(e, t, i = [], r) {
@@ -8181,33 +8216,33 @@ function Us(e, t = Date.now()) {
   const s = [];
   for (const a of n.values()) {
     if (a.length < 2) {
-      for (const g of a)
-        s.push(g), cr(g, g, t);
+      for (const m of a)
+        s.push(m), cr(m, m, t);
       continue;
     }
-    const l = [...a], c = [...a].sort((g, b) => He(g).localeCompare(He(b))), p = /* @__PURE__ */ new Map(), d = /* @__PURE__ */ new Set(), u = c.map((g) => {
-      const b = Fe.get(He(g));
-      if (!b) return { identity: g, track: void 0, scores: [] };
-      const m = l.map((y) => Gs(b, y)).sort((y, w) => y.score - w.score);
-      return { identity: g, track: b, scores: m };
-    }).sort((g, b) => (g.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
-    for (const g of u) {
-      const { identity: b, track: m } = g;
-      if (!m) continue;
-      const y = g.scores.filter((P) => !d.has(P.candidate));
+    const l = [...a], c = [...a].sort((m, b) => He(m).localeCompare(He(b))), d = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Set(), h = c.map((m) => {
+      const b = Fe.get(He(m));
+      if (!b) return { identity: m, track: void 0, scores: [] };
+      const g = l.map((y) => Gs(b, y)).sort((y, A) => y.score - A.score);
+      return { identity: m, track: b, scores: g };
+    }).sort((m, b) => (m.scores[0]?.score ?? 1 / 0) - (b.scores[0]?.score ?? 1 / 0));
+    for (const m of h) {
+      const { identity: b, track: g } = m;
+      if (!g) continue;
+      const y = m.scores.filter((P) => !p.has(P.candidate));
       if (!y.length) continue;
-      const w = y[0], A = y[1], k = w.distance <= Fs || ai(zr(m), Dt(w.candidate)) <= Zs, E = !!A && A.score - w.score < Ws;
-      k && !E && (p.set(He(b), w.candidate), d.add(w.candidate));
+      const A = y[0], w = y[1], k = A.distance <= Fs || ai(zr(g), Dt(A.candidate)) <= Zs, E = !!w && w.score - A.score < Ws;
+      k && !E && (d.set(He(b), A.candidate), p.add(A.candidate));
     }
-    for (const g of c) {
-      const b = He(g);
-      let m = p.get(b);
-      if (m || (m = l.find((w) => !d.has(w) && et(w) === et(g)), m && d.add(m)), m || (m = l.find((w) => !d.has(w)), m && d.add(m)), !m) {
-        s.push(g);
+    for (const m of c) {
+      const b = He(m);
+      let g = d.get(b);
+      if (g || (g = l.find((A) => !p.has(A) && et(A) === et(m)), g && p.add(g)), g || (g = l.find((A) => !p.has(A)), g && p.add(g)), !g) {
+        s.push(m);
         continue;
       }
-      const y = { ...g, x: m.x, y: m.y, room_id: m.room_id, visible: m.visible };
-      s.push(y), cr(g, m, t);
+      const y = { ...m, x: g.x, y: g.y, room_id: g.room_id, visible: g.visible };
+      s.push(y), cr(m, g, t);
     }
   }
   return [...s, ...o];
@@ -8220,8 +8255,8 @@ var Ys = Object.defineProperty, Qs = Object.getOwnPropertyDescriptor, Lt = (e, t
     (s = e[n]) && (o = (r ? s(t, i, o) : s(o)) || o);
   return r && o && Ys(t, i, o), o;
 };
-const Tr = "0.45.3";
-let Ue = class extends B {
+const Tr = "0.46.0";
+let Ue = class extends O {
   constructor() {
     super(...arguments), this.preview = !1;
   }
@@ -8399,7 +8434,7 @@ let Ue = class extends B {
     });
   }
   renderClouds() {
-    const e = (t, i) => h`<svg
+    const e = (t, i) => u`<svg
         class=${`cloud ${t} cloud-v${i}`}
         viewBox="0 0 300 160"
         aria-hidden="true"
@@ -8451,7 +8486,7 @@ let Ue = class extends B {
           <circle cx="218" cy="92" r="32" />
         </g>
       </svg>`;
-    return h`<div class="cloud-field" aria-hidden="true">
+    return u`<div class="cloud-field" aria-hidden="true">
       ${e("cloud-a", 1)}${e("cloud-b", 2)}${e("cloud-c", 3)}${e(
       "cloud-d",
       1
@@ -8471,10 +8506,10 @@ let Ue = class extends B {
     </div>`;
   }
   renderCelestialCloud() {
-    return h`<div class="celestial-cloud" aria-hidden="true"></div>`;
+    return u`<div class="celestial-cloud" aria-hidden="true"></div>`;
   }
   renderCastleSurround(e) {
-    return h`<div
+    return u`<div
       class=${`enchanted-castle-surround ${e ? "castle-night" : "castle-day"}`}
       aria-hidden="true"
     >
@@ -8502,16 +8537,16 @@ let Ue = class extends B {
     ), r = Us(i), o = this.config.appearance?.theme ?? "classic", n = o === "enchanted_antique", s = this.isNight(), a = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.day_night?.intensity ?? 0.72)
-    ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, p = this.alarmState(), d = Math.min(
+    ), l = this.config.appearance?.compass ?? {}, c = this.config.appearance?.hide_source_text ?? !1, d = this.alarmState(), p = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.alarm?.intensity ?? 0.75)
-    ), u = this.config.appearance?.occupancy?.enabled ?? !1, g = this.someoneHome(r), b = Math.min(
+    ), h = this.config.appearance?.occupancy?.enabled ?? !1, m = this.someoneHome(r), b = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.occupancy?.intensity ?? 0.65)
-    ), m = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), w = s || y === "clear-night", A = this.weatherEffect(y), k = Math.min(
+    ), g = this.config.appearance?.weather?.enabled ?? !1, y = this.weatherState(), A = s || y === "clear-night", w = this.weatherEffect(y), k = Math.min(
       1,
       Math.max(0.25, this.config.appearance?.weather?.intensity ?? 0.6)
-    ), E = m && [
+    ), E = g && [
       "partlycloudy",
       "cloudy",
       "rainy",
@@ -8523,14 +8558,14 @@ let Ue = class extends B {
       "hail",
       "windy-variant",
       "exceptional"
-    ].includes(y), P = m && !w && ["sunny", "clear", "partlycloudy"].includes(y), S = y === "partlycloudy";
-    return h`${this.renderCastleSurround(s)}<ha-card
-      class=${`${n ? "enchanted" : "classic"}${w ? " moonlight" : ""}${P ? " sunlight" : ""}${S ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${u ? g ? " occupied" : " empty-house" : ""}${m && A !== "clear" ? ` weather-${A}` : ""}${m ? ` state-${y}` : ""}${p === "armed" ? " alarm-armed" : ""}${p === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
-      style=${`--moon-intensity:${a};--alarm-intensity:${d};--occupancy-intensity:${b};--weather-intensity:${k}`}
+    ].includes(y), P = g && !A && ["sunny", "clear", "partlycloudy"].includes(y), S = y === "partlycloudy";
+    return u`${this.renderCastleSurround(s)}<ha-card
+      class=${`${n ? "enchanted" : "classic"}${A ? " moonlight" : ""}${P ? " sunlight" : ""}${S ? " partly-cloudy" : ""}${E ? " has-clouds" : ""}${h ? m ? " occupied" : " empty-house" : ""}${g && w !== "clear" ? ` weather-${w}` : ""}${g ? ` state-${y}` : ""}${d === "armed" ? " alarm-armed" : ""}${d === "triggered" ? " alarm-triggered" : ""}${this.preview ? " preview" : ""}`}
+      style=${`--moon-intensity:${a};--alarm-intensity:${p};--occupancy-intensity:${b};--weather-intensity:${k}`}
       ><header>
         <div>
           <span
-            >${p === "triggered" ? "⚠ Alarm Triggered" : p === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? w ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : A === "exceptional" ? "⚠ Exceptional Weather" : A === "wind" ? "➳ Wind over the Map" : A === "storm" ? "⛈ Storm over the Map" : A === "rain" ? "☂ Rain over the Map" : A === "snow" ? "❄ Snow over the Map" : A === "fog" ? "◇ Mist over the Map" : A === "cloudy" ? "☁ Clouded Map" : P ? "☀ Sunlit Map" : u && g ? "✦ Someone is Home" : u ? "◇ Empty House" : w ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
+            >${d === "triggered" ? "⚠ Alarm Triggered" : d === "armed" ? "✦ Map Secured" : y === "partlycloudy" ? A ? "☾ Partly Clouded Map" : "☀ Partly Clouded Map" : y === "clear-night" ? "☾ Clear Night Map" : w === "exceptional" ? "⚠ Exceptional Weather" : w === "wind" ? "➳ Wind over the Map" : w === "storm" ? "⛈ Storm over the Map" : w === "rain" ? "☂ Rain over the Map" : w === "snow" ? "❄ Snow over the Map" : w === "fog" ? "◇ Mist over the Map" : w === "cloudy" ? "☁ Clouded Map" : P ? "☀ Sunlit Map" : h && m ? "✦ Someone is Home" : h ? "◇ Empty House" : A ? "Moonlight Explorer" : n ? "Enchanted Explorer" : "Explorer map"}</span
           >
           <h1>${this.config.title}</h1>
         </div>
@@ -8543,10 +8578,10 @@ let Ue = class extends B {
         <explorer-source-clean-canvas
           .theme=${o}
           .hideSourceText=${c}
-          .weatherEffect=${m ? A : "clear"}
+          .weatherEffect=${g ? w : "clear"}
           .weatherState=${y}
           .weatherIntensity=${k}
-          .weatherNight=${w}
+          .weatherNight=${A}
           .compassVisible=${l.visible ?? !0}
           .compassRotation=${l.rotation ?? -7}
           .compassSize=${l.size ?? 1}
@@ -8576,7 +8611,7 @@ let Ue = class extends B {
     ></ha-card>`;
   }
 };
-Ue.styles = j`
+Ue.styles = I`
     :host {
       display: block;
       width: 100%;
@@ -9906,6 +9941,19 @@ Ue.styles = j`
         right: 1.8%;
         top: 3.9%;
       }
+      .cloud {
+        filter: drop-shadow(0 5px 10px rgba(64, 47, 29, 0.18));
+      }
+      .cloud-d,
+      .cloud-f,
+      .cloud-h,
+      .cloud-j,
+      .cloud-l,
+      .cloud-n,
+      .cloud-p,
+      .cloud-r {
+        display: none;
+      }
     }
   `;
 Lt([
@@ -9918,7 +9966,7 @@ Lt([
   v()
 ], Ue.prototype, "config", 2);
 Ue = Lt([
-  I("ha-explorer-card")
+  D("ha-explorer-card")
 ], Ue);
 window.customCards = window.customCards || [];
 window.customCards.push({
