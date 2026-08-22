@@ -35,6 +35,26 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
   private readonly previousPresencePositions = new Map<string, PresencePosition>();
   private readonly previousPresenceRooms = new Map<string, string | undefined>();
   private readonly activeAnimations = new Map<string, SVGElement>();
+  private readonly transientTimers = new Set<number>();
+
+  public override disconnectedCallback(): void {
+    this.transientTimers.forEach((timer) => window.clearTimeout(timer));
+    this.transientTimers.clear();
+    this.activeAnimations.forEach((animation) => animation.remove());
+    this.activeAnimations.clear();
+    this.previousPresencePositions.clear();
+    this.previousPresenceRooms.clear();
+    this.renderRoot.querySelectorAll("g.footsteps-scene > *").forEach((element) => element.remove());
+    super.disconnectedCallback();
+  }
+
+  private scheduleTransientTask(callback: () => void, delay: number): void {
+    const timer = window.setTimeout(() => {
+      this.transientTimers.delete(timer);
+      if (this.isConnected) callback();
+    }, delay);
+    this.transientTimers.add(timer);
+  }
 
   protected updated(changed: Map<PropertyKey, unknown>): void {
     super.updated(changed);
@@ -96,7 +116,7 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
         this.activeAnimations.set(presence.id, animation);
         (animation as SVGAnimationElement).beginElement();
 
-        window.setTimeout(() => {
+        this.scheduleTransientTask(() => {
           if (this.activeAnimations.get(presence.id) !== animation) return;
           animation.remove();
           this.activeAnimations.delete(presence.id);
@@ -516,12 +536,12 @@ export class ExplorerAnimatedCanvas extends ExplorerCanvas {
       footprint.append(sole, heel, fade);
       layer.appendChild(footprint);
 
-      window.setTimeout(() => {
+      this.scheduleTransientTask(() => {
         if (!footprint.isConnected) return;
         (fade as SVGAnimationElement).beginElement();
       }, delay);
 
-      window.setTimeout(() => footprint.remove(), delay + FOOTSTEP_LIFETIME_MS + 120);
+      this.scheduleTransientTask(() => footprint.remove(), delay + FOOTSTEP_LIFETIME_MS + 120);
     }
   }
 }

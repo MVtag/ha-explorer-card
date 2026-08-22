@@ -29,6 +29,7 @@ export class ExplorerOpeningsCanvas extends ExplorerRoomMagicCanvas{
   disconnectedCallback():void{
     super.disconnectedCallback();
     if(this.openingAgeTimer!==undefined)window.clearTimeout(this.openingAgeTimer);
+    this.openingAgeTimer=undefined;
   }
 
   private isOpen(opening:ExplorerOpening):boolean{

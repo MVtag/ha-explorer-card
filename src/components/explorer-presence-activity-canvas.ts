@@ -54,6 +54,7 @@ export class ExplorerPresenceActivityCanvas extends ExplorerLivingCanvas {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     if (this.afterglowTimer !== undefined) window.clearTimeout(this.afterglowTimer);
+    this.afterglowTimer = undefined;
   }
 
   private pointInPolygon(point: NormalizedPoint, polygon: NormalizedPoint[]): boolean {

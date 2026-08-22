@@ -31,6 +31,7 @@ export class ExplorerRoomMagicCanvas extends ExplorerPresencePolishCanvas {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     if (this.magicRefreshTimer !== undefined) window.clearTimeout(this.magicRefreshTimer);
+    this.magicRefreshTimer = undefined;
   }
 
   private magicPointInPolygon(point: NormalizedPoint, polygon: NormalizedPoint[]): boolean {
