@@ -17,7 +17,7 @@ import {
   resetIdentityTracks,
 } from "./utils/identity-matcher";
 import { resetShellyPetTracks } from "./utils/shelly-pet-detection";
-const CARD_VERSION = "0.45.3";
+const CARD_VERSION = "0.46.0";
 type AlarmAtmosphereState = "normal" | "armed" | "triggered";
 @customElement("ha-explorer-card")
 export class HaExplorerCard extends LitElement {
@@ -1806,6 +1806,19 @@ export class HaExplorerCard extends LitElement {
       .partly-cloudy.moonlight .celestial-cloud {
         right: 1.8%;
         top: 3.9%;
+      }
+      .cloud {
+        filter: drop-shadow(0 5px 10px rgba(64, 47, 29, 0.18));
+      }
+      .cloud-d,
+      .cloud-f,
+      .cloud-h,
+      .cloud-j,
+      .cloud-l,
+      .cloud-n,
+      .cloud-p,
+      .cloud-r {
+        display: none;
       }
     }
   `;
