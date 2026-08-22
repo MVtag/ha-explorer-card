@@ -1,5 +1,6 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { guard } from "lit/directives/guard.js";
 import { live } from "lit/directives/live.js";
 import type {
   ExplorerCardConfig,
@@ -46,6 +47,10 @@ export class HaExplorerCardEditor extends LitElement {
   @state() private areaError = "";
   @state() private loadingAreas = false;
   private areasLoaded = false;
+  private entityCatalogSource?: HomeAssistant["states"];
+  private entityCatalogSignature = "";
+  private entityCatalog: HassEntity[] = [];
+  private roomEntityCatalog: HassEntity[] = [];
 
   public setConfig(config: ExplorerCardConfig): void {
     this.config = config;
@@ -167,24 +172,32 @@ export class HaExplorerCardEditor extends LitElement {
     this.updateConfig({ presences });
   }
 
-  private get entities(): HassEntity[] {
-    return Object.values(this.hass?.states ?? {}).sort((a, b) =>
+  private refreshEntityCatalog(): void {
+    const states = this.hass?.states;
+    if (states === this.entityCatalogSource) return;
+    this.entityCatalogSource = states;
+    const ids = Object.keys(states ?? {});
+    const signature = ids.map((id) => `${id}\u0000${friendlyName(states![id])}`).join("\u0001");
+    if (signature === this.entityCatalogSignature) return;
+    this.entityCatalogSignature = signature;
+    this.entityCatalog = ids.map((id) => states![id]).sort((a, b) =>
       friendlyName(a).localeCompare(friendlyName(b), "da"),
+    );
+    this.roomEntityCatalog = this.entityCatalog.filter((entity) =>
+      ROOM_ENTITY_DOMAINS.has(entityDomain(entity.entity_id)),
     );
   }
 
   private renderEntityDatalist(id: string, roomCandidatesOnly = false) {
-    const entities = roomCandidatesOnly
-      ? this.entities.filter((entity) => ROOM_ENTITY_DOMAINS.has(entityDomain(entity.entity_id)))
-      : this.entities;
+    const entities = roomCandidatesOnly ? this.roomEntityCatalog : this.entityCatalog;
 
-    return html`
+    return guard([id, entities], () => html`
       <datalist id=${id}>
         ${entities.map(
           (entity) => html`<option value=${entity.entity_id}>${friendlyName(entity)}</option>`,
         )}
       </datalist>
-    `;
+    `);
   }
 
   private renderRoom(room: ExplorerRoom, index: number) {
@@ -367,6 +380,7 @@ export class HaExplorerCardEditor extends LitElement {
 
   protected render() {
     if (!this.config) return nothing;
+    this.refreshEntityCatalog();
     const rooms = this.config.rooms ?? [];
     const presences = this.config.presences ?? [];
 
