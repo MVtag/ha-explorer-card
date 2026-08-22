@@ -256,7 +256,11 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-The v0.45.x weather polish roadmap is complete, including smooth transitions between weather states.
+The v0.46.0 mobile performance pass is complete. Small screens now use an automatic compact weather profile that preserves the enchanted atmosphere while reducing expensive particle, blur, and cloud work.
+
+1. **Rendering & memory cleanup** — reuse long-lived render resources and remove avoidable scene churn.
+2. **Editor performance** — reduce editor re-rendering and keep large configurations responsive.
+3. **Final stability pass** — verify lifecycle cleanup, mobile interactions, and long-running dashboards.
 
 ## License
 
