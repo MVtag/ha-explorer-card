@@ -16,8 +16,8 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
   private readonly weatherMaskId = `explorer-weather-mask-${Math.random().toString(36).slice(2, 10)}`;
   private readonly cloudFilterId = `explorer-cloud-organic-${Math.random().toString(36).slice(2, 10)}`;
-  private weatherTransitionSequence = 0;
-  private readonly weatherTransitionTimers = new Set<number>();
+  private readonly weatherTransitionTimers = new Map<SVGGElement, number>();
+  private weatherTransitionFrame?: number;
   private compactWeatherQuery?: MediaQueryList;
   private compactWeatherMode = false;
   private readonly handleCompactWeatherChange = (event: MediaQueryListEvent): void => {
@@ -36,9 +36,15 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
   public override disconnectedCallback(): void {
     this.compactWeatherQuery?.removeEventListener("change", this.handleCompactWeatherChange);
     this.compactWeatherQuery = undefined;
+    if (this.weatherTransitionFrame !== undefined) {
+      window.cancelAnimationFrame(this.weatherTransitionFrame);
+      this.weatherTransitionFrame = undefined;
+    }
     this.weatherTransitionTimers.forEach((timer) => window.clearTimeout(timer));
     this.weatherTransitionTimers.clear();
-    this.renderRoot.querySelectorAll("g.weather-transition-shell, defs[data-weather-owner]").forEach((element) => element.remove());
+    this.renderRoot
+      .querySelectorAll("g.weather-transition-shell, defs[data-explorer-weather-resources]")
+      .forEach((element) => element.remove());
     super.disconnectedCallback();
   }
 
@@ -162,6 +168,39 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     filter.appendChild(finish);
 
     return filter;
+  }
+
+  private ensureWeatherResources(svgRoot: SVGSVGElement, roomKey: string): void {
+    const resourceKey = `${this.compactWeatherMode ? "compact" : "full"}:${roomKey}`;
+    let defs = svgRoot.querySelector<SVGDefsElement>(":scope > defs[data-explorer-weather-resources]");
+    if (!defs) {
+      defs = this.svg("defs");
+      defs.setAttribute("data-explorer-weather-resources", "true");
+      svgRoot.insertBefore(defs, svgRoot.firstChild);
+    }
+    if (defs.dataset.weatherResourceKey === resourceKey) return;
+    defs.replaceChildren(this.createWeatherMask(), this.createCloudFilter());
+    defs.dataset.weatherResourceKey = resourceKey;
+  }
+
+  private removeWeatherShell(shell: SVGGElement): void {
+    const timer = this.weatherTransitionTimers.get(shell);
+    if (timer !== undefined) window.clearTimeout(timer);
+    this.weatherTransitionTimers.delete(shell);
+    shell.remove();
+  }
+
+  private scheduleWeatherShellRemoval(shell: SVGGElement): void {
+    if (this.weatherTransitionTimers.has(shell)) return;
+    const timer = window.setTimeout(() => this.removeWeatherShell(shell), 1050);
+    this.weatherTransitionTimers.set(shell, timer);
+  }
+
+  private pruneWeatherShells(scene: SVGGElement): void {
+    const leavingShells = Array.from(
+      scene.querySelectorAll<SVGGElement>(":scope > g.weather-transition-shell.is-weather-leaving"),
+    );
+    while (leavingShells.length > 2) this.removeWeatherShell(leavingShells.shift()!);
   }
 
   private appendClouds(layer: SVGGElement, filterId = this.cloudFilterId): void {
@@ -634,6 +673,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     const weatherKey = `${this.weatherEffect}:${safeState}:${this.weatherNight ? "night" : "day"}:${this.compactWeatherMode ? "compact" : "full"}:${roomKey}`;
     const currentShell = scene.querySelector<SVGGElement>(":scope > g.weather-transition-shell:not(.is-weather-leaving)");
     if (currentShell?.dataset.weatherKey === weatherKey) {
+      if (this.weatherEffect !== "clear") this.ensureWeatherResources(svgRoot, roomKey);
       const intensity = Number.isFinite(this.weatherIntensity) ? this.weatherIntensity : .6;
       currentShell.querySelector<SVGGElement>(":scope > g.weather-outside-rooms-scene")
         ?.style.setProperty("--weather-svg-intensity", String(Math.min(1, Math.max(0, intensity))));
@@ -644,30 +684,17 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       if (shell.classList.contains("is-weather-leaving")) return;
       shell.classList.remove("is-weather-visible");
       shell.classList.add("is-weather-leaving");
-      const owner = shell.dataset.weatherOwner;
-      const timer = window.setTimeout(() => {
-        shell.remove();
-        if (owner) svgRoot.querySelector<SVGDefsElement>(`defs[data-weather-owner="${owner}"]`)?.remove();
-        this.weatherTransitionTimers.delete(timer);
-      }, 1050);
-      this.weatherTransitionTimers.add(timer);
+      this.scheduleWeatherShellRemoval(shell);
     });
+    this.pruneWeatherShells(scene);
     if (this.weatherEffect === "clear") return;
 
-    const transitionId = String(++this.weatherTransitionSequence);
-    const maskId = `${this.weatherMaskId}-${transitionId}`;
-    const filterId = `${this.cloudFilterId}-${transitionId}`;
-    const defs = this.svg("defs");
-    defs.setAttribute("data-weather-owner", transitionId);
-    defs.appendChild(this.createWeatherMask(maskId));
-    defs.appendChild(this.createCloudFilter(filterId));
-    svgRoot.insertBefore(defs, svgRoot.firstChild);
+    this.ensureWeatherResources(svgRoot, roomKey);
 
     const transitionShell = this.svg("g");
     transitionShell.setAttribute("class", "weather-transition-shell is-weather-entering");
-    transitionShell.setAttribute("data-weather-owner", transitionId);
     transitionShell.setAttribute("data-weather-key", weatherKey);
-    transitionShell.setAttribute("mask", `url(#${maskId})`);
+    transitionShell.setAttribute("mask", `url(#${this.weatherMaskId})`);
     transitionShell.setAttribute("pointer-events", "none");
 
     const layer = this.svg("g");
@@ -677,7 +704,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
 
     const hasCloudLayer = ["cloudy", "rain", "storm", "snow"].includes(this.weatherEffect) || this.weatherState === "windy-variant";
     if (hasCloudLayer) {
-      this.appendClouds(layer, filterId);
+      this.appendClouds(layer);
       this.appendMagicMotes(layer, "cloud");
     }
     if (this.weatherEffect === "fog") this.appendFog(layer);
@@ -696,7 +723,7 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
       this.appendMagicMotes(layer, "wind");
     }
     if (this.weatherEffect === "exceptional") {
-      this.appendClouds(layer, filterId);
+      this.appendClouds(layer);
       this.appendWind(layer);
       this.appendMagicMotes(layer, "cloud");
       this.appendExceptionalMagic(layer);
@@ -714,7 +741,9 @@ export class ExplorerSourceCleanCanvas extends ExplorerOpeningsCanvas {
     transitionShell.appendChild(layer);
     const roomsLayer = scene.querySelector<SVGGElement>(":scope > g.rooms-scene");
     scene.insertBefore(transitionShell, roomsLayer ?? null);
-    window.requestAnimationFrame(() => {
+    if (this.weatherTransitionFrame !== undefined) window.cancelAnimationFrame(this.weatherTransitionFrame);
+    this.weatherTransitionFrame = window.requestAnimationFrame(() => {
+      this.weatherTransitionFrame = undefined;
       if (!transitionShell.isConnected) return;
       transitionShell.classList.remove("is-weather-entering");
       transitionShell.classList.add("is-weather-visible");
