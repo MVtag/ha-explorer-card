@@ -256,10 +256,9 @@ dist/ha-explorer-card.js
 
 Only the remaining planned work is listed here. Features that are already implemented are intentionally removed from the roadmap.
 
-The v0.46.1 rendering and memory cleanup is complete. Weather masks and filters are now reused across transitions, pending animation frames and timers are cancelled on disconnect, and rapid weather changes keep only a bounded number of outgoing scenes.
+The v0.46.2 editor performance pass is complete. Advanced tools are activated only when first opened, closed tools keep their local draft state without receiving live Home Assistant updates, and large entity datalists are reused until the entity catalogue actually changes.
 
-1. **Editor performance** — reduce editor re-rendering and keep large configurations responsive.
-2. **Final stability pass** — verify lifecycle cleanup, mobile interactions, and long-running dashboards.
+1. **Final stability pass** — verify lifecycle cleanup, mobile interactions, and long-running dashboards.
 
 ## License
 
